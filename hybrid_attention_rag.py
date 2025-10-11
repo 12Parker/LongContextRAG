@@ -44,9 +44,9 @@ class AttentionConfig:
     num_synthesis_layers: int = 2
     
     # Model dimensions
-    hidden_size: int = 768
+    hidden_size: int = 3072  # Match text-embedding-3-large
     num_attention_heads: int = 12
-    intermediate_size: int = 3072
+    intermediate_size: int = 4096  # Adjusted for larger hidden size
     dropout: float = 0.1
 
 class SlidingWindowAttention(nn.Module):

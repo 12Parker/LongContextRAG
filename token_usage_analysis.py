@@ -15,7 +15,7 @@ import numpy as np
 class TokenUsageConfig:
     """Configuration for token usage analysis."""
     # Model configurations
-    embedding_model: str = "text-embedding-3-large"
+    embedding_model: str = "text-embedding-3-large"  # 3072 dimensions
     chat_model: str = "gpt-4-turbo-preview"
     
     # BookCorpus settings

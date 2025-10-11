@@ -20,9 +20,9 @@ import math
 class RetrieverConfig:
     """Configuration for neural retriever components."""
     # Embedding dimensions
-    query_embed_dim: int = 768
-    doc_embed_dim: int = 768
-    hidden_dim: int = 512
+    query_embed_dim: int = 3072  # Match text-embedding-3-large
+    doc_embed_dim: int = 3072    # Match text-embedding-3-large
+    hidden_dim: int = 1024
     
     # Retrieval parameters
     num_candidates: int = 100

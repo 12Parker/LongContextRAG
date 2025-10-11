@@ -47,13 +47,13 @@ class HybridRAGIntegration:
                 'window_size': 512,
                 'num_landmark_tokens': 32,
                 'max_retrieved_segments': 8,
-                'hidden_size': 768,
+                'hidden_size': 3072,  # Match text-embedding-3-large dimensions
                 'num_attention_heads': 12
             },
             'retriever': {
-                'query_embed_dim': 768,
-                'doc_embed_dim': 768,
-                'hidden_dim': 512,
+                'query_embed_dim': 3072,  # Match text-embedding-3-large dimensions
+                'doc_embed_dim': 3072,    # Match text-embedding-3-large dimensions
+                'hidden_dim': 1024,
                 'num_candidates': 100,
                 'top_k': 8
             },
@@ -142,14 +142,15 @@ class HybridRAGIntegration:
             
             # Step 3: Dynamic query generation
             if self.config['integration']['use_dynamic_queries']:
-                processing_state = query_embedding.mean(dim=1)  # Simplified processing state
+                # Extract processing state from query embedding
+                processing_state = query_embedding.squeeze(0).squeeze(0)  # [3072]
                 dynamic_query = self.query_generator(
-                    query_embedding.unsqueeze(0), 
+                    query_embedding,  # Already has correct shape [1, 1, 3072]
                     processing_state, 
                     task_type
                 )
             else:
-                dynamic_query = query_embedding.unsqueeze(0)
+                dynamic_query = query_embedding
             
             # Step 4: Neural retrieval
             if self.config['integration']['use_neural_retriever']:
@@ -170,7 +171,7 @@ class HybridRAGIntegration:
             
             # Process with hybrid attention
             attention_output = self.hybrid_attention(
-                query_embedding.unsqueeze(0),
+                query_embedding,  # Already has correct shape [1, 1, 3072]
                 retrieved_segments
             )
             
@@ -196,7 +197,13 @@ class HybridRAGIntegration:
     def _get_query_embedding(self, query: str) -> torch.Tensor:
         """Get query embedding."""
         embedding = self.base_rag.embeddings.embed_query(query)
-        return torch.tensor(embedding, dtype=torch.float32).unsqueeze(0)
+        
+        # Convert to tensor and ensure proper shape for hybrid attention
+        embedding_tensor = torch.tensor(embedding, dtype=torch.float32)
+        
+        # Reshape to [1, 1, embed_dim] for hybrid attention compatibility
+        # This creates a sequence of length 1 with the embedding
+        return embedding_tensor.unsqueeze(0).unsqueeze(0)  # [1, 1, 3072]
     
     def _get_document_embeddings(self, documents: List[Any]) -> torch.Tensor:
         """Get document embeddings for retrieved documents."""
@@ -208,12 +215,17 @@ class HybridRAGIntegration:
                                 retrieved_docs: List[Any]) -> str:
         """Prepare context for LLM generation."""
         # Use attention output to weight retrieved documents
-        attention_weights = torch.softmax(attention_output.mean(dim=-1), dim=-1)
+        # attention_output shape: [1, 1, 3072] or [1, seq_len, 3072]
+        if attention_output.shape[1] > 1:
+            attention_weights = torch.softmax(attention_output.mean(dim=-1), dim=-1)
+        else:
+            # For single token sequences, create uniform weights
+            attention_weights = torch.ones(1, len(retrieved_docs)) / len(retrieved_docs)
         
         # Weight documents by attention
         weighted_contexts = []
         for i, doc in enumerate(retrieved_docs):
-            weight = attention_weights[0, i].item() if i < attention_weights.shape[1] else 0.0
+            weight = attention_weights[0, i].item() if i < attention_weights.shape[1] else 1.0 / len(retrieved_docs)
             weighted_contexts.append(f"[Weight: {weight:.3f}] {doc.page_content}")
         
         return "\n\n".join(weighted_contexts)
@@ -303,13 +315,13 @@ class HybridRAGIntegration:
             
             # Process with hybrid attention
             attention_output = self.hybrid_attention(
-                query_embedding.unsqueeze(0),
+                query_embedding,  # Already has correct shape [1, 1, 3072]
                 None  # No retrieved segments for analysis
             )
             
             # Analyze attention patterns
             attention_analysis = {
-                'query_length': query_embedding.shape[1],
+                'query_length': query_embedding.shape[1],  # Should be 1
                 'attention_output_shape': attention_output.shape,
                 'attention_mean': attention_output.mean().item(),
                 'attention_std': attention_output.std().item(),
