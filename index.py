@@ -160,7 +160,7 @@ class LongContextRAG:
         if not self.retriever:
             raise ValueError("Vector store not initialized. Call create_vectorstore() first.")
         
-        docs = self.retriever.get_relevant_documents(query)
+        docs = self.retriever.invoke(query)
         logger.info(f"Retrieved {len(docs)} relevant documents")
         return docs
     
@@ -230,34 +230,48 @@ def main():
     # Initialize RAG system
     rag = LongContextRAG()
     
-    # Example: Load documents (you would replace with your actual documents)
-    sample_docs = [
-        Document(
-            page_content="This is a sample document about machine learning and artificial intelligence.",
-            metadata={"source": "sample1.txt"}
-        ),
-        Document(
-            page_content="This document discusses natural language processing and transformer models.",
-            metadata={"source": "sample2.txt"}
-        )
-    ]
+    # Try to load sample documents from file
+    sample_file = "data/sample_documents.txt"
+    if os.path.exists(sample_file):
+        print(f"Loading sample documents from {sample_file}")
+        documents = rag.load_documents([sample_file])
+    else:
+        print("Sample documents file not found. Using basic examples.")
+        # Fallback to basic examples
+        documents = [
+            Document(
+                page_content="Machine learning is a subset of artificial intelligence that focuses on algorithms that can learn from data without being explicitly programmed. It includes supervised learning, unsupervised learning, and reinforcement learning approaches.",
+                metadata={"source": "sample1.txt", "topic": "machine_learning"}
+            ),
+            Document(
+                page_content="Natural Language Processing (NLP) is a field of AI that focuses on the interaction between computers and humans through natural language. Transformer models, introduced in 2017, revolutionized NLP with self-attention mechanisms and have led to models like GPT, BERT, and T5.",
+                metadata={"source": "sample2.txt", "topic": "nlp"}
+            ),
+            Document(
+                page_content="Retrieval Augmented Generation (RAG) combines large language models with external knowledge retrieval. It involves document processing, vector storage, retrieval, and generation to provide accurate, up-to-date information while reducing hallucination.",
+                metadata={"source": "sample3.txt", "topic": "rag"}
+            )
+        ]
     
     # Create vector store
-    rag.create_vectorstore(sample_docs)
+    rag.create_vectorstore(documents)
     
     # Example queries
     queries = [
-        "What is machine learning?",
-        "Tell me about transformer models",
-        "How does natural language processing work?"
+        "What is machine learning and what are its main types?",
+        "How do transformer models work in NLP?",
+        "What are the benefits of RAG systems?",
+        "What challenges do long context models face?"
     ]
     
     # Test RAG responses
     for query in queries:
-        print(f"\nQuery: {query}")
+        print(f"\n{'='*60}")
+        print(f"Query: {query}")
+        print(f"{'='*60}")
         result = rag.generate_response(query, use_rag=True)
         print(f"Response: {result['response']}")
-        print(f"Method: {result['method']}, Retrieved docs: {result['retrieved_docs']}")
+        print(f"\nMethod: {result['method']}, Retrieved docs: {result['retrieved_docs']}, Context length: {result['context_length']} chars")
 
 if __name__ == "__main__":
     main()

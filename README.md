@@ -47,6 +47,11 @@ A comprehensive research framework for exploring Retrieval Augmented Generation 
    python examples.py
    ```
 
+7. **Try the interactive system**:
+   ```bash
+   python interactive_rag.py
+   ```
+
 ### Alternative: Use the activation script
 ```bash
 chmod +x activate.sh
@@ -61,6 +66,7 @@ LongContextRAG/
 ├── config.py             # Configuration management
 ├── prompts.py            # Prompt templates for different scenarios
 ├── examples.py           # Usage examples and test cases
+├── interactive_rag.py    # Interactive RAG system for testing
 ├── test_setup.py         # Setup verification script
 ├── setup.py              # Project setup script
 ├── setup_env.py          # Environment configuration script
