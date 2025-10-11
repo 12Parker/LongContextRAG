@@ -136,6 +136,40 @@ This framework is designed for research in:
 - **Context Management**: Balancing context length with response quality
 - **Domain Adaptation**: Adapting RAG systems for specific research domains
 
+## 🔬 Advanced: Hybrid Attention RAG
+
+The project includes an advanced implementation of a **novel hybrid attention mechanism** combining:
+
+- **Sliding Window Attention** for local relationships
+- **Sparse Global Attention** with strategic landmark tokens
+- **Retrieval-Augmented Segments** with dynamic passage integration
+- **Neural Retrievers** trained end-to-end with the language model
+- **Dynamic Query Generation** for task-specific adaptation
+
+### Quick Start with Hybrid Attention
+
+```bash
+# Test the hybrid attention system
+python -c "from hybrid_attention_rag import test_hybrid_attention_rag; test_hybrid_attention_rag()"
+
+# Test neural retriever components
+python -c "from neural_retriever import test_neural_retriever; test_neural_retriever()"
+
+# Run comprehensive research experiments
+python research_notebook.py
+```
+
+### Key Files for Hybrid Attention
+
+- `hybrid_attention_rag.py` - Core hybrid attention implementation
+- `neural_retriever.py` - Neural retriever components
+- `hybrid_rag_integration.py` - Integration with existing RAG system
+- `train_hybrid_rag.py` - End-to-end training framework
+- `research_notebook.py` - Research experimentation tools
+- `HYBRID_ATTENTION_README.md` - Detailed documentation
+
+See `HYBRID_ATTENTION_README.md` for comprehensive documentation of the hybrid attention methodology and implementation.
+
 ## Security
 
 🔒 **API Key Protection**: Your API keys are kept secure through:
