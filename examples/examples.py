@@ -6,8 +6,8 @@ import os
 from typing import List
 from langchain.schema import Document
 
-from index import LongContextRAG
-from prompts import RAGPrompts, PromptFactory
+from core.index import LongContextRAG
+from core.prompts import RAGPrompts, PromptFactory
 
 def create_sample_documents() -> List[Document]:
     """Create sample documents for testing."""
@@ -156,7 +156,7 @@ def example_research_rag():
     
     # Use research prompt
     from langchain_openai import ChatOpenAI
-    from config import config
+    from core.config import config
     
     llm = ChatOpenAI(
         model=config.OPENAI_MODEL,
@@ -192,7 +192,7 @@ def example_long_context_analysis():
     
     # Use long context analysis prompt
     from langchain_openai import ChatOpenAI
-    from config import config
+    from core.config import config
     
     llm = ChatOpenAI(
         model=config.OPENAI_MODEL,
@@ -231,7 +231,7 @@ def example_custom_prompt():
     context = "\n\n".join([doc.page_content for doc in relevant_docs])
     
     from langchain_openai import ChatOpenAI
-    from config import config
+    from core.config import config
     
     llm = ChatOpenAI(
         model=config.OPENAI_MODEL,
@@ -268,7 +268,7 @@ def example_evaluation():
     eval_prompt = PromptFactory.create_evaluation_prompt()
     
     from langchain_openai import ChatOpenAI
-    from config import config
+    from core.config import config
     
     llm = ChatOpenAI(
         model=config.OPENAI_MODEL,

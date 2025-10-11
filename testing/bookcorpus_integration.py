@@ -18,8 +18,8 @@ import zipfile
 from tqdm import tqdm
 import random
 
-from hybrid_rag_integration import HybridRAGIntegration, create_hybrid_rag_system
-from index import LongContextRAG
+from hybrid.hybrid_rag_integration import HybridRAGIntegration, create_hybrid_rag_system
+from core.index import LongContextRAG
 from langchain.schema import Document
 
 logger = logging.getLogger(__name__)

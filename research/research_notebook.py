@@ -17,9 +17,9 @@ from pathlib import Path
 import time
 from dataclasses import dataclass, asdict
 
-from hybrid_rag_integration import HybridRAGIntegration, create_hybrid_rag_system
-from hybrid_attention_rag import AttentionConfig
-from neural_retriever import RetrieverConfig
+from hybrid.hybrid_rag_integration import HybridRAGIntegration, create_hybrid_rag_system
+from hybrid.hybrid_attention_rag import AttentionConfig
+from training.neural_retriever import RetrieverConfig
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

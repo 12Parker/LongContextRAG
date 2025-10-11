@@ -17,8 +17,8 @@ from dataclasses import dataclass
 import logging
 from tqdm import tqdm
 
-from hybrid_attention_rag import HybridAttentionRAG, AttentionConfig
-from neural_retriever import EndToEndRAGTrainer, RetrieverConfig, ContrastiveRetrievalLoss
+from hybrid.hybrid_attention_rag import HybridAttentionRAG, AttentionConfig
+from .neural_retriever import EndToEndRAGTrainer, RetrieverConfig, ContrastiveRetrievalLoss
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

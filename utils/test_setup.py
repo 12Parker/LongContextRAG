@@ -12,21 +12,21 @@ def test_imports():
     print("Testing imports...")
     
     try:
-        from index import LongContextRAG
+        from core.index import LongContextRAG
         print("✅ LongContextRAG import successful")
     except ImportError as e:
         print(f"❌ LongContextRAG import failed: {e}")
         return False
     
     try:
-        from config import config
+        from core.config import config
         print("✅ Config import successful")
     except ImportError as e:
         print(f"❌ Config import failed: {e}")
         return False
     
     try:
-        from prompts import RAGPrompts
+        from core.prompts import RAGPrompts
         print("✅ Prompts import successful")
     except ImportError as e:
         print(f"❌ Prompts import failed: {e}")
@@ -39,7 +39,7 @@ def test_config():
     print("\nTesting configuration...")
     
     try:
-        from config import config
+        from core.config import config
         print(f"✅ Configuration loaded")
         print(f"   - OpenAI Model: {config.OPENAI_MODEL}")
         print(f"   - Embedding Model: {config.EMBEDDING_MODEL}")
@@ -77,7 +77,7 @@ def test_basic_rag_initialization():
     print("\nTesting RAG system initialization...")
     
     try:
-        from index import LongContextRAG
+        from core.index import LongContextRAG
         
         # This will fail if API key is not set, but we can catch that
         try:

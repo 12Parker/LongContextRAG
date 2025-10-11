@@ -17,8 +17,8 @@ def main():
     try:
         # Test basic RAG system first
         print("1. Testing basic RAG system...")
-        from index import LongContextRAG
-        from bookcorpus_integration import BookCorpusLoader, BookCorpusConfig
+        from core.index import LongContextRAG
+        from testing.bookcorpus_integration import BookCorpusLoader, BookCorpusConfig
         
         # Load sample documents
         config = BookCorpusConfig(max_books=1)
@@ -41,7 +41,7 @@ def main():
         
         # Test hybrid attention components individually
         print("\n2. Testing hybrid attention components...")
-        from hybrid_attention_rag import HybridAttentionRAG, AttentionConfig
+        from hybrid.hybrid_attention_rag import HybridAttentionRAG, AttentionConfig
         
         # Create attention config with smaller dimensions for testing
         attn_config = AttentionConfig(
@@ -68,7 +68,7 @@ def main():
         
         # Test neural retriever components
         print("\n3. Testing neural retriever components...")
-        from neural_retriever import NeuralRetriever, RetrieverConfig
+        from training.neural_retriever import NeuralRetriever, RetrieverConfig
         
         # Create retriever config with smaller dimensions
         ret_config = RetrieverConfig(

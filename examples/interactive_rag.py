@@ -5,7 +5,7 @@ Interactive RAG system for testing queries and exploring the Long Context RAG ca
 
 import os
 import sys
-from index import LongContextRAG
+from core.index import LongContextRAG
 from langchain.schema import Document
 
 def load_sample_data():

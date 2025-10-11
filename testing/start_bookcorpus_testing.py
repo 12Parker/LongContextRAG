@@ -24,7 +24,7 @@ def main():
     
     try:
         # Import and run the test
-        from bookcorpus_integration import test_bookcorpus_integration
+        from testing.bookcorpus_integration import test_bookcorpus_integration
         test_bookcorpus_integration()
         
     except ImportError as e:

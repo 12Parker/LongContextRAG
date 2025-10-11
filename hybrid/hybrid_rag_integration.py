@@ -12,10 +12,10 @@ from typing import List, Dict, Any, Optional, Tuple
 import logging
 from pathlib import Path
 
-from index import LongContextRAG
-from hybrid_attention_rag import HybridAttentionRAG, AttentionConfig
-from neural_retriever import NeuralRetriever, DynamicQueryGenerator, RetrieverConfig
-from prompts import RAGPrompts
+from core.index import LongContextRAG
+from .hybrid_attention_rag import HybridAttentionRAG, AttentionConfig
+from training.neural_retriever import NeuralRetriever, DynamicQueryGenerator, RetrieverConfig
+from core.prompts import RAGPrompts
 
 logger = logging.getLogger(__name__)
 
