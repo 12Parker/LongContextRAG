@@ -157,6 +157,9 @@ python -c "from neural_retriever import test_neural_retriever; test_neural_retri
 
 # Run comprehensive research experiments
 python research_notebook.py
+
+# Test with BookCorpus-like data for long context research
+python start_bookcorpus_testing.py
 ```
 
 ### Key Files for Hybrid Attention
@@ -166,7 +169,10 @@ python research_notebook.py
 - `hybrid_rag_integration.py` - Integration with existing RAG system
 - `train_hybrid_rag.py` - End-to-end training framework
 - `research_notebook.py` - Research experimentation tools
+- `bookcorpus_integration.py` - BookCorpus testing for long context research
+- `start_bookcorpus_testing.py` - Quick start script for BookCorpus testing
 - `HYBRID_ATTENTION_README.md` - Detailed documentation
+- `BOOKCORPUS_TESTING_GUIDE.md` - BookCorpus testing guide
 
 See `HYBRID_ATTENTION_README.md` for comprehensive documentation of the hybrid attention methodology and implementation.
 
