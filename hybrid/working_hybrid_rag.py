@@ -11,11 +11,17 @@ import numpy as np
 from typing import List, Dict, Any, Optional
 import logging
 from pathlib import Path
+import sys
+import os
+
+# Add VectorDB to path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'VectorDB'))
 
 from core.index import LongContextRAG
 from .hybrid_attention_rag import HybridAttentionRAG, AttentionConfig
 from training.neural_retriever import NeuralRetriever, RetrieverConfig
 from core.prompts import RAGPrompts
+from build_db import VectorDBBuilder
 
 logger = logging.getLogger(__name__)
 
@@ -24,17 +30,34 @@ class WorkingHybridRAG:
     Working hybrid attention RAG system with proper dimension alignment.
     """
     
-    def __init__(self, use_hybrid_attention: bool = True):
+    def __init__(self, use_hybrid_attention: bool = True, vectordb_config: Optional[Dict[str, Any]] = None):
         """
         Initialize the working hybrid RAG system.
         
         Args:
             use_hybrid_attention: Whether to use hybrid attention (default: True)
+            vectordb_config: Configuration for VectorDBBuilder (optional)
         """
         self.use_hybrid_attention = use_hybrid_attention
         
         # Initialize base RAG system
         self.base_rag = LongContextRAG()
+        
+        # Initialize VectorDBBuilder with default or provided config
+        default_vectordb_config = {
+            'db_path': './vector_store',
+            'collection_name': 'hybrid_rag',
+            'embedding_model': 'all-MiniLM-L6-v2',
+            'chunk_size': 500,
+            'chunk_overlap': 50,
+            'batch_size': 100
+        }
+        
+        if vectordb_config:
+            default_vectordb_config.update(vectordb_config)
+        
+        self.vectordb_builder = VectorDBBuilder(**default_vectordb_config)
+        self.vectordb_initialized = False
         
         if use_hybrid_attention:
             # Initialize hybrid attention components with correct dimensions
@@ -71,13 +94,75 @@ class WorkingHybridRAG:
         """Load documents using the base RAG system."""
         return self.base_rag.load_documents(file_paths)
     
-    def create_vectorstore(self, documents: List[Any], persist: bool = True):
-        """Create vector store using the base RAG system."""
-        self.base_rag.create_vectorstore(documents, persist)
+    def create_vectorstore(self, documents: List[Any] = None, persist: bool = True, 
+                          use_vectordb: bool = True, num_documents: int = 5000):
+        """
+        Create vector store using VectorDBBuilder or base RAG system.
         
-        if self.use_hybrid_attention:
+        Args:
+            documents: List of documents (optional if using VectorDBBuilder)
+            persist: Whether to persist the vector store
+            use_vectordb: Whether to use VectorDBBuilder for BookCorpus dataset
+            num_documents: Number of documents to process (for VectorDBBuilder)
+        """
+        if use_vectordb:
+            # Use VectorDBBuilder for BookCorpus dataset
+            logger.info("Creating vector store using VectorDBBuilder...")
+            self.vectordb_builder.create_or_reset_collection(reset=True)
+            self.vectordb_builder.process_dataset(
+                dataset_name="rojagtap/bookcorpus",
+                num_documents=num_documents,
+                min_text_length=50  # Lower minimum length to process more documents
+            )
+            self.vectordb_initialized = True
+            logger.info("VectorDBBuilder vector store created successfully")
+            
+            # Initialize base RAG retriever to use VectorDBBuilder
+            self._setup_base_rag_with_vectordb()
+            
+            # Also create base RAG vector store for compatibility if documents provided
+            if documents:
+                self.base_rag.create_vectorstore(documents, persist)
+        else:
+            # Use base RAG system
+            if not documents:
+                raise ValueError("Documents required when not using VectorDBBuilder")
+            self.base_rag.create_vectorstore(documents, persist)
+        
+        if self.use_hybrid_attention and documents:
             # Prepare document embeddings for neural retriever
             self._prepare_document_embeddings(documents)
+    
+    def _setup_base_rag_with_vectordb(self):
+        """Setup base RAG to use VectorDBBuilder for retrieval."""
+        # Create a custom retriever that uses VectorDBBuilder
+        class VectorDBRetriever:
+            def __init__(self, vectordb_builder, n_results=5):
+                self.vectordb_builder = vectordb_builder
+                self.n_results = n_results
+            
+            def invoke(self, query: str):
+                """Retrieve documents using VectorDBBuilder."""
+                results = self.vectordb_builder.query(query, n_results=self.n_results)
+                
+                # Convert to Document-like objects
+                documents = []
+                for doc_text, distance, metadata in zip(
+                    results['documents'][0],
+                    results['distances'][0],
+                    results['metadatas'][0]
+                ):
+                    doc = type('Document', (), {
+                        'page_content': doc_text,
+                        'metadata': metadata
+                    })()
+                    documents.append(doc)
+                
+                return documents
+        
+        # Set the retriever
+        self.base_rag.retriever = VectorDBRetriever(self.vectordb_builder)
+        logger.info("Base RAG configured to use VectorDBBuilder")
     
     def _prepare_document_embeddings(self, documents: List[Any]):
         """Prepare document embeddings for the neural retriever."""
@@ -105,6 +190,46 @@ class WorkingHybridRAG:
         
         logger.info(f"Prepared {len(embeddings)} document embeddings for neural retriever")
     
+    def retrieve_relevant_docs(self, query: str, n_results: int = 5) -> List[Any]:
+        """
+        Retrieve relevant documents using VectorDBBuilder or base RAG.
+        
+        Args:
+            query: The search query
+            n_results: Number of results to return
+            
+        Returns:
+            List of relevant documents
+        """
+        if self.vectordb_initialized:
+            # Use VectorDBBuilder for retrieval
+            try:
+                results = self.vectordb_builder.query(query, n_results=n_results)
+                
+                # Convert VectorDBBuilder results to Document-like objects
+                documents = []
+                for i, (doc_text, distance, metadata) in enumerate(zip(
+                    results['documents'][0],
+                    results['distances'][0],
+                    results['metadatas'][0]
+                )):
+                    # Create a simple document-like object
+                    doc = type('Document', (), {
+                        'page_content': doc_text,
+                        'metadata': metadata
+                    })()
+                    documents.append(doc)
+                
+                logger.info(f"Retrieved {len(documents)} documents using VectorDBBuilder")
+                return documents
+                
+            except Exception as e:
+                logger.warning(f"VectorDBBuilder retrieval failed: {e}, falling back to base RAG")
+                return self.base_rag.retrieve_relevant_docs(query)
+        else:
+            # Use base RAG system
+            return self.base_rag.retrieve_relevant_docs(query)
+    
     def generate_response(self, query: str, task_type: str = 'qa') -> Dict[str, Any]:
         """
         Generate response using the hybrid attention RAG system.
@@ -125,8 +250,8 @@ class WorkingHybridRAG:
     def _generate_hybrid_response(self, query: str, task_type: str) -> Dict[str, Any]:
         """Generate response using the hybrid attention mechanism."""
         try:
-            # Step 1: Retrieve relevant documents using base RAG
-            retrieved_docs = self.base_rag.retrieve_relevant_docs(query)
+            # Step 1: Retrieve relevant documents using VectorDBBuilder or base RAG
+            retrieved_docs = self.retrieve_relevant_docs(query, n_results=5)
             
             # Step 2: Prepare embeddings
             query_embedding = self._get_query_embedding(query)
@@ -317,31 +442,85 @@ class WorkingHybridRAG:
                 results['direct_llm'] = {'error': str(e2)}
         
         return results
+    
+    def load_vectordb_from_existing(self, db_path: str = None, collection_name: str = None):
+        """
+        Load an existing VectorDBBuilder database.
+        
+        Args:
+            db_path: Path to the existing database (optional)
+            collection_name: Name of the collection (optional)
+        """
+        if db_path:
+            self.vectordb_builder.db_path = db_path
+        if collection_name:
+            self.vectordb_builder.collection_name = collection_name
+            
+        # Reinitialize the client and collection
+        self.vectordb_builder.client = self.vectordb_builder.client.__class__(path=self.vectordb_builder.db_path)
+        self.vectordb_builder.collection = self.vectordb_builder.client.get_collection(
+            name=self.vectordb_builder.collection_name
+        )
+        self.vectordb_initialized = True
+        logger.info(f"Loaded existing VectorDB from {self.vectordb_builder.db_path}")
+    
+    def get_vectordb_stats(self) -> Dict[str, Any]:
+        """Get statistics about the VectorDBBuilder database."""
+        if not self.vectordb_initialized:
+            return {"error": "VectorDB not initialized"}
+        
+        try:
+            count = self.vectordb_builder.collection.count()
+            return {
+                "collection_name": self.vectordb_builder.collection_name,
+                "db_path": self.vectordb_builder.db_path,
+                "total_chunks": count,
+                "embedding_model": self.vectordb_builder.embedding_function.model_name,
+                "chunk_size": self.vectordb_builder.chunk_size,
+                "chunk_overlap": self.vectordb_builder.chunk_overlap
+            }
+        except Exception as e:
+            return {"error": str(e)}
 
 def test_working_hybrid_rag():
     """Test the working hybrid RAG system."""
-    print("🧪 Testing Working Hybrid Attention RAG")
-    print("=" * 50)
+    print("🧪 Testing Working Hybrid Attention RAG with VectorDBBuilder")
+    print("=" * 60)
     
-    # Create working hybrid RAG system
-    hybrid_rag = WorkingHybridRAG(use_hybrid_attention=True)
+    # Create working hybrid RAG system with VectorDBBuilder
+    vectordb_config = {
+        'db_path': './vector_store',
+        'collection_name': 'hybrid_rag_test',
+        'embedding_model': 'all-MiniLM-L6-v2',
+        'chunk_size': 500,
+        'chunk_overlap': 50,
+        'batch_size': 100
+    }
     
-    # Load sample documents
-    from testing.bookcorpus_integration import BookCorpusLoader, BookCorpusConfig
-    config = BookCorpusConfig(max_books=1)
-    loader = BookCorpusLoader(config)
-    books = loader.load_sample_books()
-    documents = loader.process_books_for_rag()
+    hybrid_rag = WorkingHybridRAG(
+        use_hybrid_attention=True, 
+        vectordb_config=vectordb_config
+    )
     
-    # Create vector store
-    hybrid_rag.create_vectorstore(documents)
-    print(f"✅ Loaded {len(documents)} documents and created vector store")
+    # Create vector store using VectorDBBuilder with BookCorpus dataset
+    print("📚 Creating vector store using VectorDBBuilder with BookCorpus dataset...")
+    hybrid_rag.create_vectorstore(
+        use_vectordb=True, 
+        num_documents=5000  # Use more documents for better results
+    )
+    print("✅ Vector store created successfully using VectorDBBuilder")
     
-    # Test queries
+    # Show VectorDB stats
+    stats = hybrid_rag.get_vectordb_stats()
+    print(f"📊 VectorDB Stats: {stats}")
+    
+    # Test queries appropriate for BookCorpus dataset
     test_queries = [
-        "What is the main topic of this book?",
-        "What are the key concepts discussed?",
-        "How does the author support their arguments?"
+        "character development and relationships",
+        "plot twists and surprises",
+        "dialogue and conversation",
+        "setting and atmosphere",
+        "conflict and resolution"
     ]
     
     for query in test_queries:
