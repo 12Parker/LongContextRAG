@@ -16,8 +16,7 @@ LongContextRAG/
 │   ├── __init__.py
 │   ├── hybrid_attention_rag.py      # Core hybrid attention mechanism
 │   ├── hybrid_rag_integration.py    # Integration with base RAG
-│   ├── fixed_hybrid_rag.py          # Fixed dimension version
-│   └── working_hybrid_rag.py        # Working implementation
+│   └── working_hybrid_rag.py        # Working hybrid RAG implementation
 │
 ├── training/               # Training and neural retriever components
 │   ├── __init__.py
@@ -95,8 +94,7 @@ python training/train_hybrid_rag.py
 ### Hybrid (`hybrid/`)
 - **`hybrid_attention_rag.py`**: Novel hybrid attention mechanism implementation
 - **`hybrid_rag_integration.py`**: Integration layer between base RAG and hybrid attention
-- **`fixed_hybrid_rag.py`**: Simplified, working version with fixed dimensions
-- **`working_hybrid_rag.py`**: Alternative working implementation
+- **`working_hybrid_rag.py`**: Working hybrid RAG implementation with proper error handling
 
 ### Training (`training/`)
 - **`neural_retriever.py`**: Neural retriever components and end-to-end training

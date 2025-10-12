@@ -15,7 +15,7 @@ from langchain.schema import Document
 from langchain.prompts import ChatPromptTemplate
 from langchain.chains import RetrievalQA
 
-from config import config
+from .config import config
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

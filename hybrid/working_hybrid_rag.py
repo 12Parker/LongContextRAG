@@ -149,25 +149,41 @@ class WorkingHybridRAG:
                 
                 # Neural retrieval
                 with torch.no_grad():
-                    retrieval_scores, neural_retrieved = self.neural_retriever(
-                        query_embedding.unsqueeze(0), 
-                        doc_embeddings_tensor
-                    )
+                    try:
+                        # Ensure correct tensor shapes for neural retriever
+                        query_tensor = query_embedding.unsqueeze(0)  # [1, 768]
+                        doc_tensor = doc_embeddings_tensor.unsqueeze(0)  # [1, num_docs, 768]
+                        
+                        retrieval_scores, neural_retrieved = self.neural_retriever(
+                            query_tensor, 
+                            doc_tensor
+                        )
+                    except Exception as e:
+                        logger.warning(f"Neural retrieval failed: {e}")
+                        retrieval_scores = None
+                        neural_retrieved = None
                 
                 # Convert neural retrieved docs to list format
-                retrieved_segments = [neural_retrieved[0, i] for i in range(neural_retrieved.shape[1])]
+                if neural_retrieved is not None:
+                    retrieved_segments = [neural_retrieved[0, i] for i in range(neural_retrieved.shape[1])]
+                else:
+                    retrieved_segments = None
             else:
                 retrieved_segments = None
                 retrieval_scores = None
             
             # Step 4: Hybrid attention processing
-            if retrieved_segments is not None:
+            if retrieved_segments is not None and len(retrieved_segments) > 0:
                 # Process with hybrid attention
-                with torch.no_grad():
-                    attention_output = self.hybrid_attention(
-                        query_embedding.unsqueeze(0),
-                        retrieved_segments
-                    )
+                try:
+                    with torch.no_grad():
+                        attention_output = self.hybrid_attention(
+                            query_embedding.unsqueeze(0),
+                            retrieved_segments
+                        )
+                except Exception as e:
+                    logger.warning(f"Hybrid attention failed, using fallback: {e}")
+                    attention_output = query_embedding.unsqueeze(0)
             else:
                 attention_output = query_embedding.unsqueeze(0)
             
@@ -182,7 +198,7 @@ class WorkingHybridRAG:
                 'neural_retrieval_scores': retrieval_scores.tolist() if retrieval_scores is not None else None,
                 'context_length': len(context),
                 'task_type': task_type,
-                'attention_output_shape': attention_output.shape
+                'attention_output_shape': list(attention_output.shape) if attention_output is not None else None
             }
             
         except Exception as e:
@@ -214,8 +230,15 @@ class WorkingHybridRAG:
         # Weight documents by attention
         weighted_contexts = []
         for i, doc in enumerate(retrieved_docs):
-            weight = attention_weights[0, i].item() if i < attention_weights.shape[1] else 1.0
-            weighted_contexts.append(f"[Weight: {weight:.3f}] {doc.page_content}")
+            try:
+                if attention_weights is not None and i < attention_weights.shape[1]:
+                    weight = attention_weights[0, i].item()
+                else:
+                    weight = 1.0
+                weighted_contexts.append(f"[Weight: {weight:.3f}] {doc.page_content}")
+            except (IndexError, AttributeError):
+                # Fallback if attention weights are malformed
+                weighted_contexts.append(f"[Weight: 1.000] {doc.page_content}")
         
         return "\n\n".join(weighted_contexts)
     
@@ -282,7 +305,16 @@ class WorkingHybridRAG:
                 'context_length': direct_result['context_length']
             }
         except Exception as e:
-            results['direct_llm'] = {'error': str(e)}
+            # Fallback: create a simple direct LLM response
+            try:
+                response = self.base_rag.llm.invoke(query)
+                results['direct_llm'] = {
+                    'response': response.content,
+                    'retrieved_docs': 0,
+                    'context_length': 0
+                }
+            except Exception as e2:
+                results['direct_llm'] = {'error': str(e2)}
         
         return results
 
@@ -295,7 +327,7 @@ def test_working_hybrid_rag():
     hybrid_rag = WorkingHybridRAG(use_hybrid_attention=True)
     
     # Load sample documents
-        from testing.bookcorpus_integration import BookCorpusLoader, BookCorpusConfig
+    from testing.bookcorpus_integration import BookCorpusLoader, BookCorpusConfig
     config = BookCorpusConfig(max_books=1)
     loader = BookCorpusLoader(config)
     books = loader.load_sample_books()

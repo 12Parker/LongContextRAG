@@ -15,7 +15,7 @@ def main():
     print("=" * 50)
     
     # Check if we're in the right directory
-    if not Path("hybrid_attention_rag.py").exists():
+    if not Path("hybrid/hybrid_attention_rag.py").exists():
         print("❌ Error: Please run this script from the LongContextRAG directory")
         sys.exit(1)
     
