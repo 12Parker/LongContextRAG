@@ -30,15 +30,18 @@ class WorkingHybridRAG:
     Working hybrid attention RAG system with proper dimension alignment.
     """
     
-    def __init__(self, use_hybrid_attention: bool = True, vectordb_config: Optional[Dict[str, Any]] = None):
+    def __init__(self, use_hybrid_attention: bool = True, vectordb_config: Optional[Dict[str, Any]] = None, 
+                 max_retrieved_docs: int = 5):
         """
         Initialize the working hybrid RAG system.
         
         Args:
             use_hybrid_attention: Whether to use hybrid attention (default: True)
             vectordb_config: Configuration for VectorDBBuilder (optional)
+            max_retrieved_docs: Maximum number of documents to retrieve (default: 5)
         """
         self.use_hybrid_attention = use_hybrid_attention
+        self.max_retrieved_docs = max_retrieved_docs
         
         # Initialize base RAG system
         self.base_rag = LongContextRAG()
@@ -160,9 +163,9 @@ class WorkingHybridRAG:
                 
                 return documents
         
-        # Set the retriever
-        self.base_rag.retriever = VectorDBRetriever(self.vectordb_builder)
-        logger.info("Base RAG configured to use VectorDBBuilder")
+        # Set the retriever with configurable number of results
+        self.base_rag.retriever = VectorDBRetriever(self.vectordb_builder, n_results=self.max_retrieved_docs)
+        logger.info(f"Base RAG configured to use VectorDBBuilder with {self.max_retrieved_docs} documents")
     
     def _prepare_document_embeddings(self, documents: List[Any]):
         """Prepare document embeddings for the neural retriever."""
@@ -190,17 +193,20 @@ class WorkingHybridRAG:
         
         logger.info(f"Prepared {len(embeddings)} document embeddings for neural retriever")
     
-    def retrieve_relevant_docs(self, query: str, n_results: int = 5) -> List[Any]:
+    def retrieve_relevant_docs(self, query: str, n_results: Optional[int] = None) -> List[Any]:
         """
         Retrieve relevant documents using VectorDBBuilder or base RAG.
         
         Args:
             query: The search query
-            n_results: Number of results to return
+            n_results: Number of results to return (defaults to max_retrieved_docs)
             
         Returns:
             List of relevant documents
         """
+        if n_results is None:
+            n_results = self.max_retrieved_docs
+            
         if self.vectordb_initialized:
             # Use VectorDBBuilder for retrieval
             try:
@@ -251,7 +257,7 @@ class WorkingHybridRAG:
         """Generate response using the hybrid attention mechanism."""
         try:
             # Step 1: Retrieve relevant documents using VectorDBBuilder or base RAG
-            retrieved_docs = self.retrieve_relevant_docs(query, n_results=5)
+            retrieved_docs = self.retrieve_relevant_docs(query)
             
             # Step 2: Prepare embeddings
             query_embedding = self._get_query_embedding(query)
@@ -499,7 +505,8 @@ def test_working_hybrid_rag():
     
     hybrid_rag = WorkingHybridRAG(
         use_hybrid_attention=True, 
-        vectordb_config=vectordb_config
+        vectordb_config=vectordb_config,
+        max_retrieved_docs=10  # Retrieve more documents for better context
     )
     
     # Create vector store using VectorDBBuilder with BookCorpus dataset

@@ -7,9 +7,12 @@ A comprehensive research framework for exploring Retrieval Augmented Generation 
 - **OpenAI API Integration**: Full support for GPT-4 and other OpenAI models
 - **Vector Store Management**: ChromaDB integration for efficient document storage and retrieval
 - **Long Context Support**: Optimized for handling large documents and extended contexts
+- **Hybrid Attention RAG**: Advanced RAG system with neural retrieval and attention mechanisms
 - **Multiple Prompt Templates**: Pre-built prompts for various research scenarios
 - **Flexible Configuration**: Easy-to-customize settings for different use cases
 - **Comprehensive Examples**: Ready-to-run examples demonstrating different RAG techniques
+- **Evaluation Framework**: Tools to compare RAG vs Base LLM performance
+- **Long Context Testing**: Support for context lengths up to 128k+ tokens
 
 ## Quick Start
 
@@ -49,8 +52,39 @@ A comprehensive research framework for exploring Retrieval Augmented Generation 
 
 7. **Try the interactive system**:
    ```bash
-   python interactive_rag.py
+   python examples/interactive_rag.py
    ```
+
+## Project Structure
+
+```
+LongContextRAG/
+├── core/                    # Core RAG implementation
+│   ├── config.py           # Configuration management
+│   ├── index.py            # Main RAG system
+│   ├── long_context_config.py  # Long context configuration
+│   └── prompts.py          # Prompt templates
+├── hybrid/                 # Hybrid attention RAG
+│   ├── working_hybrid_rag.py    # Main hybrid RAG system
+│   ├── hybrid_attention_rag.py  # Attention mechanisms
+│   └── hybrid_rag_integration.py # Integration components
+├── evaluation/             # Evaluation framework
+│   ├── rag_evaluation.py   # Comprehensive evaluation
+│   └── quick_rag_evaluation.py  # Quick evaluation script
+├── examples/               # Example scripts and demos
+│   ├── compare_responses.py     # Side-by-side comparison
+│   ├── long_context_testing.py  # Long context testing
+│   ├── run_long_context_test.py # Quick long context tests
+│   └── interactive_rag.py       # Interactive RAG demo
+├── docs/                   # Documentation
+│   ├── EVALUATION_GUIDE.md      # Evaluation guide
+│   └── LONG_CONTEXT_TESTING_README.md  # Long context guide
+├── VectorDB/               # Vector database builder
+│   └── build_db.py         # ChromaDB builder for BookCorpus
+├── testing/                # Testing utilities
+├── training/               # Training components
+└── utils/                  # Utility functions
+```
 
 ### Alternative: Use the activation script
 ```bash
@@ -58,28 +92,74 @@ chmod +x activate.sh
 ./activate.sh
 ```
 
+## Evaluation and Testing
+
+### Quick RAG vs Base LLM Evaluation
+```bash
+# Quick evaluation with 5 test queries
+python evaluation/quick_rag_evaluation.py
+
+# Side-by-side response comparison
+python examples/compare_responses.py "Your query here"
+```
+
+### Long Context Testing
+```bash
+# Test different context sizes
+python examples/run_long_context_test.py large
+python examples/run_long_context_test.py ultra
+
+# Comprehensive long context testing
+python examples/long_context_testing.py
+```
+
+### Comprehensive Evaluation
+```bash
+# Full evaluation framework
+python evaluation/rag_evaluation.py
+```
+
+## Documentation
+
+- **[Evaluation Guide](docs/EVALUATION_GUIDE.md)**: Complete guide to evaluating RAG performance
+- **[Long Context Testing Guide](docs/LONG_CONTEXT_TESTING_README.md)**: Guide for testing with 32k+ token contexts
+- **[Hybrid Attention README](HYBRID_ATTENTION_README.md)**: Technical details about hybrid attention mechanisms
+
 ## Project Structure
 
 ```
 LongContextRAG/
-├── index.py              # Main RAG implementation
-├── config.py             # Configuration management
-├── prompts.py            # Prompt templates for different scenarios
-├── examples.py           # Usage examples and test cases
-├── interactive_rag.py    # Interactive RAG system for testing
-├── test_setup.py         # Setup verification script
-├── setup.py              # Project setup script
-├── setup_env.py          # Environment configuration script
-├── activate.sh           # Virtual environment activation script
-├── requirements.txt      # Python dependencies
-├── env.template          # Environment variables template
-├── .env                  # Your environment variables (not tracked by git)
-├── .gitignore           # Git ignore file (protects your API keys)
-├── data/                 # Directory for your documents
-├── vector_store/         # Persistent vector store
-├── logs/                 # Log files
-├── results/              # Research results and outputs
-└── README.md            # This file
+├── core/                    # Core RAG implementation
+│   ├── config.py           # Configuration management
+│   ├── index.py            # Main RAG system
+│   ├── long_context_config.py  # Long context configuration
+│   └── prompts.py          # Prompt templates
+├── hybrid/                 # Hybrid attention RAG
+│   ├── working_hybrid_rag.py    # Main hybrid RAG system
+│   ├── hybrid_attention_rag.py  # Attention mechanisms
+│   └── hybrid_rag_integration.py # Integration components
+├── evaluation/             # Evaluation framework
+│   ├── rag_evaluation.py   # Comprehensive evaluation
+│   └── quick_rag_evaluation.py  # Quick evaluation script
+├── examples/               # Example scripts and demos
+│   ├── compare_responses.py     # Side-by-side comparison
+│   ├── long_context_testing.py  # Long context testing
+│   ├── run_long_context_test.py # Quick long context tests
+│   └── interactive_rag.py       # Interactive RAG demo
+├── docs/                   # Documentation
+│   ├── EVALUATION_GUIDE.md      # Evaluation guide
+│   └── LONG_CONTEXT_TESTING_README.md  # Long context guide
+├── VectorDB/               # Vector database builder
+│   └── build_db.py         # ChromaDB builder for BookCorpus
+├── testing/                # Testing utilities
+├── training/               # Training components
+├── utils/                  # Utility functions
+├── data/                   # Directory for documents
+├── vector_store/           # Persistent vector stores
+├── results/                # Research results and outputs
+├── requirements.txt        # Python dependencies
+├── env.template           # Environment variables template
+└── README.md              # This file
 ```
 
 ## Usage Examples
