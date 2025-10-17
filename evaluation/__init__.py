@@ -6,11 +6,19 @@ against base LLMs across multiple dimensions.
 """
 
 from .rag_evaluation import RAGEvaluator, EvaluationMetrics, EvaluationResult
-from .quick_rag_evaluation import quick_evaluation
 
-__all__ = [
-    'RAGEvaluator',
-    'EvaluationMetrics', 
-    'EvaluationResult',
-    'quick_evaluation'
-]
+# Handle missing modules gracefully
+try:
+    from .quick_rag_evaluation import quick_evaluation
+    __all__ = [
+        'RAGEvaluator',
+        'EvaluationMetrics', 
+        'EvaluationResult',
+        'quick_evaluation'
+    ]
+except ImportError:
+    __all__ = [
+        'RAGEvaluator',
+        'EvaluationMetrics', 
+        'EvaluationResult'
+    ]

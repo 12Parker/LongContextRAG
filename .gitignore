@@ -47,6 +47,8 @@ venv.bak/
 
 # Vector stores and data
 vector_store/
+full_bookcorpus_db/
+test_persistence_db/
 data/
 logs/
 results/

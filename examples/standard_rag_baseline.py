@@ -38,6 +38,7 @@ sys.path.append(os.path.join(project_root, 'VectorDB'))
 from core.config import config
 from langchain_openai import ChatOpenAI
 from build_db import VectorDBBuilder
+from vectordb_manager import VectorDBManager
 import tiktoken
 
 # Setup logging
@@ -60,7 +61,9 @@ class StandardRAGBaseline:
                  num_documents: int = 5000,
                  chunk_size: int = 500,
                  chunk_overlap: int = 50,
-                 top_k_results: int = 10):
+                 top_k_results: int = 10,
+                 use_persistent_db: bool = True,
+                 db_path: str = "./full_bookcorpus_db"):
         """
         Initialize the standard RAG baseline.
         
@@ -70,12 +73,16 @@ class StandardRAGBaseline:
             chunk_size: Size of text chunks
             chunk_overlap: Overlap between chunks
             top_k_results: Number of top results to retrieve
+            use_persistent_db: Whether to use persistent database
+            db_path: Path to persistent database
         """
         self.max_context_tokens = max_context_tokens
         self.num_documents = num_documents
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.top_k_results = top_k_results
+        self.use_persistent_db = use_persistent_db
+        self.db_path = db_path
         
         # Initialize the LLM
         self.llm = ChatOpenAI(
@@ -86,47 +93,86 @@ class StandardRAGBaseline:
         
         self.tokenizer = tiktoken.encoding_for_model("gpt-4")
         
-        # Initialize VectorDBBuilder
-        self.vectordb_config = {
-            'db_path': './vector_store_standard_rag',
-            'collection_name': 'standard_rag_baseline',
-            'embedding_model': 'all-MiniLM-L6-v2',
-            'chunk_size': chunk_size,
-            'chunk_overlap': chunk_overlap,
-            'batch_size': 100
-        }
-        
-        self.vectordb_builder = VectorDBBuilder(**self.vectordb_config)
-        self.vectordb_initialized = False
-        
         # Initialize vector database
         self._initialize_vectordb()
     
     def _initialize_vectordb(self):
         """Initialize the vector database with BookCorpus data."""
         print("🔧 Initializing Standard RAG Vector Database...")
-        print(f"📚 Processing {self.num_documents} documents from BookCorpus")
-        print(f"📄 Chunk size: {self.chunk_size}, Overlap: {self.chunk_overlap}")
-        print(f"🔍 Top-k results: {self.top_k_results}")
         
-        try:
-            # Create or reset collection
-            self.vectordb_builder.create_or_reset_collection(reset=True)
+        if self.use_persistent_db:
+            # Use persistent database manager
+            print("📚 Using persistent database...")
+            print(f"📁 Database path: {self.db_path}")
+            print(f"📄 Chunk size: {self.chunk_size}, Overlap: {self.chunk_overlap}")
+            print(f"🔍 Top-k results: {self.top_k_results}")
             
-            # Process BookCorpus dataset
-            self.vectordb_builder.process_dataset(
-                dataset_name="rojagtap/bookcorpus",
-                num_documents=self.num_documents,
-                min_text_length=100  # Minimum text length for processing
-            )
+            try:
+                # Initialize VectorDBManager
+                self.vectordb_manager = VectorDBManager(
+                    db_path=self.db_path,
+                    collection_name="full_bookcorpus",
+                    chunk_size=self.chunk_size,
+                    chunk_overlap=self.chunk_overlap,
+                    batch_size=100,
+                    embedding_model="all-MiniLM-L6-v2"
+                )
+                
+                # Check if database is ready
+                if self.vectordb_manager.is_database_ready():
+                    print("✅ Persistent database found and ready")
+                    self.vectordb_initialized = True
+                else:
+                    print("🔧 Database not found, initializing...")
+                    # Initialize with smaller dataset first
+                    success = self.vectordb_manager.initialize_database()
+                    if success:
+                        print("✅ Database initialized successfully")
+                        self.vectordb_initialized = True
+                    else:
+                        print("❌ Database initialization failed")
+                        self.vectordb_initialized = False
+                
+            except Exception as e:
+                logger.error(f"Failed to initialize persistent database: {e}")
+                print(f"❌ Persistent database initialization failed: {e}")
+                self.vectordb_initialized = False
+        else:
+            # Use original VectorDBBuilder approach
+            print(f"📚 Processing {self.num_documents} documents from BookCorpus")
+            print(f"📄 Chunk size: {self.chunk_size}, Overlap: {self.chunk_overlap}")
+            print(f"🔍 Top-k results: {self.top_k_results}")
             
-            self.vectordb_initialized = True
-            print("✅ Standard RAG vector database initialized successfully")
-            
-        except Exception as e:
-            logger.error(f"Failed to initialize vector database: {e}")
-            print(f"❌ Vector database initialization failed: {e}")
-            self.vectordb_initialized = False
+            try:
+                # Initialize VectorDBBuilder
+                self.vectordb_config = {
+                    'db_path': './vector_store_standard_rag',
+                    'collection_name': 'standard_rag_baseline',
+                    'embedding_model': 'all-MiniLM-L6-v2',
+                    'chunk_size': self.chunk_size,
+                    'chunk_overlap': self.chunk_overlap,
+                    'batch_size': 100
+                }
+                
+                self.vectordb_builder = VectorDBBuilder(**self.vectordb_config)
+                
+                # Create or reset collection
+                self.vectordb_builder.create_or_reset_collection(reset=True)
+                
+                # Process BookCorpus dataset
+                self.vectordb_builder.process_dataset(
+                    dataset_name="rojagtap/bookcorpus",
+                    num_documents=self.num_documents,
+                    min_text_length=100  # Minimum text length for processing
+                )
+                
+                self.vectordb_initialized = True
+                print("✅ Standard RAG vector database initialized successfully")
+                
+            except Exception as e:
+                logger.error(f"Failed to initialize vector database: {e}")
+                print(f"❌ Vector database initialization failed: {e}")
+                self.vectordb_initialized = False
     
     def _count_tokens(self, text: str) -> int:
         """Count tokens in text using tiktoken."""
@@ -165,8 +211,12 @@ class StandardRAGBaseline:
             raise ValueError("Vector database not initialized")
         
         try:
-            # Query the vector database
-            results = self.vectordb_builder.query(query, n_results=self.top_k_results)
+            if self.use_persistent_db:
+                # Use persistent database manager
+                results = self.vectordb_manager.query(query, n_results=self.top_k_results)
+            else:
+                # Use original VectorDBBuilder
+                results = self.vectordb_builder.query(query, n_results=self.top_k_results)
             
             # Convert results to chunk format
             chunks = []
@@ -281,21 +331,39 @@ please say so and provide what information you can from the available context.""
             return {'error': 'Vector database not initialized'}
         
         try:
-            # Get collection info
-            collection = self.vectordb_builder.client.get_collection(
-                name=self.vectordb_config['collection_name']
-            )
-            
-            count = collection.count()
-            
-            return {
-                'collection_name': self.vectordb_config['collection_name'],
-                'total_chunks': count,
-                'chunk_size': self.chunk_size,
-                'chunk_overlap': self.chunk_overlap,
-                'embedding_model': self.vectordb_config['embedding_model'],
-                'top_k_results': self.top_k_results
-            }
+            if self.use_persistent_db:
+                # Get stats from persistent database manager
+                stats = self.vectordb_manager.get_database_stats()
+                if 'error' in stats:
+                    return stats
+                
+                return {
+                    'collection_name': stats['collection_name'],
+                    'total_chunks': stats['total_chunks'],
+                    'chunk_size': stats['chunk_size'],
+                    'chunk_overlap': stats['chunk_overlap'],
+                    'embedding_model': stats['embedding_model'],
+                    'top_k_results': self.top_k_results,
+                    'database_path': stats['database_path'],
+                    'is_persistent': True
+                }
+            else:
+                # Get collection info from original builder
+                collection = self.vectordb_builder.client.get_collection(
+                    name=self.vectordb_config['collection_name']
+                )
+                
+                count = collection.count()
+                
+                return {
+                    'collection_name': self.vectordb_config['collection_name'],
+                    'total_chunks': count,
+                    'chunk_size': self.chunk_size,
+                    'chunk_overlap': self.chunk_overlap,
+                    'embedding_model': self.vectordb_config['embedding_model'],
+                    'top_k_results': self.top_k_results,
+                    'is_persistent': False
+                }
             
         except Exception as e:
             return {'error': str(e)}
@@ -405,8 +473,14 @@ def main():
     parser.add_argument("--top-k", type=int, default=10, help="Number of top results to retrieve")
     parser.add_argument("--save-results", action="store_true", help="Save results to file")
     parser.add_argument("--interactive", action="store_true", help="Interactive mode")
+    parser.add_argument("--use-persistent-db", action="store_true", default=True, help="Use persistent database (default: True)")
+    parser.add_argument("--no-persistent-db", action="store_true", help="Disable persistent database")
+    parser.add_argument("--db-path", type=str, default="./full_bookcorpus_db", help="Path to persistent database")
     
     args = parser.parse_args()
+    
+    # Determine if persistent database should be used
+    use_persistent_db = args.use_persistent_db and not args.no_persistent_db
     
     # Initialize baseline
     baseline = StandardRAGBaseline(
@@ -414,7 +488,9 @@ def main():
         num_documents=args.num_documents,
         chunk_size=args.chunk_size,
         chunk_overlap=args.chunk_overlap,
-        top_k_results=args.top_k
+        top_k_results=args.top_k,
+        use_persistent_db=use_persistent_db,
+        db_path=args.db_path
     )
     
     if args.interactive:

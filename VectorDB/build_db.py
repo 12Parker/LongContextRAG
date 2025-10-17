@@ -33,7 +33,8 @@ class VectorDBBuilder:
         embedding_model: str = "all-MiniLM-L6-v2",
         chunk_size: int = 500,
         chunk_overlap: int = 50,
-        batch_size: int = 100
+        batch_size: int = 100,
+        progress_callback: callable = None
     ):
         """
         Initialize the VectorDB Builder
@@ -45,12 +46,14 @@ class VectorDBBuilder:
             chunk_size: Number of words per chunk
             chunk_overlap: Number of words to overlap between chunks
             batch_size: Number of chunks to process in each batch
+            progress_callback: Optional callback function for progress updates
         """
         self.db_path = db_path
         self.collection_name = collection_name
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.batch_size = batch_size
+        self.progress_callback = progress_callback
         
         logger.info(f"Initializing ChromaDB at {db_path}")
         self.client = chromadb.PersistentClient(path=db_path)
@@ -178,6 +181,15 @@ class VectorDBBuilder:
                         
                         self.stats['processed_documents'] += 1
                         pbar.update(1)
+                        
+                        # Call progress callback if provided
+                        if self.progress_callback:
+                            self.progress_callback(
+                                processed_documents=self.stats['processed_documents'],
+                                total_documents=num_documents,
+                                total_chunks=self.stats['total_chunks'],
+                                errors=self.stats['errors']
+                            )
                         
                     except Exception as e:
                         logger.error(f"Error processing document {doc_idx}: {e}")
