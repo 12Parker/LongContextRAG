@@ -137,15 +137,47 @@ def test_single_question_with_system(question_data: Dict[str, Any], system_name:
             context_tokens = response.get('context_tokens', 0)
             retrieved_docs = response.get('retrieved_docs', 0)
         
-        # Simple relevance check
+        # Calculate comprehensive evaluation metrics
+        evaluation_metrics = {}
         relevance_score = 0.0
+        
         if reference_answers:
-            for ref_answer in reference_answers:
-                ref_words = set(ref_answer.lower().split())
-                gen_words = set(generated_answer.lower().split())
-                overlap = len(ref_words.intersection(gen_words))
-                if len(ref_words) > 0:
-                    relevance_score = max(relevance_score, overlap / len(ref_words))
+            try:
+                from evaluation.bleu_evaluator import BLEUEvaluator
+                from evaluation.qa_metrics import QAMetrics
+                
+                # Get BLEU and ROUGE metrics
+                bleu_evaluator = BLEUEvaluator()
+                bleu_metrics = bleu_evaluator.evaluate_answer(generated_answer, reference_answers)
+                
+                # Get QA-specific metrics
+                qa_evaluator = QAMetrics()
+                qa_metrics = qa_evaluator.evaluate_answer(generated_answer, reference_answers)
+                
+                # Combine all metrics
+                evaluation_metrics = {**bleu_metrics, **qa_metrics}
+                
+                # Use F1 score as the primary relevance metric (more appropriate for QA)
+                relevance_score = qa_metrics.get('f1_score', 0.0)
+                
+            except ImportError:
+                print("  ⚠️  Evaluation modules not available, falling back to simple word overlap")
+                # Fallback to simple word overlap
+                for ref_answer in reference_answers:
+                    ref_words = set(ref_answer.lower().split())
+                    gen_words = set(generated_answer.lower().split())
+                    overlap = len(ref_words.intersection(gen_words))
+                    if len(ref_words) > 0:
+                        relevance_score = max(relevance_score, overlap / len(ref_words))
+            except Exception as e:
+                print(f"  ⚠️  Evaluation failed: {e}, using simple word overlap")
+                # Fallback to simple word overlap
+                for ref_answer in reference_answers:
+                    ref_words = set(ref_answer.lower().split())
+                    gen_words = set(generated_answer.lower().split())
+                    overlap = len(ref_words.intersection(gen_words))
+                    if len(ref_words) > 0:
+                        relevance_score = max(relevance_score, overlap / len(ref_words))
         
         result = {
             'question_id': question_data.get('question_id', 'unknown'),
@@ -159,6 +191,7 @@ def test_single_question_with_system(question_data: Dict[str, Any], system_name:
             'context_tokens': context_tokens,
             'retrieved_docs': retrieved_docs,
             'relevance_score': relevance_score,
+            'evaluation_metrics': evaluation_metrics,
             'method': system_name
         }
         
