@@ -32,8 +32,8 @@ def test_system_availability():
     
     # Test Base LLM
     try:
-        from examples.bookcorpus_raw_llm_baseline import BookCorpusRawLLMBaseline
-        available_systems['base_llm'] = BookCorpusRawLLMBaseline
+        from examples.narrativeqa_base_llm import NarrativeQABaseLLM
+        available_systems['base_llm'] = NarrativeQABaseLLM
         print("  ✅ Base LLM available")
     except ImportError as e:
         print(f"  ❌ Base LLM not available: {e}")
@@ -45,6 +45,14 @@ def test_system_availability():
         print("  ✅ NarrativeQA RAG available")
     except ImportError as e:
         print(f"  ❌ NarrativeQA RAG not available: {e}")
+    
+    # Test NarrativeQA Hybrid RAG
+    try:
+        from hybrid.narrativeqa_hybrid_rag import NarrativeQAHybridRAG
+        available_systems['narrativeqa_hybrid_rag'] = NarrativeQAHybridRAG
+        print("  ✅ NarrativeQA Hybrid RAG available")
+    except ImportError as e:
+        print(f"  ❌ NarrativeQA Hybrid RAG not available: {e}")
     
     # Test Standard RAG (BookCorpus-based)
     try:
@@ -76,18 +84,16 @@ def test_single_question_with_system(question_data: Dict[str, Any], system_name:
     try:
         # Initialize system if needed
         if system_name == 'base_llm':
-            # Use simple LLM with NarrativeQA stories
-            from core.config import config
-            from langchain_openai import ChatOpenAI
-            system = ChatOpenAI(
-                model=config.OPENAI_MODEL,
-                openai_api_key=config.OPENAI_API_KEY,
-                temperature=0.1
-            )
+            # Use NarrativeQA Base LLM
+            system = system_class()
         elif system_name == 'narrativeqa_rag':
             # Use the story text from the question data
             story_text = question_data.get('story', '')
             system = system_class(db_path="./narrativeqa_vectordb", top_k_results=5, story_text=story_text)
+        elif system_name == 'narrativeqa_hybrid_rag':
+            # Use the story text from the question data
+            story_text = question_data.get('story', '')
+            system = system_class(db_path="./narrativeqa_hybrid_vectordb", top_k_results=5, story_text=story_text)
         elif system_name == 'standard_rag':
             system = system_class(db_path="./full_bookcorpus_db", top_k_results=10)
         elif system_name == 'hybrid_rag':
@@ -97,37 +103,18 @@ def test_single_question_with_system(question_data: Dict[str, Any], system_name:
         
         # Generate response
         if system_name == 'base_llm':
-            # Use NarrativeQA story and summary for base LLM
+            # Use NarrativeQA Base LLM
             story = question_data.get('story', '')
             summary = question_data.get('summary', '')
             
-            # Create context from NarrativeQA story and summary
-            context_parts = []
-            if summary:
-                context_parts.append(f"Summary: {summary}")
-            if story:
-                # Truncate story to fit in context window
-                max_story_length = 8000
-                if len(story) > max_story_length:
-                    story = story[:max_story_length] + "..."
-                context_parts.append(f"Story: {story}")
-            
-            context = "\n\n".join(context_parts) if context_parts else "No context available."
-            
-            # Create prompt
-            prompt = f"""Based on the following story and summary, answer the question.
-
-{context}
-
-Question: {question}
-
-Please provide a comprehensive answer based on the story content. If the story doesn't contain enough information to answer the question, please say so and provide what information you can from the available context."""
-
-            # Generate response
-            response = system.invoke(prompt)
-            generated_answer = response.content if hasattr(response, 'content') else str(response)
+            response = system.generate_response(question, story, summary)
+            generated_answer = response['response']
         elif system_name == 'narrativeqa_rag':
             # Use NarrativeQA RAG system
+            response = system.generate_response(question)
+            generated_answer = response['response']
+        elif system_name == 'narrativeqa_hybrid_rag':
+            # Use NarrativeQA Hybrid RAG system
             response = system.generate_response(question)
             generated_answer = response['response']
         else:
@@ -141,11 +128,10 @@ Please provide a comprehensive answer based on the story content. If the story d
         
         # Handle different response formats
         if system_name == 'base_llm':
-            # For base LLM, calculate metrics from the story and prompt
-            story = question_data.get('story', '')
-            context_length = len(story)
-            context_tokens = len(prompt.split()) if 'prompt' in locals() else 0
-            retrieved_docs = 0
+            # For base LLM, get metrics from response
+            context_length = response.get('context_length', 0)
+            context_tokens = response.get('context_tokens', 0)
+            retrieved_docs = response.get('retrieved_docs', 0)
         else:
             context_length = response.get('context_length', 0)
             context_tokens = response.get('context_tokens', 0)
