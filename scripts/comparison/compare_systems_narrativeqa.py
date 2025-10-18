@@ -21,8 +21,8 @@ from typing import List, Dict, Any, Optional
 import argparse
 
 # Add project root to path
-project_root = Path(__file__).parent
-sys.path.append(str(project_root))
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 def test_system_availability():
     """Test which systems are available."""
@@ -54,21 +54,6 @@ def test_system_availability():
     except ImportError as e:
         print(f"  ❌ NarrativeQA Hybrid RAG not available: {e}")
     
-    # Test Standard RAG (BookCorpus-based)
-    try:
-        from examples.standard_rag_baseline import StandardRAGBaseline
-        available_systems['standard_rag'] = StandardRAGBaseline
-        print("  ✅ Standard RAG (BookCorpus) available")
-    except ImportError as e:
-        print(f"  ❌ Standard RAG not available: {e}")
-    
-    # Test Hybrid RAG
-    try:
-        from hybrid.working_hybrid_rag import WorkingHybridRAG
-        available_systems['hybrid_rag'] = WorkingHybridRAG
-        print("  ✅ Hybrid RAG available")
-    except ImportError as e:
-        print(f"  ❌ Hybrid RAG not available: {e}")
     
     return available_systems
 
@@ -347,10 +332,16 @@ def run_comparison_test(systems_to_test: List[str], num_questions: int = 5, subs
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"system_comparison_narrativeqa_{timestamp}.json"
     
-    with open(filename, 'w') as f:
+    # Create results directory if it doesn't exist
+    results_dir = Path("results/system_comparisons")
+    results_dir.mkdir(parents=True, exist_ok=True)
+    
+    results_path = results_dir / filename
+    
+    with open(results_path, 'w') as f:
         json.dump(all_results, f, indent=2)
     
-    print(f"\n💾 Results saved to {filename}")
+    print(f"\n💾 Results saved to {results_path}")
     
     return True
 

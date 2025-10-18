@@ -22,7 +22,7 @@ from datetime import datetime
 project_root = Path(__file__).parent.parent
 sys.path.append(str(project_root))
 
-from hybrid.working_hybrid_rag import WorkingHybridRAG
+# from hybrid.working_hybrid_rag import WorkingHybridRAG  # Removed - using NarrativeQA hybrid RAG instead
 from core.long_context_config import LongContextManager, ContextSize
 import tiktoken
 

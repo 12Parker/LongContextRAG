@@ -16,13 +16,13 @@ import sys
 import os
 from pathlib import Path
 import argparse
+
+# Add project root to path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 import subprocess
 import json
 from datetime import datetime
-
-# Add project root to path
-project_root = Path(__file__).parent
-sys.path.append(str(project_root))
 
 def install_dependencies():
     """Install required dependencies for NarrativeQA evaluation."""
@@ -83,43 +83,19 @@ def run_quick_test():
     print("🚀 Running quick NarrativeQA test...")
     
     try:
-        # First run the simple test
-        print("Running basic functionality test...")
+        # Run a quick comparison test
+        print("Running quick comparison test...")
         import subprocess
-        result = subprocess.run([sys.executable, "test_narrativeqa_simple.py"], 
+        result = subprocess.run([sys.executable, "run.py", "compare-systems", "--systems", "base_llm", "--num-questions", "2"], 
                               capture_output=True, text=True)
         
         if result.returncode == 0:
-            print("✅ Basic functionality test passed")
+            print("✅ Quick test passed")
         else:
-            print("❌ Basic functionality test failed")
+            print("❌ Quick test failed")
             print(result.stdout)
             print(result.stderr)
             return False
-        
-        # Now test with evaluator
-        from evaluation.narrativeqa_evaluator import NarrativeQAEvaluator
-        
-        # Initialize evaluator with small test
-        evaluator = NarrativeQAEvaluator(
-            db_path="./full_bookcorpus_db",
-            max_questions=5,
-            subset="test"
-        )
-        
-        # Load dataset
-        questions = evaluator.load_narrativeqa_dataset()
-        if not questions:
-            print("❌ No questions loaded")
-            return False
-        
-        print(f"✅ Loaded {len(questions)} questions")
-        
-        # Show sample questions
-        print("\n📋 Sample Questions:")
-        for i, q in enumerate(questions[:3]):
-            print(f"{i+1}. {q['question'][:80]}...")
-            print(f"   Answers: {q['answers']}")
         
         print("\n✅ Quick test completed successfully")
         return True

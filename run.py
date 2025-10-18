@@ -42,39 +42,31 @@ def main():
 Available commands:
 
 SETUP:
-  setup-vectordb     Build BookCorpus vector database
   setup-narrativeqa  Setup NarrativeQA evaluation
-  monitor-build      Monitor database build progress
 
 COMPARISON:
   compare-systems    Compare RAG systems on NarrativeQA
-  compare-bleu       Compare systems with BLEU metrics
-  compare-qa         Compare systems with QA metrics
 
 ANALYSIS:
   analyze-qa         Analyze QA evaluation results
   analyze-bleu       Analyze BLEU evaluation results
-  analyze-comparison Analyze system comparison results
-  summarize-results  Summarize base LLM results
 
 EXAMPLES:
   python run.py compare-systems --systems base_llm,narrativeqa_hybrid_rag --num-questions 5
   python run.py analyze-qa
-  python run.py setup-vectordb --build-medium
+  python run.py setup-narrativeqa
         """
     )
     
     parser.add_argument('command', help='Command to run')
-    parser.add_argument('args', nargs='*', help='Additional arguments for the command')
     
-    args = parser.parse_args()
+    # Parse known args to avoid conflicts with subcommand args
+    args, unknown = parser.parse_known_args()
     
     # Define script mappings
     scripts = {
         # Setup scripts
-        'setup-vectordb': 'scripts/setup/setup_full_vectordb.py',
         'setup-narrativeqa': 'scripts/setup/setup_narrativeqa.py',
-        'monitor-build': 'scripts/setup/monitor_build.py',
         
         # Comparison scripts
         'compare-systems': 'scripts/comparison/compare_systems_narrativeqa.py',
@@ -82,8 +74,6 @@ EXAMPLES:
         # Analysis scripts
         'analyze-qa': 'scripts/analysis/analyze_qa_metrics.py',
         'analyze-bleu': 'scripts/analysis/analyze_bleu_results.py',
-        'analyze-comparison': 'scripts/analysis/analyze_narrativeqa_comparison.py',
-        'summarize-results': 'scripts/analysis/summarize_base_llm_results.py',
     }
     
     if args.command not in scripts:
@@ -99,7 +89,8 @@ EXAMPLES:
         print(f"❌ Script not found: {script_path}")
         return 1
     
-    return run_script(script_path, args.args)
+    # Use unknown args as the arguments for the script
+    return run_script(script_path, unknown)
 
 if __name__ == "__main__":
     sys.exit(main())

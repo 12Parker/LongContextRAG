@@ -15,7 +15,7 @@ from collections import defaultdict
 def load_latest_results() -> Dict[str, Any]:
     """Load the latest comparison results."""
     # Find the most recent results file
-    result_files = glob.glob("system_comparison_narrativeqa_*.json")
+    result_files = glob.glob("results/system_comparisons/system_comparison_narrativeqa_*.json")
     if not result_files:
         print("❌ No results files found")
         return {}
