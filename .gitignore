@@ -51,7 +51,6 @@ full_bookcorpus_db/
 test_persistence_db/
 data/
 logs/
-results/
 *.db
 *.sqlite
 *.sqlite3
