@@ -13,17 +13,17 @@ class RAGConfig:
     
     # OpenAI API Configuration
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
-    OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4-turbo-preview")
+    OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     
     # Vector Store Configuration
     VECTOR_STORE_TYPE: str = os.getenv("VECTOR_STORE_TYPE", "chroma")
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "text-embedding-3-large")
     
     # RAG Configuration
-    CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "1000"))
-    CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", "200"))
-    TOP_K_RESULTS: int = int(os.getenv("TOP_K_RESULTS", "5"))
-    MAX_CONTEXT_LENGTH: int = int(os.getenv("MAX_CONTEXT_LENGTH", "8000"))
+    CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "2000"))
+    CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", "400"))
+    TOP_K_RESULTS: int = int(os.getenv("TOP_K_RESULTS", "20"))
+    MAX_CONTEXT_LENGTH: int = int(os.getenv("MAX_CONTEXT_LENGTH", "50000"))
     
     # Research Settings
     ENABLE_LONG_CONTEXT: bool = os.getenv("ENABLE_LONG_CONTEXT", "True").lower() == "true"

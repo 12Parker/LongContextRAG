@@ -55,10 +55,10 @@ class NarrativeQARAGBaseline:
     """
     
     def __init__(self, 
-                 max_context_tokens: int = 8000,
-                 chunk_size: int = 1000,
-                 chunk_overlap: int = 100,
-                 top_k_results: int = 5,
+                 max_context_tokens: int = 50000,
+                 chunk_size: int = 2000,
+                 chunk_overlap: int = 400,
+                 top_k_results: int = 20,
                  db_path: str = "./narrativeqa_vectordb",
                  story_text: str = None):
         """
@@ -223,7 +223,7 @@ Context:
 
 Question: {question}
 
-Please provide a comprehensive answer based on the story content. If the excerpts don't contain enough information to answer the question, please say so and provide what information you can from the available context."""
+Please provide a concise, direct answer (1-2 sentences maximum). Focus on the key facts from the story excerpts. If the excerpts don't contain enough information to answer the question, please say so briefly."""
 
             # Generate response
             response = self.llm.invoke(prompt)

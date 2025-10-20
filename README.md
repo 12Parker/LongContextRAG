@@ -204,7 +204,7 @@ Key configuration options in `.env`:
 OPENAI_API_KEY=your_openai_api_key_here
 
 # Optional (defaults provided)
-OPENAI_MODEL=gpt-4-turbo-preview
+OPENAI_MODEL=gpt-4o-mini
 CHUNK_SIZE=1000
 TOP_K_RESULTS=5
 MAX_STORY_LENGTH=8000

@@ -30,7 +30,7 @@ class LongContextConfig:
     # Document processing
     num_documents: int = 10000
     chunk_size: int = 2000
-    chunk_overlap: int = 200
+    chunk_overlap: int = 400
     min_text_length: int = 50
     
     # Vector database
@@ -44,7 +44,7 @@ class LongContextConfig:
     max_retrieved_chunks: int = 20
     
     # Model settings
-    openai_model: str = "gpt-4-turbo-preview"  # Better for long context
+    openai_model: str = "gpt-4o-mini"  # Better for long context
     temperature: float = 0.1
     
     # Performance settings
@@ -58,47 +58,47 @@ class LongContextConfig:
         configs = {
             ContextSize.STANDARD: cls(
                 context_size=ContextSize.STANDARD,
-                max_context_tokens=8000,
-                target_context_tokens=7000,
+                max_context_tokens=50000,
+                target_context_tokens=40000,
                 num_documents=5000,
-                chunk_size=1000,
-                top_k_results=5,
-                max_retrieved_chunks=10
+                chunk_size=2000,
+                top_k_results=20,
+                max_retrieved_chunks=25
             ),
             ContextSize.MEDIUM: cls(
                 context_size=ContextSize.MEDIUM,
                 max_context_tokens=16000,
                 target_context_tokens=14000,
                 num_documents=7500,
-                chunk_size=1500,
-                top_k_results=7,
-                max_retrieved_chunks=15
+                chunk_size=2500,
+                top_k_results=20,
+                max_retrieved_chunks=30
             ),
             ContextSize.LARGE: cls(
                 context_size=ContextSize.LARGE,
-                max_context_tokens=32000,
-                target_context_tokens=28000,
+                max_context_tokens=50000,
+                target_context_tokens=40000,
                 num_documents=10000,
-                chunk_size=2000,
-                top_k_results=10,
-                max_retrieved_chunks=20
+                chunk_size=3000,
+                top_k_results=25,
+                max_retrieved_chunks=40
             ),
             ContextSize.XLARGE: cls(
                 context_size=ContextSize.XLARGE,
                 max_context_tokens=64000,
                 target_context_tokens=56000,
                 num_documents=15000,
-                chunk_size=3000,
-                top_k_results=15,
-                max_retrieved_chunks=30
+                chunk_size=4000,
+                top_k_results=30,
+                max_retrieved_chunks=50
             ),
             ContextSize.ULTRA: cls(
                 context_size=ContextSize.ULTRA,
                 max_context_tokens=128000,
                 target_context_tokens=112000,
                 num_documents=20000,
-                chunk_size=4000,
-                top_k_results=20,
+                chunk_size=5000,
+                top_k_results=40,
                 max_retrieved_chunks=50
             )
         }

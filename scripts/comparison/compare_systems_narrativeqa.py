@@ -74,11 +74,11 @@ def test_single_question_with_system(question_data: Dict[str, Any], system_name:
         elif system_name == 'narrativeqa_rag':
             # Use the story text from the question data
             story_text = question_data.get('story', '')
-            system = system_class(db_path="./narrativeqa_vectordb", top_k_results=5, story_text=story_text)
+            system = system_class(db_path="./narrativeqa_vectordb", top_k_results=20, story_text=story_text)
         elif system_name == 'narrativeqa_hybrid_rag':
             # Use the story text from the question data
             story_text = question_data.get('story', '')
-            system = system_class(db_path="./narrativeqa_hybrid_vectordb", top_k_results=5, story_text=story_text)
+            system = system_class(db_path="./narrativeqa_hybrid_vectordb", top_k_results=20, story_text=story_text)
         elif system_name == 'standard_rag':
             system = system_class(db_path="./full_bookcorpus_db", top_k_results=10)
         elif system_name == 'hybrid_rag':

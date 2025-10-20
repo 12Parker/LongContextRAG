@@ -189,7 +189,7 @@ class NarrativeQAEvaluator:
         if BookCorpusRawLLMBaseline is not None:
             try:
                 self.raw_llm = BookCorpusRawLLMBaseline(
-                    max_context_tokens=8000,
+                    max_context_tokens=50000,
                     num_books=10
                 )
                 logger.info("✅ Raw LLM baseline initialized")

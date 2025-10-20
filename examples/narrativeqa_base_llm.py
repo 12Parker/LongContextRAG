@@ -30,7 +30,7 @@ class NarrativeQABaseLLM:
     without any retrieval or chunking mechanisms.
     """
     
-    def __init__(self, max_story_length: int = 8000):
+    def __init__(self, max_story_length: int = 50000):
         """
         Initialize the NarrativeQA Base LLM system.
         
@@ -139,7 +139,7 @@ class NarrativeQABaseLLM:
 
 Question: {question}
 
-Please provide a comprehensive answer based on the story content. If the story doesn't contain enough information to answer the question, please say so and provide what information you can from the available context."""
+Please provide a concise, direct answer (1-2 sentences maximum). Focus on the key facts from the story. If the story doesn't contain enough information to answer the question, please say so briefly."""
 
 def main():
     """Main function for testing the NarrativeQA Base LLM."""
@@ -150,7 +150,7 @@ def main():
     parser.add_argument("--story", type=str, default="", help="Story text")
     parser.add_argument("--summary", type=str, default="", help="Story summary")
     parser.add_argument("--interactive", action="store_true", help="Run in interactive mode")
-    parser.add_argument("--max-story-length", type=int, default=8000, help="Maximum story length")
+    parser.add_argument("--max-story-length", type=int, default=50000, help="Maximum story length")
     
     args = parser.parse_args()
     
