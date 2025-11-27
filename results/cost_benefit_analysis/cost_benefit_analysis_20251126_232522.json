@@ -1,0 +1,109 @@
+{
+  "system_metrics": {
+    "hybrid_bm25_optimized": {
+      "total_questions": 50,
+      "avg_llm_score": 4.2,
+      "avg_response_time": 1.9056129884719848,
+      "avg_input_tokens": 2330.5,
+      "avg_output_tokens": 53.54,
+      "avg_cost_per_query": 0.0003830146,
+      "avg_retrieved_docs": 5.0,
+      "quality_adjusted_latency": 4.537173782076154,
+      "cost_efficiency_score": 10965.639429932959,
+      "latency_efficiency_score": 2.2040152042455214,
+      "total_cost_1000_queries": 0.3830146,
+      "total_cost_10000_queries": 3.8301459999999996,
+      "total_cost_100000_queries": 38.30146,
+      "total_latency_1000_queries": 1905.6129884719849,
+      "total_latency_10000_queries": 19056.12988471985,
+      "total_latency_100000_queries": 190561.2988471985,
+      "one_time_setup_cost": 0.024375000000000004,
+      "estimated_total_chunks": 500.0
+    },
+    "hybrid_bm25_only": {
+      "total_questions": 50,
+      "avg_llm_score": 4.98,
+      "avg_response_time": 2.532295970916748,
+      "avg_input_tokens": 7915.42,
+      "avg_output_tokens": 57.2,
+      "avg_cost_per_query": 0.0012229486,
+      "avg_retrieved_docs": 10.0,
+      "quality_adjusted_latency": 5.084931668507525,
+      "cost_efficiency_score": 4072.125353428591,
+      "latency_efficiency_score": 1.9665947650649733,
+      "total_cost_1000_queries": 1.2229486,
+      "total_cost_10000_queries": 12.229486,
+      "total_cost_100000_queries": 122.29486,
+      "total_latency_1000_queries": 2532.295970916748,
+      "total_latency_10000_queries": 25322.959709167477,
+      "total_latency_100000_queries": 253229.59709167478,
+      "one_time_setup_cost": 0.04875000000000001,
+      "estimated_total_chunks": 1000.0
+    },
+    "base_llm": {
+      "total_questions": 50,
+      "avg_llm_score": 4.88,
+      "avg_response_time": 1.2989876556396485,
+      "avg_input_tokens": 9072.82,
+      "avg_output_tokens": 40.4,
+      "avg_cost_per_query": 0.0013851629999999998,
+      "avg_retrieved_docs": 0.0,
+      "quality_adjusted_latency": 2.6618599500812468,
+      "cost_efficiency_score": 3523.0510777431973,
+      "latency_efficiency_score": 3.756771651226344,
+      "total_cost_1000_queries": 1.3851629999999997,
+      "total_cost_10000_queries": 13.851629999999998,
+      "total_cost_100000_queries": 138.51629999999997,
+      "total_latency_1000_queries": 1298.9876556396484,
+      "total_latency_10000_queries": 12989.876556396484,
+      "total_latency_100000_queries": 129898.76556396484,
+      "one_time_setup_cost": 0.0,
+      "estimated_total_chunks": 0
+    }
+  },
+  "category_metrics": {
+    "factual": {
+      "hybrid_bm25_optimized": {
+        "avg_score": 4.023255813953488,
+        "avg_time": 1.9525240798329198,
+        "count": 43
+      },
+      "hybrid_bm25_only": {
+        "avg_score": 4.906976744186046,
+        "avg_time": 2.525115112925685,
+        "count": 43
+      },
+      "base_llm": {
+        "avg_score": 4.837209302325581,
+        "avg_time": 1.2962114256481791,
+        "count": 43
+      }
+    },
+    "inferential": {
+      "hybrid_bm25_optimized": {
+        "avg_score": 5.285714285714286,
+        "avg_time": 1.6174448558262415,
+        "count": 7
+      },
+      "hybrid_bm25_only": {
+        "avg_score": 5.428571428571429,
+        "avg_time": 2.576406955718994,
+        "count": 7
+      },
+      "base_llm": {
+        "avg_score": 5.142857142857143,
+        "avg_time": 1.3160416398729597,
+        "count": 7
+      }
+    }
+  },
+  "break_even_analysis": {},
+  "metadata": {
+    "analysis_date": "2025-11-26T23:25:22.272940",
+    "pricing": {
+      "input_price_per_1k": 0.15,
+      "output_price_per_1k": 0.6,
+      "embedding_price_per_1k": 0.13
+    }
+  }
+}

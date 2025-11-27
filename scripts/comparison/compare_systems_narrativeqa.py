@@ -20,7 +20,7 @@ from pathlib import Path
 import time
 import json
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 import argparse
 
 # Add project root to path
@@ -71,6 +71,15 @@ def test_system_availability():
         print(f"  ❌ NarrativeQA Hybrid RAG (BM25+Dense) not available: {e}")
         print(f"     Make sure narrativeqa_hybrid_rag_improved.py is in the hybrid/ directory")
     
+    # Test Optimized NarrativeQA Hybrid RAG (BM25-only, optimized)
+    try:
+        from hybrid.narrativeqa_hybrid_rag_optimized import OptimizedNarrativeQAHybridRAG
+        available_systems['hybrid_bm25_optimized'] = OptimizedNarrativeQAHybridRAG
+        print("  ✅ NarrativeQA Hybrid RAG (BM25 Optimized) available")
+    except ImportError as e:
+        print(f"  ❌ NarrativeQA Hybrid RAG (BM25 Optimized) not available: {e}")
+        print(f"     Make sure narrativeqa_hybrid_rag_optimized.py is in the hybrid/ directory")
+    
     return available_systems
 
 def test_single_question_with_system(question_data: Dict[str, Any], 
@@ -78,7 +87,8 @@ def test_single_question_with_system(question_data: Dict[str, Any],
                                      system_class, 
                                      retriever_checkpoint: str = None,
                                      expand_context: bool = False,
-                                     context_window: int = 1) -> Dict[str, Any]:
+                                     context_window: int = 1,
+                                     system_cache: Dict[Tuple[str, str], Any] = None) -> Dict[str, Any]:
     """Test a single NarrativeQA question with a specific system."""
     question = question_data['question']
     reference_answers = question_data['answers']
@@ -90,63 +100,107 @@ def test_single_question_with_system(question_data: Dict[str, Any],
     try:
         # Initialize system based on type
         story_text = question_data.get('story', '')
+        story_id = question_data.get('story_id', 'unknown')
         
+        # Handle base_llm separately (global cache, not per story)
         if system_name == 'base_llm':
-            # Use NarrativeQA Base LLM
-            system = system_class()
-        
-        elif system_name == 'narrativeqa_rag':
-            # Use the story text from the question data
-            system = system_class(db_path="./narrativeqa_vectordb", top_k_results=20, story_text=story_text)
-        
-        elif system_name == 'narrativeqa_hybrid_rag_neural':
-            # Use the story text from the question data (old neural retriever version)
-            system = system_class(
-                db_path="./narrativeqa_hybrid_vectordb_neural", 
-                top_k_results=20, 
-                story_text=story_text,
-                retriever_checkpoint=retriever_checkpoint
-            )
-        
-        elif system_name == 'hybrid_bm25_dense':
-            # NEW: Hybrid retriever with BM25+Dense
-            system = system_class(
-                chunk_size=1500,
-                top_k_results=10,
-                db_path="./narrativeqa_hybrid_bm25_dense",
-                story_text=story_text,
-                retrieval_mode='hybrid',
-                hybrid_alpha=0.5  # Equal weight BM25 and Dense
-            )
-        
-        elif system_name == 'hybrid_dense_only':
-            # Dense retrieval only
-            system = system_class(
-                chunk_size=1500,
-                top_k_results=10,
-                db_path="./narrativeqa_dense_only",
-                story_text=story_text,
-                retrieval_mode='dense'
-            )
-        
-        elif system_name == 'hybrid_bm25_only':
-            # BM25 retrieval only
-            system = system_class(
-                chunk_size=1500,
-                top_k_results=10,
-                db_path="./narrativeqa_bm25_only",
-                story_text=story_text,
-                retrieval_mode='bm25'
-            )
-        
-        elif system_name == 'standard_rag':
-            system = system_class(db_path="./full_bookcorpus_db", top_k_results=10)
-        
-        elif system_name == 'hybrid_rag':
-            system = system_class(db_path="./full_bookcorpus_db")
-        
+            cache_key_global = ('base_llm', 'global')
+            if system_cache is not None and cache_key_global in system_cache:
+                print(f"  ♻️  Using cached base_llm instance...")
+                system = system_cache[cache_key_global]
+            else:
+                system = system_class()
+                if system_cache is not None:
+                    system_cache[cache_key_global] = system
         else:
-            raise ValueError(f"Unknown system: {system_name}")
+            # Check cache first (for systems that can be cached per story)
+            cache_key = (system_name, story_id)
+            if system_cache is not None and cache_key in system_cache:
+                print(f"  ♻️  Using cached system instance for story {story_id[:20]}...")
+                system = system_cache[cache_key]
+            else:
+                # Create new system instance
+                if system_name == 'narrativeqa_rag':
+                    # Use the story text from the question data
+                    system = system_class(db_path=f"./narrativeqa_vectordb_{story_id}", top_k_results=20, story_text=story_text)
+                    # Cache per story
+                    if system_cache is not None:
+                        system_cache[cache_key] = system
+                
+                elif system_name == 'narrativeqa_hybrid_rag_neural':
+                    # Use the story text from the question data (old neural retriever version)
+                    system = system_class(
+                        db_path=f"./narrativeqa_hybrid_vectordb_neural_{story_id}", 
+                        top_k_results=20, 
+                        story_text=story_text,
+                        retriever_checkpoint=retriever_checkpoint
+                    )
+                    # Cache per story
+                    if system_cache is not None:
+                        system_cache[cache_key] = system
+                
+                elif system_name == 'hybrid_bm25_dense':
+                    # NEW: Hybrid retriever with BM25+Dense
+                    system = system_class(
+                        chunk_size=1500,
+                        top_k_results=10,
+                        db_path=f"./narrativeqa_hybrid_bm25_dense_{story_id}",
+                        story_text=story_text,
+                        retrieval_mode='hybrid',
+                        hybrid_alpha=0.5  # Equal weight BM25 and Dense
+                    )
+                    # Cache per story
+                    if system_cache is not None:
+                        system_cache[cache_key] = system
+                
+                elif system_name == 'hybrid_dense_only':
+                    # Dense retrieval only
+                    system = system_class(
+                        chunk_size=1500,
+                        top_k_results=10,
+                        db_path=f"./narrativeqa_dense_only_{story_id}",
+                        story_text=story_text,
+                        retrieval_mode='dense'
+                    )
+                    # Cache per story
+                    if system_cache is not None:
+                        system_cache[cache_key] = system
+                
+                elif system_name == 'hybrid_bm25_only':
+                    # BM25 retrieval only
+                    system = system_class(
+                        chunk_size=1500,
+                        top_k_results=10,
+                        db_path=f"./narrativeqa_bm25_only_{story_id}",
+                        story_text=story_text,
+                        retrieval_mode='bm25'
+                    )
+                    # Cache per story
+                    if system_cache is not None:
+                        system_cache[cache_key] = system
+                
+                elif system_name == 'hybrid_bm25_optimized':
+                    # Optimized BM25 retrieval only
+                    system = system_class(
+                        chunk_size=1200,
+                        top_k_results=5,
+                        db_path=f"./narrativeqa_bm25_optimized_{story_id}",
+                        story_text=story_text,
+                        max_context_tokens=4000
+                    )
+                    # Cache per story
+                    if system_cache is not None:
+                        system_cache[cache_key] = system
+                    print(f"  💾 Cached system instance for story {story_id[:20]}...")
+                
+                elif system_name == 'standard_rag':
+                    system = system_class(db_path="./full_bookcorpus_db", top_k_results=10)
+                
+                elif system_name == 'hybrid_rag':
+                    system = system_class(db_path="./full_bookcorpus_db")
+                
+                else:
+                    raise ValueError(f"Unknown system: {system_name}")
         
         # Generate response
         if system_name == 'base_llm':
@@ -164,6 +218,11 @@ def test_single_question_with_system(question_data: Dict[str, Any],
                 expand_context=expand_context,
                 context_window=context_window
             )
+            generated_answer = response['response']
+        
+        elif system_name == 'hybrid_bm25_optimized':
+            # Use optimized hybrid system (no context expansion needed)
+            response = system.generate_response(question)
             generated_answer = response['response']
         
         else:
@@ -348,6 +407,10 @@ def run_comparison_test(systems_to_test: List[str],
     # Test each system
     all_results = {}
     
+    # Create system cache to reuse instances per story_id
+    # Key: (system_name, story_id), Value: system instance
+    system_cache = {}
+    
     for system_name in systems_to_test:
         print(f"\n🧪 Testing {system_name.upper()}...")
         if retriever_checkpoint and 'neural' in system_name:
@@ -364,11 +427,20 @@ def run_comparison_test(systems_to_test: List[str],
                 system_class, 
                 retriever_checkpoint,
                 expand_context=expand_context,
-                context_window=context_window
+                context_window=context_window,
+                system_cache=system_cache
             )
             system_results.append(result)
         
         all_results[system_name] = system_results
+    
+    # Print cache statistics
+    if system_cache:
+        unique_stories = set(key[1] for key in system_cache.keys() if key[1] != 'global')
+        print(f"\n💾 Cache Statistics:")
+        print(f"  Total cached instances: {len(system_cache)}")
+        print(f"  Unique stories cached: {len(unique_stories)}")
+        print(f"  Cache hits saved ~2-3s per reused story")
     
     # Calculate and display comparison
     print(f"\n📊 SYSTEM COMPARISON RESULTS")
