@@ -35,6 +35,8 @@ sys.path.append(str(project_root))
 from core.config import config
 from langchain_openai import ChatOpenAI
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from chunking_evaluation.chunking import ClusterSemanticChunker
+from chromadb.utils import embedding_functions
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
 import tiktoken
@@ -88,12 +90,16 @@ class NarrativeQARAGBaseline:
         
         self.tokenizer = tiktoken.encoding_for_model("gpt-4")
         
-        # Initialize text splitter
-        self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap,
-            length_function=len,
-            separators=["\n\n", "\n", " ", ""]
+        # Initialize semantic chunker
+        embedding_function = embedding_functions.OpenAIEmbeddingFunction(
+            api_key=config.OPENAI_API_KEY,
+            model_name="text-embedding-3-large"
+        )
+        
+        self.text_splitter = ClusterSemanticChunker(
+            embedding_function=embedding_function,
+            max_chunk_size=chunk_size,
+            length_function=len
         )
         
         # Initialize embeddings
