@@ -1,0 +1,624 @@
+{
+  "experiment_metadata": {
+    "dataset": "NarrativeQA",
+    "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+    "method": "hybrid_rag_contradiction_aware",
+    "conflict_strategy": "flag",
+    "contradiction_threshold": 0.35,
+    "similarity_threshold": 0.65,
+    "baseline_method": "narrativeqa_hybrid_rag_neural",
+    "notes": "Expected/mock results demonstrating overhead on single-narrative QA where contradictions are rare"
+  },
+  "aggregate_statistics": {
+    "baseline": {
+      "avg_response_time": 4.19,
+      "avg_overall_score": 4.55,
+      "avg_correctness_score": 3.91,
+      "avg_f1_score": 0.16,
+      "avg_bert_score": 0.856
+    },
+    "contradiction_aware": {
+      "avg_response_time": 4.51,
+      "avg_overall_score": 4.36,
+      "avg_correctness_score": 3.73,
+      "avg_f1_score": 0.15,
+      "avg_bert_score": 0.854,
+      "total_contradictions_detected": 3,
+      "questions_with_contradictions": 2,
+      "false_positive_rate": 0.67
+    },
+    "delta": {
+      "response_time_increase_pct": 7.6,
+      "overall_score_change": -0.19,
+      "correctness_change": -0.18,
+      "notes": "Overhead from contradiction detection without meaningful benefit on single-source narrative"
+    }
+  },
+  "results": [
+    {
+      "question_id": "q_0",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "Who is Mark Hunter?",
+      "reference_answers": [
+        "He is a high school student in Phoenix.",
+        "A loner and outsider student with a radio station."
+      ],
+      "generated_answer": "Mark Hunter is a student at Hubert Humphrey High who struggles with communication and social interactions, feeling isolated and unhappy in his environment. He also operates an underground radio station under the persona Happy Harry Hardon.",
+      "response_time": 4.48,
+      "answer_length": 289,
+      "context_length": 28669,
+      "context_tokens": 7167,
+      "retrieved_docs": 10,
+      "relevance_score": 0.24,
+      "evaluation_metrics": {
+        "bleu_score": 0.0112,
+        "rouge_1": 0.2143,
+        "rouge_2": 0.037,
+        "rouge_l": 0.1429,
+        "word_overlap": 0.75,
+        "exact_match": 0,
+        "f1_score": 0.24,
+        "bert_score": 0.8718,
+        "meteor_score": 0.3521
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 287
+      },
+      "llm_judge": {
+        "correctness_score": 10,
+        "completeness_score": 8,
+        "relevance_score": 10,
+        "clarity_score": 9,
+        "overall_score": 9,
+        "reasoning": "No contradictions detected. Response nearly identical to baseline - contradiction detection added ~300ms overhead with no benefit."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.31,
+        "score_delta": 0,
+        "notes": "No change in quality, added latency only"
+      }
+    },
+    {
+      "question_id": "q_1",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "Where does this radio station take place?",
+      "reference_answers": [
+        "It takes place in Mark's parents basement.",
+        "Phoenix, Arizona"
+      ],
+      "generated_answer": "The radio station operates from a high school environment at Hubert Humphrey High. ⚠️ Note: Some retrieved passages mention different locations including a 'radio jeep' and indoor settings, which may indicate the station moved or had multiple broadcast points.",
+      "response_time": 4.67,
+      "answer_length": 271,
+      "context_length": 18983,
+      "context_tokens": 4745,
+      "retrieved_docs": 9,
+      "relevance_score": 0.18,
+      "evaluation_metrics": {
+        "bleu_score": 0.0198,
+        "rouge_1": 0.1489,
+        "rouge_2": 0.0667,
+        "rouge_l": 0.1489,
+        "word_overlap": 0.3571,
+        "exact_match": 0,
+        "f1_score": 0.18,
+        "bert_score": 0.8523,
+        "meteor_score": 0.3654
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 2,
+        "contradiction_groups": 1,
+        "contradictions": [
+          {
+            "chunk_1": 3,
+            "chunk_2": 7,
+            "score": 0.41,
+            "type": "negation",
+            "evidence": {
+              "semantic_similarity": 0.72,
+              "negation_asymmetry": 3,
+              "is_false_positive": true,
+              "explanation": "Chunks discuss basement vs jeep - actually different time periods, not a contradiction"
+            }
+          },
+          {
+            "chunk_1": 5,
+            "chunk_2": 7,
+            "score": 0.38,
+            "type": "temporal",
+            "evidence": {
+              "semantic_similarity": 0.68,
+              "temporal_markers": {
+                "chunk_5": [
+                  "initially"
+                ],
+                "chunk_7": [
+                  "later",
+                  "then"
+                ]
+              },
+              "is_false_positive": true,
+              "explanation": "Temporal sequence, not conflict - station moved locations over story timeline"
+            }
+          }
+        ],
+        "processing_overhead_ms": 312
+      },
+      "llm_judge": {
+        "correctness_score": 2,
+        "completeness_score": 2,
+        "relevance_score": 4,
+        "clarity_score": 6,
+        "overall_score": 3,
+        "reasoning": "FALSE POSITIVE HARM: Contradiction detector flagged basement vs jeep mentions as conflicting, causing LLM to hedge rather than give direct answer. Baseline score was 4.0, now 3.0."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.38,
+        "score_delta": -1,
+        "notes": "False positive contradictions caused LLM to hedge, reducing answer quality"
+      }
+    },
+    {
+      "question_id": "q_2",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "Why do more students tune into Mark's show?",
+      "reference_answers": [
+        "Mark talks about what goes on at school and in the community.",
+        "Because he has a thing to say about what is happening at his school and the community."
+      ],
+      "generated_answer": "More students tune into Mark's show because he addresses their feelings of being misunderstood and provides a voice for their struggles, resonating with their desire for authenticity and connection. The show discusses real issues happening at school and in the community, attracting students who want to express their frustrations.",
+      "response_time": 5.02,
+      "answer_length": 378,
+      "context_length": 21532,
+      "context_tokens": 5380,
+      "retrieved_docs": 8,
+      "relevance_score": 0.23,
+      "evaluation_metrics": {
+        "bleu_score": 0.0058,
+        "rouge_1": 0.1892,
+        "rouge_2": 0.0311,
+        "rouge_l": 0.1351,
+        "word_overlap": 0.3824,
+        "exact_match": 0,
+        "f1_score": 0.23,
+        "bert_score": 0.8789,
+        "meteor_score": 0.2412
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 256
+      },
+      "llm_judge": {
+        "correctness_score": 8,
+        "completeness_score": 7,
+        "relevance_score": 9,
+        "clarity_score": 8,
+        "overall_score": 7,
+        "reasoning": "No contradictions detected. Answer similar to baseline with slight improvement in mentioning 'school and community' explicitly. Overhead added ~250ms."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.25,
+        "score_delta": 0,
+        "notes": "No meaningful change"
+      }
+    },
+    {
+      "question_id": "q_3",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "Who commits suicide?",
+      "reference_answers": [
+        "Malcolm.",
+        "Malcolm."
+      ],
+      "generated_answer": "The excerpts do not explicitly identify who commits suicide. Happy Harry Hardon discusses suicide conceptually, describing its psychological aspects, but the specific individual is not named in the retrieved passages.",
+      "response_time": 4.21,
+      "answer_length": 245,
+      "context_length": 1888,
+      "context_tokens": 472,
+      "retrieved_docs": 7,
+      "relevance_score": 0,
+      "evaluation_metrics": {
+        "bleu_score": 0,
+        "rouge_1": 0,
+        "rouge_2": 0,
+        "rouge_l": 0,
+        "word_overlap": 0,
+        "exact_match": 0,
+        "f1_score": 0,
+        "bert_score": 0.8598,
+        "meteor_score": 0
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 198
+      },
+      "llm_judge": {
+        "correctness_score": 0,
+        "completeness_score": 0,
+        "relevance_score": 3,
+        "clarity_score": 6,
+        "overall_score": 1,
+        "reasoning": "Same failure as baseline - retrieval didn't find chunks mentioning Malcolm. Contradiction detection cannot help when the relevant content isn't retrieved in the first place."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.26,
+        "score_delta": 0,
+        "notes": "Retrieval failure - contradiction detection irrelevant"
+      }
+    },
+    {
+      "question_id": "q_4",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "What does Paige jam into her microwave?",
+      "reference_answers": [
+        "She jams her medals and accolades.",
+        "Her award medals"
+      ],
+      "generated_answer": "Paige jams her stuff into the microwave and turns it on. The excerpts do not provide specific details about what items she places inside.",
+      "response_time": 3.65,
+      "answer_length": 132,
+      "context_length": 6055,
+      "context_tokens": 1514,
+      "retrieved_docs": 6,
+      "relevance_score": 0.31,
+      "evaluation_metrics": {
+        "bleu_score": 0.0198,
+        "rouge_1": 0.3077,
+        "rouge_2": 0,
+        "rouge_l": 0.3077,
+        "word_overlap": 0.5,
+        "exact_match": 0,
+        "f1_score": 0.31,
+        "bert_score": 0.8612,
+        "meteor_score": 0.2121
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 178
+      },
+      "llm_judge": {
+        "correctness_score": 2,
+        "completeness_score": 2,
+        "relevance_score": 5,
+        "clarity_score": 6,
+        "overall_score": 3,
+        "reasoning": "No contradictions to detect. Same vague answer as baseline - the retrieved chunks don't contain specific mention of 'medals'."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.27,
+        "score_delta": 0,
+        "notes": "No change - retrieval quality is the bottleneck"
+      }
+    },
+    {
+      "question_id": "q_5",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "What does Mark do with his radio station?",
+      "reference_answers": [
+        "He dismantles it and attaches it to his mother's jeep.",
+        "Dismantle it."
+      ],
+      "generated_answer": "Mark uses his radio station under the persona Happy Harry Hardon to broadcast messages highlighting school issues and expressing his isolation. The broadcasts become controversial and culminate in an emotional finale.",
+      "response_time": 4.83,
+      "answer_length": 243,
+      "context_length": 20267,
+      "context_tokens": 5067,
+      "retrieved_docs": 6,
+      "relevance_score": 0.16,
+      "evaluation_metrics": {
+        "bleu_score": 0.0052,
+        "rouge_1": 0.1429,
+        "rouge_2": 0,
+        "rouge_l": 0.0714,
+        "word_overlap": 0.4,
+        "exact_match": 0,
+        "f1_score": 0.16,
+        "bert_score": 0.8512,
+        "meteor_score": 0.1356
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 267
+      },
+      "llm_judge": {
+        "correctness_score": 2,
+        "completeness_score": 3,
+        "relevance_score": 5,
+        "clarity_score": 7,
+        "overall_score": 4,
+        "reasoning": "Same as baseline - answer focuses on broadcasting rather than dismantling. No contradictions present to detect."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.32,
+        "score_delta": 0,
+        "notes": "No improvement possible via contradiction detection"
+      }
+    },
+    {
+      "question_id": "q_6",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "What does Mark tell the protesting students?",
+      "reference_answers": [
+        "He tells them to make their own future.",
+        "That they should make their own future because the world belongs to them."
+      ],
+      "generated_answer": "Mark tells the protesting students that they need to work together to finish what they started. He expresses urgency about taking action and emphasizes that they have the power to make a difference.",
+      "response_time": 4.52,
+      "answer_length": 218,
+      "context_length": 19891,
+      "context_tokens": 4973,
+      "retrieved_docs": 5,
+      "relevance_score": 0.24,
+      "evaluation_metrics": {
+        "bleu_score": 0.0109,
+        "rouge_1": 0.2,
+        "rouge_2": 0.0345,
+        "rouge_l": 0.1667,
+        "word_overlap": 0.5625,
+        "exact_match": 0,
+        "f1_score": 0.24,
+        "bert_score": 0.8834,
+        "meteor_score": 0.3412
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 234
+      },
+      "llm_judge": {
+        "correctness_score": 5,
+        "completeness_score": 4,
+        "relevance_score": 7,
+        "clarity_score": 8,
+        "overall_score": 5,
+        "reasoning": "No contradictions present. Answer similar to baseline - captures urgency but misses the specific 'make your own future' message."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.26,
+        "score_delta": 0,
+        "notes": "No change"
+      }
+    },
+    {
+      "question_id": "q_7",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "Who gets arrested?",
+      "reference_answers": [
+        "Mark and Nora.",
+        "Mark and Nora."
+      ],
+      "generated_answer": "Happy Harry Hardon (Mark) is arrested, as indicated by his statement 'Hello Dad we're going to jail.' The use of 'we're' suggests others may also be arrested.",
+      "response_time": 4.09,
+      "answer_length": 156,
+      "context_length": 11230,
+      "context_tokens": 2806,
+      "retrieved_docs": 5,
+      "relevance_score": 0.08,
+      "evaluation_metrics": {
+        "bleu_score": 0,
+        "rouge_1": 0.08,
+        "rouge_2": 0,
+        "rouge_l": 0.08,
+        "word_overlap": 0.25,
+        "exact_match": 0,
+        "f1_score": 0.08,
+        "bert_score": 0.8567,
+        "meteor_score": 0.0625
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 212
+      },
+      "llm_judge": {
+        "correctness_score": 3,
+        "completeness_score": 3,
+        "relevance_score": 6,
+        "clarity_score": 7,
+        "overall_score": 4,
+        "reasoning": "Slight improvement over baseline (3.0) - LLM noted the 'we're' implying multiple people, and correctly identified Mark. Still missing Nora explicitly."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.26,
+        "score_delta": 1,
+        "notes": "Minor improvement - unrelated to contradiction detection"
+      }
+    },
+    {
+      "question_id": "q_8",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "What does the radio show cause?",
+      "reference_answers": [
+        "It causes trouble.",
+        "It causes much trouble in the community."
+      ],
+      "generated_answer": "The radio show causes controversy and unrest by exposing school system issues, challenging authority figures, and encouraging students to confront their feelings. This leads to gatherings outside the school to listen to broadcasts.",
+      "response_time": 4.51,
+      "answer_length": 256,
+      "context_length": 6776,
+      "context_tokens": 1694,
+      "retrieved_docs": 4,
+      "relevance_score": 0.09,
+      "evaluation_metrics": {
+        "bleu_score": 0.0048,
+        "rouge_1": 0.075,
+        "rouge_2": 0,
+        "rouge_l": 0.075,
+        "word_overlap": 0.3333,
+        "exact_match": 0,
+        "f1_score": 0.09,
+        "bert_score": 0.8698,
+        "meteor_score": 0.0923
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 189
+      },
+      "llm_judge": {
+        "correctness_score": 8,
+        "completeness_score": 7,
+        "relevance_score": 9,
+        "clarity_score": 8,
+        "overall_score": 8,
+        "reasoning": "Same as baseline - good answer describing the trouble/controversy caused. No contradictions to process."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.29,
+        "score_delta": 0,
+        "notes": "No change"
+      }
+    },
+    {
+      "question_id": "q_9",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "Where does Mark Broadcast his station from?",
+      "reference_answers": [
+        "Parent's Basement",
+        "At the basement of his home"
+      ],
+      "generated_answer": "Mark broadcasts his station anonymously from an undisclosed location. ⚠️ Note: Retrieved passages contain potentially conflicting information about broadcast locations, making it difficult to determine the exact place.",
+      "response_time": 4.38,
+      "answer_length": 223,
+      "context_length": 15179,
+      "context_tokens": 3795,
+      "retrieved_docs": 4,
+      "relevance_score": 0.14,
+      "evaluation_metrics": {
+        "bleu_score": 0.0058,
+        "rouge_1": 0.1176,
+        "rouge_2": 0,
+        "rouge_l": 0.0882,
+        "word_overlap": 0.4,
+        "exact_match": 0,
+        "f1_score": 0.14,
+        "bert_score": 0.8089,
+        "meteor_score": 0.1423
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 1,
+        "contradiction_groups": 1,
+        "contradictions": [
+          {
+            "chunk_1": 1,
+            "chunk_2": 4,
+            "score": 0.36,
+            "type": "negation",
+            "evidence": {
+              "semantic_similarity": 0.71,
+              "negation_asymmetry": 2,
+              "is_false_positive": true,
+              "explanation": "One chunk mentions 'basement', another mentions 'jeep' - these are sequential locations in the plot, not contradictions"
+            }
+          }
+        ],
+        "processing_overhead_ms": 298
+      },
+      "llm_judge": {
+        "correctness_score": 1,
+        "completeness_score": 1,
+        "relevance_score": 4,
+        "clarity_score": 5,
+        "overall_score": 2,
+        "reasoning": "FALSE POSITIVE HARM: Detector flagged narrative progression (basement → jeep) as contradiction, causing LLM to refuse answering. Baseline score was 3.0, now worse at 2.0."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.36,
+        "score_delta": -1,
+        "notes": "False positive caused quality degradation"
+      }
+    },
+    {
+      "question_id": "q_10",
+      "story_id": "0025577043f5090cd603c6aea60f26e236195594",
+      "question": "What is Mark's only outlet?",
+      "reference_answers": [
+        "His Radio station",
+        "His unauthorized radio station."
+      ],
+      "generated_answer": "Mark's only outlet is his anonymous persona as Happy Harry Hardon, through which he expresses his thoughts and frustrations about his life and the school environment via his radio broadcasts.",
+      "response_time": 4.92,
+      "answer_length": 194,
+      "context_length": 18510,
+      "context_tokens": 4628,
+      "retrieved_docs": 4,
+      "relevance_score": 0.08,
+      "evaluation_metrics": {
+        "bleu_score": 0,
+        "rouge_1": 0.0714,
+        "rouge_2": 0,
+        "rouge_l": 0.0714,
+        "word_overlap": 0.3333,
+        "exact_match": 0,
+        "f1_score": 0.08,
+        "bert_score": 0.8289,
+        "meteor_score": 0.0987
+      },
+      "method": "hybrid_rag_contradiction_aware",
+      "retrieval_mode": "hybrid",
+      "contradiction_detection": {
+        "enabled": true,
+        "contradictions_detected": 0,
+        "contradiction_groups": 0,
+        "contradictions": [],
+        "processing_overhead_ms": 245
+      },
+      "llm_judge": {
+        "correctness_score": 3,
+        "completeness_score": 4,
+        "relevance_score": 5,
+        "clarity_score": 7,
+        "overall_score": 4,
+        "reasoning": "Slight improvement - mentions 'radio broadcasts' which is closer to the reference answer. No contradictions detected."
+      },
+      "comparison_to_baseline": {
+        "response_time_delta": 0.26,
+        "score_delta": 1,
+        "notes": "Minor improvement unrelated to contradiction detection"
+      }
+    }
+  ]
+}
