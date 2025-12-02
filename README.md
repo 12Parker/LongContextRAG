@@ -1,273 +1,169 @@
 # NarrativeQA RAG Evaluation Framework
 
-A focused research framework for evaluating Retrieval Augmented Generation (RAG) systems against the NarrativeQA benchmark. This project provides comprehensive tools for comparing Base LLM, Standard RAG, and Hybrid RAG approaches on long-form question-answering tasks.
+A research framework for evaluating Retrieval Augmented Generation (RAG) systems against the NarrativeQA benchmark. Compare Base LLM, Standard RAG, and Hybrid RAG approaches on long-form question-answering tasks.
 
-## 🎯 **Project Focus: NarrativeQA Evaluation**
+## 🚀 Quick Start
 
-This repository is specifically designed for evaluating RAG systems against the NarrativeQA benchmark, which tests deep reading comprehension over long narratives. The framework includes three main evaluation approaches:
+### 1. Setup (5 minutes)
 
-- **Base LLM**: Direct processing of full story context
-- **Standard RAG**: Traditional retrieval-augmented generation
-- **Hybrid RAG**: Advanced RAG with neural retrieval and attention mechanisms
-
-## ✨ **Key Features**
-
-- **NarrativeQA Integration**: Full support for the NarrativeQA benchmark dataset
-- **Multiple RAG Systems**: Base LLM, Standard RAG, and Hybrid RAG implementations
-- **Comprehensive Evaluation**: BLEU, ROUGE, F1, METEOR, BERTScore, and Exact Match metrics
-- **Organized Scripts**: Clean command-line interface with `run.py`
-- **Results Management**: Automated results storage and analysis
-- **Documentation**: Complete guides for setup, evaluation, and analysis
-
-## 🚀 **Quick Start**
-
-### 1. **Setup Environment**
 ```bash
-# Clone and navigate to repository
+# Clone repository
 cd LongContextRAG
 
-# Create and activate virtual environment
+# Create virtual environment
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 pip install -r requirements_narrativeqa.txt
-```
 
-### 2. **Configure API Keys**
-```bash
-# Copy environment template
+# Configure API key
 cp env.template .env
-
-# Edit .env file and add your API keys:
-# OPENAI_API_KEY=your_actual_api_key_here
+# Edit .env and add: OPENAI_API_KEY=your_key_here
 ```
 
-### 3. **Setup NarrativeQA**
+### 2. Run Comparisons
+
 ```bash
-# Setup NarrativeQA evaluation
-python run.py setup-narrativeqa --install-deps
-python run.py setup-narrativeqa --test-dataset
+# Quick test (2 questions, 1 system)
+python scripts/comparison/compare_systems_narrativeqa.py \
+  --systems base_llm \
+  --num-questions 2
+
+# Compare multiple systems (10 questions)
+python scripts/comparison/compare_systems_narrativeqa.py \
+  --systems base_llm,hybrid_bm25_optimized,narrativeqa_hybrid_rag_neural \
+  --num-questions 10
+
+# Full evaluation (50+ questions)
+python scripts/comparison/compare_systems_narrativeqa.py \
+  --systems base_llm,hybrid_bm25_optimized,narrativeqa_hybrid_rag_neural \
+  --num-questions 50
 ```
 
-### 4. **Run Evaluation**
+**Available Systems:**
+- `base_llm` - Direct LLM with full context (baseline)
+- `narrativeqa_rag` - Standard RAG with vector search
+- `hybrid_bm25_optimized` - Optimized BM25-only RAG (fast, low cost)
+- `narrativeqa_hybrid_rag_neural` - Neural retriever RAG (best quality)
+- `hybrid_bm25_dense` - Hybrid BM25 + Dense retrieval
+
+### 3. View Results
+
+Results are automatically saved to `results/system_comparisons/` with timestamps.
+
 ```bash
-# Quick comparison (2 questions)
-python run.py compare-systems --systems base_llm --num-questions 2
+# Analyze QA metrics (F1, BERTScore, METEOR, etc.)
+python scripts/analysis/analyze_qa_metrics.py
 
-# Full comparison (10 questions)
-python run.py compare-systems --systems base_llm,narrativeqa_rag,narrativeqa_hybrid_rag --num-questions 10
+# Analyze LLM judge scores (quality assessment)
+python scripts/analysis/analyze_llm_judge.py \
+  --input-file results/system_comparisons/system_comparison_narrativeqa_YYYYMMDD_HHMMSS.json
 
-# Analyze results
-python run.py analyze-qa
-python run.py analyze-bleu
+# Generate comparison graphs
+python scripts/analysis/generate_comparison_graphs.py
+
+# Cost-benefit analysis
+python scripts/analysis/analyze_cost_benefit.py
 ```
 
-## 📁 **Repository Structure**
+**Results Location:**
+- System comparisons: `results/system_comparisons/`
+- LLM judge evaluations: `results/llm_judge_evaluations/`
+- Graphs: `results/graphs/`
+- Cost analysis: `results/cost_benefit_analysis/`
 
-```
-LongContextRAG/
-├── 📁 core/                     # Core configuration
-│   ├── config.py               # Main configuration
-│   ├── prompts.py              # Prompt templates
-│   └── long_context_config.py  # Long context settings
-│
-├── 📁 evaluation/              # Evaluation frameworks
-│   ├── narrativeqa_evaluator.py # Main NarrativeQA evaluator
-│   ├── qa_metrics.py           # QA-specific metrics (F1, METEOR, etc.)
-│   ├── bleu_evaluator.py       # BLEU and ROUGE evaluation
-│   └── rag_evaluation.py       # RAG evaluation utilities
-│
-├── 📁 examples/                # NarrativeQA examples
-│   ├── narrativeqa_base_llm.py # Base LLM implementation
-│   └── narrativeqa_rag_baseline.py # Standard RAG implementation
-│
-├── 📁 hybrid/                  # Hybrid RAG system
-│   └── narrativeqa_hybrid_rag.py # Advanced RAG with neural retrieval
-│
-├── 📁 scripts/                 # Organized scripts
-│   ├── 📁 setup/               # Setup scripts
-│   │   └── setup_narrativeqa.py # NarrativeQA setup
-│   ├── 📁 comparison/          # Comparison scripts
-│   │   └── compare_systems_narrativeqa.py # System comparison
-│   └── 📁 analysis/            # Analysis scripts
-│       ├── analyze_qa_metrics.py # QA metrics analysis
-│       └── analyze_bleu_results.py # BLEU analysis
-│
-├── 📁 docs/                    # Documentation
-│   ├── NARRATIVEQA_EVALUATION_GUIDE.md # Complete evaluation guide
-│   ├── BASE_LLM_NARRATIVEQA_SYSTEM_DESIGN.md # Base LLM architecture
-│   ├── RAG_NARRATIVEQA_SYSTEM_DESIGN.md # RAG architecture
-│   └── PROJECT_ORGANIZATION.md # Project organization guide
-│
-├── 📁 results/                 # Evaluation results
-│   └── system_comparisons/     # System comparison results
-│
-├── run.py                      # Main script runner
-├── main.py                     # Original entry point
-├── requirements.txt            # Core dependencies
-├── requirements_narrativeqa.txt # NarrativeQA dependencies
-└── env.template                # Environment template
-```
+## 📊 Example Output
 
-## 🛠️ **Available Commands**
-
-### **Setup Commands**
-```bash
-python run.py setup-narrativeqa --install-deps    # Install dependencies
-python run.py setup-narrativeqa --test-dataset    # Test dataset loading
-python run.py setup-narrativeqa --quick-test      # Quick functionality test
-```
-
-### **Comparison Commands**
-```bash
-# Compare specific systems
-python run.py compare-systems --systems base_llm --num-questions 5
-python run.py compare-systems --systems base_llm,narrativeqa_rag --num-questions 10
-python run.py compare-systems --systems base_llm,narrativeqa_rag,narrativeqa_hybrid_rag --num-questions 15
-
-# Use different dataset subsets
-python run.py compare-systems --systems base_llm --subset validation --num-questions 5
-```
-
-### **Analysis Commands**
-```bash
-python run.py analyze-qa        # Analyze QA metrics (F1, METEOR, BERTScore, etc.)
-python run.py analyze-bleu      # Analyze BLEU and ROUGE metrics
-```
-
-## 📊 **Evaluation Metrics**
-
-The framework provides comprehensive evaluation metrics:
-
-### **QA-Specific Metrics**
-- **Exact Match (EM)**: Binary match with reference answers
-- **F1 Score**: Token-level harmonic mean of precision and recall
-- **BERTScore**: Semantic similarity using BERT embeddings
-- **METEOR**: Alignment considering synonyms and paraphrases
-
-### **Traditional Metrics**
-- **BLEU**: N-gram overlap with reference answers
-- **ROUGE-1/2/L**: Recall-oriented understudy for gisting evaluation
-- **Word Overlap**: Simple word-level overlap
-
-### **Performance Metrics**
-- **Response Time**: Generation latency
-- **Context Length**: Input context size
-- **Answer Length**: Generated response length
-- **Retrieved Docs**: Number of retrieved documents
-
-## 🔬 **System Architectures**
-
-### **Base LLM**
-- Direct processing of full story context
-- No retrieval mechanism
-- Serves as baseline for comparison
-
-### **Standard RAG**
-- Traditional similarity-based retrieval
-- ChromaDB vector database
-- HuggingFace embeddings (all-MiniLM-L6-v2)
-
-### **Hybrid RAG**
-- Advanced RAG with neural retrieval
-- Multi-head attention mechanisms
-- Neural re-ranking of retrieved documents
-- Dynamic context integration
-
-## 📈 **Example Results**
+After running a comparison, you'll see:
 
 ```
 📊 QA SYSTEM COMPARISON
 ============================================================
-System               Questions  EM     F1     BERT   METEOR   BLEU   ROUGE-1  Time    
-------------------------------------------------------------------------------------------
-base_llm             10         0.000  0.087  0.000  0.110    0.004  0.060    3.18    
-narrativeqa_rag      10         0.100  0.234  0.156  0.189    0.023  0.145    4.52    
-narrativeqa_hybrid_rag 10       0.200  0.312  0.201  0.245    0.045  0.198    5.23    
+System                    Questions  F1     BERT   METEOR   Time    
+--------------------------------------------------------------------
+base_llm                  50          0.087   0.000  0.110    1.00s   
+hybrid_bm25_optimized     50          0.234   0.156  0.189    1.64s   
+narrativeqa_hybrid_rag_neural 50     0.312   0.201  0.245    2.17s   
 ```
 
-## 📚 **Documentation**
+## 🎯 Common Workflows
 
-- **[NarrativeQA Evaluation Guide](docs/NARRATIVEQA_EVALUATION_GUIDE.md)**: Complete guide to running evaluations
-- **[Base LLM System Design](docs/BASE_LLM_NARRATIVEQA_SYSTEM_DESIGN.md)**: Architecture and implementation
-- **[RAG System Design](docs/RAG_NARRATIVEQA_SYSTEM_DESIGN.md)**: RAG architecture and implementation
-- **[Project Organization](docs/PROJECT_ORGANIZATION.md)**: Repository structure and organization
-
-## 🔧 **Configuration**
-
-Key configuration options in `.env`:
-
+### Quick Test
 ```bash
-# Required
-OPENAI_API_KEY=your_openai_api_key_here
-
-# Optional (defaults provided)
-OPENAI_MODEL=gpt-4o-mini
-CHUNK_SIZE=1000
-TOP_K_RESULTS=5
-MAX_STORY_LENGTH=8000
+# Test one system with 5 questions
+python scripts/comparison/compare_systems_narrativeqa.py \
+  --systems base_llm \
+  --num-questions 5
 ```
 
-## 🎯 **Research Applications**
-
-This framework is designed for research in:
-
-- **Long Context Processing**: How to effectively handle long narratives
-- **Retrieval Quality**: Optimizing document retrieval for QA tasks
-- **Neural Retrieval**: Advanced retrieval mechanisms
-- **Attention Mechanisms**: Multi-head attention in RAG systems
-- **Evaluation Metrics**: Comprehensive QA evaluation methodologies
-
-## 🔒 **Security**
-
-- API keys are stored in `.env` (not tracked in git)
-- Only `env.template` is tracked (contains no real keys)
-- Results are automatically saved to `results/` (ignored by git)
-
-## 📝 **Usage Examples**
-
-### **Basic Evaluation**
+### Compare Optimized Systems
 ```bash
-# Quick test with 2 questions
-python run.py compare-systems --systems base_llm --num-questions 2
-
-# Full evaluation with all systems
-python run.py compare-systems --systems base_llm,narrativeqa_rag,narrativeqa_hybrid_rag --num-questions 10
+# Compare the three main systems
+python scripts/comparison/compare_systems_narrativeqa.py \
+  --systems base_llm,hybrid_bm25_optimized,narrativeqa_hybrid_rag_neural \
+  --num-questions 50
 ```
 
-### **Analysis**
+### Full Analysis Pipeline
 ```bash
-# Analyze QA metrics
-python run.py analyze-qa
+# 1. Run comparison
+python scripts/comparison/compare_systems_narrativeqa.py \
+  --systems base_llm,hybrid_bm25_optimized,narrativeqa_hybrid_rag_neural \
+  --num-questions 50
 
-# Analyze BLEU/ROUGE metrics
-python run.py analyze-bleu
-```
-
-### **Direct Script Usage**
-```bash
-# Run comparison directly
-python scripts/comparison/compare_systems_narrativeqa.py --systems base_llm --num-questions 5
-
-# Run analysis directly
+# 2. Analyze QA metrics
 python scripts/analysis/analyze_qa_metrics.py
+
+# 3. Run LLM judge evaluation
+python scripts/analysis/analyze_llm_judge.py \
+  --input-file results/system_comparisons/system_comparison_narrativeqa_*.json \
+  --max-questions 50
+
+# 4. Generate graphs
+python scripts/analysis/generate_comparison_graphs.py
+
+# 5. Cost analysis
+python scripts/analysis/analyze_cost_benefit.py
 ```
 
-## 🤝 **Contributing**
+## 📁 Project Structure
 
-This is a research framework. Contributions welcome:
+```
+LongContextRAG/
+├── baselines/              # Baseline implementations
+│   ├── narrativeqa_base_llm.py
+│   └── narrativeqa_rag_baseline.py
+├── hybrid/                 # Hybrid RAG systems
+│   ├── narrativeqa_hybrid_rag_optimized.py
+│   ├── narrativeqa_hybrid_rag_neural_retriever.py
+│   └── narrativeqa_hybrid_rag_improved.py
+├── scripts/
+│   ├── comparison/         # System comparison scripts
+│   └── analysis/           # Result analysis scripts
+├── results/                # All evaluation results
+│   ├── system_comparisons/
+│   ├── llm_judge_evaluations/
+│   ├── graphs/
+│   └── cost_benefit_analysis/
+└── core/                   # Configuration and prompts
+```
 
-- New evaluation metrics
-- Additional RAG architectures
-- Performance optimizations
-- Documentation improvements
+## 🔧 Configuration
 
-## 📄 **License**
+Edit `.env` file for configuration:
+
+```bash
+OPENAI_API_KEY=your_key_here
+OPENAI_MODEL=gpt-4o-mini  # Optional, defaults to gpt-4o-mini
+```
+
+## 📚 Documentation
+
+- **[NarrativeQA Evaluation Guide](docs/NARRATIVEQA_EVALUATION_GUIDE.md)** - Detailed evaluation instructions
+- **[Hybrid RAG Optimization](docs/HYBRID_RAG_OPTIMIZATION.md)** - Optimization details
+
+## 📄 License
 
 See LICENSE file for details.
-
----
-
-**🎯 Focus**: This repository is specifically designed for NarrativeQA evaluation and RAG research. All components are optimized for long-form question-answering tasks and comprehensive system comparison.

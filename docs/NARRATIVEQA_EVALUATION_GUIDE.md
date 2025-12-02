@@ -119,19 +119,19 @@ python run.py compare-systems --systems base_llm,narrativeqa_hybrid_rag,narrativ
 #### **Interactive Mode**
 ```bash
 # Test Base LLM interactively
-python examples/narrativeqa_base_llm.py --interactive
+python baselines/narrativeqa_base_llm.py --interactive
 
 # Test with custom story
-python examples/narrativeqa_base_llm.py --story "Your custom story here" --question "Your question here"
+python baselines/narrativeqa_base_llm.py --story "Your custom story here" --question "Your question here"
 ```
 
 #### **Individual System Testing**
 ```bash
 # Test Base LLM standalone
-python examples/narrativeqa_base_llm.py "Who is Mark Hunter?" --story "Your story text"
+python baselines/narrativeqa_base_llm.py "Who is Mark Hunter?" --story "Your story text"
 
 # Test RAG baseline
-python examples/narrativeqa_rag_baseline.py --question "Your question" --story-text "Your story text"
+python baselines/narrativeqa_rag_baseline.py --question "Your question" --story-text "Your story text"
 
 # Test Hybrid RAG
 python hybrid/narrativeqa_hybrid_rag.py --question "Your question" --story-text "Your story text"
@@ -284,7 +284,7 @@ export OPENAI_API_KEY=your_api_key_here
 python compare_systems_narrativeqa.py --systems base_llm --num-questions 1 --verbose
 
 # Test individual components
-python examples/narrativeqa_base_llm.py --interactive
+python baselines/narrativeqa_base_llm.py --interactive
 ```
 
 ## 📈 **Expected Results**
@@ -337,8 +337,8 @@ python examples/narrativeqa_base_llm.py --interactive
 - `docs/QA_EVALUATION_METRICS_GUIDE.md`: Detailed metrics explanation
 
 ### **Code Examples**
-- `examples/narrativeqa_base_llm.py`: Base LLM implementation
-- `examples/narrativeqa_rag_baseline.py`: Standard RAG implementation
+- `baselines/narrativeqa_base_llm.py`: Base LLM implementation
+- `baselines/narrativeqa_rag_baseline.py`: Standard RAG implementation
 - `hybrid/narrativeqa_hybrid_rag.py`: Hybrid RAG implementation
 
 ### **Analysis Tools**

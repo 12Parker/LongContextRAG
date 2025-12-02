@@ -165,9 +165,9 @@ class OptimizedNarrativeQAHybridRAG:
     
     def __init__(self, 
                  max_context_tokens: int = 4000,  # Reduced from 50000
-                 chunk_size: int = 1200,  # Slightly smaller chunks
-                 chunk_overlap: int = 150,
-                 top_k_results: int = 5,  # Reduced from 10
+                 chunk_size: int = 600,  # Slightly smaller chunks
+                 chunk_overlap: int = 7,  # Reduced from 10
+                 top_k_results: int = 5,  # Number of top results to retrieve
                  db_path: str = "./narrativeqa_hybrid_vectordb",
                  story_text: str = None,
                  min_retrieval_score: float = 0.0):

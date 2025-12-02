@@ -35,7 +35,7 @@ def test_system_availability():
     
     # Test Base LLM
     try:
-        from examples.narrativeqa_base_llm import NarrativeQABaseLLM
+        from baselines.narrativeqa_base_llm import NarrativeQABaseLLM
         available_systems['base_llm'] = NarrativeQABaseLLM
         print("  ✅ Base LLM available")
     except ImportError as e:
@@ -43,7 +43,7 @@ def test_system_availability():
     
     # Test NarrativeQA RAG
     try:
-        from examples.narrativeqa_rag_baseline import NarrativeQARAGBaseline
+        from baselines.narrativeqa_rag_baseline import NarrativeQARAGBaseline
         available_systems['narrativeqa_rag'] = NarrativeQARAGBaseline
         print("  ✅ NarrativeQA RAG available")
     except ImportError as e:
@@ -180,9 +180,9 @@ def test_single_question_with_system(question_data: Dict[str, Any],
                         system_cache[cache_key] = system
                 
                 elif system_name == 'hybrid_bm25_optimized':
-                    # Optimized BM25 retrieval only
+                    # Optimized BM25 retrieval only (chunk_size=600 as median)
                     system = system_class(
-                        chunk_size=1200,
+                        chunk_size=600,
                         top_k_results=5,
                         db_path=f"./narrativeqa_bm25_optimized_{story_id}",
                         story_text=story_text,

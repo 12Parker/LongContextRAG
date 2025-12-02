@@ -194,10 +194,10 @@ class NarrativeQAHybridRAG:
     """
     
     def __init__(self, 
-                 max_context_tokens: int = 50000,
-                 chunk_size: int = 2000,
-                 chunk_overlap: int = 400,
-                 top_k_results: int = 20,
+                 max_context_tokens: int = 4000,
+                 chunk_size: int = 600,
+                 chunk_overlap: int = 0,
+                 top_k_results: int = 5,
                  db_path: str = "./narrativeqa_hybrid_vectordb",
                  story_text: str = None,
                  use_hybrid_attention: bool = True,

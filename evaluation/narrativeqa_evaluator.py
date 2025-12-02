@@ -45,12 +45,12 @@ except ImportError:
     logger.warning("Hybrid RAG not available, using fallback")
 
 try:
-    from examples.standard_rag_baseline import StandardRAGBaseline
+    from baselines.standard_rag_baseline import StandardRAGBaseline
 except ImportError:
     logger.warning("Standard RAG baseline not available")
 
 try:
-    from examples.bookcorpus_raw_llm_baseline import BookCorpusRawLLMBaseline
+    from baselines.bookcorpus_raw_llm_baseline import BookCorpusRawLLMBaseline
 except ImportError:
     logger.warning("Raw LLM baseline not available")
 
