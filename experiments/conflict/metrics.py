@@ -145,3 +145,49 @@ def direction_coverage(examples: list[Example], dets: dict) -> float | None:
                 flagged += 1
                 with_dir += bool(d.suspects)
     return with_dir / flagged if flagged else None
+
+
+# --------------------------------------------------------------------------- document level
+DOC_MODES = ("remove", "remove_suspect", "flag_directional")
+
+
+def marked_docs(dets, mode: str) -> set[int]:
+    """Passages a prompt mode acts on: removed (remove, remove_suspect) or headed
+    LIKELY MISINFORMATION (flag_directional). Mirrors prompts.build_prompt."""
+    if mode == "remove":
+        return {d.j for d in dets}
+    if mode == "remove_suspect":
+        return {k for d in dets for k in (d.suspects or [d.j])}
+    if mode == "flag_directional":
+        return {k for d in dets for k in d.suspects}
+    raise ValueError(f"no document-level reading for mode {mode}")
+
+
+def doc_level(examples: list[Example], dets: dict, mode: str) -> dict:
+    """What a detector does to documents in a given mode.
+
+    misinfo_marked  share of misinformation documents marked (benefit side)
+    correct_marked  share of correct documents marked (harm side)
+    conflict_q_all_misinfo_marked  conflict questions whose every misinfo document is marked
+    conflict_q_any_correct_marked  conflict questions with at least one correct document marked
+    clean_q_any_correct_marked     clean questions with at least one correct document marked
+    Pair-level P/R miss this: one correctly directed pair is enough to remove a misinfo
+    document, and false flags concentrated on correct-correct pairs remove valid answers.
+    Under label_fix="exclude", suspect documents are left out of both counts.
+    """
+    mis_n = mis_m = cor_n = cor_m = cq = cq_all = cq_cor = kq = kq_any = 0
+    for ex in examples:
+        types = ex.meta.get("doc_types", [])
+        skip = set(ex.meta.get("suspect_docs", [])) if ex.meta.get("label_fix") == "exclude" else set()
+        marked = marked_docs(dets[ex.id].pairs, mode)
+        mis = {k for k, t in enumerate(types) if t == "misinfo" and k not in skip}
+        cor = {k for k, t in enumerate(types) if t == "correct" and k not in skip}
+        mis_n += len(mis); mis_m += len(mis & marked); cor_n += len(cor); cor_m += len(cor & marked)
+        if ex.has_conflict and mis:
+            cq += 1; cq_all += mis <= marked; cq_cor += bool(cor & marked)
+        if ex.has_conflict is False:
+            kq += 1; kq_any += bool(cor & marked)
+    r = lambda a, b: a / b if b else None
+    return {"misinfo_marked": r(mis_m, mis_n), "correct_marked": r(cor_m, cor_n),
+            "conflict_q_all_misinfo_marked": r(cq_all, cq), "conflict_q_any_correct_marked": r(cq_cor, cq),
+            "clean_q_any_correct_marked": r(kq_any, kq)}

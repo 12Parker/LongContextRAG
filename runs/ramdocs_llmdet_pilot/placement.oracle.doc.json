@@ -1,0 +1,109 @@
+{
+ "detector": "oracle",
+ "space": "doc",
+ "reference": "plain",
+ "modes": {
+  "flag_directional": {
+   "conflict": {
+    "location": [
+     1.0,
+     0.0
+    ],
+    "grid_predicted": 0.11764617501764355,
+    "nearest_cells": [
+     "synth-p1-r1-all-d1+flag_directional",
+     "synth-p1-r0.5-all-d1+flag_directional",
+     "synth-p0.75-r0.5-all-d1+flag_directional",
+     "synth-p1-r0.25-all-d1+flag_directional"
+    ],
+    "actual": {
+     "diff": 0.11764705882352941,
+     "ci_low": 0.04248366013071895,
+     "ci_high": 0.19607843137254902,
+     "n": 102,
+     "n_clusters": 102
+    }
+   },
+   "no_conflict": {
+    "location": [
+     0.0
+    ],
+    "grid_predicted": 0.0,
+    "nearest_cells": [
+     "synth-p1-r0.25-all-d0.5+flag_directional",
+     "synth-p1-r0.25-all-d0.75+flag_directional",
+     "synth-p1-r0.25-all-d1+flag_directional",
+     "synth-p1-r0.5-all-d0.5+flag_directional"
+    ],
+    "actual": {
+     "diff": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 78,
+     "n_clusters": 78
+    }
+   },
+   "all": {
+    "grid_predicted": 0.06666616584333133,
+    "actual": {
+     "diff": 0.06,
+     "ci_low": 0.02,
+     "ci_high": 0.10166666666666666,
+     "n": 200,
+     "n_clusters": 200
+    }
+   }
+  },
+  "remove_suspect": {
+   "conflict": {
+    "location": [
+     1.0,
+     0.0
+    ],
+    "grid_predicted": 0.2843125011180841,
+    "nearest_cells": [
+     "synth-p1-r1-all-d1+remove_suspect",
+     "synth-p1-r0.5-all-d1+remove_suspect",
+     "synth-p0.75-r0.5-all-d1+remove_suspect",
+     "synth-p1-r0.25-all-d1+remove_suspect"
+    ],
+    "actual": {
+     "diff": 0.28431372549019607,
+     "ci_low": 0.19934640522875818,
+     "ci_high": 0.37581699346405223,
+     "n": 102,
+     "n_clusters": 102
+    }
+   },
+   "no_conflict": {
+    "location": [
+     0.0
+    ],
+    "grid_predicted": 0.0,
+    "nearest_cells": [
+     "synth-p1-r0.25-all-d0.5+remove_suspect",
+     "synth-p1-r0.25-all-d0.75+remove_suspect",
+     "synth-p1-r0.25-all-d1+remove_suspect",
+     "synth-p1-r0.5-all-d0.5+remove_suspect"
+    ],
+    "actual": {
+     "diff": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 78,
+     "n_clusters": 78
+    }
+   },
+   "all": {
+    "grid_predicted": 0.16111041730024767,
+    "actual": {
+     "diff": 0.145,
+     "ci_low": 0.09666666666666668,
+     "ci_high": 0.19504166666666606,
+     "n": 200,
+     "n_clusters": 200
+    }
+   }
+  }
+ }
+}

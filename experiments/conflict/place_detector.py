@@ -4,13 +4,24 @@ Place a real detector on a synthetic grid.
     python -m experiments.conflict.place_detector runs/ramdocs_dirgrid_pilot runs/ramdocs_llmdet_pilot \
         --detector llm_dir --modes flag_directional,remove_suspect
 
-Reads the detector's measured pair precision, recall and direction accuracy from
-<det_run>/detector_quality.json, and its actual effect (paired diff vs --reference, by subset)
-from <det_run>/results.jsonl. From the grid run it takes every synthetic cell in the same mode,
-at its *achieved* (precision, recall, direction), and predicts the detector's effect by
-inverse-distance weighting of the k nearest cells. Agreement between actual and predicted is
-evidence that the grid summarizes detectors by those three numbers alone. Both runs must use
-the same questions and seeds. Writes <det_run>/placement.<detector>.json.
+Default `--space doc`: each subset's effect is predicted from grid cells that do the same thing
+to that subset's documents in that mode (metrics.doc_level):
+
+  conflict     (conflict questions with all misinformation marked,
+                conflict questions with a correct document marked)
+  no_conflict  (clean questions with a correct document marked,)
+  all          the conflict and no_conflict predictions, weighted by their question counts
+               (questions with has_conflict=None are left out of this weighting)
+
+Each prediction is an inverse-distance-weighted mean of the k nearest directional cells. A
+single shared location was tried first and failed in the pilot: matching on pooled document
+rates missed the clean-question harm, and matching on clean-question harm picked low-precision
+cells whose misdirected flags also hurt conflict questions. `--space pair` locates by pair
+precision, recall and direction accuracy, kept for comparison (it also mispredicted).
+
+Coordinates come from the runs' detections.*.jsonl and config.json, so older runs work. Both
+runs must cover the same questions and seeds with the same RAMDocs labels.
+Writes <det_run>/placement.<detector>.<space>.json.
 """
 from __future__ import annotations
 
@@ -19,14 +30,49 @@ import json
 import math
 from pathlib import Path
 
+from . import data
 from .analyze import per_question
-from .detectors import parse_synth_name
-from .grid_analyze import SUBSETS
+from .detectors import Detection, DetectorOutput, parse_synth_name
+from .metrics import direction_accuracy, doc_level, pair_level
 from .stats import paired_bootstrap
+
+DOC_AXES = {"conflict": ("conflict_q_all_misinfo_marked", "conflict_q_any_correct_marked"),
+            "no_conflict": ("clean_q_any_correct_marked",)}
+PAIR_AXES = ("precision", "recall", "direction")
+SUBSET_FLAG = {"all": None, "conflict": True, "no_conflict": False}
 
 
 def _rows(run: Path):
     return [json.loads(l) for l in open(run / "results.jsonl")]
+
+
+def _examples(run: Path):
+    cfg = json.loads((run / "config.json").read_text())
+    kw = {"label_fix": cfg.get("ramdocs_labels", "none")} if cfg["dataset"] == "ramdocs" else {}
+    return data.load(cfg["dataset"], n=cfg.get("n"), seed=cfg.get("sample_seed", 0), **kw), kw
+
+
+def _dets(run: Path, name: str) -> dict:
+    return {r["id"]: DetectorOutput([Detection(**p) for p in r["pairs"]])
+            for r in map(json.loads, open(run / f"detections.{name}.jsonl"))}
+
+
+def locate(space: str, mode: str, examples, dets) -> dict[str, tuple]:
+    """Coordinates per subset ("conflict", "no_conflict") in the given space."""
+    if space == "doc":
+        d = doc_level(examples, dets, mode)
+        return {s: tuple(d[a] or 0.0 for a in axes) for s, axes in DOC_AXES.items()}
+    fl = {e: {(x.i, x.j) for x in o.pairs} for e, o in dets.items()}
+    p = pair_level(examples, fl)
+    xyz = (p["precision"], p["recall"], direction_accuracy(examples, dets) or 0.5)
+    return {"conflict": xyz, "no_conflict": xyz}
+
+
+def idw(here: tuple, cells: list[tuple[tuple, float]], k: int) -> tuple[float, list[int]]:
+    """Inverse-distance-weighted mean of the k nearest (coords, value) cells; exact hit wins."""
+    order = sorted(range(len(cells)), key=lambda n: math.dist(cells[n][0], here))[:k]
+    ws = [1 / max(math.dist(cells[n][0], here), 1e-6) for n in order]
+    return sum(w * cells[n][1] for w, n in zip(ws, order)) / sum(ws), order
 
 
 def main(argv=None):
@@ -36,49 +82,52 @@ def main(argv=None):
     ap.add_argument("--detector", default="llm_dir")
     ap.add_argument("--modes", default="flag_directional,remove_suspect")
     ap.add_argument("--reference", default="plain")
+    ap.add_argument("--space", default="doc", choices=("doc", "pair"))
     ap.add_argument("--k", type=int, default=4)
     args = ap.parse_args(argv)
     grid, detr = Path(args.grid_run), Path(args.det_run)
     g_rows, d_rows = _rows(grid), _rows(detr)
-    achieved = json.loads((grid / "synthetic_achieved.json").read_text())
-    q = json.loads((detr / "detector_quality.json").read_text())[args.detector]
-    P, R = q["pair_level"]["precision"], q["pair_level"]["recall"]
-    D = q["direction_accuracy"] if q["direction_accuracy"] is not None else 0.5
-    groups = {r["id"]: r.get("group", r["id"]) for r in d_rows}
     if {r["id"] for r in g_rows} != {r["id"] for r in d_rows}:
         raise SystemExit("grid and detector runs cover different questions; use the same --n/--sample-seed")
+    g_ex, g_kw = _examples(grid)
+    d_ex, d_kw = _examples(detr)
+    if g_kw != d_kw:
+        raise SystemExit(f"runs use different RAMDocs labels: grid {g_kw}, detector {d_kw}")
+    groups = {r["id"]: r.get("group", r["id"]) for r in d_rows}
+    det_out = _dets(detr, args.detector)
+    n_sub = {s: sum(e.has_conflict is f for e in d_ex) for s, f in SUBSET_FLAG.items() if f is not None}
 
-    print(f"{args.detector}: pair precision={P:.3f} recall={R:.3f} direction accuracy={D:.3f} "
-          f"(direction given on {q['direction_coverage'] or 0:.0%} of true flags; "
-          f"clean-question FPR={q['question_level']['false_positive_rate']:.3f})")
-    out = {"detector": args.detector, "quality": q, "reference": args.reference, "modes": {}}
+    out = {"detector": args.detector, "space": args.space, "reference": args.reference, "modes": {}}
     for mode in args.modes.split(","):
-        cells = []
-        for c in {r["condition"] for r in g_rows}:
-            det, _, m = c.partition("+")
-            if m == mode and det.startswith("synth-") and parse_synth_name(det)[3] is not None:
-                a = achieved[det]
-                cells.append((c, a["pair_level"]["precision"], a["pair_level"]["recall"], a["direction_accuracy"] or 0.5))
+        here = locate(args.space, mode, d_ex, det_out)
+        cells = [c for c in sorted({r["condition"] for r in g_rows})
+                 if c.partition("+")[2] == mode and c.startswith("synth-")
+                 and parse_synth_name(c.partition("+")[0])[3] is not None]
         if not cells:
             raise SystemExit(f"no directional grid cells in mode {mode}")
-        near = sorted(cells, key=lambda t: math.dist((t[1], t[2], t[3]), (P, R, D)))[: args.k]
-        out["modes"][mode] = {"nearest_cells": [n[0] for n in near]}
-        print(f"\n## mode={mode}  diff vs {args.reference}; nearest cells: "
-              + ", ".join(f"{n[0].split('+')[0]}" for n in near))
-        print(f"{'subset':12s} {'actual':>8s} {'95% CI':>17s} {'grid-predicted':>15s} {'nearest cell':>13s}")
-        for subset_name, subset in SUBSETS:
-            ref_d = per_question(d_rows, args.reference, subset)
-            act = paired_bootstrap(ref_d, per_question(d_rows, f"{args.detector}+{mode}", subset), groups)
-            ref_g = per_question(g_rows, args.reference, subset)
-            diffs, ws = [], []
-            for c, p, r, d in near:
-                diffs.append(paired_bootstrap(ref_g, per_question(g_rows, c, subset), groups, n_boot=200)["diff"])
-                ws.append(1 / max(math.dist((p, r, d), (P, R, D)), 1e-6))
-            pred = sum(w * x for w, x in zip(ws, diffs)) / sum(ws)
-            out["modes"][mode][subset_name] = {"actual": act, "grid_predicted": pred, "nearest_diff": diffs[0]}
-            print(f"{subset_name:12s} {act['diff']:+8.3f} [{act['ci_low']:+.3f},{act['ci_high']:+.3f}] "
-                  f"{pred:+15.3f} {diffs[0]:+13.3f}")
-    (detr / f"placement.{args.detector}.json").write_text(json.dumps(out, indent=1))
+        where = {c: locate(args.space, mode, g_ex, _dets(grid, c.partition("+")[0])) for c in cells}
+        effect = {}
+        for s, flag in SUBSET_FLAG.items():
+            ref = per_question(g_rows, args.reference, flag)
+            effect[s] = {c: paired_bootstrap(ref, per_question(g_rows, c, flag), groups, n_boot=200)["diff"]
+                         for c in cells}
+        print(f"\n## {args.detector} mode={mode} space={args.space}")
+        res = {}
+        for s in ("conflict", "no_conflict"):
+            pred, order = idw(here[s], [(where[c][s], effect[s][c]) for c in cells], args.k)
+            res[s] = {"location": here[s], "grid_predicted": pred, "nearest_cells": [cells[n] for n in order]}
+            print(f"  {s} location {tuple(round(v, 3) for v in here[s])}; nearest: "
+                  + ", ".join(cells[n].split("+")[0] for n in order))
+        res["all"] = {"grid_predicted": sum(res[s]["grid_predicted"] * n_sub[s] for s in n_sub) / sum(n_sub.values())}
+        print(f"{'subset':12s} {'actual':>8s} {'95% CI':>17s} {'grid-predicted':>15s}")
+        for s, flag in SUBSET_FLAG.items():
+            act = paired_bootstrap(per_question(d_rows, args.reference, flag),
+                                   per_question(d_rows, f"{args.detector}+{mode}", flag), groups)
+            res[s]["actual"] = act
+            print(f"{s:12s} {act['diff']:+8.3f} [{act['ci_low']:+.3f},{act['ci_high']:+.3f}] "
+                  f"{res[s]['grid_predicted']:+15.3f}")
+        out["modes"][mode] = res
+    (detr / f"placement.{args.detector}.{args.space}.json").write_text(json.dumps(out, indent=1, default=list))
 
 
 if __name__ == "__main__":

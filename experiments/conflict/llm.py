@@ -108,12 +108,13 @@ class FakeLLM:
     """Deterministic stand-in for tests and dry runs. `responder(prompt) -> str`."""
     model = "fake"
 
-    def __init__(self, responder=None):
+    def __init__(self, responder=None, latency_s: float = 0.0):
         self.responder = responder or (lambda p: "Answer: unknown")
+        self.latency_s = latency_s
         self.calls = 0
 
     def __call__(self, prompt: str, seed: int = 0, json_mode: bool = False, max_tokens=None) -> LLMResult:
         self.calls += 1
         txt = self.responder(prompt)
         pt, ct = len(prompt) // 4, len(txt) // 4
-        return LLMResult(txt, pt, ct, 0.0, 0.0, False)
+        return LLMResult(txt, pt, ct, 0.0, self.latency_s, False)

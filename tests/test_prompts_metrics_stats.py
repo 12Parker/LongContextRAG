@@ -12,7 +12,7 @@ PS = ["alpha text", "beta text", "gamma text"]
 def test_prompt_modes():
     d = [Detection(0, 2, 0.5, "factual")]
     plain, _ = build_prompt("q?", PS, "plain")
-    flag, _ = build_prompt("q?", PS, "flag", d)
+    flag, _ = build_prompt("q?", PS, "flag", d, style="original")
     instr, _ = build_prompt("q?", PS, "instruct")
     rem, kept = build_prompt("q?", PS, "remove", d)
     assert "CONFLICT" not in plain and "contradict" not in plain

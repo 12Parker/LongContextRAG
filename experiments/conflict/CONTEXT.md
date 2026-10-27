@@ -296,3 +296,32 @@ python -m experiments.conflict.analyze runs/ramdocs_pilot --reference plain
 4. **Sample across stories or items with a fixed seed**, and report how many clusters there are.
 5. **Keep `--dry-run` working** and keep the tests passing.
 6. **Report the conflict and no-conflict splits** for every QA result.
+
+---
+
+## 14. Changes since this document was written (pilots of 2026-10-26/27)
+
+Pilot outputs and what each run is are in `runs/README.md`. All pilots are exploratory.
+
+- **RAMDocs labels:** some misinformation sits in documents typed "correct". `--ramdocs-labels`
+  defaults to `exclude` (55 questions leave the clean split; pairs touching those documents are
+  "uncertain"). `contains` treats them as misinformation; `none` keeps the released types.
+  The 163 suspect documents still need hand-checking.
+- **Scoring:** RAMDocs answer matching is bidirectional; `ramdocs_strict_oneway` keeps the old
+  one-way metric.
+- **Flag format:** `--flag-style uniform` (default) renders every detector's flags identically;
+  `original` reproduces CAAG's typed, scored lines (use only for C2). Control and LLM detectors use
+  the neutral type "contradiction" (the old "oracle"/"random" types leaked into the prompt).
+- **New conditions:** `instruct_v2` / `flag_instruct_v2` (second C1 wording; v1 licensed listing
+  both sides), `flag_directional`, `remove_suspect`, `llm_dir`, synthetic `grid` cells with
+  precision, recall and direction accuracy.
+- **Latency:** `generate_s` is now the API latency of the original call, including on cache hits;
+  `wall_s` is wall clock. Pilot runs before this fix have unusable latency.
+- **Analysis:** `grid_analyze` break-even = lowest precision at and above which every cell is a
+  significant gain (sign-flip, Holm within table); `harm_free_precision` is the weaker secondary.
+  `place_detector` predicts each subset from grid cells matched on that subset's document-level
+  behaviour (`metrics.doc_level`); these axes were chosen after seeing one detector (llm_dir), so
+  confirm them on another detector before relying on them.
+- **Pilot findings (exploratory):** neutral flags hurt even when perfect; direction is what pays
+  off; removal has the largest gain and the largest harm; pair-level P/R does not predict a real
+  detector's effect, document-level behaviour does.

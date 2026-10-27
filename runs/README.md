@@ -12,5 +12,9 @@ All runs use GPT-4o-mini on RAMDocs; pilots are **exploratory**, since they shap
 | `ramdocs_dirgrid_pilot` | 200 q, 3 seeds; directional grid (P x R x direction), flag_directional and remove_suspect | `exclude` | exploratory |
 | `ramdocs_llmdet_pilot` | 200 q, 3 seeds; directional LLM detector in 3 formats | `exclude` | exploratory |
 
-Runs made before the cached-latency fix record `generate_s` as wall-clock time, which is ~0 for
+Runs made before the cached-latency fix (all runs listed above) record `generate_s` as wall-clock time, ~0 for
 cache hits; their latency figures should not be reported.
+
+`ramdocs_dirgrid_pilot/grid_vs_plain.txt` and `grid_analysis.json` were regenerated with the
+Holm-based break-even definition; `ramdocs_llmdet_pilot/placement.*.{doc,pair}.json` with
+document-level placement.

@@ -5,7 +5,7 @@ Run the condition matrix (Phase 2).
         --conditions plain,instruct,caag+flag,nli+flag,llm+flag,random+flag,oracle+flag,madam \
         --seeds 0,1,2 --out runs/ramdocs_pilot
 
-A condition is "<detector>+<mode>" or one of: plain, instruct, madam, grid.
+A condition is "<detector>+<mode>" or one of: plain, instruct, instruct_v2, madam, grid.
 Detectors: caag, nli, llm, llm_dir (also says which side is misinformation), random, oracle,
 synth-p<P>-r<R>-<pool>[-d<D>]. Modes: see prompts.py.
 
@@ -38,12 +38,13 @@ from .detectors import (CAAGDetector, DetectorOutput, Detection, LLMDetector, NL
                         NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
 from .madam import madam_rag
-from .metrics import direction_accuracy, direction_coverage, pair_level, question_level, score
-from .prompts import build_prompt
+from .metrics import (DOC_MODES, direction_accuracy, direction_coverage, doc_level, pair_level,
+                      question_level, score)
+from .prompts import FLAG_STYLES, PROMPT_ONLY_MODES, build_prompt
 
 
 def parse_condition(c: str) -> tuple[str, str]:
-    if c in ("plain", "instruct"):
+    if c in PROMPT_ONLY_MODES:
         return "none", c
     if c == "madam":
         return "none", "madam"
@@ -141,6 +142,8 @@ def main(argv=None):
     ap.add_argument("--grid-direction", default="",
                     help="comma list of direction accuracies for synthetic flags, e.g. 1,0.75,0.5")
     ap.add_argument("--synth-seed", type=int, default=0)
+    ap.add_argument("--flag-style", default="uniform", choices=FLAG_STYLES,
+                    help="uniform: identical flag text for every detector; original: CAAG's typed, scored lines")
     ap.add_argument("--dry-run", action="store_true", help="FakeLLM; no API calls, no cost")
     args = ap.parse_args(argv)
 
@@ -174,6 +177,7 @@ def main(argv=None):
         q = {"pair_level": pair_level(examples, fl), "question_level": question_level(examples, fl),
              "direction_accuracy": direction_accuracy(examples, detections[dn]),
              "direction_coverage": direction_coverage(examples, detections[dn]),
+             "doc_level": {m: doc_level(examples, detections[dn], m) for m in DOC_MODES},
              "total_cost_usd": sum(o.cost_usd for o in detections[dn].values())}
         if isinstance(det, SyntheticDetector):
             achieved[dn] = {"target_precision": det.precision, "target_recall": det.recall,
@@ -199,17 +203,20 @@ def main(argv=None):
             m = madam_rag(ex.question, ex.passages, madam_llm, seed=seed)
             text, usage, kept = m["final"], m["usage"], list(range(len(ex.passages)))
         else:
-            prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs)
+            prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style)
             r = llm(prompt, seed=seed)
             text = r.text
             usage = {"prompt_tokens": r.prompt_tokens, "completion_tokens": r.completion_tokens,
-                     "cost_usd": r.cost_usd, "calls": 1, "cached": r.cached}
-        gen_s = time.perf_counter() - t0
+                     "cost_usd": r.cost_usd, "calls": 1, "cached": r.cached, "latency_s": r.latency_s}
+        wall_s = time.perf_counter() - t0
+        # generate_s is the API latency of the original call(s), also on cache hits; wall_s is
+        # this process's wall clock (near 0 when cached, inflated by thread contention otherwise)
+        gen_s = usage.pop("latency_s")
         return {"id": eid, "dataset": ex.dataset, "condition": cond, "seed": seed,
                 "has_conflict": ex.has_conflict, "conflict_type": ex.conflict_type, "group": ex.group,
-                "n_flags": len(dout.pairs), "kept": kept, "response": text,
+                "n_flags": len(dout.pairs), "kept": kept, "flag_style": args.flag_style, "response": text,
                 **score(ex, text), **usage,
-                "detect_s": dout.latency_s, "detect_cost_usd": dout.cost_usd, "generate_s": gen_s}
+                "detect_s": dout.latency_s, "detect_cost_usd": dout.cost_usd, "generate_s": gen_s, "wall_s": wall_s}
 
     with open(res_path, "a") as f, ThreadPoolExecutor(args.workers) as pool:
         futs = [pool.submit(work, j) for j in jobs]

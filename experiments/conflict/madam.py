@@ -55,12 +55,12 @@ def _split(resp: str) -> tuple[str, str]:
 
 
 def madam_rag(query: str, documents: list[str], llm, seed: int = 0, num_rounds: int = 3) -> dict:
-    usage = {"prompt_tokens": 0, "completion_tokens": 0, "cost_usd": 0.0, "calls": 0}
+    usage = {"prompt_tokens": 0, "completion_tokens": 0, "cost_usd": 0.0, "calls": 0, "latency_s": 0.0}
 
     def call(prompt):
         r = llm(prompt, seed=seed)
         usage["prompt_tokens"] += r.prompt_tokens; usage["completion_tokens"] += r.completion_tokens
-        usage["cost_usd"] += r.cost_usd; usage["calls"] += 1
+        usage["cost_usd"] += r.cost_usd; usage["calls"] += 1; usage["latency_s"] += r.latency_s
         return r.text.strip()
 
     def aggregate(outputs):

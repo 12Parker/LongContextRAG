@@ -4,10 +4,14 @@ information differs, so differences in outcome are attributable to that informat
 
 Modes
   plain      C0  passages + question
-  instruct   C1  + generic "check for contradictions" instruction, no detector
+  instruct   C1  + generic "check for contradictions" instruction, no detector (v1 wording)
+  instruct_v2 C1b + a second wording (INSTRUCTION_V2). v1 ends "if a disagreement reflects
+                 genuinely different valid answers, report each one", which in the pilots licensed
+                 listing both sides of a contradiction; v2 asks for a reliability judgement instead.
+                 Report both so the prompt-only baseline does not hinge on one wording.
   flag           passage headers + "POTENTIAL CONFLICTS DETECTED" list, in the original
                  CAAG format (_build_context_with_contradictions/_build_prompt)
-  flag_instruct  flag + the C1 instruction
+  flag_instruct  flag + the C1 instruction (v1); flag_instruct_v2 uses v2
   arbitrate      original ARBITRATE format (only the heading differs from flag)
   remove         original REMOVE: drop the second passage of each flagged pair
                  (the original drops the lower retrieval score; with no scores it drops
@@ -20,6 +24,14 @@ Modes
 
 Note for the paper: in the original code SEPARATE renders exactly the same prompt as FLAG,
 so it is not a separate condition here.
+
+Flag styles (`style`, run.py --flag-style)
+  uniform    every flag renders as "- Passages i and j: possible contradiction", whatever the
+             detector, so detectors differ only in WHICH pairs they flag (default; use for any
+             comparison across detectors)
+  original   CAAG's "- Passages i and j: <type> conflict (confidence: <score>)"; detectors then
+             also differ in type labels and score scale (CAAG ~0.4, LLM/oracle 1.00). Use only to
+             reproduce the original CAAG format (C2).
 """
 from __future__ import annotations
 
@@ -40,6 +52,14 @@ INSTRUCTION = """Some passages may contradict each other. Before answering, chec
 Ignore passages that appear to contain misinformation, and if a disagreement reflects genuinely different valid answers, report each one.
 """
 
+INSTRUCTION_V2 = """Some passages may contain false information. Before answering, decide which passages are reliable by checking them against each other.
+Do not include an answer that is supported only by a passage you judge to be unreliable.
+"""
+
+INSTRUCTIONS = {"instruct": INSTRUCTION, "instruct_v2": INSTRUCTION_V2,
+                "flag_instruct": INSTRUCTION, "flag_instruct_v2": INSTRUCTION_V2}
+PROMPT_ONLY_MODES = ("plain", "instruct", "instruct_v2")
+
 
 def _flag_context(passages: list[str], dets: list[Detection], directional: bool = False) -> str:
     partners: dict[int, list[int]] = {}
@@ -58,12 +78,17 @@ def _flag_context(passages: list[str], dets: list[Detection], directional: bool 
     return "\n\n".join(parts)
 
 
-def _conflict_list(dets: list[Detection], heading: str, directional: bool = False) -> str:
+FLAG_STYLES = ("uniform", "original")
+
+
+def _conflict_list(dets: list[Detection], heading: str, directional: bool = False,
+                   style: str = "uniform") -> str:
     if not dets:
         return ""
     lines = []
     for d in dets:
-        line = f"- Passages {d.i} and {d.j}: {d.type} conflict (confidence: {d.score:.2f})"
+        line = (f"- Passages {d.i} and {d.j}: {d.type} conflict (confidence: {d.score:.2f})" if style == "original"
+                else f"- Passages {d.i} and {d.j}: possible contradiction")
         if directional and d.suspects:
             line += f"; passage {' and '.join(map(str, d.suspects))} likely contains misinformation"
         lines.append(line)
@@ -71,23 +96,25 @@ def _conflict_list(dets: list[Detection], heading: str, directional: bool = Fals
 
 
 def build_prompt(question: str, passages: list[str], mode: str,
-                 dets: list[Detection] | None = None) -> tuple[str, list[int]]:
+                 dets: list[Detection] | None = None, style: str = "uniform") -> tuple[str, list[int]]:
     """Returns (prompt, kept_passage_indices)."""
+    if style not in FLAG_STYLES:
+        raise ValueError(f"style must be one of {FLAG_STYLES}")
     dets = dets or []
     kept = list(range(len(passages)))
     instruction, conflicts = "", ""
 
-    if mode in ("plain", "instruct"):
+    if mode in PROMPT_ONLY_MODES:
         context = "\n\n".join(f"Passage {k}:\n{p}" for k, p in enumerate(passages))
-        instruction = INSTRUCTION if mode == "instruct" else ""
-    elif mode in ("flag", "flag_instruct", "arbitrate"):
+        instruction = INSTRUCTIONS.get(mode, "")
+    elif mode in ("flag", "flag_instruct", "flag_instruct_v2", "arbitrate"):
         context = _flag_context(passages, dets)
         heading = "CONFLICTING INFORMATION DETECTED:" if mode == "arbitrate" else "POTENTIAL CONFLICTS DETECTED:"
-        conflicts = _conflict_list(dets, heading)
-        instruction = INSTRUCTION if mode == "flag_instruct" else ""
+        conflicts = _conflict_list(dets, heading, style=style)
+        instruction = INSTRUCTIONS.get(mode, "")
     elif mode == "flag_directional":
         context = _flag_context(passages, dets, directional=True)
-        conflicts = _conflict_list(dets, "POTENTIAL CONFLICTS DETECTED:", directional=True)
+        conflicts = _conflict_list(dets, "POTENTIAL CONFLICTS DETECTED:", directional=True, style=style)
     elif mode in ("remove", "remove_suspect"):
         drop = ({k for d in dets for k in (d.suspects or [d.j])} if mode == "remove_suspect"
                 else {d.j for d in dets})
