@@ -220,3 +220,14 @@ This fulfils §7. No hosted endpoint is available, so the model runs locally.
 6. **H1 direction accuracy.** A cluster bootstrap CI over questions replaces the binomial CI.
 7. **Real-detector rows.** In every table, these are labelled exploratory. Significance is Holm
    across that table.
+
+### 9.4 Change before any Qwen result was looked at (2026-10-27)
+
+Running Qwen2.5-7B locally takes about 3 s per call. At 3 seeds the two Qwen runs would take about
+9 hours, so both now use **seed 0 only**. With temperature 0.1, seeds change little: under `plain`,
+only 4.7% of gpt-4o-mini's hold-out questions score differently across seeds.
+
+- 113 `plain` rows had already been generated, all at seed 0. They are kept.
+- No Qwen score had been inspected when this change was made.
+- All other §9.2 settings are unchanged.
+- The paper reports this as a deviation.
