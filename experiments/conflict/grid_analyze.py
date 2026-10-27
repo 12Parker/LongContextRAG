@@ -25,6 +25,7 @@ from pathlib import Path
 
 from .analyze import per_question
 from .detectors import parse_synth_name
+from .jsonl import read_results
 from .stats import holm, paired_bootstrap, sign_flip_p
 
 SUBSETS = (("all", None), ("conflict", True), ("no_conflict", False))
@@ -58,10 +59,11 @@ def main(argv=None):
     ap.add_argument("run_dir")
     ap.add_argument("--reference", default="instruct")
     ap.add_argument("--alpha", type=float, default=0.05)
+    ap.add_argument("--metric", default="primary")
     ap.add_argument("--n-perm", type=int, default=5000)
     args = ap.parse_args(argv)
     run = Path(args.run_dir)
-    rows = [json.loads(l) for l in open(run / "results.jsonl")]
+    rows = read_results(run)
     achieved = json.loads((run / "synthetic_achieved.json").read_text())
     groups = {r["id"]: r.get("group", r["id"]) for r in rows}
     cells = defaultdict(dict)  # (mode, pool, direction) -> {(p, r): condition}
@@ -77,14 +79,14 @@ def main(argv=None):
         key = f"{mode}|{pool}|d={d}"
         report[key] = {}
         for subset_name, subset in SUBSETS:
-            ref = per_question(rows, args.reference, subset)
+            ref = per_question(rows, args.reference, subset, args.metric)
             tab, pv = {}, {}
             for (p, r), c in cs.items():
                 a = achieved[c.split("+")[0]]
-                cur = per_question(rows, c, subset)
+                cur = per_question(rows, c, subset, args.metric)
                 pv[f"{p:g},{r:g}"] = sign_flip_p(ref, cur, n_perm=args.n_perm)
                 tab[f"{p:g},{r:g}"] = {**paired_bootstrap(ref, cur, groups), "p": pv[f"{p:g},{r:g}"],
-                                       "mean": sum(per_question(rows, c, subset).values()) / max(len(per_question(rows, c, subset)), 1),
+                                       "mean": sum(cur.values()) / max(len(cur), 1),
                                        "achieved_precision": a["pair_level"]["precision"],
                                        "achieved_recall": a["pair_level"]["recall"],
                                        "achieved_direction": a.get("direction_accuracy"),
@@ -117,8 +119,9 @@ def main(argv=None):
                         print(f"{p:<8g}" + "".join(
                             _fmt(report[f"{mode}|{pool}|d={d}"][subset_name]["cells"][f"{p:g},{r_max:g}"], args.alpha)
                             for d in dirs))
-    (run / "grid_analysis.json").write_text(json.dumps({"reference": args.reference, "alpha": args.alpha,
-                                                         "groups": report}, indent=1))
+    name = "grid_analysis.json" if args.metric == "primary" else f"grid_analysis.{args.metric}.json"
+    (run / name).write_text(json.dumps({"reference": args.reference, "alpha": args.alpha, "metric": args.metric,
+                                        "groups": report}, indent=1))
     print(f"\n+/- = significant gain/harm, sign-flip p Holm-adjusted within each table, alpha={args.alpha}. "
           "Rows/cols are targets; achieved values in grid_analysis.json.")
 

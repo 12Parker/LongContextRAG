@@ -1,0 +1,14 @@
+\begin{abstract}
+Retrieval-augmented generation systems increasingly detect contradictions among retrieved passages and flag them
+to the generator. We ask what such a flag should say and what the detector must get right for it to help. In a
+pre-registered study on RAMDocs with two generators, we vary the detector (heuristic, NLI, LLM, random, oracle) and
+the format (neutral flag, directional flag naming the likely misinformation, or removal), and add synthetic detectors
+of controlled precision, recall and direction accuracy. A perfectly accurate neutral flag \emph{lowers} accuracy on
+conflict questions by \adOracleFlagConf\ points, because the model lists the misinformation alongside the correct
+answer; the same flag raises accuracy on genuine conflicts in WikiContradict. Naming the wrong side reverses the
+effect (\dOracleDirConf\ points, and \dOracleRemConf\ when the suspect passage is removed). Removal, however, is
+fragile: false flags delete correct passages, and with a real LLM detector its gains on conflict questions are
+cancelled on clean ones. Finally, pair-level detection F1 fails to predict downstream benefit, while a detector's
+document-level behaviour predicts it well. We recommend evaluating conflict detectors by direction accuracy and
+document-level effects on both conflict and conflict-free questions.
+\end{abstract}

@@ -23,6 +23,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from . import data
+from .jsonl import read_results
 
 JUDGE_PROMPT = """You are grading an answer to a question that was answered from retrieved passages.
 
@@ -137,7 +138,7 @@ def main(argv=None):
     kw = {"label_fix": cfg.get("ramdocs_labels", "exclude")} if cfg["dataset"] == "ramdocs" else {}
     exs = {e.id: e for e in data.filter_ids(data.load(cfg["dataset"], n=cfg.get("n"),
                                                        seed=cfg.get("sample_seed", 0), **kw), cfg.get("ids_file"))}
-    rows = [json.loads(l) for l in open(run / "results.jsonl")]
+    rows = read_results(run)
     if args.dry_run:
         from .llm import FakeLLM
         llm = FakeLLM(lambda p: '{"correct": 1, "handles_conflict": null, "reason": "dry run"}')

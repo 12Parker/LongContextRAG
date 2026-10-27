@@ -12,6 +12,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from . import data
+from .jsonl import ensure_plain
 from .metrics import score
 
 
@@ -24,6 +25,7 @@ def main(argv=None):
         kw = {"label_fix": cfg.get("ramdocs_labels", "none")} if cfg["dataset"] == "ramdocs" else {}
         exs = {e.id: e for e in data.filter_ids(data.load(cfg["dataset"], n=cfg.get("n"),
                                                            seed=cfg.get("sample_seed", 0), **kw), cfg.get("ids_file"))}
+        ensure_plain(rd)
         rows = [json.loads(l) for l in open(rd / "results.jsonl")]
         before, after, changed = defaultdict(float), defaultdict(float), 0
         for r in rows:

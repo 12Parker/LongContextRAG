@@ -1,0 +1,155 @@
+{
+ "caag": {
+  "question_level": {
+   "precision": 0.5784313725490197,
+   "recall": 0.4244604316546763,
+   "f1": 0.4896265560165975,
+   "tp": 59,
+   "fp": 43,
+   "fn": 80,
+   "tn": 83,
+   "false_positive_rate": 0.3412698412698413
+  },
+  "pair_level": {
+   "precision": 0.21705426356589147,
+   "recall": 0.07898448519040903,
+   "f1": 0.11582213029989659,
+   "tp": 56,
+   "fp": 202,
+   "fn": 653
+  },
+  "false_flags_by_gold_relation": {
+   "ambiguity": 134,
+   "consistent": 53,
+   "uncertain": 19,
+   "contradiction": 56,
+   "unrelated": 15
+  },
+  "pair_flag_rate": 0.06220525488434763,
+  "mean_latency_s": 0.22619119667913765,
+  "total_cost_usd": 0.0
+ },
+ "nli": {
+  "question_level": {
+   "precision": 0.6176470588235294,
+   "recall": 0.9064748201438849,
+   "f1": 0.7346938775510203,
+   "tp": 126,
+   "fp": 78,
+   "fn": 13,
+   "tn": 48,
+   "false_positive_rate": 0.6190476190476191
+  },
+  "pair_level": {
+   "precision": 0.20057859209257473,
+   "recall": 0.2933709449929478,
+   "f1": 0.23825887743413515,
+   "tp": 208,
+   "fp": 829,
+   "fn": 501
+  },
+  "false_flags_by_gold_relation": {
+   "unrelated": 302,
+   "consistent": 116,
+   "contradiction": 208,
+   "ambiguity": 411,
+   "uncertain": 144
+  },
+  "pair_flag_rate": 0.26521446216034134,
+  "mean_latency_s": 1.184485322755451,
+  "total_cost_usd": 0.0
+ },
+ "llm_dir": {
+  "question_level": {
+   "precision": 0.5826086956521739,
+   "recall": 0.9640287769784173,
+   "f1": 0.7262872628726287,
+   "tp": 134,
+   "fp": 96,
+   "fn": 5,
+   "tn": 30,
+   "false_positive_rate": 0.7619047619047619
+  },
+  "pair_level": {
+   "precision": 0.3717948717948718,
+   "recall": 0.20451339915373765,
+   "f1": 0.26387625113739765,
+   "tp": 145,
+   "fp": 245,
+   "fn": 564
+  },
+  "false_flags_by_gold_relation": {
+   "unrelated": 36,
+   "consistent": 85,
+   "ambiguity": 124,
+   "contradiction": 145,
+   "uncertain": 65
+  },
+  "pair_flag_rate": 0.10217830675948798,
+  "mean_latency_s": 0.8043291569151916,
+  "total_cost_usd": 0.054261
+ },
+ "caag_negation_only": {
+  "question_level": {
+   "precision": 0.375,
+   "recall": 0.02158273381294964,
+   "f1": 0.04081632653061225,
+   "tp": 3,
+   "fp": 5,
+   "fn": 136,
+   "tn": 121,
+   "false_positive_rate": 0.03968253968253968
+  },
+  "pair_level": {
+   "precision": 0.125,
+   "recall": 0.0028208744710860366,
+   "f1": 0.005517241379310345,
+   "tp": 2,
+   "fp": 14,
+   "fn": 707
+  },
+  "pair_flag_rate": 0.003593083314619358
+ },
+ "caag_entity_only": {
+  "question_level": {
+   "precision": 0.5857142857142857,
+   "recall": 0.2949640287769784,
+   "f1": 0.39234449760765544,
+   "tp": 41,
+   "fp": 29,
+   "fn": 98,
+   "tn": 97,
+   "false_positive_rate": 0.23015873015873015
+  },
+  "pair_level": {
+   "precision": 0.2159090909090909,
+   "recall": 0.0535966149506347,
+   "f1": 0.08587570621468928,
+   "tp": 38,
+   "fp": 138,
+   "fn": 671
+  },
+  "pair_flag_rate": 0.042892432068268586
+ },
+ "caag_temporal_only": {
+  "question_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 139,
+   "tn": 126,
+   "false_positive_rate": 0.0
+  },
+  "pair_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 709
+  },
+  "pair_flag_rate": 0.0
+ }
+}

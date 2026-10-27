@@ -1,0 +1,67 @@
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{llrlrl}
+\toprule
+& Test (labels: \emph{contains}) & One-way [95\% CI] & $p_{\text{Holm}}$ & Bidir. & $p_{\text{Holm}}$ \\
+\midrule
+H2 & oracle+flag $<$ plain (conflict) & $-$4.6 [$-$8.1, $-$1.5] & 0.006 & $-$5.2 & 0.003 \\
+H3 & oracle+flag\_directional $>$ plain (conflict) & $+$11.6 [$+$5.6, $+$17.3] & $<$0.001 & $+$13.3 & $<$0.001 \\
+H3 & oracle+flag\_directional $>$ oracle+flag (conflict) & $+$16.2 [$+$10.8, $+$21.8] & $<$0.001 & $+$18.5 & $<$0.001 \\
+H3 & oracle+remove\_suspect $>$ plain (conflict) & $+$25.8 [$+$19.5, $+$32.2] & $<$0.001 & $+$30.3 & $<$0.001 \\
+H4 & false-flag cells harmful on clean q.; Spearman $\rho$ & 0/2; $\rho=+1.00$ & 1.000 & & \\
+\bottomrule
+\end{tabular}
+\caption{Label robustness: pre-registered tests with every suspect document treated as misinformation
+(173 conflict and 127 clean hold-out questions).}
+\label{tab:contains}
+\end{table*}
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+CAAG setting & $\theta_s$ & $\theta_c$ & P & R & F1 & Clean FPR \\
+\midrule
+Default & 0.65 & 0.35 & 21.7 & 7.9 & 11.6 & 34.1 \\
+Best pair F1 & 0.40 & 0.10 & 20.7 & 49.6 & 29.2 & 87.3 \\
+Best question F1 & 0.55 & 0.15 & 22.2 & 28.8 & 25.1 & 60.3 \\
+\bottomrule
+\end{tabular}
+
+\vspace{4pt}
+\begin{tabular}{lrrr}
+\toprule
+Signals (defaults) & Pair F1 & Flag rate & Clean FPR \\
+\midrule
+all signals & 11.6 & 6.2 & 34.1 \\
+negation only & 0.6 & 0.4 & 4.0 \\
+entity only & 8.6 & 4.3 & 23.0 \\
+temporal only & 0.0 & 0.0 & 0.0 \\
+\bottomrule
+\end{tabular}
+\caption{CAAG on the RAMDocs hold-out (\%). Top: thresholds from a sweep over 121 settings
+($\theta_s\in[0.40,0.90]$, $\theta_c\in[0.10,0.60]$). Bottom: each signal alone.}
+\label{tab:caag}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Condition & All & Conflict & No conflict \\
+\midrule
+No flags (plain) & 66.7 & 49.3 & 73.8 \\
+\midrule
+Instruction (v2) & $-$0.4 & $+$1.4 & $-$1.2 \\
+CAAG, flag & $+$0.4 & $+$1.4 & 0.0 \\
+NLI, flag & $-$1.7 & $-$4.3 & $-$0.6 \\
+LLM, flag & $+$1.7 & $+$2.9 & $+$1.2 \\
+LLM, directional flag & $-$0.4 & $-$2.9 & $+$0.6 \\
+\bottomrule
+\end{tabular}
+\caption{CONFLICTS, 237 automatically scorable questions (69 conflict), gpt-4o-mini, one seed; exploratory.
+Contains-match accuracy (\%) and differences in points; no difference is significant (bold would mark raw $p<0.05$).
+CAAG: flags 94.2\% of conflict and 92.9\% of clean questions; NLI: flags 52.2\% of conflict and 43.5\% of clean questions; LLM: flags 98.6\% of conflict and 83.9\% of clean questions.}
+\label{tab:conflicts}
+\end{table}

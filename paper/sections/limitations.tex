@@ -1,0 +1,34 @@
+\section*{Limitations}
+
+\paragraph{Models.} We test two closed OpenAI generators. Open-weights models may respond differently to flags,
+particularly to the directional header, and we could not run one within this study. The LLM detector is a single
+prompt to one model; stronger or fine-tuned detectors would occupy different points on the map.
+
+\paragraph{Data.} The confirmatory evidence is one benchmark, RAMDocs, with 300 questions. Its misinformation is
+synthetic and its document labels are imperfect: we exclude 55 questions whose status depends on 163 documents we
+could not label without human annotation, and we check that conclusions survive treating those documents as
+misinformation. WikiContradict and CONFLICTS each test one side of our account (genuine conflicts and real search
+results), but neither has a misinformation side that we can label at the passage level. We score CONFLICTS only on
+items with a reference answer and use no LLM judge, so its opinion and complementary-information items are not
+evaluated.
+
+\paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition, and with it
+MADAM-RAG reproduces the published score within about one point on our pilot split. It is still string matching:
+it misses paraphrases, and partial answers interact with ``no wrong answer''. We report a more lenient variant
+throughout and mark any conclusion that depends on the choice.
+
+\paragraph{Synthetic detectors.} Synthetic false flags are spread uniformly over non-contradicting pairs, and their
+suspect side is chosen at random. Real detectors concentrate their errors, and the grid predicts them only once it
+is summarised at the document level. We chose those axes after seeing one detector on the pilot split; on the
+confirmatory split they are tested on three detectors, which is still a small sample.
+
+\paragraph{Scope.} We study flags passed to the generator as text. Learned interfaces such as soft prompts or
+credibility fine-tuning \citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may follow different
+trade-offs.
+
+\section*{Ethics Statement}
+This work uses public benchmarks and commercial model APIs, and involves no human subjects or personal data. Its main
+risk is dual use. Our results show that a false ``likely misinformation'' label, or the removal of a passage, can
+change a RAG system's answers. An adversary who can trigger a deployed detector could exploit this
+\citep{zou2025poisonedrag}. We therefore report harm on conflict-free questions alongside every gain, and we argue that
+systems should measure what a detector does at the document level before acting on its flags.

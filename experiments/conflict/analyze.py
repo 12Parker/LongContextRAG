@@ -17,17 +17,19 @@ from pathlib import Path
 
 import numpy as np
 
+from .jsonl import read_results
 from .stats import holm, paired_bootstrap, sign_flip_p
 
 
-def per_question(rows, cond, subset=None):
+def per_question(rows, cond, subset=None, metric: str = "primary"):
+    """Per-question mean of `metric` over seeds, for one condition and subset (None = all)."""
     acc = defaultdict(list)
     for r in rows:
-        if r["condition"] != cond or r.get("primary") is None:
+        if r["condition"] != cond or r.get(metric) is None:
             continue
         if subset is not None and r.get("has_conflict") != subset:
             continue
-        acc[r["id"]].append(r["primary"])
+        acc[r["id"]].append(r[metric])
     return {k: float(np.mean(v)) for k, v in acc.items()}
 
 
@@ -35,17 +37,18 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("run_dir")
     ap.add_argument("--reference", default="plain")
+    ap.add_argument("--metric", default="primary", help="score field, e.g. ramdocs_strict_oneway")
     args = ap.parse_args(argv)
-    rows = [json.loads(l) for l in open(Path(args.run_dir) / "results.jsonl")]
+    rows = read_results(Path(args.run_dir))
     groups = {r["id"]: r.get("group", r["id"]) for r in rows}
     conds = sorted({r["condition"] for r in rows}, key=lambda c: (c != args.reference, c))
 
     report = {}
     for subset_name, subset in (("all", None), ("conflict", True), ("no_conflict", False)):
-        ref = per_question(rows, args.reference, subset)
+        ref = per_question(rows, args.reference, subset, args.metric)
         stats, pvals = {}, {}
         for c in conds:
-            cur = per_question(rows, c, subset)
+            cur = per_question(rows, c, subset, args.metric)
             if not cur:
                 continue
             s = {"mean": float(np.mean(list(cur.values()))), "n": len(cur)}
@@ -64,7 +67,9 @@ def main(argv=None):
                    for k in ("prompt_tokens", "completion_tokens", "cost_usd", "detect_s",
                              "generate_s", "detect_cost_usd", "n_flags")}
     report["cost_latency"] = cost
-    (Path(args.run_dir) / "analysis.json").write_text(json.dumps(report, indent=1))
+    report["metric"] = args.metric
+    name = "analysis.json" if args.metric == "primary" else f"analysis.{args.metric}.json"
+    (Path(args.run_dir) / name).write_text(json.dumps(report, indent=1))
 
     for subset_name in ("all", "conflict", "no_conflict"):
         print(f"\n## {subset_name}")

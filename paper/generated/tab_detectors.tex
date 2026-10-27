@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+& \multicolumn{3}{c}{Pair level} & Clean-q. & Direc- & \multicolumn{2}{c}{Removal, per question} & Latency & Cost \\
+\cmidrule(lr){2-4}\cmidrule(lr){7-8}
+Detector & P & R & F1 & flagged & tion & misinfo gone & correct lost & (s) & (\$/1k q.) \\
+\midrule
+CAAG (heuristic) & 21.7 & 7.9 & 11.6 & 34.1 & -- & 9.4 & 31.7 & 0.23 & 0.000 \\
+NLI cross-encoder & 20.1 & 29.3 & 23.8 & 61.9 & -- & 44.6 & 52.4 & 1.18 & 0.000 \\
+LLM (gpt-4o-mini) & 37.2 & 20.5 & 26.4 & 76.2 & 88.3 & 61.2 & 65.9 & 0.80 & 0.181 \\
+\bottomrule
+\end{tabular}
+\caption{Detectors on the RAMDocs hold-out split (300 questions; percentages). \emph{Clean-q.\ flagged}: share of
+conflict-free questions with at least one flag. \emph{Direction}: share of correctly flagged contradictions whose suspect
+side is the misinformation. \emph{Misinfo gone}: conflict questions whose misinformation documents are all removed
+when removing the suspect (or, without direction, the second passage). \emph{Correct lost}: clean questions that lose
+at least one correct document. Latency is per question; CAAG and NLI run locally.}
+\label{tab:detectors}
+\end{table*}

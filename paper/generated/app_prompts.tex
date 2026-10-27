@@ -1,0 +1,95 @@
+\paragraph{Generation skeleton.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below.
+If the passages support more than one valid answer
+(for example, different people or things share the
+same name), give every valid answer.
+If no passage answers the question, the answer is
+"unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <answer 1> | <answer 2> | ...
+\end{verbatim}\end{footnotesize}
+\paragraph{Instruction v1.}
+\begin{footnotesize}\begin{verbatim}
+Some passages may contradict each other. Before
+answering, check whether they do.
+Ignore passages that appear to contain
+misinformation, and if a disagreement reflects
+genuinely different valid answers, report each one.
+\end{verbatim}\end{footnotesize}
+\paragraph{Instruction v2.}
+\begin{footnotesize}\begin{verbatim}
+Some passages may contain false information. Before
+answering, decide which passages are reliable by
+checking them against each other.
+Do not include an answer that is supported only by a
+passage you judge to be unreliable.
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: directional flag (passage 2 suspect).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below.
+If the passages support more than one valid answer
+(for example, different people or things share the
+same name), give every valid answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [POTENTIAL CONFLICT with passage(s): 2]:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [LIKELY MISINFORMATION; conflicts with
+passage(s): 0]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+- Passages 0 and 2: possible contradiction; passage
+2 likely contains misinformation
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <answer 1> | <answer 2> | ...
+\end{verbatim}\end{footnotesize}
+\paragraph{Directional LLM detector.}
+\begin{footnotesize}\begin{verbatim}
+You will see a question and {n} numbered passages
+retrieved for it.
+Some passages may contain misinformation: false
+claims about the answer to the question.
+Identify every pair of passages that CONTRADICT each
+other about the answer to the question,
+i.e. they cannot both be true about the same entity
+at the same time. Passages that are about
+different entities with the same name, give
+complementary details, or describe different times
+are NOT contradictions; note them as "ambiguity",
+"complementary" or "temporal" instead.
+
+For each contradiction, say which passage of the
+pair is more likely the misinformation, judging
+by agreement with the other passages and by
+plausibility: its number, "both" if both are likely
+false, or "unclear" if you cannot tell.
+
+Question: {question}
+
+{passages}
+
+Return JSON only: {{"pairs": [{{"i": <int>, "j":
+<int>, "relation":
+"contradiction|ambiguity|complementary|temporal",
+"misinformation": <int>|"both"|"unclear"}}]}}
+Use the passage numbers shown. "misinformation" is
+needed only for contradictions. Return {{"pairs":
+[]}} if there are none.
+\end{verbatim}\end{footnotesize}

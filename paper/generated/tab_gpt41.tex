@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Condition & All & Conflict & Clean \\
+\midrule
+No flags (plain) & 32.7 & 21.8 & 48.4 \\
+\midrule
+Instruction (v2) & \textbf{$+$5.8} & \textbf{$+$12.2} & $-$2.6 \\
+Oracle, flag & \textbf{$-$4.0} & \textbf{$-$8.6} & 0.0 \\
+Oracle, directional flag & \textbf{$+$8.4} & \textbf{$+$18.2} & 0.0 \\
+Oracle, remove suspect & \textbf{$+$14.0} & \textbf{$+$30.2} & 0.0 \\
+LLM, directional flag & \textbf{$+$5.4} & \textbf{$+$8.4} & 0.0 \\
+LLM, remove suspect & $+$1.0 & \textbf{$+$20.6} & \textbf{$-$24.3} \\
+NLI, remove & \textbf{$-$7.0} & $+$0.2 & \textbf{$-$15.6} \\
+\bottomrule
+\end{tabular}
+\caption{Replication with gpt-4.1 as generator (RAMDocs hold-out, 3 seeds, one-way strict accuracy; detector fixed
+to gpt-4o-mini). Same conventions as Table~\ref{tab:main}.}
+\label{tab:gpt41}
+\end{table}

@@ -1,0 +1,111 @@
+\section{Results}
+\label{sec:results}
+
+\input{generated/tab_main}
+
+Table~\ref{tab:main} gives every condition on the RAMDocs confirmatory split, Table~\ref{tab:hypotheses} gives the
+outcome of every pre-registered test, and Figure~\ref{fig:tradeoff} plots each condition's change on conflict
+questions against its change on clean ones.
+
+\subsection{A correct neutral flag hurts on misinformation and helps on genuine conflicts}
+\label{sec:neutral}
+Flagging exactly the gold contradictions, in the neutral format, \emph{lowers} gpt-4o-mini's accuracy on conflict
+questions by \adOracleFlagConf\ points \dOracleFlagConfCI, from \plainConf\%\ (H2). With gpt-4.1 the drop is
+\agptOracleFlagConf\ points (H9). Both hold under either metric. The errors are not refusals. With the flag, the share of
+conflict answers that include the misinformation answer rises from \wrongPlain\% to \wrongOracleFlag\%, while gold
+recall barely moves (\goldPlain\% to \goldOracleFlag\%). The model lists the misinformation \emph{alongside} the
+correct answer, treating ``these passages conflict'' as ``both are valid''. That reading is right when both sides are valid. On WikiContradict, where the
+reference answer is both sides, the same oracle flag \emph{raises} the share of answers that give both sides by
+\awikiOracleFlag\ points \wikiOracleFlagCI\ with gpt-4o-mini, and by \awikiGptOracleFlag\ points \wikiGptOracleFlagCI\
+with gpt-4.1 (H8; Table~\ref{tab:wiki}). A neutral flag passes on \emph{that} a conflict exists, but not \emph{which
+kind} it is. Whether it helps depends on whether listing both sides is the right behaviour.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_tradeoff.pdf}
+\caption{Change in one-way strict accuracy on RAMDocs conflict questions (y) against clean questions (x), relative to
+no flags (gpt-4o-mini, confirmatory split, 95\% CIs). Colour: detector; shape: format. The oracle sits on the y-axis
+because it never flags a clean question. Without direction, removal deletes the second passage of each pair.}
+\label{fig:tradeoff}
+\end{figure}
+
+\subsection{Direction is what helps}
+Telling the model \emph{which} side is likely wrong reverses the effect (H3): the share of answers that include the
+misinformation falls to \wrongOracleDir\% with the directional flag and \wrongOracleRem\% with removal. With oracle flags, the directional
+format gains \adOracleDirConf\ points on conflict questions \dOracleDirConfCI, and removing the suspect passage gains
+\adOracleRemConf\ \dOracleRemConfCI. Both are robust to the metric and replicate with gpt-4.1 (\gptOracleDirConf\ and
+\gptOracleRemConf; H9, Table~\ref{tab:gpt41}).
+
+\subsection{What a detector must get right}
+\label{sec:grid}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{generated/fig_grid.pdf}
+\caption{Synthetic detectors at recall 1: change in one-way strict accuracy (points) against no flags, by pair
+precision (rows) and direction accuracy (columns), for the directional flag (top) and removal (bottom). $^*$:
+significant after Holm correction over the 36 cells of that mode and subset. Clean questions only see false flags,
+so their rows do not vary with direction accuracy.}
+\label{fig:grid}
+\end{figure*}
+
+Figure~\ref{fig:grid} replaces the oracle with synthetic detectors of known quality. Two thresholds appear. First,
+\emph{direction accuracy}: at a direction accuracy of 0.5 (a coin flip on which side is wrong), no cell gains
+significantly in either format. Only perfect direction gives a significant gain on all questions (directional flag
+\gDirOneDOneAll, removal \gRemOneDOneAll\ points at perfect precision). Second, \emph{precision}, but only for removal:
+false flags make the model delete correct passages, which costs clean questions \agRemHalfDOneClean\ points at
+precision 0.5 and \agRemQuDOneClean\ at 0.25. False directional flags cost clean questions at most two points. Across
+all grid cells, the harm on clean questions tracks the share of clean questions that lose a correct document
+(Spearman $\rho=\hFourRho$, $p<0.001$), and \hFourHarm\ of \hFourCells\ false-flag cells are significantly harmful (H4).
+Removal is the more powerful and the more fragile interface: its best cell gains twice the directional flag's on all
+questions, but below precision 0.75 it is the only format that does net harm.
+
+\subsection{Real detectors}
+\label{sec:real}
+\input{generated/tab_detectors}
+
+Table~\ref{tab:detectors} describes the detectors. The pre-registered F1 ordering (H1) holds only in part. NLI beats
+CAAG (\fOneNli\ vs.\ \fOneCaag), but the LLM detector's F1 (\fOneLlm) is not significantly higher than NLI's. Its
+direction accuracy is \dirAccLlm\%, far above chance. NLI and the LLM detector flag most clean questions (\cleanFprNli\% and \cleanFprLlm\%); CAAG flags \cleanFprCaag\%.
+
+The detectors' downstream effects differ far more than their F1 scores. In the neutral format, no real detector helps:
+CAAG, NLI and the LLM detector all stay within a few points of no flags. CAAG performs no differently from random flags
+at its own flag rate (H5; \dCaagFlagAll\ vs.\ \dRandFlagAll\ points overall), so its pair selections carry no usable
+signal. Directional output changes the picture. The LLM detector gains \adLlmDirConf\ points on conflict questions with
+directional flags, and \adLlmRemConf\ with removal. Removal, however, costs \adLlmRemClean\ on clean questions, so its
+overall effect is \dLlmRemAll. The directional flag costs \adLlmDirClean\ on clean questions and comes out
+\dLlmDirAll\ points ahead overall. With gpt-4.1 as the generator, the same gpt-4o-mini detector gives a significant
+overall gain with directional flags (\gptLlmDirAll\ points, no loss on clean questions), while removal again nets out
+near zero (\gptLlmRemAll). For reference, MADAM-RAG gains \adMadamAll\ points overall at roughly nine times the prompt
+tokens. CAAG in its original typed and scored format behaves the same as in the uniform format (Appendix~\ref{app:extra}).
+
+\subsection{Document-level behaviour predicts a detector's effect; pair-level F1 does not}
+\label{sec:placement-results}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_placement.pdf}
+\caption{Effect of real detectors predicted from the synthetic grid against the measured effect (with 95\% CIs), for
+conflict ($\bullet$) and clean ($\blacksquare$) questions. Left: detectors located by their document-level behaviour;
+right: by pair precision, recall and direction accuracy.}
+\label{fig:placement}
+\end{figure}
+
+If the grid only described synthetic detectors, it would be of limited use. Figure~\ref{fig:placement} tests whether
+it predicts real ones (H6). Locating each real detector by its pair-level precision, recall and direction accuracy
+puts \hSixPairIn\ of \hSixN\ effects inside their 95\% CIs (mean absolute error \hSixPairMae\ points). The LLM
+detector is the clearest failure: its pair recall is low, yet it removes the misinformation on \misGoneLlm\% of
+conflict questions, because one correctly directed pair is enough to remove a misinformation document. Locating
+detectors by what they do to documents (the share of conflict questions whose misinformation is removed, and the share
+of clean questions that lose a correct document) puts \hSixDocIn\ of \hSixN\ inside (error \hSixDocMae\ points). We
+chose these axes after seeing the LLM detector on the pilot split. The confirmatory test covers three detectors and
+two formats.
+
+\subsection{Prompt-only baselines depend on wording}
+Neither instruction wording changes RAMDocs accuracy significantly after correction (H7). Their behaviour on
+WikiContradict explains why prompting alone is not a fix. The v1 instruction, which allows ``genuinely different valid
+answers'', raises both-sides answers there by \awikiInstrOne\ points; v2, which asks the model to drop unreliable
+passages, lowers them by \awikiInstrTwo. Each wording builds in one policy for handling conflicts, and that policy is
+right for one kind of conflict and wrong for the other. A directional detector can make that choice per pair.
+
+\paragraph{CONFLICTS.} On the 237 automatically scorable CONFLICTS questions (exploratory, one seed), no condition
+moves accuracy significantly; all are within $\pm$5 points (Appendix~\ref{app:extra}). Most of these items have no
+conflict or an outdated-information conflict, and only 69 are conflict items.

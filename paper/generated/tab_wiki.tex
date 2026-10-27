@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lr}
+\toprule
+Condition & Both answers \\
+\midrule
+No flags (plain) & 14.0 \\
+\midrule
+Instruction (v1) & \textbf{$+$8.7} \\
+Instruction (v2) & \textbf{$-$6.7} \\
+Oracle, flag & \textbf{$+$6.5} \\
+CAAG, flag & $+$0.7 \\
+NLI, flag & $+$3.2 \\
+LLM, flag & \textbf{$+$6.2} \\
+\bottomrule
+\end{tabular}
+\caption{WikiContradict (253 genuine conflicts between two Wikipedia passages; the reference answer is both sides),
+gpt-4o-mini, 3 seeds. First row: share of answers giving both sides (\%); other rows: difference in points,
+\textbf{bold} = significant after Holm within H8.}
+\label{tab:wiki}
+\end{table}

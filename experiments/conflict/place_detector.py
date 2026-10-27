@@ -34,6 +34,7 @@ from . import data
 from .analyze import per_question
 from .detectors import Detection, DetectorOutput, parse_synth_name
 from .metrics import direction_accuracy, doc_level, pair_level
+from .jsonl import read_results
 from .stats import paired_bootstrap
 
 DOC_AXES = {"conflict": ("conflict_q_all_misinfo_marked", "conflict_q_any_correct_marked"),
@@ -43,7 +44,7 @@ SUBSET_FLAG = {"all": None, "conflict": True, "no_conflict": False}
 
 
 def _rows(run: Path):
-    return [json.loads(l) for l in open(run / "results.jsonl")]
+    return read_results(run)
 
 
 def _examples(run: Path):
@@ -85,6 +86,7 @@ def main(argv=None):
     ap.add_argument("--reference", default="plain")
     ap.add_argument("--space", default="doc", choices=("doc", "pair"))
     ap.add_argument("--k", type=int, default=4)
+    ap.add_argument("--metric", default="primary")
     args = ap.parse_args(argv)
     grid, detr = Path(args.grid_run), Path(args.det_run)
     g_rows, d_rows = _rows(grid), _rows(detr)
@@ -98,7 +100,8 @@ def main(argv=None):
     det_out = _dets(detr, args.detector)
     n_sub = {s: sum(e.has_conflict is f for e in d_ex) for s, f in SUBSET_FLAG.items() if f is not None}
 
-    out = {"detector": args.detector, "space": args.space, "reference": args.reference, "modes": {}}
+    out = {"detector": args.detector, "space": args.space, "reference": args.reference,
+           "metric": args.metric, "modes": {}}
     for mode in args.modes.split(","):
         here = locate(args.space, mode, d_ex, det_out)
         cells = [c for c in sorted({r["condition"] for r in g_rows})
@@ -109,8 +112,8 @@ def main(argv=None):
         where = {c: locate(args.space, mode, g_ex, _dets(grid, c.partition("+")[0])) for c in cells}
         effect = {}
         for s, flag in SUBSET_FLAG.items():
-            ref = per_question(g_rows, args.reference, flag)
-            effect[s] = {c: paired_bootstrap(ref, per_question(g_rows, c, flag), groups, n_boot=200)["diff"]
+            ref = per_question(g_rows, args.reference, flag, args.metric)
+            effect[s] = {c: paired_bootstrap(ref, per_question(g_rows, c, flag, args.metric), groups, n_boot=200)["diff"]
                          for c in cells}
         print(f"\n## {args.detector} mode={mode} space={args.space}")
         res = {}
@@ -122,13 +125,14 @@ def main(argv=None):
         res["all"] = {"grid_predicted": sum(res[s]["grid_predicted"] * n_sub[s] for s in n_sub) / sum(n_sub.values())}
         print(f"{'subset':12s} {'actual':>8s} {'95% CI':>17s} {'grid-predicted':>15s}")
         for s, flag in SUBSET_FLAG.items():
-            act = paired_bootstrap(per_question(d_rows, args.reference, flag),
-                                   per_question(d_rows, f"{args.detector}+{mode}", flag), groups)
+            act = paired_bootstrap(per_question(d_rows, args.reference, flag, args.metric),
+                                   per_question(d_rows, f"{args.detector}+{mode}", flag, args.metric), groups)
             res[s]["actual"] = act
             print(f"{s:12s} {act['diff']:+8.3f} [{act['ci_low']:+.3f},{act['ci_high']:+.3f}] "
                   f"{res[s]['grid_predicted']:+15.3f}")
         out["modes"][mode] = res
-    (detr / f"placement.{args.detector}.{args.space}.json").write_text(json.dumps(out, indent=1, default=list))
+    suffix = "" if args.metric == "primary" else f".{args.metric}"
+    (detr / f"placement.{args.detector}.{args.space}{suffix}.json").write_text(json.dumps(out, indent=1, default=list))
 
 
 if __name__ == "__main__":

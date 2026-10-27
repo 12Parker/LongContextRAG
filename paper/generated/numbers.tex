@@ -1,0 +1,355 @@
+\newcommand{\plainAll}{29.9}
+\newcommand{\plainConf}{22.1}
+\newcommand{\plainClean}{41.5}
+\newcommand{\dOracleFlagAll}{$-$3.1}
+\newcommand{\dOracleFlagAllCI}{[$-$5.1, $-$1.4]}
+\newcommand{\dOracleFlagConf}{$-$6.7}
+\newcommand{\dOracleFlagConfCI}{[$-$10.8, $-$3.1]}
+\newcommand{\dOracleFlagClean}{0.0}
+\newcommand{\dOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\dOracleDirAll}{$+$6.2}
+\newcommand{\dOracleDirAllCI}{[$+$3.0, $+$9.6]}
+\newcommand{\dOracleDirConf}{$+$13.4}
+\newcommand{\dOracleDirConfCI}{[$+$6.7, $+$20.4]}
+\newcommand{\dOracleDirClean}{0.0}
+\newcommand{\dOracleDirCleanCI}{[0.0, 0.0]}
+\newcommand{\dOracleRemAll}{$+$12.8}
+\newcommand{\dOracleRemAllCI}{[$+$9.3, $+$16.6]}
+\newcommand{\dOracleRemConf}{$+$27.6}
+\newcommand{\dOracleRemConfCI}{[$+$20.6, $+$35.0]}
+\newcommand{\dOracleRemClean}{0.0}
+\newcommand{\dOracleRemCleanCI}{[0.0, 0.0]}
+\newcommand{\dLlmFlagAll}{$-$1.8}
+\newcommand{\dLlmFlagAllCI}{[$-$4.0, $+$0.3]}
+\newcommand{\dLlmFlagConf}{$-$4.1}
+\newcommand{\dLlmFlagConfCI}{[$-$7.2, $-$1.4]}
+\newcommand{\dLlmFlagClean}{$+$1.9}
+\newcommand{\dLlmFlagCleanCI}{[$-$1.1, $+$5.0]}
+\newcommand{\dLlmDirAll}{$+$5.0}
+\newcommand{\dLlmDirAllCI}{[$+$1.0, $+$9.1]}
+\newcommand{\dLlmDirConf}{$+$12.5}
+\newcommand{\dLlmDirConfCI}{[$+$5.3, $+$19.9]}
+\newcommand{\dLlmDirClean}{$-$3.4}
+\newcommand{\dLlmDirCleanCI}{[$-$7.1, 0.0]}
+\newcommand{\dLlmRemAll}{$+$0.3}
+\newcommand{\dLlmRemAllCI}{[$-$5.2, $+$6.1]}
+\newcommand{\dLlmRemConf}{$+$18.7}
+\newcommand{\dLlmRemConfCI}{[$+$10.3, $+$27.3]}
+\newcommand{\dLlmRemClean}{$-$20.6}
+\newcommand{\dLlmRemCleanCI}{[$-$28.0, $-$13.8]}
+\newcommand{\dNliFlagAll}{$+$0.2}
+\newcommand{\dNliFlagAllCI}{[$-$1.8, $+$2.2]}
+\newcommand{\dNliFlagConf}{$-$0.5}
+\newcommand{\dNliFlagConfCI}{[$-$3.6, $+$2.6]}
+\newcommand{\dNliFlagClean}{$+$1.1}
+\newcommand{\dNliFlagCleanCI}{[$-$2.1, $+$4.2]}
+\newcommand{\dNliRemAll}{$-$5.7}
+\newcommand{\dNliRemAllCI}{[$-$10.0, $-$1.6]}
+\newcommand{\dNliRemConf}{$-$2.2}
+\newcommand{\dNliRemConfCI}{[$-$8.6, $+$4.3]}
+\newcommand{\dNliRemClean}{$-$8.2}
+\newcommand{\dNliRemCleanCI}{[$-$14.6, $-$1.9]}
+\newcommand{\dCaagFlagAll}{$-$0.4}
+\newcommand{\dCaagFlagAllCI}{[$-$2.0, $+$1.1]}
+\newcommand{\dCaagFlagConf}{$-$0.7}
+\newcommand{\dCaagFlagConfCI}{[$-$3.4, $+$1.7]}
+\newcommand{\dCaagFlagClean}{$-$0.8}
+\newcommand{\dCaagFlagCleanCI}{[$-$3.2, $+$1.3]}
+\newcommand{\dCaagRemAll}{$-$3.3}
+\newcommand{\dCaagRemAllCI}{[$-$6.3, $-$0.4]}
+\newcommand{\dCaagRemConf}{0.0}
+\newcommand{\dCaagRemConfCI}{[$-$4.1, $+$4.1]}
+\newcommand{\dCaagRemClean}{$-$7.9}
+\newcommand{\dCaagRemCleanCI}{[$-$13.2, $-$3.2]}
+\newcommand{\dRandFlagAll}{$+$1.0}
+\newcommand{\dRandFlagAllCI}{[$-$0.8, $+$2.9]}
+\newcommand{\dRandFlagConf}{$+$0.7}
+\newcommand{\dRandFlagConfCI}{[$-$2.4, $+$4.3]}
+\newcommand{\dRandFlagClean}{$+$1.3}
+\newcommand{\dRandFlagCleanCI}{[$-$0.5, $+$3.7]}
+\newcommand{\dInstrOneAll}{$+$1.6}
+\newcommand{\dInstrOneAllCI}{[$-$0.6, $+$3.7]}
+\newcommand{\dInstrOneConf}{$-$1.2}
+\newcommand{\dInstrOneConfCI}{[$-$4.3, $+$1.7]}
+\newcommand{\dInstrOneClean}{$+$2.9}
+\newcommand{\dInstrOneCleanCI}{[0.0, $+$6.1]}
+\newcommand{\dInstrTwoAll}{$+$3.1}
+\newcommand{\dInstrTwoAllCI}{[$+$0.4, $+$5.9]}
+\newcommand{\dInstrTwoConf}{$+$5.3}
+\newcommand{\dInstrTwoConfCI}{[$+$1.4, $+$9.6]}
+\newcommand{\dInstrTwoClean}{$-$1.1}
+\newcommand{\dInstrTwoCleanCI}{[$-$5.0, $+$2.6]}
+\newcommand{\dMadamAll}{$+$5.7}
+\newcommand{\dMadamAllCI}{[$+$1.0, $+$10.1]}
+\newcommand{\dMadamConf}{$+$3.6}
+\newcommand{\dMadamConfCI}{[$-$2.9, $+$10.1]}
+\newcommand{\dMadamClean}{$+$7.9}
+\newcommand{\dMadamCleanCI}{[$+$0.8, $+$15.1]}
+\newcommand{\fOneCaag}{11.6}
+\newcommand{\cleanFprCaag}{34.1}
+\newcommand{\misGoneCaag}{9.4}
+\newcommand{\corLostCaag}{31.7}
+\newcommand{\fOneNli}{23.8}
+\newcommand{\cleanFprNli}{61.9}
+\newcommand{\misGoneNli}{44.6}
+\newcommand{\corLostNli}{52.4}
+\newcommand{\fOneLlm}{26.4}
+\newcommand{\cleanFprLlm}{76.2}
+\newcommand{\misGoneLlm}{61.2}
+\newcommand{\corLostLlm}{65.9}
+\newcommand{\dirAccLlm}{88.3}
+\newcommand{\hFourHarm}{15}
+\newcommand{\hFourCells}{54}
+\newcommand{\hFourRho}{-0.72}
+\newcommand{\hFourRemWorse}{12}
+\newcommand{\hFourMatched}{27}
+\newcommand{\hSixDocIn}{8}
+\newcommand{\hSixPairIn}{5}
+\newcommand{\hSixN}{8}
+\newcommand{\hSixDocMae}{4.1}
+\newcommand{\hSixPairMae}{5.3}
+\newcommand{\wikiPlain}{14.0}
+\newcommand{\wikiOracleFlag}{$+$6.5}
+\newcommand{\wikiOracleFlagCI}{[$+$3.0, $+$10.0]}
+\newcommand{\wikiLlmFlag}{$+$6.2}
+\newcommand{\wikiLlmFlagCI}{[$+$2.8, $+$9.6]}
+\newcommand{\wikiInstrTwo}{$-$6.7}
+\newcommand{\wikiInstrTwoCI}{[$-$10.0, $-$3.7]}
+\newcommand{\wikiNliFlag}{$+$3.2}
+\newcommand{\wikiNliFlagCI}{[$+$0.3, $+$6.1]}
+\newcommand{\wikiCaagFlag}{$+$0.7}
+\newcommand{\wikiCaagFlagCI}{[0.0, $+$1.6]}
+\newcommand{\wikiInstrOne}{$+$8.7}
+\newcommand{\wikiInstrOneCI}{[$+$5.4, $+$12.3]}
+\newcommand{\wikiGptPlain}{29.0}
+\newcommand{\wikiGptOracleFlag}{$+$19.0}
+\newcommand{\wikiGptOracleFlagCI}{[$+$14.5, $+$23.8]}
+\newcommand{\gptPlainConf}{21.8}
+\newcommand{\gptPlainClean}{48.4}
+\newcommand{\gptOracleFlagConf}{$-$8.6}
+\newcommand{\gptOracleFlagClean}{0.0}
+\newcommand{\gptOracleFlagAll}{$-$4.0}
+\newcommand{\gptOracleDirConf}{$+$18.2}
+\newcommand{\gptOracleDirClean}{0.0}
+\newcommand{\gptOracleDirAll}{$+$8.4}
+\newcommand{\gptOracleRemConf}{$+$30.2}
+\newcommand{\gptOracleRemClean}{0.0}
+\newcommand{\gptOracleRemAll}{$+$14.0}
+\newcommand{\gptLlmRemConf}{$+$20.6}
+\newcommand{\gptLlmRemClean}{$-$24.3}
+\newcommand{\gptLlmRemAll}{$+$1.0}
+\newcommand{\gptLlmDirConf}{$+$8.4}
+\newcommand{\gptLlmDirClean}{0.0}
+\newcommand{\gptLlmDirAll}{$+$5.4}
+\newcommand{\madamOneWay}{32.8}
+\newcommand{\madamBidir}{38.4}
+\newcommand{\origCaagAll}{$-$0.9}
+\newcommand{\origCaagConf}{$-$1.2}
+\newcommand{\origCaagClean}{$-$1.6}
+\newcommand{\wrongPlain}{47.7}
+\newcommand{\goldPlain}{72.6}
+\newcommand{\wrongOracleFlag}{61.9}
+\newcommand{\goldOracleFlag}{69.8}
+\newcommand{\wrongOracleDir}{14.9}
+\newcommand{\goldOracleDir}{68.2}
+\newcommand{\wrongOracleRem}{2.9}
+\newcommand{\goldOracleRem}{76.9}
+\newcommand{\caagBestFOne}{29.2}
+\newcommand{\caagBestRate}{43}
+\newcommand{\caagBestCleanFpr}{87}
+\newcommand{\caagBestThS}{0.40}
+\newcommand{\caagBestThC}{0.10}
+\newcommand{\gDirOneDOneAll}{$+$6}
+\newcommand{\gDirOneDOneConf}{$+$13}
+\newcommand{\gDirOneDOneClean}{0}
+\newcommand{\gDirOneDTquAll}{$+$2}
+\newcommand{\gDirOneDTquConf}{$+$4}
+\newcommand{\gDirOneDTquClean}{0}
+\newcommand{\gDirOneDHalfAll}{$-$1}
+\newcommand{\gDirOneDHalfConf}{$-$1}
+\newcommand{\gDirOneDHalfClean}{0}
+\newcommand{\gDirTquDOneAll}{$+$5}
+\newcommand{\gDirTquDOneConf}{$+$12}
+\newcommand{\gDirTquDOneClean}{$-$1}
+\newcommand{\gDirTquDTquAll}{$+$1}
+\newcommand{\gDirTquDTquConf}{$+$4}
+\newcommand{\gDirTquDTquClean}{$-$1}
+\newcommand{\gDirTquDHalfAll}{$-$1}
+\newcommand{\gDirTquDHalfConf}{$-$1}
+\newcommand{\gDirTquDHalfClean}{$-$1}
+\newcommand{\gDirHalfDOneAll}{$+$3}
+\newcommand{\gDirHalfDOneConf}{$+$9}
+\newcommand{\gDirHalfDOneClean}{$-$2}
+\newcommand{\gDirHalfDTquAll}{0}
+\newcommand{\gDirHalfDTquConf}{$+$2}
+\newcommand{\gDirHalfDTquClean}{$-$2}
+\newcommand{\gDirHalfDHalfAll}{$-$2}
+\newcommand{\gDirHalfDHalfConf}{$-$2}
+\newcommand{\gDirHalfDHalfClean}{$-$2}
+\newcommand{\gDirQuDOneAll}{0}
+\newcommand{\gDirQuDOneConf}{$+$3}
+\newcommand{\gDirQuDOneClean}{$-$1}
+\newcommand{\gDirQuDTquAll}{0}
+\newcommand{\gDirQuDTquConf}{$+$2}
+\newcommand{\gDirQuDTquClean}{$-$1}
+\newcommand{\gDirQuDHalfAll}{$-$1}
+\newcommand{\gDirQuDHalfConf}{$+$1}
+\newcommand{\gDirQuDHalfClean}{$-$1}
+\newcommand{\gRemOneDOneAll}{$+$13}
+\newcommand{\gRemOneDOneConf}{$+$28}
+\newcommand{\gRemOneDOneClean}{0}
+\newcommand{\gRemOneDTquAll}{$+$5}
+\newcommand{\gRemOneDTquConf}{$+$11}
+\newcommand{\gRemOneDTquClean}{0}
+\newcommand{\gRemOneDHalfAll}{$-$2}
+\newcommand{\gRemOneDHalfConf}{$-$5}
+\newcommand{\gRemOneDHalfClean}{0}
+\newcommand{\gRemTquDOneAll}{$+$7}
+\newcommand{\gRemTquDOneConf}{$+$22}
+\newcommand{\gRemTquDOneClean}{$-$6}
+\newcommand{\gRemTquDTquAll}{0}
+\newcommand{\gRemTquDTquConf}{$+$9}
+\newcommand{\gRemTquDTquClean}{$-$6}
+\newcommand{\gRemTquDHalfAll}{$-$6}
+\newcommand{\gRemTquDHalfConf}{$-$6}
+\newcommand{\gRemTquDHalfClean}{$-$6}
+\newcommand{\gRemHalfDOneAll}{$-$2}
+\newcommand{\gRemHalfDOneConf}{$+$12}
+\newcommand{\gRemHalfDOneClean}{$-$15}
+\newcommand{\gRemHalfDTquAll}{$-$8}
+\newcommand{\gRemHalfDTquConf}{$-$1}
+\newcommand{\gRemHalfDTquClean}{$-$15}
+\newcommand{\gRemHalfDHalfAll}{$-$12}
+\newcommand{\gRemHalfDHalfConf}{$-$11}
+\newcommand{\gRemHalfDHalfClean}{$-$15}
+\newcommand{\gRemQuDOneAll}{$-$16}
+\newcommand{\gRemQuDOneConf}{$-$5}
+\newcommand{\gRemQuDOneClean}{$-$26}
+\newcommand{\gRemQuDTquAll}{$-$19}
+\newcommand{\gRemQuDTquConf}{$-$11}
+\newcommand{\gRemQuDTquClean}{$-$26}
+\newcommand{\gRemQuDHalfAll}{$-$21}
+\newcommand{\gRemQuDHalfConf}{$-$16}
+\newcommand{\gRemQuDHalfClean}{$-$26}
+\newcommand{\totalSpend}{\$26.23}
+\newcommand{\adOracleFlagAll}{3.1}
+\newcommand{\adOracleFlagConf}{6.7}
+\newcommand{\adOracleDirAll}{6.2}
+\newcommand{\adOracleDirConf}{13.4}
+\newcommand{\adOracleRemAll}{12.8}
+\newcommand{\adOracleRemConf}{27.6}
+\newcommand{\adLlmFlagAll}{1.8}
+\newcommand{\adLlmFlagConf}{4.1}
+\newcommand{\adLlmFlagClean}{1.9}
+\newcommand{\adLlmDirAll}{5.0}
+\newcommand{\adLlmDirConf}{12.5}
+\newcommand{\adLlmDirClean}{3.4}
+\newcommand{\adLlmRemAll}{0.3}
+\newcommand{\adLlmRemConf}{18.7}
+\newcommand{\adLlmRemClean}{20.6}
+\newcommand{\adNliFlagAll}{0.2}
+\newcommand{\adNliFlagConf}{0.5}
+\newcommand{\adNliFlagClean}{1.1}
+\newcommand{\adNliRemAll}{5.7}
+\newcommand{\adNliRemConf}{2.2}
+\newcommand{\adNliRemClean}{8.2}
+\newcommand{\adCaagFlagAll}{0.4}
+\newcommand{\adCaagFlagConf}{0.7}
+\newcommand{\adCaagFlagClean}{0.8}
+\newcommand{\adCaagRemAll}{3.3}
+\newcommand{\adCaagRemClean}{7.9}
+\newcommand{\adRandFlagAll}{1.0}
+\newcommand{\adRandFlagConf}{0.7}
+\newcommand{\adRandFlagClean}{1.3}
+\newcommand{\adInstrOneAll}{1.6}
+\newcommand{\adInstrOneConf}{1.2}
+\newcommand{\adInstrOneClean}{2.9}
+\newcommand{\adInstrTwoAll}{3.1}
+\newcommand{\adInstrTwoConf}{5.3}
+\newcommand{\adInstrTwoClean}{1.1}
+\newcommand{\adMadamAll}{5.7}
+\newcommand{\adMadamConf}{3.6}
+\newcommand{\adMadamClean}{7.9}
+\newcommand{\awikiOracleFlag}{6.5}
+\newcommand{\awikiLlmFlag}{6.2}
+\newcommand{\awikiInstrTwo}{6.7}
+\newcommand{\awikiNliFlag}{3.2}
+\newcommand{\awikiCaagFlag}{0.7}
+\newcommand{\awikiInstrOne}{8.7}
+\newcommand{\awikiGptOracleFlag}{19.0}
+\newcommand{\agptOracleFlagConf}{8.6}
+\newcommand{\agptOracleFlagAll}{4.0}
+\newcommand{\agptOracleDirConf}{18.2}
+\newcommand{\agptOracleDirAll}{8.4}
+\newcommand{\agptOracleRemConf}{30.2}
+\newcommand{\agptOracleRemAll}{14.0}
+\newcommand{\agptLlmRemConf}{20.6}
+\newcommand{\agptLlmRemClean}{24.3}
+\newcommand{\agptLlmRemAll}{1.0}
+\newcommand{\agptLlmDirConf}{8.4}
+\newcommand{\agptLlmDirAll}{5.4}
+\newcommand{\aorigCaagAll}{0.9}
+\newcommand{\aorigCaagConf}{1.2}
+\newcommand{\aorigCaagClean}{1.6}
+\newcommand{\agDirOneDOneAll}{6}
+\newcommand{\agDirOneDOneConf}{13}
+\newcommand{\agDirOneDTquAll}{2}
+\newcommand{\agDirOneDTquConf}{4}
+\newcommand{\agDirOneDHalfAll}{1}
+\newcommand{\agDirOneDHalfConf}{1}
+\newcommand{\agDirTquDOneAll}{5}
+\newcommand{\agDirTquDOneConf}{12}
+\newcommand{\agDirTquDOneClean}{1}
+\newcommand{\agDirTquDTquAll}{1}
+\newcommand{\agDirTquDTquConf}{4}
+\newcommand{\agDirTquDTquClean}{1}
+\newcommand{\agDirTquDHalfAll}{1}
+\newcommand{\agDirTquDHalfConf}{1}
+\newcommand{\agDirTquDHalfClean}{1}
+\newcommand{\agDirHalfDOneAll}{3}
+\newcommand{\agDirHalfDOneConf}{9}
+\newcommand{\agDirHalfDOneClean}{2}
+\newcommand{\agDirHalfDTquConf}{2}
+\newcommand{\agDirHalfDTquClean}{2}
+\newcommand{\agDirHalfDHalfAll}{2}
+\newcommand{\agDirHalfDHalfConf}{2}
+\newcommand{\agDirHalfDHalfClean}{2}
+\newcommand{\agDirQuDOneConf}{3}
+\newcommand{\agDirQuDOneClean}{1}
+\newcommand{\agDirQuDTquConf}{2}
+\newcommand{\agDirQuDTquClean}{1}
+\newcommand{\agDirQuDHalfAll}{1}
+\newcommand{\agDirQuDHalfConf}{1}
+\newcommand{\agDirQuDHalfClean}{1}
+\newcommand{\agRemOneDOneAll}{13}
+\newcommand{\agRemOneDOneConf}{28}
+\newcommand{\agRemOneDTquAll}{5}
+\newcommand{\agRemOneDTquConf}{11}
+\newcommand{\agRemOneDHalfAll}{2}
+\newcommand{\agRemOneDHalfConf}{5}
+\newcommand{\agRemTquDOneAll}{7}
+\newcommand{\agRemTquDOneConf}{22}
+\newcommand{\agRemTquDOneClean}{6}
+\newcommand{\agRemTquDTquConf}{9}
+\newcommand{\agRemTquDTquClean}{6}
+\newcommand{\agRemTquDHalfAll}{6}
+\newcommand{\agRemTquDHalfConf}{6}
+\newcommand{\agRemTquDHalfClean}{6}
+\newcommand{\agRemHalfDOneAll}{2}
+\newcommand{\agRemHalfDOneConf}{12}
+\newcommand{\agRemHalfDOneClean}{15}
+\newcommand{\agRemHalfDTquAll}{8}
+\newcommand{\agRemHalfDTquConf}{1}
+\newcommand{\agRemHalfDTquClean}{15}
+\newcommand{\agRemHalfDHalfAll}{12}
+\newcommand{\agRemHalfDHalfConf}{11}
+\newcommand{\agRemHalfDHalfClean}{15}
+\newcommand{\agRemQuDOneAll}{16}
+\newcommand{\agRemQuDOneConf}{5}
+\newcommand{\agRemQuDOneClean}{26}
+\newcommand{\agRemQuDTquAll}{19}
+\newcommand{\agRemQuDTquConf}{11}
+\newcommand{\agRemQuDTquClean}{26}
+\newcommand{\agRemQuDHalfAll}{21}
+\newcommand{\agRemQuDHalfConf}{16}
+\newcommand{\agRemQuDHalfClean}{26}

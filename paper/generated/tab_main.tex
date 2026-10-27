@@ -1,0 +1,35 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lrrrr}
+\toprule
+Condition & All & Conflict & Clean & Tokens \\
+\midrule
+No flags (plain) & 29.9 & 22.1 & 41.5 & 911 \\
+\midrule
+\multicolumn{5}{l}{\emph{Prompt only}} \\
+\quad Instruction (v1) & $+$1.6 & $-$1.2 & $+$2.9 & 948 \\
+\quad Instruction (v2) & $+$3.1 & $+$5.3 & $-$1.1 & 951 \\
+\multicolumn{5}{l}{\emph{Oracle detector}} \\
+\quad Oracle, flag & \textbf{$-$3.1} & \textbf{$-$6.7} & 0.0 & 980 \\
+\quad Oracle, directional flag & \textbf{$+$6.2} & \textbf{$+$13.4} & 0.0 & 998 \\
+\quad Oracle, remove suspect & \textbf{$+$12.8} & \textbf{$+$27.6} & 0.0 & 825 \\
+\multicolumn{5}{l}{\emph{Real detectors}} \\
+\quad Random, flag & $+$1.0 & $+$0.7 & $+$1.3 & 949 \\
+\quad CAAG, flag & $-$0.4 & $-$0.7 & $-$0.8 & 942 \\
+\quad CAAG, remove & $-$3.3 & 0.0 & $-$7.9 & 809 \\
+\quad NLI, flag & $+$0.2 & $-$0.5 & $+$1.1 & 1021 \\
+\quad NLI, remove & $-$5.7 & $-$2.2 & $-$8.2 & 592 \\
+\quad LLM, flag & $-$1.8 & $-$4.1 & $+$1.9 & 970 \\
+\quad LLM, directional flag & $+$5.0 & $+$12.5 & $-$3.4 & 983 \\
+\quad LLM, remove suspect & $+$0.3 & \textbf{$+$18.7} & \textbf{$-$20.6} & 718 \\
+\multicolumn{5}{l}{\emph{Reference}} \\
+\quad MADAM-RAG & $+$5.7 & $+$3.6 & $+$7.9 & 8196 \\
+\bottomrule
+\end{tabular}
+\caption{RAMDocs hold-out (300 questions: 139 conflict, 126 clean), gpt-4o-mini, 3 seeds, one-way strict accuracy (primary).
+First row: accuracy (\%) with no flags. Other rows: paired difference from it in points; \textbf{bold} = significant
+after Holm correction across the table (sign-flip test, $p<0.05$). Tokens: mean prompt tokens per call
+(MADAM-RAG: per question, all calls).}
+\label{tab:main}
+\end{table}

@@ -37,6 +37,7 @@ from . import data
 from .detectors import (CAAGDetector, DetectorOutput, Detection, LLMDetector, NLIDetector,
                         NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
+from .jsonl import ensure_plain
 from .madam import madam_rag
 from .metrics import (DOC_MODES, direction_accuracy, direction_coverage, doc_level, pair_level,
                       question_level, score)
@@ -166,7 +167,11 @@ def main(argv=None):
     by_id = {e.id: e for e in examples}
     seeds = [int(s) for s in args.seeds.split(",")]
     conditions = expand_conditions([c.strip() for c in args.conditions.split(",") if c.strip()], args)
-    (out / "config.json").write_text(json.dumps({**vars(args), "expanded_conditions": conditions}, indent=1))
+    cfg = {**vars(args), "expanded_conditions": conditions}
+    if (out / "config.json").exists():  # resuming or adding conditions: keep earlier invocations on record
+        old = json.loads((out / "config.json").read_text())
+        cfg["previous_invocations"] = old.pop("previous_invocations", []) + [old]
+    (out / "config.json").write_text(json.dumps(cfg, indent=1))
 
     if args.dry_run:
         from .llm import FakeLLM
@@ -208,6 +213,7 @@ def main(argv=None):
     if quality:
         (out / "detector_quality.json").write_text(json.dumps(quality, indent=1))
 
+    ensure_plain(out)
     res_path = out / "results.jsonl"
     done = {(r["id"], r["condition"], r["seed"]) for r in _read_jsonl(res_path)}
     jobs = [(ex.id, c, s) for c in conditions for s in seeds for ex in examples if (ex.id, c, s) not in done]

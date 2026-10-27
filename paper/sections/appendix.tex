@@ -1,0 +1,51 @@
+\section{Prompts}
+\label{app:prompts}
+All prompts below are copied verbatim from the code that produced the results.
+\input{generated/app_prompts}
+
+\section{Additional Results}
+\label{app:extra}
+
+\paragraph{Robustness to the metric and the labels.}
+Table~\ref{tab:main_robust} repeats Table~\ref{tab:main} with the bidirectional metric. Table~\ref{tab:contains}
+repeats the pre-registered tests with every suspect document treated as misinformation. Table~\ref{tab:hypotheses}
+lists all pre-registered tests.
+
+\input{generated/tab_hypotheses}
+\input{generated/tab_main_robust}
+\input{generated/app_tables}
+\input{generated/tab_gpt41}
+\input{generated/tab_wiki}
+
+\paragraph{Original CAAG format.}
+Rendering CAAG's flags in its original format, with typed lines and confidence scores (``factual conflict (confidence:
+0.41)''), changes accuracy by \origCaagAll\ points overall (\origCaagConf\ on conflict questions, \origCaagClean\ on
+clean ones). This is no different from the uniform format.
+
+\paragraph{Pilot study (exploratory).}
+On the 200-question pilot split, scored with the bidirectional metric, the same pattern appeared before any
+confirmatory run. Oracle neutral flags changed conflict-question accuracy by $-$10.5 points, directional flags by
+$+$11.8, and removing the suspect by $+$28.4. The pilots also showed that the original \textsc{remove} strategy,
+which deletes an arbitrary side of each pair, removes correct documents. They are why we added directional formats,
+synthetic direction accuracy and document-level placement. All pilot runs are released.
+
+\paragraph{Phase-0 audit of CAAG on NarrativeQA.}
+CAAG was designed for long-document QA. On 100 NarrativeQA \citep{kocisky2018narrativeqa} questions from 50 stories
+(BM25 top-10 chunks from a single coherent story), it flags at least one pair in 54\% of questions, 166 pairs in all.
+A single story rarely contradicts itself, so most of these flags are likely false; the flagged pairs are released for
+annotation. This is the setting where a false flag can only hurt.
+
+\section{Reproducibility}
+\label{app:repro}
+\paragraph{Runs.} Every number in this paper is produced by one script from committed run outputs: per-call responses,
+token counts, detector outputs and configurations. The pre-registration was committed before any confirmatory run.
+Its deviations are listed below.
+
+\paragraph{Deviations from the pre-registration.}
+(1) For the placement test (H6), the detectors without direction were run under the label \texttt{remove\_suspect} as
+well as \texttt{remove}. Both render identical prompts, so these were served entirely from the response cache.
+(2) Table~\ref{tab:main} applies Holm correction across all its comparisons. This is stricter than the per-family
+correction used for the hypothesis tests.
+
+\paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. CAAG and NLI ran on a
+laptop CPU (0.2\,s and 1.2\,s per question).

@@ -1,0 +1,40 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Why neutral flags backfire.}
+A contradiction flag is a hint about \emph{what to do} as much as a statement of fact. Our generation prompt, like
+most RAG prompts, asks for every valid answer when sources disagree for a legitimate reason. A neutral flag cannot
+separate that case from misinformation, so the model resolves the ambiguity toward inclusion. That is the right
+behaviour on WikiContradict and the wrong one on RAMDocs. The same tension appears in prompt-only baselines: each
+instruction wording builds in one policy and fails on the other kind of conflict. This sharpens the finding of
+\citet{cattan2025conflicts} that knowing the conflict \emph{type} helps. For misinformation, the useful part of the
+type is the direction.
+
+\paragraph{Implications for building detectors.}
+Detection F1, the usual figure of merit \citep{wang2026conflictrag}, measures the wrong unit. Over our three detectors,
+F1 ranged from 12 to 26 points, but the order of their downstream effects was set by two other properties. One is
+direction accuracy. The other is the detector's document-level footprint: whether every misinformation document in a
+question is caught, and whether a clean question loses a correct document. One correctly directed pair is enough to
+remove a misinformation document, while scattered false flags on correct--correct pairs (where most of our detectors'
+errors fall) delete valid answers. We recommend that conflict-aware RAG papers report (i) direction accuracy,
+(ii) document-level removal and loss rates, and (iii) effects on conflict-free questions, all under the exact format
+used downstream.
+
+\paragraph{Which interface to use.}
+Removal has the largest upside, roughly double the directional flag's at oracle quality, and the largest downside: it
+is the only format that does net harm below 0.75 precision, and with our LLM detector its gain on conflict questions
+is cancelled by losses on clean ones. A directional flag keeps most of the gain at a fraction of the risk, and it is
+the one interface that gave a significant overall gain with a real detector (with the gpt-4.1 generator). Until
+detectors reach high precision, directional flags are the safer default. Removal should be gated on the detector's
+measured clean-question loss rate.
+
+\paragraph{The heuristic detector.}
+CAAG is the detector we set out to study. As a neutral flag it did no better than random flags of the same volume, and
+as a removal rule it only deleted correct passages (\dCaagRemClean\ points on clean questions, \dCaagRemConf\ on
+conflict ones). Its false flags fall mostly on pairs that should both be reported: 134 of its 221 false flags on the
+hold-out are same-name ambiguity pairs, which its entity-mismatch signal flags because they mention different dates or
+numbers. We read this as a warning about lexical contradiction cues in general \citep{gururangan2018annotation},
+rather than as a problem with a particular threshold. Retuning illustrates why F1 misleads. Over a 121-setting sweep, CAAG's
+best pair F1 is \caagBestFOne, above NLI's, at $\theta_s=\caagBestThS$ and $\theta_c=\caagBestThC$. But it gets
+there by flagging \caagBestRate\% of all pairs and \caagBestCleanFpr\% of clean questions, which our grid predicts
+would be harmful under removal (Appendix~\ref{app:extra}).
