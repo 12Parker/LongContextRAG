@@ -142,3 +142,81 @@ deviation and gets reported as one.
    model family was available. CONFLICTS' opinion and complementary items are left out, and that is
    a stated limitation.
 7. **Budget:** at most $100 in API spend across everything, tracked in `runs/COSTS.md`.
+
+## 9. Revision addendum (frozen 2026-10-27, after a mock review, before any run below)
+
+Three reviewers read the draft. This section registers the runs and re-analyses that answer them.
+It is committed before any of the runs in 9.1–9.2 start. §1–§8 are unchanged. The re-analyses in 9.3
+use data that already exists, so the paper reports them as **re-analyses**, not as pre-registered
+tests of new data.
+
+### 9.1 Skeleton ablation (H10)
+
+The default skeleton (`prompts.BASE`) tells the model to "give every valid answer" when the passages
+support more than one. The reviewers' concern is that a neutral flag may hurt only because of that
+policy combined with the strict metric. `--skeleton minimal` (`prompts.BASE_MINIMAL`) removes the
+policy sentence, and its answer line allows several answers without inviting them. Everything else
+is unchanged: hold-out split, `exclude` labels, both metrics, analysis as in §5.
+
+- **gpt-4o-mini**, 3 seeds, `--skeleton minimal`:
+  - `plain`;
+  - `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`;
+  - `llm_dir+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect`.
+
+  Output: `runs/holdout_minimal`.
+- **gpt-4.1**, 3 seeds, `--skeleton minimal`, detector `gpt-4o-mini`:
+  - `plain`;
+  - `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`.
+
+  Output: `runs/holdout_gpt41_minimal`.
+- **H10a.** Under the minimal skeleton, Δ(`oracle+flag`, `plain`) on conflict questions, for each
+  generator. Two-sided, because we do not predict a sign. A negative, significant effect means the
+  harm does not depend on the "every valid answer" policy. A null or positive effect means it does,
+  and the paper says so.
+- **H10b.** The three H3 comparisons hold, with the same sign, under the minimal skeleton, for each
+  generator.
+- **Multiplicity:** Holm within H10, across generators and comparisons, per metric.
+
+### 9.2 Open-weights generator (H11)
+
+This fulfils §7. No hosted endpoint is available, so the model runs locally.
+
+- **Model:** `qwen2.5:7b-instruct` (Qwen2.5-7B-Instruct, Q4_K_M quantization) through Ollama's
+  OpenAI-compatible endpoint. Ollama model digest `845dbda0ea48`; 4 parallel slots; context length
+  8192. Temperature 0.1, 256 output tokens, seeds 0, 1, 2. There is no API cost. Batched local
+  inference is not bit-for-bit deterministic, so this is stated as a limitation.
+- **Detector:** `llm_dir` stays `gpt-4o-mini` (`--detector-model`). Its outputs are the same as in
+  `holdout_main`.
+- **Default skeleton** (`runs/holdout_qwen`):
+  - `plain`;
+  - `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`;
+  - `llm_dir+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect`.
+- **Minimal skeleton** (`runs/holdout_qwen_minimal`):
+  - `plain`;
+  - `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`.
+
+  These enter H10 as a third generator.
+- **H11 (replication).** H2 and H3 hold with the same sign under Qwen2.5-7B, with the default
+  skeleton. Holm within H11.
+- **Real detector (exploratory, all generators):** Δ(`llm_dir+flag_directional`, `llm_dir+flag`) on
+  conflict questions. This is the direct test of whether direction helps with a real detector.
+
+### 9.3 Re-analyses of existing data (reported as such)
+
+1. **H4a, by mode.** Count false-flag cells separately for `flag_directional` and `remove_suspect`.
+   On clean questions, direction accuracy cannot change the prompt, so cells that differ only in
+   direction are one comparison. We collapse them, giving 18 distinct comparisons. Holm runs within
+   each mode. H4c is reported as a count, with no "supported" label.
+2. **Dose-response.** Spearman ρ over the distinct clean-question cells (the collapse above), with a
+   95% CI from a cluster bootstrap over questions. The cell-permutation p-value is dropped.
+3. **H6 as pre-registered.** For each placement space, a 95% interval for the grid prediction,
+   built by a cluster bootstrap over questions: resample questions, recompute the cell effects and
+   the detector's coordinates, then interpolate. We count how often the actual effect falls inside
+   that interval. Doc- and pair-level absolute errors are compared with an exact paired sign-flip
+   test over the cases. The lenient converse test is kept, labelled as the converse.
+4. **H5 equivalence.** TOST with a margin of ±3 points (half the H2 effect, fixed now), α = 0.05.
+5. **"All" over labelled questions.** Every "All" effect is also reported over the 265 labelled
+   questions (conflict + clean), with the 35 excluded questions reported separately.
+6. **H1 direction accuracy.** A cluster bootstrap CI over questions replaces the binomial CI.
+7. **Real-detector rows.** In every table, these are labelled exploratory. Significance is Holm
+   across that table.

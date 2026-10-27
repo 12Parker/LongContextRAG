@@ -22,6 +22,13 @@ Modes
   remove_suspect drop the suspect passage(s) of each flagged pair; falls back to doc_idx_2
                  (as remove) for pairs with no suspect
 
+Skeletons (`skeleton`, run.py --skeleton)
+  default    BASE: tells the model to give every valid answer when the passages support more than
+             one (RAMDocs has same-name ambiguity questions). Used for every pre-registered run.
+  minimal    BASE_MINIMAL: the same prompt without any answer policy (no "give every valid answer"),
+             and an answer line that allows but does not invite several answers. Revision ablation:
+             does the neutral-flag harm depend on the default skeleton's policy?
+
 Note for the paper: in the original code SEPARATE renders exactly the same prompt as FLAG,
 so it is not a separate condition here.
 
@@ -47,6 +54,18 @@ Question: {question}
 
 Give a brief explanation, then end with one line in exactly this format:
 Final answer(s): <answer 1> | <answer 2> | ..."""
+
+BASE_MINIMAL = """Answer the question using the passages below.
+If no passage answers the question, the answer is "unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in exactly this format:
+Final answer(s): <your answer; if there is more than one, separate them with |>"""
+
+SKELETONS = {"default": BASE, "minimal": BASE_MINIMAL}
 
 INSTRUCTION = """Some passages may contradict each other. Before answering, check whether they do.
 Ignore passages that appear to contain misinformation, and if a disagreement reflects genuinely different valid answers, report each one.
@@ -96,10 +115,13 @@ def _conflict_list(dets: list[Detection], heading: str, directional: bool = Fals
 
 
 def build_prompt(question: str, passages: list[str], mode: str,
-                 dets: list[Detection] | None = None, style: str = "uniform") -> tuple[str, list[int]]:
+                 dets: list[Detection] | None = None, style: str = "uniform",
+                 skeleton: str = "default") -> tuple[str, list[int]]:
     """Returns (prompt, kept_passage_indices)."""
     if style not in FLAG_STYLES:
         raise ValueError(f"style must be one of {FLAG_STYLES}")
+    if skeleton not in SKELETONS:
+        raise ValueError(f"skeleton must be one of {tuple(SKELETONS)}")
     dets = dets or []
     kept = list(range(len(passages)))
     instruction, conflicts = "", ""
@@ -123,5 +145,5 @@ def build_prompt(question: str, passages: list[str], mode: str,
     else:
         raise ValueError(f"unknown mode {mode}")
 
-    prompt = BASE.format(instruction=instruction, context=context, conflicts=conflicts, question=question)
+    prompt = SKELETONS[skeleton].format(instruction=instruction, context=context, conflicts=conflicts, question=question)
     return prompt, kept

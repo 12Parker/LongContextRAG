@@ -41,7 +41,7 @@ from .jsonl import ensure_plain
 from .madam import madam_rag
 from .metrics import (DOC_MODES, direction_accuracy, direction_coverage, doc_level, pair_level,
                       question_level, score)
-from .prompts import FLAG_STYLES, PROMPT_ONLY_MODES, build_prompt
+from .prompts import FLAG_STYLES, PROMPT_ONLY_MODES, SKELETONS, build_prompt
 
 
 def parse_condition(c: str) -> tuple[str, str]:
@@ -154,6 +154,8 @@ def main(argv=None):
     ap.add_argument("--synth-seed", type=int, default=0)
     ap.add_argument("--flag-style", default="uniform", choices=FLAG_STYLES,
                     help="uniform: identical flag text for every detector; original: CAAG's typed, scored lines")
+    ap.add_argument("--skeleton", default="default", choices=tuple(SKELETONS),
+                    help="prompt skeleton (prompts.py); minimal drops the 'give every valid answer' policy")
     ap.add_argument("--dry-run", action="store_true", help="FakeLLM; no API calls, no cost")
     args = ap.parse_args(argv)
     if (args.price_input is None) != (args.price_output is None):
@@ -228,7 +230,8 @@ def main(argv=None):
             m = madam_rag(ex.question, ex.passages, madam_llm, seed=seed)
             text, usage, kept = m["final"], m["usage"], list(range(len(ex.passages)))
         else:
-            prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style)
+            prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style,
+                                       skeleton=args.skeleton)
             r = llm(prompt, seed=seed)
             text = r.text
             usage = {"prompt_tokens": r.prompt_tokens, "completion_tokens": r.completion_tokens,
@@ -240,7 +243,8 @@ def main(argv=None):
         gen_s = usage.pop("latency_s")
         return {"id": eid, "dataset": ex.dataset, "condition": cond, "seed": seed,
                 "has_conflict": ex.has_conflict, "conflict_type": ex.conflict_type, "group": ex.group,
-                "n_flags": len(dout.pairs), "kept": kept, "flag_style": args.flag_style, "response": text,
+                "n_flags": len(dout.pairs), "kept": kept, "flag_style": args.flag_style,
+                "skeleton": args.skeleton, "response": text,
                 **score(ex, text), **usage,
                 "detect_s": dout.latency_s, "detect_cost_usd": dout.cost_usd, "generate_s": gen_s, "wall_s": wall_s}
 
