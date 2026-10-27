@@ -84,3 +84,8 @@ models/
 # Cache
 .cache/
 .pytest_cache/
+
+# conflict experiments
+.venv-conflict/
+data/external/
+runs/
