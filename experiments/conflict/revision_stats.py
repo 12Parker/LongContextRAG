@@ -118,7 +118,9 @@ def h4_revised(rows, examples, dets_of, run, metric, compare) -> dict:
     plain = per_question(rows, "plain", False, metric)
     ids = sorted(set(plain) & set(ex_by))
     expo, eff = [], []
-    for k, c in sorted(rep.items()):
+    # only cells that contain false flags (precision < 1); precision-1 cells sit at (0, 0) by
+    # construction and would inflate the correlation
+    for k, c in sorted((k, c) for k, c in rep.items() if k[1] < 1):
         det = dets_of(run, c.partition("+")[0])
         sc = per_question(rows, c, False, metric)
         expo.append([q_doc(ex_by[i], det[i].pairs, k[0])[0] for i in ids])
@@ -250,3 +252,136 @@ def direction_ci(examples, dets) -> dict:
     lo, hi = np.quantile(boots, [0.025, 0.975])
     return {"estimate": float(est), "ci_low": float(lo), "ci_high": float(hi), "n_pairs": int(per[:, 1].sum()),
             "n_questions": len(per)}
+
+
+# --------------------------------------------------------------------------- one significance scheme (§10)
+REGISTERED = {
+    # (generator, skeleton, condition, reference, subset) -> hypothesis family in R / R["rev"]
+}
+
+
+def _registered_keys():
+    out = {}
+    h3 = [("oracle+flag_directional", "plain"), ("oracle+flag_directional", "oracle+flag"),
+          ("oracle+remove_suspect", "plain")]
+    fams = {("gpt-4o-mini", "default"): ("H2", "H3"), ("gpt-4.1", "default"): ("H9", "H9"),
+            ("gpt-4o-mini", "minimal"): ("H10", "H10"), ("gpt-4.1", "minimal"): ("H10", "H10"),
+            ("Qwen2.5-7B", "minimal"): ("H10", "H10"), ("Qwen2.5-7B", "default"): ("H11", "H11")}
+    for (g, sk), (f2, f3) in fams.items():
+        out[(g, sk, "oracle+flag", "plain", "conflict")] = f2
+        for c, ref in h3:
+            out[(g, sk, c, ref, "conflict")] = f3
+    for c in ("instruct", "instruct_v2"):
+        for s in ("conflict", "clean"):
+            out[("gpt-4o-mini", "default", c, "plain", s)] = "H7"
+    return out
+
+
+def _family_lookup(R, fam, key, metric):
+    """Find the registered test for `key` in family `fam` (its keys are free text)."""
+    g, sk, c, ref, s = key
+    src = R["rev"][fam] if fam in ("H10", "H11") else R[fam]
+    tests = src[metric]
+    for k, v in tests.items():
+        if c not in k or f"({s})" not in k:
+            continue
+        if fam in ("H9", "H10", "H11") and not k.startswith(g):
+            continue
+        is_vs_flag = "> oracle+flag (" in k
+        if (ref == "oracle+flag") != is_vs_flag:
+            continue
+        if c == "oracle+flag" and ("directional" in k or "remove" in k):
+            continue
+        return v
+    return None
+
+
+def comparisons(R):
+    """Every paired comparison the paper reports, as (key, metric, result dict). Keys identify the
+    same comparison wherever it appears, so it gets one decision everywhere."""
+    rev = R.get("rev", {})
+    out = []
+    for m in ("ramdocs_strict_oneway", "ramdocs_strict"):
+        for gen, tk in (("gpt-4o-mini", "main_table"), ("gpt-4.1", "gpt41_table")):
+            for c, d in R.get(tk, {}).get(m, {}).items():
+                for s, v in d.items():
+                    out.append(((gen, "default", c, "plain", s), m, v))
+        for gk, v in rev.get("generality", {}).items():
+            g, sk = gk.split("|")
+            for c, d in v["effects"][m].items():
+                for s, t in d.items():
+                    out.append(((g, sk, c, "plain", s), m, t))
+        for gen, d in rev.get("labelled", {}).items():
+            for c, e in d.get(m, {}).items():
+                out.append(((gen, "default", c, "plain", "labelled"), m, e["labelled"]))
+                out.append(((gen, "default", c, "plain", "excluded"), m, e["excluded"]))
+        for gk, t in rev.get("real_direction", {}).get(m, {}).items():
+            g, sk = gk.split("|")
+            out.append(((g, sk, "llm_dir+flag_directional", "llm_dir+flag", "conflict"), m, t))
+        for name, block in rev.get("extra", {}).items():      # later analyses register here
+            for key, d in block.get(m, {}).items():
+                out.append((tuple(key.split("|")), m, d))
+    for c, d in rev.get("adversarial", {}).items():
+        for s, v in d.items():
+            out.append((("gpt-4o-mini", "default", c, "plain", s), "ramdocs_strict_oneway", v))
+    for key, d in rev.get("by_answers", {}).items():
+        g, sk, part = key.split("|")
+        for c, v in d.items():
+            if isinstance(v, dict):
+                out.append(((g, sk, c, "plain", f"conflict-{part}"), "ramdocs_strict_oneway", v))
+    return out
+
+
+def assign_significance(R, alpha=0.05):
+    """One scheme for the whole paper. A comparison that is a registered test takes that test's
+    Holm-adjusted p (Holm within its family). Every other comparison is exploratory, and all of them
+    together form ONE Holm family per metric. Writes p_adj / sig / registered into each result."""
+    reg = _registered_keys()
+    rows = comparisons(R)
+    explo = {}
+    for key, m, v in rows:
+        if key in reg or v.get("p") is None or (isinstance(v.get("p"), float) and math.isnan(v["p"])):
+            continue
+        if v.get("ci_low") == v.get("ci_high") == 0:     # identical prompts (e.g. oracle on clean q.)
+            continue
+        explo.setdefault(m, {})[key] = v["p"]
+    adj = {m: holm(ps) for m, ps in explo.items()}
+    for key, m, v in rows:
+        if key in reg:
+            t = _family_lookup(R, reg[key], key, m)
+            v["registered"] = reg[key]
+            v["p_adj"] = t["p_holm"] if t else float("nan")
+            v["sig"] = bool(t and t["p_holm"] < alpha)
+        else:
+            v["registered"] = None
+            v["p_adj"] = adj.get(m, {}).get(key, float("nan"))
+            v["sig"] = bool(v["p_adj"] < alpha) if not math.isnan(v["p_adj"]) else False
+    R.setdefault("rev", {})["n_exploratory"] = {m: len(p) for m, p in explo.items()}
+    return R
+
+
+# --------------------------------------------------------------------------- break-even precision (§5)
+def break_even(grid_cells: dict, mode: str, recall: float, direction: float, subset: str = "all"):
+    """Pre-registered break-even precision: the lowest precision at and above which every cell
+    (this mode, recall, direction) is a significant gain (Holm within the mode x subset table).
+    None if not even precision 1 qualifies."""
+    best = None
+    for p in (1.0, 0.75, 0.5, 0.25):
+        v = grid_cells.get(f"{mode}|{p:g}|{recall:g}|{direction:g}|{subset}")
+        if not v or not (v["p_holm"] < 0.05 and v["diff"] > 0):
+            break
+        best = p
+    return best
+
+
+# --------------------------------------------------------------------------- prevalence
+def prevalence(d_conf: float, d_clean: float) -> dict:
+    """Net effect as a function of the share pi of conflict questions: pi*d_conf + (1-pi)*d_clean.
+    break_even_pi: the conflict share above which the net effect is positive (None if it never
+    or always is)."""
+    if d_conf > 0 > d_clean:
+        pi = -d_clean / (d_conf - d_clean)
+    else:
+        pi = None
+    return {"d_conf": d_conf, "d_clean": d_clean, "break_even_pi": pi,
+            "net_at": {f"{q:.2f}": q * d_conf + (1 - q) * d_clean for q in (0.1, 0.25, 0.5)}}

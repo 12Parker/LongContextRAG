@@ -38,6 +38,7 @@ from .detectors import (CAAGDetector, DetectorOutput, Detection, InvertedOracleD
                         NLIDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
 from .jsonl import ensure_plain
+from .baselines import BASELINE_MODES, SimCSE, astute_rag, trustrag
 from .madam import madam_rag
 from .metrics import (DOC_MODES, direction_accuracy, direction_coverage, doc_level, pair_level,
                       question_level, score)
@@ -47,8 +48,8 @@ from .prompts import FLAG_STYLES, PROMPT_ONLY_MODES, SKELETONS, build_prompt
 def parse_condition(c: str) -> tuple[str, str]:
     if c in PROMPT_ONLY_MODES:
         return "none", c
-    if c == "madam":
-        return "none", "madam"
+    if c in ("madam",) + BASELINE_MODES:
+        return "none", c
     det, mode = c.split("+")
     return det, mode
 
@@ -131,6 +132,8 @@ def main(argv=None):
     ap.add_argument("--model", default="gpt-4o-mini")
     ap.add_argument("--detector-model", default=None, help="model for LLM detectors (default: --model)")
     ap.add_argument("--base-url", default=None, help="OpenAI-compatible endpoint for a non-OpenAI model")
+    ap.add_argument("--detector-base-url", default=None,
+                    help="OpenAI-compatible endpoint for --detector-model (e.g. a local open-weights detector)")
     ap.add_argument("--api-key-env", default="OPENAI_API_KEY")
     ap.add_argument("--price-input", type=float, default=None, help="USD per 1M input tokens (models not in llm.PRICES)")
     ap.add_argument("--price-output", type=float, default=None)
@@ -179,7 +182,7 @@ def main(argv=None):
 
     if args.dry_run:
         from .llm import FakeLLM
-        llm = madam_llm = det_llm = FakeLLM(lambda p: "All Correct Answers: [\"unknown\"]" if "aggregator" in p
+        llm = madam_llm = det_llm = astute_llm = trust_llm = FakeLLM(lambda p: "All Correct Answers: [\"unknown\"]" if "aggregator" in p
                                   else "Answer: unknown. Explanation: dry run.\nFinal answer(s): unknown")
     else:
         from .llm import OpenAILLM, register_price
@@ -189,9 +192,17 @@ def main(argv=None):
         llm = OpenAILLM(args.model, temperature=args.temperature, **ep)
         # detectors decode greedily, as in detect_eval; --detector-model keeps the LLM detector fixed
         # (on OpenAI's endpoint) while the generator changes
-        det_llm = (OpenAILLM(args.detector_model, temperature=0.0) if args.detector_model
-                   else OpenAILLM(args.model, temperature=0.0, **ep))
+        if args.detector_model and args.detector_base_url:
+            register_price(args.detector_model, 0.0, 0.0)   # local server: no API cost
+            det_llm = OpenAILLM(args.detector_model, temperature=0.0, base_url=args.detector_base_url,
+                                api_key_env=args.api_key_env if args.base_url else "OLLAMA_API_KEY")
+        elif args.detector_model:
+            det_llm = OpenAILLM(args.detector_model, temperature=0.0)
+        else:
+            det_llm = OpenAILLM(args.model, temperature=0.0, **ep)
         madam_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=128, **ep)  # matches public MADAM script
+        astute_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=1024, **ep)   # Astute RAG §5.1
+        trust_llm = OpenAILLM(args.model, temperature=0.1, max_tokens=1024, **ep)    # TrustRAG repo, GPT path
 
     dets_needed = sorted({parse_condition(c)[0] for c in conditions})
     detections = {}
@@ -222,6 +233,15 @@ def main(argv=None):
     done = {(r["id"], r["condition"], r["seed"]) for r in _read_jsonl(res_path)}
     jobs = [(ex.id, c, s) for c in conditions for s in seeds for ex in examples if (ex.id, c, s) not in done]
 
+    embed = None
+    if any(parse_condition(c)[1].startswith("trustrag") for c in conditions):
+        import threading
+        _simcse, _lock = SimCSE(), threading.Lock()
+
+        def embed(texts):
+            with _lock:
+                return _simcse(texts)
+
     def work(job):
         eid, cond, seed = job
         ex = by_id[eid]
@@ -231,6 +251,14 @@ def main(argv=None):
         if mode == "madam":
             m = madam_rag(ex.question, ex.passages, madam_llm, seed=seed)
             text, usage, kept = m["final"], m["usage"], list(range(len(ex.passages)))
+        elif mode in BASELINE_MODES:
+            multi = mode.endswith("_multi")
+            if mode.startswith("astute"):
+                m = astute_rag(ex.question, ex.passages, astute_llm, seed=seed, multi=multi)
+            else:
+                m = trustrag(ex.question, ex.passages, trust_llm, embed, seed=seed, multi=multi)
+            text, usage, kept = m["final"], m["usage"], m["kept"]
+            usage.pop("cached", None)
         else:
             prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style,
                                        skeleton=args.skeleton)

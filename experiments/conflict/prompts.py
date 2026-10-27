@@ -19,6 +19,8 @@ Modes
   flag_directional  flag, but passages the detector marks as `suspects` are headed
                  "LIKELY MISINFORMATION" and the conflict list says which side is suspect.
                  Needs a detector that knows direction (oracle; an LLM detector could).
+  flag_directional_instruct_v2  flag_directional + the v2 reliability instruction (does direction
+                 add anything once the model is told to resolve the conflict?)
   remove_suspect drop the suspect passage(s) of each flagged pair; falls back to doc_idx_2
                  (as remove) for pairs with no suspect
 
@@ -76,7 +78,8 @@ Do not include an answer that is supported only by a passage you judge to be unr
 """
 
 INSTRUCTIONS = {"instruct": INSTRUCTION, "instruct_v2": INSTRUCTION_V2,
-                "flag_instruct": INSTRUCTION, "flag_instruct_v2": INSTRUCTION_V2}
+                "flag_instruct": INSTRUCTION, "flag_instruct_v2": INSTRUCTION_V2,
+                "flag_directional_instruct_v2": INSTRUCTION_V2}
 PROMPT_ONLY_MODES = ("plain", "instruct", "instruct_v2")
 
 
@@ -134,9 +137,10 @@ def build_prompt(question: str, passages: list[str], mode: str,
         heading = "CONFLICTING INFORMATION DETECTED:" if mode == "arbitrate" else "POTENTIAL CONFLICTS DETECTED:"
         conflicts = _conflict_list(dets, heading, style=style)
         instruction = INSTRUCTIONS.get(mode, "")
-    elif mode == "flag_directional":
+    elif mode in ("flag_directional", "flag_directional_instruct_v2"):
         context = _flag_context(passages, dets, directional=True)
         conflicts = _conflict_list(dets, "POTENTIAL CONFLICTS DETECTED:", directional=True, style=style)
+        instruction = INSTRUCTIONS.get(mode, "")
     elif mode in ("remove", "remove_suspect"):
         drop = ({k for d in dets for k in (d.suspects or [d.j])} if mode == "remove_suspect"
                 else {d.j for d in dets})

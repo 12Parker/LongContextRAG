@@ -28,3 +28,12 @@ def test_inverted_oracle_names_the_correct_side():
         assert [(d.i, d.j) for d in o.pairs] == [(d.i, d.j) for d in inv.pairs]
         for a, b in zip(o.pairs, inv.pairs):
             assert set(a.suspects) | set(b.suspects) == {a.i, a.j} and not set(a.suspects) & set(b.suspects)
+
+
+def test_directional_instruct_v2_adds_only_the_instruction():
+    from experiments.conflict.prompts import INSTRUCTION_V2
+    dets = [Detection(0, 1, 1.0, suspects=[1])]
+    a, _ = build_prompt("Q?", ["a", "b"], "flag_directional", dets)
+    b, _ = build_prompt("Q?", ["a", "b"], "flag_directional_instruct_v2", dets)
+    assert INSTRUCTION_V2 in b and INSTRUCTION_V2 not in a
+    assert b.replace(INSTRUCTION_V2, "") == a

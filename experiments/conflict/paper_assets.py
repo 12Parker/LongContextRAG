@@ -58,6 +58,8 @@ def cell(t, holm_key="p_holm"):
     if not t or _nan(t.get("diff")):
         return "--"
     s = pct(t["diff"], sign=True)
+    if "sig" in t:   # the paper-wide scheme (revision_stats.assign_significance)
+        return f"\\textbf{{{s}}}" if t["sig"] else s
     p = t.get(holm_key, t.get("p"))
     return f"\\textbf{{{s}}}" if (p is not None and not _nan(p) and p < 0.05) else s
 
@@ -159,10 +161,13 @@ def tab_gpt41(R, out: Path):
         return
     t = _holm_table(R["gpt41_table"][PRIMARY])
     b = R["gpt41_plain"][PRIMARY]
-    lines = [f"No flags (plain) & {pct(b['all'])} & {pct(b['conflict'])} & {pct(b['clean'])} \\\\", "\\midrule"]
+    lb = R.get("rev", {}).get("plain_labelled_gpt41")
+    lines = [f"No flags (plain) & {pct(b['all'])} & {pct(lb) if lb is not None else '--'} & {pct(b['conflict'])} & "
+             f"{pct(b['clean'])} \\\\", "\\midrule"]
+    lab = R.get("rev", {}).get("labelled", {}).get("gpt-4.1", {}).get(PRIMARY, {})
     for c in t:
-        lines.append(f"{COND_NAME[c]} & {cell(t[c]['all'], 'p_table_holm')} & {cell(t[c]['conflict'], 'p_table_holm')} & "
-                     f"{cell(t[c]['clean'], 'p_table_holm')} \\\\")
+        lines.append(f"{COND_NAME[c]} & {cell(t[c]['all'])} & {cell(lab[c]['labelled']) if c in lab else '--'} & "
+                     f"{cell(t[c]['conflict'])} & {cell(t[c]['clean'])} \\\\")
     (out / "tab_gpt41.tex").write_text(rf"""\begin{{table}}[t]
 \centering\footnotesize
 \setlength{{\tabcolsep}}{{3pt}}

@@ -340,6 +340,16 @@ def revision(R, main_rows, main_ex, h3spec):
                               for c in ("oracle_inv+flag_directional", "oracle_inv+remove_suspect")}
         rev["adversarial_wrong"] = {c: float(np.mean([r["wrong_rate"] for r in ar if r["condition"] == c and r["has_conflict"]]))
                                     for c in ("oracle_inv+flag_directional", "oracle_inv+remove_suspect")}
+    # break-even precision (pre-registered, §5) and conflict prevalence
+    rev["break_even"] = {f"{mode}|r{r:g}|d{d:g}": rv.break_even(R["grid_cells"], mode, r, d)
+                         for mode in ("flag_directional", "remove_suspect") for r in (0.25, 0.5, 1.0)
+                         for d in (0.5, 0.75, 1.0)}
+    rev["prevalence"] = {}
+    for gk, v in rev["generality"].items():
+        for c in ("llm_dir+flag_directional", "llm_dir+remove_suspect"):
+            e = v["effects"][PRIMARY].get(c)
+            if e:
+                rev["prevalence"][f"{gk}|{c}"] = rv.prevalence(e["conflict"]["diff"], e["clean"]["diff"])
     # exploratory: does direction help with the real detector? (directional vs neutral flag, same detector)
     rev["real_direction"] = {m: {f"{g}|{sk}": compare(rows, "llm_dir+flag", "llm_dir+flag_directional", True, m)
                                  for (g, sk), rows in gen_rows.items()
@@ -483,6 +493,8 @@ def main(argv=None):
     R["caag_ablation"] = {k: {"pair_f1": v["pair_level"]["f1"], "pair_flag_rate": v["pair_flag_rate"],
                               "q_fpr": v["question_level"]["false_positive_rate"]}
                           for k, v in summ.items() if k.startswith("caag")}
+    from .revision_stats import assign_significance
+    assign_significance(R)
     (out / "hypotheses.json").write_text(json.dumps(R, indent=1, default=float))
     from . import paper_assets
     paper_assets.write_all(R, out)

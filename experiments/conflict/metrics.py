@@ -64,7 +64,7 @@ def score(ex: Example, response: str) -> dict:
     answers = extract_answers(response)
     pred = normalize_answer(" ; ".join(answers))
     out: dict = {"pred_answers": answers}
-    if ex.dataset == "ramdocs":
+    if ex.dataset in ("ramdocs", "conflictbank"):
         g = [_matches(answers, a) for a in ex.gold_answers]
         w = [_matches(answers, a) for a in ex.wrong_answers]
         g1 = [_contains(pred, a) for a in ex.gold_answers]   # one-way, kept for comparison
@@ -159,11 +159,14 @@ def direction_coverage(examples: list[Example], dets: dict) -> float | None:
 
 # --------------------------------------------------------------------------- document level
 DOC_MODES = ("remove", "remove_suspect", "flag_directional")
+# modes whose documents are marked like flag_directional
+_MARK_AS = {"flag_directional_instruct_v2": "flag_directional"}
 
 
 def marked_docs(dets, mode: str) -> set[int]:
     """Passages a prompt mode acts on: removed (remove, remove_suspect) or headed
     LIKELY MISINFORMATION (flag_directional). Mirrors prompts.build_prompt."""
+    mode = _MARK_AS.get(mode, mode)
     if mode == "remove":
         return {d.j for d in dets}
     if mode == "remove_suspect":

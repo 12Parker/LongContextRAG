@@ -251,3 +251,80 @@ limit reached". The call fails the same way on every retry, which stopped the ru
 degenerate output, like a truncated one (§5), so it is scored as it is: the stored response is a
 marker with no `Final answer(s)` line. We report how many there are. This rule was set when the
 first one occurred, without looking at any scores.
+
+## 10. Second revision addendum (frozen 2026-10-27, after a second mock review, before any run below)
+
+A second, independent mock review asked for five things: stronger published baselines, a neutral
+flag paired with a resolution instruction, a second misinformation benchmark, a detector from a
+different model family than the generator, and a single significance scheme. Nothing below has
+been run yet.
+
+### 10.1 Conditions and runs
+
+**New prompt mode.** `flag_directional_instruct_v2` is the directional flag plus the v2 reliability
+instruction. The existing `flag_instruct_v2` is the neutral flag plus the same instruction.
+
+**Baselines** (`baselines.py`):
+- **Astute RAG** (ACL 2025). Paper prompts, t=1, m=1.
+- **TrustRAG** (repo commit `11dcea0`, MIT). K-means plus n-gram filter, then 3-call conflict resolution.
+
+Both produce one answer. `*_multi` variants ask for every valid answer, because RAMDocs has
+multi-answer questions. Both the plain and the `_multi` variants are reported.
+
+**ConflictBank** (`prepare_conflictbank.py`; `Warrieryes/CB_qa_v2` at `92866a0`):
+- 400 items, sampled round-robin over relations with seed 0, ids in `splits/conflictbank_eval.txt`.
+- 300 conflict items: correct passage, misinformation passage and 2 distractors.
+- 100 clean items: correct passage and 3 distractors.
+- Each item has a single gold answer, scored with the same strict metrics as RAMDocs.
+- No pilot: every ConflictBank result is confirmatory for the tests below.
+
+**Runs:**
+
+| Output | Data | Generator | Seeds | Conditions |
+|---|---|---|---|---|
+| `runs/holdout_round2` | RAMDocs hold-out | gpt-4o-mini | 0, 1, 2 | `plain`, `oracle+flag_instruct_v2`, `oracle+flag_directional_instruct_v2`, `llm_dir+flag_instruct_v2`, `llm_dir+flag_directional_instruct_v2`, `astute`, `astute_multi`, `trustrag`, `trustrag_multi` |
+| `runs/holdout_gpt41_round2` | RAMDocs hold-out | gpt-4.1 | 0 | `plain`, `oracle+flag_instruct_v2`, `oracle+flag_directional_instruct_v2`, `astute_multi`, `trustrag_multi`, `llm_dir+flag_directional` |
+| `runs/holdout_qwendet` | RAMDocs hold-out | gpt-4o-mini, with `llm_dir` run on Qwen2.5-7B (`--detector-model qwen2.5:7b-instruct --detector-base-url`) | 0, 1, 2 | `plain`, `llm_dir+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect` |
+| `runs/cb_main` | ConflictBank | gpt-4o-mini | 0, 1, 2 | `plain`, `instruct_v2`, `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`, `oracle+flag_instruct_v2`, `oracle+flag_directional_instruct_v2`, `oracle_inv+flag_directional`, `nli+flag`, `nli+remove`, `llm_dir+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect`, `astute`, `trustrag` |
+| `runs/cb_gpt41` | ConflictBank | gpt-4.1 | 0 | `plain`, `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`, `llm_dir+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect` |
+| `runs/cb_qwen` | ConflictBank | Qwen2.5-7B (local) | 0 | same as `cb_gpt41` |
+
+Wherever the generator is not gpt-4o-mini, the LLM detector is gpt-4o-mini; the exception is
+`holdout_qwendet`, where Qwen2.5-7B is the detector.
+
+### 10.2 Hypotheses
+
+Primary metric: one-way strict accuracy. Holm runs within each family, per metric.
+
+- **H12, ConflictBank replication**, for each of the 3 generators, on conflict items:
+  - Δ(`oracle+flag`, `plain`) is two-sided. In the RAMDocs exploratory split, the neutral-flag harm
+    was small on single-answer questions, so we do not predict its sign.
+  - The three H3 comparisons are directional (+).
+- **H13, resolution instruction**, on conflict questions:
+  - Δ(`oracle+flag_instruct_v2`, `plain`) is two-sided.
+  - Δ(`oracle+flag_directional_instruct_v2`, `oracle+flag_instruct_v2`) > 0: direction adds something
+    beyond the instruction.
+  - Settings: RAMDocs with gpt-4o-mini, RAMDocs with gpt-4.1, and ConflictBank with gpt-4o-mini.
+- **H14, against published baselines**, on labelled questions (conflict plus clean), all two-sided:
+  - Δ(`llm_dir+flag_directional`, `astute_multi`);
+  - Δ(`llm_dir+flag_directional`, `trustrag_multi`);
+  - on ConflictBank, Δ(`llm_dir+flag_directional`, `astute`) and Δ(`llm_dir+flag_directional`, `trustrag`).
+
+  Settings are gpt-4o-mini on both datasets, and gpt-4.1 on RAMDocs.
+
+### 10.3 Exploratory analyses and the significance scheme
+
+**Exploratory analyses:**
+- the detector from a different model family (`holdout_qwendet`);
+- the inverted oracle on ConflictBank;
+- every comparison against `plain` that is not listed above.
+
+**One significance scheme for the whole paper.** A comparison that is a registered test (H2–H14)
+takes that test's Holm-adjusted p within its family. Every other comparison the paper reports
+belongs to one exploratory family, Holm-corrected together, per metric. A table cell is bold if
+and only if it is significant under this scheme. Text that calls a result "significant" uses the
+same scheme.
+
+**Analyses specified after the data were seen.** The ±3-point TOST margin (§9.3) was fixed after H2
+was known. The single- vs multi-answer split (§9) was chosen after the minimal-skeleton run. The
+paper labels both as post hoc.

@@ -154,6 +154,27 @@ def load_ramdocs(path: Path | None = None, n: int | None = None, seed: int = 0,
     return _subsample(out, n, seed)
 
 
+# --------------------------------------------------------------------------- ConflictBank
+def load_conflictbank(path: Path | None = None, n: int | None = None, seed: int = 0) -> list[Example]:
+    """ConflictBank misinformation subset as built by prepare_conflictbank.py: one correct passage,
+    one misinformation passage (conflict items only) and distractors; one gold answer. Scored with
+    the RAMDocs strict metrics (metrics.score). Pair labels: contradiction (correct vs misinformation),
+    unrelated (any pair with a distractor)."""
+    path = path or DATA_DIR / "conflictbank" / "conflictbank_eval.jsonl"
+    out = []
+    for r in map(json.loads, open(path)):
+        t = r["types"]
+        pairs = {(i, j): ("contradiction" if {t[i], t[j]} == {"correct", "misinfo"} else "unrelated")
+                 for i in range(len(t)) for j in range(i + 1, len(t))}
+        out.append(Example(
+            id=r["id"], dataset="conflictbank", question=r["question"], passages=r["passages"],
+            gold_answers=[r["gold"]], wrong_answers=[r["wrong"]] if r["wrong"] else [],
+            has_conflict=r["has_conflict"], conflict_type="misinfo" if r["has_conflict"] else "none",
+            gold_pairs=pairs, group=r["id"],
+            meta={"doc_types": t, "relation": r["relation"], "suspect_docs": [], "label_fix": "none"}))
+    return _subsample(out, n, seed)
+
+
 # --------------------------------------------------------------------------- CONFLICTS
 def load_conflicts(path: Path | None = None, n: int | None = None, seed: int = 0,
                    text_field: str = "short_text") -> list[Example]:
@@ -266,7 +287,7 @@ def filter_ids(xs: list[Example], ids_file: str | Path | None) -> list[Example]:
     return [by_id[i] for i in sorted(want)]
 
 
-LOADERS = {"ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
+LOADERS = {"conflictbank": load_conflictbank, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
 
 def load(name: str, **kw) -> list[Example]:
