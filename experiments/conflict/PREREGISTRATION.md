@@ -243,3 +243,11 @@ reference (served from the cache).
 We expect both to lower accuracy on conflict questions, removal more than the flag. This is
 exploratory and reported with a raw p-value. It covers only a detector with the wrong direction; an
 attacker who also chooses which pairs to flag is not tested.
+
+### 9.6 Degenerate Qwen generations (2026-10-27, during the Qwen run)
+
+Ollama sometimes aborts a generation that keeps repeating one token, with the error "token repeat
+limit reached". The call fails the same way on every retry, which stopped the run. This is a
+degenerate output, like a truncated one (§5), so it is scored as it is: the stored response is a
+marker with no `Final answer(s)` line. We report how many there are. This rule was set when the
+first one occurred, without looking at any scores.

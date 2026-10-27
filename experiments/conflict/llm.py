@@ -105,7 +105,15 @@ class OpenAILLM:
         if json_mode:
             kw["response_format"] = {"type": "json_object"}
         t0 = time.perf_counter()
-        resp = self._with_retry(kw)
+        try:
+            resp = self._with_retry(kw)
+        except _Degenerate as e:
+            # Ollama aborts a generation that loops on one token. It is a degenerate output, like a
+            # truncated one, and is scored as it is (no final-answer line). Cached so reruns agree.
+            res = dict(text=f"{ABORTED_PREFIX} {e}]", prompt_tokens=0, completion_tokens=mt, cost_usd=0.0,
+                       latency_s=time.perf_counter() - t0, cached_prompt_tokens=0)
+            self.cache.put(key, res)
+            return LLMResult(**res, cached=False)
         dt = time.perf_counter() - t0
         u = resp.usage
         cpt = getattr(getattr(u, "prompt_tokens_details", None), "cached_tokens", 0) or 0
@@ -121,10 +129,19 @@ class OpenAILLM:
         for a in range(attempts):
             try:
                 return self.client.chat.completions.create(**kw)
-            except (RateLimitError, APITimeoutError, APIConnectionError, InternalServerError):
+            except (RateLimitError, APITimeoutError, APIConnectionError, InternalServerError) as e:
+                if self.base_url and "repeat limit" in str(e):
+                    raise _Degenerate("token repeat limit reached") from e
                 if a == attempts - 1:
                     raise
                 time.sleep(min(60, 2 ** a))
+
+
+ABORTED_PREFIX = "[generation aborted by the server:"
+
+
+class _Degenerate(Exception):
+    pass
 
 
 class FakeLLM:
