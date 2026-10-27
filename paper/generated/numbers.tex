@@ -85,6 +85,14 @@
 \newcommand{\dMadamConfCI}{[$-$2.9, $+$10.1]}
 \newcommand{\dMadamClean}{$+$7.9}
 \newcommand{\dMadamCleanCI}{[$+$0.8, $+$15.1]}
+\newcommand{\rLlmDirAll}{$+$4.7}
+\newcommand{\rLlmDirClean}{$-$6.1}
+\newcommand{\rLlmDirConf}{$+$14.1}
+\newcommand{\rLlmRemAll}{$-$2.1}
+\newcommand{\rLlmRemClean}{$-$26.5}
+\newcommand{\rLlmRemConf}{$+$18.9}
+\newcommand{\pLlmDirConfRaw}{0.002}
+\newcommand{\pLlmDirConfHolm}{0.06}
 \newcommand{\fOneCaag}{11.6}
 \newcommand{\cleanFprCaag}{34.1}
 \newcommand{\misGoneCaag}{9.4}
@@ -98,16 +106,6 @@
 \newcommand{\misGoneLlm}{61.2}
 \newcommand{\corLostLlm}{65.9}
 \newcommand{\dirAccLlm}{88.3}
-\newcommand{\hFourHarm}{15}
-\newcommand{\hFourCells}{54}
-\newcommand{\hFourRho}{-0.72}
-\newcommand{\hFourRemWorse}{12}
-\newcommand{\hFourMatched}{27}
-\newcommand{\hSixDocIn}{8}
-\newcommand{\hSixPairIn}{5}
-\newcommand{\hSixN}{8}
-\newcommand{\hSixDocMae}{4.1}
-\newcommand{\hSixPairMae}{5.3}
 \newcommand{\wikiPlain}{14.0}
 \newcommand{\wikiOracleFlag}{$+$6.5}
 \newcommand{\wikiOracleFlagCI}{[$+$3.0, $+$10.0]}
@@ -231,7 +229,400 @@
 \newcommand{\gRemQuDHalfAll}{$-$21}
 \newcommand{\gRemQuDHalfConf}{$-$16}
 \newcommand{\gRemQuDHalfClean}{$-$26}
-\newcommand{\totalSpend}{\$27.42}
+\newcommand{\hFourDirHarm}{0}
+\newcommand{\hFourDirN}{9}
+\newcommand{\hFourRemHarm}{6}
+\newcommand{\hFourRemN}{9}
+\newcommand{\hFourRho}{$-$0.72}
+\newcommand{\hFourRhoCI}{[$-$0.86, $-$0.19]}
+\newcommand{\hFourRhoCells}{24}
+\newcommand{\hFourRemWorse}{5}
+\newcommand{\hFourMatched}{9}
+\newcommand{\hSixDocIn}{7}
+\newcommand{\hSixPairIn}{6}
+\newcommand{\hSixN}{8}
+\newcommand{\hSixDocMae}{4.1}
+\newcommand{\hSixPairMae}{5.3}
+\newcommand{\hSixMaeDiff}{$-$1.2}
+\newcommand{\hSixMaeDiffCI}{[$-$3.6, $+$0.4]}
+\newcommand{\hSixMaeP}{0.41}
+\newcommand{\hSixDocBetter}{5}
+\newcommand{\tostLo}{$-$3.1}
+\newcommand{\tostHi}{$+$0.1}
+\newcommand{\tostMargin}{3}
+\newcommand{\dirAccLlmCI}{[83.3, 92.9]}
+\newcommand{\mdeLo}{4}
+\newcommand{\mdeHi}{12}
+\newcommand{\mdeMed}{5.8}
+\newcommand{\plainLab}{31.3}
+\newcommand{\labLlmDir}{$+$4.9}
+\newcommand{\labLlmDirCI}{[$+$0.8, $+$9.3]}
+\newcommand{\exclLlmDir}{$+$5.7}
+\newcommand{\labLlmRem}{0.0}
+\newcommand{\labLlmRemCI}{[$-$6.2, $+$6.0]}
+\newcommand{\exclLlmRem}{$+$2.9}
+\newcommand{\labOracleDir}{$+$7.0}
+\newcommand{\labOracleDirCI}{[$+$3.4, $+$10.8]}
+\newcommand{\exclOracleDir}{0.0}
+\newcommand{\labOracleRem}{$+$14.5}
+\newcommand{\labOracleRemCI}{[$+$10.4, $+$18.7]}
+\newcommand{\exclOracleRem}{0.0}
+\newcommand{\gptlabLlmDir}{$+$4.4}
+\newcommand{\gptlabLlmDirCI}{[$+$0.6, $+$8.3]}
+\newcommand{\gptexclLlmDir}{$+$13.3}
+\newcommand{\gptlabLlmRem}{$-$0.8}
+\newcommand{\gptlabLlmRemCI}{[$-$7.3, $+$5.7]}
+\newcommand{\gptexclLlmRem}{$+$14.3}
+\newcommand{\gptlabOracleDir}{$+$9.6}
+\newcommand{\gptlabOracleDirCI}{[$+$6.2, $+$13.2]}
+\newcommand{\gptexclOracleDir}{0.0}
+\newcommand{\gptlabOracleRem}{$+$15.8}
+\newcommand{\gptlabOracleRemCI}{[$+$11.4, $+$20.4]}
+\newcommand{\gptexclOracleRem}{0.0}
+\newcommand{\nAbortedMini}{0}
+\newcommand{\nRowsMini}{80100}
+\newcommand{\plainMiniConf}{22.1}
+\newcommand{\plainMiniClean}{41.5}
+\newcommand{\xMiniOracleFlagConf}{$-$6.7}
+\newcommand{\xMiniOracleFlagConfCI}{[$-$10.8, $-$3.1]}
+\newcommand{\xMiniOracleFlagClean}{0.0}
+\newcommand{\xMiniOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\xMiniOracleFlagLab}{$-$3.5}
+\newcommand{\xMiniOracleFlagLabCI}{[$-$5.8, $-$1.5]}
+\newcommand{\xMiniOracleDirConf}{$+$13.4}
+\newcommand{\xMiniOracleDirConfCI}{[$+$6.7, $+$20.4]}
+\newcommand{\xMiniOracleDirClean}{0.0}
+\newcommand{\xMiniOracleDirCleanCI}{[0.0, 0.0]}
+\newcommand{\xMiniOracleDirLab}{$+$7.0}
+\newcommand{\xMiniOracleDirLabCI}{[$+$3.4, $+$10.8]}
+\newcommand{\xMiniOracleRemConf}{$+$27.6}
+\newcommand{\xMiniOracleRemConfCI}{[$+$20.6, $+$35.0]}
+\newcommand{\xMiniOracleRemClean}{0.0}
+\newcommand{\xMiniOracleRemCleanCI}{[0.0, 0.0]}
+\newcommand{\xMiniOracleRemLab}{$+$14.5}
+\newcommand{\xMiniOracleRemLabCI}{[$+$10.4, $+$18.7]}
+\newcommand{\xMiniLlmFlagConf}{$-$4.1}
+\newcommand{\xMiniLlmFlagConfCI}{[$-$7.2, $-$1.4]}
+\newcommand{\xMiniLlmFlagClean}{$+$1.9}
+\newcommand{\xMiniLlmFlagCleanCI}{[$-$1.1, $+$5.0]}
+\newcommand{\xMiniLlmFlagLab}{$-$1.3}
+\newcommand{\xMiniLlmFlagLabCI}{[$-$3.4, $+$0.9]}
+\newcommand{\xMiniLlmDirConf}{$+$12.5}
+\newcommand{\xMiniLlmDirConfCI}{[$+$5.3, $+$19.9]}
+\newcommand{\xMiniLlmDirClean}{$-$3.4}
+\newcommand{\xMiniLlmDirCleanCI}{[$-$7.1, 0.0]}
+\newcommand{\xMiniLlmDirLab}{$+$4.9}
+\newcommand{\xMiniLlmDirLabCI}{[$+$0.8, $+$9.3]}
+\newcommand{\xMiniLlmRemConf}{$+$18.7}
+\newcommand{\xMiniLlmRemConfCI}{[$+$10.3, $+$27.3]}
+\newcommand{\xMiniLlmRemClean}{$-$20.6}
+\newcommand{\xMiniLlmRemCleanCI}{[$-$28.0, $-$13.8]}
+\newcommand{\xMiniLlmRemLab}{0.0}
+\newcommand{\xMiniLlmRemLabCI}{[$-$6.2, $+$6.0]}
+\newcommand{\wrongMiniPlain}{47.7}
+\newcommand{\goldMiniPlain}{72.6}
+\newcommand{\wrongMiniOracleFlag}{61.9}
+\newcommand{\goldMiniOracleFlag}{69.8}
+\newcommand{\wrongMiniOracleDir}{14.9}
+\newcommand{\goldMiniOracleDir}{68.2}
+\newcommand{\nAbortedMiniMin}{0}
+\newcommand{\nRowsMiniMin}{6300}
+\newcommand{\plainMiniMinConf}{20.4}
+\newcommand{\plainMiniMinClean}{35.4}
+\newcommand{\xMiniMinOracleFlagConf}{$-$5.3}
+\newcommand{\xMiniMinOracleFlagConfCI}{[$-$9.4, $-$1.4]}
+\newcommand{\xMiniMinOracleFlagClean}{0.0}
+\newcommand{\xMiniMinOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\xMiniMinOracleFlagLab}{$-$2.8}
+\newcommand{\xMiniMinOracleFlagLabCI}{[$-$5.0, $-$0.9]}
+\newcommand{\xMiniMinOracleDirConf}{$+$5.0}
+\newcommand{\xMiniMinOracleDirConfCI}{[$-$1.7, $+$11.8]}
+\newcommand{\xMiniMinOracleDirClean}{0.0}
+\newcommand{\xMiniMinOracleDirCleanCI}{[0.0, 0.0]}
+\newcommand{\xMiniMinOracleDirLab}{$+$2.6}
+\newcommand{\xMiniMinOracleDirLabCI}{[$-$0.8, $+$6.2]}
+\newcommand{\xMiniMinOracleRemConf}{$+$18.9}
+\newcommand{\xMiniMinOracleRemConfCI}{[$+$12.5, $+$25.9]}
+\newcommand{\xMiniMinOracleRemClean}{0.0}
+\newcommand{\xMiniMinOracleRemCleanCI}{[0.0, 0.0]}
+\newcommand{\xMiniMinOracleRemLab}{$+$9.9}
+\newcommand{\xMiniMinOracleRemLabCI}{[$+$6.4, $+$13.8]}
+\newcommand{\xMiniMinLlmFlagConf}{$-$2.4}
+\newcommand{\xMiniMinLlmFlagConfCI}{[$-$6.5, $+$1.4]}
+\newcommand{\xMiniMinLlmFlagClean}{0.0}
+\newcommand{\xMiniMinLlmFlagCleanCI}{[$-$4.0, $+$4.0]}
+\newcommand{\xMiniMinLlmFlagLab}{$-$1.3}
+\newcommand{\xMiniMinLlmFlagLabCI}{[$-$4.0, $+$1.4]}
+\newcommand{\xMiniMinLlmDirConf}{$+$3.6}
+\newcommand{\xMiniMinLlmDirConfCI}{[$-$2.6, $+$9.8]}
+\newcommand{\xMiniMinLlmDirClean}{$-$10.3}
+\newcommand{\xMiniMinLlmDirCleanCI}{[$-$15.9, $-$5.0]}
+\newcommand{\xMiniMinLlmDirLab}{$-$3.0}
+\newcommand{\xMiniMinLlmDirLabCI}{[$-$7.3, $+$1.3]}
+\newcommand{\xMiniMinLlmRemConf}{$+$11.0}
+\newcommand{\xMiniMinLlmRemConfCI}{[$+$3.6, $+$18.5]}
+\newcommand{\xMiniMinLlmRemClean}{$-$19.6}
+\newcommand{\xMiniMinLlmRemCleanCI}{[$-$26.5, $-$13.0]}
+\newcommand{\xMiniMinLlmRemLab}{$-$3.5}
+\newcommand{\xMiniMinLlmRemLabCI}{[$-$8.9, $+$1.8]}
+\newcommand{\wrongMiniMinPlain}{33.3}
+\newcommand{\goldMiniMinPlain}{57.1}
+\newcommand{\wrongMiniMinOracleFlag}{32.4}
+\newcommand{\goldMiniMinOracleFlag}{47.1}
+\newcommand{\wrongMiniMinOracleDir}{4.6}
+\newcommand{\goldMiniMinOracleDir}{54.0}
+\newcommand{\nAbortedFour}{0}
+\newcommand{\nRowsFour}{7200}
+\newcommand{\plainFourConf}{21.8}
+\newcommand{\plainFourClean}{48.4}
+\newcommand{\xFourOracleFlagConf}{$-$8.6}
+\newcommand{\xFourOracleFlagConfCI}{[$-$13.2, $-$4.3]}
+\newcommand{\xFourOracleFlagClean}{0.0}
+\newcommand{\xFourOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\xFourOracleFlagLab}{$-$4.5}
+\newcommand{\xFourOracleFlagLabCI}{[$-$6.9, $-$2.3]}
+\newcommand{\xFourOracleDirConf}{$+$18.2}
+\newcommand{\xFourOracleDirConfCI}{[$+$12.0, $+$24.7]}
+\newcommand{\xFourOracleDirClean}{0.0}
+\newcommand{\xFourOracleDirCleanCI}{[0.0, 0.0]}
+\newcommand{\xFourOracleDirLab}{$+$9.6}
+\newcommand{\xFourOracleDirLabCI}{[$+$6.2, $+$13.2]}
+\newcommand{\xFourOracleRemConf}{$+$30.2}
+\newcommand{\xFourOracleRemConfCI}{[$+$22.5, $+$37.9]}
+\newcommand{\xFourOracleRemClean}{0.0}
+\newcommand{\xFourOracleRemCleanCI}{[0.0, 0.0]}
+\newcommand{\xFourOracleRemLab}{$+$15.8}
+\newcommand{\xFourOracleRemLabCI}{[$+$11.4, $+$20.4]}
+\newcommand{\xFourLlmDirConf}{$+$8.4}
+\newcommand{\xFourLlmDirConfCI}{[$+$2.9, $+$14.4]}
+\newcommand{\xFourLlmDirClean}{0.0}
+\newcommand{\xFourLlmDirCleanCI}{[$-$5.0, $+$5.0]}
+\newcommand{\xFourLlmDirLab}{$+$4.4}
+\newcommand{\xFourLlmDirLabCI}{[$+$0.6, $+$8.3]}
+\newcommand{\xFourLlmRemConf}{$+$20.6}
+\newcommand{\xFourLlmRemConfCI}{[$+$12.0, $+$29.3]}
+\newcommand{\xFourLlmRemClean}{$-$24.3}
+\newcommand{\xFourLlmRemCleanCI}{[$-$32.3, $-$16.9]}
+\newcommand{\xFourLlmRemLab}{$-$0.8}
+\newcommand{\xFourLlmRemLabCI}{[$-$7.3, $+$5.7]}
+\newcommand{\wrongFourPlain}{58.0}
+\newcommand{\goldFourPlain}{78.1}
+\newcommand{\wrongFourOracleFlag}{74.8}
+\newcommand{\goldFourOracleFlag}{79.0}
+\newcommand{\wrongFourOracleDir}{22.3}
+\newcommand{\goldFourOracleDir}{81.1}
+\newcommand{\nAbortedFourMin}{0}
+\newcommand{\nRowsFourMin}{3600}
+\newcommand{\plainFourMinConf}{33.6}
+\newcommand{\plainFourMinClean}{43.1}
+\newcommand{\xFourMinOracleFlagConf}{$-$11.0}
+\newcommand{\xFourMinOracleFlagConfCI}{[$-$17.5, $-$4.6]}
+\newcommand{\xFourMinOracleFlagClean}{0.0}
+\newcommand{\xFourMinOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\xFourMinOracleFlagLab}{$-$5.8}
+\newcommand{\xFourMinOracleFlagLabCI}{[$-$9.4, $-$2.4]}
+\newcommand{\xFourMinOracleDirConf}{$+$12.7}
+\newcommand{\xFourMinOracleDirConfCI}{[$+$5.8, $+$19.7]}
+\newcommand{\xFourMinOracleDirClean}{0.0}
+\newcommand{\xFourMinOracleDirCleanCI}{[0.0, 0.0]}
+\newcommand{\xFourMinOracleDirLab}{$+$6.7}
+\newcommand{\xFourMinOracleDirLabCI}{[$+$2.9, $+$10.4]}
+\newcommand{\xFourMinOracleRemConf}{$+$14.9}
+\newcommand{\xFourMinOracleRemConfCI}{[$+$8.6, $+$21.6]}
+\newcommand{\xFourMinOracleRemClean}{0.0}
+\newcommand{\xFourMinOracleRemCleanCI}{[0.0, 0.0]}
+\newcommand{\xFourMinOracleRemLab}{$+$7.8}
+\newcommand{\xFourMinOracleRemLabCI}{[$+$4.3, $+$11.4]}
+\newcommand{\wrongFourMinPlain}{30.5}
+\newcommand{\goldFourMinPlain}{65.7}
+\newcommand{\wrongFourMinOracleFlag}{43.2}
+\newcommand{\goldFourMinOracleFlag}{61.1}
+\newcommand{\wrongFourMinOracleDir}{3.8}
+\newcommand{\goldFourMinOracleDir}{69.1}
+\newcommand{\nAbortedQwen}{1}
+\newcommand{\nRowsQwen}{2100}
+\newcommand{\plainQwenConf}{19.4}
+\newcommand{\plainQwenClean}{35.7}
+\newcommand{\xQwenOracleFlagConf}{$-$5.8}
+\newcommand{\xQwenOracleFlagConfCI}{[$-$10.8, $-$0.7]}
+\newcommand{\xQwenOracleFlagClean}{0.0}
+\newcommand{\xQwenOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\xQwenOracleFlagLab}{$-$3.0}
+\newcommand{\xQwenOracleFlagLabCI}{[$-$5.7, $-$0.4]}
+\newcommand{\xQwenOracleDirConf}{$+$3.6}
+\newcommand{\xQwenOracleDirConfCI}{[$-$0.7, $+$8.6]}
+\newcommand{\xQwenOracleDirClean}{0.0}
+\newcommand{\xQwenOracleDirCleanCI}{[0.0, 0.0]}
+\newcommand{\xQwenOracleDirLab}{$+$1.9}
+\newcommand{\xQwenOracleDirLabCI}{[$-$0.4, $+$4.5]}
+\newcommand{\xQwenOracleRemConf}{$+$18.0}
+\newcommand{\xQwenOracleRemConfCI}{[$+$10.8, $+$25.2]}
+\newcommand{\xQwenOracleRemClean}{0.0}
+\newcommand{\xQwenOracleRemCleanCI}{[0.0, 0.0]}
+\newcommand{\xQwenOracleRemLab}{$+$9.4}
+\newcommand{\xQwenOracleRemLabCI}{[$+$5.7, $+$13.6]}
+\newcommand{\xQwenLlmFlagConf}{$-$2.2}
+\newcommand{\xQwenLlmFlagConfCI}{[$-$5.8, $+$1.4]}
+\newcommand{\xQwenLlmFlagClean}{$+$1.6}
+\newcommand{\xQwenLlmFlagCleanCI}{[$-$4.0, $+$7.1]}
+\newcommand{\xQwenLlmFlagLab}{$-$0.4}
+\newcommand{\xQwenLlmFlagLabCI}{[$-$3.8, $+$3.0]}
+\newcommand{\xQwenLlmDirConf}{$+$2.9}
+\newcommand{\xQwenLlmDirConfCI}{[$-$1.4, $+$7.2]}
+\newcommand{\xQwenLlmDirClean}{$-$7.1}
+\newcommand{\xQwenLlmDirCleanCI}{[$-$12.7, $-$1.6]}
+\newcommand{\xQwenLlmDirLab}{$-$1.9}
+\newcommand{\xQwenLlmDirLabCI}{[$-$5.3, $+$1.5]}
+\newcommand{\xQwenLlmRemConf}{$+$7.9}
+\newcommand{\xQwenLlmRemConfCI}{[$+$0.7, $+$15.1]}
+\newcommand{\xQwenLlmRemClean}{$-$18.3}
+\newcommand{\xQwenLlmRemCleanCI}{[$-$25.4, $-$11.1]}
+\newcommand{\xQwenLlmRemLab}{$-$4.5}
+\newcommand{\xQwenLlmRemLabCI}{[$-$9.8, $+$0.8]}
+\newcommand{\wrongQwenPlain}{48.2}
+\newcommand{\goldQwenPlain}{60.4}
+\newcommand{\wrongQwenOracleFlag}{68.3}
+\newcommand{\goldQwenOracleFlag}{64.3}
+\newcommand{\wrongQwenOracleDir}{42.4}
+\newcommand{\goldQwenOracleDir}{62.5}
+\newcommand{\nAbortedQwenMin}{0}
+\newcommand{\nRowsQwenMin}{1200}
+\newcommand{\plainQwenMinConf}{17.3}
+\newcommand{\plainQwenMinClean}{24.6}
+\newcommand{\xQwenMinOracleFlagConf}{$-$5.8}
+\newcommand{\xQwenMinOracleFlagConfCI}{[$-$10.8, $-$1.4]}
+\newcommand{\xQwenMinOracleFlagClean}{0.0}
+\newcommand{\xQwenMinOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\xQwenMinOracleFlagLab}{$-$3.0}
+\newcommand{\xQwenMinOracleFlagLabCI}{[$-$5.7, $-$0.8]}
+\newcommand{\xQwenMinOracleDirConf}{$+$2.9}
+\newcommand{\xQwenMinOracleDirConfCI}{[$-$3.6, $+$9.4]}
+\newcommand{\xQwenMinOracleDirClean}{0.0}
+\newcommand{\xQwenMinOracleDirCleanCI}{[0.0, 0.0]}
+\newcommand{\xQwenMinOracleDirLab}{$+$1.5}
+\newcommand{\xQwenMinOracleDirLabCI}{[$-$1.9, $+$4.9]}
+\newcommand{\xQwenMinOracleRemConf}{$+$10.8}
+\newcommand{\xQwenMinOracleRemConfCI}{[$+$4.3, $+$17.3]}
+\newcommand{\xQwenMinOracleRemClean}{0.0}
+\newcommand{\xQwenMinOracleRemCleanCI}{[0.0, 0.0]}
+\newcommand{\xQwenMinOracleRemLab}{$+$5.7}
+\newcommand{\xQwenMinOracleRemLabCI}{[$+$2.3, $+$9.4]}
+\newcommand{\wrongQwenMinPlain}{41.0}
+\newcommand{\goldQwenMinPlain}{52.3}
+\newcommand{\wrongQwenMinOracleFlag}{45.3}
+\newcommand{\goldQwenMinOracleFlag}{44.6}
+\newcommand{\wrongQwenMinOracleDir}{19.4}
+\newcommand{\goldQwenMinOracleDir}{52.5}
+\newcommand{\nConfMulti}{105}
+\newcommand{\nConfSingle}{34}
+\newcommand{\plainMiniSingle}{36.3}
+\newcommand{\yMiniSingleOracleFlag}{$-$4.9}
+\newcommand{\yMiniSingleOracleFlagCI}{[$-$12.7, $+$1.0]}
+\newcommand{\yMiniSingleOracleDir}{$+$46.1}
+\newcommand{\yMiniSingleOracleDirCI}{[$+$30.4, $+$62.7]}
+\newcommand{\yMiniSingleOracleRem}{$+$52.0}
+\newcommand{\yMiniSingleOracleRemCI}{[$+$36.3, $+$67.6]}
+\newcommand{\plainMiniMulti}{17.5}
+\newcommand{\yMiniMultiOracleFlag}{$-$7.3}
+\newcommand{\yMiniMultiOracleFlagCI}{[$-$12.4, $-$2.9]}
+\newcommand{\yMiniMultiOracleDir}{$+$2.9}
+\newcommand{\yMiniMultiOracleDirCI}{[$-$3.5, $+$9.2]}
+\newcommand{\yMiniMultiOracleRem}{$+$19.7}
+\newcommand{\yMiniMultiOracleRemCI}{[$+$12.4, $+$27.3]}
+\newcommand{\plainMiniMinSingle}{47.1}
+\newcommand{\yMiniMinSingleOracleFlag}{$-$3.9}
+\newcommand{\yMiniMinSingleOracleFlagCI}{[$-$13.7, $+$4.9]}
+\newcommand{\yMiniMinSingleOracleDir}{$+$38.2}
+\newcommand{\yMiniMinSingleOracleDirCI}{[$+$23.5, $+$53.9]}
+\newcommand{\yMiniMinSingleOracleRem}{$+$37.3}
+\newcommand{\yMiniMinSingleOracleRemCI}{[$+$22.5, $+$52.9]}
+\newcommand{\plainMiniMinMulti}{11.7}
+\newcommand{\yMiniMinMultiOracleFlag}{$-$5.7}
+\newcommand{\yMiniMinMultiOracleFlagCI}{[$-$10.2, $-$1.9]}
+\newcommand{\yMiniMinMultiOracleDir}{$-$5.7}
+\newcommand{\yMiniMinMultiOracleDirCI}{[$-$11.7, $-$0.3]}
+\newcommand{\yMiniMinMultiOracleRem}{$+$13.0}
+\newcommand{\yMiniMinMultiOracleRemCI}{[$+$6.3, $+$20.3]}
+\newcommand{\plainFourSingle}{26.5}
+\newcommand{\yFourSingleOracleFlag}{$-$3.9}
+\newcommand{\yFourSingleOracleFlagCI}{[$-$9.8, $+$1.0]}
+\newcommand{\yFourSingleOracleDir}{$+$15.7}
+\newcommand{\yFourSingleOracleDirCI}{[$+$4.9, $+$27.5]}
+\newcommand{\yFourSingleOracleRem}{$+$52.9}
+\newcommand{\yFourSingleOracleRemCI}{[$+$36.3, $+$69.6]}
+\newcommand{\plainFourMulti}{20.3}
+\newcommand{\yFourMultiOracleFlag}{$-$10.2}
+\newcommand{\yFourMultiOracleFlagCI}{[$-$15.9, $-$5.1]}
+\newcommand{\yFourMultiOracleDir}{$+$19.0}
+\newcommand{\yFourMultiOracleDirCI}{[$+$11.7, $+$26.7]}
+\newcommand{\yFourMultiOracleRem}{$+$22.9}
+\newcommand{\yFourMultiOracleRemCI}{[$+$14.6, $+$31.4]}
+\newcommand{\plainFourMinSingle}{59.8}
+\newcommand{\yFourMinSingleOracleFlag}{$-$13.7}
+\newcommand{\yFourMinSingleOracleFlagCI}{[$-$29.4, $+$2.0]}
+\newcommand{\yFourMinSingleOracleDir}{$+$28.4}
+\newcommand{\yFourMinSingleOracleDirCI}{[$+$13.7, $+$44.1]}
+\newcommand{\yFourMinSingleOracleRem}{$+$20.6}
+\newcommand{\yFourMinSingleOracleRemCI}{[$+$3.9, $+$37.3]}
+\newcommand{\plainFourMinMulti}{25.1}
+\newcommand{\yFourMinMultiOracleFlag}{$-$10.2}
+\newcommand{\yFourMinMultiOracleFlagCI}{[$-$17.5, $-$3.5]}
+\newcommand{\yFourMinMultiOracleDir}{$+$7.6}
+\newcommand{\yFourMinMultiOracleDirCI}{[0.0, $+$15.2]}
+\newcommand{\yFourMinMultiOracleRem}{$+$13.0}
+\newcommand{\yFourMinMultiOracleRemCI}{[$+$6.3, $+$19.7]}
+\newcommand{\plainQwenSingle}{41.2}
+\newcommand{\yQwenSingleOracleFlag}{$-$14.7}
+\newcommand{\yQwenSingleOracleFlagCI}{[$-$29.4, 0.0]}
+\newcommand{\yQwenSingleOracleDir}{$+$11.8}
+\newcommand{\yQwenSingleOracleDirCI}{[$+$2.9, $+$23.5]}
+\newcommand{\yQwenSingleOracleRem}{$+$35.3}
+\newcommand{\yQwenSingleOracleRemCI}{[$+$17.6, $+$52.9]}
+\newcommand{\plainQwenMulti}{12.4}
+\newcommand{\yQwenMultiOracleFlag}{$-$2.9}
+\newcommand{\yQwenMultiOracleFlagCI}{[$-$7.6, $+$1.9]}
+\newcommand{\yQwenMultiOracleDir}{$+$1.0}
+\newcommand{\yQwenMultiOracleDirCI}{[$-$3.8, $+$5.7]}
+\newcommand{\yQwenMultiOracleRem}{$+$12.4}
+\newcommand{\yQwenMultiOracleRemCI}{[$+$4.8, $+$20.0]}
+\newcommand{\plainQwenMinSingle}{44.1}
+\newcommand{\yQwenMinSingleOracleFlag}{$-$5.9}
+\newcommand{\yQwenMinSingleOracleFlagCI}{[$-$20.6, $+$8.8]}
+\newcommand{\yQwenMinSingleOracleDir}{$+$20.6}
+\newcommand{\yQwenMinSingleOracleDirCI}{[0.0, $+$38.2]}
+\newcommand{\yQwenMinSingleOracleRem}{$+$29.4}
+\newcommand{\yQwenMinSingleOracleRemCI}{[$+$11.8, $+$47.1]}
+\newcommand{\plainQwenMinMulti}{8.6}
+\newcommand{\yQwenMinMultiOracleFlag}{$-$5.7}
+\newcommand{\yQwenMinMultiOracleFlagCI}{[$-$10.5, $-$1.9]}
+\newcommand{\yQwenMinMultiOracleDir}{$-$2.9}
+\newcommand{\yQwenMinMultiOracleDirCI}{[$-$7.6, $+$1.9]}
+\newcommand{\yQwenMinMultiOracleRem}{$+$4.8}
+\newcommand{\yQwenMinMultiOracleRemCI}{[$-$1.0, $+$11.4]}
+\newcommand{\rdMini}{$+$16.5}
+\newcommand{\rdMiniCI}{[$+$9.6, $+$23.7]}
+\newcommand{\rdMiniP}{<0.001}
+\newcommand{\rdMiniMin}{$+$6.0}
+\newcommand{\rdMiniMinCI}{[$+$0.2, $+$12.0]}
+\newcommand{\rdMiniMinP}{0.059}
+\newcommand{\rdQwen}{$+$5.0}
+\newcommand{\rdQwenCI}{[0.0, $+$10.1]}
+\newcommand{\rdQwenP}{0.093}
+\newcommand{\advDirConf}{$-$7.0}
+\newcommand{\advDirConfCI}{[$-$11.5, $-$2.9]}
+\newcommand{\advDirClean}{0.0}
+\newcommand{\advDirCleanCI}{[0.0, 0.0]}
+\newcommand{\wrongAdvDir}{61.4}
+\newcommand{\advRemConf}{$-$21.8}
+\newcommand{\advRemConfCI}{[$-$28.8, $-$15.3]}
+\newcommand{\advRemClean}{0.0}
+\newcommand{\advRemCleanCI}{[0.0, 0.0]}
+\newcommand{\wrongAdvRem}{71.7}
+\newcommand{\nHTenSupported}{9}
+\newcommand{\nHTenTests}{12}
+\newcommand{\nHElevenSupported}{2}
+\newcommand{\nHElevenTests}{4}
+\newcommand{\totalSpend}{\$33.70}
 \newcommand{\adOracleFlagAll}{3.1}
 \newcommand{\adOracleFlagConf}{6.7}
 \newcommand{\adOracleDirAll}{6.2}
@@ -270,6 +661,12 @@
 \newcommand{\adMadamAll}{5.7}
 \newcommand{\adMadamConf}{3.6}
 \newcommand{\adMadamClean}{7.9}
+\newcommand{\arLlmDirAll}{4.7}
+\newcommand{\arLlmDirClean}{6.1}
+\newcommand{\arLlmDirConf}{14.1}
+\newcommand{\arLlmRemAll}{2.1}
+\newcommand{\arLlmRemClean}{26.5}
+\newcommand{\arLlmRemConf}{18.9}
 \newcommand{\awikiOracleFlag}{6.5}
 \newcommand{\awikiLlmFlag}{6.2}
 \newcommand{\awikiInstrTwo}{6.7}
@@ -353,3 +750,125 @@
 \newcommand{\agRemQuDHalfAll}{21}
 \newcommand{\agRemQuDHalfConf}{16}
 \newcommand{\agRemQuDHalfClean}{26}
+\newcommand{\ahFourRho}{0.72}
+\newcommand{\ahSixMaeDiff}{1.2}
+\newcommand{\atostLo}{3.1}
+\newcommand{\atostHi}{0.1}
+\newcommand{\alabLlmDir}{4.9}
+\newcommand{\aexclLlmDir}{5.7}
+\newcommand{\aexclLlmRem}{2.9}
+\newcommand{\alabOracleDir}{7.0}
+\newcommand{\alabOracleRem}{14.5}
+\newcommand{\agptlabLlmDir}{4.4}
+\newcommand{\agptexclLlmDir}{13.3}
+\newcommand{\agptlabLlmRem}{0.8}
+\newcommand{\agptexclLlmRem}{14.3}
+\newcommand{\agptlabOracleDir}{9.6}
+\newcommand{\agptlabOracleRem}{15.8}
+\newcommand{\axMiniOracleFlagConf}{6.7}
+\newcommand{\axMiniOracleFlagLab}{3.5}
+\newcommand{\axMiniOracleDirConf}{13.4}
+\newcommand{\axMiniOracleDirLab}{7.0}
+\newcommand{\axMiniOracleRemConf}{27.6}
+\newcommand{\axMiniOracleRemLab}{14.5}
+\newcommand{\axMiniLlmFlagConf}{4.1}
+\newcommand{\axMiniLlmFlagClean}{1.9}
+\newcommand{\axMiniLlmFlagLab}{1.3}
+\newcommand{\axMiniLlmDirConf}{12.5}
+\newcommand{\axMiniLlmDirClean}{3.4}
+\newcommand{\axMiniLlmDirLab}{4.9}
+\newcommand{\axMiniLlmRemConf}{18.7}
+\newcommand{\axMiniLlmRemClean}{20.6}
+\newcommand{\axMiniMinOracleFlagConf}{5.3}
+\newcommand{\axMiniMinOracleFlagLab}{2.8}
+\newcommand{\axMiniMinOracleDirConf}{5.0}
+\newcommand{\axMiniMinOracleDirLab}{2.6}
+\newcommand{\axMiniMinOracleRemConf}{18.9}
+\newcommand{\axMiniMinOracleRemLab}{9.9}
+\newcommand{\axMiniMinLlmFlagConf}{2.4}
+\newcommand{\axMiniMinLlmFlagLab}{1.3}
+\newcommand{\axMiniMinLlmDirConf}{3.6}
+\newcommand{\axMiniMinLlmDirClean}{10.3}
+\newcommand{\axMiniMinLlmDirLab}{3.0}
+\newcommand{\axMiniMinLlmRemConf}{11.0}
+\newcommand{\axMiniMinLlmRemClean}{19.6}
+\newcommand{\axMiniMinLlmRemLab}{3.5}
+\newcommand{\axFourOracleFlagConf}{8.6}
+\newcommand{\axFourOracleFlagLab}{4.5}
+\newcommand{\axFourOracleDirConf}{18.2}
+\newcommand{\axFourOracleDirLab}{9.6}
+\newcommand{\axFourOracleRemConf}{30.2}
+\newcommand{\axFourOracleRemLab}{15.8}
+\newcommand{\axFourLlmDirConf}{8.4}
+\newcommand{\axFourLlmDirLab}{4.4}
+\newcommand{\axFourLlmRemConf}{20.6}
+\newcommand{\axFourLlmRemClean}{24.3}
+\newcommand{\axFourLlmRemLab}{0.8}
+\newcommand{\axFourMinOracleFlagConf}{11.0}
+\newcommand{\axFourMinOracleFlagLab}{5.8}
+\newcommand{\axFourMinOracleDirConf}{12.7}
+\newcommand{\axFourMinOracleDirLab}{6.7}
+\newcommand{\axFourMinOracleRemConf}{14.9}
+\newcommand{\axFourMinOracleRemLab}{7.8}
+\newcommand{\axQwenOracleFlagConf}{5.8}
+\newcommand{\axQwenOracleFlagLab}{3.0}
+\newcommand{\axQwenOracleDirConf}{3.6}
+\newcommand{\axQwenOracleDirLab}{1.9}
+\newcommand{\axQwenOracleRemConf}{18.0}
+\newcommand{\axQwenOracleRemLab}{9.4}
+\newcommand{\axQwenLlmFlagConf}{2.2}
+\newcommand{\axQwenLlmFlagClean}{1.6}
+\newcommand{\axQwenLlmFlagLab}{0.4}
+\newcommand{\axQwenLlmDirConf}{2.9}
+\newcommand{\axQwenLlmDirClean}{7.1}
+\newcommand{\axQwenLlmDirLab}{1.9}
+\newcommand{\axQwenLlmRemConf}{7.9}
+\newcommand{\axQwenLlmRemClean}{18.3}
+\newcommand{\axQwenLlmRemLab}{4.5}
+\newcommand{\axQwenMinOracleFlagConf}{5.8}
+\newcommand{\axQwenMinOracleFlagLab}{3.0}
+\newcommand{\axQwenMinOracleDirConf}{2.9}
+\newcommand{\axQwenMinOracleDirLab}{1.5}
+\newcommand{\axQwenMinOracleRemConf}{10.8}
+\newcommand{\axQwenMinOracleRemLab}{5.7}
+\newcommand{\ayMiniSingleOracleFlag}{4.9}
+\newcommand{\ayMiniSingleOracleDir}{46.1}
+\newcommand{\ayMiniSingleOracleRem}{52.0}
+\newcommand{\ayMiniMultiOracleFlag}{7.3}
+\newcommand{\ayMiniMultiOracleDir}{2.9}
+\newcommand{\ayMiniMultiOracleRem}{19.7}
+\newcommand{\ayMiniMinSingleOracleFlag}{3.9}
+\newcommand{\ayMiniMinSingleOracleDir}{38.2}
+\newcommand{\ayMiniMinSingleOracleRem}{37.3}
+\newcommand{\ayMiniMinMultiOracleFlag}{5.7}
+\newcommand{\ayMiniMinMultiOracleDir}{5.7}
+\newcommand{\ayMiniMinMultiOracleRem}{13.0}
+\newcommand{\ayFourSingleOracleFlag}{3.9}
+\newcommand{\ayFourSingleOracleDir}{15.7}
+\newcommand{\ayFourSingleOracleRem}{52.9}
+\newcommand{\ayFourMultiOracleFlag}{10.2}
+\newcommand{\ayFourMultiOracleDir}{19.0}
+\newcommand{\ayFourMultiOracleRem}{22.9}
+\newcommand{\ayFourMinSingleOracleFlag}{13.7}
+\newcommand{\ayFourMinSingleOracleDir}{28.4}
+\newcommand{\ayFourMinSingleOracleRem}{20.6}
+\newcommand{\ayFourMinMultiOracleFlag}{10.2}
+\newcommand{\ayFourMinMultiOracleDir}{7.6}
+\newcommand{\ayFourMinMultiOracleRem}{13.0}
+\newcommand{\ayQwenSingleOracleFlag}{14.7}
+\newcommand{\ayQwenSingleOracleDir}{11.8}
+\newcommand{\ayQwenSingleOracleRem}{35.3}
+\newcommand{\ayQwenMultiOracleFlag}{2.9}
+\newcommand{\ayQwenMultiOracleDir}{1.0}
+\newcommand{\ayQwenMultiOracleRem}{12.4}
+\newcommand{\ayQwenMinSingleOracleFlag}{5.9}
+\newcommand{\ayQwenMinSingleOracleDir}{20.6}
+\newcommand{\ayQwenMinSingleOracleRem}{29.4}
+\newcommand{\ayQwenMinMultiOracleFlag}{5.7}
+\newcommand{\ayQwenMinMultiOracleDir}{2.9}
+\newcommand{\ayQwenMinMultiOracleRem}{4.8}
+\newcommand{\ardMini}{16.5}
+\newcommand{\ardMiniMin}{6.0}
+\newcommand{\ardQwen}{5.0}
+\newcommand{\aadvDirConf}{7.0}
+\newcommand{\aadvRemConf}{21.8}

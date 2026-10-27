@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrrrrrrr}
+\toprule
+& & Plain & \multicolumn{3}{c}{Oracle, conflict q.} & \multicolumn{2}{c}{LLM, directional flag} & \multicolumn{2}{c}{LLM, remove suspect} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+Generator & Skeleton & conflict & flag & dir.\ flag & remove & conflict & clean & conflict & clean \\
+\midrule
+gpt-4o-mini & default & 22.1 & \textbf{$-$6.7} & \textbf{$+$13.4} & \textbf{$+$27.6} & \textbf{$+$12.5} & $-$3.4 & \textbf{$+$18.7} & \textbf{$-$20.6} \\
+gpt-4o-mini & minimal & 20.4 & $-$5.3 & $+$5.0 & \textbf{$+$18.9} & $+$3.6 & \textbf{$-$10.3} & $+$11.0 & \textbf{$-$19.6} \\
+gpt-4.1 & default & 21.8 & \textbf{$-$8.6} & \textbf{$+$18.2} & \textbf{$+$30.2} & $+$8.4 & 0.0 & \textbf{$+$20.6} & \textbf{$-$24.3} \\
+gpt-4.1 & minimal & 33.6 & \textbf{$-$11.0} & \textbf{$+$12.7} & \textbf{$+$14.9} & -- & -- & -- & -- \\
+Qwen2.5-7B & default & 19.4 & $-$5.8 & $+$3.6 & \textbf{$+$18.0} & $+$2.9 & $-$7.1 & $+$7.9 & \textbf{$-$18.3} \\
+Qwen2.5-7B & minimal & 17.3 & $-$5.8 & $+$2.9 & \textbf{$+$10.8} & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\caption{The main effects across three generators and two prompt skeletons (RAMDocs hold-out, 3 seeds, one-way strict
+accuracy). \emph{Plain}: accuracy (\%) on conflict questions with no flags. Other columns: paired difference from plain
+in points. \emph{Default} skeleton tells the model to give every valid answer; \emph{minimal} drops that policy
+(Appendix~\ref{app:prompts}). \textbf{Bold}: significant after Holm across the table. The LLM detector is gpt-4o-mini
+for every generator. Qwen2.5-7B-Instruct runs locally (4-bit).}
+\label{tab:generality}
+\end{table*}

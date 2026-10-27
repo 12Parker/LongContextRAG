@@ -355,3 +355,28 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   Labels: everything holds under `contains`.
 - **Paper:** `paper/` (ACL review format; see `paper/README.md` for the build and the remaining human steps).
   Every number comes from `paper_stats.py`. Total API spend $27.42.
+
+### Round 4 (2026-10-27): mock review and revision
+
+- **Mock review:** three blind reviewers scored the first draft 2.5 out of 5 (reject for main, borderline Findings).
+  Their main points were: the prompt skeleton may cause the neutral-flag harm; there was no open-weights model; H4,
+  H6 and the dose-response statistics were overstated; real-detector gains are not significant; and the title
+  overclaimed.
+- **Addendum** `PREREGISTRATION.md` §9 was committed before every revision run:
+  - H10: minimal skeleton (`--skeleton minimal`);
+  - H11: Qwen2.5-7B through Ollama (`--base-url http://localhost:11434/v1`), seed 0 only (§9.4);
+  - re-analyses (§9.3);
+  - inverted-oracle adversarial control (§9.5);
+  - Ollama repeat-limit aborts scored as degenerate (§9.6; 1 occurred).
+- **Results:**
+  - The neutral-flag effect is negative in all 6 generator × skeleton settings, significant in 4.
+  - Removal of the oracle suspect is significant in all 6.
+  - Directional flag > neutral flag in all 6. Directional flag > plain only for gpt-4.1 (both skeletons) and
+    gpt-4o-mini (default skeleton). Exploratory split: it fails on multi-answer conflict questions.
+  - Real detector: directional vs neutral flag +16.5 on conflict questions (gpt-4o-mini).
+  - H6 re-analysis: document-level is not significantly better than pair-level (7/8 vs 6/8 inside the prediction
+    intervals).
+  - H5 TOST: not equivalent.
+- **Code:** `revision_stats.py` (analyses), `InvertedOracleDetector`, and `prompts.BASE_MINIMAL`.
+- **Paper:** retitled "Which Side Is Wrong? Neutral Contradiction Flags Do Not Help Retrieval-Augmented Generation
+  Against Misinformation". The body still fits in 8 pages.

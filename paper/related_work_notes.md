@@ -190,3 +190,10 @@ Every item on the planning list was found, so nothing is in this section. Unconf
 - RobustRAG: workshop paper only.
 
 Do not describe any of these as conference papers unless a proceedings record appears later.
+
+## Added in the revision (2026-10-27)
+
+Verified against primary sources (ACL Anthology .bib, IJCAI proceedings BibTeX, arXiv abs pages, Crossref):
+pan2023risk, pan2023attacking, ge2025confact (5 authors), chiang2024metadata, zhou2025trustrag (8 authors;
+title ends "in Retrieval-Augmented Generation"), vanmiltenburg2021preregistering, lakens2017equivalence,
+card2020power, yang2024qwen25.

@@ -1,34 +1,42 @@
 \section*{Limitations}
 
-\paragraph{Models.} We test two closed OpenAI generators. Open-weights models may respond differently to flags,
-particularly to the directional header, and we could not run one within this study. The LLM detector is a single
-prompt to one model; stronger or fine-tuned detectors would occupy different points on the map.
+\paragraph{Models.} We test three generators: two closed OpenAI models and one 7B open-weights model, run at 4-bit
+precision with one seed. Larger open models and reasoning models may respond differently, especially to the
+directional header. The LLM detector is a single prompt to one model. We compare against no trained detector such as
+ConflictRAG's or TrustRAG's filter \citep{wang2026conflictrag,zhou2025trustrag}, which would sit at different points
+on the grid.
 
-\paragraph{Data.} The confirmatory evidence is one benchmark, RAMDocs, with 300 questions. Its misinformation is
-synthetic and its document labels are imperfect: we exclude 55 questions whose status depends on 163 documents we
-could not label without human annotation, and we check that conclusions survive treating those documents as
-misinformation. WikiContradict and CONFLICTS each test one side of our account (genuine conflicts and real search
-results), but neither has a misinformation side that we can label at the passage level. We score CONFLICTS only on
-items with a reference answer and use no LLM judge, so its opinion and complementary-information items are not
-evaluated.
+\paragraph{Data and power.} The confirmatory evidence comes from one benchmark, RAMDocs: 300 questions, 139 of them
+conflict questions. Its misinformation is synthetic, and its document labels are imperfect. We exclude 35 hold-out
+questions whose status depends on documents we could not label without human annotation, and we check that the
+conclusions survive treating those documents as misinformation. Our comparisons detect effects of about
+\mdeMed\ points with 80\% power, so smaller effects, including small harms on clean questions, may be missed.
+WikiContradict has genuine conflicts but no misinformation side. CONFLICTS, the most realistic benchmark we use, shows
+no significant effect for any condition. It was run with one seed, scored only on items with a reference answer, and
+without the planned LLM judge, so it can neither confirm nor refute the RAMDocs findings. We do not know how the
+findings transfer to naturally occurring misinformation.
 
-\paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition, and with it
-MADAM-RAG reproduces the published score within about one point on our pilot split. It is still string matching:
-it misses paraphrases, and partial answers interact with ``no wrong answer''. We report a more lenient variant
-throughout and mark any conclusion that depends on the choice.
+\paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition and scores our
+MADAM-RAG port close to the published number on the pilot split, but the published subset is unknown, so this is not a
+reproduction. The metric is string matching: it misses paraphrases, and partial answers interact with ``no wrong
+answer''. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
 
-\paragraph{Synthetic detectors.} Synthetic false flags are spread uniformly over non-contradicting pairs, and their
-suspect side is chosen at random. Real detectors concentrate their errors, and the grid predicts them only once it
-is summarised at the document level. We chose those axes after seeing one detector on the pilot split; on the
-confirmatory split they are tested on three detectors, which is still a small sample.
+\paragraph{Direction and the grid.} Oracle direction is close to giving the model an answer key, so the oracle rows
+are upper bounds. In the synthetic grid only perfect direction gives a significant overall gain. The real LLM
+detector, at \dirAccLlm\% direction accuracy, gains on conflict questions over a neutral flag, but its net gain over no flags
+is significant only with gpt-4.1. Synthetic false flags are spread uniformly and their suspect side is random, whereas
+real detectors concentrate their errors. The grid predicts real detectors only roughly, and three detectors cannot
+show whether document- or pair-level summaries predict better.
 
 \paragraph{Scope.} We study flags passed to the generator as text. Learned interfaces such as soft prompts or
 credibility fine-tuning \citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may follow different
-trade-offs.
+trade-offs. We test one adversarial case, a detector that always names the wrong side, but not an attacker who controls
+which pairs are flagged.
 
 \section*{Ethics Statement}
 This work uses public benchmarks and commercial model APIs, and involves no human subjects or personal data. Its main
 risk is dual use. Our results show that a false ``likely misinformation'' label, or the removal of a passage, can
-change a RAG system's answers. An adversary who can trigger a deployed detector could exploit this
+change a RAG system's answers: an inverted oracle that names the correct side as misinformation costs up to
+\aadvRemConf\ points. An adversary who can trigger a deployed detector could exploit this
 \citep{zou2025poisonedrag}. We therefore report harm on conflict-free questions alongside every gain, and we argue that
 systems should measure what a detector does at the document level before acting on its flags.

@@ -1,4 +1,4 @@
-\paragraph{Generation skeleton.}
+\paragraph{Generation skeleton (default).}
 \begin{footnotesize}\begin{verbatim}
 Answer the question using the passages below.
 If the passages support more than one valid answer
@@ -14,6 +14,21 @@ Question: {question}
 Give a brief explanation, then end with one line in
 exactly this format:
 Final answer(s): <answer 1> | <answer 2> | ...
+\end{verbatim}\end{footnotesize}
+\paragraph{Minimal skeleton (no answer policy).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below.
+If no passage answers the question, the answer is
+"unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your answer; if there is more than
+one, separate them with |>
 \end{verbatim}\end{footnotesize}
 \paragraph{Instruction v1.}
 \begin{footnotesize}\begin{verbatim}

@@ -12,10 +12,31 @@ repeats the pre-registered tests with every suspect document treated as misinfor
 lists all pre-registered tests.
 
 \input{generated/tab_hypotheses}
+\input{generated/tab_detectors}
 \input{generated/tab_main_robust}
 \input{generated/app_tables}
 \input{generated/tab_gpt41}
 \input{generated/tab_wiki}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_placement.pdf}
+\caption{Effect of real detectors predicted from the synthetic grid (x, with the 95\% bootstrap prediction interval)
+against the measured effect (y, with its 95\% CI), for conflict ($\bullet$) and clean ($\blacksquare$) questions.
+Left: detectors located by their document-level behaviour; right: by pair precision, recall and direction accuracy.}
+\label{fig:placement}
+\end{figure}
+
+\paragraph{The heuristic detector.}
+CAAG is the detector we set out to study. As a neutral flag it did not beat random flags of the same volume, and
+as a removal rule it only deleted correct passages (\dCaagRemClean\ points on clean questions, \dCaagRemConf\ on
+conflict ones). Its false flags fall mostly on pairs that should both be reported: 134 of its 221 false flags on the
+hold-out are same-name ambiguity pairs, which its entity-mismatch signal flags because they mention different dates or
+numbers. We read this as a warning about lexical contradiction cues in general \citep{gururangan2018annotation},
+rather than as a problem with a particular threshold. Retuning illustrates why F1 misleads. Over a 121-setting sweep, CAAG's
+best pair F1 is \caagBestFOne, above NLI's, at $\theta_s=\caagBestThS$ and $\theta_c=\caagBestThC$. But it gets
+there by flagging \caagBestRate\% of all pairs and \caagBestCleanFpr\% of clean questions, which our grid predicts
+would be harmful under removal (Appendix~\ref{app:extra}).
 
 \paragraph{Original CAAG format.}
 Rendering CAAG's flags in its original format, with typed lines and confidence scores (``factual conflict (confidence:
@@ -42,13 +63,35 @@ token counts, detector outputs and configurations. The pre-registration was comm
 Its deviations are listed below.
 
 \paragraph{Deviations from the pre-registration.}
-(1) For the placement test (H6), the detectors without direction were run under the label \texttt{remove\_suspect} as
-well as \texttt{remove}. Both render identical prompts, so these were served entirely from the response cache.
-(2) Table~\ref{tab:main} applies Holm correction across all its comparisons. This is stricter than the per-family
-correction used for the hypothesis tests.
-(3) The pre-registration worded H6 as the actual effect lying inside a 95\% CI around the grid prediction. The
-prediction has no bootstrap CI of its own, so we test the converse: whether the prediction lies inside the actual
-effect's 95\% CI. The error comparison with pair-level placement is as pre-registered.
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \emph{Primary metric.} The first draft of the pre-registration named the bidirectional metric as primary. Before
+the confirmatory run we switched to one-way matching, because it reproduces MADAM-RAG's published score on the pilot
+split (Section~\ref{sec:setup}); bidirectional became the robustness metric. Every table reports both.
+\item \emph{Second generator.} The plan named an open-weights model. None was available before the confirmatory run, so
+gpt-4.1 was used (H9). After review we added Qwen2.5-7B-Instruct, registered before its run. Because local inference
+takes about 3\,s per call, the Qwen runs use one seed; we made that change before inspecting any Qwen result.
+\item \emph{CONFLICTS judge.} The plan called for a judge from a different model family, validated on about 100 human
+labels. Neither the judge nor the labels were available, so CONFLICTS is scored only on items with a reference answer,
+with one seed, and reported as exploratory.
+\item \emph{H4.} The pre-registration counted 54 false-flag cells. On clean questions, cells that differ only in
+direction accuracy render identical prompts (their scores differ by exactly 0), so they are one comparison: 18 in
+all, 9 per format. We report H4a per format. The cell-permutation $p$-value for the dose-response correlation assumed
+exchangeable cells; the cells are nested, so we replace it with a question-level bootstrap CI. No threshold was set
+for H4c, so we report a count.
+\item \emph{H5.} A non-significant difference is not equivalence. We add a TOST with a $\pm$3-point margin, fixed in the
+addendum.
+\item \emph{H6.} The first draft tested whether the grid prediction lies inside the actual effect's CI, which is
+lenient. We now report the pre-registered test (actual effect inside a bootstrap prediction interval) and a paired test
+of the two spaces' errors.
+\item \emph{Placement modes.} For H6, the detectors without direction were run under the label
+\texttt{remove\_suspect} as well as \texttt{remove}. Both render identical prompts, so these were served entirely from
+the response cache.
+\item \emph{Holm scope.} Table~\ref{tab:main} applies Holm across all its comparisons, which is stricter than the
+per-family correction used for the hypothesis tests.
+\end{enumerate}
+The addendum (H10, H11 and the re-analyses above) and the Qwen seed change were committed to the repository before the
+runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
+\citep{vanmiltenburg2021preregistering}.
 
 \paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. CAAG and NLI ran on a
 laptop CPU (0.2\,s and 1.2\,s per question).

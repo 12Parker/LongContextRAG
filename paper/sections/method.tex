@@ -4,9 +4,11 @@
 A question $q$ comes with retrieved passages $P=(p_0,\dots,p_{n-1})$. A \emph{detector} returns flagged pairs
 $F\subseteq\{(i,j): i<j\}$. A \emph{directional} detector also returns, for each flagged pair, a \emph{suspect}
 set $S_{ij}\subseteq\{i,j\}$: the side it believes is misinformation. A \emph{format} turns $(P,F,S)$ into the
-generator's prompt. We vary detectors and formats independently. Every prompt uses one skeleton: passages,
-question, and an instruction to end with \texttt{Final answer(s): a | b | \dots}, listing every valid answer when
-different entities share a name (Appendix~\ref{app:prompts}).
+generator's prompt. We vary detectors and formats independently. Every prompt shares a skeleton: passages, question, and an instruction
+to end with a \texttt{Final answer(s):} line. The \emph{default} skeleton asks for every valid answer when the
+passages support several (RAMDocs contains same-name ambiguity, so a correct answer may need several entities). The
+\emph{minimal} skeleton drops that policy, and its answer line allows several answers without inviting them
+(Appendix~\ref{app:prompts}).
 
 \subsection{Formats}
 \label{sec:formats}
@@ -41,7 +43,8 @@ ambiguity, complementary and temporal relations, and names the side that is more
 ``both'' or ``unclear''), as JSON.
 \item[Random] flags each pair independently at CAAG's per-pair flag rate on the confirmatory split
 ($6.22\%$). It is a placebo that matches CAAG's flag volume.
-\item[Oracle] flags exactly the gold contradiction pairs and names the gold misinformation side.
+\item[Oracle] flags exactly the gold contradiction pairs and names the gold misinformation side. The
+\emph{inverted oracle}, an adversarial control, flags the same pairs but names the correct side.
 \end{description}
 
 \subsection{Synthetic detectors}

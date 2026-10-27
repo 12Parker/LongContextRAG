@@ -39,9 +39,18 @@ RUNS = {
     "conflicts": ROOT / "runs/conflicts_auto",
     "madam_all": ROOT / "runs/ramdocs_madam_check",
     "contains": ROOT / "runs/holdout_contains",
+    # revision runs (PREREGISTRATION.md §9)
+    "minimal": ROOT / "runs/holdout_minimal",
+    "gpt41_minimal": ROOT / "runs/holdout_gpt41_minimal",
+    "qwen": ROOT / "runs/holdout_qwen",
+    "qwen_minimal": ROOT / "runs/holdout_qwen_minimal",
+    "adversarial": ROOT / "runs/holdout_adversarial",
 }
+GENERATORS = {"gpt-4o-mini": ("main", "minimal"), "gpt-4.1": ("gpt41", "gpt41_minimal"),
+              "Qwen2.5-7B": ("qwen", "qwen_minimal")}
 PRIMARY, ROBUST = "ramdocs_strict_oneway", "ramdocs_strict"
 SUB = {"all": None, "conflict": True, "clean": False}
+LABELLED = "labelled"   # conflict + clean questions, without the ones the label rule excludes
 N_BOOT, N_PERM = 10_000, 10_000
 
 
@@ -70,7 +79,10 @@ def groups_of(rows):
 
 # --------------------------------------------------------------------------- tests
 def compare(rows, a: str, b: str, subset, metric: str) -> dict:
-    """Paired effect of condition b over a (b - a), cluster bootstrap CI, two-sided sign-flip p."""
+    """Paired effect of condition b over a (b - a), cluster bootstrap CI, two-sided sign-flip p.
+    subset LABELLED: all questions that have a conflict label (§9.3.5)."""
+    if subset == LABELLED:
+        rows, subset = [r for r in rows if r.get("has_conflict") is not None], None
     ra, rb = per_question(rows, a, subset, metric), per_question(rows, b, subset, metric)
     shared = set(ra) & set(rb)
     if not shared:
@@ -245,6 +257,96 @@ def h6(run_grid: Path, run_det: Path, metric: str) -> dict:
     return {"cases": res, "summary": summ}
 
 
+# --------------------------------------------------------------------------- revision (§9)
+def revision(R, main_rows, main_ex, h3spec):
+    from . import revision_stats as rv
+    rev = R["rev"] = {}
+    groups = groups_of(main_rows)
+    rev["H4"] = {m: rv.h4_revised(main_rows, main_ex, dets_of, RUNS["main"], m, compare) for m in (PRIMARY, ROBUST)}
+    rev["H6"] = {m: rv.h6_prereg(main_rows, main_ex, dets_of, RUNS["main"], m) for m in (PRIMARY, ROBUST)}
+    rev["H5_tost"] = {m: rv.tost(main_rows, "random+flag", "caag+flag", None, m, groups) for m in (PRIMARY, ROBUST)}
+    rev["direction_ci"] = rv.direction_ci(main_ex, dets_of(RUNS["detect"], "llm_dir"))
+    # "All" over labelled questions, and the excluded questions on their own
+    rev["labelled"] = {}
+    for key, run in (("gpt-4o-mini", "main"), ("gpt-4.1", "gpt41")):
+        if not results_path(RUNS[run]):
+            continue
+        rows = main_rows if run == "main" else rows_of(RUNS[run])
+        conds = sorted({r["condition"] for r in rows} - {"plain"})
+        rev["labelled"][key] = {m: {c: {LABELLED: compare(rows, "plain", c, LABELLED, m),
+                                        "excluded": compare(rv.excluded(rows), "plain", c, None, m)}
+                                    for c in conds if not c.startswith("synth-")} for m in (PRIMARY, ROBUST)}
+    # minimum detectable effect (80% power, alpha 0.05 two-sided) on conflict questions: 2.8 x the
+    # bootstrap SE of each main-table comparison; the paper reports the range
+    ses = [(v["conflict"]["ci_high"] - v["conflict"]["ci_low"]) / (2 * 1.96)
+           for c, v in R["main_table"][PRIMARY].items() if c != "madam"]
+    rev["mde_conflict"] = {"min": 2.8 * min(ses), "median": 2.8 * float(np.median(ses)), "max": 2.8 * max(ses)}
+    rev["plain_labelled"] = {m: float(np.mean(list(per_question(rv.labelled(main_rows), "plain", None, m).values())))
+                             for m in (PRIMARY, ROBUST)}
+    if results_path(RUNS["gpt41"]):
+        g41 = rv.labelled(rows_of(RUNS["gpt41"]))
+        rev["plain_labelled_gpt41"] = float(np.mean(list(per_question(g41, "plain", None, PRIMARY).values())))
+    # generator x skeleton: H10 (minimal skeleton), H11 (open weights, default skeleton)
+    gen_rows = {}
+    for g, (d, mn) in GENERATORS.items():
+        for sk, run in (("default", d), ("minimal", mn)):
+            if results_path(RUNS[run]):
+                gen_rows[(g, sk)] = main_rows if run == "main" else rows_of(RUNS[run])
+    rev["generality"] = {}
+    for (g, sk), rows in gen_rows.items():
+        conds = [c for c in ("oracle+flag", "oracle+flag_directional", "oracle+remove_suspect", "llm_dir+flag",
+                             "llm_dir+flag_directional", "llm_dir+remove_suspect") if c in {r["condition"] for r in rows}]
+        from .llm import ABORTED_PREFIX
+        n_abort = sum(r["response"].startswith(ABORTED_PREFIX) for r in rows)
+        rev["generality"][f"{g}|{sk}"] = {"n_aborted": n_abort, "n_rows": len(rows),
+            "plain": {m: {s: float(np.mean(list(per_question(rows, "plain", SUB[s], m).values()))) for s in SUB}
+                      for m in (PRIMARY, ROBUST)},
+            "effects": {m: {c: {s: compare(rows, "plain", c, sub, m)
+                                for s, sub in (("conflict", True), ("clean", False), (LABELLED, LABELLED))}
+                            for c in conds} for m in (PRIMARY, ROBUST)},
+            "mechanism": {c: {k: float(np.mean([r[k] for r in rows if r["condition"] == c and r["has_conflict"]]))
+                              for k in ("wrong_rate", "gold_recall")}
+                          for c in ("plain", "oracle+flag", "oracle+flag_directional", "oracle+remove_suspect")
+                          if c in {r["condition"] for r in rows}}}
+    # exploratory (post hoc, after seeing the minimal-skeleton run): conflict questions with one gold
+    # answer vs several (ambiguity + misinformation); a strict answer must list every gold answer
+    multi = {e.id for e in main_ex if e.has_conflict and len(e.gold_answers) > 1}
+    rev["n_conflict_multi"] = len(multi)
+    rev["n_conflict_single"] = sum(1 for e in main_ex if e.has_conflict) - len(multi)
+    rev["by_answers"] = {}
+    for (g, sk), rows in gen_rows.items():
+        conds = {r["condition"] for r in rows}
+        for name, keep in (("single", lambda i: i not in multi), ("multi", lambda i: i in multi)):
+            rr = [r for r in rows if keep(r["id"])]
+            rev["by_answers"][f"{g}|{sk}|{name}"] = {
+                "plain": float(np.mean(list(per_question(rr, "plain", True, PRIMARY).values()))),
+                **{c: compare(rr, "plain", c, True, PRIMARY) for c in ("oracle+flag", "oracle+flag_directional",
+                                                                        "oracle+remove_suspect") if c in conds}}
+    h2h3 = [("oracle+flag vs plain (conflict)", "plain", "oracle+flag", "conflict")] + list(h3spec)
+    dirs = lambda g, k: 0 if k.startswith("oracle+flag vs") else +1
+    h10 = {(g, k, a, b, s): rows for (g, sk), rows in gen_rows.items() if sk == "minimal" for k, a, b, s in h2h3}
+    if h10:
+        rev["H10"] = {m: family({f"{g}: {k}": compare(rows, a, b, SUB[s], m) for (g, k, a, b, s), rows in h10.items()},
+                                {f"{g}: {k}": dirs(g, k) for (g, k, a, b, s) in h10}) for m in (PRIMARY, ROBUST)}
+    if ("Qwen2.5-7B", "default") in gen_rows:
+        q = gen_rows[("Qwen2.5-7B", "default")]
+        spec = [("oracle+flag < plain (conflict)", "plain", "oracle+flag", "conflict")] + list(h3spec)
+        rev["H11"] = qa_family(q, [(f"Qwen2.5-7B: {k}", a, b, s) for k, a, b, s in spec],
+                               {f"Qwen2.5-7B: {k}": (-1 if "<" in k else +1) for k, *_ in spec})
+    # exploratory (§9.5): directional signal that always names the correct side
+    if results_path(RUNS["adversarial"]):
+        ar = rows_of(RUNS["adversarial"])
+        rev["adversarial"] = {c: {s: compare(ar, "plain", c, SUB[s], PRIMARY) for s in SUB}
+                              for c in ("oracle_inv+flag_directional", "oracle_inv+remove_suspect")}
+        rev["adversarial_wrong"] = {c: float(np.mean([r["wrong_rate"] for r in ar if r["condition"] == c and r["has_conflict"]]))
+                                    for c in ("oracle_inv+flag_directional", "oracle_inv+remove_suspect")}
+    # exploratory: does direction help with the real detector? (directional vs neutral flag, same detector)
+    rev["real_direction"] = {m: {f"{g}|{sk}": compare(rows, "llm_dir+flag", "llm_dir+flag_directional", True, m)
+                                 for (g, sk), rows in gen_rows.items()
+                                 if {"llm_dir+flag", "llm_dir+flag_directional"} <= {r["condition"] for r in rows}}
+                             for m in (PRIMARY, ROBUST)}
+
+
 # --------------------------------------------------------------------------- output helpers
 def fmt(x, nd=3, sign=True):
     if x is None or (isinstance(x, float) and math.isnan(x)):
@@ -365,10 +467,10 @@ def main(argv=None):
             "H3": qa_family(cr, h3spec, {k: +1 for k, *_ in h3spec}),
             "n": {s: sum(e.has_conflict is f for e in cx) for s, f in (("conflict", True), ("clean", False))}}
         if any(r["condition"].startswith("synth-") for r in cr):
-            h4c = h4(cr, cx, RUNS["contains"])
-            R["contains"]["H4"] = {m: {k: h4c[m][k] for k in ("n_cells", "n_harmful", "dose_response",
-                                                              "n_remove_worse")} | {"n_matched": len(h4c[m]["remove_vs_flag"])}
-                                   for m in h4c}
+            from . import revision_stats as rv
+            R["contains"]["H4"] = {m: rv.h4_revised(cr, cx, dets_of, RUNS["contains"], m, compare)
+                                   for m in (PRIMARY, ROBUST)}
+    revision(R, main_rows, main_ex, h3spec)
     import csv
     sweep = list(csv.DictReader(open(RUNS["detect"] / "caag_sweep.csv")))
     for r in sweep:

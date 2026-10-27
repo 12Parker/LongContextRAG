@@ -105,40 +105,50 @@ at least one correct document. Latency is per question; CAAG and NLI run locally
 """)
 
 
+def _with_labelled(R, table: dict, gen: str, m: str) -> dict:
+    lab = R.get("rev", {}).get("labelled", {}).get(gen, {}).get(m, {})
+    return {c: {**d, "lab": lab[c]["labelled"]} if c in lab else dict(d) for c, d in table.items()}
+
+
 def tab_main(R, out: Path):
     for m, tag in ((PRIMARY, ""), (ROBUST, "_robust")):
-        t = _holm_table(R["main_table"][m])
+        t = _holm_table(_with_labelled(R, R["main_table"][m], "gpt-4o-mini", m))
         base = R["plain_means"][m]
         groups = [("Prompt only", ["instruct", "instruct_v2"]),
                   ("Oracle detector", ["oracle+flag", "oracle+flag_directional", "oracle+remove_suspect"]),
-                  ("Real detectors", ["random+flag", "caag+flag", "caag+remove", "nli+flag", "nli+remove",
+                  ("Real detectors (exploratory)", ["random+flag", "caag+flag", "caag+remove", "nli+flag", "nli+remove",
                                       "llm_dir+flag", "llm_dir+flag_directional", "llm_dir+remove_suspect"]),
                   ("Reference", ["madam"])]
-        lines = [f"No flags (plain) & {pct(base['all'])} & {pct(base['conflict'])} & {pct(base['clean'])} & "
+        lab_base = R.get("rev", {}).get("plain_labelled", {}).get(m)
+        lines = [f"No flags (plain) & {pct(base['all'])} & {pct(lab_base) if lab_base is not None else '--'} & "
+                 f"{pct(base['conflict'])} & {pct(base['clean'])} & "
                  f"{R['main_costs']['plain']['prompt_tokens']:.0f} \\\\", "\\midrule"]
         for gname, cs in groups:
-            lines.append(f"\\multicolumn{{5}}{{l}}{{\\emph{{{gname}}}}} \\\\")
+            lines.append(f"\\multicolumn{{6}}{{l}}{{\\emph{{{gname}}}}} \\\\")
             for c in cs:
                 if c not in t:
                     continue
                 lines.append(f"\\quad {COND_NAME[c]} & {cell(t[c]['all'], 'p_table_holm')} & "
+                             f"{cell(t[c].get('lab'), 'p_table_holm')} & "
                              f"{cell(t[c]['conflict'], 'p_table_holm')} & {cell(t[c]['clean'], 'p_table_holm')} & "
                              f"{R['main_costs'][c]['prompt_tokens']:.0f} \\\\")
         metric_name = "one-way strict accuracy (primary)" if m == PRIMARY else "bidirectional strict accuracy (robustness)"
         (out / f"tab_main{tag}.tex").write_text(rf"""\begin{{table}}[t]
 \centering\small
-\setlength{{\tabcolsep}}{{2.5pt}}
-\begin{{tabular}}{{lrrrr}}
+\setlength{{\tabcolsep}}{{2.2pt}}
+\resizebox{{\columnwidth}}{{!}}{{%
+\begin{{tabular}}{{lrrrrr}}
 \toprule
-Condition & All & Conflict & Clean & Tokens \\
+Condition & All & Lab. & Conflict & Clean & Tokens \\
 \midrule
 {chr(10).join(lines)}
 \bottomrule
-\end{{tabular}}
-\caption{{RAMDocs hold-out (300 questions: 139 conflict, 126 clean), gpt-4o-mini, 3 seeds, {metric_name}.
+\end{{tabular}}}}
+\caption{{RAMDocs hold-out, gpt-4o-mini, 3 seeds, {metric_name}. \emph{{All}}: 300 questions, including 35 whose
+conflict status the label rule leaves open; \emph{{Lab.}}: the 265 labelled ones (139 conflict, 126 clean).
 First row: accuracy (\%) with no flags. Other rows: paired difference from it in points; \textbf{{bold}} = significant
-after Holm correction across the table (sign-flip test, $p<0.05$). Tokens: mean prompt tokens per call
-(MADAM-RAG: per question, all calls).}}
+after Holm correction across the table (sign-flip test, $p<0.05$). Real-detector rows were not pre-registered as
+tests. Tokens: mean prompt tokens per call (MADAM-RAG: per question, all calls).}}
 \label{{tab:main{tag}}}
 \end{{table}}
 """)
@@ -154,10 +164,11 @@ def tab_gpt41(R, out: Path):
         lines.append(f"{COND_NAME[c]} & {cell(t[c]['all'], 'p_table_holm')} & {cell(t[c]['conflict'], 'p_table_holm')} & "
                      f"{cell(t[c]['clean'], 'p_table_holm')} \\\\")
     (out / "tab_gpt41.tex").write_text(rf"""\begin{{table}}[t]
-\centering\small
-\begin{{tabular}}{{lrrr}}
+\centering\footnotesize
+\setlength{{\tabcolsep}}{{3pt}}
+\begin{{tabular}}{{lrrrr}}
 \toprule
-Condition & All & Conflict & Clean \\
+Condition & All & Lab. & Conflict & Clean \\
 \midrule
 {chr(10).join(lines)}
 \bottomrule
@@ -194,62 +205,150 @@ gpt-4o-mini, 3 seeds. First row: share of answers giving both sides (\%); other 
 """)
 
 
-def tab_hypotheses(R, out: Path):
-    two_sided = {"H5", "H7"}
+def _esc(k):
+    return k.replace("_", "\\_").replace(">", "$>$").replace("<", "$<$")
 
-    def status(fam_by_metric, key, metric=PRIMARY, h=""):
-        v = fam_by_metric[metric][key]
-        ok = v["supported"]
-        rob = all(fam_by_metric[m][key]["supported"] for m in fam_by_metric)
-        if h in two_sided:  # no predicted direction: report significance only
-            return ("significant" + ("" if rob else "$^\\dagger$")) if ok else "n.s."
-        return ("supported" + ("" if rob else "$^\\dagger$")) if ok else "not supported"
+
+def _est(v):
+    return f"{pct(v['diff'], True)} [{pct(v['ci_low'], True)}, {pct(v['ci_high'], True)}]"
+
+
+def tab_hypotheses(R, out: Path):
+    """Every pre-registered test (§4, §8, §9). Robust: the same outcome under the bidirectional metric.
+    Rows marked (r) are re-analyses of existing data registered in §9.3."""
+    two_sided = {"H5", "H7"}
+    rev = R.get("rev", {})
+
+    def outcome(v, h, k=""):
+        if h in two_sided or (h == "H10" and "oracle+flag vs" in k) or (h == "H8" and not k.startswith("oracle+flag")):
+            return "significant" if v["supported"] else "n.s."
+        return "supported" if v["supported"] else "not supported"
+
+    def rob(fam, k, h):
+        if ROBUST not in fam:
+            return "--"
+        return "yes" if outcome(fam[ROBUST][k], h, k) == outcome(fam[PRIMARY][k], h, k) else "no"
+
     rows = []
-    for k, v in R["H1"]["tests"].items():
-        rows.append(("H1", k, f"{pct(v['diff'], True)} [{pct(v['ci_low'], True)}, {pct(v['ci_high'], True)}]",
-                     _p(v["p_holm"]), "supported" if v["supported"] else "not supported"))
-    for h in ("H2", "H3", "H5", "H7", "H9"):
-        if h not in R:
-            continue
+    h1 = R["H1"]["tests"]
+    for k, v in h1.items():
+        if k.startswith("direction") and "direction_ci" in rev:
+            d = rev["direction_ci"]
+            est = f"{pct(d['estimate'])}\\% [{pct(d['ci_low'])}, {pct(d['ci_high'])}]"
+            rows.append(("H1", "direction accuracy llm\\_dir $>$ 50\\% (cluster CI\\textsuperscript{r})", est,
+                         _p(v["p_holm"]), "supported" if d["ci_low"] > 0.5 else "not supported", "--"))
+        else:
+            rows.append(("H1", _esc(k), _est(v), _p(v["p_holm"]), outcome(v, "H1"), "--"))
+    for h in ("H2", "H3"):
         for k, v in R[h][PRIMARY].items():
-            rows.append((h, k, f"{pct(v['diff'], True)} [{pct(v['ci_low'], True)}, {pct(v['ci_high'], True)}]",
-                         _p(v["p_holm"]), status(R[h], k, h=h)))
-    h4 = R["H4"][PRIMARY]
-    rows.append(("H4a", f"false-flag cells below plain on clean q.",
-                 f"{h4['n_harmful']} of {h4['n_cells']} cells", "Holm", "supported" if h4["n_harmful"] else "not supported"))
-    dr = h4["dose_response"]
-    rows.append(("H4b", "harm grows with clean-q. exposure (Spearman)", f"$\\rho={dr['spearman_rho']:+.2f}$",
-                 _p(dr["p_perm"]), "supported" if dr["p_perm"] < 0.05 and dr["spearman_rho"] < 0 else "not supported"))
-    rows.append(("H4c", "removal harms clean q. more than directional flag", f"{h4['n_remove_worse']} of "
-                 f"{len(h4['remove_vs_flag'])} matched cells", "Holm", "supported" if h4["n_remove_worse"] else "not supported"))
-    s6 = R["H6"][PRIMARY]["summary"]
-    rows.append(("H6", "document-level placement inside actual CI",
-                 f"{s6['doc']['inside']}/{s6['doc']['n']} (pair: {s6['pair']['inside']}/{s6['pair']['n']})",
-                 f"MAE {100*s6['doc']['mae']:.1f} vs {100*s6['pair']['mae']:.1f}",
-                 "supported" if s6["doc"]["mae"] < s6["pair"]["mae"] else "not supported"))
+            rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h), rob(R[h], k, h)))
+    if "H4" in rev:
+        h4p, h4r = rev["H4"][PRIMARY], rev["H4"][ROBUST]
+        for mode, name in (("flag_directional", "directional flag"), ("remove_suspect", "removal")):
+            a, b = h4p["by_mode"][mode], h4r["by_mode"][mode]
+            rows.append(("H4a", f"false-flag cells below plain on clean q., {name}\\textsuperscript{{r}}",
+                         f"{a['n_harmful']} of {a['n']} cells", "Holm", "supported" if a["n_harmful"] else "not supported",
+                         "yes" if bool(a["n_harmful"]) == bool(b["n_harmful"]) else "no"))
+        dr, drr = h4p["dose_response"], h4r["dose_response"]
+        rows.append(("H4b", f"harm grows with clean-q.\\ exposure, Spearman over {dr['n_cells']} cells\\textsuperscript{{r}}",
+                     f"$\\rho={dr['spearman_rho']:+.2f}$ [${dr['ci_low']:+.2f}$, ${dr['ci_high']:+.2f}$]", "--",
+                     "supported" if dr["ci_high"] < 0 else "not supported", "yes" if (drr["ci_high"] < 0) == (dr["ci_high"] < 0) else "no"))
+        rv = h4p["remove_vs_flag"]
+        rows.append(("H4c", "removal harms clean q.\\ more than directional flag\\textsuperscript{r}",
+                     f"{rv['n_remove_worse']} of {rv['n']} matched cells", "Holm", "count only", "--"))
+    for h in ("H5",):
+        for k, v in R[h][PRIMARY].items():
+            rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h), rob(R[h], k, h)))
+    if "H5_tost" in rev:
+        t = rev["H5_tost"][PRIMARY]
+        rows.append(("H5", f"equivalence within $\\pm${100*t['margin']:.0f} points (TOST)\\textsuperscript{{r}}",
+                     f"90\\% CI [{pct(t['ci90_low'], True)}, {pct(t['ci90_high'], True)}]", "--",
+                     "equivalent" if t["equivalent"] else "not equivalent",
+                     "yes" if rev["H5_tost"][ROBUST]["equivalent"] == t["equivalent"] else "no"))
+    if "H6" in rev:
+        s6, s6r = rev["H6"][PRIMARY]["summary"], rev["H6"][ROBUST]["summary"]
+        rows.append(("H6", "actual effect inside the 95\\% interval of the document-level prediction\\textsuperscript{r}",
+                     f"{s6['doc']['inside']} of {s6['doc']['n']} (pair level: {s6['pair']['inside']} of {s6['pair']['n']})",
+                     "--", "descriptive", "--"))
+        d, dr_ = s6["doc_minus_pair_mae"], s6r["doc_minus_pair_mae"]
+        rows.append(("H6", "document-level error $<$ pair-level error (paired, exact sign-flip)\\textsuperscript{r}",
+                     f"{pct(d['diff'], True)} [{pct(d['ci_low'], True)}, {pct(d['ci_high'], True)}]",
+                     _p(d["p_exact_signflip"]), "supported" if d["p_exact_signflip"] < 0.05 and d["diff"] < 0 else "not supported",
+                     "yes" if (dr_["p_exact_signflip"] < 0.05) == (d["p_exact_signflip"] < 0.05) else "no"))
+    for h in ("H7", "H9"):
+        if h in R:
+            for k, v in R[h][PRIMARY].items():
+                rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h), rob(R[h], k, h)))
     if "H8" in R:
         for k, v in R["H8"]["both_answers"].items():
-            directional = k.startswith("oracle+flag")
-            out_s = (("supported" if v["supported"] else "not supported") if directional
-                     else ("significant" if v["supported"] else "n.s."))
-            rows.append(("H8", "WikiContradict: " + k, f"{pct(v['diff'], True)} [{pct(v['ci_low'], True)}, {pct(v['ci_high'], True)}]",
-                         _p(v["p_holm"]), out_s))
-    body = "\n".join(f"{a} & {b.replace('_', chr(92)+'_').replace('>', '$>$').replace('<', '$<$')} & {c} & {d} & {e} \\\\"
-                     for a, b, c, d, e in rows)
+            rows.append(("H8", "WikiContradict: " + _esc(k), _est(v), _p(v["p_holm"]), outcome(v, "H8", k), "--"))
+    for h in ("H10", "H11"):
+        if h in rev:
+            for k, v in rev[h][PRIMARY].items():
+                rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h, k), rob(rev[h], k, h)))
+    body = "\n".join(" & ".join(r) + " \\\\" for r in rows)
     (out / "tab_hypotheses.tex").write_text(rf"""\begin{{table*}}[t]
-\centering\small
-\begin{{tabular}}{{lp{{6.0cm}}lll}}
+\centering\footnotesize
+\setlength{{\tabcolsep}}{{4pt}}
+\begin{{tabular}}{{lp{{6.3cm}}llll}}
 \toprule
-& Pre-registered test & Estimate [95\% CI] & $p_{{\text{{Holm}}}}$ & Outcome \\
+& Pre-registered test & Estimate [95\% CI] & $p_{{\text{{Holm}}}}$ & Outcome & Robust \\
 \midrule
 {body}
 \bottomrule
 \end{{tabular}}
-\caption{{All pre-registered tests on the confirmatory split (differences in points of one-way strict accuracy unless
-stated). Holm correction within each family. Directional predictions are \emph{{supported}} or \emph{{not supported}};
-tests with no predicted direction (H5, H7, and H8 apart from the oracle flag) are \emph{{significant}} or \emph{{n.s.}}
-$^\dagger$: holds under the primary metric but not under the bidirectional robustness metric.}}
+\caption{{Every pre-registered test on the confirmatory split (one-way strict accuracy; differences in points). Holm
+correction within each family. H1--H9 were registered before the confirmatory run; H10, H11 and the rows marked
+\textsuperscript{{r}} were registered after a review of the first draft (H10, H11 before their runs; \textsuperscript{{r}}
+rows are re-analyses of data that already existed). Directional predictions are \emph{{supported}} or \emph{{not
+supported}}; tests with no predicted sign are \emph{{significant}} or \emph{{n.s.}} \emph{{Robust}}: the same outcome under
+the bidirectional metric.}}
 \label{{tab:hypotheses}}
+\end{{table*}}
+""")
+
+
+def tab_generality(R, out: Path):
+    """Generator x skeleton: oracle effects on conflict questions and the real detector's effects."""
+    g = R.get("rev", {}).get("generality")
+    if not g:
+        return
+    from .stats import holm
+    cols = [("oracle+flag", "conflict"), ("oracle+flag_directional", "conflict"), ("oracle+remove_suspect", "conflict"),
+            ("llm_dir+flag_directional", "conflict"), ("llm_dir+flag_directional", "clean"),
+            ("llm_dir+remove_suspect", "conflict"), ("llm_dir+remove_suspect", "clean")]
+    keys = {f"{gk}|{c}|{s}": v["effects"][PRIMARY][c][s]["p"] for gk, v in g.items() for c, s in cols
+            if c in v["effects"][PRIMARY]}
+    adj = holm(keys)
+    lines = []
+    order = [f"{gen}|{sk}" for gen in ("gpt-4o-mini", "gpt-4.1", "Qwen2.5-7B") for sk in ("default", "minimal")]
+    for gk in order:
+        if gk not in g:
+            continue
+        v = g[gk]; gen, sk = gk.split("|")
+        cells = []
+        for c, s in cols:
+            t = v["effects"][PRIMARY].get(c, {}).get(s)
+            cells.append(cell({**t, "p_holm": adj[f"{gk}|{c}|{s}"]}) if t else "--")
+        lines.append(f"{gen} & {sk} & {pct(v['plain'][PRIMARY]['conflict'])} & " + " & ".join(cells) + " \\\\")
+    (out / "tab_generality.tex").write_text(rf"""\begin{{table*}}[t]
+\centering\small
+\setlength{{\tabcolsep}}{{4pt}}
+\begin{{tabular}}{{llrrrrrrrr}}
+\toprule
+& & Plain & \multicolumn{{3}}{{c}}{{Oracle, conflict q.}} & \multicolumn{{2}}{{c}}{{LLM, directional flag}} & \multicolumn{{2}}{{c}}{{LLM, remove suspect}} \\
+\cmidrule(lr){{4-6}}\cmidrule(lr){{7-8}}\cmidrule(lr){{9-10}}
+Generator & Skeleton & conflict & flag & dir.\ flag & remove & conflict & clean & conflict & clean \\
+\midrule
+{chr(10).join(lines)}
+\bottomrule
+\end{{tabular}}
+\caption{{The main effects across three generators and two prompt skeletons (RAMDocs hold-out, 3 seeds, one-way strict
+accuracy). \emph{{Plain}}: accuracy (\%) on conflict questions with no flags. Other columns: paired difference from plain
+in points. \emph{{Default}} skeleton tells the model to give every valid answer; \emph{{minimal}} drops that policy
+(Appendix~\ref{{app:prompts}}). \textbf{{Bold}}: significant after Holm across the table. The LLM detector is gpt-4o-mini
+for every generator. Qwen2.5-7B-Instruct runs locally (4-bit).}}
+\label{{tab:generality}}
 \end{{table*}}
 """)
 
@@ -277,7 +376,7 @@ def fig_tradeoff(R, out: Path, table_key: str = "main_table", name: str = "fig_t
     from matplotlib.lines import Line2D
     _style()
     t = R[table_key][PRIMARY]
-    fig, ax = plt.subplots(figsize=(3.3, 3.0))
+    fig, ax = plt.subplots(figsize=(3.3, 3.5))
     ax.axhline(0, color=INK2, lw=0.8); ax.axvline(0, color=INK2, lw=0.8)
     short = {"flag": "flag", "flag_directional": "dir. flag", "remove": "remove", "remove_suspect": "remove"}
     # hand-placed labels (offset in points, alignment) for the points the text discusses
@@ -311,10 +410,10 @@ def fig_tradeoff(R, out: Path, table_key: str = "main_table", name: str = "fig_t
     fmts = [Line2D([], [], marker=MARK[m], ls="", color=INK2, label=FORMAT_NAME[m])
             for m in ("flag", "flag_directional", "remove_suspect")]
     fmts.append(Line2D([], [], marker="D", ls="", markerfacecolor="white", markeredgecolor=INK2, label="instruction only"))
-    l1 = ax.legend(handles=dets, fontsize=5.8, loc="upper left", handletextpad=0.2, borderaxespad=0.2)
-    ax.add_artist(l1)
-    ax.legend(handles=fmts, fontsize=5.8, loc="lower left", handletextpad=0.2, borderaxespad=0.2)
-    fig.tight_layout()
+    # legends below the plot, so they never cover points or labels
+    fig.legend(handles=dets + fmts, fontsize=6.2, loc="lower center", ncol=3, handletextpad=0.2,
+               columnspacing=0.8, borderaxespad=0.1)
+    fig.tight_layout(rect=(0, 0.17, 1, 1))
     fig.savefig(out / name); plt.close(fig)
 
 
@@ -346,7 +445,7 @@ def fig_grid(R, out: Path, grid: dict):
                 for b in range(len(ds)):
                     if not np.isnan(Z[a, b]):
                         txt = f"{int(round(Z[a, b])):+d}" + ("*" if S[a, b] else "")
-                        ax.text(b, a, txt, ha="center", va="center", fontsize=6.5,
+                        ax.text(b, a, txt, ha="center", va="center", fontsize=7.5,
                                 color="white" if abs(Z[a, b]) > 0.6 * vmax else INK)
             ax.set_xticks(range(len(ds)), [f"{d:g}" for d in ds]); ax.set_yticks(range(len(ps)), [f"{p:g}" for p in ps])
             ax.grid(False)
@@ -361,31 +460,37 @@ def fig_grid(R, out: Path, grid: dict):
 
 
 def fig_placement(R, out: Path):
+    """Predicted (with the pre-registered bootstrap prediction interval, x) vs actual (95% CI, y)."""
     import matplotlib.pyplot as plt
     _style()
-    cases = R["H6"][PRIMARY]["cases"]
-    fig, axes = plt.subplots(1, 2, figsize=(4.4, 2.2), sharex=True, sharey=True)
+    act = R["H6"][PRIMARY]["cases"]
+    pred = R.get("rev", {}).get("H6", {}).get(PRIMARY, {}).get("cases", {})
+    fig, axes = plt.subplots(1, 2, figsize=(4.6, 2.5), sharex=True, sharey=True)
     for ax, space, title in ((axes[0], "doc", "Document-level placement"), (axes[1], "pair", "Pair-level placement")):
         lo = -32; hi = 28
         ax.plot([lo, hi], [lo, hi], color=INK2, lw=0.8, ls="--")
-        for k, v in cases.items():
+        for k, v in act.items():
             cond, sub, sp = k.split("|")
             if sp != space:
                 continue
             det = cond.split("+")[0]
-            ax.errorbar(100 * v["predicted"], 100 * v["actual"],
+            pv = pred.get(k, {})
+            x = 100 * pv.get("predicted", v["predicted"])
+            xerr = ([[x - 100 * pv["pred_low"]], [100 * pv["pred_high"] - x]] if pv else None)
+            ax.errorbar(x, 100 * v["actual"], xerr=xerr,
                         yerr=[[100 * (v["actual"] - v["ci_low"])], [100 * (v["ci_high"] - v["actual"])]],
                         fmt="none", ecolor=CAT[det], elinewidth=0.6, alpha=0.7)
-            ax.scatter(100 * v["predicted"], 100 * v["actual"], color=CAT[det],
-                       marker="o" if sub == "conflict" else "s", s=22, edgecolor="white", linewidth=1.0, zorder=3)
-        ax.set_title(title, fontsize=8, color=INK); ax.set_xlabel("Predicted change (points)")
+            ax.scatter(x, 100 * v["actual"], color=CAT[det],
+                       marker="o" if sub == "conflict" else "s", s=24, edgecolor="white", linewidth=1.0, zorder=3)
+        ax.set_title(title, fontsize=8.5, color=INK); ax.set_xlabel("Predicted change (points)", fontsize=8.5)
         ax.set_xlim(lo, hi); ax.set_ylim(lo, hi)
-    axes[0].set_ylabel("Actual change (points)")
+        ax.tick_params(labelsize=7.5)
+    axes[0].set_ylabel("Actual change (points)", fontsize=8.5)
     from matplotlib.lines import Line2D
     h = [Line2D([], [], marker="o", ls="", color=CAT[d], label=DET_NAME[d]) for d in ("caag", "nli", "llm_dir")] + \
         [Line2D([], [], marker="o", ls="", color=INK2, label="conflict q."),
          Line2D([], [], marker="s", ls="", color=INK2, label="clean q.")]
-    axes[1].legend(handles=h, fontsize=5.5, loc="upper left", handletextpad=0.2)
+    axes[1].legend(handles=h, fontsize=6.5, loc="upper left", handletextpad=0.2)
     fig.tight_layout()
     fig.savefig(out / "fig_placement.pdf"); plt.close(fig)
 
@@ -406,19 +511,19 @@ def numbers(R, out: Path):
         for s, sn in (("all", "All"), ("conflict", "Conf"), ("clean", "Clean")):
             v = t[c][s]
             add(f"d{k}{sn}", pct(v["diff"], True)); add(f"d{k}{sn}CI", f"[{pct(v['ci_low'], True)}, {pct(v['ci_high'], True)}]")
+    tr = R["main_table"][ROBUST]
+    for k, c in (("LlmDir", "llm_dir+flag_directional"), ("LlmRem", "llm_dir+remove_suspect")):
+        for sb, sn in (("all", "All"), ("clean", "Clean"), ("conflict", "Conf")):
+            add(f"r{k}{sn}", pct(tr[c][sb]["diff"], True))
+    tt = _holm_table({c: dict(d) for c, d in R["main_table"][PRIMARY].items()})
+    add("pLlmDirConfRaw", f"{tt['llm_dir+flag_directional']['conflict']['p']:.3f}")
+    add("pLlmDirConfHolm", f"{tt['llm_dir+flag_directional']['conflict']['p_table_holm']:.2f}")
     q = R["H1"]["quality"]
     for n, k in (("caag", "Caag"), ("nli", "Nli"), ("llm_dir", "Llm")):
         add(f"fOne{k}", pct(q[n]["pair_f1"])); add(f"cleanFpr{k}", pct(q[n]["clean_fpr"]))
         add(f"misGone{k}", pct(q[n]["doc_remove"]["conflict_q_all_misinfo_marked"]))
         add(f"corLost{k}", pct(q[n]["doc_remove"]["clean_q_any_correct_marked"]))
     add("dirAccLlm", pct(q["llm_dir"]["direction_accuracy"]))
-    h4 = R["H4"][PRIMARY]
-    add("hFourHarm", h4["n_harmful"]); add("hFourCells", h4["n_cells"])
-    add("hFourRho", f"{h4['dose_response']['spearman_rho']:+.2f}")
-    add("hFourRemWorse", h4["n_remove_worse"]); add("hFourMatched", len(h4["remove_vs_flag"]))
-    s6 = R["H6"][PRIMARY]["summary"]
-    add("hSixDocIn", s6["doc"]["inside"]); add("hSixPairIn", s6["pair"]["inside"]); add("hSixN", s6["doc"]["n"])
-    add("hSixDocMae", pct(s6["doc"]["mae"])); add("hSixPairMae", pct(s6["pair"]["mae"]))
     if "H8" in R:
         add("wikiPlain", pct(R["wiki_plain"]))
         for c, k in (("oracle+flag", "OracleFlag"), ("llm_dir+flag", "LlmFlag"), ("instruct_v2", "InstrTwo"),
@@ -460,6 +565,88 @@ def numbers(R, out: Path):
                     v = gcells.get(f"{mode}|{pp}|1|{dd}|{sub}")
                     if v:
                         add(f"g{mk}{pk}{dk}{sk}", pct(v["diff"], True, 0))
+    rev = R.get("rev", {})
+    if "H4" in rev:
+        h = rev["H4"][PRIMARY]
+        add("hFourDirHarm", h["by_mode"]["flag_directional"]["n_harmful"]); add("hFourDirN", h["by_mode"]["flag_directional"]["n"])
+        add("hFourRemHarm", h["by_mode"]["remove_suspect"]["n_harmful"]); add("hFourRemN", h["by_mode"]["remove_suspect"]["n"])
+        dr = h["dose_response"]
+        add("hFourRho", f"{dr['spearman_rho']:+.2f}".replace("-", "$-$"))
+        add("hFourRhoCI", f"[{dr['ci_low']:+.2f}, {dr['ci_high']:+.2f}]".replace("-", "$-$").replace("+", "$+$"))
+        add("hFourRhoCells", dr["n_cells"])
+        add("hFourRemWorse", h["remove_vs_flag"]["n_remove_worse"]); add("hFourMatched", h["remove_vs_flag"]["n"])
+    if "H6" in rev:
+        s6 = rev["H6"][PRIMARY]["summary"]
+        add("hSixDocIn", s6["doc"]["inside"]); add("hSixPairIn", s6["pair"]["inside"]); add("hSixN", s6["doc"]["n"])
+        add("hSixDocMae", pct(s6["doc"]["mae"])); add("hSixPairMae", pct(s6["pair"]["mae"]))
+        d = s6["doc_minus_pair_mae"]
+        add("hSixMaeDiff", pct(d["diff"], True)); add("hSixMaeDiffCI", f"[{pct(d['ci_low'], True)}, {pct(d['ci_high'], True)}]")
+        add("hSixMaeP", f"{d['p_exact_signflip']:.2f}"); add("hSixDocBetter", d["n_doc_better"])
+    if "H5_tost" in rev:
+        t5 = rev["H5_tost"][PRIMARY]
+        add("tostLo", pct(t5["ci90_low"], True)); add("tostHi", pct(t5["ci90_high"], True))
+        add("tostMargin", f"{100*t5['margin']:.0f}")
+    if "direction_ci" in rev:
+        dc = rev["direction_ci"]
+        add("dirAccLlmCI", f"[{pct(dc['ci_low'])}, {pct(dc['ci_high'])}]")
+    if "mde_conflict" in rev:
+        add("mdeLo", pct(rev["mde_conflict"]["min"], nd=0)); add("mdeHi", pct(rev["mde_conflict"]["max"], nd=0))
+        add("mdeMed", pct(rev["mde_conflict"]["median"]))
+    if "plain_labelled" in rev:
+        add("plainLab", pct(rev["plain_labelled"][PRIMARY]))
+    for gen, gk in (("gpt-4o-mini", ""), ("gpt-4.1", "gpt")):
+        lab = rev.get("labelled", {}).get(gen, {}).get(PRIMARY, {})
+        for c, k in (("llm_dir+flag_directional", "LlmDir"), ("llm_dir+remove_suspect", "LlmRem"),
+                     ("oracle+flag_directional", "OracleDir"), ("oracle+remove_suspect", "OracleRem")):
+            if c in lab:
+                add(f"{gk}lab{k}", pct(lab[c]["labelled"]["diff"], True))
+                add(f"{gk}lab{k}CI", f"[{pct(lab[c]['labelled']['ci_low'], True)}, {pct(lab[c]['labelled']['ci_high'], True)}]")
+                add(f"{gk}excl{k}", pct(lab[c]["excluded"]["diff"], True))
+    # generator x skeleton
+    tag = {"gpt-4o-mini|default": "Mini", "gpt-4o-mini|minimal": "MiniMin", "gpt-4.1|default": "Four",
+           "gpt-4.1|minimal": "FourMin", "Qwen2.5-7B|default": "Qwen", "Qwen2.5-7B|minimal": "QwenMin"}
+    for gk, v in rev.get("generality", {}).items():
+        T = tag[gk]
+        add(f"nAborted{T}", v["n_aborted"]); add(f"nRows{T}", v["n_rows"])
+        add(f"plain{T}Conf", pct(v["plain"][PRIMARY]["conflict"])); add(f"plain{T}Clean", pct(v["plain"][PRIMARY]["clean"]))
+        for c, k in (("oracle+flag", "OracleFlag"), ("oracle+flag_directional", "OracleDir"),
+                     ("oracle+remove_suspect", "OracleRem"), ("llm_dir+flag", "LlmFlag"),
+                     ("llm_dir+flag_directional", "LlmDir"), ("llm_dir+remove_suspect", "LlmRem")):
+            e = v["effects"][PRIMARY].get(c)
+            if not e:
+                continue
+            for s_, sn in (("conflict", "Conf"), ("clean", "Clean"), ("labelled", "Lab")):
+                add(f"x{T}{k}{sn}", pct(e[s_]["diff"], True))
+                add(f"x{T}{k}{sn}CI", f"[{pct(e[s_]['ci_low'], True)}, {pct(e[s_]['ci_high'], True)}]")
+        for c, k in (("plain", "Plain"), ("oracle+flag", "OracleFlag"), ("oracle+flag_directional", "OracleDir")):
+            if c in v["mechanism"]:
+                add(f"wrong{T}{k}", pct(v["mechanism"][c]["wrong_rate"])); add(f"gold{T}{k}", pct(v["mechanism"][c]["gold_recall"]))
+    if "by_answers" in rev:
+        add("nConfMulti", rev["n_conflict_multi"]); add("nConfSingle", rev["n_conflict_single"])
+        for key, v in rev["by_answers"].items():
+            gk, name = key.rsplit("|", 1)
+            T = tag[gk] + ("Single" if name == "single" else "Multi")
+            add(f"plain{T}", pct(v["plain"]))
+            for c, k in (("oracle+flag", "OracleFlag"), ("oracle+flag_directional", "OracleDir"),
+                         ("oracle+remove_suspect", "OracleRem")):
+                if c in v:
+                    add(f"y{T}{k}", pct(v[c]["diff"], True))
+                    add(f"y{T}{k}CI", f"[{pct(v[c]['ci_low'], True)}, {pct(v[c]['ci_high'], True)}]")
+    for gk, t in rev.get("real_direction", {}).get(PRIMARY, {}).items():
+        T = tag[gk]
+        add(f"rd{T}", pct(t["diff"], True)); add(f"rd{T}CI", f"[{pct(t['ci_low'], True)}, {pct(t['ci_high'], True)}]")
+        add(f"rd{T}P", f"{t['p']:.3f}" if t["p"] >= 0.001 else "<0.001")
+    for c, k in (("oracle_inv+flag_directional", "Dir"), ("oracle_inv+remove_suspect", "Rem")):
+        if c in rev.get("adversarial", {}):
+            for sb, sn in (("conflict", "Conf"), ("clean", "Clean")):
+                v = rev["adversarial"][c][sb]
+                add(f"adv{k}{sn}", pct(v["diff"], True)); add(f"adv{k}{sn}CI", f"[{pct(v['ci_low'], True)}, {pct(v['ci_high'], True)}]")
+            add(f"wrongAdv{k}", pct(R["rev"]["adversarial_wrong"][c]) if "adversarial_wrong" in rev else "--")
+    for h in ("H10", "H11"):
+        if h in rev:
+            fam = rev[h][PRIMARY]
+            hn = {"H10": "HTen", "H11": "HEleven"}[h]
+            add(f"n{hn}Supported", sum(v["supported"] for v in fam.values())); add(f"n{hn}Tests", len(fam))
     from .costs import total_spend
     add("totalSpend", f"\\${total_spend():.2f}")
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
@@ -474,6 +661,7 @@ def numbers(R, out: Path):
 
 def write_all(R, out: Path):
     tab_detectors(R, out); tab_main(R, out); tab_gpt41(R, out); tab_wiki(R, out); tab_hypotheses(R, out)
+    tab_generality(R, out)
     numbers(R, out)
     app_prompts(out)
     tab_appendix(R, out)
@@ -489,7 +677,7 @@ def write_all(R, out: Path):
 def app_prompts(out: Path):
     """Verbatim prompts for the appendix, taken from the code that ran."""
     from .detectors import LLM_DETECT_DIRECTIONAL_PROMPT
-    from .prompts import BASE, INSTRUCTION, INSTRUCTION_V2, build_prompt
+    from .prompts import BASE, BASE_MINIMAL, INSTRUCTION, INSTRUCTION_V2, build_prompt
     from .detectors import Detection
     ex = build_prompt("Who founded X?", ["<passage 0>", "<passage 1>", "<passage 2>"], "flag_directional",
                       [Detection(0, 2, 1.0, "contradiction", [2])])[0]
@@ -498,7 +686,7 @@ def app_prompts(out: Path):
         wrapped = "\n".join(textwrap.fill(l, 52) if l.strip() else "" for l in text.splitlines())
         return f"\\paragraph{{{title}}}\n\\begin{{footnotesize}}\\begin{{verbatim}}\n{wrapped}\n\\end{{verbatim}}\\end{{footnotesize}}\n"
     (out / "app_prompts.tex").write_text(
-        vb("Generation skeleton.", BASE) + vb("Instruction v1.", INSTRUCTION) + vb("Instruction v2.", INSTRUCTION_V2)
+        vb("Generation skeleton (default).", BASE) + vb("Minimal skeleton (no answer policy).", BASE_MINIMAL) + vb("Instruction v1.", INSTRUCTION) + vb("Instruction v2.", INSTRUCTION_V2)
         + vb("Example: directional flag (passage 2 suspect).", ex)
         + vb("Directional LLM detector.", LLM_DETECT_DIRECTIONAL_PROMPT))
 
@@ -516,9 +704,11 @@ def tab_appendix(R, out: Path):
                             f"{pct(v['diff'], True)} [{pct(v['ci_low'], True)}, {pct(v['ci_high'], True)}] & {_p(v['p_holm'])} & "
                             f"{pct(vb['diff'], True)} & {_p(vb['p_holm'])} \\\\")
         if "H4" in c:
-            h4 = c["H4"][PRIMARY]
-            rows.append(f"H4 & false-flag cells harmful on clean q.; Spearman $\\rho$ & {h4['n_harmful']}/{h4['n_cells']}; "
-                        f"$\\rho={h4['dose_response']['spearman_rho']:+.2f}$ & {_p(h4['dose_response']['p_perm'])} & & \\\\")
+            h4 = c["H4"][PRIMARY]; bm = h4["by_mode"]; dr = h4["dose_response"]
+            rows.append(f"H4 & harmful cells, clean q.\\ (dir.\\ flag; removal); $\\rho$ & "
+                        f"{bm['flag_directional']['n_harmful']}/{bm['flag_directional']['n']}; "
+                        f"{bm['remove_suspect']['n_harmful']}/{bm['remove_suspect']['n']}; "
+                        f"$\\rho={dr['spearman_rho']:+.2f}$ [{dr['ci_low']:+.2f}, {dr['ci_high']:+.2f}] & & & \\\\")
         parts.append(rf"""\begin{{table*}}[t]
 \centering\small
 \begin{{tabular}}{{llrlrl}}

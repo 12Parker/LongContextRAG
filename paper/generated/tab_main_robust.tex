@@ -1,35 +1,37 @@
 \begin{table}[t]
 \centering\small
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{lrrrr}
+\setlength{\tabcolsep}{2.2pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrr}
 \toprule
-Condition & All & Conflict & Clean & Tokens \\
+Condition & All & Lab. & Conflict & Clean & Tokens \\
 \midrule
-No flags (plain) & 35.2 & 25.9 & 49.7 & 911 \\
+No flags (plain) & 35.2 & 37.2 & 25.9 & 49.7 & 911 \\
 \midrule
-\multicolumn{5}{l}{\emph{Prompt only}} \\
-\quad Instruction (v1) & $+$1.3 & $-$1.0 & $+$2.1 & 948 \\
-\quad Instruction (v2) & $+$2.2 & $+$3.6 & $-$1.1 & 951 \\
-\multicolumn{5}{l}{\emph{Oracle detector}} \\
-\quad Oracle, flag & \textbf{$-$3.6} & \textbf{$-$7.7} & 0.0 & 980 \\
-\quad Oracle, directional flag & \textbf{$+$7.0} & \textbf{$+$15.1} & 0.0 & 998 \\
-\quad Oracle, remove suspect & \textbf{$+$15.4} & \textbf{$+$33.3} & 0.0 & 825 \\
-\multicolumn{5}{l}{\emph{Real detectors}} \\
-\quad Random, flag & $+$0.4 & $-$0.2 & $+$1.1 & 949 \\
-\quad CAAG, flag & $-$0.9 & $-$1.9 & $-$0.8 & 942 \\
-\quad CAAG, remove & $-$4.0 & $-$1.0 & \textbf{$-$8.5} & 809 \\
-\quad NLI, flag & $+$0.2 & $-$1.4 & $+$1.6 & 1021 \\
-\quad NLI, remove & $-$8.0 & $-$3.1 & \textbf{$-$13.2} & 592 \\
-\quad LLM, flag & $-$3.4 & \textbf{$-$7.2} & $+$0.8 & 970 \\
-\quad LLM, directional flag & $+$4.7 & \textbf{$+$14.1} & $-$6.1 & 983 \\
-\quad LLM, remove suspect & $-$2.1 & \textbf{$+$18.9} & \textbf{$-$26.5} & 718 \\
-\multicolumn{5}{l}{\emph{Reference}} \\
-\quad MADAM-RAG & $+$5.7 & $+$3.6 & $+$6.9 & 8196 \\
+\multicolumn{6}{l}{\emph{Prompt only}} \\
+\quad Instruction (v1) & $+$1.3 & $+$0.5 & $-$1.0 & $+$2.1 & 948 \\
+\quad Instruction (v2) & $+$2.2 & $+$1.4 & $+$3.6 & $-$1.1 & 951 \\
+\multicolumn{6}{l}{\emph{Oracle detector}} \\
+\quad Oracle, flag & \textbf{$-$3.6} & \textbf{$-$4.0} & \textbf{$-$7.7} & 0.0 & 980 \\
+\quad Oracle, directional flag & \textbf{$+$7.0} & \textbf{$+$7.9} & \textbf{$+$15.1} & 0.0 & 998 \\
+\quad Oracle, remove suspect & \textbf{$+$15.4} & \textbf{$+$17.5} & \textbf{$+$33.3} & 0.0 & 825 \\
+\multicolumn{6}{l}{\emph{Real detectors (exploratory)}} \\
+\quad Random, flag & $+$0.4 & $+$0.4 & $-$0.2 & $+$1.1 & 949 \\
+\quad CAAG, flag & $-$0.9 & $-$1.4 & $-$1.9 & $-$0.8 & 942 \\
+\quad CAAG, remove & $-$4.0 & $-$4.5 & $-$1.0 & $-$8.5 & 809 \\
+\quad NLI, flag & $+$0.2 & 0.0 & $-$1.4 & $+$1.6 & 1021 \\
+\quad NLI, remove & $-$8.0 & $-$7.9 & $-$3.1 & \textbf{$-$13.2} & 592 \\
+\quad LLM, flag & $-$3.4 & $-$3.4 & \textbf{$-$7.2} & $+$0.8 & 970 \\
+\quad LLM, directional flag & $+$4.7 & $+$4.5 & \textbf{$+$14.1} & $-$6.1 & 983 \\
+\quad LLM, remove suspect & $-$2.1 & $-$2.6 & \textbf{$+$18.9} & \textbf{$-$26.5} & 718 \\
+\multicolumn{6}{l}{\emph{Reference}} \\
+\quad MADAM-RAG & $+$5.7 & $+$5.2 & $+$3.6 & $+$6.9 & 8196 \\
 \bottomrule
-\end{tabular}
-\caption{RAMDocs hold-out (300 questions: 139 conflict, 126 clean), gpt-4o-mini, 3 seeds, bidirectional strict accuracy (robustness).
+\end{tabular}}
+\caption{RAMDocs hold-out, gpt-4o-mini, 3 seeds, bidirectional strict accuracy (robustness). \emph{All}: 300 questions, including 35 whose
+conflict status the label rule leaves open; \emph{Lab.}: the 265 labelled ones (139 conflict, 126 clean).
 First row: accuracy (\%) with no flags. Other rows: paired difference from it in points; \textbf{bold} = significant
-after Holm correction across the table (sign-flip test, $p<0.05$). Tokens: mean prompt tokens per call
-(MADAM-RAG: per question, all calls).}
+after Holm correction across the table (sign-flip test, $p<0.05$). Real-detector rows were not pre-registered as
+tests. Tokens: mean prompt tokens per call (MADAM-RAG: per question, all calls).}
 \label{tab:main_robust}
 \end{table}

@@ -5,7 +5,7 @@ disagreements are genuine: two sources report different findings, or two people 
 stale misinformation \citep{zou2025poisonedrag,wang2025madam}. A natural fix is to detect the contradiction and tell
 the generator about it. Recent systems pair pairwise contradiction detectors with prompts that flag conflicting
 passages \citep{wang2026conflictrag}, and prompting a model about conflicts can help \citep{cattan2025conflicts}.
-These systems are judged mainly by detection F1 and end-to-end accuracy, which hides two questions. What should the
+These systems report detection F1 and end-to-end accuracy, but not how the two connect, which hides two questions. What should the
 flag say? And what must the detector get right for the flag to help?
 
 We separate the two. We fix the retrieved passages and vary, independently, the \emph{detector} (a heuristic, an NLI
@@ -13,26 +13,30 @@ cross-encoder, an LLM, a random placebo and an oracle) and the \emph{format} tha
 a neutral ``these passages may conflict'' flag, a \emph{directional} flag that names the likely misinformation, or
 removal of the suspect passage. To see what detector quality buys, we also build synthetic detectors with a chosen
 precision, recall and direction accuracy. We ran pilots on 200 RAMDocs questions \citep{wang2025madam}, then
-pre-registered our hypotheses and tested them on 300 held-out questions with two generators, plus a contrast
-benchmark of genuine conflicts \citep{hou2024wikicontradict}.
+pre-registered our hypotheses and tested them on 300 held-out questions with three generators and two prompt
+skeletons, plus a contrast benchmark of genuine conflicts \citep{hou2024wikicontradict}.
 
 Our findings:
 \begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{A correct neutral flag can hurt.} Flagging exactly the true contradictions lowers gpt-4o-mini's
-accuracy on RAMDocs conflict questions by \adOracleFlagConf\ points \dOracleFlagConfCI. The model reads ``these
-conflict'' as ``both are valid answers'' and repeats the misinformation. The same flag \emph{raises} accuracy on
-WikiContradict, where both sides are valid, by \awikiOracleFlag\ points (\awikiGptOracleFlag\ with gpt-4.1).
-\item \textbf{Direction is what helps.} Saying which passage is likely wrong gains \adOracleDirConf\ points on
-conflict questions, and removing that passage gains \adOracleRemConf. A real gpt-4o-mini detector with directional
-output gains \adLlmDirConf\ (directional flag) and \adLlmRemConf\ (removal).
-\item \textbf{Removal is the high-variance choice.} The detector's false flags remove correct passages and cost
-\adLlmRemClean\ points on conflict-free questions, cancelling the gain overall (\dLlmRemAll). A directional flag costs
-little on clean questions, so it is the safer interface.
-\item \textbf{Pair-level F1 does not predict benefit.} A detector's effect is predicted far better by what it does to
-\emph{documents}: whether each question's misinformation is removed and whether a correct document is lost. The
-heuristic detector we started from does no better than random flags of the same volume.
+\item \textbf{A correct neutral flag does not help against misinformation.} Flagging exactly the true contradictions
+lowers gpt-4o-mini's accuracy on RAMDocs conflict questions by \adOracleFlagConf\ points \dOracleFlagConfCI. The
+estimate is negative for all three generators and both prompt skeletons, and significant in four of the six settings.
+The same flag \emph{raises} accuracy on WikiContradict, where both sides are valid, by \awikiOracleFlag\ points
+(\awikiGptOracleFlag\ with gpt-4.1).
+\item \textbf{Acting on direction helps; telling the model helps if it listens.} Removing the passage the oracle names
+as misinformation gains \axQwenMinOracleRemConf--\agptOracleRemConf\ points on conflict questions in every setting.
+A directional flag beats the neutral flag everywhere, but beats no flag only for generators that follow the warning
+(gpt-4.1; gpt-4o-mini with the default prompt). Naming the wrong side costs \aadvDirConf\ points as a flag and
+\aadvRemConf\ with removal.
+\item \textbf{Removal is the high-variance choice.} False flags make the model lose correct passages. With a real LLM
+detector, removal's \adLlmRemConf-point gain on conflict questions is offset by a \adLlmRemClean-point loss on clean
+ones, in every generator.
+\item \textbf{Real detectors gain little so far} (exploratory). With the same LLM detector, a directional flag beats a
+neutral one by \ardMini\ points on conflict questions, but its net effect over no flags is \labLlmDir\ points on
+labelled questions. The heuristic detector we started from does not beat random flags of the same volume, and a
+grid of synthetic detectors predicts real detectors' effects only roughly.
 \end{itemize}
-Together these results suggest a reporting standard: evaluate a conflict detector by its document-level behaviour on
-both conflict and conflict-free questions, under the exact format it will feed the generator. We release the harness,
-pre-registration and every run.\footnote{Code, the pre-registration and all run outputs are in the anonymised
+For conflict-aware RAG, we recommend reporting direction accuracy and effects on conflict-free questions alongside
+detection F1, under the exact format that feeds the generator. We release the harness, pre-registration and every
+run.\footnote{Code, the pre-registration and all run outputs are in the anonymised
 supplementary material and will be released publicly on acceptance.}

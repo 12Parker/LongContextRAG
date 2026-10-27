@@ -1,4 +1,4 @@
-# Paper: "Which Side Is Wrong? Contradiction Flags in RAG Need Direction, Not Just Detection"
+# Paper: "Which Side Is Wrong? Neutral Contradiction Flags Do Not Help Retrieval-Augmented Generation Against Misinformation"
 
 ACL-format long paper (review mode, anonymous). The body is about 7.3 pages; Limitations, Ethics, References and the
 appendix follow.
@@ -29,7 +29,8 @@ the text is a macro from `generated/numbers.tex`.
    NLP checklist and to take full responsibility for the content. Check every claim against `generated/hypotheses.json`.
 2. **Fill in the ARR Responsible NLP checklist** in the submission form. Relevant facts:
    - artifacts and licences: RAMDocs (MIT), CONFLICTS (Apache-2.0), WikiContradict (MIT, per its Hugging Face card);
-   - compute: CPU only, plus $27.42 of API spend (`runs/COSTS.md`);
+   - compute: a laptop (CPU for CAAG/NLI; Apple-silicon GPU for Qwen2.5-7B via Ollama), plus $33.70 of API spend
+     (`runs/COSTS.md`; its call count includes the local Qwen calls, which cost nothing);
    - no human subjects;
    - AI assistance: yes, see item 1.
 3. **Venue and deadline.** Check the current ARR cycle dates and the target venue's page limit (8 pages for long
@@ -40,7 +41,6 @@ the text is a macro from `generated/numbers.tex`.
    - hand-label the 163 suspect RAMDocs documents (`runs/labelling/ramdocs_suspect_docs.csv`, then
      `--ramdocs-labels hand`);
    - label the 166 Phase-0 CAAG flags (`runs/phase0/flags_to_label.csv`);
-   - add an open-weights generator through `--base-url`;
    - add a different-family judge for CONFLICTS' opinion items (`judge.py`).
 6. **Camera-ready:** de-anonymise (author block, the code-release footnote in `sections/intro.tex`) and switch
    `\usepackage[review]{acl}` to `\usepackage[final]{acl}`.
@@ -54,5 +54,16 @@ the text is a macro from `generated/numbers.tex`.
 | gpt-4.1 replication | `runs/holdout_gpt41/` |
 | WikiContradict | `runs/wikicontradict_main/`, `runs/wikicontradict_gpt41/` |
 | Label robustness | `runs/holdout_contains/` |
+| Skeleton ablation (H10) | `runs/holdout_minimal/`, `runs/holdout_gpt41_minimal/`, `runs/holdout_qwen_minimal/` |
+| Open-weights replication (H11) | `runs/holdout_qwen/` |
+| Adversarial direction | `runs/holdout_adversarial/` |
+| Re-analyses (H4, H5 TOST, H6 prediction intervals) | `experiments/conflict/revision_stats.py` |
 | Detector quality, θ sweep | `runs/holdout_detect/` |
-| Pre-registration (frozen before confirmatory runs) | `experiments/conflict/PREREGISTRATION.md`, commit `a6f7124` |
+| Pre-registration (frozen before confirmatory runs) | `experiments/conflict/PREREGISTRATION.md`, commit `a6f7124`; revision addendum §9, commits `ad5535d` onward |
+
+## Reproducing the Qwen runs
+
+`brew install ollama`, `ollama serve` (with `OLLAMA_NUM_PARALLEL=4 OLLAMA_CONTEXT_LENGTH=8192`),
+`ollama pull qwen2.5:7b-instruct` (digest `845dbda0ea48`), then `run.py` with
+`--base-url http://localhost:11434/v1 --api-key-env OLLAMA_API_KEY` (any non-empty value) and `--price-input 0 --price-output 0`.
+The exact commands are in each run's `config.json`.
