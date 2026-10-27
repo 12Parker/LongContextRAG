@@ -52,3 +52,35 @@ def test_stats():
     assert sign_flip_p(a, a, n_perm=500) == 1.0
     h = holm({"x": 0.01, "y": 0.04, "z": 0.03})
     assert h["x"] == 0.03 and h["z"] == 0.06 and h["y"] == 0.06
+
+
+def test_ramdocs_matching_is_bidirectional():
+    ex = Example("r", "ramdocs", "q", PS, gold_answers=["January 1, 1877", "1,664 people"],
+                 wrong_answers=["5,000 people"])
+    s = score(ex, "Final answer(s): 1877 | 1,664")
+    assert s["ramdocs_strict"] == 1.0 and s["ramdocs_strict_oneway"] == 0.0
+    s = score(ex, "Final answer(s): 1877 | 1,664 | 5,000")
+    assert s["wrong_rate"] == 1.0 and s["ramdocs_strict"] == 0.0
+    assert score(ex, "Final answer(s): 1878 | 1,664")["gold_recall"] == 0.5
+
+
+def test_directional_and_remove_suspect():
+    d = [Detection(0, 2, 1.0, "contradiction", suspects=[0])]
+    dirp, _ = build_prompt("q?", PS, "flag_directional", d)
+    assert "Passage 0 [LIKELY MISINFORMATION; conflicts with passage(s): 2]" in dirp
+    assert "Passage 2 [POTENTIAL CONFLICT with passage(s): 0]" in dirp
+    assert "passage 0 likely contains misinformation" in dirp
+    # plain flag ignores direction
+    assert "MISINFORMATION" not in build_prompt("q?", PS, "flag", d)[0]
+    rem, kept = build_prompt("q?", PS, "remove_suspect", d)
+    assert kept == [1, 2] and "alpha" not in rem
+    # no suspect -> falls back to original remove (drops doc_idx_2)
+    assert build_prompt("q?", PS, "remove_suspect", [Detection(0, 2, 1.0)])[1] == [0, 1]
+    assert build_prompt("q?", PS, "remove", d)[1] == [0, 1]
+
+
+def test_pair_level_skips_uncertain():
+    from experiments.conflict.metrics import pair_level
+    ex = Example("u", "ramdocs", "q", PS, gold_pairs={(0, 1): "contradiction", (0, 2): "uncertain", (1, 2): "ambiguity"})
+    m = pair_level([ex], {"u": {(0, 1), (0, 2), (1, 2)}})
+    assert m["tp"] == 1 and m["fp"] == 1

@@ -46,16 +46,28 @@ def _contains(pred_norm: str, ans: str) -> bool:
     return bool(a) and re.search(rf"(?<!\w){re.escape(a)}(?!\w)", pred_norm) is not None
 
 
+def _matches(answers: list[str], ref: str) -> bool:
+    """Some predicted answer matches `ref` as a whole-word span, in either direction:
+    "1877" matches gold "January 1, 1877", and "5,000" matches wrong answer "5,000 people".
+    One-way matching (ref inside the prediction) missed both, so it credited wrong answers
+    and penalised right ones whenever RAMDocs answers carry extra words."""
+    r = normalize_answer(ref)
+    return any(_contains(normalize_answer(a), ref) or _contains(r, a) for a in answers)
+
+
 def score(ex: Example, response: str) -> dict:
     answers = extract_answers(response)
     pred = normalize_answer(" ; ".join(answers))
     out: dict = {"pred_answers": answers}
     if ex.dataset == "ramdocs":
-        g = [_contains(pred, a) for a in ex.gold_answers]
-        w = [_contains(pred, a) for a in ex.wrong_answers]
+        g = [_matches(answers, a) for a in ex.gold_answers]
+        w = [_matches(answers, a) for a in ex.wrong_answers]
+        g1 = [_contains(pred, a) for a in ex.gold_answers]   # one-way, kept for comparison
+        w1 = [_contains(pred, a) for a in ex.wrong_answers]
         out.update(ramdocs_strict=float(all(g) and not any(w)),
                    gold_recall=sum(g) / max(len(g), 1),
-                   wrong_rate=float(any(w)))
+                   wrong_rate=float(any(w)),
+                   ramdocs_strict_oneway=float(all(g1) and not any(w1)))
         out["primary"] = out["ramdocs_strict"]
     elif ex.dataset == "conflicts":
         out["primary"] = float(_contains(pred, ex.gold_answers[0])) if ex.gold_answers else None
@@ -79,7 +91,7 @@ def pair_level(examples: list[Example], flagged: dict[str, set[tuple[int, int]]]
         if ex.gold_pairs is None:
             continue
         gold = {k for k, v in ex.gold_pairs.items() if v == positive}
-        f = flagged.get(ex.id, set())
+        f = {pr for pr in flagged.get(ex.id, set()) if ex.gold_pairs.get(pr) != "uncertain"}
         tp += len(f & gold); fp += len(f - gold); fn += len(gold - f)
     return prf(tp, fp, fn)
 
@@ -108,3 +120,28 @@ def false_flags_by_relation(examples: list[Example], flagged: dict[str, set[tupl
         for pr in flagged.get(ex.id, set()):
             c[ex.gold_pairs.get(pr, "?")] += 1
     return dict(c)
+
+
+def direction_accuracy(examples: list[Example], dets: dict) -> float | None:
+    """Share of flagged gold-contradiction pairs whose `suspects` are exactly the gold
+    misinformation side(s). None if no flagged true pair carries a direction."""
+    right = total = 0
+    for ex in examples:
+        types = ex.meta.get("doc_types", [])
+        for d in dets[ex.id].pairs:
+            if (ex.gold_pairs or {}).get((d.i, d.j)) != "contradiction" or not d.suspects:
+                continue
+            total += 1
+            right += sorted(d.suspects) == [k for k in (d.i, d.j) if types[k] == "misinfo"]
+    return right / total if total else None
+
+
+def direction_coverage(examples: list[Example], dets: dict) -> float | None:
+    """Share of flagged gold-contradiction pairs that carry any direction (`suspects`)."""
+    flagged = with_dir = 0
+    for ex in examples:
+        for d in dets[ex.id].pairs:
+            if (ex.gold_pairs or {}).get((d.i, d.j)) == "contradiction":
+                flagged += 1
+                with_dir += bool(d.suspects)
+    return with_dir / flagged if flagged else None

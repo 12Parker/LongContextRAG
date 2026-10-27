@@ -70,7 +70,7 @@ def main(argv=None):
                 raise RuntimeError(f"contradiction prob {s:.2f} on an obvious contradiction; check label mapping")
             return f"contradiction label idx={d.c_idx}, p={s:.2f} on sanity pair"
         check("NLI cross-encoder + label sanity", nli)
-        check("NarrativeQA (HF)", lambda: f"{len(__import__('datasets').load_dataset('narrativeqa', split='test'))} rows")
+        check("NarrativeQA (HF)", lambda: f"{len(__import__('datasets').load_dataset('deepmind/narrativeqa', split='test'))} rows")
 
     if args.live:
         print("Live API")

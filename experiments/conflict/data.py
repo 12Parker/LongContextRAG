@@ -66,22 +66,67 @@ def _ramdocs_pair_label(a: dict, b: dict) -> str:
     return "contradiction"
 
 
-def load_ramdocs(path: Path | None = None, n: int | None = None, seed: int = 0) -> list[Example]:
+RAMDOCS_LABEL_FIXES = ("exclude", "contains", "none")
+
+
+def _ramdocs_suspects(r: dict) -> dict[int, str]:
+    """Non-misinfo documents whose text contains a wrong answer -> the wrong answer found.
+
+    In the released file, some injected misinformation sits in documents typed "correct"
+    (e.g. a "Football" document saying Ronald Powell is "a renowned chess player"). But many
+    hits are incidental mentions in genuine documents (a navigation menu listing "Soccer", a
+    footer naming "John Coltrane"): 151 of the 163 hits also contain a gold answer. A string
+    match cannot separate the two, so these documents are *suspects*, not misinformation.
+    """
+    from .metrics import _contains, normalize_answer  # metrics imports Example from here
+    out = {}
+    for i, d in enumerate(r["documents"]):
+        if d["type"] == "misinfo":
+            continue
+        t = normalize_answer(d["text"])
+        hit = next((w for w in r["wrong_answers"] if _contains(t, w)), None)
+        if hit is not None:
+            out[i] = hit
+    return out
+
+
+def load_ramdocs(path: Path | None = None, n: int | None = None, seed: int = 0,
+                 label_fix: str = "exclude") -> list[Example]:
+    """`label_fix` handles suspect documents (see _ramdocs_suspects):
+      exclude  : pairs touching a suspect get label "uncertain" (left out of pair metrics and
+                 synthetic pools); a question whose only sign of conflict is a suspect gets
+                 has_conflict=None, so it leaves the clean split. Conflict questions are unchanged.
+      contains : treat every suspect as misinformation for the wrong answer it contains.
+      none     : the released document types as they are.
+    """
+    if label_fix not in RAMDOCS_LABEL_FIXES:
+        raise ValueError(f"label_fix must be one of {RAMDOCS_LABEL_FIXES}")
     path = path or DATA_DIR / "RAMDocs" / "RAMDocs_test.jsonl"
     rows = [json.loads(l) for l in open(path)]
     out = []
     for k, r in enumerate(rows):
-        docs = r["documents"]
+        docs = [dict(d) for d in r["documents"]]
+        suspects = _ramdocs_suspects(r) if label_fix != "none" else {}
+        if label_fix == "contains":
+            for i, w in suspects.items():
+                docs[i]["type"], docs[i]["answer"] = "misinfo", w
         pairs = {(i, j): _ramdocs_pair_label(docs[i], docs[j])
                  for i in range(len(docs)) for j in range(i + 1, len(docs))}
+        has_conflict = any(v == "contradiction" for v in pairs.values())
+        if label_fix == "exclude" and suspects:
+            pairs = {pr: ("uncertain" if (pr[0] in suspects or pr[1] in suspects) and v != "contradiction" else v)
+                     for pr, v in pairs.items()}
+            has_conflict = True if has_conflict else None
         out.append(Example(
             id=f"ramdocs-{k}", dataset="ramdocs", question=r["question"],
             passages=[d["text"] for d in docs],
             gold_answers=r["gold_answers"], wrong_answers=r["wrong_answers"],
-            has_conflict=any(v == "contradiction" for v in pairs.values()),
+            has_conflict=has_conflict,
             conflict_type="misinfo" if r["wrong_answers"] else ("ambiguity" if len(r["gold_answers"]) > 1 else "none"),
             gold_pairs=pairs, group=f"ramdocs-{k}",
-            meta={"doc_types": [d["type"] for d in docs], "doc_answers": [d["answer"] for d in docs]},
+            meta={"doc_types": [d["type"] for d in docs], "doc_answers": [d["answer"] for d in docs],
+                  "doc_types_released": [d["type"] for d in r["documents"]],
+                  "suspect_docs": sorted(suspects), "label_fix": label_fix},
         ))
     return _subsample(out, n, seed)
 
@@ -116,7 +161,7 @@ def load_narrativeqa_questions(n: int, seed: int = 42, split: str = "test",
     Returns raw dicts with the full story; retrieval happens later.
     """
     from datasets import load_dataset  # heavy, import lazily
-    ds = load_dataset("narrativeqa", split=split)
+    ds = load_dataset("deepmind/narrativeqa", split=split)  # namespaced id required by datasets>=4
     by_story = defaultdict(list)
     for i, doc_id in enumerate(ds["document"]):
         by_story[doc_id["id"]].append(i)

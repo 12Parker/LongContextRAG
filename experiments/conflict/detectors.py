@@ -25,6 +25,9 @@ class Detection:
     j: int
     score: float
     type: str = "contradiction"
+    # passages in (i, j) the detector believes are the misinformation side; empty if it
+    # cannot tell (CAAG, NLI). Used by the flag_directional and remove_suspect modes.
+    suspects: list[int] = field(default_factory=list)
 
 
 @dataclass
@@ -148,28 +151,68 @@ Return JSON only: {{"pairs": [{{"i": <int>, "j": <int>, "relation": "contradicti
 Use the passage numbers shown. Return {{"pairs": []}} if there are none."""
 
 
+LLM_DETECT_DIRECTIONAL_PROMPT = """You will see a question and {n} numbered passages retrieved for it.
+Some passages may contain misinformation: false claims about the answer to the question.
+Identify every pair of passages that CONTRADICT each other about the answer to the question,
+i.e. they cannot both be true about the same entity at the same time. Passages that are about
+different entities with the same name, give complementary details, or describe different times
+are NOT contradictions; note them as "ambiguity", "complementary" or "temporal" instead.
+
+For each contradiction, say which passage of the pair is more likely the misinformation, judging
+by agreement with the other passages and by plausibility: its number, "both" if both are likely
+false, or "unclear" if you cannot tell.
+
+Question: {question}
+
+{passages}
+
+Return JSON only: {{"pairs": [{{"i": <int>, "j": <int>, "relation": "contradiction|ambiguity|complementary|temporal", "misinformation": <int>|"both"|"unclear"}}]}}
+Use the passage numbers shown. "misinformation" is needed only for contradictions. Return {{"pairs": []}} if there are none."""
+
+
 class LLMDetector:
-    """Single-call LLM detector (comparable to ConflictRAG's 'CoT Detection' baseline)."""
-    def __init__(self, llm, max_chars: int = 1500, seed: int = 0, name: str = "llm"):
-        self.llm, self.max_chars, self.seed, self.name = llm, max_chars, seed, name
+    """Single-call LLM detector (comparable to ConflictRAG's 'CoT Detection' baseline).
+
+    With `directional=True` it also says which side of each contradiction is likely the
+    misinformation, which fills `Detection.suspects` for flag_directional / remove_suspect.
+    """
+    def __init__(self, llm, max_chars: int = 1500, seed: int = 0, directional: bool = False,
+                 name: str | None = None):
+        self.llm, self.max_chars, self.seed, self.directional = llm, max_chars, seed, directional
+        self.name = name or ("llm_dir" if directional else "llm")
 
     def detect(self, ex: Example) -> DetectorOutput:
         body = "\n\n".join(f"[{k}] {p[: self.max_chars]}" for k, p in enumerate(ex.passages))
-        prompt = LLM_DETECT_PROMPT.format(n=len(ex.passages), question=ex.question, passages=body)
-        r = self.llm(prompt, seed=self.seed, json_mode=True, max_tokens=512)
+        template = LLM_DETECT_DIRECTIONAL_PROMPT if self.directional else LLM_DETECT_PROMPT
+        prompt = template.format(n=len(ex.passages), question=ex.question, passages=body)
+        r = self.llm(prompt, seed=self.seed, json_mode=True, max_tokens=1024 if self.directional else 512)
         try:
             items = json.loads(r.text).get("pairs", [])
         except json.JSONDecodeError:
             m = re.search(r"\{.*\}", r.text, re.S)
-            items = json.loads(m.group(0)).get("pairs", []) if m else []
+            try:
+                items = json.loads(m.group(0)).get("pairs", []) if m else []
+            except json.JSONDecodeError:
+                items = []
         pairs, scores, n = [], {}, len(ex.passages)
-        for it in items:
+        for it in items if isinstance(items, list) else []:
             try:
                 i, j = sorted((int(it["i"]), int(it["j"])))
             except (KeyError, TypeError, ValueError):
                 continue
-            if 0 <= i < j < n and it.get("relation", "contradiction") == "contradiction":
-                pairs.append(Detection(i, j, 1.0, "llm"))
+            if 0 <= i < j < n and it.get("relation", "contradiction") == "contradiction" and (i, j) not in scores:
+                suspects = []
+                if self.directional:
+                    mis = it.get("misinformation")
+                    if str(mis).lower() == "both":
+                        suspects = [i, j]
+                    else:
+                        try:
+                            suspects = [int(mis)] if int(mis) in (i, j) else []
+                        except (TypeError, ValueError):
+                            suspects = []
+                # neutral type: it is rendered into the prompt as "<type> conflict"
+                pairs.append(Detection(i, j, 1.0, "contradiction", suspects))
                 scores[(i, j)] = 1.0
         return DetectorOutput(pairs, scores, r.latency_s, r.cost_usd, {"raw": r.text, "relations": items})
 
@@ -184,7 +227,9 @@ class RandomDetector:
     def detect(self, ex: Example) -> DetectorOutput:
         rng = random.Random(f"{self.seed}-{ex.id}")
         n = len(ex.passages)
-        pairs = [Detection(i, j, 1.0, "random") for i in range(n) for j in range(i + 1, n)
+        # type is rendered into the prompt ("<type> conflict"), so controls use a neutral
+        # label; "random conflict" / "oracle conflict" would tell the model what it is seeing
+        pairs = [Detection(i, j, 1.0, "contradiction") for i in range(n) for j in range(i + 1, n)
                  if rng.random() < self.rate]
         return DetectorOutput(pairs, {(d.i, d.j): 1.0 for d in pairs})
 
@@ -196,8 +241,93 @@ class OracleDetector:
     def detect(self, ex: Example) -> DetectorOutput:
         if ex.gold_pairs is None:
             raise ValueError(f"{ex.dataset} has no pair-level gold labels; oracle not defined.")
-        pairs = [Detection(i, j, 1.0, "oracle") for (i, j), lab in ex.gold_pairs.items() if lab == "contradiction"]
+        types = ex.meta.get("doc_types", [])
+        pairs = [Detection(i, j, 1.0, "contradiction",
+                           [k for k in (i, j) if k < len(types) and types[k] == "misinfo"])
+                 for (i, j), lab in ex.gold_pairs.items() if lab == "contradiction"]
         return DetectorOutput(pairs, {(d.i, d.j): 1.0 for d in pairs})
+
+
+def synth_name(precision: float, recall: float, pool: str = "all", direction: float | None = None) -> str:
+    return f"synth-p{precision:g}-r{recall:g}-{pool}" + ("" if direction is None else f"-d{direction:g}")
+
+
+def parse_synth_name(name: str) -> tuple[float, float, str, float | None]:
+    _, p, r, pool, *d = name.split("-")
+    return float(p[1:]), float(r[1:]), pool, (float(d[0][1:]) if d else None)
+
+
+class SyntheticDetector:
+    """Flags with a chosen pair-level precision and recall, built from gold pair labels.
+
+    Each true contradiction pair is flagged with probability `recall`. False flags are drawn
+    from non-contradiction pairs whose gold relation is in `pool` ("all" = any of them) at a
+    single per-pair rate, set over the whole example list so that expected dataset-level
+    precision equals `precision`. Because the rate is dataset-wide, conflict-free questions get
+    false flags too, which is what H3 needs.
+
+    Every pair gets one uniform draw keyed by (seed, example, pair) and shared across grid
+    cells, so cells are nested: a higher-recall cell flags a superset of a lower one's true
+    pairs, and a lower-precision cell a superset of the false ones. Grid comparisons stay paired.
+
+    If the pool is too small to reach the target precision, the rate is capped at 1 and the
+    achieved precision is higher than requested; `capped` records this.
+
+    `direction` (None = no direction) sets `suspects` for the flag_directional and
+    remove_suspect modes. A true flag points at the gold misinformation side(s) with
+    probability `direction`; otherwise it points at the other passage (for a pair where both
+    sides are misinformation, at one of them only). A false flag has no misinformation side, so
+    it points at one passage chosen at random, independent of `direction`. Direction draws are
+    shared across cells too, so a higher-accuracy cell gets right every pair a lower one does.
+    """
+    RELATIONS = ("ambiguity", "unrelated", "consistent")
+
+    def __init__(self, examples: list[Example], precision: float, recall: float,
+                 pool: str = "all", seed: int = 0, direction: float | None = None, name: str | None = None):
+        if not 0 < precision <= 1 or not 0 <= recall <= 1:
+            raise ValueError(f"need 0 < precision <= 1 and 0 <= recall <= 1, got {precision}, {recall}")
+        if direction is not None and not 0 <= direction <= 1:
+            raise ValueError(f"need 0 <= direction <= 1, got {direction}")
+        self.pool = set(self.RELATIONS) if pool == "all" else {pool}
+        if not self.pool <= set(self.RELATIONS):
+            raise ValueError(f"pool must be 'all' or one of {self.RELATIONS}, got {pool!r}")
+        n_gold = n_pool = 0
+        for ex in examples:
+            if ex.gold_pairs is None:
+                raise ValueError(f"{ex.dataset} has no pair-level gold labels; synthetic detector not defined.")
+            for lab in ex.gold_pairs.values():
+                n_gold += lab == "contradiction"
+                n_pool += lab in self.pool
+        want_fp = recall * n_gold * (1 - precision) / precision
+        self.capped = want_fp > n_pool
+        self.fp_rate = min(1.0, want_fp / n_pool) if n_pool else 0.0
+        self.precision, self.recall, self.seed, self.direction = precision, recall, seed, direction
+        self.name = name or synth_name(precision, recall, pool, direction)
+
+    def _u(self, ex: Example, i: int, j: int, tag: str = "") -> float:
+        return random.Random(f"{self.seed}-{ex.id}-{i}-{j}{tag}").random()
+
+    def _suspects(self, ex: Example, i: int, j: int, lab: str) -> list[int]:
+        if self.direction is None:
+            return []
+        pick = [i, j][self._u(ex, i, j, "-side") < 0.5]
+        if lab != "contradiction":
+            return [pick]
+        types = ex.meta.get("doc_types", [])
+        true = [k for k in (i, j) if k < len(types) and types[k] == "misinfo"]
+        if self._u(ex, i, j, "-dir") < self.direction:
+            return true
+        wrong = [k for k in (i, j) if k not in true]
+        return wrong or [pick]
+
+    def detect(self, ex: Example) -> DetectorOutput:
+        pairs = []
+        for (i, j), lab in sorted(ex.gold_pairs.items()):
+            u = self._u(ex, i, j)
+            if (lab == "contradiction" and u < self.recall) or (lab in self.pool and u < self.fp_rate):
+                pairs.append(Detection(i, j, 1.0, "contradiction", self._suspects(ex, i, j, lab)))
+        return DetectorOutput(pairs, {(d.i, d.j): 1.0 for d in pairs},
+                              extra={"fp_rate": self.fp_rate, "capped": self.capped})
 
 
 class NoDetector:

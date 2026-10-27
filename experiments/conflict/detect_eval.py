@@ -68,10 +68,14 @@ def main(argv=None):
     ap.add_argument("--nli-model", default="cross-encoder/nli-deberta-v3-base")
     ap.add_argument("--nli-threshold", type=float, default=0.5)
     ap.add_argument("--random-rate", type=float, default=None)
+    ap.add_argument("--ramdocs-labels", default="exclude", choices=data.RAMDOCS_LABEL_FIXES,
+                    help="how to treat documents typed correct that contain a wrong answer (data.load_ramdocs)")
+    ap.add_argument("--synth-seed", type=int, default=0)
     args = ap.parse_args(argv)
 
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
-    examples = data.load(args.dataset, n=args.n, seed=args.sample_seed)
+    kw = {"label_fix": args.ramdocs_labels} if args.dataset == "ramdocs" else {}
+    examples = data.load(args.dataset, n=args.n, seed=args.sample_seed, **kw)
     llm = None
     if "llm" in args.detectors:
         from .llm import OpenAILLM
@@ -80,7 +84,7 @@ def main(argv=None):
     summary = {}
     n_pairs = sum(len(e.passages) * (len(e.passages) - 1) // 2 for e in examples)
     for name in args.detectors.split(","):
-        det = make_detector(name, args, llm)
+        det = make_detector(name, args, llm, examples)
         dets = run_detection(det, examples, out)
         fl = _flagsets(dets)
         summary[name] = {
