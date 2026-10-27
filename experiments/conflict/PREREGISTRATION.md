@@ -231,3 +231,15 @@ only 4.7% of gpt-4o-mini's hold-out questions score differently across seeds.
 - No Qwen score had been inspected when this change was made.
 - All other §9.2 settings are unchanged.
 - The paper reports this as a deviation.
+
+### 9.5 Adversarial direction (exploratory; registered 2026-10-27, before its run)
+
+A reviewer asked what happens if the directional signal is wrong. `oracle_inv` flags exactly the gold
+contradiction pairs but names the *correct* side as the suspect. We run it with **gpt-4o-mini**, the
+default skeleton, 3 seeds, on the hold-out split, in two modes: `oracle_inv+flag_directional` and
+`oracle_inv+remove_suspect`. Output goes to `runs/holdout_adversarial`, together with a `plain`
+reference (served from the cache).
+
+We expect both to lower accuracy on conflict questions, removal more than the flag. This is
+exploratory and reported with a raw p-value. It covers only a detector with the wrong direction; an
+attacker who also chooses which pairs to flag is not tested.

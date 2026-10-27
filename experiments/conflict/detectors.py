@@ -248,6 +248,18 @@ class OracleDetector:
         return DetectorOutput(pairs, {(d.i, d.j): 1.0 for d in pairs})
 
 
+class InvertedOracleDetector(OracleDetector):
+    """Adversarial control: the gold contradiction pairs, but the suspect is always the side that
+    is NOT misinformation (PREREGISTRATION.md §9.5)."""
+    name = "oracle_inv"
+
+    def detect(self, ex: Example) -> DetectorOutput:
+        out = super().detect(ex)
+        for d in out.pairs:
+            d.suspects = [k for k in (d.i, d.j) if k not in d.suspects]
+        return out
+
+
 def synth_name(precision: float, recall: float, pool: str = "all", direction: float | None = None) -> str:
     return f"synth-p{precision:g}-r{recall:g}-{pool}" + ("" if direction is None else f"-d{direction:g}")
 

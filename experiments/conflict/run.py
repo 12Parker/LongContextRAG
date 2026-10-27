@@ -6,7 +6,7 @@ Run the condition matrix (Phase 2).
         --seeds 0,1,2 --out runs/ramdocs_pilot
 
 A condition is "<detector>+<mode>" or one of: plain, instruct, instruct_v2, madam, grid.
-Detectors: caag, nli, llm, llm_dir (also says which side is misinformation), random, oracle,
+Detectors: caag, nli, llm, llm_dir (also says which side is misinformation), random, oracle, oracle_inv,
 synth-p<P>-r<R>-<pool>[-d<D>]. Modes: see prompts.py.
 
 `grid` expands to one synthetic-detector condition per (precision, recall, pool) cell from
@@ -34,8 +34,8 @@ from pathlib import Path
 from tqdm import tqdm
 
 from . import data
-from .detectors import (CAAGDetector, DetectorOutput, Detection, LLMDetector, NLIDetector,
-                        NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
+from .detectors import (CAAGDetector, DetectorOutput, Detection, InvertedOracleDetector, LLMDetector,
+                        NLIDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
 from .jsonl import ensure_plain
 from .madam import madam_rag
@@ -88,6 +88,8 @@ def make_detector(name: str, args, llm, examples=None):
         return RandomDetector(args.random_rate)
     if name == "oracle":
         return OracleDetector()
+    if name == "oracle_inv":
+        return InvertedOracleDetector()
     raise SystemExit(f"unknown detector {name}")
 
 
