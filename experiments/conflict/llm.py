@@ -19,8 +19,10 @@ from pathlib import Path
 
 # USD per 1M tokens, standard tier. "cached_input" applies to prompt tokens the API reports as
 # served from its prompt cache (usage.prompt_tokens_details.cached_tokens).
-PRICES = {"gpt-4o-mini": {"input": 0.15, "cached_input": 0.075, "output": 0.60}}
-PRICES_CHECKED = "2026-10-27, https://developers.openai.com/api/docs/pricing (gpt-4o-mini row: $0.15 / $0.075 cached / $0.60)"
+PRICES = {"gpt-4o-mini": {"input": 0.15, "cached_input": 0.075, "output": 0.60},
+          "gpt-4.1": {"input": 2.00, "cached_input": 0.50, "output": 8.00}}
+PRICES_CHECKED = ("2026-10-27, https://developers.openai.com/api/docs/pricing "
+                  "(gpt-4o-mini: $0.15 / $0.075 cached / $0.60; gpt-4.1: $2.00 / $0.50 cached / $8.00)")
 
 CACHE_PATH = Path(os.getenv("CONFLICT_LLM_CACHE", Path(__file__).resolve().parents[2] / "runs" / "llm_cache.sqlite"))
 

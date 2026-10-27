@@ -126,6 +126,7 @@ def main(argv=None):
     ap.add_argument("--seeds", default="0")
     ap.add_argument("--out", required=True)
     ap.add_argument("--model", default="gpt-4o-mini")
+    ap.add_argument("--detector-model", default=None, help="model for LLM detectors (default: --model)")
     ap.add_argument("--base-url", default=None, help="OpenAI-compatible endpoint for a non-OpenAI model")
     ap.add_argument("--api-key-env", default="OPENAI_API_KEY")
     ap.add_argument("--price-input", type=float, default=None, help="USD per 1M input tokens (models not in llm.PRICES)")
@@ -177,7 +178,10 @@ def main(argv=None):
             register_price(args.model, args.price_input, args.price_output, args.price_cached_input)
         ep = {"base_url": args.base_url, "api_key_env": args.api_key_env}
         llm = OpenAILLM(args.model, temperature=args.temperature, **ep)
-        det_llm = OpenAILLM(args.model, temperature=0.0, **ep)  # detectors decode greedily, as in detect_eval
+        # detectors decode greedily, as in detect_eval; --detector-model keeps the LLM detector fixed
+        # (on OpenAI's endpoint) while the generator changes
+        det_llm = (OpenAILLM(args.detector_model, temperature=0.0) if args.detector_model
+                   else OpenAILLM(args.model, temperature=0.0, **ep))
         madam_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=128, **ep)  # matches public MADAM script
 
     dets_needed = sorted({parse_condition(c)[0] for c in conditions})

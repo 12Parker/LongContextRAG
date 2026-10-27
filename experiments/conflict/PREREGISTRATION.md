@@ -1,8 +1,8 @@
 # Pre-registration: confirmatory RAMDocs run
 
-Draft of 2026-10-27, written **before** any confirmatory run. Items marked **TEAM** need the team's
-decision before this is frozen. Once frozen, commit it, and treat anything not listed here as
-exploratory in the paper.
+**Frozen 2026-10-27, before any confirmatory run.** The TEAM items below were resolved by the
+decisions in §8, made on the evidence available then; §8 overrides any earlier text it conflicts
+with. Anything not listed here is exploratory in the paper.
 
 ## 1. Data and splits
 
@@ -98,3 +98,47 @@ All on the confirmatory split; Δ is the paired difference in `ramdocs_strict`.
 - **Second generator:** one open-weights model through an OpenAI-compatible endpoint (`--base-url`, `--api-key-env`). The same pre-registered analysis applies; the model's name and price go here before its run.
 - **Second dataset: WikiContradict** (`--dataset wikicontradict`, HF revision pinned in `data.py`). It has 253 questions, each with two Wikipedia passages that contradict each other; the reference answer is *both* sides. There's no misinformation side and no clean questions, so it can't test direction or false-flag harm. It is the contrast case: on RAMDocs, listing both sides is wrong, while here it is the correct answer. Proposed hypothesis **H8:** Δ(`oracle+flag`, `plain`) > 0 on WikiContradict (primary `both_answers`), the opposite sign from H2.
 - **CONFLICTS judge:** a model from a different family, run only on a stratified subset, with about 100 human labels to check agreement.
+
+## 8. Decisions (frozen 2026-10-27)
+
+These were made without the team, on the evidence below. A change after this date counts as a
+deviation and gets reported as one.
+
+1. **Primary metric: `ramdocs_strict_oneway`.** Wang et al. define a correct output as one that
+   "includes all gold answers" and no misinformation answer. One-way matching reads that literally:
+   each gold string must appear inside the output. On the pilot split, one-way matching scores
+   MADAM-RAG at 28.5%, against the published 28.00; bidirectional scores it at 36.0%.
+   `ramdocs_strict` (bidirectional) is the pre-registered **robustness** metric. A hypothesis
+   counts as *robustly supported* only if its Holm-adjusted test passes under both metrics.
+2. **Labels: `exclude`** for the main analysis. It makes no judgement calls on the 163 suspect
+   documents. `contains` is a robustness check for H2–H4. Hand labels aren't used, because no human
+   labelling has been done.
+3. **Conditions:** every condition in §3 runs on the confirmatory split with `gpt-4o-mini`. The main
+   paper reports the prompt-only, oracle, real-detector and placebo conditions and the grid; MADAM-RAG
+   is a reference point. The original-CAAG-format reproduction (`caag+flag` with
+   `--flag-style original`) goes in the appendix.
+4. **Second generator: `gpt-4.1`**, the strongest OpenAI non-reasoning model that supports `temperature`
+   and `seed` ($2.00 / $8.00 per 1M tokens, checked 2026-10-27). No open-weights endpoint was available;
+   that is a stated limitation. It runs on the confirmatory split, 3 seeds, with:
+   - `plain`, `instruct_v2`;
+   - `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`;
+   - `llm_dir+flag_directional`, `llm_dir+remove_suspect`;
+   - `nli+remove_suspect`.
+
+   The detector stays `gpt-4o-mini` (`--detector-model`). **H9 (replication):** H2 and H3 hold with
+   the same sign under `gpt-4.1` (Holm within H9).
+5. **WikiContradict (H8):** all 253 questions, 3 seeds:
+   - `plain`, `instruct`, `instruct_v2`;
+   - `oracle+flag`;
+   - `caag+flag`, `nli+flag`, `llm_dir+flag`.
+
+   Primary metric `both_answers`. H8 is two-sided, but the predicted sign is positive for `oracle+flag`.
+   It runs with `gpt-4o-mini`, plus `gpt-4.1` for `plain` and `oracle+flag`.
+6. **CONFLICTS (exploratory, secondary):** auto-scorable items only (`primary` not None), 1 seed:
+   - `plain`, `instruct_v2`;
+   - `caag+flag`, `nli+flag`, `llm_dir+flag`, `llm_dir+flag_directional`.
+
+   Plus question-level detection metrics for CAAG, NLI and `llm_dir`. No judge: none from a different
+   model family was available. CONFLICTS' opinion and complementary items are left out, and that is
+   a stated limitation.
+7. **Budget:** at most $100 in API spend across everything, tracked in `runs/COSTS.md`.
