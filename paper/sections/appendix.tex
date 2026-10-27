@@ -46,6 +46,9 @@ Its deviations are listed below.
 well as \texttt{remove}. Both render identical prompts, so these were served entirely from the response cache.
 (2) Table~\ref{tab:main} applies Holm correction across all its comparisons. This is stricter than the per-family
 correction used for the hypothesis tests.
+(3) The pre-registration worded H6 as the actual effect lying inside a 95\% CI around the grid prediction. The
+prediction has no bootstrap CI of its own, so we test the converse: whether the prediction lies inside the actual
+effect's 95\% CI. The error comparison with pair-level placement is as pre-registered.
 
 \paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. CAAG and NLI ran on a
 laptop CPU (0.2\,s and 1.2\,s per question).

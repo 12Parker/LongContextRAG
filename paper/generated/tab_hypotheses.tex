@@ -11,11 +11,11 @@ H2 & oracle+flag $<$ plain (conflict) & $-$6.7 [$-$10.8, $-$3.1] & $<$0.001 & su
 H3 & oracle+flag\_directional $>$ plain (conflict) & $+$13.4 [$+$6.7, $+$20.4] & $<$0.001 & supported \\
 H3 & oracle+flag\_directional $>$ oracle+flag (conflict) & $+$20.1 [$+$13.9, $+$26.9] & $<$0.001 & supported \\
 H3 & oracle+remove\_suspect $>$ plain (conflict) & $+$27.6 [$+$20.6, $+$35.0] & $<$0.001 & supported \\
-H5 & caag+flag vs random+flag (all) & $-$1.4 [$-$3.4, $+$0.3] & 0.178 & not supported \\
-H7 & instruct vs plain (conflict) & $-$1.2 [$-$4.3, $+$1.7] & 1.000 & not supported \\
-H7 & instruct vs plain (clean) & $+$2.9 [0.0, $+$6.1] & 0.280 & not supported \\
-H7 & instruct\_v2 vs plain (conflict) & $+$5.3 [$+$1.4, $+$9.6] & 0.059 & not supported \\
-H7 & instruct\_v2 vs plain (clean) & $-$1.1 [$-$5.0, $+$2.6] & 1.000 & not supported \\
+H5 & caag+flag vs random+flag (all) & $-$1.4 [$-$3.4, $+$0.3] & 0.178 & n.s. \\
+H7 & instruct vs plain (conflict) & $-$1.2 [$-$4.3, $+$1.7] & 1.000 & n.s. \\
+H7 & instruct vs plain (clean) & $+$2.9 [0.0, $+$6.1] & 0.280 & n.s. \\
+H7 & instruct\_v2 vs plain (conflict) & $+$5.3 [$+$1.4, $+$9.6] & 0.059 & n.s. \\
+H7 & instruct\_v2 vs plain (clean) & $-$1.1 [$-$5.0, $+$2.6] & 1.000 & n.s. \\
 H9 & gpt-4.1: oracle+flag $<$ plain (conflict) & $-$8.6 [$-$13.2, $-$4.3] & $<$0.001 & supported \\
 H9 & gpt-4.1: oracle+flag\_directional $>$ plain (conflict) & $+$18.2 [$+$12.0, $+$24.7] & $<$0.001 & supported \\
 H9 & gpt-4.1: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$26.9 [$+$20.1, $+$33.6] & $<$0.001 & supported \\
@@ -23,17 +23,18 @@ H9 & gpt-4.1: oracle+remove\_suspect $>$ plain (conflict) & $+$30.2 [$+$22.5, $+
 H4a & false-flag cells below plain on clean q. & 15 of 54 cells & Holm & supported \\
 H4b & harm grows with clean-q. exposure (Spearman) & $\rho=-0.72$ & $<$0.001 & supported \\
 H4c & removal harms clean q. more than directional flag & 12 of 27 matched cells & Holm & supported \\
-H6 & document-level placement inside actual CI & 8/8 (pair: 5/8) & MAE 0.041 vs 0.053 & supported \\
-H8 & WikiContradict: instruct vs plain & $+$8.7 [$+$5.4, $+$12.3] & $<$0.001 & supported \\
-H8 & WikiContradict: instruct\_v2 vs plain & $-$6.7 [$-$10.0, $-$3.7] & $<$0.001 & supported \\
+H6 & document-level placement inside actual CI & 8/8 (pair: 5/8) & MAE 4.1 vs 5.3 & supported \\
+H8 & WikiContradict: instruct vs plain & $+$8.7 [$+$5.4, $+$12.3] & $<$0.001 & significant \\
+H8 & WikiContradict: instruct\_v2 vs plain & $-$6.7 [$-$10.0, $-$3.7] & $<$0.001 & significant \\
 H8 & WikiContradict: oracle+flag vs plain & $+$6.5 [$+$3.0, $+$10.0] & $<$0.001 & supported \\
-H8 & WikiContradict: caag+flag vs plain & $+$0.7 [0.0, $+$1.6] & 0.250 & not supported \\
-H8 & WikiContradict: nli+flag vs plain & $+$3.2 [$+$0.3, $+$6.1] & 0.077 & not supported \\
-H8 & WikiContradict: llm\_dir+flag vs plain & $+$6.2 [$+$2.8, $+$9.6] & $<$0.001 & supported \\
+H8 & WikiContradict: caag+flag vs plain & $+$0.7 [0.0, $+$1.6] & 0.250 & n.s. \\
+H8 & WikiContradict: nli+flag vs plain & $+$3.2 [$+$0.3, $+$6.1] & 0.077 & n.s. \\
+H8 & WikiContradict: llm\_dir+flag vs plain & $+$6.2 [$+$2.8, $+$9.6] & $<$0.001 & significant \\
 \bottomrule
 \end{tabular}
 \caption{All pre-registered tests on the confirmatory split (differences in points of one-way strict accuracy unless
-stated). Holm correction within each family. $^\dagger$: supported under the primary metric but not under the
-bidirectional robustness metric.}
+stated). Holm correction within each family. Directional predictions are \emph{supported} or \emph{not supported};
+tests with no predicted direction (H5, H7, and H8 apart from the oracle flag) are \emph{significant} or \emph{n.s.}
+$^\dagger$: holds under the primary metric but not under the bidirectional robustness metric.}
 \label{tab:hypotheses}
 \end{table*}

@@ -345,3 +345,13 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   OpenAI-compatible endpoint. `judge.py` has a DRAFT rubric (align it with Cattan et al.), a
   human-label export and Cohen's kappa. Neither has been run yet: we need the model choice and API key.
 - **WikiContradict:** loader and `both_answers` metric added. It is the contrast dataset (H8).
+
+### Round 3 (2026-10-27): confirmatory runs and paper
+
+- **Pre-registration frozen** (commit `a6f7124`, §8). Primary metric: one-way strict (it matches MADAM-RAG's
+  published score on the pilot split); bidirectional is the robustness metric.
+- **Confirmatory results** (RAMDocs hold-out, 300 questions): H2, H3, H4, H6, H8 and H9 supported. H1 is supported
+  in part (LLM vs NLI F1 is n.s.). H5: CAAG is no better than random. H7: no instruction effect after Holm.
+  Labels: everything holds under `contains`.
+- **Paper:** `paper/` (ACL review format; see `paper/README.md` for the build and the remaining human steps).
+  Every number comes from `paper_stats.py`. Total API spend $27.42.
