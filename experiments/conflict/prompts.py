@@ -23,6 +23,12 @@ Modes
                  add anything once the model is told to resolve the conflict?)
   remove_suspect drop the suspect passage(s) of each flagged pair; falls back to doc_idx_2
                  (as remove) for pairs with no suspect
+  flag_onewrong  neutral flag that also says exactly one passage of each flagged pair contains
+                 misinformation, without saying which (§11: separates "one side is false" from
+                 "this side is false"; same headers' position and imperative force as flag_directional)
+  self_identify  no detector: one call that first names the passages it judges to be misinformation,
+                 then answers from the rest (§11: compute-matched single-call baseline)
+  closedbook     no passages at all (§11: what the model knows without retrieval)
 
 Skeletons (`skeleton`, run.py --skeleton)
   default    BASE: tells the model to give every valid answer when the passages support more than
@@ -30,6 +36,8 @@ Skeletons (`skeleton`, run.py --skeleton)
   minimal    BASE_MINIMAL: the same prompt without any answer policy (no "give every valid answer"),
              and an answer line that allows but does not invite several answers. Revision ablation:
              does the neutral-flag harm depend on the default skeleton's policy?
+  single     BASE_SINGLE: says the question has exactly one correct answer and asks for one
+             (§11; for ConflictBank, where that is true by construction)
 
 Note for the paper: in the original code SEPARATE renders exactly the same prompt as FLAG,
 so it is not a separate condition here.
@@ -67,7 +75,36 @@ Question: {question}
 Give a brief explanation, then end with one line in exactly this format:
 Final answer(s): <your answer; if there is more than one, separate them with |>"""
 
-SKELETONS = {"default": BASE, "minimal": BASE_MINIMAL}
+BASE_SINGLE = """Answer the question using the passages below. The question has exactly one correct answer.
+If no passage answers the question, the answer is "unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in exactly this format:
+Final answer(s): <your one answer>"""
+
+SKELETONS = {"default": BASE, "minimal": BASE_MINIMAL, "single": BASE_SINGLE}
+
+# closed-book: same answer line as each skeleton, no passages
+CLOSED_BOOK = {
+    "default": """Answer the question from your own knowledge.
+If the question has more than one valid answer (for example, different people or things share the same name), give every valid answer.
+Question: {question}
+
+Give a brief explanation, then end with one line in exactly this format:
+Final answer(s): <answer 1> | <answer 2> | ...""",
+    "minimal": """Answer the question from your own knowledge.
+Question: {question}
+
+Give a brief explanation, then end with one line in exactly this format:
+Final answer(s): <your answer; if there is more than one, separate them with |>""",
+    "single": """Answer the question from your own knowledge. The question has exactly one correct answer.
+Question: {question}
+
+Give a brief explanation, then end with one line in exactly this format:
+Final answer(s): <your one answer>"""}
 
 INSTRUCTION = """Some passages may contradict each other. Before answering, check whether they do.
 Ignore passages that appear to contain misinformation, and if a disagreement reflects genuinely different valid answers, report each one.
@@ -77,13 +114,19 @@ INSTRUCTION_V2 = """Some passages may contain false information. Before answerin
 Do not include an answer that is supported only by a passage you judge to be unreliable.
 """
 
-INSTRUCTIONS = {"instruct": INSTRUCTION, "instruct_v2": INSTRUCTION_V2,
+INSTRUCTION_SELF = """Some passages may contain misinformation. First decide which passages, if any, contain misinformation, by checking them against each other and against what you know, and write one line in this format:
+Suspect passages: <passage numbers, or none>
+Then answer the question using only the other passages.
+"""
+
+INSTRUCTIONS = {"instruct": INSTRUCTION, "instruct_v2": INSTRUCTION_V2, "self_identify": INSTRUCTION_SELF,
                 "flag_instruct": INSTRUCTION, "flag_instruct_v2": INSTRUCTION_V2,
                 "flag_directional_instruct_v2": INSTRUCTION_V2}
-PROMPT_ONLY_MODES = ("plain", "instruct", "instruct_v2")
+PROMPT_ONLY_MODES = ("plain", "instruct", "instruct_v2", "self_identify", "closedbook")
 
 
-def _flag_context(passages: list[str], dets: list[Detection], directional: bool = False) -> str:
+def _flag_context(passages: list[str], dets: list[Detection], directional: bool = False,
+                  onewrong: bool = False) -> str:
     partners: dict[int, list[int]] = {}
     for d in dets:
         partners.setdefault(d.i, []).append(d.j)
@@ -94,8 +137,12 @@ def _flag_context(passages: list[str], dets: list[Detection], directional: bool 
         header = f"Passage {k}"
         if k in partners:
             with_ = ", ".join(map(str, sorted(partners[k])))
-            header += (f" [LIKELY MISINFORMATION; conflicts with passage(s): {with_}]" if k in suspects
-                       else f" [POTENTIAL CONFLICT with passage(s): {with_}]")
+            if k in suspects:
+                header += f" [LIKELY MISINFORMATION; conflicts with passage(s): {with_}]"
+            elif onewrong:
+                header += f" [CONFLICT with passage(s): {with_}; one side contains misinformation]"
+            else:
+                header += f" [POTENTIAL CONFLICT with passage(s): {with_}]"
         parts.append(f"{header}:\n{p}")
     return "\n\n".join(parts)
 
@@ -104,7 +151,7 @@ FLAG_STYLES = ("uniform", "original")
 
 
 def _conflict_list(dets: list[Detection], heading: str, directional: bool = False,
-                   style: str = "uniform") -> str:
+                   style: str = "uniform", onewrong: bool = False) -> str:
     if not dets:
         return ""
     lines = []
@@ -113,6 +160,8 @@ def _conflict_list(dets: list[Detection], heading: str, directional: bool = Fals
                 else f"- Passages {d.i} and {d.j}: possible contradiction")
         if directional and d.suspects:
             line += f"; passage {' and '.join(map(str, d.suspects))} likely contains misinformation"
+        elif onewrong:
+            line += "; exactly one of the two contains misinformation (it is not known which)"
         lines.append(line)
     return f"\n{heading}\n" + "\n".join(lines) + "\n"
 
@@ -129,6 +178,8 @@ def build_prompt(question: str, passages: list[str], mode: str,
     kept = list(range(len(passages)))
     instruction, conflicts = "", ""
 
+    if mode == "closedbook":
+        return CLOSED_BOOK[skeleton].format(question=question), []
     if mode in PROMPT_ONLY_MODES:
         context = "\n\n".join(f"Passage {k}:\n{p}" for k, p in enumerate(passages))
         instruction = INSTRUCTIONS.get(mode, "")
@@ -137,6 +188,9 @@ def build_prompt(question: str, passages: list[str], mode: str,
         heading = "CONFLICTING INFORMATION DETECTED:" if mode == "arbitrate" else "POTENTIAL CONFLICTS DETECTED:"
         conflicts = _conflict_list(dets, heading, style=style)
         instruction = INSTRUCTIONS.get(mode, "")
+    elif mode == "flag_onewrong":
+        context = _flag_context(passages, dets, onewrong=True)
+        conflicts = _conflict_list(dets, "POTENTIAL CONFLICTS DETECTED:", style=style, onewrong=True)
     elif mode in ("flag_directional", "flag_directional_instruct_v2"):
         context = _flag_context(passages, dets, directional=True)
         conflicts = _conflict_list(dets, "POTENTIAL CONFLICTS DETECTED:", directional=True, style=style)

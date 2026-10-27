@@ -159,13 +159,14 @@ def load_conflictbank(path: Path | None = None, n: int | None = None, seed: int 
     """ConflictBank misinformation subset as built by prepare_conflictbank.py: one correct passage,
     one misinformation passage (conflict items only) and distractors; one gold answer. Scored with
     the RAMDocs strict metrics (metrics.score). Pair labels: contradiction (correct vs misinformation),
-    unrelated (any pair with a distractor)."""
+    consistent (two wrong-side passages, majority variant only), unrelated (any pair with a distractor)."""
     path = path or DATA_DIR / "conflictbank" / "conflictbank_eval.jsonl"
     out = []
     for r in map(json.loads, open(path)):
         t = r["types"]
-        pairs = {(i, j): ("contradiction" if {t[i], t[j]} == {"correct", "misinfo"} else "unrelated")
-                 for i in range(len(t)) for j in range(i + 1, len(t))}
+        lab = lambda a, b: ("contradiction" if {a, b} == {"correct", "misinfo"} else
+                            "consistent" if a == b == "misinfo" else "unrelated")   # misinfo-misinfo: majority variant
+        pairs = {(i, j): lab(t[i], t[j]) for i in range(len(t)) for j in range(i + 1, len(t))}
         out.append(Example(
             id=r["id"], dataset="conflictbank", question=r["question"], passages=r["passages"],
             gold_answers=[r["gold"]], wrong_answers=[r["wrong"]] if r["wrong"] else [],
@@ -287,7 +288,12 @@ def filter_ids(xs: list[Example], ids_file: str | Path | None) -> list[Example]:
     return [by_id[i] for i in sorted(want)]
 
 
-LOADERS = {"conflictbank": load_conflictbank, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
+def load_conflictbank_majority(path: Path | None = None, **kw) -> list[Example]:
+    """§11: the same items with three wrong-side passages per conflict item (prepare_conflictbank.py)."""
+    return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_majority.jsonl", **kw)
+
+
+LOADERS = {"conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
 
 def load(name: str, **kw) -> list[Example]:

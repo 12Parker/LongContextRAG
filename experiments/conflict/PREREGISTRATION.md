@@ -328,3 +328,112 @@ same scheme.
 **Analyses specified after the data were seen.** The ±3-point TOST margin (§9.3) was fixed after H2
 was known. The single- vs multi-answer split (§9) was chosen after the minimal-skeleton run. The
 paper labels both as post hoc.
+
+## 11. Third revision addendum (frozen 2026-10-27, after a third mock review, before any run below)
+
+A third mock review (three reviewers plus a discussion round, all 2.5) found one decisive problem.
+ConflictBank was run only under the default skeleton, which asks for "every valid answer", although
+every ConflictBank question has exactly one answer. That could explain the neutral-flag harm, the
+low no-flag accuracy (21.6% on conflict questions against 89.0% on clean ones), and the large
+removal gains.
+
+The reviewers also asked for:
+- a closed-book control;
+- a neutral flag that says one side is false without saying which;
+- a compute-matched single-call baseline;
+- a condition where the misinformation is the majority;
+- seed-matched gpt-4.1 numbers for H14.
+
+Nothing below has been run.
+
+### 11.1 Conditions and runs
+
+**New skeleton.** `single` (`prompts.BASE_SINGLE`) says the question has exactly one correct
+answer and asks for one.
+
+**New modes.**
+- `flag_onewrong`: the neutral flag, plus "exactly one of the two contains misinformation (it is
+  not known which)" in the header and conflict list.
+- `self_identify`: no detector. One call that first writes `Suspect passages: …` and then answers
+  from the remaining passages.
+- `closedbook`: no passages, with the skeleton's answer line.
+
+**Majority variant.** `conflictbank_majority` (`prepare_conflictbank.py`) uses the same 400 items.
+Each conflict item has the correct passage plus all three of ConflictBank's wrong-object passages
+(misinformation, temporal and semantic evidence) and no distractors, so the split is 3 wrong to
+1 correct. Clean items are unchanged. Pairs of two wrong-side passages are labelled `consistent`.
+
+**Runs** (the LLM detector is gpt-4o-mini throughout):
+
+| Output | Data | Generator | Seeds | Skeleton | Conditions |
+|---|---|---|---|---|---|
+| `runs/cb_single` | ConflictBank | gpt-4o-mini | 0, 1, 2 | single | `plain`, `closedbook`, `self_identify`, `oracle+flag`, `oracle+flag_onewrong`, `oracle+flag_directional`, `oracle+remove_suspect`, `llm_dir+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect` |
+| `runs/cb_minimal` | ConflictBank | gpt-4o-mini | 0, 1, 2 | minimal | `plain`, `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect` |
+| `runs/cb_single_gpt41` | ConflictBank | gpt-4.1 | 0 | single | `plain`, `closedbook`, `oracle+flag`, `oracle+flag_onewrong`, `oracle+flag_directional`, `oracle+remove_suspect`, `llm_dir+flag_directional` |
+| `runs/cb_single_qwen` | ConflictBank | Qwen2.5-7B (local) | 0 | single | as `cb_single_gpt41`, plus `llm_dir+flag` |
+| `runs/cbmaj_single` | ConflictBank majority | gpt-4o-mini | 0, 1, 2 | single | `plain`, `self_identify`, `oracle+flag`, `oracle+flag_directional`, `oracle+remove_suspect`, `llm_dir+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect`, `astute`, `trustrag` |
+| `runs/cbmaj_single_gpt41` | ConflictBank majority | gpt-4.1 | 0 | single | `plain`, `oracle+flag`, `oracle+flag_directional`, `llm_dir+flag_directional` |
+| `runs/holdout_extra` | RAMDocs hold-out | gpt-4o-mini | 0, 1, 2 | default | `closedbook`, `self_identify`, `oracle+flag_onewrong` |
+| `runs/holdout_gpt41_round2` | RAMDocs hold-out | gpt-4.1 | adds 1, 2 | default | `plain`, `llm_dir+flag_directional`, `astute_multi`, `trustrag_multi` |
+| `runs/holdout_gpt41_closedbook` | RAMDocs hold-out | gpt-4.1 | 0 | default | `closedbook` |
+
+**Budget rule.** Runs go in the order listed. If total spend reaches $95 before a gpt-4.1 run
+starts, that run is dropped and the paper says so.
+
+### 11.2 Hypotheses
+
+Primary metric: one-way strict accuracy. Holm runs within each family, per metric.
+
+- **H15: the ConflictBank result without the multi-answer policy.** Skeleton `single`. Run for
+  each of gpt-4o-mini, gpt-4.1 and Qwen2.5-7B.
+  - On conflict questions:
+    - Δ(`oracle+flag`, `plain`), two-sided.
+    - Δ(`oracle+flag_directional`, `oracle+flag`) > 0.
+    - Δ(`oracle+flag_directional`, `plain`) > 0.
+  - On all 400 questions:
+    - Δ(`llm_dir+flag_directional`, `plain`) > 0. This makes the real detector's directional
+      flag a confirmatory test.
+
+  If the neutral-flag harm is absent here, the paper will say that on ConflictBank it depends
+  on the answer policy.
+- **H16: information versus direction.** On conflict questions:
+  - Δ(`oracle+flag_directional`, `oracle+flag_onewrong`) > 0;
+  - Δ(`oracle+flag_onewrong`, `plain`), two-sided.
+
+  Settings: ConflictBank `single` with gpt-4o-mini, ConflictBank `single` with gpt-4.1, and
+  RAMDocs default with gpt-4o-mini.
+- **H17: majority misinformation.** On `conflictbank_majority` with skeleton `single`, using
+  gpt-4o-mini (3 seeds) and gpt-4.1 (seed 0), on conflict questions:
+  - Δ(`oracle+flag`, `plain`), two-sided;
+  - Δ(`oracle+flag_directional`, `plain`) > 0;
+  - Δ(`llm_dir+flag_directional`, `plain`), two-sided, because a majority may mislead the
+    detector.
+- **H18: compute-matched single call.** Two-sided, on all labelled questions:
+  - Δ(`llm_dir+flag_directional`, `self_identify`).
+
+  Settings: RAMDocs gpt-4o-mini, ConflictBank `single` gpt-4o-mini, and ConflictBank majority
+  gpt-4o-mini. Detector-plus-generator counts as two calls everywhere in the paper.
+
+### 11.3 Exploratory analyses and changes to reporting
+
+**Closed-book stratification (exploratory, registered).** A question counts as "known" if
+gpt-4o-mini's closed-book answer is strictly correct on at least 2 of 3 seeds. We will report:
+- closed-book accuracy for each generator and dataset;
+- the LLM detector's direction accuracy split by known vs unknown;
+- the effect of `llm_dir+flag_directional` split the same way.
+
+**Majority variant (exploratory).** We will report the LLM detector's direction accuracy on the
+majority variant against the 1:1 set.
+
+**ConflictBank minimal skeleton (exploratory).** We will report `cb_minimal` as exploratory.
+
+**H14 with gpt-4.1.** H14 was registered with gpt-4.1 seed 0 (§10). We add seeds 1 and 2 and, decided
+now and before those seeds exist, report the 3-seed estimates for H14 with gpt-4.1. The seed-0
+values are kept in the appendix.
+
+**"No harm" and "tie" claims.** Any such claim is reported with its 90% CI and a TOST at the
+±3-point margin fixed in §9.3. Without equivalence, the paper says "not significant", not "no
+harm" or "tie".
+
+**One significance scheme.** §10.3 still applies. H15–H18 are registered families, and every
+other comparison is in the single exploratory family.

@@ -14,6 +14,11 @@ misinformation passage and two distractors; a clean item gets the correct passag
 distractors. Distractors are other sampled rows' correct passages (a different subject), so they are
 fluent, on-topic-looking noise. Passage order is shuffled per item with a fixed seed.
 
+Also writes conflictbank_majority.jsonl (PREREGISTRATION.md §11): the same 400 items, but each conflict item
+gets the correct passage and all three of ConflictBank's wrong-object passages for that fact
+(misinformation, temporal and semantic conflict evidence, which all support the substituted object) and no
+distractors, so the misinformation is the majority (3 to 1). Clean items are unchanged.
+
 Writes data/external/conflictbank/conflictbank_eval.jsonl (not committed: the source licence is
 stated as CC BY-SA 4.0 in the repo README but no licence file exists) and the item ids to
 experiments/conflict/splits/conflictbank_eval.txt.
@@ -28,6 +33,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "data/external/conflictbank/QA_dataset.json"
 OUT = ROOT / "data/external/conflictbank/conflictbank_eval.jsonl"
+OUT_MAJ = ROOT / "data/external/conflictbank/conflictbank_majority.jsonl"
+WRONG_SIDE = ("misinformation_conflict_evidence", "temporal_conflict_evidence", "semantic_conflict_evidence")
 IDS = Path(__file__).resolve().parent / "splits/conflictbank_eval.txt"
 N_CONFLICT, N_CLEAN, N_DISTRACT = 300, 100, 2
 
@@ -60,7 +67,7 @@ def main():
             if len(picked) >= 2 * N_CONFLICT + N_CLEAN:
                 break
     items, pool = picked[:N_CONFLICT + N_CLEAN], picked[N_CONFLICT + N_CLEAN:]
-    out = []
+    out, maj = [], []
     for n, (idx, r) in enumerate(items):
         conflict = n < N_CONFLICT
         k = N_DISTRACT if conflict else N_DISTRACT + 1
@@ -71,7 +78,15 @@ def main():
         out.append({"id": f"cb-{idx}", "relation": r["relation"], "question": r["question"],
                     "gold": r["object"], "wrong": r["replaced_object"] if conflict else None,
                     "passages": [d for d, _ in docs], "types": [t for _, t in docs], "has_conflict": conflict})
+        if conflict and all(isinstance(r.get(k), str) and r[k].strip() for k in WRONG_SIDE):
+            mdocs = [(r["default_evidence"], "correct")] + [(r[k], "misinfo") for k in WRONG_SIDE]
+            random.Random(idx).shuffle(mdocs)
+            maj.append({**out[-1], "passages": [d for d, _ in mdocs], "types": [t for _, t in mdocs]})
+        else:
+            maj.append(out[-1])
     OUT.write_text("".join(json.dumps(o) + "\n" for o in out))
+    OUT_MAJ.write_text("".join(json.dumps(o) + "\n" for o in maj))
+    print(f"majority variant: {sum(o['types'].count('misinfo') == 3 for o in maj)} items with 3 wrong-side passages")
     IDS.write_text("".join(o["id"] + "\n" for o in out))
     print(f"{len(out)} items ({N_CONFLICT} conflict, {N_CLEAN} clean) from {len(rows)} usable rows, "
           f"{len({o['relation'] for o in out})} relations -> {OUT}")
