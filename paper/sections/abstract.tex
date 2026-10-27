@@ -1,15 +1,16 @@
 \begin{abstract}
 Retrieval-augmented generation systems increasingly detect contradictions among retrieved passages and flag them to
-the generator. We ask what such a flag should say, and what the detector must get right for it to help. In a
-pre-registered study on RAMDocs, we vary the detector (heuristic, NLI, LLM, random, oracle) and the format (a neutral
-flag, a directional flag naming the likely misinformation, or removal of the suspect passage), and add synthetic
-detectors of controlled precision, recall and direction accuracy. Even a perfectly accurate neutral flag does not
-help: it lowers gpt-4o-mini's accuracy on conflict questions by \adOracleFlagConf\ points, and its estimate is
-negative for all three generators we test (gpt-4o-mini, gpt-4.1, Qwen2.5-7B) under two prompts, whereas the same flag
-helps on the genuine conflicts of WikiContradict. Acting on direction helps: removing the passage the oracle names
-gains \axQwenMinOracleRemConf--\agptOracleRemConf\ points in every setting, and naming it in the prompt beats a
-neutral flag everywhere, though it beats no flag only for generators that follow the warning. Removal is fragile:
-false flags delete correct passages, and a wrong direction does as much harm as a neutral flag or more. With a real
-LLM detector, a directional flag beats a neutral one by \ardMini\ points on conflict questions, but its net gain over
-no flags is small. We release the harness, the pre-registration and every run.
+the generator. We ask what such a flag should say, and what the detector must get right for it to help. In
+pre-registered experiments on two misinformation benchmarks, RAMDocs and ConflictBank, we vary the detector
+(heuristic, NLI, LLM, random, oracle) and the format (a neutral flag, a directional flag naming the likely
+misinformation, or removal of the suspect passage), and add synthetic detectors of controlled precision, recall and
+direction accuracy. Even a perfectly accurate neutral flag does not help. It lowers accuracy on conflict questions
+for all three generators we test (gpt-4o-mini, gpt-4.1, Qwen2.5-7B), significantly in all three on ConflictBank, and
+adding an instruction to drop unreliable passages only brings it back to no-flag accuracy. The same flag helps on the
+genuine conflicts of WikiContradict. Naming the misinformation is what helps: with the same oracle pairs, a
+directional flag beats the neutral one in every setting (by \azCbQwenOracleFlagDirectionalConflict--\azCbMiniOracleFlagDirectionalConflict\ points
+over no flags on ConflictBank), and removal gains most. A wrong direction does as much harm as a neutral flag or
+more, and false flags make removal delete correct passages. With a real LLM detector, a one-call directional flag
+beats Astute RAG and TrustRAG on RAMDocs and ties them on ConflictBank, where they do well. We release the harness,
+the pre-registration and every run.
 \end{abstract}

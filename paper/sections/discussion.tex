@@ -10,16 +10,20 @@ misinformation, the useful part of the type is the direction. It also extends Ra
 hints hurt \citep{gross2026ragability} to true hints that are not specific enough.
 
 \paragraph{When direction helps.}
-Removal helps with every generator because it needs nothing from the model; a directional flag helps only if the
-model acts on the warning, and a wrong direction is at least as harmful as a neutral flag. Practitioners should check
-that a directional flag changes their generator's behaviour before relying on it.
+Removal helps with every generator because it needs nothing from the model. A directional flag helps only if the
+model acts on it, which every generator does on ConflictBank and the smaller models do less on RAMDocs questions with
+several valid answers. An instruction does not replace direction (H13), but it amplifies it. Practitioners should
+check that a directional flag changes their generator's behaviour before relying on it.
+
+\paragraph{Why the baselines split by benchmark.} Astute RAG and TrustRAG keep the best-supported answer. That is
+right when one answer is correct (ConflictBank) and wrong when passages describe different same-name entities
+(RAMDocs). A directional flag leaves the answer policy alone and marks only the suspect passage.
 
 \paragraph{Implications for detectors and interfaces.}
-Detection F1 alone does not say what a detector will do downstream: with the same LLM detector, adding direction
-raised conflict-question accuracy by \ardMini\ points over a neutral flag, and real false flags, concentrated on
-correct--correct pairs, cost clean questions more than synthetic ones. We recommend reporting (i) direction accuracy,
-(ii) how often correct documents are marked or removed on conflict-free questions, and (iii) effects on conflict-free
-questions, under the exact format used downstream. Neither interface is safe with today's detectors. With our LLM
-detector, removal gains \adLlmRemConf\ points on conflict questions and loses \adLlmRemClean\ on clean ones; the
-directional flag still costs clean questions \adLlmDirClean\ (default skeleton) to \axMiniMinLlmDirClean\ points
-(minimal). Removal should be gated on a measured clean-question loss rate.
+Detection F1 alone does not say what a detector will do downstream: with the same LLM detector, direction is worth
+\ardMini\ points over a neutral flag with gpt-4o-mini but less under the minimal skeleton (\rdMiniMin) and with
+Qwen2.5-7B (\rdQwen). We recommend reporting (i) direction accuracy, (ii) how often correct documents are marked or
+removed on conflict-free questions, and (iii) effects on conflict-free questions, under the exact format used
+downstream. Neither interface is safe with today's detectors: the LLM detector's directional flag costs clean
+questions \adLlmDirClean\ (default skeleton) to \axMiniMinLlmDirClean\ points (minimal), and removal loses
+\adLlmRemClean. Removal should be gated on a measured clean-question loss rate.

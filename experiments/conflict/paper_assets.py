@@ -287,10 +287,13 @@ def tab_hypotheses(R, out: Path):
     if "H8" in R:
         for k, v in R["H8"]["both_answers"].items():
             rows.append(("H8", "WikiContradict: " + _esc(k), _est(v), _p(v["p_holm"]), outcome(v, "H8", k), "--"))
-    for h in ("H10", "H11"):
+    for h in ("H10", "H11", "H12", "H13", "H14"):
         if h in rev:
             for k, v in rev[h][PRIMARY].items():
-                rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h, k), rob(rev[h], k, h)))
+                two = h == "H14" or " vs " in k
+                o = ("significant" if v["supported"] else "n.s.") if two else ("supported" if v["supported"] else "not supported")
+                ob = rev[h][ROBUST][k]["supported"] == v["supported"]
+                rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), o, "yes" if ob else "no"))
     body = "\n".join(" & ".join(r) + " \\\\" for r in rows)
     (out / "tab_hypotheses.tex").write_text(rf"""\begin{{table*}}[t]
 \centering\footnotesize
@@ -304,13 +307,123 @@ def tab_hypotheses(R, out: Path):
 \end{{tabular}}
 \caption{{Every pre-registered test on the confirmatory split (one-way strict accuracy; differences in points). Holm
 correction within each family. H1--H9 were registered before the confirmatory run; H10, H11 and the rows marked
-\textsuperscript{{r}} were registered after a review of the first draft (H10, H11 before their runs; \textsuperscript{{r}}
-rows are re-analyses of data that already existed). Directional predictions are \emph{{supported}} or \emph{{not
+\textsuperscript{{r}} after a first review of the draft, and H12--H14 after a second one (each before its runs;
+\textsuperscript{{r}} rows are re-analyses of data that already existed). Directional predictions are \emph{{supported}} or \emph{{not
 supported}}; tests with no predicted sign are \emph{{significant}} or \emph{{n.s.}} \emph{{Robust}}: the same outcome under
 the bidirectional metric.}}
 \label{{tab:hypotheses}}
 \end{{table*}}
 """)
+
+
+BASELINE_NAME = {"astute": "Astute RAG", "astute_multi": "Astute RAG (multi)", "trustrag": "TrustRAG",
+                 "trustrag_multi": "TrustRAG (multi)", "madam": "MADAM-RAG",
+                 "llm_dir+flag_directional": "LLM detector, dir.\\ flag",
+                 "llm_dir+flag_directional_instruct_v2": "LLM detector, dir.\\ flag + instr.",
+                 "llm_dir+flag_instruct_v2": "LLM detector, flag + instr.",
+                 "llm_dir+remove_suspect": "LLM detector, remove suspect",
+                 "instruct_v2": "Instruction (v2) only",
+                 "oracle+flag_instruct_v2": "Oracle, flag + instr.",
+                 "oracle+flag_directional_instruct_v2": "Oracle, dir.\\ flag + instr."}
+
+
+def tab_baselines(R, out: Path):
+    """Our directional interface against published conflict-robust RAG methods, plus the
+    resolution-instruction conditions (§10)."""
+    r2 = R.get("rev", {}).get("r2", {})
+    if "gpt-4o-mini" not in r2:
+        return
+    mt = R["main_table"][PRIMARY]; lab = R["rev"]["labelled"]["gpt-4o-mini"][PRIMARY]
+    a, b, cb = r2.get("gpt-4o-mini"), r2.get("gpt-4.1|seed0"), r2.get("CB:gpt-4o-mini")
+    rows_ = ["instruct_v2", "oracle+flag_instruct_v2", "oracle+flag_directional_instruct_v2", "madam", "astute",
+             "astute_multi", "trustrag", "trustrag_multi", "llm_dir+flag_instruct_v2",
+             "llm_dir+flag_directional_instruct_v2", "llm_dir+flag_directional", "llm_dir+remove_suspect"]
+
+    def eff(src, c, s):
+        return src["effects"][PRIMARY].get(c, {}).get(s) if src else None
+
+    def ramdocs_mini(c, s):
+        if c in mt:   # registered / main-table conditions
+            return lab[c]["labelled"] if s == "labelled" else mt[c][s]
+        return eff(a, c, s)
+
+    def calls(src, c):
+        v = (src or {}).get("cost", {}).get(c)
+        return f"{v['calls']:.0f}" if v else "--"
+
+    lines = [f"No flags (plain), accuracy & {pct(R['rev']['plain_labelled'][PRIMARY])} & {pct(R['plain_means'][PRIMARY]['conflict'])} & "
+             f"{pct(R['plain_means'][PRIMARY]['clean'])} & "
+             f"{pct(b['plain'][PRIMARY]['labelled']) if b else '--'} & "
+             f"{pct(cb['plain'][PRIMARY]['all']) if cb else '--'} & {pct(cb['plain'][PRIMARY]['conflict']) if cb else '--'} & "
+             f"{pct(cb['plain'][PRIMARY]['clean']) if cb else '--'} & 1 \\\\", "\\midrule"]
+    for c in rows_:
+        cbc = {"astute_multi": None, "trustrag_multi": None}.get(c, c)
+        cells = [cell(ramdocs_mini(c, s)) for s in ("labelled", "conflict", "clean")]
+        cells.append(cell(eff(b, c, "labelled")))
+        cells += [cell(eff(cb, cbc, s)) if cbc else "--" for s in ("labelled", "conflict", "clean")]
+        n_calls = {"madam": "--", "astute": "2", "astute_multi": "2", "trustrag": "3", "trustrag_multi": "3"}.get(c, "1")
+        if c == "madam":
+            n_calls = f"{R['main_costs']['madam']['prompt_tokens'] / R['main_costs']['plain']['prompt_tokens']:.0f}$\\times$tok."
+        lines.append(f"{BASELINE_NAME.get(c, COND_NAME.get(c, c))} & " + " & ".join(cells) + f" & {n_calls} \\\\")
+        if c in ("oracle+flag_directional_instruct_v2", "trustrag_multi"):
+            lines.append("\\midrule")
+    (out / "tab_baselines.tex").write_text(rf"""\begin{{table*}}[t]
+\centering\small
+\setlength{{\tabcolsep}}{{4pt}}
+\begin{{tabular}}{{lrrrrrrrr}}
+\toprule
+& \multicolumn{{3}}{{c}}{{RAMDocs, gpt-4o-mini}} & RAMDocs, gpt-4.1 & \multicolumn{{3}}{{c}}{{ConflictBank, gpt-4o-mini}} & \\
+\cmidrule(lr){{2-4}}\cmidrule(lr){{5-5}}\cmidrule(lr){{6-8}}
+Method & Lab. & Conflict & Clean & Lab. & All & Conflict & Clean & Calls \\
+\midrule
+{{chr(10).join(lines)}}
+\bottomrule
+\end{{tabular}}
+\caption{{Resolution instructions and published baselines. First row: accuracy (\%, one-way strict) with no flags; other rows:
+paired difference from it in points. \emph{{Lab.}}: the labelled RAMDocs questions; ConflictBank questions are all
+labelled. RAMDocs gpt-4o-mini and ConflictBank: 3 seeds; RAMDocs gpt-4.1: seed 0. \emph{{instr.}}: the v2 reliability
+instruction. \emph{{(multi)}}: the baseline's final step asks for every valid answer, which RAMDocs needs (every
+ConflictBank question has one answer). Calls: generator calls per question (LLM-detector rows add one detector call).
+\textbf{{Bold}}: significant under the paper's single scheme (Section~\ref{{sec:setup}}).}}
+\label{{tab:baselines}}
+\end{{table*}}
+""".replace("{chr(10).join(lines)}", chr(10).join(lines)))
+
+
+def tab_cb(R, out: Path):
+    """ConflictBank: the main effects for three generators (H12)."""
+    r2 = R.get("rev", {}).get("r2", {})
+    keys = [k for k in ("CB:gpt-4o-mini", "CB:gpt-4.1", "CB:Qwen2.5-7B") if k in r2]
+    if not keys:
+        return
+    cols = [("oracle+flag", "conflict"), ("oracle+flag_directional", "conflict"), ("oracle+remove_suspect", "conflict"),
+            ("llm_dir+flag", "conflict"), ("llm_dir+flag_directional", "conflict"), ("llm_dir+flag_directional", "clean"),
+            ("llm_dir+remove_suspect", "conflict"), ("llm_dir+remove_suspect", "clean")]
+    lines = []
+    for k in keys:
+        v = r2[k]
+        seeds = "3" if k == "CB:gpt-4o-mini" else "1"
+        lines.append(f"{k[3:]} & {seeds} & {pct(v['plain'][PRIMARY]['conflict'])} & " +
+                     " & ".join(cell(v["effects"][PRIMARY].get(c, {}).get(s)) for c, s in cols) + " \\\\")
+    (out / "tab_cb.tex").write_text(rf"""\begin{{table*}}[t]
+\centering\small
+\setlength{{\tabcolsep}}{{4pt}}
+\begin{{tabular}}{{lrrrrrrrrrr}}
+\toprule
+& & Plain & \multicolumn{{3}}{{c}}{{Oracle, conflict q.}} & \multicolumn{{3}}{{c}}{{LLM detector, flag / dir.\ flag}} & \multicolumn{{2}}{{c}}{{LLM, remove}} \\
+\cmidrule(lr){{4-6}}\cmidrule(lr){{7-9}}\cmidrule(lr){{10-11}}
+Generator & Seeds & conflict & flag & dir.\ flag & remove & flag & dir.\ conf. & dir.\ clean & conflict & clean \\
+\midrule
+LINES
+\bottomrule
+\end{{tabular}}
+\caption{{ConflictBank (300 conflict, 100 clean questions; one correct answer each; LLM-written misinformation built from
+Wikidata facts), default skeleton. \emph{{Plain}}: accuracy (\%) on conflict questions with no flags; other columns:
+paired difference in points. The LLM detector is gpt-4o-mini for every generator. \textbf{{Bold}}: significant under the
+paper's single scheme.}}
+\label{{tab:cb}}
+\end{{table*}}
+""".replace("LINES", chr(10).join(lines)))
 
 
 def tab_generality(R, out: Path):
@@ -544,7 +657,7 @@ def numbers(R, out: Path):
         add("gptPlainConf", pct(gb["conflict"])); add("gptPlainClean", pct(gb["clean"]))
         for c, k in (("oracle+flag", "OracleFlag"), ("oracle+flag_directional", "OracleDir"),
                      ("oracle+remove_suspect", "OracleRem"), ("llm_dir+remove_suspect", "LlmRem"),
-                     ("llm_dir+flag_directional", "LlmDir")):
+                     ("llm_dir+flag_directional", "LlmDir"), ("instruct_v2", "InstrTwo")):
             for s, sn in (("conflict", "Conf"), ("clean", "Clean"), ("all", "All")):
                 add(f"gpt{k}{sn}", pct(g[c][s]["diff"], True))
     if "madam_all500" in R:
@@ -652,6 +765,68 @@ def numbers(R, out: Path):
             fam = rev[h][PRIMARY]
             hn = {"H10": "HTen", "H11": "HEleven"}[h]
             add(f"n{hn}Supported", sum(v["supported"] for v in fam.values())); add(f"n{hn}Tests", len(fam))
+    # second revision (§10)
+    import re as _re2
+    T2 = {"gpt-4o-mini": "Mini", "gpt-4.1|seed0": "Four", "gpt-4o-mini|qwen-detector": "QDet",
+          "CB:gpt-4o-mini": "CbMini", "CB:gpt-4.1": "CbFour", "CB:Qwen2.5-7B": "CbQwen"}
+    cname = lambda c: "".join(w.capitalize() for w in _re2.split(r"[^a-z0-9]+", c.replace("_v2", "_two")) if w and not w.isdigit())
+    for gk, v in rev.get("r2", {}).items():
+        T = T2[gk]
+        for sb in ("all", "conflict", "clean", "labelled"):
+            add(f"zp{T}{sb.capitalize()}", pct(v["plain"][PRIMARY][sb]))
+        for c, d in v["effects"][PRIMARY].items():
+            for sb, t in d.items():
+                nm = f"z{T}{cname(c)}{sb.capitalize()}"
+                add(nm, pct(t["diff"], True)); add(nm + "CI", f"[{pct(t['ci_low'], True)}, {pct(t['ci_high'], True)}]")
+        for c, w in v.get("wrong_rate", {}).items():
+            add(f"zw{T}{cname(c)}", pct(w))
+    for h in ("H12", "H13", "H14"):
+        if h in rev:
+            hn = {"H12": "HTwelve", "H13": "HThirteen", "H14": "HFourteen"}[h]
+            fam = rev[h][PRIMARY]
+            add(f"n{hn}Supported", sum(v["supported"] for v in fam.values())); add(f"n{hn}Tests", len(fam))
+            for n_, (k, v) in enumerate(fam.items()):
+                add(f"{hn.lower()}P{chr(65 + n_)}", _p(v["p_holm"]))
+    # registered round-2 tests by short name, and detector quality on the new runs
+    short = {"H13": {"RAMDocs, gpt-4o-mini: dir.": "DirMini", "RAMDocs, gpt-4.1: dir.": "DirFour",
+                     "ConflictBank, gpt-4o-mini: dir.": "DirCb"},
+             "H14": {"RAMDocs, gpt-4o-mini: LLM dir. flag vs astute": "AstMini",
+                     "RAMDocs, gpt-4o-mini: LLM dir. flag vs trustrag": "TrMini",
+                     "RAMDocs, gpt-4.1: LLM dir. flag vs astute": "AstFour",
+                     "RAMDocs, gpt-4.1: LLM dir. flag vs trustrag": "TrFour",
+                     "ConflictBank, gpt-4o-mini: LLM dir. flag vs astute": "AstCb",
+                     "ConflictBank, gpt-4o-mini: LLM dir. flag vs trustrag": "TrCb"}}
+    for h, hn in (("H13", "hThirteen"), ("H14", "hFourteen")):
+        for tk, t in rev.get(h, {}).get(PRIMARY, {}).items():
+            for pre, nm in short[h].items():
+                if tk.startswith(pre):
+                    add(f"{hn}{nm}", pct(t["diff"], True))
+                    add(f"{hn}{nm}CI", f"[{pct(t['ci_low'], True)}, {pct(t['ci_high'], True)}]")
+                    add(f"{hn}{nm}P", _p(t["p_holm"]))
+    for grp, v in rev.get("baseline_recall", {}).items():
+        for c, k in (("plain", "Plain"), ("astute_multi", "Ast"), ("trustrag_multi", "Tr")):
+            add(f"rec{grp.capitalize()}{k}", pct(v[c]))
+    import json as _json
+    from .paper_stats import RUNS as _RUNS
+    for run, pre in (("cb_main", "cb"), ("qwendet", "qdet")):
+        f = Path(_RUNS[run]) / "detector_quality.json"
+        if f.exists():
+            dq = _json.loads(f.read_text()).get("llm_dir", {})
+            ql = dq.get("question_level", {})
+            add(f"{pre}DirAccLlm", pct(dq["direction_accuracy"]) if dq.get("direction_accuracy") is not None else "--")
+            add(f"{pre}Fpr", pct(ql.get("false_positive_rate", float("nan"))))
+            add(f"{pre}Dir", pct(dq["direction_accuracy"]) if dq.get("direction_accuracy") is not None else "--")
+    be = rev.get("break_even", {})
+    for mode, mk in (("flag_directional", "Dir"), ("remove_suspect", "Rem")):
+        v = be.get(f"{mode}|r1|d1")
+        add(f"breakEven{mk}", f"{v:g}" if v else "none")
+    for k, v in rev.get("prevalence", {}).items():
+        gk, sk, c = k.split("|")
+        T = {"gpt-4o-mini": "Mini", "gpt-4.1": "Four", "Qwen2.5-7B": "Qwen"}[gk] + ("Min" if sk == "minimal" else "")
+        nm = f"prev{T}{'Dir' if 'directional' in c else 'Rem'}"
+        add(nm, pct(v["break_even_pi"], nd=0) if v["break_even_pi"] is not None else "--")
+    if "n_exploratory" in rev:
+        add("nExploratory", rev["n_exploratory"].get(PRIMARY, 0))
     from .costs import total_spend
     add("totalSpend", f"\\${total_spend():.2f}")
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
@@ -666,7 +841,7 @@ def numbers(R, out: Path):
 
 def write_all(R, out: Path):
     tab_detectors(R, out); tab_main(R, out); tab_gpt41(R, out); tab_wiki(R, out); tab_hypotheses(R, out)
-    tab_generality(R, out)
+    tab_generality(R, out); tab_baselines(R, out); tab_cb(R, out)
     numbers(R, out)
     app_prompts(out)
     tab_appendix(R, out)

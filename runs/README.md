@@ -26,6 +26,12 @@ All runs use GPT-4o-mini on RAMDocs; pilots are **exploratory**, since they shap
 | `holdout_qwen` | Revision H11: Qwen2.5-7B-Instruct (Ollama, 4-bit), default skeleton, seed 0 | `exclude` | **registered (§9.2, §9.4)** |
 | `holdout_qwen_minimal` | Revision H10: Qwen2.5-7B-Instruct, minimal skeleton, seed 0 | `exclude` | **registered (§9.2, §9.4)** |
 | `holdout_adversarial` | Revision §9.5: inverted oracle (names the correct side), gpt-4o-mini, 3 seeds | `exclude` | exploratory (registered) |
+| `holdout_round2` | Round 2 (§10): neutral/directional flag + v2 instruction, Astute RAG, TrustRAG (+multi), gpt-4o-mini, 3 seeds | `exclude` | **registered (§10, H13, H14)** |
+| `holdout_gpt41_round2` | Round 2: same with gpt-4.1, seed 0 | `exclude` | **registered (§10)** |
+| `holdout_qwendet` | Round 2: Qwen2.5-7B as LLM detector, gpt-4o-mini generator, 3 seeds | `exclude` | exploratory (registered) |
+| `cb_main` | Round 2: ConflictBank (400 items, `prepare_conflictbank.py`), gpt-4o-mini, 3 seeds, all formats and baselines | n/a | **registered (§10, H12)** |
+| `cb_gpt41` | Round 2: ConflictBank, gpt-4.1, seed 0 | n/a | **registered (H12)** |
+| `cb_qwen` | Round 2: ConflictBank, Qwen2.5-7B (Ollama), seed 0 | n/a | **registered (H12)** |
 | `labelling` | `ramdocs_suspect_docs.csv`: 163 RAMDocs documents to hand-label (`export_labelling.py`) | n/a | to label |
 
 Runs made before the cached-latency fix (all runs listed above) record `generate_s` as wall-clock time, ~0 for
@@ -40,4 +46,5 @@ All runs were rescored (`rescore.py`) after the MADAM answer-parsing fix of 2026
 
 Runs from `holdout_*` onward record `generate_s` as API latency (also on cache hits). The paper's
 numbers, tables and figures are all produced by `python -m experiments.conflict.paper_stats` from
-these directories (written to `paper/generated/`). Total API spend is in `COSTS.md`.
+these directories (written to `paper/generated/`). `cb_main` stopped once on a transient HTTP 403 and was
+resumed (completed rows kept; finished calls served from the cache). Total API spend is in `COSTS.md`.

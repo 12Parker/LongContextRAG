@@ -2,65 +2,63 @@
 \label{sec:setup}
 
 \paragraph{Data.}
-\textbf{RAMDocs} \citep{wang2025madam} has 500 questions. Each has 1--12 documents (5.5 on average) typed \emph{correct} (supports a gold
-answer, possibly for a different same-name entity), \emph{misinfo} (supports a wrong answer) or \emph{noise}. We
-label a pair a \emph{contradiction} if one side is misinformation and the two answers differ, \emph{ambiguity} if
-both are correct with different answers, \emph{consistent} if the answers match, and \emph{unrelated} if either is
-noise. A question is a \emph{conflict} question if it has at least one contradiction pair, and \emph{clean} otherwise.
+\textbf{RAMDocs} \citep{wang2025madam} has 500 questions, each with 1--12 documents (5.5 on average) typed
+\emph{correct} (supports a gold answer, possibly for a different same-name entity), \emph{misinfo} (supports a wrong
+answer) or \emph{noise}. We label a pair a \emph{contradiction} if one side is misinformation and the two answers
+differ, \emph{ambiguity} if both are correct with different answers, \emph{consistent} if the answers match, and
+\emph{unrelated} if either is noise. A question is a \emph{conflict} question if it has a contradiction pair, and
+\emph{clean} otherwise. The released types are imperfect: 163 documents typed \emph{correct} contain a wrong answer,
+some as injected misinformation, others incidentally. We leave pairs that touch them out of pair-level metrics, and
+questions whose only sign of conflict is such a document (55 of 500; 35 of the confirmatory split) count only in
+``All''. Treating them as misinformation is a robustness check.
 
-The released types are imperfect. 163 documents typed \emph{correct} contain a wrong answer; some are injected
-misinformation (``Ronald Powell, a renowned chess player''), others mention it incidentally (a navigation menu
-listing ``Soccer''). We therefore leave pairs that touch these documents out of pair-level metrics. Questions whose
-only sign of conflict is such a document (55 of all 500; 35 of the confirmatory split) belong to neither subset; they
-count only in ``All''. Treating every such document as misinformation instead is a robustness check.
+\textbf{ConflictBank} \citep{su2024conflictbank} builds misinformation differently: for a Wikidata fact, an LLM writes
+one evidence passage for the true object and one for a substituted object. We sample 400 questions round-robin over
+relations: 300 conflict questions (correct passage, misinformation passage, two distractors from other subjects) and
+100 clean ones (correct passage, three distractors). Every question has one gold answer. It had no pilot, so all its
+results are confirmatory.
 
 \textbf{WikiContradict} \citep{hou2024wikicontradict} has 253 questions, each with two Wikipedia passages that
-genuinely contradict each other. The reference answer is \emph{both} sides and no passage is misinformation, so it is
-the contrast case to RAMDocs. An answer is scored correct if both of the dataset's answer strings (one per passage)
-match a final answer, with the bidirectional matching rule below. \textbf{CONFLICTS} \citep{cattan2025conflicts}: we use the 237 questions that have a
-reference answer (outdated-information, misinformation and no-conflict items), which can be scored automatically.
+genuinely contradict each other; the reference answer is \emph{both} sides. We also run 237 automatically scorable
+\textbf{CONFLICTS} \citep{cattan2025conflicts} questions (Appendix~\ref{app:repro}).
 
 \paragraph{Pre-registration and splits.}
-We developed the method on a random 200-question pilot split of RAMDocs. Those pilots motivated directional flags,
-removal and document-level placement. Before running anything on the remaining 300 questions (139 conflict, 126
-clean, 35 excluded), we committed a pre-registration that fixes the conditions, metrics, hypotheses and corrections.
-Every RAMDocs result in the main text is on this confirmatory split. Pilot results appear only in the appendix and are
-marked exploratory. Comparisons that were not registered, including every real-detector row of Table~\ref{tab:main},
-are exploratory. After a review of a first draft we registered an addendum (H10, H11 and four re-analyses), before
-running anything it covers; Appendix~\ref{app:repro} lists every deviation.
+We developed the method on a random 200-question pilot split of RAMDocs. Before running anything on the remaining 300
+questions (139 conflict, 126 clean, 35 excluded), we committed a pre-registration that fixes the conditions, metrics,
+hypotheses and corrections. Every RAMDocs result in the main text is on this confirmatory split; pilot results appear
+only in the appendix. Comparisons that were not registered, including every real-detector row of
+Table~\ref{tab:main}, are exploratory. After review we registered an addendum (H10, H11 and four re-analyses) and a
+second registration (H12--H14), each before running anything it covers; Appendix~\ref{app:repro} lists every
+deviation.
 
-\paragraph{Generators.}
+\paragraph{Generators and baselines.}
 The main generator is \texttt{gpt-4o-mini} \citep{openai2024gpt4o} (temperature 0.1, at most 256 output tokens, seeds
-0--2). We replicate the key conditions with \texttt{gpt-4.1} (3 seeds) and with the open-weights
-Qwen2.5-7B-Instruct \citep{yang2024qwen25} (4-bit, run locally with Ollama, seed 0), keeping the LLM detector fixed at
-gpt-4o-mini. Every prompt uses the \emph{default} skeleton, which asks for every valid answer when the passages
-support several. To test whether our findings depend on that policy, we rerun the oracle and LLM-detector conditions
-with a \emph{minimal} skeleton that drops it (Appendix~\ref{app:prompts}).
-MADAM-RAG \citep{wang2025madam} is ported unchanged to the same client: three debate rounds, temperature 0, 128 tokens
-per call.
+0--2). We replicate the key conditions with \texttt{gpt-4.1} (3 seeds) and with Qwen2.5-7B-Instruct \citep{yang2024qwen25}
+(4-bit, local, seed 0), keeping the LLM detector fixed at gpt-4o-mini. We rerun the oracle and LLM-detector
+conditions with the minimal skeleton. MADAM-RAG \citep{wang2025madam} is ported unchanged (three debate rounds).
+Astute RAG \citep{wang2025astute} and TrustRAG \citep{zhou2025trustrag} use their published prompts and defaults; since
+both return one answer, we also run \emph{multi} variants that ask for every valid answer (Appendix~\ref{app:repro}).
+We also run the LLM detector on Qwen2.5-7B with gpt-4o-mini generating.
 
 \paragraph{Metrics.}
 On RAMDocs an answer is correct if it includes every gold answer and no wrong answer \citep{wang2025madam}. Our primary
-metric reads ``includes'' literally: after normalisation (lower-casing; removing punctuation and articles), each gold
-or wrong answer must appear as a whole-word span of the extracted final answer. A more lenient bidirectional variant,
-which also counts a predicted answer contained in a gold one, is our robustness metric. With the one-way metric,
-our port of MADAM-RAG scores 28.5\% on the pilot split and \madamOneWay\% on all 500 questions (published: 28.00, on
-an undisclosed subset); with the bidirectional metric it scores \madamBidir\% on all 500. We chose the one-way metric
-as primary for this reason, before the confirmatory run; the first draft of the pre-registration had named the
-bidirectional one. Because the published subset and scorer are unknown, we do not claim to reproduce the published
-number, and we compare conditions only within our own harness. On WikiContradict an answer is correct if it contains both sides;
-on CONFLICTS, if it contains the reference answer.
+metric reads ``includes'' literally: after normalisation, each gold or wrong answer must appear as a whole-word span
+of the extracted final answer. A bidirectional variant, which also counts a predicted answer contained in a gold one,
+is the robustness metric. We chose the one-way metric before the confirmatory run because it is closer to MADAM-RAG's
+published score (Appendix~\ref{app:repro}), and we compare conditions only within our own harness. On WikiContradict
+an answer is correct if it contains both sides (bidirectional matching); on ConflictBank we use the RAMDocs metrics.
 
 \paragraph{Statistics.}
-We average each question's score over the three seeds, then report paired differences from the plain format with
-cluster-bootstrap 95\% CIs (10,000 resamples) and two-sided sign-flip permutation tests (10,000 permutations)
+We average each question's score over seeds, then report paired differences from the plain format with
+cluster-bootstrap 95\% CIs (10,000 resamples) and two-sided sign-flip permutation tests
 \citep{efron1993bootstrap,dror2018hitchhiker}. Holm correction \citep{holm1979simple} is applied within each
-pre-registered hypothesis family. A hypothesis is \emph{robustly supported} if it also holds under the robustness
-metric. A null difference is not read as equivalence unless a two one-sided test (TOST; \citealp{lakens2017equivalence})
-with a pre-set margin confirms it. With 139 conflict questions, the smallest effect our comparisons detect with 80\% power is \mdeLo--\mdeHi\ points
-(median \mdeMed; \citealp{card2020power}); smaller differences may go unseen.
+pre-registered family. A hypothesis is \emph{robustly supported} if it also holds under the robustness metric. One
+significance scheme governs the paper: a registered test takes its family's Holm-adjusted $p$, and every other
+comparison we report (\nExploratory\ of them) forms one exploratory Holm family. Only results significant under this
+scheme are called significant or set in bold. A null difference is not read as equivalence without a TOST
+\citep{lakens2017equivalence}. With 139 conflict questions, the minimum detectable effect at 80\% power is
+\mdeLo--\mdeHi\ points (median \mdeMed; \citealp{card2020power}).
 
 \paragraph{Cost.}
-Token counts come from the API's usage reports. Prices were checked on 2026-10-27 (gpt-4o-mini: \$0.15, \$0.075
-cached, and \$0.60 per million input, cached-input and output tokens; gpt-4.1: \$2.00, \$0.50 and \$8.00). All experiments in
-this paper, pilots included, cost \totalSpend\ in API fees; Qwen ran locally.
+Token counts come from the API's usage reports. All experiments, pilots included, cost \totalSpend\ in API fees
+(prices checked on 2026-10-27; Appendix~\ref{app:repro}); Qwen ran locally.

@@ -56,7 +56,8 @@ expected precision is $p$. That rate is dataset-wide, so conflict-free questions
 names the gold misinformation side with probability $d$, and otherwise the other side. A false flag has no
 misinformation side, so its suspect is picked uniformly. Each pair gets one uniform draw for flagging and one for
 direction, and every cell reuses them. Cells are therefore nested: raising $r$ or $d$, or lowering $p$, only adds
-flags or corrections. This keeps comparisons across cells paired.
+flags or corrections. This keeps comparisons across cells paired. The grid crosses $p\in\{0.25,0.5,0.75,1\}$, $r\in\{0.25,0.5,1\}$ and $d\in\{0.5,0.75,1\}$ (36
+cells), each rendered as a directional flag and as removal.
 
 \subsection{Placing real detectors on the grid}
 \label{sec:placement}

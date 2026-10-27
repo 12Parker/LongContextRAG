@@ -45,6 +45,13 @@ RUNS = {
     "qwen": ROOT / "runs/holdout_qwen",
     "qwen_minimal": ROOT / "runs/holdout_qwen_minimal",
     "adversarial": ROOT / "runs/holdout_adversarial",
+    # second revision (PREREGISTRATION.md §10)
+    "round2": ROOT / "runs/holdout_round2",
+    "gpt41_round2": ROOT / "runs/holdout_gpt41_round2",
+    "qwendet": ROOT / "runs/holdout_qwendet",
+    "cb_main": ROOT / "runs/cb_main",
+    "cb_gpt41": ROOT / "runs/cb_gpt41",
+    "cb_qwen": ROOT / "runs/cb_qwen",
 }
 GENERATORS = {"gpt-4o-mini": ("main", "minimal"), "gpt-4.1": ("gpt41", "gpt41_minimal"),
               "Qwen2.5-7B": ("qwen", "qwen_minimal")}
@@ -357,6 +364,105 @@ def revision(R, main_rows, main_ex, h3spec):
                              for m in (PRIMARY, ROBUST)}
 
 
+# --------------------------------------------------------------------------- second revision (§10)
+R2_SUBSETS = (("conflict", True), ("clean", False), (LABELLED, LABELLED))
+
+
+def revision2(R, main_rows, main_ex=None):
+    """Baselines, resolution instruction, ConflictBank, cross-family detector (§10)."""
+    rev = R["rev"]
+    sets = {}
+    if results_path(RUNS["round2"]):
+        sets["gpt-4o-mini"] = main_rows + [r for r in rows_of(RUNS["round2"]) if r["condition"] != "plain"]
+    for key, run in (("gpt-4.1|seed0", "gpt41_round2"), ("gpt-4o-mini|qwen-detector", "qwendet"),
+                     ("CB:gpt-4o-mini", "cb_main"), ("CB:gpt-4.1", "cb_gpt41"), ("CB:Qwen2.5-7B", "cb_qwen")):
+        if results_path(RUNS[run]):
+            sets[key] = rows_of(RUNS[run])
+    r2 = rev["r2"] = {}
+    for key, rows in sets.items():
+        conds = sorted({r["condition"] for r in rows} - {"plain"})
+        if key == "gpt-4o-mini":   # only what round 2 added on RAMDocs; the rest is in main_table
+            conds = [c for c in conds if "instruct_v2" in c and c.startswith(("oracle", "llm")) or
+                     c.split("+")[0] in ("astute", "astute_multi", "trustrag", "trustrag_multi") or
+                     c in ("llm_dir+flag_directional",)]
+        r2[key] = {
+            "plain": {m: {s: float(np.mean(list(per_question(rr, "plain", f, m).values())))
+                          for s, f, rr in (("all", None, rows), ("conflict", True, rows), ("clean", False, rows),
+                                           ("labelled", None, [r for r in rows if r.get("has_conflict") is not None]))}
+                      for m in (PRIMARY, ROBUST)},
+            "effects": {m: {c: {s: compare(rows, "plain", c, sub, m) for s, sub in R2_SUBSETS} for c in conds}
+                        for m in (PRIMARY, ROBUST)},
+            "cost": {c: {"prompt_tokens": float(np.mean([r["prompt_tokens"] for r in rows if r["condition"] == c])),
+                         "calls": float(np.mean([r.get("calls", 1) for r in rows if r["condition"] == c])),
+                         "cost_usd": float(np.mean([r["cost_usd"] + r.get("detect_cost_usd", 0) for r in rows
+                                                    if r["condition"] == c]))}
+                     for c in ["plain"] + conds},
+            "n": {s: len(per_question(rows, "plain", f, PRIMARY)) for s, f in (("conflict", True), ("clean", False))}}
+        if any(c.startswith("oracle_inv") for c in conds):
+            r2[key]["wrong_rate"] = {c: float(np.mean([r["wrong_rate"] for r in rows if r["condition"] == c and r["has_conflict"]]))
+                                     for c in ("plain", "oracle+flag", "oracle+flag_directional", "oracle_inv+flag_directional")
+                                     if c in conds + ["plain"]}
+        r2[key]["_rows"] = rows   # dropped before writing
+    regmap = rev["registered_map"] = {}
+
+    def fam(name, spec, dirs):
+        out = {}
+        for m in (PRIMARY, ROBUST):
+            tests = {}
+            for tk, key, a, b, sub in spec:
+                rows = r2[key]["_rows"]
+                tests[tk] = compare(rows, a, b, sub, m)
+            out[m] = family(tests, {tk: dirs.get(tk, 0) for tk, *_ in spec})
+        for tk, key, a, b, sub in spec:
+            sname = {True: "conflict", False: "clean", LABELLED: "labelled"}[sub]
+            regmap["\t".join((key, "default", b, a, sname))] = (name, tk)
+        return out
+
+    h3 = [("oracle+flag", "plain", 0, "neutral flag vs plain"),
+          ("oracle+flag_directional", "plain", +1, "dir. flag > plain"),
+          ("oracle+flag_directional", "oracle+flag", +1, "dir. flag > neutral flag"),
+          ("oracle+remove_suspect", "plain", +1, "removal > plain")]
+    spec, dirs = [], {}
+    for key in ("CB:gpt-4o-mini", "CB:gpt-4.1", "CB:Qwen2.5-7B"):
+        if key in r2:
+            for b, a, d, name in h3:
+                tk = f"{key[3:]}: {name} (conflict)"
+                spec.append((tk, key, a, b, True)); dirs[tk] = d
+    if spec:
+        rev["H12"] = fam("H12", spec, dirs)
+    spec, dirs = [], {}
+    for key, label in (("gpt-4o-mini", "RAMDocs, gpt-4o-mini"), ("gpt-4.1|seed0", "RAMDocs, gpt-4.1"),
+                       ("CB:gpt-4o-mini", "ConflictBank, gpt-4o-mini")):
+        if key in r2:
+            spec.append((f"{label}: neutral flag + instruction vs plain (conflict)", key, "plain",
+                         "oracle+flag_instruct_v2", True))
+            tk = f"{label}: dir. flag + instruction > neutral flag + instruction (conflict)"
+            spec.append((tk, key, "oracle+flag_instruct_v2", "oracle+flag_directional_instruct_v2", True)); dirs[tk] = +1
+    if spec:
+        rev["H13"] = fam("H13", spec, dirs)
+    spec = []
+    for key, label, bases in (("gpt-4o-mini", "RAMDocs, gpt-4o-mini", ("astute_multi", "trustrag_multi")),
+                              ("gpt-4.1|seed0", "RAMDocs, gpt-4.1", ("astute_multi", "trustrag_multi")),
+                              ("CB:gpt-4o-mini", "ConflictBank, gpt-4o-mini", ("astute", "trustrag"))):
+        if key in r2:
+            for bname in bases:
+                spec.append((f"{label}: LLM dir. flag vs {bname.replace('_', ' ')} (labelled)", key, bname,
+                             "llm_dir+flag_directional", LABELLED))
+    if spec:
+        rev["H14"] = fam("H14", spec, {})
+    # exploratory (after seeing H14): do the baselines lose valid answers on multi-answer clean questions?
+    if "gpt-4o-mini" in r2 and main_ex is not None:
+        n_gold = {e.id: len(e.gold_answers) for e in main_ex}
+        rows = r2["gpt-4o-mini"]["_rows"]
+        rev["baseline_recall"] = {
+            grp: {c: float(np.mean([r["gold_recall"] for r in rows if r["condition"] == c and r["has_conflict"] is False
+                                    and (n_gold.get(r["id"], 0) > 1) == (grp == "multi")]))
+                  for c in ("plain", "astute_multi", "trustrag_multi")}
+            for grp in ("single", "multi")}
+    for v in r2.values():
+        v.pop("_rows", None)
+
+
 # --------------------------------------------------------------------------- output helpers
 def fmt(x, nd=3, sign=True):
     if x is None or (isinstance(x, float) and math.isnan(x)):
@@ -481,6 +587,7 @@ def main(argv=None):
             R["contains"]["H4"] = {m: rv.h4_revised(cr, cx, dets_of, RUNS["contains"], m, compare)
                                    for m in (PRIMARY, ROBUST)}
     revision(R, main_rows, main_ex, h3spec)
+    revision2(R, main_rows, main_ex)
     import csv
     sweep = list(csv.DictReader(open(RUNS["detect"] / "caag_sweep.csv")))
     for r in sweep:

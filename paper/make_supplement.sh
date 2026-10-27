@@ -35,7 +35,9 @@ cat > "$DEST/README.md" <<'EOF'
   source, which is withheld for anonymity, so that one test is expected to fail here.
 
 Benchmarks are fetched at pinned commits by `setup_env.sh` (RAMDocs, CONFLICTS); WikiContradict
-is loaded from Hugging Face at the revision pinned in `experiments/conflict/data.py`.
+is loaded from Hugging Face at the revision pinned in `experiments/conflict/data.py`. ConflictBank is
+not redistributed (no licence file in its release): download the pinned QA file with the command in
+`experiments/conflict/prepare_conflictbank.py`, then run that script to rebuild the 400 evaluation items.
 EOF
 
 # anonymity check: no author names, usernames, repo names or home paths

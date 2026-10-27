@@ -139,6 +139,9 @@
 \newcommand{\gptLlmDirConf}{$+$8.4}
 \newcommand{\gptLlmDirClean}{0.0}
 \newcommand{\gptLlmDirAll}{$+$5.4}
+\newcommand{\gptInstrTwoConf}{$+$12.2}
+\newcommand{\gptInstrTwoClean}{$-$2.6}
+\newcommand{\gptInstrTwoAll}{$+$5.8}
 \newcommand{\madamOneWay}{32.8}
 \newcommand{\madamBidir}{38.4}
 \newcommand{\origCaagAll}{$-$0.9}
@@ -233,8 +236,8 @@
 \newcommand{\hFourDirN}{9}
 \newcommand{\hFourRemHarm}{6}
 \newcommand{\hFourRemN}{9}
-\newcommand{\hFourRho}{$-$0.72}
-\newcommand{\hFourRhoCI}{[$-$0.86, $-$0.19]}
+\newcommand{\hFourRho}{$-$0.39}
+\newcommand{\hFourRhoCI}{[$-$0.74, $-$0.12]}
 \newcommand{\hFourRhoCells}{24}
 \newcommand{\hFourRemWorse}{5}
 \newcommand{\hFourMatched}{9}
@@ -622,7 +625,373 @@
 \newcommand{\nHTenTests}{12}
 \newcommand{\nHElevenSupported}{2}
 \newcommand{\nHElevenTests}{4}
-\newcommand{\totalSpend}{\$33.70}
+\newcommand{\zpMiniAll}{29.9}
+\newcommand{\zpMiniConflict}{22.1}
+\newcommand{\zpMiniClean}{41.5}
+\newcommand{\zpMiniLabelled}{31.3}
+\newcommand{\zMiniAstuteConflict}{$-$8.4}
+\newcommand{\zMiniAstuteConflictCI}{[$-$16.1, $-$1.0]}
+\newcommand{\zMiniAstuteClean}{$-$23.5}
+\newcommand{\zMiniAstuteCleanCI}{[$-$31.2, $-$16.1]}
+\newcommand{\zMiniAstuteLabelled}{$-$15.6}
+\newcommand{\zMiniAstuteLabelledCI}{[$-$21.0, $-$10.2]}
+\newcommand{\zMiniAstuteMultiConflict}{$-$1.2}
+\newcommand{\zMiniAstuteMultiConflictCI}{[$-$7.9, $+$5.5]}
+\newcommand{\zMiniAstuteMultiClean}{$-$11.1}
+\newcommand{\zMiniAstuteMultiCleanCI}{[$-$18.0, $-$4.5]}
+\newcommand{\zMiniAstuteMultiLabelled}{$-$5.9}
+\newcommand{\zMiniAstuteMultiLabelledCI}{[$-$10.7, $-$1.3]}
+\newcommand{\zMiniLlmDirFlagDirectionalConflict}{$+$12.5}
+\newcommand{\zMiniLlmDirFlagDirectionalConflictCI}{[$+$5.3, $+$19.9]}
+\newcommand{\zMiniLlmDirFlagDirectionalClean}{$-$3.4}
+\newcommand{\zMiniLlmDirFlagDirectionalCleanCI}{[$-$7.1, 0.0]}
+\newcommand{\zMiniLlmDirFlagDirectionalLabelled}{$+$4.9}
+\newcommand{\zMiniLlmDirFlagDirectionalLabelledCI}{[$+$0.8, $+$9.3]}
+\newcommand{\zMiniLlmDirFlagDirectionalInstructTwoConflict}{$+$8.4}
+\newcommand{\zMiniLlmDirFlagDirectionalInstructTwoConflictCI}{[$+$1.0, $+$16.3]}
+\newcommand{\zMiniLlmDirFlagDirectionalInstructTwoClean}{$-$16.7}
+\newcommand{\zMiniLlmDirFlagDirectionalInstructTwoCleanCI}{[$-$22.8, $-$10.8]}
+\newcommand{\zMiniLlmDirFlagDirectionalInstructTwoLabelled}{$-$3.5}
+\newcommand{\zMiniLlmDirFlagDirectionalInstructTwoLabelledCI}{[$-$8.7, $+$1.5]}
+\newcommand{\zMiniLlmDirFlagInstructTwoConflict}{$-$2.2}
+\newcommand{\zMiniLlmDirFlagInstructTwoConflictCI}{[$-$7.0, $+$2.6]}
+\newcommand{\zMiniLlmDirFlagInstructTwoClean}{$-$1.9}
+\newcommand{\zMiniLlmDirFlagInstructTwoCleanCI}{[$-$6.9, $+$3.2]}
+\newcommand{\zMiniLlmDirFlagInstructTwoLabelled}{$-$2.0}
+\newcommand{\zMiniLlmDirFlagInstructTwoLabelledCI}{[$-$5.5, $+$1.4]}
+\newcommand{\zMiniOracleFlagDirectionalInstructTwoConflict}{$+$13.2}
+\newcommand{\zMiniOracleFlagDirectionalInstructTwoConflictCI}{[$+$6.0, $+$20.4]}
+\newcommand{\zMiniOracleFlagDirectionalInstructTwoClean}{$-$1.1}
+\newcommand{\zMiniOracleFlagDirectionalInstructTwoCleanCI}{[$-$5.0, $+$2.6]}
+\newcommand{\zMiniOracleFlagDirectionalInstructTwoLabelled}{$+$6.4}
+\newcommand{\zMiniOracleFlagDirectionalInstructTwoLabelledCI}{[$+$2.1, $+$10.7]}
+\newcommand{\zMiniOracleFlagInstructTwoConflict}{$-$2.4}
+\newcommand{\zMiniOracleFlagInstructTwoConflictCI}{[$-$6.2, $+$1.2]}
+\newcommand{\zMiniOracleFlagInstructTwoClean}{$-$1.1}
+\newcommand{\zMiniOracleFlagInstructTwoCleanCI}{[$-$5.0, $+$2.6]}
+\newcommand{\zMiniOracleFlagInstructTwoLabelled}{$-$1.8}
+\newcommand{\zMiniOracleFlagInstructTwoLabelledCI}{[$-$4.4, $+$0.9]}
+\newcommand{\zMiniTrustragConflict}{$-$11.3}
+\newcommand{\zMiniTrustragConflictCI}{[$-$18.7, $-$4.1]}
+\newcommand{\zMiniTrustragClean}{$-$24.3}
+\newcommand{\zMiniTrustragCleanCI}{[$-$32.8, $-$16.1]}
+\newcommand{\zMiniTrustragLabelled}{$-$17.5}
+\newcommand{\zMiniTrustragLabelledCI}{[$-$22.9, $-$12.1]}
+\newcommand{\zMiniTrustragMultiConflict}{$-$12.2}
+\newcommand{\zMiniTrustragMultiConflictCI}{[$-$19.9, $-$4.8]}
+\newcommand{\zMiniTrustragMultiClean}{$-$24.6}
+\newcommand{\zMiniTrustragMultiCleanCI}{[$-$32.5, $-$16.7]}
+\newcommand{\zMiniTrustragMultiLabelled}{$-$18.1}
+\newcommand{\zMiniTrustragMultiLabelledCI}{[$-$23.5, $-$12.7]}
+\newcommand{\zpFourAll}{31.3}
+\newcommand{\zpFourConflict}{19.4}
+\newcommand{\zpFourClean}{47.6}
+\newcommand{\zpFourLabelled}{32.8}
+\newcommand{\zFourAstuteMultiConflict}{$+$13.7}
+\newcommand{\zFourAstuteMultiConflictCI}{[$+$5.0, $+$22.3]}
+\newcommand{\zFourAstuteMultiClean}{$-$10.3}
+\newcommand{\zFourAstuteMultiCleanCI}{[$-$19.0, $-$2.4]}
+\newcommand{\zFourAstuteMultiLabelled}{$+$2.3}
+\newcommand{\zFourAstuteMultiLabelledCI}{[$-$3.8, $+$8.7]}
+\newcommand{\zFourLlmDirFlagDirectionalConflict}{$+$14.4}
+\newcommand{\zFourLlmDirFlagDirectionalConflictCI}{[$+$7.2, $+$21.6]}
+\newcommand{\zFourLlmDirFlagDirectionalClean}{$+$2.4}
+\newcommand{\zFourLlmDirFlagDirectionalCleanCI}{[$-$3.2, $+$7.9]}
+\newcommand{\zFourLlmDirFlagDirectionalLabelled}{$+$8.7}
+\newcommand{\zFourLlmDirFlagDirectionalLabelledCI}{[$+$4.2, $+$13.2]}
+\newcommand{\zFourOracleFlagDirectionalInstructTwoConflict}{$+$30.9}
+\newcommand{\zFourOracleFlagDirectionalInstructTwoConflictCI}{[$+$22.3, $+$39.6]}
+\newcommand{\zFourOracleFlagDirectionalInstructTwoClean}{$-$3.2}
+\newcommand{\zFourOracleFlagDirectionalInstructTwoCleanCI}{[$-$9.5, $+$2.4]}
+\newcommand{\zFourOracleFlagDirectionalInstructTwoLabelled}{$+$14.7}
+\newcommand{\zFourOracleFlagDirectionalInstructTwoLabelledCI}{[$+$9.1, $+$20.8]}
+\newcommand{\zFourOracleFlagInstructTwoConflict}{$+$5.8}
+\newcommand{\zFourOracleFlagInstructTwoConflictCI}{[$-$2.9, $+$14.4]}
+\newcommand{\zFourOracleFlagInstructTwoClean}{$-$3.2}
+\newcommand{\zFourOracleFlagInstructTwoCleanCI}{[$-$9.5, $+$2.4]}
+\newcommand{\zFourOracleFlagInstructTwoLabelled}{$+$1.5}
+\newcommand{\zFourOracleFlagInstructTwoLabelledCI}{[$-$3.8, $+$6.8]}
+\newcommand{\zFourTrustragMultiConflict}{0.0}
+\newcommand{\zFourTrustragMultiConflictCI}{[$-$8.6, $+$8.6]}
+\newcommand{\zFourTrustragMultiClean}{$-$23.0}
+\newcommand{\zFourTrustragMultiCleanCI}{[$-$31.7, $-$14.3]}
+\newcommand{\zFourTrustragMultiLabelled}{$-$10.9}
+\newcommand{\zFourTrustragMultiLabelledCI}{[$-$17.4, $-$4.5]}
+\newcommand{\zpQDetAll}{29.9}
+\newcommand{\zpQDetConflict}{22.1}
+\newcommand{\zpQDetClean}{41.5}
+\newcommand{\zpQDetLabelled}{31.3}
+\newcommand{\zQDetLlmDirFlagConflict}{$-$2.6}
+\newcommand{\zQDetLlmDirFlagConflictCI}{[$-$6.2, $+$0.7]}
+\newcommand{\zQDetLlmDirFlagClean}{$+$0.8}
+\newcommand{\zQDetLlmDirFlagCleanCI}{[$-$2.4, $+$4.2]}
+\newcommand{\zQDetLlmDirFlagLabelled}{$-$1.0}
+\newcommand{\zQDetLlmDirFlagLabelledCI}{[$-$3.4, $+$1.5]}
+\newcommand{\zQDetLlmDirFlagDirectionalConflict}{$+$10.6}
+\newcommand{\zQDetLlmDirFlagDirectionalConflictCI}{[$+$3.4, $+$18.0]}
+\newcommand{\zQDetLlmDirFlagDirectionalClean}{0.0}
+\newcommand{\zQDetLlmDirFlagDirectionalCleanCI}{[$-$3.7, $+$4.0]}
+\newcommand{\zQDetLlmDirFlagDirectionalLabelled}{$+$5.5}
+\newcommand{\zQDetLlmDirFlagDirectionalLabelledCI}{[$+$1.3, $+$9.9]}
+\newcommand{\zQDetLlmDirRemoveSuspectConflict}{$+$14.1}
+\newcommand{\zQDetLlmDirRemoveSuspectConflictCI}{[$+$6.0, $+$22.5]}
+\newcommand{\zQDetLlmDirRemoveSuspectClean}{$-$14.6}
+\newcommand{\zQDetLlmDirRemoveSuspectCleanCI}{[$-$21.7, $-$7.9]}
+\newcommand{\zQDetLlmDirRemoveSuspectLabelled}{$+$0.5}
+\newcommand{\zQDetLlmDirRemoveSuspectLabelledCI}{[$-$5.2, $+$6.3]}
+\newcommand{\zpCbMiniAll}{38.4}
+\newcommand{\zpCbMiniConflict}{21.6}
+\newcommand{\zpCbMiniClean}{89.0}
+\newcommand{\zpCbMiniLabelled}{38.4}
+\newcommand{\zCbMiniAstuteConflict}{$+$27.4}
+\newcommand{\zCbMiniAstuteConflictCI}{[$+$21.9, $+$32.9]}
+\newcommand{\zCbMiniAstuteClean}{$-$9.7}
+\newcommand{\zCbMiniAstuteCleanCI}{[$-$17.3, $-$2.3]}
+\newcommand{\zCbMiniAstuteLabelled}{$+$18.2}
+\newcommand{\zCbMiniAstuteLabelledCI}{[$+$13.4, $+$22.8]}
+\newcommand{\zCbMiniInstructTwoConflict}{$+$5.9}
+\newcommand{\zCbMiniInstructTwoConflictCI}{[$+$2.4, $+$9.4]}
+\newcommand{\zCbMiniInstructTwoClean}{$-$1.7}
+\newcommand{\zCbMiniInstructTwoCleanCI}{[$-$4.7, $+$1.0]}
+\newcommand{\zCbMiniInstructTwoLabelled}{$+$4.0}
+\newcommand{\zCbMiniInstructTwoLabelledCI}{[$+$1.3, $+$6.8]}
+\newcommand{\zCbMiniLlmDirFlagConflict}{$-$8.4}
+\newcommand{\zCbMiniLlmDirFlagConflictCI}{[$-$12.4, $-$4.7]}
+\newcommand{\zCbMiniLlmDirFlagClean}{0.0}
+\newcommand{\zCbMiniLlmDirFlagCleanCI}{[$-$1.0, $+$1.0]}
+\newcommand{\zCbMiniLlmDirFlagLabelled}{$-$6.3}
+\newcommand{\zCbMiniLlmDirFlagLabelledCI}{[$-$9.3, $-$3.4]}
+\newcommand{\zCbMiniLlmDirFlagDirectionalConflict}{$+$20.0}
+\newcommand{\zCbMiniLlmDirFlagDirectionalConflictCI}{[$+$15.0, $+$25.0]}
+\newcommand{\zCbMiniLlmDirFlagDirectionalClean}{$-$1.0}
+\newcommand{\zCbMiniLlmDirFlagDirectionalCleanCI}{[$-$4.3, $+$1.7]}
+\newcommand{\zCbMiniLlmDirFlagDirectionalLabelled}{$+$14.8}
+\newcommand{\zCbMiniLlmDirFlagDirectionalLabelledCI}{[$+$10.8, $+$18.8]}
+\newcommand{\zCbMiniLlmDirRemoveSuspectConflict}{$+$38.8}
+\newcommand{\zCbMiniLlmDirRemoveSuspectConflictCI}{[$+$32.7, $+$45.0]}
+\newcommand{\zCbMiniLlmDirRemoveSuspectClean}{$-$6.7}
+\newcommand{\zCbMiniLlmDirRemoveSuspectCleanCI}{[$-$12.0, $-$2.0]}
+\newcommand{\zCbMiniLlmDirRemoveSuspectLabelled}{$+$27.4}
+\newcommand{\zCbMiniLlmDirRemoveSuspectLabelledCI}{[$+$22.2, $+$32.6]}
+\newcommand{\zCbMiniNliFlagConflict}{0.0}
+\newcommand{\zCbMiniNliFlagConflictCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniNliFlagClean}{0.0}
+\newcommand{\zCbMiniNliFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniNliFlagLabelled}{0.0}
+\newcommand{\zCbMiniNliFlagLabelledCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniNliRemoveConflict}{0.0}
+\newcommand{\zCbMiniNliRemoveConflictCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniNliRemoveClean}{0.0}
+\newcommand{\zCbMiniNliRemoveCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniNliRemoveLabelled}{0.0}
+\newcommand{\zCbMiniNliRemoveLabelledCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniOracleFlagConflict}{$-$8.8}
+\newcommand{\zCbMiniOracleFlagConflictCI}{[$-$12.8, $-$4.9]}
+\newcommand{\zCbMiniOracleFlagClean}{0.0}
+\newcommand{\zCbMiniOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniOracleFlagLabelled}{$-$6.6}
+\newcommand{\zCbMiniOracleFlagLabelledCI}{[$-$9.7, $-$3.7]}
+\newcommand{\zCbMiniOracleFlagDirectionalConflict}{$+$27.9}
+\newcommand{\zCbMiniOracleFlagDirectionalConflictCI}{[$+$22.8, $+$32.9]}
+\newcommand{\zCbMiniOracleFlagDirectionalClean}{0.0}
+\newcommand{\zCbMiniOracleFlagDirectionalCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniOracleFlagDirectionalLabelled}{$+$20.9}
+\newcommand{\zCbMiniOracleFlagDirectionalLabelledCI}{[$+$16.9, $+$24.9]}
+\newcommand{\zCbMiniOracleFlagDirectionalInstructTwoConflict}{$+$63.8}
+\newcommand{\zCbMiniOracleFlagDirectionalInstructTwoConflictCI}{[$+$58.6, $+$69.0]}
+\newcommand{\zCbMiniOracleFlagDirectionalInstructTwoClean}{$-$1.7}
+\newcommand{\zCbMiniOracleFlagDirectionalInstructTwoCleanCI}{[$-$4.7, $+$1.0]}
+\newcommand{\zCbMiniOracleFlagDirectionalInstructTwoLabelled}{$+$47.4}
+\newcommand{\zCbMiniOracleFlagDirectionalInstructTwoLabelledCI}{[$+$42.5, $+$52.3]}
+\newcommand{\zCbMiniOracleFlagInstructTwoConflict}{$+$1.6}
+\newcommand{\zCbMiniOracleFlagInstructTwoConflictCI}{[$-$2.8, $+$6.0]}
+\newcommand{\zCbMiniOracleFlagInstructTwoClean}{$-$1.7}
+\newcommand{\zCbMiniOracleFlagInstructTwoCleanCI}{[$-$4.7, $+$1.0]}
+\newcommand{\zCbMiniOracleFlagInstructTwoLabelled}{$+$0.7}
+\newcommand{\zCbMiniOracleFlagInstructTwoLabelledCI}{[$-$2.6, $+$4.2]}
+\newcommand{\zCbMiniOracleRemoveSuspectConflict}{$+$66.4}
+\newcommand{\zCbMiniOracleRemoveSuspectConflictCI}{[$+$61.1, $+$71.7]}
+\newcommand{\zCbMiniOracleRemoveSuspectClean}{0.0}
+\newcommand{\zCbMiniOracleRemoveSuspectCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniOracleRemoveSuspectLabelled}{$+$49.8}
+\newcommand{\zCbMiniOracleRemoveSuspectLabelledCI}{[$+$45.0, $+$54.7]}
+\newcommand{\zCbMiniOracleInvFlagDirectionalConflict}{$-$8.6}
+\newcommand{\zCbMiniOracleInvFlagDirectionalConflictCI}{[$-$12.3, $-$4.8]}
+\newcommand{\zCbMiniOracleInvFlagDirectionalClean}{0.0}
+\newcommand{\zCbMiniOracleInvFlagDirectionalCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbMiniOracleInvFlagDirectionalLabelled}{$-$6.4}
+\newcommand{\zCbMiniOracleInvFlagDirectionalLabelledCI}{[$-$9.4, $-$3.6]}
+\newcommand{\zCbMiniTrustragConflict}{$+$19.9}
+\newcommand{\zCbMiniTrustragConflictCI}{[$+$14.7, $+$25.2]}
+\newcommand{\zCbMiniTrustragClean}{$-$4.0}
+\newcommand{\zCbMiniTrustragCleanCI}{[$-$12.0, $+$4.0]}
+\newcommand{\zCbMiniTrustragLabelled}{$+$13.9}
+\newcommand{\zCbMiniTrustragLabelledCI}{[$+$9.4, $+$18.4]}
+\newcommand{\zwCbMiniPlain}{72.8}
+\newcommand{\zwCbMiniOracleFlag}{83.2}
+\newcommand{\zwCbMiniOracleFlagDirectional}{41.2}
+\newcommand{\zwCbMiniOracleInvFlagDirectional}{80.9}
+\newcommand{\zpCbFourAll}{32.5}
+\newcommand{\zpCbFourConflict}{13.0}
+\newcommand{\zpCbFourClean}{91.0}
+\newcommand{\zpCbFourLabelled}{32.5}
+\newcommand{\zCbFourLlmDirFlagConflict}{$-$6.7}
+\newcommand{\zCbFourLlmDirFlagConflictCI}{[$-$9.7, $-$4.0]}
+\newcommand{\zCbFourLlmDirFlagClean}{0.0}
+\newcommand{\zCbFourLlmDirFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbFourLlmDirFlagLabelled}{$-$5.0}
+\newcommand{\zCbFourLlmDirFlagLabelledCI}{[$-$7.2, $-$3.0]}
+\newcommand{\zCbFourLlmDirFlagDirectionalConflict}{$+$17.0}
+\newcommand{\zCbFourLlmDirFlagDirectionalConflictCI}{[$+$12.3, $+$21.7]}
+\newcommand{\zCbFourLlmDirFlagDirectionalClean}{0.0}
+\newcommand{\zCbFourLlmDirFlagDirectionalCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbFourLlmDirFlagDirectionalLabelled}{$+$12.8}
+\newcommand{\zCbFourLlmDirFlagDirectionalLabelledCI}{[$+$9.0, $+$16.5]}
+\newcommand{\zCbFourLlmDirRemoveSuspectConflict}{$+$48.7}
+\newcommand{\zCbFourLlmDirRemoveSuspectConflictCI}{[$+$43.0, $+$54.3]}
+\newcommand{\zCbFourLlmDirRemoveSuspectClean}{$-$6.0}
+\newcommand{\zCbFourLlmDirRemoveSuspectCleanCI}{[$-$11.0, $-$2.0]}
+\newcommand{\zCbFourLlmDirRemoveSuspectLabelled}{$+$35.0}
+\newcommand{\zCbFourLlmDirRemoveSuspectLabelledCI}{[$+$29.8, $+$40.0]}
+\newcommand{\zCbFourOracleFlagConflict}{$-$6.3}
+\newcommand{\zCbFourOracleFlagConflictCI}{[$-$9.7, $-$3.3]}
+\newcommand{\zCbFourOracleFlagClean}{0.0}
+\newcommand{\zCbFourOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbFourOracleFlagLabelled}{$-$4.8}
+\newcommand{\zCbFourOracleFlagLabelledCI}{[$-$7.2, $-$2.5]}
+\newcommand{\zCbFourOracleFlagDirectionalConflict}{$+$23.0}
+\newcommand{\zCbFourOracleFlagDirectionalConflictCI}{[$+$18.0, $+$28.3]}
+\newcommand{\zCbFourOracleFlagDirectionalClean}{0.0}
+\newcommand{\zCbFourOracleFlagDirectionalCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbFourOracleFlagDirectionalLabelled}{$+$17.2}
+\newcommand{\zCbFourOracleFlagDirectionalLabelledCI}{[$+$13.2, $+$21.2]}
+\newcommand{\zCbFourOracleRemoveSuspectConflict}{$+$78.3}
+\newcommand{\zCbFourOracleRemoveSuspectConflictCI}{[$+$73.3, $+$83.0]}
+\newcommand{\zCbFourOracleRemoveSuspectClean}{0.0}
+\newcommand{\zCbFourOracleRemoveSuspectCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbFourOracleRemoveSuspectLabelled}{$+$58.8}
+\newcommand{\zCbFourOracleRemoveSuspectLabelledCI}{[$+$53.8, $+$63.5]}
+\newcommand{\zpCbQwenAll}{39.8}
+\newcommand{\zpCbQwenConflict}{23.7}
+\newcommand{\zpCbQwenClean}{88.0}
+\newcommand{\zpCbQwenLabelled}{39.8}
+\newcommand{\zCbQwenLlmDirFlagConflict}{$-$8.3}
+\newcommand{\zCbQwenLlmDirFlagConflictCI}{[$-$12.3, $-$4.3]}
+\newcommand{\zCbQwenLlmDirFlagClean}{$-$1.0}
+\newcommand{\zCbQwenLlmDirFlagCleanCI}{[$-$3.0, 0.0]}
+\newcommand{\zCbQwenLlmDirFlagLabelled}{$-$6.5}
+\newcommand{\zCbQwenLlmDirFlagLabelledCI}{[$-$9.8, $-$3.5]}
+\newcommand{\zCbQwenLlmDirFlagDirectionalConflict}{$+$6.7}
+\newcommand{\zCbQwenLlmDirFlagDirectionalConflictCI}{[$+$1.3, $+$12.0]}
+\newcommand{\zCbQwenLlmDirFlagDirectionalClean}{$-$1.0}
+\newcommand{\zCbQwenLlmDirFlagDirectionalCleanCI}{[$-$3.0, 0.0]}
+\newcommand{\zCbQwenLlmDirFlagDirectionalLabelled}{$+$4.8}
+\newcommand{\zCbQwenLlmDirFlagDirectionalLabelledCI}{[$+$0.8, $+$8.8]}
+\newcommand{\zCbQwenLlmDirRemoveSuspectConflict}{$+$36.0}
+\newcommand{\zCbQwenLlmDirRemoveSuspectConflictCI}{[$+$29.7, $+$42.3]}
+\newcommand{\zCbQwenLlmDirRemoveSuspectClean}{$-$8.0}
+\newcommand{\zCbQwenLlmDirRemoveSuspectCleanCI}{[$-$14.0, $-$3.0]}
+\newcommand{\zCbQwenLlmDirRemoveSuspectLabelled}{$+$25.0}
+\newcommand{\zCbQwenLlmDirRemoveSuspectLabelledCI}{[$+$19.8, $+$30.2]}
+\newcommand{\zCbQwenOracleFlagConflict}{$-$8.3}
+\newcommand{\zCbQwenOracleFlagConflictCI}{[$-$12.3, $-$4.3]}
+\newcommand{\zCbQwenOracleFlagClean}{0.0}
+\newcommand{\zCbQwenOracleFlagCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbQwenOracleFlagLabelled}{$-$6.2}
+\newcommand{\zCbQwenOracleFlagLabelledCI}{[$-$9.5, $-$3.2]}
+\newcommand{\zCbQwenOracleFlagDirectionalConflict}{$+$17.7}
+\newcommand{\zCbQwenOracleFlagDirectionalConflictCI}{[$+$12.0, $+$23.3]}
+\newcommand{\zCbQwenOracleFlagDirectionalClean}{0.0}
+\newcommand{\zCbQwenOracleFlagDirectionalCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbQwenOracleFlagDirectionalLabelled}{$+$13.2}
+\newcommand{\zCbQwenOracleFlagDirectionalLabelledCI}{[$+$9.0, $+$17.5]}
+\newcommand{\zCbQwenOracleRemoveSuspectConflict}{$+$63.7}
+\newcommand{\zCbQwenOracleRemoveSuspectConflictCI}{[$+$58.3, $+$69.0]}
+\newcommand{\zCbQwenOracleRemoveSuspectClean}{0.0}
+\newcommand{\zCbQwenOracleRemoveSuspectCleanCI}{[0.0, 0.0]}
+\newcommand{\zCbQwenOracleRemoveSuspectLabelled}{$+$47.8}
+\newcommand{\zCbQwenOracleRemoveSuspectLabelledCI}{[$+$42.8, $+$52.8]}
+\newcommand{\nHTwelveSupported}{12}
+\newcommand{\nHTwelveTests}{12}
+\newcommand{\htwelvePA}{0.001}
+\newcommand{\htwelvePB}{0.001}
+\newcommand{\htwelvePC}{0.001}
+\newcommand{\htwelvePD}{0.001}
+\newcommand{\htwelvePE}{0.001}
+\newcommand{\htwelvePF}{0.001}
+\newcommand{\htwelvePG}{0.001}
+\newcommand{\htwelvePH}{0.001}
+\newcommand{\htwelvePI}{0.001}
+\newcommand{\htwelvePJ}{0.001}
+\newcommand{\htwelvePK}{0.001}
+\newcommand{\htwelvePL}{0.001}
+\newcommand{\nHThirteenSupported}{3}
+\newcommand{\nHThirteenTests}{6}
+\newcommand{\hthirteenPA}{0.743}
+\newcommand{\hthirteenPB}{$<$0.001}
+\newcommand{\hthirteenPC}{0.743}
+\newcommand{\hthirteenPD}{$<$0.001}
+\newcommand{\hthirteenPE}{0.743}
+\newcommand{\hthirteenPF}{$<$0.001}
+\newcommand{\nHFourteenSupported}{3}
+\newcommand{\nHFourteenTests}{6}
+\newcommand{\hfourteenPA}{$<$0.001}
+\newcommand{\hfourteenPB}{$<$0.001}
+\newcommand{\hfourteenPC}{0.151}
+\newcommand{\hfourteenPD}{$<$0.001}
+\newcommand{\hfourteenPE}{0.324}
+\newcommand{\hfourteenPF}{0.761}
+\newcommand{\hThirteenDirMini}{$+$15.6}
+\newcommand{\hThirteenDirMiniCI}{[$+$9.6, $+$21.8]}
+\newcommand{\hThirteenDirMiniP}{$<$0.001}
+\newcommand{\hThirteenDirFour}{$+$25.2}
+\newcommand{\hThirteenDirFourCI}{[$+$18.0, $+$32.4]}
+\newcommand{\hThirteenDirFourP}{$<$0.001}
+\newcommand{\hThirteenDirCb}{$+$62.2}
+\newcommand{\hThirteenDirCbCI}{[$+$57.1, $+$67.2]}
+\newcommand{\hThirteenDirCbP}{$<$0.001}
+\newcommand{\hFourteenAstMini}{$+$10.8}
+\newcommand{\hFourteenAstMiniCI}{[$+$5.9, $+$16.0]}
+\newcommand{\hFourteenAstMiniP}{$<$0.001}
+\newcommand{\hFourteenTrMini}{$+$23.0}
+\newcommand{\hFourteenTrMiniCI}{[$+$18.1, $+$28.3]}
+\newcommand{\hFourteenTrMiniP}{$<$0.001}
+\newcommand{\hFourteenAstFour}{$+$6.4}
+\newcommand{\hFourteenAstFourCI}{[$+$0.4, $+$12.5]}
+\newcommand{\hFourteenAstFourP}{0.151}
+\newcommand{\hFourteenTrFour}{$+$19.6}
+\newcommand{\hFourteenTrFourCI}{[$+$13.6, $+$25.7]}
+\newcommand{\hFourteenTrFourP}{$<$0.001}
+\newcommand{\hFourteenAstCb}{$-$3.4}
+\newcommand{\hFourteenAstCbCI}{[$-$8.1, $+$1.3]}
+\newcommand{\hFourteenAstCbP}{0.324}
+\newcommand{\hFourteenTrCb}{$+$0.8}
+\newcommand{\hFourteenTrCbCI}{[$-$3.9, $+$5.6]}
+\newcommand{\hFourteenTrCbP}{0.761}
+\newcommand{\recSinglePlain}{86.4}
+\newcommand{\recSingleAst}{80.3}
+\newcommand{\recSingleTr}{59.1}
+\newcommand{\recMultiPlain}{69.0}
+\newcommand{\recMultiAst}{47.9}
+\newcommand{\recMultiTr}{29.4}
+\newcommand{\cbDirAccLlm}{68.8}
+\newcommand{\cbFpr}{71.0}
+\newcommand{\cbDir}{68.8}
+\newcommand{\qdetDirAccLlm}{89.0}
+\newcommand{\qdetFpr}{96.8}
+\newcommand{\qdetDir}{89.0}
+\newcommand{\breakEvenDir}{1}
+\newcommand{\breakEvenRem}{1}
+\newcommand{\prevMiniDir}{22}
+\newcommand{\prevMiniRem}{52}
+\newcommand{\prevMiniMinDir}{74}
+\newcommand{\prevMiniMinRem}{64}
+\newcommand{\prevFourDir}{--}
+\newcommand{\prevFourRem}{54}
+\newcommand{\prevQwenDir}{71}
+\newcommand{\prevQwenRem}{70}
+\newcommand{\nExploratory}{254}
+\newcommand{\totalSpend}{\$51.75}
 \newcommand{\adOracleFlagAll}{3.1}
 \newcommand{\adOracleFlagConf}{6.7}
 \newcommand{\adOracleDirAll}{6.2}
@@ -685,6 +1054,9 @@
 \newcommand{\agptLlmRemAll}{1.0}
 \newcommand{\agptLlmDirConf}{8.4}
 \newcommand{\agptLlmDirAll}{5.4}
+\newcommand{\agptInstrTwoConf}{12.2}
+\newcommand{\agptInstrTwoClean}{2.6}
+\newcommand{\agptInstrTwoAll}{5.8}
 \newcommand{\aorigCaagAll}{0.9}
 \newcommand{\aorigCaagConf}{1.2}
 \newcommand{\aorigCaagClean}{1.6}
@@ -750,7 +1122,7 @@
 \newcommand{\agRemQuDHalfAll}{21}
 \newcommand{\agRemQuDHalfConf}{16}
 \newcommand{\agRemQuDHalfClean}{26}
-\newcommand{\ahFourRho}{0.72}
+\newcommand{\ahFourRho}{0.39}
 \newcommand{\ahSixMaeDiff}{1.2}
 \newcommand{\atostLo}{3.1}
 \newcommand{\atostHi}{0.1}
@@ -872,3 +1244,120 @@
 \newcommand{\ardQwen}{5.0}
 \newcommand{\aadvDirConf}{7.0}
 \newcommand{\aadvRemConf}{21.8}
+\newcommand{\azMiniAstuteConflict}{8.4}
+\newcommand{\azMiniAstuteClean}{23.5}
+\newcommand{\azMiniAstuteLabelled}{15.6}
+\newcommand{\azMiniAstuteMultiConflict}{1.2}
+\newcommand{\azMiniAstuteMultiClean}{11.1}
+\newcommand{\azMiniAstuteMultiLabelled}{5.9}
+\newcommand{\azMiniLlmDirFlagDirectionalConflict}{12.5}
+\newcommand{\azMiniLlmDirFlagDirectionalClean}{3.4}
+\newcommand{\azMiniLlmDirFlagDirectionalLabelled}{4.9}
+\newcommand{\azMiniLlmDirFlagDirectionalInstructTwoConflict}{8.4}
+\newcommand{\azMiniLlmDirFlagDirectionalInstructTwoClean}{16.7}
+\newcommand{\azMiniLlmDirFlagDirectionalInstructTwoLabelled}{3.5}
+\newcommand{\azMiniLlmDirFlagInstructTwoConflict}{2.2}
+\newcommand{\azMiniLlmDirFlagInstructTwoClean}{1.9}
+\newcommand{\azMiniLlmDirFlagInstructTwoLabelled}{2.0}
+\newcommand{\azMiniOracleFlagDirectionalInstructTwoConflict}{13.2}
+\newcommand{\azMiniOracleFlagDirectionalInstructTwoClean}{1.1}
+\newcommand{\azMiniOracleFlagDirectionalInstructTwoLabelled}{6.4}
+\newcommand{\azMiniOracleFlagInstructTwoConflict}{2.4}
+\newcommand{\azMiniOracleFlagInstructTwoClean}{1.1}
+\newcommand{\azMiniOracleFlagInstructTwoLabelled}{1.8}
+\newcommand{\azMiniTrustragConflict}{11.3}
+\newcommand{\azMiniTrustragClean}{24.3}
+\newcommand{\azMiniTrustragLabelled}{17.5}
+\newcommand{\azMiniTrustragMultiConflict}{12.2}
+\newcommand{\azMiniTrustragMultiClean}{24.6}
+\newcommand{\azMiniTrustragMultiLabelled}{18.1}
+\newcommand{\azFourAstuteMultiConflict}{13.7}
+\newcommand{\azFourAstuteMultiClean}{10.3}
+\newcommand{\azFourAstuteMultiLabelled}{2.3}
+\newcommand{\azFourLlmDirFlagDirectionalConflict}{14.4}
+\newcommand{\azFourLlmDirFlagDirectionalClean}{2.4}
+\newcommand{\azFourLlmDirFlagDirectionalLabelled}{8.7}
+\newcommand{\azFourOracleFlagDirectionalInstructTwoConflict}{30.9}
+\newcommand{\azFourOracleFlagDirectionalInstructTwoClean}{3.2}
+\newcommand{\azFourOracleFlagDirectionalInstructTwoLabelled}{14.7}
+\newcommand{\azFourOracleFlagInstructTwoConflict}{5.8}
+\newcommand{\azFourOracleFlagInstructTwoClean}{3.2}
+\newcommand{\azFourOracleFlagInstructTwoLabelled}{1.5}
+\newcommand{\azFourTrustragMultiClean}{23.0}
+\newcommand{\azFourTrustragMultiLabelled}{10.9}
+\newcommand{\azQDetLlmDirFlagConflict}{2.6}
+\newcommand{\azQDetLlmDirFlagClean}{0.8}
+\newcommand{\azQDetLlmDirFlagLabelled}{1.0}
+\newcommand{\azQDetLlmDirFlagDirectionalConflict}{10.6}
+\newcommand{\azQDetLlmDirFlagDirectionalLabelled}{5.5}
+\newcommand{\azQDetLlmDirRemoveSuspectConflict}{14.1}
+\newcommand{\azQDetLlmDirRemoveSuspectClean}{14.6}
+\newcommand{\azQDetLlmDirRemoveSuspectLabelled}{0.5}
+\newcommand{\azCbMiniAstuteConflict}{27.4}
+\newcommand{\azCbMiniAstuteClean}{9.7}
+\newcommand{\azCbMiniAstuteLabelled}{18.2}
+\newcommand{\azCbMiniInstructTwoConflict}{5.9}
+\newcommand{\azCbMiniInstructTwoClean}{1.7}
+\newcommand{\azCbMiniInstructTwoLabelled}{4.0}
+\newcommand{\azCbMiniLlmDirFlagConflict}{8.4}
+\newcommand{\azCbMiniLlmDirFlagLabelled}{6.3}
+\newcommand{\azCbMiniLlmDirFlagDirectionalConflict}{20.0}
+\newcommand{\azCbMiniLlmDirFlagDirectionalClean}{1.0}
+\newcommand{\azCbMiniLlmDirFlagDirectionalLabelled}{14.8}
+\newcommand{\azCbMiniLlmDirRemoveSuspectConflict}{38.8}
+\newcommand{\azCbMiniLlmDirRemoveSuspectClean}{6.7}
+\newcommand{\azCbMiniLlmDirRemoveSuspectLabelled}{27.4}
+\newcommand{\azCbMiniOracleFlagConflict}{8.8}
+\newcommand{\azCbMiniOracleFlagLabelled}{6.6}
+\newcommand{\azCbMiniOracleFlagDirectionalConflict}{27.9}
+\newcommand{\azCbMiniOracleFlagDirectionalLabelled}{20.9}
+\newcommand{\azCbMiniOracleFlagDirectionalInstructTwoConflict}{63.8}
+\newcommand{\azCbMiniOracleFlagDirectionalInstructTwoClean}{1.7}
+\newcommand{\azCbMiniOracleFlagDirectionalInstructTwoLabelled}{47.4}
+\newcommand{\azCbMiniOracleFlagInstructTwoConflict}{1.6}
+\newcommand{\azCbMiniOracleFlagInstructTwoClean}{1.7}
+\newcommand{\azCbMiniOracleFlagInstructTwoLabelled}{0.7}
+\newcommand{\azCbMiniOracleRemoveSuspectConflict}{66.4}
+\newcommand{\azCbMiniOracleRemoveSuspectLabelled}{49.8}
+\newcommand{\azCbMiniOracleInvFlagDirectionalConflict}{8.6}
+\newcommand{\azCbMiniOracleInvFlagDirectionalLabelled}{6.4}
+\newcommand{\azCbMiniTrustragConflict}{19.9}
+\newcommand{\azCbMiniTrustragClean}{4.0}
+\newcommand{\azCbMiniTrustragLabelled}{13.9}
+\newcommand{\azCbFourLlmDirFlagConflict}{6.7}
+\newcommand{\azCbFourLlmDirFlagLabelled}{5.0}
+\newcommand{\azCbFourLlmDirFlagDirectionalConflict}{17.0}
+\newcommand{\azCbFourLlmDirFlagDirectionalLabelled}{12.8}
+\newcommand{\azCbFourLlmDirRemoveSuspectConflict}{48.7}
+\newcommand{\azCbFourLlmDirRemoveSuspectClean}{6.0}
+\newcommand{\azCbFourLlmDirRemoveSuspectLabelled}{35.0}
+\newcommand{\azCbFourOracleFlagConflict}{6.3}
+\newcommand{\azCbFourOracleFlagLabelled}{4.8}
+\newcommand{\azCbFourOracleFlagDirectionalConflict}{23.0}
+\newcommand{\azCbFourOracleFlagDirectionalLabelled}{17.2}
+\newcommand{\azCbFourOracleRemoveSuspectConflict}{78.3}
+\newcommand{\azCbFourOracleRemoveSuspectLabelled}{58.8}
+\newcommand{\azCbQwenLlmDirFlagConflict}{8.3}
+\newcommand{\azCbQwenLlmDirFlagClean}{1.0}
+\newcommand{\azCbQwenLlmDirFlagLabelled}{6.5}
+\newcommand{\azCbQwenLlmDirFlagDirectionalConflict}{6.7}
+\newcommand{\azCbQwenLlmDirFlagDirectionalClean}{1.0}
+\newcommand{\azCbQwenLlmDirFlagDirectionalLabelled}{4.8}
+\newcommand{\azCbQwenLlmDirRemoveSuspectConflict}{36.0}
+\newcommand{\azCbQwenLlmDirRemoveSuspectClean}{8.0}
+\newcommand{\azCbQwenLlmDirRemoveSuspectLabelled}{25.0}
+\newcommand{\azCbQwenOracleFlagConflict}{8.3}
+\newcommand{\azCbQwenOracleFlagLabelled}{6.2}
+\newcommand{\azCbQwenOracleFlagDirectionalConflict}{17.7}
+\newcommand{\azCbQwenOracleFlagDirectionalLabelled}{13.2}
+\newcommand{\azCbQwenOracleRemoveSuspectConflict}{63.7}
+\newcommand{\azCbQwenOracleRemoveSuspectLabelled}{47.8}
+\newcommand{\ahThirteenDirMini}{15.6}
+\newcommand{\ahThirteenDirFour}{25.2}
+\newcommand{\ahThirteenDirCb}{62.2}
+\newcommand{\ahFourteenAstMini}{10.8}
+\newcommand{\ahFourteenTrMini}{23.0}
+\newcommand{\ahFourteenAstFour}{6.4}
+\newcommand{\ahFourteenTrFour}{19.6}
+\newcommand{\ahFourteenAstCb}{3.4}
+\newcommand{\ahFourteenTrCb}{0.8}

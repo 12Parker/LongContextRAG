@@ -380,3 +380,34 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
 - **Code:** `revision_stats.py` (analyses), `InvertedOracleDetector`, and `prompts.BASE_MINIMAL`.
 - **Paper:** retitled "Which Side Is Wrong? Neutral Contradiction Flags Do Not Help Retrieval-Augmented Generation
   Against Misinformation". The body still fits in 8 pages.
+
+### Round 5 (2026-10-27): second mock review, round-2 experiments
+
+- **Second mock review:** three fresh reviewers, all 2.5. Required:
+  - rescope to synthetic misinformation and strict scoring;
+  - one significance scheme;
+  - a non-RAMDocs misinformation benchmark;
+  - stronger baselines;
+  - a neutral flag + resolution-instruction condition;
+  - a cross-family detector;
+  - the related work on telling the model which passage is wrong.
+- **Registration:** `PREREGISTRATION.md` §10 (commit a76ff84), committed before the runs.
+- **Code:**
+  - `baselines.py`: Astute RAG, TrustRAG and the `*_multi` variants;
+  - `prepare_conflictbank.py` and `data.load_conflictbank`;
+  - `flag_directional_instruct_v2`;
+  - `--detector-base-url`;
+  - `revision_stats.assign_significance` (one scheme: registered tests use their family's Holm; everything else
+    goes into one exploratory Holm family per metric).
+- **Results:**
+  - H12 on ConflictBank: all 12 tests are supported. Neutral flag −6 to −9; directional flag +18 to +28; removal
+    +64 to +78 (3 generators).
+  - H13: neutral flag + instruction ≈ plain; directional + instruction beats it everywhere.
+  - H14:
+    - On RAMDocs, the LLM directional flag beats Astute RAG and TrustRAG (3 of 4 tests significant).
+    - On ConflictBank it ties both.
+    - The baselines hurt RAMDocs clean questions by 11 to 25 points.
+  - NLI flags nothing on ConflictBank.
+  - Qwen detector: flags 97% of clean questions; direction accuracy 89%.
+- **Spend:** about $52 of $100.
+

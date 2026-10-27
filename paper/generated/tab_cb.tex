@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+& & Plain & \multicolumn{3}{c}{Oracle, conflict q.} & \multicolumn{3}{c}{LLM detector, flag / dir.\ flag} & \multicolumn{2}{c}{LLM, remove} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}\cmidrule(lr){10-11}
+Generator & Seeds & conflict & flag & dir.\ flag & remove & flag & dir.\ conf. & dir.\ clean & conflict & clean \\
+\midrule
+gpt-4o-mini & 3 & 21.6 & \textbf{$-$8.8} & \textbf{$+$27.9} & \textbf{$+$66.4} & \textbf{$-$8.4} & \textbf{$+$20.0} & $-$1.0 & \textbf{$+$38.8} & $-$6.7 \\
+gpt-4.1 & 1 & 13.0 & \textbf{$-$6.3} & \textbf{$+$23.0} & \textbf{$+$78.3} & \textbf{$-$6.7} & \textbf{$+$17.0} & 0.0 & \textbf{$+$48.7} & $-$6.0 \\
+Qwen2.5-7B & 1 & 23.7 & \textbf{$-$8.3} & \textbf{$+$17.7} & \textbf{$+$63.7} & \textbf{$-$8.3} & $+$6.7 & $-$1.0 & \textbf{$+$36.0} & $-$8.0 \\
+\bottomrule
+\end{tabular}
+\caption{ConflictBank (300 conflict, 100 clean questions; one correct answer each; LLM-written misinformation built from
+Wikidata facts), default skeleton. \emph{Plain}: accuracy (\%) on conflict questions with no flags; other columns:
+paired difference in points. The LLM detector is gpt-4o-mini for every generator. \textbf{Bold}: significant under the
+paper's single scheme.}
+\label{tab:cb}
+\end{table*}

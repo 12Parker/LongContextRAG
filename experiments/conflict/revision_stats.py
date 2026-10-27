@@ -318,9 +318,13 @@ def comparisons(R):
         for gk, t in rev.get("real_direction", {}).get(m, {}).items():
             g, sk = gk.split("|")
             out.append(((g, sk, "llm_dir+flag_directional", "llm_dir+flag", "conflict"), m, t))
-        for name, block in rev.get("extra", {}).items():      # later analyses register here
-            for key, d in block.get(m, {}).items():
-                out.append((tuple(key.split("|")), m, d))
+        for gk, v in rev.get("r2", {}).items():               # second revision (§10)
+            for c, d in v["effects"][m].items():
+                for s, t in d.items():
+                    out.append(((gk, "default", c, "plain", s), m, t))
+        for fam in ("H12", "H13", "H14"):
+            for tk, t in rev.get(fam, {}).get(m, {}).items():
+                out.append((("registered", fam, tk, "", ""), m, t))
     for c, d in rev.get("adversarial", {}).items():
         for s, v in d.items():
             out.append((("gpt-4o-mini", "default", c, "plain", s), "ramdocs_strict_oneway", v))
@@ -337,19 +341,27 @@ def assign_significance(R, alpha=0.05):
     Holm-adjusted p (Holm within its family). Every other comparison is exploratory, and all of them
     together form ONE Holm family per metric. Writes p_adj / sig / registered into each result."""
     reg = _registered_keys()
+    regmap = R.get("rev", {}).get("registered_map", {})
+    for k, (fam, tk) in regmap.items():
+        g, sk, c, ref, s = k.split("\t")
+        reg[(g, sk, c, ref, s)] = (fam, tk)
     rows = comparisons(R)
     explo = {}
     for key, m, v in rows:
-        if key in reg or v.get("p") is None or (isinstance(v.get("p"), float) and math.isnan(v["p"])):
+        if key in reg or key[0] == "registered" or v.get("p") is None or (isinstance(v.get("p"), float) and math.isnan(v["p"])):
             continue
         if v.get("ci_low") == v.get("ci_high") == 0:     # identical prompts (e.g. oracle on clean q.)
             continue
         explo.setdefault(m, {})[key] = v["p"]
     adj = {m: holm(ps) for m, ps in explo.items()}
     for key, m, v in rows:
+        if key[0] == "registered":
+            v["registered"] = key[1]; v["p_adj"] = v["p_holm"]; v["sig"] = bool(v["p_holm"] < alpha)
+            continue
         if key in reg:
-            t = _family_lookup(R, reg[key], key, m)
-            v["registered"] = reg[key]
+            t = (R["rev"][reg[key][0]][m].get(reg[key][1]) if isinstance(reg[key], tuple)
+                 else _family_lookup(R, reg[key], key, m))
+            v["registered"] = reg[key] if isinstance(reg[key], str) else reg[key][0]
             v["p_adj"] = t["p_holm"] if t else float("nan")
             v["sig"] = bool(t and t["p_holm"] < alpha)
         else:

@@ -56,6 +56,45 @@ CAAG was designed for long-document QA. On 100 NarrativeQA \citep{kocisky2018nar
 A single story rarely contradicts itself, so most of these flags are likely false; the flagged pairs are released for
 annotation. This is the setting where a false flag can only hurt.
 
+\section{Further Results}
+\label{app:more}
+
+\subsection{Where the directional flag fails (exploratory)}
+\label{app:single}
+After seeing the minimal-skeleton run, we split conflict questions by the number of gold answers. \nConfMulti\ of
+\the\numexpr\nConfMulti+\nConfSingle\relax\ have several (same-name ambiguity \emph{and} misinformation), and a strict
+answer must list all of them. On the \nConfSingle\ single-answer conflict questions, the directional flag's estimate
+is positive in every setting, from \yQwenSingleOracleDir\ points (Qwen) to \yMiniSingleOracleDir\ (gpt-4o-mini), both
+with the default skeleton. On multi-answer questions it changes little except with gpt-4.1 (gpt-4o-mini
+\yMiniMultiOracleDir, and \yMiniMinMultiOracleDir\ with the minimal skeleton; gpt-4.1 \yFourMultiOracleDir). One
+reading is that a warning about one passage makes the smaller models more conservative about the legitimate
+alternative answers too; we did not test this. Removal does not depend on the model acting on a warning, and it gains
+in both groups.
+
+\subsection{Real detectors}
+CAAG flags \cleanFprCaag\% of clean questions. Its neutral flags do not beat random flags at the same rate (H5;
+\dCaagFlagAll\ vs.\ \dRandFlagAll\ points overall). The 90\% CI of the difference, [\tostLo, \tostHi], rules out a
+gain larger than \tostHi\ points but does not establish equivalence within $\pm$\tostMargin\ points (TOST). The
+directional-versus-neutral comparison with the LLM detector's pairs was registered as exploratory in the addendum.
+Under the bidirectional metric, the LLM detector's directional flag costs clean questions \arLlmDirClean\ points. With
+gpt-4.1 as the generator, its gain over all 300 questions (\gptLlmDirAll) is significant after Holm, but the 35
+unlabelled questions contribute disproportionately to it (they gain \agptexclLlmDir\ points); over the labelled
+questions it is \gptlabLlmDir\ \gptlabLlmDirCI. On ConflictBank the NLI cross-encoder flags no pair at all:
+ConflictBank passages are long, LLM-written and agree on everything but the one fact, and the truncated pair rarely
+contains it.
+
+\subsection{A detector from another family}
+Replacing the gpt-4o-mini detector with Qwen2.5-7B (gpt-4o-mini still generates) gives a much less selective
+detector. It flags \qdetFpr\% of clean RAMDocs questions, but its direction accuracy is \qdetDir\%. Its directional
+flag gains \zQDetLlmDirFlagDirectionalConflict\ points on conflict questions and \zQDetLlmDirFlagDirectionalClean\ on
+clean ones, and its neutral flag \zQDetLlmDirFlagConflict. Removal again trades a conflict-question gain
+(\zQDetLlmDirRemoveSuspectConflict) for a clean-question loss (\zQDetLlmDirRemoveSuspectClean). The conclusions do
+not depend on the detector's family.
+
+\subsection{CONFLICTS}
+On the 237 automatically scorable CONFLICTS questions (exploratory, one seed; most have no conflict), no condition
+moves accuracy significantly (Table~\ref{tab:conflicts}).
+
 \section{Reproducibility}
 \label{app:repro}
 \paragraph{Runs.} Every number in this paper is produced by one script from committed run outputs: per-call responses,
@@ -78,20 +117,51 @@ direction accuracy render identical prompts (their scores differ by exactly 0), 
 all, 9 per format. We report H4a per format. The cell-permutation $p$-value for the dose-response correlation assumed
 exchangeable cells; the cells are nested, so we replace it with a question-level bootstrap CI. No threshold was set
 for H4c, so we report a count.
-\item \emph{H5.} A non-significant difference is not equivalence. We add a TOST with a $\pm$3-point margin, fixed in the
-addendum.
+\item \emph{H5.} A non-significant difference is not equivalence. We add a TOST with a $\pm$3-point margin, chosen in
+the addendum after the confirmatory run, so it is post hoc.
 \item \emph{H6.} The first draft tested whether the grid prediction lies inside the actual effect's CI, which is
 lenient. We now report the pre-registered test (actual effect inside a bootstrap prediction interval) and a paired test
 of the two spaces' errors.
 \item \emph{Placement modes.} For H6, the detectors without direction were run under the label
 \texttt{remove\_suspect} as well as \texttt{remove}. Both render identical prompts, so these were served entirely from
 the response cache.
-\item \emph{Holm scope.} Table~\ref{tab:main} applies Holm across all its comparisons, which is stricter than the
-per-family correction used for the hypothesis tests.
+\item \emph{Significance.} Earlier drafts used different corrections in different tables. We now apply one scheme
+throughout (Section~\ref{sec:setup}), which makes some exploratory differences that were bold in earlier drafts
+non-significant.
+\item \emph{Single- and multi-answer split.} The split of conflict questions by number of gold answers
+(Appendix~\ref{app:single}) was chosen after seeing the minimal-skeleton run and is exploratory.
+\item \emph{Second registration.} After a second review we registered H12--H14 (ConflictBank, the neutral flag with a
+resolution instruction, and the published baselines), the Qwen2.5-7B detector and the ConflictBank sampling rule.
+The gpt-4.1 runs in it use seed 0 only, to stay within budget. One ConflictBank gpt-4o-mini run stopped on a
+transient API error and was resumed from the response cache; no row was re-sampled.
 \end{enumerate}
-The addendum (H10, H11 and the re-analyses above) and the Qwen seed change were committed to the repository before the
-runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
+The addendum (H10, H11 and the re-analyses above), the Qwen seed change and the second registration were committed to
+the repository before the runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
 \citep{vanmiltenburg2021preregistering}.
 
-\paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. CAAG and NLI ran on a
+\paragraph{Metric choice.} With the one-way metric, our port of MADAM-RAG scores 28.5\% on the pilot split and
+\madamOneWay\% on all 500 questions (published: 28.00, on an undisclosed subset); with the bidirectional metric it
+scores \madamBidir\% on all 500. Because the published subset and scorer are unknown, we do not claim to reproduce the
+published number. Normalisation lower-cases and removes punctuation and articles.
+
+\paragraph{WikiContradict and CONFLICTS.} A WikiContradict answer is correct if both of the dataset's answer strings
+(one per passage) match a final answer under the bidirectional rule. From CONFLICTS we use the 237 questions that
+have a reference answer (outdated-information, misinformation and no-conflict items); an answer is correct if it
+contains the reference answer.
+
+\paragraph{Baselines.} MADAM-RAG is ported unchanged to our client: three debate rounds, temperature 0, 128 tokens
+per call. Astute RAG has no official code. We use the prompts in its appendix verbatim with its default
+settings ($t{=}1$ consolidation round, $m{=}1$ generated passage, temperature 0, 1,024 output tokens). A generated
+passage that says ``I don't know'' is dropped, and the answer is the text in its \texttt{<ANSWER>} tag. TrustRAG is
+ported from its repository (commit \texttt{11dcea0}, MIT licence): SimCSE CLS embeddings
+(\texttt{sup-simcse-bert-base-uncased}), a ROUGE-L gate of 0.25, 2-means clustering and a cosine threshold of 0.88,
+followed by its three prompts verbatim at temperature 0.1. Its system message is not sent, because our client sends
+user messages only. The \emph{multi} variants change one sentence of the final step to ask for every valid answer
+(Astute RAG) or append our final-answer line (TrustRAG); the unmodified variants are also reported.
+
+\paragraph{ConflictBank.} We use the QA file of the dataset's Hugging Face release (revision \texttt{92866a0}). Questions are sampled round-robin over relations with seed 0; distractors are other subjects' correct passages. The
+sampling script, the item ids and the seed are released; the data are not redistributed, because the release states
+a licence in its README but ships no licence file.
+
+\paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. Prices were checked on 2026-10-27 (gpt-4o-mini: \$0.15, \$0.075 cached, and \$0.60 per million input, cached-input and output tokens; gpt-4.1: \$2.00, \$0.50 and \$8.00). CAAG and NLI ran on a
 laptop CPU (0.2\,s and 1.2\,s per question).

@@ -1,0 +1,35 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+& \multicolumn{3}{c}{RAMDocs, gpt-4o-mini} & RAMDocs, gpt-4.1 & \multicolumn{3}{c}{ConflictBank, gpt-4o-mini} & \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-5}\cmidrule(lr){6-8}
+Method & Lab. & Conflict & Clean & Lab. & All & Conflict & Clean & Calls \\
+\midrule
+No flags (plain), accuracy & 31.3 & 22.1 & 41.5 & 32.8 & 38.4 & 21.6 & 89.0 & 1 \\
+\midrule
+Instruction (v2) only & $+$2.3 & $+$5.3 & $-$1.1 & -- & $+$4.0 & $+$5.9 & $-$1.7 & 1 \\
+Oracle, flag + instr. & $-$1.8 & $-$2.4 & $-$1.1 & $+$1.5 & $+$0.7 & $+$1.6 & $-$1.7 & 1 \\
+Oracle, dir.\ flag + instr. & $+$6.4 & $+$13.2 & $-$1.1 & \textbf{$+$14.7} & \textbf{$+$47.4} & \textbf{$+$63.8} & $-$1.7 & 1 \\
+\midrule
+MADAM-RAG & $+$5.7 & $+$3.6 & $+$7.9 & -- & -- & -- & -- & 9$\times$tok. \\
+Astute RAG & \textbf{$-$15.6} & $-$8.4 & \textbf{$-$23.5} & -- & \textbf{$+$18.2} & \textbf{$+$27.4} & $-$9.7 & 2 \\
+Astute RAG (multi) & $-$5.9 & $-$1.2 & $-$11.1 & $+$2.3 & -- & -- & -- & 2 \\
+TrustRAG & \textbf{$-$17.5} & $-$11.3 & \textbf{$-$24.3} & -- & \textbf{$+$13.9} & \textbf{$+$19.9} & $-$4.0 & 3 \\
+TrustRAG (multi) & \textbf{$-$18.1} & $-$12.2 & \textbf{$-$24.6} & $-$10.9 & -- & -- & -- & 3 \\
+\midrule
+LLM detector, flag + instr. & $-$2.0 & $-$2.2 & $-$1.9 & -- & -- & -- & -- & 1 \\
+LLM detector, dir.\ flag + instr. & $-$3.5 & $+$8.4 & \textbf{$-$16.7} & -- & -- & -- & -- & 1 \\
+LLM detector, dir.\ flag & $+$4.9 & $+$12.5 & $-$3.4 & \textbf{$+$8.7} & \textbf{$+$14.8} & \textbf{$+$20.0} & $-$1.0 & 1 \\
+LLM detector, remove suspect & 0.0 & \textbf{$+$18.7} & \textbf{$-$20.6} & -- & \textbf{$+$27.4} & \textbf{$+$38.8} & $-$6.7 & 1 \\
+\bottomrule
+\end{tabular}
+\caption{Resolution instructions and published baselines. First row: accuracy (\%, one-way strict) with no flags; other rows:
+paired difference from it in points. \emph{Lab.}: the labelled RAMDocs questions; ConflictBank questions are all
+labelled. RAMDocs gpt-4o-mini and ConflictBank: 3 seeds; RAMDocs gpt-4.1: seed 0. \emph{instr.}: the v2 reliability
+instruction. \emph{(multi)}: the baseline's final step asks for every valid answer, which RAMDocs needs (every
+ConflictBank question has one answer). Calls: generator calls per question (LLM-detector rows add one detector call).
+\textbf{Bold}: significant under the paper's single scheme (Section~\ref{sec:setup}).}
+\label{tab:baselines}
+\end{table*}
