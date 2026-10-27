@@ -1,0 +1,111 @@
+{
+ "detector": "oracle",
+ "quality": {
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 502,
+   "fp": 0,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 102,
+   "fp": 0,
+   "fn": 0,
+   "tn": 78,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": 1.0,
+  "direction_coverage": 1.0,
+  "total_cost_usd": 0.0
+ },
+ "reference": "plain",
+ "modes": {
+  "flag_directional": {
+   "nearest_cells": [
+    "synth-p1-r1-all-d1+flag_directional",
+    "synth-p1-r1-all-d0.75+flag_directional",
+    "synth-p0.75-r1-all-d1+flag_directional",
+    "synth-p0.75-r1-all-d0.75+flag_directional"
+   ],
+   "all": {
+    "actual": {
+     "diff": 0.06,
+     "ci_low": 0.02,
+     "ci_high": 0.10166666666666666,
+     "n": 200,
+     "n_clusters": 200
+    },
+    "grid_predicted": 0.059999454139998784,
+    "nearest_diff": 0.06
+   },
+   "conflict": {
+    "actual": {
+     "diff": 0.11764705882352941,
+     "ci_low": 0.04248366013071895,
+     "ci_high": 0.19607843137254902,
+     "n": 102,
+     "n_clusters": 102
+    },
+    "grid_predicted": 0.11764619171923124,
+    "nearest_diff": 0.11764705882352941
+   },
+   "no_conflict": {
+    "actual": {
+     "diff": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 78,
+     "n_clusters": 78
+    },
+    "grid_predicted": -1.7715693870838418e-07,
+    "nearest_diff": 0.0
+   }
+  },
+  "remove_suspect": {
+   "nearest_cells": [
+    "synth-p1-r1-all-d1+remove_suspect",
+    "synth-p1-r1-all-d0.75+remove_suspect",
+    "synth-p0.75-r1-all-d1+remove_suspect",
+    "synth-p0.75-r1-all-d0.75+remove_suspect"
+   ],
+   "all": {
+    "actual": {
+     "diff": 0.145,
+     "ci_low": 0.09666666666666668,
+     "ci_high": 0.19504166666666606,
+     "n": 200,
+     "n_clusters": 200
+    },
+    "grid_predicted": 0.14499877348097615,
+    "nearest_diff": 0.145
+   },
+   "conflict": {
+    "actual": {
+     "diff": 0.28431372549019607,
+     "ci_low": 0.19934640522875818,
+     "ci_high": 0.37581699346405223,
+     "n": 102,
+     "n_clusters": 102
+    },
+    "grid_predicted": 0.2843119527580482,
+    "nearest_diff": 0.28431372549019607
+   },
+   "no_conflict": {
+    "actual": {
+     "diff": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 78,
+     "n_clusters": 78
+    },
+    "grid_predicted": -7.38153911284934e-07,
+    "nearest_diff": 0.0
+   }
+  }
+ }
+}

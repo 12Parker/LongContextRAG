@@ -88,4 +88,5 @@ models/
 # conflict experiments
 .venv-conflict/
 data/external/
-runs/
+runs/llm_cache.sqlite
+runs/*.log
