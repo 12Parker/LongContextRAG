@@ -325,3 +325,23 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
 - **Pilot findings (exploratory):** neutral flags hurt even when perfect; direction is what pays
   off; removal has the largest gain and the largest harm; pair-level P/R does not predict a real
   detector's effect, document-level behaviour does.
+
+### Round 2 (2026-10-27): open issues before the full run
+
+- **Splits:** `splits/ramdocs_pilot.txt` (200 questions, exploratory) and `splits/ramdocs_holdout.txt`
+  (300, confirmatory). Use `--ids-file`. The plan is in `PREREGISTRATION.md`, which still needs
+  TEAM decisions before it is frozen.
+- **Metric check:** MADAM-RAG scores 38.4% (bidirectional) / 32.8% (one-way) against the published
+  28.00. They don't match, and the team has to decide what to do (PREREGISTRATION §6). A MADAM
+  answer-parsing bug (commas inside quoted answers) was fixed, and all runs were rescored.
+- **Pricing:** verified 2026-10-27; cached prompt tokens are priced at the cached rate.
+- **CAAG and NLI on the pilot:** neither helps. Pair F1: CAAG 0.07, NLI 0.28, llm_dir 0.33.
+  Document-level placement predicted CAAG and NLI better than pair-level placement (5/6 vs 4/6
+  inside the 95% CIs; mean error 0.030 vs 0.043).
+- **Phase 0:** CAAG flags 54% of NarrativeQA questions (166 pairs from single coherent stories).
+  To label: `runs/phase0/flags_to_label.csv`.
+- **Labelling:** `runs/labelling/ramdocs_suspect_docs.csv`, then `--ramdocs-labels hand`.
+- **Second model / judge:** `--base-url`, `--api-key-env` and `--price-*` support any
+  OpenAI-compatible endpoint. `judge.py` has a DRAFT rubric (align it with Cattan et al.), a
+  human-label export and Cohen's kappa. Neither has been run yet: we need the model choice and API key.
+- **WikiContradict:** loader and `both_answers` metric added. It is the contrast dataset (H8).

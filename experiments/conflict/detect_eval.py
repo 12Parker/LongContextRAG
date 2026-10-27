@@ -57,6 +57,8 @@ def main(argv=None):
     ap.add_argument("--dataset", required=True)
     ap.add_argument("--n", type=int, default=None)
     ap.add_argument("--sample-seed", type=int, default=0)
+    ap.add_argument("--ids-file", default=None,
+                    help="restrict to the ids listed in this file, e.g. experiments/conflict/splits/ramdocs_holdout.txt")
     ap.add_argument("--detectors", default="caag,nli")
     ap.add_argument("--signal-ablation", action="store_true",
                     help="also run CAAG with each signal alone")
@@ -75,7 +77,9 @@ def main(argv=None):
 
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     kw = {"label_fix": args.ramdocs_labels} if args.dataset == "ramdocs" else {}
-    examples = data.load(args.dataset, n=args.n, seed=args.sample_seed, **kw)
+    if args.ids_file and args.n is not None:
+        raise SystemExit("use either --n or --ids-file, not both")
+    examples = data.filter_ids(data.load(args.dataset, n=args.n, seed=args.sample_seed, **kw), args.ids_file)
     llm = None
     if "llm" in args.detectors:
         from .llm import OpenAILLM

@@ -120,10 +120,18 @@ def main(argv=None):
     ap.add_argument("--dataset", required=True)
     ap.add_argument("--n", type=int, default=None)
     ap.add_argument("--sample-seed", type=int, default=0)
+    ap.add_argument("--ids-file", default=None,
+                    help="restrict to the ids listed in this file, e.g. experiments/conflict/splits/ramdocs_holdout.txt")
     ap.add_argument("--conditions", required=True)
     ap.add_argument("--seeds", default="0")
     ap.add_argument("--out", required=True)
     ap.add_argument("--model", default="gpt-4o-mini")
+    ap.add_argument("--base-url", default=None, help="OpenAI-compatible endpoint for a non-OpenAI model")
+    ap.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    ap.add_argument("--price-input", type=float, default=None, help="USD per 1M input tokens (models not in llm.PRICES)")
+    ap.add_argument("--price-output", type=float, default=None)
+    ap.add_argument("--price-cached-input", type=float, default=None)
+    ap.add_argument("--price-source", default=None, help="where and when the price was checked; stored in config.json")
     ap.add_argument("--temperature", type=float, default=0.1)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--embedder", default="sentence-transformers/all-MiniLM-L6-v2")
@@ -146,10 +154,14 @@ def main(argv=None):
                     help="uniform: identical flag text for every detector; original: CAAG's typed, scored lines")
     ap.add_argument("--dry-run", action="store_true", help="FakeLLM; no API calls, no cost")
     args = ap.parse_args(argv)
+    if (args.price_input is None) != (args.price_output is None):
+        raise SystemExit("give both --price-input and --price-output, or neither")
 
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     kw = {"label_fix": args.ramdocs_labels} if args.dataset == "ramdocs" else {}
-    examples = data.load(args.dataset, n=args.n, seed=args.sample_seed, **kw)
+    if args.ids_file and args.n is not None:
+        raise SystemExit("use either --n or --ids-file, not both")
+    examples = data.filter_ids(data.load(args.dataset, n=args.n, seed=args.sample_seed, **kw), args.ids_file)
     by_id = {e.id: e for e in examples}
     seeds = [int(s) for s in args.seeds.split(",")]
     conditions = expand_conditions([c.strip() for c in args.conditions.split(",") if c.strip()], args)
@@ -160,10 +172,13 @@ def main(argv=None):
         llm = madam_llm = det_llm = FakeLLM(lambda p: "All Correct Answers: [\"unknown\"]" if "aggregator" in p
                                   else "Answer: unknown. Explanation: dry run.\nFinal answer(s): unknown")
     else:
-        from .llm import OpenAILLM
-        llm = OpenAILLM(args.model, temperature=args.temperature)
-        det_llm = OpenAILLM(args.model, temperature=0.0)  # detectors decode greedily, as in detect_eval
-        madam_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=128)  # matches public MADAM script
+        from .llm import OpenAILLM, register_price
+        if args.price_input is not None:
+            register_price(args.model, args.price_input, args.price_output, args.price_cached_input)
+        ep = {"base_url": args.base_url, "api_key_env": args.api_key_env}
+        llm = OpenAILLM(args.model, temperature=args.temperature, **ep)
+        det_llm = OpenAILLM(args.model, temperature=0.0, **ep)  # detectors decode greedily, as in detect_eval
+        madam_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=128, **ep)  # matches public MADAM script
 
     dets_needed = sorted({parse_condition(c)[0] for c in conditions})
     detections = {}
@@ -207,7 +222,8 @@ def main(argv=None):
             r = llm(prompt, seed=seed)
             text = r.text
             usage = {"prompt_tokens": r.prompt_tokens, "completion_tokens": r.completion_tokens,
-                     "cost_usd": r.cost_usd, "calls": 1, "cached": r.cached, "latency_s": r.latency_s}
+                     "cost_usd": r.cost_usd, "calls": 1, "cached": r.cached, "latency_s": r.latency_s,
+                     "cached_prompt_tokens": r.cached_prompt_tokens}
         wall_s = time.perf_counter() - t0
         # generate_s is the API latency of the original call(s), also on cache hits; wall_s is
         # this process's wall clock (near 0 when cached, inflated by thread contention otherwise)

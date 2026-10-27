@@ -49,7 +49,8 @@ def _rows(run: Path):
 def _examples(run: Path):
     cfg = json.loads((run / "config.json").read_text())
     kw = {"label_fix": cfg.get("ramdocs_labels", "none")} if cfg["dataset"] == "ramdocs" else {}
-    return data.load(cfg["dataset"], n=cfg.get("n"), seed=cfg.get("sample_seed", 0), **kw), kw
+    xs = data.load(cfg["dataset"], n=cfg.get("n"), seed=cfg.get("sample_seed", 0), **kw)
+    return data.filter_ids(xs, cfg.get("ids_file")), kw
 
 
 def _dets(run: Path, name: str) -> dict:

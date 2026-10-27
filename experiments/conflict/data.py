@@ -66,7 +66,19 @@ def _ramdocs_pair_label(a: dict, b: dict) -> str:
     return "contradiction"
 
 
-RAMDOCS_LABEL_FIXES = ("exclude", "contains", "none")
+RAMDOCS_LABEL_FIXES = ("exclude", "contains", "hand", "none")
+HAND_LABELS = Path(__file__).resolve().parents[2] / "runs" / "labelling" / "ramdocs_suspect_docs.csv"
+
+
+def _read_hand_labels(path: Path) -> dict[tuple[str, int], str]:
+    import csv
+    labs = {}
+    for r in csv.DictReader(open(path)):
+        lab = r.get("label", "").strip().lower()
+        if lab and lab not in ("misinformation", "incidental", "unclear"):
+            raise ValueError(f"{path}: bad label {lab!r} for {r['question_id']} doc {r['doc_index']}")
+        labs[(r["question_id"], int(r["doc_index"]))] = lab
+    return labs
 
 
 def _ramdocs_suspects(r: dict) -> dict[int, str]:
@@ -91,18 +103,22 @@ def _ramdocs_suspects(r: dict) -> dict[int, str]:
 
 
 def load_ramdocs(path: Path | None = None, n: int | None = None, seed: int = 0,
-                 label_fix: str = "exclude") -> list[Example]:
+                 label_fix: str = "exclude", hand_labels: Path | None = None) -> list[Example]:
     """`label_fix` handles suspect documents (see _ramdocs_suspects):
       exclude  : pairs touching a suspect get label "uncertain" (left out of pair metrics and
                  synthetic pools); a question whose only sign of conflict is a suspect gets
                  has_conflict=None, so it leaves the clean split. Conflict questions are unchanged.
       contains : treat every suspect as misinformation for the wrong answer it contains.
+      hand     : use the team's labels (export_labelling.py; default file HAND_LABELS):
+                 "misinformation" -> misinfo for the wrong answer found; "incidental" -> keep
+                 the released type; "unclear" or blank -> handled as under exclude.
       none     : the released document types as they are.
     """
     if label_fix not in RAMDOCS_LABEL_FIXES:
         raise ValueError(f"label_fix must be one of {RAMDOCS_LABEL_FIXES}")
     path = path or DATA_DIR / "RAMDocs" / "RAMDocs_test.jsonl"
     rows = [json.loads(l) for l in open(path)]
+    hand = _read_hand_labels(hand_labels or HAND_LABELS) if label_fix == "hand" else {}
     out = []
     for k, r in enumerate(rows):
         docs = [dict(d) for d in r["documents"]]
@@ -110,10 +126,17 @@ def load_ramdocs(path: Path | None = None, n: int | None = None, seed: int = 0,
         if label_fix == "contains":
             for i, w in suspects.items():
                 docs[i]["type"], docs[i]["answer"] = "misinfo", w
+        if label_fix == "hand":
+            for i, w in list(suspects.items()):
+                lab = hand.get((f"ramdocs-{k}", i), "")
+                if lab == "misinformation":
+                    docs[i]["type"], docs[i]["answer"] = "misinfo", w
+                if lab in ("misinformation", "incidental"):
+                    del suspects[i]       # resolved; only unclear/unlabelled stay suspect
         pairs = {(i, j): _ramdocs_pair_label(docs[i], docs[j])
                  for i in range(len(docs)) for j in range(i + 1, len(docs))}
         has_conflict = any(v == "contradiction" for v in pairs.values())
-        if label_fix == "exclude" and suspects:
+        if label_fix in ("exclude", "hand") and suspects:
             pairs = {pr: ("uncertain" if (pr[0] in suspects or pr[1] in suspects) and v != "contradiction" else v)
                      for pr, v in pairs.items()}
             has_conflict = True if has_conflict else None
@@ -187,6 +210,38 @@ def load_narrativeqa_questions(n: int, seed: int = 42, split: str = "test",
     return out
 
 
+# --------------------------------------------------------------------------- WikiContradict
+WIKICONTRADICT_REVISION = "c20e361f985ed480a659b35d98b49f2311fcd174"   # HF commit, checked 2026-10-27
+
+
+def load_wikicontradict(n: int | None = None, seed: int = 0) -> list[Example]:
+    """WikiContradict (Hou et al. 2024; HF ibm/Wikipedia_contradict_benchmark).
+
+    253 questions, each with two Wikipedia passages that contradict each other about the answer
+    (the HF train split has every question twice; the first row per question_ID is kept). The
+    reference answer is BOTH answers ("answer1|answer2"): these are real-world knowledge conflicts
+    with no misinformation side, so there is no direction, and no conflict-free questions.
+    That makes it the contrast case to RAMDocs, where listing both sides is wrong.
+    """
+    from datasets import load_dataset  # heavy, import lazily
+    ds = load_dataset("ibm/Wikipedia_contradict_benchmark", revision=WIKICONTRADICT_REVISION)["train"]
+    seen, out = set(), []
+    for r in ds:
+        if r["question_ID"] in seen:
+            continue
+        seen.add(r["question_ID"])
+        out.append(Example(
+            id=f"wikicontradict-{r['question_ID']}", dataset="wikicontradict", question=r["question"],
+            passages=[r["context1"], r["context2"]],
+            gold_answers=[r["answer1"].strip(), r["answer2"].strip()],
+            has_conflict=True, conflict_type=r["contradictType"],
+            gold_pairs={(0, 1): "contradiction"}, group=f"wikicontradict-{r['question_ID']}",
+            meta={"doc_types": ["correct", "correct"], "samepassage": r["samepassage"],
+                  "title": r["WikipediaArticleTitle"], "url": r["url"]},
+        ))
+    return _subsample(out, n, seed)
+
+
 # --------------------------------------------------------------------------- helpers
 def _subsample(xs: list[Example], n: int | None, seed: int) -> list[Example]:
     if n is None or n >= len(xs):
@@ -195,7 +250,23 @@ def _subsample(xs: list[Example], n: int | None, seed: int) -> list[Example]:
     return sorted(rng.sample(xs, n), key=lambda e: e.id)
 
 
-LOADERS = {"ramdocs": load_ramdocs, "conflicts": load_conflicts}
+SPLITS_DIR = Path(__file__).resolve().parent / "splits"
+
+
+def filter_ids(xs: list[Example], ids_file: str | Path | None) -> list[Example]:
+    """Keep the examples listed in `ids_file` (one id per line), e.g. splits/ramdocs_holdout.txt.
+    Fails if an id is missing, so a split can never silently shrink."""
+    if not ids_file:
+        return xs
+    want = [l.strip() for l in open(ids_file) if l.strip()]
+    by_id = {x.id: x for x in xs}
+    missing = [i for i in want if i not in by_id]
+    if missing:
+        raise ValueError(f"{len(missing)} ids from {ids_file} not in the loaded data, e.g. {missing[:3]}")
+    return [by_id[i] for i in sorted(want)]
+
+
+LOADERS = {"ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
 
 def load(name: str, **kw) -> list[Example]:

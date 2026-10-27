@@ -37,7 +37,12 @@ def extract_answers(text: str) -> list[str]:
         return [a.strip() for a in m.group(1).split("|") if a.strip()]
     m = _MADAM.search(text)
     if m:
-        return [a.strip().strip('"\'') for a in m.group(1).split(",") if a.strip()]
+        # items are quoted strings that may themselves contain commas ("July 10, 1850");
+        # splitting on commas turned one answer into fragments that then matched gold answers
+        quoted = re.findall(r'"([^"]*)"|\'([^\']*)\'', m.group(1))
+        if quoted:
+            return [(a or b).strip() for a, b in quoted if (a or b).strip()]
+        return [a.strip() for a in m.group(1).split(",") if a.strip()]
     return [text.strip()]
 
 
@@ -69,6 +74,11 @@ def score(ex: Example, response: str) -> dict:
                    wrong_rate=float(any(w)),
                    ramdocs_strict_oneway=float(all(g1) and not any(w1)))
         out["primary"] = out["ramdocs_strict"]
+    elif ex.dataset == "wikicontradict":
+        # the reference is both sides of a genuine conflict; reporting only one is incomplete
+        g = [_matches(answers, a) for a in ex.gold_answers]
+        out.update(both_answers=float(all(g)), gold_recall=sum(g) / max(len(g), 1))
+        out["primary"] = out["both_answers"]
     elif ex.dataset == "conflicts":
         out["primary"] = float(_contains(pred, ex.gold_answers[0])) if ex.gold_answers else None
     else:
@@ -173,12 +183,13 @@ def doc_level(examples: list[Example], dets: dict, mode: str) -> dict:
     clean_q_any_correct_marked     clean questions with at least one correct document marked
     Pair-level P/R miss this: one correctly directed pair is enough to remove a misinfo
     document, and false flags concentrated on correct-correct pairs remove valid answers.
-    Under label_fix="exclude", suspect documents are left out of both counts.
+    Under label_fix="exclude" (and "hand", for unresolved suspects), suspect documents are left
+    out of both counts.
     """
     mis_n = mis_m = cor_n = cor_m = cq = cq_all = cq_cor = kq = kq_any = 0
     for ex in examples:
         types = ex.meta.get("doc_types", [])
-        skip = set(ex.meta.get("suspect_docs", [])) if ex.meta.get("label_fix") == "exclude" else set()
+        skip = set(ex.meta.get("suspect_docs", [])) if ex.meta.get("label_fix") in ("exclude", "hand") else set()
         marked = marked_docs(dets[ex.id].pairs, mode)
         mis = {k for k, t in enumerate(types) if t == "misinfo" and k not in skip}
         cor = {k for k, t in enumerate(types) if t == "correct" and k not in skip}

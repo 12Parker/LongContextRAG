@@ -17,10 +17,10 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-# USD per 1M tokens. GPT-4o-mini list price; CONFIRM on openai.com/api/pricing and
-# record the date you checked in the paper.
-PRICES = {"gpt-4o-mini": {"input": 0.15, "output": 0.60}}
-PRICES_CHECKED = "UNVERIFIED - fill in date checked"
+# USD per 1M tokens, standard tier. "cached_input" applies to prompt tokens the API reports as
+# served from its prompt cache (usage.prompt_tokens_details.cached_tokens).
+PRICES = {"gpt-4o-mini": {"input": 0.15, "cached_input": 0.075, "output": 0.60}}
+PRICES_CHECKED = "2026-10-27, https://developers.openai.com/api/docs/pricing (gpt-4o-mini row: $0.15 / $0.075 cached / $0.60)"
 
 CACHE_PATH = Path(os.getenv("CONFLICT_LLM_CACHE", Path(__file__).resolve().parents[2] / "runs" / "llm_cache.sqlite"))
 
@@ -33,13 +33,16 @@ class LLMResult:
     cost_usd: float
     latency_s: float
     cached: bool
+    cached_prompt_tokens: int = 0     # of prompt_tokens, served from OpenAI's prompt cache
 
 
-def price(model: str, pt: int, ct: int) -> float:
+def price(model: str, pt: int, ct: int, cached_pt: int = 0) -> float:
     p = PRICES.get(model)
     if p is None:
         raise KeyError(f"No price for {model}; add it to PRICES with the date checked.")
-    return (pt * p["input"] + ct * p["output"]) / 1e6
+    cached_pt = min(cached_pt, pt)
+    return ((pt - cached_pt) * p["input"] + cached_pt * p.get("cached_input", p["input"])
+            + ct * p["output"]) / 1e6
 
 
 class _Cache:
@@ -60,20 +63,37 @@ class _Cache:
             self.db.commit()
 
 
+def register_price(model: str, input_per_m: float, output_per_m: float,
+                   cached_input_per_m: float | None = None) -> None:
+    """Add a price for a model served elsewhere (e.g. an open-weights model). Record the source
+    and date in the run's config (run.py stores --price-* there)."""
+    PRICES[model] = {"input": input_per_m, "output": output_per_m,
+                     "cached_input": input_per_m if cached_input_per_m is None else cached_input_per_m}
+
+
 class OpenAILLM:
+    """Chat-completions client. With `base_url` it talks to any OpenAI-compatible server
+    (vLLM, Together, OpenRouter, ...), reading the key from `api_key_env`."""
     def __init__(self, model: str = "gpt-4o-mini", temperature: float = 0.1,
-                 max_tokens: int = 256, cache_path: Path = CACHE_PATH):
+                 max_tokens: int = 256, cache_path: Path = CACHE_PATH,
+                 base_url: str | None = None, api_key_env: str = "OPENAI_API_KEY"):
         from openai import OpenAI
-        self.client = OpenAI()  # reads OPENAI_API_KEY
-        self.model, self.temperature, self.max_tokens = model, temperature, max_tokens
+        key = os.getenv(api_key_env)
+        if base_url and not key:
+            raise RuntimeError(f"{api_key_env} is not set (needed for {base_url})")
+        self.client = OpenAI(base_url=base_url, api_key=key) if base_url else OpenAI()
+        self.model, self.temperature, self.max_tokens, self.base_url = model, temperature, max_tokens, base_url
         self.cache = _Cache(cache_path)
+        price(model, 0, 0)  # fail now, not after the first call, if there is no price
 
     def __call__(self, prompt: str, seed: int = 0, json_mode: bool = False,
                  max_tokens: int | None = None) -> LLMResult:
         msgs = [{"role": "user", "content": prompt}]
         mt = max_tokens or self.max_tokens
-        key = hashlib.sha256(json.dumps(
-            [self.model, msgs, self.temperature, seed, mt, json_mode]).encode()).hexdigest()
+        parts = [self.model, msgs, self.temperature, seed, mt, json_mode]
+        if self.base_url:  # same model name on another server is a different model
+            parts.append(self.base_url)
+        key = hashlib.sha256(json.dumps(parts).encode()).hexdigest()
         hit = self.cache.get(key)
         if hit:
             return LLMResult(**{**hit, "cached": True})
@@ -86,10 +106,11 @@ class OpenAILLM:
         resp = self._with_retry(kw)
         dt = time.perf_counter() - t0
         u = resp.usage
+        cpt = getattr(getattr(u, "prompt_tokens_details", None), "cached_tokens", 0) or 0
         res = dict(text=resp.choices[0].message.content or "",
                    prompt_tokens=u.prompt_tokens, completion_tokens=u.completion_tokens,
-                   cost_usd=price(self.model, u.prompt_tokens, u.completion_tokens),
-                   latency_s=dt)
+                   cost_usd=price(self.model, u.prompt_tokens, u.completion_tokens, cpt),
+                   latency_s=dt, cached_prompt_tokens=cpt)
         self.cache.put(key, res)
         return LLMResult(**res, cached=False)
 
