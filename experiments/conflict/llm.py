@@ -20,7 +20,14 @@ from pathlib import Path
 # USD per 1M tokens, standard tier. "cached_input" applies to prompt tokens the API reports as
 # served from its prompt cache (usage.prompt_tokens_details.cached_tokens).
 PRICES = {"gpt-4o-mini": {"input": 0.15, "cached_input": 0.075, "output": 0.60},
-          "gpt-4.1": {"input": 2.00, "cached_input": 0.50, "output": 8.00}}
+          "gpt-4.1": {"input": 2.00, "cached_input": 0.50, "output": 8.00},
+          # current reasoning models (§12): reasoning tokens are billed as output
+          "gpt-6-luna": {"input": 0.10, "cached_input": 0.01, "output": 0.50},
+          "gpt-6.1-terra": {"input": 1.00, "cached_input": 0.05, "output": 5.00}}
+# Reasoning models take max_completion_tokens (reasoning tokens count against it) and only their default
+# temperature; they get a larger output budget so reasoning cannot crowd out the answer (§12).
+REASONING_MODELS = {"gpt-6-luna", "gpt-6.1-terra"}
+REASONING_MAX_TOKENS = 4096
 PRICES_CHECKED = ("2026-10-27, https://developers.openai.com/api/docs/pricing "
                   "(gpt-4o-mini: $0.15 / $0.075 cached / $0.60; gpt-4.1: $2.00 / $0.50 cached / $8.00)")
 
@@ -100,8 +107,12 @@ class OpenAILLM:
         if hit:
             return LLMResult(**{**hit, "cached": True})
 
-        kw = dict(model=self.model, messages=msgs, temperature=self.temperature,
-                  seed=seed, max_tokens=mt)
+        if self.model in REASONING_MODELS:
+            kw = dict(model=self.model, messages=msgs, seed=seed,
+                      max_completion_tokens=max(mt, REASONING_MAX_TOKENS))
+        else:
+            kw = dict(model=self.model, messages=msgs, temperature=self.temperature,
+                      seed=seed, max_tokens=mt)
         if json_mode:
             kw["response_format"] = {"type": "json_object"}
         t0 = time.perf_counter()

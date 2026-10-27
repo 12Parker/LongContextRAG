@@ -437,3 +437,63 @@ harm" or "tie".
 
 **One significance scheme.** §10.3 still applies. H15–H18 are registered families, and every
 other comparison is in the single exploratory family.
+
+## 12. Current models (frozen 2026-10-27, before any run below)
+
+gpt-4o-mini and gpt-4.1 are no longer current. We add two current OpenAI models:
+- `gpt-6-luna` (the current small tier);
+- `gpt-6.1-terra` (a current frontier tier).
+
+Prices on 2026-10-27, per 1M input / cached input / output tokens:
+- `gpt-6-luna`: $0.10 / $0.01 / $0.50;
+- `gpt-6.1-terra`: $1.00 / $0.05 / $5.00.
+
+To stay within budget, two §11 runs are dropped before they start:
+- `cbmaj_single_gpt41`. In H17 it is replaced by `gpt-6.1-terra`.
+- gpt-4.1 seeds 1–2 for H14. H14 with gpt-4.1 stays as registered in §10, on seed 0. Every comparison
+  involving gpt-4.1 baselines in the paper uses seed-0-matched numbers. This reverses the §11.3 plan,
+  and no seed 1–2 data exists.
+
+**Decoding.** Both models are reasoning models. A smoke test on 2026-10-27 established this:
+- They reject `max_tokens` and any temperature other than their default (1).
+- They therefore run at their default temperature and default reasoning effort.
+- They get `max_completion_tokens=4096`, so reasoning cannot crowd out the answer. In the smoke test a
+  call used 50–300 completion tokens.
+- The `seed` parameter is sent but does not make sampling deterministic.
+
+Everything else is unchanged:
+- the LLM detector stays gpt-4o-mini;
+- the prompts, the scorer and the significance scheme are unchanged.
+
+### 12.1 Runs
+
+| Output | Data | Generator | Seeds | Skeleton | Conditions |
+|---|---|---|---|---|---|
+| `runs/cb_single_luna` | ConflictBank | gpt-6-luna | 0, 1, 2 | single | `plain`, `closedbook`, `self_identify`, `oracle+flag`, `oracle+flag_onewrong`, `oracle+flag_directional`, `oracle+remove_suspect`, `llm_dir+flag`, `llm_dir+flag_directional` |
+| `runs/cb_single_terra` | ConflictBank | gpt-6.1-terra | 0 | single | same as `cb_single_luna` |
+| `runs/holdout_luna` | RAMDocs hold-out | gpt-6-luna | 0, 1, 2 | default | `plain`, `oracle+flag`, `oracle+flag_onewrong`, `oracle+flag_directional`, `oracle+remove_suspect`, `llm_dir+flag`, `llm_dir+flag_directional` |
+| `runs/holdout_terra` | RAMDocs hold-out | gpt-6.1-terra | 0 | default | same as `holdout_luna` |
+| `runs/cbmaj_single_luna` | ConflictBank majority | gpt-6-luna | 0, 1, 2 | single | `plain`, `oracle+flag`, `oracle+flag_directional`, `llm_dir+flag_directional` |
+| `runs/cbmaj_single_terra` | ConflictBank majority | gpt-6.1-terra | 0 | single | same as `cbmaj_single_luna` |
+
+The §11 budget rule applies: a run that would start with total spend at or above $95 is dropped.
+
+### 12.2 Hypotheses
+
+**H19. The core findings with current models.** Each test is run separately for `gpt-6-luna` and for
+`gpt-6.1-terra`, and Holm runs within H19, per metric.
+
+| Setting | Comparison | Questions | Prediction |
+|---|---|---|---|
+| ConflictBank `single` | Δ(`oracle+flag`, `plain`) | conflict | two-sided |
+| ConflictBank `single` | Δ(`oracle+flag_directional`, `oracle+flag`) | conflict | > 0 |
+| ConflictBank `single` | Δ(`oracle+flag_directional`, `oracle+flag_onewrong`) | conflict | > 0 |
+| ConflictBank `single` | Δ(`llm_dir+flag_directional`, `plain`) | all | > 0 |
+| RAMDocs default | Δ(`oracle+flag`, `plain`) | conflict | two-sided |
+| RAMDocs default | Δ(`oracle+flag_directional`, `oracle+flag`) | conflict | > 0 |
+| ConflictBank majority | Δ(`oracle+flag_directional`, `plain`) | conflict | > 0 |
+| ConflictBank majority | Δ(`llm_dir+flag_directional`, `plain`) | conflict | two-sided |
+
+If a reasoning model resolves conflicts unaided, we expect three things: a high no-flag baseline, a
+neutral-flag effect near zero, and a smaller gain from direction. The paper reports whichever pattern
+appears.
