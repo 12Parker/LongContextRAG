@@ -2,51 +2,52 @@
 \label{sec:related}
 
 \paragraph{Knowledge conflicts.}
-Language models can give priority to memorised knowledge over contradicting context \citep{longpre2021entity}.
-They are also readily persuaded by coherent external evidence that contradicts their memory \citep{xie2024chameleon},
-and they adopt wrong context over a correct prior to a degree that depends on how strong that prior is
-\citep{wu2024clasheval}. \citet{xu2024survey} distinguish context--memory, inter-context and intra-memory conflicts.
-We study inter-context conflicts: disagreements among retrieved passages, as in \citet{chen2022rich}, who find that
-models tend to rely on a single passage when the evidence conflicts.
+Language models can prefer memorised knowledge over contradicting context \citep{longpre2021entity}, yet are readily
+persuaded by coherent contradicting evidence \citep{xie2024chameleon}, to a degree that depends on the strength of
+their prior \citep{wu2024clasheval}. Of the conflict types of \citet{xu2024survey}, we study inter-context
+conflicts, as in \citet{chen2022rich}, who find that models tend to rely on a single passage when evidence conflicts.
 
-\paragraph{Benchmarks with conflicting evidence.}
-RAMDocs \citep{wang2025madam} mixes genuine ambiguity (several valid answers), misinformation and noise across
-retrieved documents, and builds on AmbigDocs \citep{lee2024ambigdocs}. CONFLICTS \citep{cattan2025conflicts}
-annotates search results with a taxonomy of conflict types, each with its own desired behaviour.
-WikiContradict \citep{hou2024wikicontradict} pairs Wikipedia passages that genuinely contradict each other.
+\paragraph{Benchmarks.}
+RAMDocs \citep{wang2025madam}, built on AmbigDocs \citep{lee2024ambigdocs}, mixes genuine ambiguity, misinformation
+and noise. CONFLICTS \citep{cattan2025conflicts} annotates search results with conflict types, each with its own
+desired behaviour, and WikiContradict \citep{hou2024wikicontradict} pairs genuinely contradicting Wikipedia passages.
 FaithEval \citep{ming2025faitheval}, ConflictBank \citep{su2024conflictbank} and ConfRAG \citep{yuan2026confrag}
-cover related settings. RAMDocs and ConflictBank label which side is misinformation; in WikiContradict neither is.
+cover related settings. RAMDocs and ConflictBank label which side is misinformation; WikiContradict does not.
 
 \paragraph{Telling the model about conflicts.}
-The closest prior work tells the generator that a conflict exists. \citet{cattan2025conflicts} find that prompting a model to
-reason about the conflict type helps, and that supplying the gold conflict type helps much more. On WikiContradict,
-models acknowledge both sides more often when told the passages may conflict \citep{hou2024wikicontradict}.
-Ragability \citep{gross2026ragability} shows the cost of such a hint: it improves conflict identification on
-contradictory contexts but hurts it on \emph{consistent} ones, where the hint is false. Our neutral-flag result is
-different: the hint is true, the input is contradictory, and accuracy still falls, because the hint does not say
-which side to trust. \citet{pan2023risk} test detection and ``vigilant'' prompting against LLM-generated misinformation, and
-\citet{pan2023attacking} call for misinformation-aware QA. Source signals also matter: models weigh retrieved pages' metadata and appearance
-\citep{chiang2024metadata}, and passing source-credibility signals to a retrieval-augmented fact-checker helps resolve
-conflicting evidence \citep{ge2025confact}. We separate the \emph{content} of the hint from its \emph{accuracy}.
+Prompting a model to reason about the conflict type helps, and supplying the gold type helps much more
+\citep{cattan2025conflicts}; on WikiContradict, models acknowledge both sides more often when told the passages may
+conflict \citep{hou2024wikicontradict}. Ragability \citep{gross2026ragability} finds that such a hint helps on
+contradictory contexts but hurts on \emph{consistent} ones, where it is false. In our neutral-flag result the hint is
+true and the input contradictory, and accuracy still falls, because the hint does not say which side to trust.
+\citet{pan2023risk} test detection and ``vigilant'' prompting against LLM-generated misinformation, and
+\citet{pan2023attacking} call for misinformation-aware QA. Models weigh retrieved pages' metadata and appearance
+\citep{chiang2024metadata}, and source-credibility signals help a fact-checker resolve conflicting evidence
+\citep{ge2025confact}. We separate the \emph{content} of the hint from its \emph{accuracy}.
 
 \paragraph{Telling the model which passage is wrong.}
-Closest to our directional format, \citet{hong2024gullible} train a discriminator that marks perturbed passages and
-pass its decisions to the generator in the prompt, which makes the generator more robust to counterfactual noise.
-CrAM \citep{deng2025cram} rescales attention by per-passage credibility, RA-RAG \citep{hwang2025rarag} estimates source
-reliability, and \citet{weller2024defending} defend open-domain QA against disinformation attacks. These works show that \emph{some} reliability signal helps, but do not compare it with a neutral warning on the
-same pairs or measure its cost on conflict-free questions.
+Closest to our directional format, \citet{hong2024gullible} pass a discriminator's marks on perturbed passages to the
+generator in the prompt, which makes it more robust to counterfactual noise. CrAM \citep{deng2025cram} rescales
+attention by passage credibility, RA-RAG \citep{hwang2025rarag} estimates source reliability, and
+\citet{weller2024defending} defend open-domain QA against disinformation. These works show that \emph{some}
+reliability signal helps, but do not compare it with a neutral warning on the same pairs or measure its cost on
+conflict-free questions. RGB \citep{chen2024rgb} warns models that passages may contain errors, and they still rarely
+detect them; our neutral flag is the pair-specific version of that warning.
 
-\paragraph{Conflict detection, resolution and poisoning.}
+\paragraph{Detection, resolution and poisoning.}
 ConflictRAG \citep{wang2026conflictrag} trains a pairwise detector with an LLM fallback and reports pair-level F1
 alongside answer gains; its NLI and chain-of-thought baselines resemble two of our detectors. LLMs are imperfect
-context validators \citep{gokul2025contradiction}, can detect knowledge conflicts but struggle to pinpoint them
-\citep{wang2024resolving}, are distracted by irrelevant context \citep{shi2023distracted}, and prefer some sources over
-others \citep{schuster2026whose}. TCR \citep{ye2026tcr} passes conflict signals through a learned soft
-prompt, EvidentialRAG \citep{hossain2026evidentialrag} routes between answering and abstaining, and credibility-aware
-generation \citep{pan2024credibility} fine-tunes models to weigh per-passage credibility, a trained analogue of our
-directional flags. MADAM-RAG \citep{wang2025madam}, Astute RAG \citep{wang2025astute}, Self-RAG \citep{asai2024selfrag}
-Corrective RAG \citep{yan2024crag} and InstructRAG \citep{wei2025instructrag} handle unreliable passages without
-an explicit contradiction detector; we compare against Astute RAG and TrustRAG directly. A few
-injected passages can steer a RAG system \citep{zou2025poisonedrag}; RobustRAG \citep{xiang2024robustrag} isolates
-passages for certifiable robustness, and TrustRAG \citep{zhou2025trustrag} filters suspected poisoned ones, the
-analogue of our removal format. We ask instead how a detector's output should be passed to the generator.
+context validators \citep{gokul2025contradiction}, detect conflicts but struggle to pinpoint them
+\citep{wang2024resolving}, and tend to pick a side without explanation \citep{jiayang2024econ}. They favour the more
+frequent side and the one matching their prior \citep{jin2024tugofwar,kortukov2024realistic}, prefer LLM-generated
+passages \citep{tan2024blinded} (both ConflictBank sides are generated), are distracted by irrelevant context
+\citep{shi2023distracted}, and favour some sources \citep{schuster2026whose}. TCR \citep{ye2026tcr} uses a learned
+soft prompt, context-aware decoding \citep{shi2024cad} upweights the context, EvidentialRAG
+\citep{hossain2026evidentialrag} routes between answering and abstaining, and credibility-aware generation
+\citep{pan2024credibility} fine-tunes models to weigh passage credibility, a trained analogue of our directional
+flags. MADAM-RAG \citep{wang2025madam}, Astute RAG \citep{wang2025astute}, Self-RAG \citep{asai2024selfrag},
+Corrective RAG \citep{yan2024crag} and InstructRAG \citep{wei2025instructrag} handle unreliable passages without an
+explicit contradiction detector; we compare against Astute RAG and TrustRAG. A few injected passages can steer a RAG
+system \citep{zou2025poisonedrag}; RobustRAG \citep{xiang2024robustrag} isolates passages for certifiable robustness,
+and TrustRAG \citep{zhou2025trustrag} filters suspected poisoned ones, the analogue of our removal. We ask instead how
+a detector's output should be passed to the generator.

@@ -52,6 +52,19 @@ RUNS = {
     "cb_main": ROOT / "runs/cb_main",
     "cb_gpt41": ROOT / "runs/cb_gpt41",
     "cb_qwen": ROOT / "runs/cb_qwen",
+    # third revision (PREREGISTRATION.md §11)
+    "cb_single": ROOT / "runs/cb_single",
+    "cb_minimal": ROOT / "runs/cb_minimal",
+    "cb_single_gpt41": ROOT / "runs/cb_single_gpt41",
+    "cb_single_qwen": ROOT / "runs/cb_single_qwen",
+    "cbmaj_single": ROOT / "runs/cbmaj_single",
+    "cbmaj_single_gpt41": ROOT / "runs/cbmaj_single_gpt41",
+    "holdout_extra": ROOT / "runs/holdout_extra",
+    "gpt41_closedbook": ROOT / "runs/holdout_gpt41_closedbook",
+    # current reasoning models (PREREGISTRATION.md §12)
+    "cb_single_luna": ROOT / "runs/cb_single_luna", "cb_single_terra": ROOT / "runs/cb_single_terra",
+    "holdout_luna": ROOT / "runs/holdout_luna", "holdout_terra": ROOT / "runs/holdout_terra",
+    "cbmaj_single_luna": ROOT / "runs/cbmaj_single_luna", "cbmaj_single_terra": ROOT / "runs/cbmaj_single_terra",
 }
 GENERATORS = {"gpt-4o-mini": ("main", "minimal"), "gpt-4.1": ("gpt41", "gpt41_minimal"),
               "Qwen2.5-7B": ("qwen", "qwen_minimal")}
@@ -375,16 +388,36 @@ def revision2(R, main_rows, main_ex=None):
     if results_path(RUNS["round2"]):
         sets["gpt-4o-mini"] = main_rows + [r for r in rows_of(RUNS["round2"]) if r["condition"] != "plain"]
     for key, run in (("gpt-4.1|seed0", "gpt41_round2"), ("gpt-4o-mini|qwen-detector", "qwendet"),
-                     ("CB:gpt-4o-mini", "cb_main"), ("CB:gpt-4.1", "cb_gpt41"), ("CB:Qwen2.5-7B", "cb_qwen")):
+                     ("CB:gpt-4o-mini", "cb_main"), ("CB:gpt-4.1", "cb_gpt41"), ("CB:Qwen2.5-7B", "cb_qwen"),
+                     ("CBs:gpt-4o-mini", "cb_single"), ("CBs:gpt-4.1", "cb_single_gpt41"),
+                     ("CBs:Qwen2.5-7B", "cb_single_qwen"), ("CBn:gpt-4o-mini", "cb_minimal"),
+                     ("CBmaj:gpt-4o-mini", "cbmaj_single"), ("CBmaj:gpt-4.1", "cbmaj_single_gpt41"),
+                     ("CBs:gpt-6-luna", "cb_single_luna"), ("CBs:gpt-6.1-terra", "cb_single_terra"),
+                     ("RD:gpt-6-luna", "holdout_luna"), ("RD:gpt-6.1-terra", "holdout_terra"),
+                     ("CBmaj:gpt-6-luna", "cbmaj_single_luna"), ("CBmaj:gpt-6.1-terra", "cbmaj_single_terra")):
         if results_path(RUNS[run]):
             sets[key] = rows_of(RUNS[run])
+    if "gpt-4.1|seed0" in sets:
+        allseeds = sets["gpt-4.1|seed0"]
+        sets["gpt-4.1|seed0"] = [r for r in allseeds if r["seed"] == 0]
+        if len({r["seed"] for r in allseeds}) > 1:   # §11.3: H14 with gpt-4.1 on 3 seeds
+            h14c = ("plain", "llm_dir+flag_directional", "astute_multi", "trustrag_multi")
+            sets["gpt-4.1|all"] = [r for r in allseeds if r["condition"] in h14c]
+    if "CBs:gpt-4o-mini" in sets and results_path(RUNS["cb_main"]):   # baselines ignore our skeleton: same prompts
+        sets["CBs:gpt-4o-mini"] = sets["CBs:gpt-4o-mini"] + [r for r in rows_of(RUNS["cb_main"])
+                                                             if r["condition"] in ("astute", "trustrag")]
+    if results_path(RUNS["holdout_extra"]):
+        sets["RD:gpt-4o-mini"] = main_rows + rows_of(RUNS["holdout_extra"])
     r2 = rev["r2"] = {}
     for key, rows in sets.items():
-        conds = sorted({r["condition"] for r in rows} - {"plain"})
+        conds = sorted({r["condition"] for r in rows} - {"plain", "closedbook"})
         if key == "gpt-4o-mini":   # only what round 2 added on RAMDocs; the rest is in main_table
             conds = [c for c in conds if "instruct_v2" in c and c.startswith(("oracle", "llm")) or
                      c.split("+")[0] in ("astute", "astute_multi", "trustrag", "trustrag_multi") or
                      c in ("llm_dir+flag_directional",)]
+        if key == "RD:gpt-4o-mini":   # main-table conditions are reported from main_table
+            conds = [c for c in conds if c in ("self_identify", "oracle+flag_onewrong", "oracle+flag", "oracle+flag_directional",
+                                               "llm_dir+flag_directional")]
         r2[key] = {
             "plain": {m: {s: float(np.mean(list(per_question(rr, "plain", f, m).values())))
                           for s, f, rr in (("all", None, rows), ("conflict", True, rows), ("clean", False, rows),
@@ -398,10 +431,32 @@ def revision2(R, main_rows, main_ex=None):
                                                     if r["condition"] == c]))}
                      for c in ["plain"] + conds},
             "n": {s: len(per_question(rows, "plain", f, PRIMARY)) for s, f in (("conflict", True), ("clean", False))}}
-        if any(c.startswith("oracle_inv") for c in conds):
+        if any(r["condition"] == "closedbook" for r in rows):
+            r2[key]["closedbook"] = {s: float(np.mean(list(per_question(rows, "closedbook", f, PRIMARY).values())))
+                                     for s, f in (("all", None), ("conflict", True), ("clean", False))}
+        if key.startswith("CB"):
             r2[key]["wrong_rate"] = {c: float(np.mean([r["wrong_rate"] for r in rows if r["condition"] == c and r["has_conflict"]]))
-                                     for c in ("plain", "oracle+flag", "oracle+flag_directional", "oracle_inv+flag_directional")
+                                     for c in ("plain", "oracle+flag", "oracle+flag_onewrong", "oracle+flag_directional",
+                                               "oracle_inv+flag_directional", "self_identify")
                                      if c in conds + ["plain"]}
+        # §11: answer mix on conflict questions (abstention, gold recall, wrong answers), per condition
+        unk = lambda r: any(a.strip().lower().rstrip(".") == "unknown" for a in r.get("pred_answers", []))
+        def outcome(r):   # mutually exclusive, for the answer-mix figure
+            if r[PRIMARY] == 1:
+                return "correct"
+            if r["wrong_rate"] > 0:
+                return "misinfo"
+            return "abstain" if unk(r) else "other"
+        mix = {}
+        for c in ["plain"] + conds:
+            rr = [r for r in rows if r["condition"] == c and r["has_conflict"]]
+            if rr:
+                oc = [outcome(r) for r in rr]
+                mix[c] = {"unknown": float(np.mean([unk(r) for r in rr])),
+                          "gold_recall": float(np.mean([r["gold_recall"] for r in rr])),
+                          "wrong": float(np.mean([r["wrong_rate"] for r in rr])),
+                          **{f"out_{k}": oc.count(k) / len(oc) for k in ("correct", "misinfo", "abstain", "other")}}
+        r2[key]["answer_mix"] = mix
         r2[key]["_rows"] = rows   # dropped before writing
     regmap = rev["registered_map"] = {}
 
@@ -442,7 +497,8 @@ def revision2(R, main_rows, main_ex=None):
         rev["H13"] = fam("H13", spec, dirs)
     spec = []
     for key, label, bases in (("gpt-4o-mini", "RAMDocs, gpt-4o-mini", ("astute_multi", "trustrag_multi")),
-                              ("gpt-4.1|seed0", "RAMDocs, gpt-4.1", ("astute_multi", "trustrag_multi")),
+                              ("gpt-4.1|all" if "gpt-4.1|all" in r2 else "gpt-4.1|seed0", "RAMDocs, gpt-4.1",
+                               ("astute_multi", "trustrag_multi")),
                               ("CB:gpt-4o-mini", "ConflictBank, gpt-4o-mini", ("astute", "trustrag"))):
         if key in r2:
             for bname in bases:
@@ -450,6 +506,7 @@ def revision2(R, main_rows, main_ex=None):
                              "llm_dir+flag_directional", LABELLED))
     if spec:
         rev["H14"] = fam("H14", spec, {})
+    revision3(R, r2, fam, main_ex)
     # exploratory (after seeing H14): do the baselines lose valid answers on multi-answer clean questions?
     if "gpt-4o-mini" in r2 and main_ex is not None:
         n_gold = {e.id: len(e.gold_answers) for e in main_ex}
@@ -461,6 +518,106 @@ def revision2(R, main_rows, main_ex=None):
             for grp in ("single", "multi")}
     for v in r2.values():
         v.pop("_rows", None)
+
+
+def revision3(R, r2, fam, main_ex):
+    """Third revision (§11): H15-H18, closed-book stratification, TOST for "tie" / "no harm" claims."""
+    from . import revision_stats as rv
+    rev = R["rev"]
+
+    def family_of(name, settings, tests=None):
+        groups = [(settings, tests)] if tests is not None else settings
+        spec, dirs = [], {}
+        for key, tests in ((k, t) for ss, t in groups for k in ss):
+            if key not in r2:
+                continue
+            label = {"CBs:gpt-4o-mini": "ConflictBank, gpt-4o-mini", "CBs:gpt-4.1": "ConflictBank, gpt-4.1",
+                     "CBs:Qwen2.5-7B": "ConflictBank, Qwen2.5-7B", "RD:gpt-4o-mini": "RAMDocs, gpt-4o-mini",
+                     "CBmaj:gpt-4o-mini": "CB majority, gpt-4o-mini", "CBmaj:gpt-4.1": "CB majority, gpt-4.1",
+                     "CBs:gpt-6-luna": "ConflictBank, gpt-6-luna", "CBs:gpt-6.1-terra": "ConflictBank, gpt-6.1-terra",
+                     "RD:gpt-6-luna": "RAMDocs, gpt-6-luna", "RD:gpt-6.1-terra": "RAMDocs, gpt-6.1-terra",
+                     "CBmaj:gpt-6-luna": "CB majority, gpt-6-luna", "CBmaj:gpt-6.1-terra": "CB majority, gpt-6.1-terra"}[key]
+            have = {r["condition"] for r in r2[key]["_rows"]}
+            for a, b, d, what, sub in tests:
+                if a in have and b in have:
+                    tk = f"{label}: {what}"
+                    spec.append((tk, key, a, b, sub)); dirs[tk] = d
+        if spec:
+            rev[name] = fam(name, spec, dirs)
+
+    cb_settings = ("CBs:gpt-4o-mini", "CBs:gpt-4.1", "CBs:Qwen2.5-7B")
+    family_of("H15", cb_settings, [
+        ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+        ("oracle+flag", "oracle+flag_directional", +1, "dir. flag > neutral flag (conflict)", True),
+        ("plain", "oracle+flag_directional", +1, "dir. flag > plain (conflict)", True),
+        ("plain", "llm_dir+flag_directional", +1, "LLM dir. flag > plain (all q.)", LABELLED)])
+    family_of("H16", ("CBs:gpt-4o-mini", "CBs:gpt-4.1", "RD:gpt-4o-mini"), [
+        ("oracle+flag_onewrong", "oracle+flag_directional", +1, "dir. flag > one-wrong flag (conflict)", True),
+        ("plain", "oracle+flag_onewrong", 0, "one-wrong flag vs plain (conflict)", True)])
+    family_of("H17", ("CBmaj:gpt-4o-mini", "CBmaj:gpt-4.1"), [
+        ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+        ("plain", "oracle+flag_directional", +1, "dir. flag > plain (conflict)", True),
+        ("plain", "llm_dir+flag_directional", 0, "LLM dir. flag vs plain (conflict)", True)])
+    family_of("H18", ("RD:gpt-4o-mini", "CBs:gpt-4o-mini", "CBmaj:gpt-4o-mini"), [
+        ("self_identify", "llm_dir+flag_directional", 0, "LLM dir. flag vs self-identify (labelled)", LABELLED)])
+
+    new = ("gpt-6-luna", "gpt-6.1-terra")
+    family_of("H19", [
+        ([f"CBs:{g}" for g in new], [
+            ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+            ("oracle+flag", "oracle+flag_directional", +1, "dir. flag > neutral flag (conflict)", True),
+            ("oracle+flag_onewrong", "oracle+flag_directional", +1, "dir. flag > one-wrong flag (conflict)", True),
+            ("plain", "llm_dir+flag_directional", +1, "LLM dir. flag > plain (all q.)", LABELLED)]),
+        ([f"RD:{g}" for g in new], [
+            ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+            ("oracle+flag", "oracle+flag_directional", +1, "dir. flag > neutral flag (conflict)", True)]),
+        ([f"CBmaj:{g}" for g in new], [
+            ("plain", "oracle+flag_directional", +1, "dir. flag > plain (conflict)", True),
+            ("plain", "llm_dir+flag_directional", 0, "LLM dir. flag vs plain (conflict)", True)])])
+
+    # degenerate reasoning-model outputs (§12): empty responses, all runs of the two current models
+    rev["n_empty_reasoning"] = sum(not r["response"].strip() for k in r2 if k.endswith(("gpt-6-luna", "gpt-6.1-terra"))
+                                   for r in r2[k]["_rows"])
+
+    # closed-book stratification (§11.3): "known" = strictly correct closed-book on >= 2 of 3 seeds
+    def known_ids(rows):
+        by = defaultdict(list)
+        for r in rows:
+            if r["condition"] == "closedbook":
+                by[r["id"]].append(r[PRIMARY])
+        return {i for i, v in by.items() if sum(v) >= min(2, len(v))}
+
+    strat = rev["closedbook"] = {}
+    for name, key, run in (("ConflictBank", "CBs:gpt-4o-mini", "cb_main"), ("RAMDocs", "RD:gpt-4o-mini", "detect")):
+        if key not in r2 or "closedbook" not in r2[key]:
+            continue
+        rows = r2[key]["_rows"]
+        kn = known_ids(rows)
+        ex = [e for e in (main_ex if name == "RAMDocs" else examples_of(RUNS[run])) if e.has_conflict]
+        dets = dets_of(RUNS[run], "llm_dir")
+        d = {"n_conflict": len(ex), "n_known": sum(e.id in kn for e in ex)}
+        for grp, keep in (("known", lambda i: i in kn), ("unknown", lambda i: i not in kn)):
+            sub_ex = [e for e in ex if keep(e.id)]
+            sub_rows = [r for r in rows if keep(r["id"])]
+            d[grp] = {"n": len(sub_ex), "direction": direction_accuracy(sub_ex, dets),
+                      **{c: compare(sub_rows, "plain", c, True, PRIMARY)
+                         for c in ("oracle+flag", "oracle+flag_directional", "llm_dir+flag_directional")
+                         if any(r["condition"] == c for r in sub_rows)}}
+        strat[name] = d
+
+    # TOST for every "no harm" / "tie" style claim (§11.3), ±3 points
+    tt = rev["tost_claims"] = {}
+    for tk, key, a, b, sub in (
+            ("cb_llmdir_vs_astute", "CB:gpt-4o-mini", "astute", "llm_dir+flag_directional", None),
+            ("cb_llmdir_vs_trustrag", "CB:gpt-4o-mini", "trustrag", "llm_dir+flag_directional", None),
+            ("cb_llmdir_clean_mini", "CB:gpt-4o-mini", "plain", "llm_dir+flag_directional", False),
+            ("cb_llmdir_clean_four", "CB:gpt-4.1", "plain", "llm_dir+flag_directional", False),
+            ("cbs_llmdir_clean_mini", "CBs:gpt-4o-mini", "plain", "llm_dir+flag_directional", False),
+            ("rd_llmdir_clean_mini", "gpt-4o-mini", "plain", "llm_dir+flag_directional", False)):
+        if key in r2:
+            rows = r2[key]["_rows"]
+            if any(r["condition"] == b for r in rows):
+                tt[tk] = rv.tost(rows, a, b, sub, PRIMARY, groups_of(rows))
 
 
 # --------------------------------------------------------------------------- output helpers

@@ -411,3 +411,34 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   - Qwen detector: flags 97% of clean questions; direction accuracy 89%.
 - **Spend:** about $52 of $100.
 
+### Round 6 (2026-10-27): third mock review, round-3/4 experiments
+
+- **Third mock review.** All three reviewers gave 2.5. The decisive issue was ConflictBank run only
+  under the "every valid answer" skeleton.
+- **Pre-registration.** §11 (e58249f) and §12 (886e5c1), each committed before its runs.
+- **Code:**
+  - `prompts`: `single` skeleton; new modes `flag_onewrong`, `self_identify`, `closedbook`.
+  - `prepare_conflictbank` writes the majority variant; `data.load_conflictbank_majority`.
+  - `llm.REASONING_MODELS`: `max_completion_tokens`, default temperature.
+  - `paper_stats.revision3`: H15–H19, closed-book stratification, TOST claims, answer mix.
+  - `fig_answers`; rebuilt `tab_cb` and `tab_baselines`; hypotheses tables split, with family header rows.
+- **Results:**
+  - **Single skeleton on ConflictBank.** The plain baseline rises from 21.6 to 51.1 (gpt-4o-mini).
+    - The neutral flag still hurts (−18.7). The model abstains, with "unknown" on 41% of answers.
+    - The one-wrong flag is worse (−35.7).
+    - The directional flag gains +30.1.
+  - **Majority misinformation (3:1).** Plain accuracy is 21.6.
+    - Neutral flag: n.s.
+    - Oracle directional flag: +32.7.
+    - LLM detector direction accuracy falls to 49%.
+    - Astute RAG gains only +1.4.
+  - **Closed-book.** gpt-4o-mini knows 28/300 ConflictBank facts. Detector direction accuracy is
+    86% on known facts and 67% on unknown ones.
+  - **gpt-6.1-terra:**
+    - Neutral flag: n.s. everywhere.
+    - Directional flag: +17 on ConflictBank, +40 on RAMDocs, +66 under majority misinformation.
+    - The LLM (gpt-4o-mini) directional flag *hurts* on ConflictBank (−11.7). A detector must be more
+      reliable than the generator (exploratory).
+    - Self-identify: −21 / −51, because the model distrusts every generated passage.
+  - **Spend.** About $80+ of $100.
+

@@ -3,121 +3,129 @@
 
 \input{generated/tab_main}
 
-Table~\ref{tab:main} gives every condition on the RAMDocs confirmatory split. Table~\ref{tab:hypotheses}
-(Appendix~\ref{app:extra}) gives every pre-registered test, and Figure~\ref{fig:tradeoff} (Appendix~\ref{app:grid})
-plots each condition's change on conflict questions against its change on clean ones.
+We organise the results around four questions. Table~\ref{tab:main} gives every RAMDocs condition and
+Table~\ref{tab:cb} every ConflictBank one. Tables~\ref{tab:hypotheses} and~\ref{tab:hypotheses2} (Appendix~\ref{app:extra})
+list every pre-registered test, grouped by family.
 
-\subsection{A correct neutral flag does not help against misinformation}
+\subsection{Does a correct neutral flag help? No, under any answer policy}
 \label{sec:neutral}
-\input{generated/tab_generality}
-Flagging exactly the gold contradictions, in the neutral format, \emph{lowers} gpt-4o-mini's accuracy on conflict
-questions by \adOracleFlagConf\ points \dOracleFlagConfCI, from \plainConf\%\ (H2). With gpt-4.1 the drop is
-\agptOracleFlagConf\ points (H9). Both hold under either metric. The errors are not refusals: the share of conflict
-answers that include the misinformation rises from \wrongPlain\% to \wrongOracleFlag\%, while gold recall barely moves
-(\goldPlain\% to \goldOracleFlag\%). The model lists the misinformation \emph{alongside} the correct answer.
-
-\paragraph{Not an artefact of the prompt.} The default skeleton asks for every valid answer, which could invite this
-behaviour. Under the minimal skeleton the oracle neutral flag still lowers conflict-question accuracy in all three
-generators (Table~\ref{tab:generality}): by \axMiniMinOracleFlagConf\ points with gpt-4o-mini and
-\axFourMinOracleFlagConf\ with gpt-4.1 (both significant; H10), and by \axQwenMinOracleFlagConf\ with Qwen2.5-7B (not
-significant; \axQwenOracleFlagConf\ under the default skeleton, H11). The mechanism changes. Without the answer
-policy, gpt-4o-mini no longer adds the misinformation (\wrongMiniMinPlain\% to \wrongMiniMinOracleFlag\%) but drops
-the correct answer (gold recall \goldMiniMinPlain\% to \goldMiniMinOracleFlag\%). A neutral flag says that something
-is wrong without saying what, and the model either keeps both sides or loses the right one.
-
-\paragraph{The same flag helps on genuine conflicts.} On WikiContradict, where the reference answer is both sides,
-the oracle flag \emph{raises} the share of answers that give both sides by \awikiOracleFlag\ points
-\wikiOracleFlagCI\ with gpt-4o-mini and by \awikiGptOracleFlag\ \wikiGptOracleFlagCI\ with gpt-4.1 (H8;
-Table~\ref{tab:wiki}). Whether a neutral flag helps depends on whether keeping both sides is right.
-
-\subsection{Acting on direction helps; a directional flag helps when the model follows it}
-\label{sec:direction}
-Given the same oracle pairs, naming the misinformation side beats the neutral flag on conflict questions in all six
-generator--skeleton settings (H3, H9--H11). Against no flags, \emph{removing} the suspect passage gains in every
-setting, from \axQwenMinOracleRemConf\ to \agptOracleRemConf\ points, all significant. The directional \emph{flag} is
-less consistent. It gains \adOracleDirConf\ points with gpt-4o-mini \dOracleDirConfCI\ and \agptOracleDirConf\ with
-gpt-4.1 under the default skeleton, and \axFourMinOracleDirConf\ with gpt-4.1 under the minimal one, but the gain is
-not significant for gpt-4o-mini under the minimal skeleton (\xMiniMinOracleDirConf) or for Qwen2.5-7B
-(\xQwenOracleDirConf, \xQwenMinOracleDirConf). Qwen largely ignores the header: the share of its answers that include
-the misinformation falls only from \wrongQwenPlain\% to \wrongQwenOracleDir\%, against \wrongPlain\% to
-\wrongOracleDir\% for gpt-4o-mini. The failures concentrate on questions with several gold answers
-(Appendix~\ref{app:single}; exploratory).
-
-\paragraph{A wrong direction (exploratory).} An inverted oracle that names the \emph{correct} side lowers
-gpt-4o-mini's conflict-question accuracy by \aadvDirConf\ points as a directional flag \advDirConfCI, about as much
-as a neutral flag, and by \aadvRemConf\ \advRemConfCI\ with removal. Direction is a strong lever both ways, which makes
-it an attack surface (Ethics).
-
-\subsection{Replication on ConflictBank}
-\label{sec:cb}
 \input{generated/tab_cb}
-ConflictBank had no pilot, and all \nHTwelveTests\ of its registered tests (H12) are supported (Table~\ref{tab:cb}).
-On conflict questions the oracle's neutral flag lowers accuracy for all three generators (gpt-4o-mini
-\zCbMiniOracleFlagConflict, gpt-4.1 \zCbFourOracleFlagConflict, Qwen2.5-7B \zCbQwenOracleFlagConflict\ points). The
-directional flag raises it (\zCbMiniOracleFlagDirectionalConflict, \zCbFourOracleFlagDirectionalConflict,
-\zCbQwenOracleFlagDirectionalConflict), now significantly for Qwen too, and removal raises it most
-(\zCbMiniOracleRemoveSuspectConflict\ to \zCbFourOracleRemoveSuspectConflict). The mechanism is the same as on
-RAMDocs. With gpt-4o-mini, the share of conflict answers that include the misinformation is \zwCbMiniPlain\% with no
-flags, \zwCbMiniOracleFlag\% with the neutral flag, \zwCbMiniOracleFlagDirectional\% with the directional flag, and
-\zwCbMiniOracleInvFlagDirectional\% when the inverted oracle names the correct passage
-(\zCbMiniOracleInvFlagDirectionalConflict\ points). The real LLM detector behaves like a noisier oracle: its neutral
-flag costs \azCbMiniLlmDirFlagConflict\ points, and its directional flag gains \zCbMiniLlmDirFlagDirectionalConflict\
-(gpt-4o-mini) and \zCbFourLlmDirFlagDirectionalConflict\ (gpt-4.1) at most one point on clean questions, though only
-\zCbQwenLlmDirFlagDirectionalConflict\ (not significant) with Qwen. Its direction accuracy is \cbDirAccLlm\%, against
-\dirAccLlm\% on RAMDocs. The NLI cross-encoder flags no pair (Appendix~\ref{app:more}).
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_answers.pdf}
+\caption{What a flag does to answers on conflict questions (gpt-4o-mini, oracle pairs; share of answers, \%). The
+answer policy decides how a neutral flag fails: a model told to give every valid answer adds the misinformation, and
+one told there is one answer abstains. Only the directional flag raises the share of correct answers.}
+\label{fig:answers}
+\end{figure}
+
+\paragraph{RAMDocs.} Flagging exactly the gold contradictions, in the neutral format, lowers gpt-4o-mini's accuracy on
+conflict questions by \adOracleFlagConf\ points \dOracleFlagConfCI, from \plainConf\%\ (H2), and gpt-4.1's by
+\agptOracleFlagConf\ (H9). It is negative for every generator and skeleton (Table~\ref{tab:generality}), significantly for
+gpt-4o-mini, gpt-4.1 and gpt-6-luna. Over all \nNeutralSettings\ settings on both benchmarks, the neutral flag significantly lowers accuracy in
+\nNeutralHarm\ and raises it in \nNeutralHelp.
+
+\paragraph{ConflictBank, without the multi-answer policy.} Our default skeleton asks for every valid answer, which
+could invite a model to list both sides. On ConflictBank, where every question has one answer, it does: with no flags
+only \zpCbMiniConflict\% of gpt-4o-mini's conflict answers are correct, and \zwCbMiniPlain\% include the
+misinformation. Told instead that the question has one answer (the \emph{single} prompt, H15), the model reaches
+\zpSgMiniConflict\%. The neutral flag still lowers accuracy: by \azSgMiniOracleFlagConflict\ points with gpt-4o-mini,
+\azSgFourOracleFlagConflict\ with gpt-4.1 and \azSgLunaOracleFlagConflict\ with gpt-6-luna (all significant; H15,
+H19), and by \azSgQwenOracleFlagConflict\ with Qwen2.5-7B and \azSgTerraOracleFlagConflict\ with gpt-6.1-terra (not
+significant; Table~\ref{tab:cb}). Only the mechanism changes (Figure~\ref{fig:answers}). Under the multi-answer prompt the flag
+makes the model add the misinformation; under the single-answer prompt it makes the model abstain, answering
+``unknown'' on \zmSgMiniOracleFlagUnknown\% of conflict questions against \zmSgMiniPlainUnknown\% without flags. On
+RAMDocs, under the minimal skeleton, it drops the correct answer instead (gold recall \goldMiniMinPlain\% to
+\goldMiniMinOracleFlag\%). The model learns that something is wrong, but not what.
+
+\paragraph{Saying that one side is false makes it worse (H16).} The one-wrong flag tells the model that exactly one
+passage of each flagged pair is misinformation, without saying which. It lowers gpt-4o-mini's ConflictBank accuracy by
+\azSgMiniOracleFlagOnewrongConflict\ points, and the model abstains on \zmSgMiniOracleFlagOnewrongUnknown\% of conflict
+questions. On RAMDocs it changes gpt-4o-mini's accuracy by \zRdMiniOracleFlagOnewrongConflict\ points, and the directional flag
+beats it everywhere we tested (H16, H19). The one exception to its uselessness is instructive: on RAMDocs,
+gpt-6.1-terra gains \zRdTerraOracleFlagOnewrongConflict\ points from it, nearly as much as from the directional flag
+(\zRdTerraOracleFlagDirectionalConflict). RAMDocs conflict questions usually have several correct passages that agree,
+so a strong model told that one side is false can work out which; on ConflictBank, one passage against one, it cannot
+(\zSgTerraOracleFlagOnewrongConflict). Knowing that the conflict is misinformation helps only when the passages reveal
+which side it is.
+
+\paragraph{Instructions and abstention.} Adding an instruction to drop unreliable passages to the neutral flag only
+brings accuracy back to the no-flag level (RAMDocs gpt-4o-mini \zMiniOracleFlagInstructTwoConflict, gpt-4.1 seed 0
+\zFourOracleFlagInstructTwoConflict, ConflictBank \zCbMiniOracleFlagInstructTwoConflict\ points; none significant; H13).
+Abstaining does halve the share of answers containing the misinformation (\zmSgMiniPlainWrong\% to
+\zmSgMiniOracleFlagWrong\%), which a system that prefers abstention to error may value, but the directional flag does
+better on both counts (\zmSgMiniOracleFlagDirectionalWrong\% wrong, accuracy \zSgMiniOracleFlagDirectionalConflict).
+
+\paragraph{Genuine conflicts and majorities.} On WikiContradict, where the reference answer is both sides, the same
+flag \emph{raises} the share of answers that give both sides by \awikiOracleFlag\ points \wikiOracleFlagCI\ with
+gpt-4o-mini and \awikiGptOracleFlag\ with gpt-4.1 (H8; Table~\ref{tab:wiki}). When the misinformation outnumbers the
+correct passage three to one, no-flag accuracy on ConflictBank falls to \zpMjMiniConflict\%. The neutral flag then
+changes gpt-4o-mini's accuracy by \zMjMiniOracleFlagConflict\ points (H17, n.s.) and gpt-6.1-terra's by
+\zMjTerraOracleFlagConflict, but raises gpt-6-luna's by \zMjLunaOracleFlagConflict, the one setting in which it
+helps (exploratory).
+
+\subsection{Naming the wrong side is what helps}
+\label{sec:direction}
+Given the same oracle pairs, the directional flag beats the neutral flag in every setting we ran (H3, H9--H12, H15,
+H19) and beats the one-wrong flag (H16: by \hSixteenSgMiniDirOw\ points on ConflictBank and \hSixteenRdMiniDirOw\ on
+RAMDocs). On ConflictBank it gains significantly over no flags for every generator (single prompt: gpt-4o-mini
+\zSgMiniOracleFlagDirectionalConflict, gpt-4.1 \zSgFourOracleFlagDirectionalConflict, Qwen2.5-7B
+\zSgQwenOracleFlagDirectionalConflict, gpt-6-luna \zSgLunaOracleFlagDirectionalConflict, gpt-6.1-terra
+\zSgTerraOracleFlagDirectionalConflict\ points), and under majority misinformation it gains
+\zMjMiniOracleFlagDirectionalConflict\ with gpt-4o-mini (H17), \zMjLunaOracleFlagDirectionalConflict\ with gpt-6-luna and
+\zMjTerraOracleFlagDirectionalConflict\ with gpt-6.1-terra (H19). On RAMDocs it gains \adOracleDirConf\ points with gpt-4o-mini, \agptOracleDirConf\ with gpt-4.1,
+\azRdLunaOracleFlagDirectionalConflict\ with gpt-6-luna and \azRdTerraOracleFlagDirectionalConflict\ with
+gpt-6.1-terra, but not significantly for Qwen2.5-7B, which largely ignores the header, or for
+gpt-4o-mini under the minimal skeleton. These failures concentrate on questions with several gold answers
+(Appendix~\ref{app:single}; exploratory). Removing the suspect passage, which needs no cooperation from the model, is
+the upper bound and gains in every setting. A wrong direction is as strong a lever the other way: an inverted oracle
+that names the correct side costs \aadvDirConf\ points as a directional flag and \aadvRemConf\ with removal on
+RAMDocs, and \azCbMiniOracleInvFlagDirectionalConflict\ on ConflictBank (exploratory).
+
+\subsection{With a real detector, direction accuracy is the bottleneck}
+\label{sec:real}
+\input{generated/tab_baselines}
+The gpt-4o-mini detector names the misinformation side of a true contradiction \dirAccLlm\% of the time on RAMDocs,
+\cbDirAccLlm\% on ConflictBank and \cbmajDirAccLlm\% (chance) under majority misinformation, and its directional
+flag's gain follows. On ConflictBank with the single prompt it gains \zSgMiniLlmDirFlagDirectionalConflict\ points on
+gpt-4o-mini's conflict questions, at a cost of \azSgMiniLlmDirFlagDirectionalClean\ on clean ones; over all
+questions the gain (\hFifteenSgMiniLlm) is not significant after Holm within H15 ($p_\text{Holm}=\hFifteenSgMiniLlmP$),
+while gpt-6-luna's (\hNineteenSgLunaLlm) is (H19). On RAMDocs it gains \adLlmDirConf\ on conflict
+questions (not significant) and \labLlmDir\ \labLlmDirCI\ over labelled ones. Under majority misinformation it gains
+\zMjMiniLlmDirFlagDirectionalConflict. In the neutral format no real detector helps (Table~\ref{tab:main}); the
+heuristic detector we started from does not beat random flags of the same volume (H5).
+
+\paragraph{The detector must beat the generator (exploratory).} The same detector's directional flag helps the three
+generators with lower unaided ConflictBank accuracy (gpt-4o-mini \zpSgMiniConflict\%, Qwen2.5-7B \zpSgQwenConflict\%,
+gpt-6-luna \zpSgLunaConflict\%; \zSgMiniLlmDirFlagDirectionalConflict, \zSgQwenLlmDirFlagDirectionalConflict\ and
+\zSgLunaLlmDirFlagDirectionalConflict\ points) and hurts the two with higher accuracy (gpt-4.1 \zpSgFourConflict\%,
+\zSgFourLlmDirFlagDirectionalConflict; gpt-6.1-terra \zpSgTerraConflict\%, \zSgTerraLlmDirFlagDirectionalConflict).
+A directional flag replaces the generator's judgement with the detector's, so it pays only when the detector's is
+better. We noticed this after seeing the results, and five generators with one detector cannot establish it.
+
+\paragraph{Direction is not just memory.} gpt-4o-mini answers only \cbkCbNKnown\ of the \cbkCbNConf\ ConflictBank
+conflict questions closed-book; its detector names the right side on \cbkCbKnownDir\% of those and \cbkCbUnknownDir\%
+of the rest, so it mostly compares passages rather than recalling the fact.
+
+\paragraph{Against published methods (H14) and a single call (H18).} Table~\ref{tab:baselines} compares the detector
+pipeline (one detector and one generator call) with Astute RAG, TrustRAG and a single call that names the suspect
+passages before answering. On RAMDocs, Astute RAG and TrustRAG lose valid answers on same-name questions: on clean
+questions with several gold answers, gold recall falls from \recMultiPlain\% to \recMultiAst\% and \recMultiTr\%
+(exploratory). The directional flag beats both on labelled questions with gpt-4o-mini (by \hFourteenAstMini\ and
+\hFourteenTrMini\ points) and TrustRAG with gpt-4.1 (\hFourteenTrFour; seed 0). Their apparent strength on ConflictBank
+under the multi-answer prompt comes from that prompt's weak baseline: against the single-answer prompt, Astute
+RAG changes conflict-question accuracy by \zSgMiniAstuteConflict\ points and TrustRAG by \zSgMiniTrustragConflict,
+while the directional flag gains \zSgMiniLlmDirFlagDirectionalConflict\ (exploratory; the registered H14 comparison,
+under the multi-answer prompt, is a tie, \hFourteenAstCb\ and \hFourteenTrCb). With three misinformation passages,
+Astute RAG gains \zMjMiniAstuteConflict\ and TrustRAG \zMjMiniTrustragConflict. With gpt-4o-mini the single
+call is as good as the detector pipeline in every setting (H18: \hEighteenRdMiniSelf\ on RAMDocs,
+\hEighteenSgMiniSelf\ on ConflictBank, \hEighteenMjMiniSelf\ under majority misinformation; none significant), at half
+the calls. With the two reasoning models it backfires: they mark nearly every ConflictBank passage as suspect and
+answer ``unknown'', losing \azSgLunaSelfIdentifyClean\ (gpt-6-luna) and \azSgTerraSelfIdentifyClean\ (gpt-6.1-terra)
+points on clean questions. A Qwen2.5-7B detector gives the same picture as the gpt-4o-mini one (Appendix~\ref{app:more}).
 
 \subsection{What a detector must get right}
 \label{sec:grid}
-Synthetic detectors (Appendix~\ref{app:grid}, Figure~\ref{fig:grid}) show two thresholds. Only perfect direction gives
-a significant gain over all questions (directional flag \gDirOneDOneAll, removal \gRemOneDOneAll\ points at perfect
-precision). Precision matters mainly for removal: false flags make the model delete correct passages, which costs
-clean questions \agRemHalfDOneClean\ points at precision 0.5, while false directional flags cost at most two (H4a:
-removal is significantly harmful in \hFourRemHarm\ of \hFourRemN\ distinct false-flag cells, the directional flag in
-\hFourDirHarm). The grid predicts real detectors' effects only roughly (H6).
-
-\subsection{Real detectors (exploratory)}
-\label{sec:real}
-The pre-registered F1 ordering (H1; Table~\ref{tab:detectors}) holds only in part: NLI beats CAAG (\fOneNli\ vs.\
-\fOneCaag), but the LLM detector (\fOneLlm) is not significantly better than NLI. Its direction accuracy is
-\dirAccLlm\% \dirAccLlmCI. NLI and the LLM detector flag most clean questions (\cleanFprNli\% and \cleanFprLlm\%). In
-the neutral format no real detector helps; CAAG does not beat random flags of the same volume (H5;
-Appendix~\ref{app:more}).
-
-\emph{Direction helps with a real detector too.} Holding the LLM detector's pairs fixed, the directional flag beats
-the neutral flag on conflict questions by \ardMini\ points \rdMiniCI\ ($p\rdMiniP$). Against no flags, it gains
-\adLlmDirConf\ points on conflict questions (raw $p=\pLlmDirConfRaw$, not significant after Holm) and costs
-\adLlmDirClean\ on clean ones; over the labelled questions its net effect is \labLlmDir\ \labLlmDirCI. Removal gains
-\adLlmRemConf\ on conflict questions and loses \adLlmRemClean\ on clean ones, netting \labLlmRem\ \labLlmRemCI. With
-gpt-4.1, the directional flag's gain over labelled questions is \gptlabLlmDir\ \gptlabLlmDirCI. Real false flags cost
-clean questions more than synthetic ones, probably because they concentrate on correct--correct pairs. MADAM-RAG gains
-\adMadamAll\ points overall at roughly nine times the prompt tokens.
-
-\subsection{Resolution instructions and published baselines}
-\label{sec:baselines}
-\input{generated/tab_baselines}
-\paragraph{An instruction does not rescue the neutral flag (H13).} Adding the v2 instruction (``ignore unreliable
-passages'') to the oracle's neutral flag leaves conflict-question accuracy where it is without flags (RAMDocs
-gpt-4o-mini \zMiniOracleFlagInstructTwoConflict, gpt-4.1 \zFourOracleFlagInstructTwoConflict, ConflictBank
-\zCbMiniOracleFlagInstructTwoConflict\ points; none significant). With the same instruction, the directional flag
-beats it in all three settings (Table~\ref{tab:baselines}), by \hThirteenDirMini, \hThirteenDirFour\ and
-\hThirteenDirCb\ points. The instruction removes the neutral flag's harm but adds nothing, because the model still
-does not know which side to drop. Given the side, it helps a great deal: the directional flag with the instruction
-gains \zCbMiniOracleFlagDirectionalInstructTwoConflict\ points on ConflictBank, close to removal, and
-\zFourOracleFlagDirectionalInstructTwoConflict\ with gpt-4.1 on RAMDocs. Instructions alone help in some settings
-(gpt-4.1 with v2 on RAMDocs conflict questions, \gptInstrTwoConf; v1 on WikiContradict, \awikiInstrOne), but each
-wording builds in one policy: v2 lowers both-sides answers on WikiContradict by \awikiInstrTwo\ points, and neither
-changes gpt-4o-mini's RAMDocs accuracy significantly (H7).
-
-\paragraph{Against published methods (H14).} Astute RAG and TrustRAG resolve conflicts inside the generator, with two
-and three calls. On RAMDocs both lose accuracy on clean questions (\zMiniAstuteMultiClean\ and
-\zMiniTrustragMultiClean\ points with gpt-4o-mini, multi variants). They lose valid answers: on clean questions with several gold
-answers, gold recall falls from \recMultiPlain\% to \recMultiAst\% (Astute RAG) and \recMultiTr\% (TrustRAG), against \recSinglePlain\% to \recSingleAst\% and
-\recSingleTr\% with one gold answer (exploratory). Consolidating to the best-supported answer is the wrong policy when passages
-describe different same-name entities. On labelled RAMDocs questions, a single call with the LLM detector's directional
-flag beats Astute RAG by \hFourteenAstMini\ points and TrustRAG by \hFourteenTrMini\ with gpt-4o-mini, and with
-gpt-4.1 beats TrustRAG by \hFourteenTrFour\ and Astute RAG by \hFourteenAstFour\ (not significant). On ConflictBank,
-which has one answer per question, the baselines gain (Astute RAG \zCbMiniAstuteConflict, TrustRAG
-\zCbMiniTrustragConflict\ points on conflict questions) and the directional flag ties both (\hFourteenAstCb,
-\hFourteenTrCb; not significant). Of the methods we tried with a real detector, only the directional flag does no significant harm on either
-benchmark or question type while gaining on ConflictBank, and it costs one generator call. A Qwen2.5-7B detector gives the same picture (Appendix~\ref{app:more}), and on CONFLICTS no
-condition moves accuracy significantly (Table~\ref{tab:conflicts}).
+In synthetic detectors the gain rises with direction accuracy, and precision matters mainly for removal, whose false
+flags delete correct passages (H4a); the grid predicts real detectors' effects only roughly (H6). Appendix~\ref{app:grid}
+and Figure~\ref{fig:grid} give the cells and tests.

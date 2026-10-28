@@ -12,6 +12,7 @@ repeats the pre-registered tests with every suspect document treated as misinfor
 lists all pre-registered tests.
 
 \input{generated/tab_hypotheses}
+\input{generated/tab_generality}
 \input{generated/tab_detectors}
 \input{generated/tab_main_robust}
 \input{generated/app_tables}
@@ -28,6 +29,10 @@ Left: detectors located by their document-level behaviour; right: by pair precis
 \end{figure}
 
 \paragraph{The heuristic detector.}
+CAAG scores a pair only if its MiniLM \citep{reimers2019sbert} cosine similarity reaches $\theta_s=0.65$. Its score
+is the sum of a negation and contrast asymmetry term, a named-entity mismatch term (differing dates, numbers, money or
+percentages) and a temporal-marker term, multiplied by the similarity. A pair is flagged if the score reaches
+$\theta_c=0.35$. Its per-pair flag rate on the confirmatory split ($6.22\%$) sets the rate of the random detector.
 CAAG is the detector we set out to study. As a neutral flag it did not beat random flags of the same volume, and
 as a removal rule it only deleted correct passages (\dCaagRemClean\ points on clean questions, \dCaagRemConf\ on
 conflict ones). Its false flags fall mostly on pairs that should both be reported: 134 of its 221 false flags on the
@@ -107,7 +112,7 @@ Its deviations are listed below.
 the confirmatory run we switched to one-way matching, because it reproduces MADAM-RAG's published score on the pilot
 split (Section~\ref{sec:setup}); bidirectional became the robustness metric. Every table reports both.
 \item \emph{Second generator.} The plan named an open-weights model. None was available before the confirmatory run, so
-gpt-4.1 was used (H9). After review we added Qwen2.5-7B-Instruct, registered before its run. Because local inference
+gpt-4.1 was used (H9). We later added Qwen2.5-7B-Instruct, registered before its run. Because local inference
 takes about 3\,s per call, the Qwen runs use one seed; we made that change before inspecting any Qwen result.
 \item \emph{CONFLICTS judge.} The plan called for a judge from a different model family, validated on about 100 human
 labels. Neither the judge nor the labels were available, so CONFLICTS is scored only on items with a reference answer,
@@ -130,14 +135,31 @@ throughout (Section~\ref{sec:setup}), which makes some exploratory differences t
 non-significant.
 \item \emph{Single- and multi-answer split.} The split of conflict questions by number of gold answers
 (Appendix~\ref{app:single}) was chosen after seeing the minimal-skeleton run and is exploratory.
-\item \emph{Second registration.} After a second review we registered H12--H14 (ConflictBank, the neutral flag with a
+\item \emph{Second registration.} We later registered H12--H14 (ConflictBank, the neutral flag with a
 resolution instruction, and the published baselines), the Qwen2.5-7B detector and the ConflictBank sampling rule.
 The gpt-4.1 runs in it use seed 0 only, to stay within budget. One ConflictBank gpt-4o-mini run stopped on a
 transient API error and was resumed from the response cache; no row was re-sampled.
+\item \emph{Third and fourth registrations.} H15--H18 (\S11) and H19 (\S12) were committed before their runs. To stay
+within budget, \S12 dropped two \S11 runs before they started: gpt-4.1 under majority misinformation (replaced by
+gpt-6.1-terra in H17) and gpt-4.1 seeds 1--2, so H14 with gpt-4.1 stays on seed 0 as first registered and every
+gpt-4.1 baseline comparison is seed-0 matched.
+\item \emph{Reasoning models.} gpt-6-luna and gpt-6.1-terra accept only their default temperature and require
+\texttt{max\_completion\_tokens}; we used their defaults with a 4,096-token budget. \Nempty\ responses from the
+two models (almost all closed-book) were empty because reasoning used the whole budget; they are scored as wrong.
+\item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; reordering the run
+queue). Resumption keeps completed rows and re-requests only missing ones; no row was re-sampled.
 \end{enumerate}
-The addendum (H10, H11 and the re-analyses above), the Qwen seed change and the second registration were committed to
-the repository before the runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
+The addenda (H10--H19 and the re-analyses above) and the Qwen seed change were each committed to the repository before
+the runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
 \citep{vanmiltenburg2021preregistering}.
+
+\paragraph{RAMDocs labels.} The released document types are imperfect: 163 documents typed \emph{correct} contain a
+wrong answer, some as injected misinformation, others incidentally. We leave pairs that touch them out of pair-level
+metrics, and questions whose only sign of conflict is such a document (55 of 500; 35 of the confirmatory split) count
+only in ``All''. Treating them as misinformation is a robustness check.
+
+\paragraph{Power.} With 139 RAMDocs conflict questions, the minimum detectable effect at 80\% power is
+\mdeLo--\mdeHi\ points (median \mdeMed; \citealp{card2020power}).
 
 \paragraph{Metric choice.} With the one-way metric, our port of MADAM-RAG scores 28.5\% on the pilot split and
 \madamOneWay\% on all 500 questions (published: 28.00, on an undisclosed subset); with the bidirectional metric it

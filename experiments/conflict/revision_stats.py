@@ -134,7 +134,7 @@ def h4_revised(rows, examples, dets_of, run, metric, compare) -> dict:
         b = rng.integers(0, len(ids), len(ids))
         boots.append(spearmanr(expo[:, b].mean(1), eff[:, b].mean(1)).statistic)
     lo, hi = np.nanquantile(boots, [0.025, 0.975])
-    out["dose_response"] = {"spearman_rho": rho, "ci_low": float(lo), "ci_high": float(hi), "n_cells": len(rep),
+    out["dose_response"] = {"spearman_rho": rho, "ci_low": float(lo), "ci_high": float(hi), "n_cells": len(expo),
                             "n_questions": len(ids)}
     return out
 
@@ -322,9 +322,12 @@ def comparisons(R):
             for c, d in v["effects"][m].items():
                 for s, t in d.items():
                     out.append(((gk, "default", c, "plain", s), m, t))
-        for fam in ("H12", "H13", "H14"):
+        for fam in ("H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19"):
             for tk, t in rev.get(fam, {}).get(m, {}).items():
                 out.append((("registered", fam, tk, "", ""), m, t))
+    if "oracle+flag" in R.get("wiki_gpt41", {}):
+        out.append((("gpt-4.1", "default", "oracle+flag", "plain", "wikicontradict"), "both_answers",
+                    R["wiki_gpt41"]["oracle+flag"]))
     for c, d in rev.get("adversarial", {}).items():
         for s, v in d.items():
             out.append((("gpt-4o-mini", "default", c, "plain", s), "ramdocs_strict_oneway", v))

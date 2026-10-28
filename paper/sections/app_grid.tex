@@ -20,10 +20,21 @@ so their rows do not vary with direction accuracy.}
 \label{fig:grid}
 \end{figure*}
 
-Figure~\ref{fig:grid} replaces the oracle with synthetic detectors of known quality. Two thresholds appear. First,
-\emph{direction accuracy}: at a direction accuracy of 0.5 or 0.75, no cell gains significantly on all questions in
-either format. Only perfect direction does (directional flag \gDirOneDOneAll, removal \gRemOneDOneAll\ points at
-perfect precision). Second, \emph{precision}, but mainly for removal. On clean questions a cell's prompt does not depend
+\paragraph{Construction.}
+Each synthetic detector (Section~\ref{sec:synthetic}) is built from the gold labels. Each gold contradiction pair is
+flagged with probability $r$. False flags are drawn from non-contradicting pairs at a single per-pair rate, set over
+the whole split so that expected precision is $p$. That rate is dataset-wide, so conflict-free questions receive
+false flags too. A true flag names the gold misinformation side with probability $d$, and otherwise the other side.
+A false flag has no misinformation side, so its suspect is picked uniformly. Each pair gets one uniform draw for
+flagging and one for direction, and every cell reuses them. Cells are therefore nested: raising $r$ or $d$, or
+lowering $p$, only adds flags or corrections. This keeps comparisons across cells paired.
+
+\paragraph{Results.}
+Figure~\ref{fig:grid} replaces the oracle with synthetic detectors of known quality. Gains rise with direction
+accuracy in both formats. Only the cells with perfect direction are significant on all questions (directional flag
+\gDirOneDOneAll, removal \gRemOneDOneAll\ points at perfect precision), but neighbouring cells at direction accuracy
+0.75 have similar point estimates on conflict questions, so this is a dose-response, not a threshold: with 36 cells
+under Holm, the grid has little power to separate adjacent levels. Precision matters mainly for removal. On clean questions a cell's prompt does not depend
 on direction accuracy, so the false-flag cells reduce to \hFourRemN\ distinct comparisons per format. Removal is
 significantly harmful in \hFourRemHarm\ of them, the directional flag in \hFourDirHarm\ (H4a): false flags make the
 model delete correct passages, which costs clean questions \agRemHalfDOneClean\ points at precision 0.5 and
@@ -34,6 +45,15 @@ than the directional flag in \hFourRemWorse\ of \hFourMatched\ matched cells (H4
 the count). Removal is the more powerful and the more fragile interface: its best cell gains twice the directional
 flag's on all questions, but below precision 0.75 it is the only format that does net harm.
 
+
+\paragraph{Placing real detectors on the grid.}
+\label{sec:placement}
+Can the grid predict a real detector's effect from a few summary numbers? We compare two ways of summarising a
+detector. \emph{Pair-level}: its pair precision, recall and direction accuracy. \emph{Document-level}: what it does
+to each subset's documents in a given format. For conflict questions, that is the share whose misinformation documents
+are all marked and the share that have a correct document marked; for clean questions, the share that have a correct
+document marked. Here ``marked'' means removed (Remove) or headed as misinformation (Directional flag). The prediction
+for a subset is the inverse-distance-weighted mean effect of the four nearest grid cells in that space.
 
 \paragraph{Does the grid predict real detectors?}
 

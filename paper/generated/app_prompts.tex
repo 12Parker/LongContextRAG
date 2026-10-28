@@ -30,6 +30,31 @@ exactly this format:
 Final answer(s): <your answer; if there is more than
 one, separate them with |>
 \end{verbatim}\end{footnotesize}
+\paragraph{Single-answer skeleton.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Closed book (single-answer version).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question from your own knowledge. The
+question has exactly one correct answer.
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
 \paragraph{Instruction v1.}
 \begin{footnotesize}\begin{verbatim}
 Some passages may contradict each other. Before
@@ -45,6 +70,17 @@ answering, decide which passages are reliable by
 checking them against each other.
 Do not include an answer that is supported only by a
 passage you judge to be unreliable.
+\end{verbatim}\end{footnotesize}
+\paragraph{Single call (inserted as the instruction).}
+\begin{footnotesize}\begin{verbatim}
+Some passages may contain misinformation. First
+decide which passages, if any, contain
+misinformation, by checking them against each other
+and against what you know, and write one line in
+this format:
+Suspect passages: <passage numbers, or none>
+Then answer the question using only the other
+passages.
 \end{verbatim}\end{footnotesize}
 \paragraph{Example: directional flag (passage 2 suspect).}
 \begin{footnotesize}\begin{verbatim}
@@ -74,6 +110,35 @@ Question: Who founded X?
 Give a brief explanation, then end with one line in
 exactly this format:
 Final answer(s): <answer 1> | <answer 2> | ...
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: one-wrong flag, single-answer skeleton.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [CONFLICT with passage(s): 2; one side
+contains misinformation]:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [CONFLICT with passage(s): 0; one side
+contains misinformation]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+- Passages 0 and 2: possible contradiction; exactly
+one of the two contains misinformation (it is not
+known which)
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
 \end{verbatim}\end{footnotesize}
 \paragraph{Directional LLM detector.}
 \begin{footnotesize}\begin{verbatim}

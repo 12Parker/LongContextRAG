@@ -2,28 +2,20 @@
 \label{sec:discussion}
 
 \paragraph{Why neutral flags do not help.}
-A neutral flag says that the passages disagree but not which one to trust, so the model falls back on its answer
-policy: with the default prompt it keeps both sides, without it it more often drops the correct one. Either way a
-strict answer to a misinformation question loses, while on WikiContradict, where both sides are right, the same flag
-helps. This sharpens the finding of \citet{cattan2025conflicts} that knowing the conflict \emph{type} helps: for
-misinformation, the useful part of the type is the direction. It also extends Ragability's observation that false
-hints hurt \citep{gross2026ragability} to true hints that are not specific enough.
+A neutral flag says that two passages disagree but not which to trust, so the model falls back on its answer policy:
+it keeps both sides, abstains, or drops the correct one. Under strict scoring all three lose on misinformation, while
+on WikiContradict keeping both is what the flag buys. This sharpens the finding of \citet{cattan2025conflicts} that
+knowing the conflict \emph{type} helps: for misinformation, the useful part of the type is the direction. It extends
+RGB's observation that a warning does not make models detect errors \citep{chen2024rgb}, and Ragability's that false
+hints hurt \citep{gross2026ragability}, to true hints that are not specific enough.
 
 \paragraph{When direction helps.}
-Removal helps with every generator because it needs nothing from the model. A directional flag helps only if the
-model acts on it, which every generator does on ConflictBank and the smaller models do less on RAMDocs questions with
-several valid answers. An instruction does not replace direction (H13), but it amplifies it. Practitioners should
-check that a directional flag changes their generator's behaviour before relying on it.
+An oracle's direction helps every generator. A real detector's helps only when it is more reliable than the
+generator's own resolution, and under majority misinformation, where agreement between passages points the wrong way,
+its direction falls to chance (exploratory). This can be checked before deployment on held-out
+conflicts.
 
-\paragraph{Why the baselines split by benchmark.} Astute RAG and TrustRAG keep the best-supported answer. That is
-right when one answer is correct (ConflictBank) and wrong when passages describe different same-name entities
-(RAMDocs). A directional flag leaves the answer policy alone and marks only the suspect passage.
-
-\paragraph{Implications for detectors and interfaces.}
-Detection F1 alone does not say what a detector will do downstream: with the same LLM detector, direction is worth
-\ardMini\ points over a neutral flag with gpt-4o-mini but less under the minimal skeleton (\rdMiniMin) and with
-Qwen2.5-7B (\rdQwen). We recommend reporting (i) direction accuracy, (ii) how often correct documents are marked or
-removed on conflict-free questions, and (iii) effects on conflict-free questions, under the exact format used
-downstream. Neither interface is safe with today's detectors: the LLM detector's directional flag costs clean
-questions \adLlmDirClean\ (default skeleton) to \axMiniMinLlmDirClean\ points (minimal), and removal loses
-\adLlmRemClean. Removal should be gated on a measured clean-question loss rate.
+\paragraph{Recommendations.}
+Pass direction rather than a bare warning; report a detector's direction accuracy against the generator's own, and
+its effects on conflict-free questions; and gate removal on a measured clean-question loss rate (with our LLM detector
+it loses \adLlmRemClean\ points on clean questions).

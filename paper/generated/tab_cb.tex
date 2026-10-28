@@ -1,20 +1,35 @@
 \begin{table*}[t]
 \centering\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lrrrrrrrrrr}
+\setlength{\tabcolsep}{3.6pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrrrrrrr}
 \toprule
-& & Plain & \multicolumn{3}{c}{Oracle, conflict q.} & \multicolumn{3}{c}{LLM detector, flag / dir.\ flag} & \multicolumn{2}{c}{LLM, remove} \\
-\cmidrule(lr){4-6}\cmidrule(lr){7-9}\cmidrule(lr){10-11}
-Generator & Seeds & conflict & flag & dir.\ flag & remove & flag & dir.\ conf. & dir.\ clean & conflict & clean \\
+& & & \multicolumn{2}{c}{Accuracy} & \multicolumn{4}{c}{Oracle pairs} & \multicolumn{2}{c}{LLM detector} & Single & LLM dir. \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-9}\cmidrule(lr){10-11}
+Generator & Prompt & Seeds & Closed & Plain & Flag & One wrong & Dir.\ flag & Remove & Flag & Dir.\ flag & call & clean q. \\
 \midrule
-gpt-4o-mini & 3 & 21.6 & \textbf{$-$8.8} & \textbf{$+$27.9} & \textbf{$+$66.4} & \textbf{$-$8.4} & \textbf{$+$20.0} & $-$1.0 & \textbf{$+$38.8} & $-$6.7 \\
-gpt-4.1 & 1 & 13.0 & \textbf{$-$6.3} & \textbf{$+$23.0} & \textbf{$+$78.3} & \textbf{$-$6.7} & \textbf{$+$17.0} & 0.0 & \textbf{$+$48.7} & $-$6.0 \\
-Qwen2.5-7B & 1 & 23.7 & \textbf{$-$8.3} & \textbf{$+$17.7} & \textbf{$+$63.7} & \textbf{$-$8.3} & $+$6.7 & $-$1.0 & \textbf{$+$36.0} & $-$8.0 \\
+gpt-4o-mini & single & 3 & 10.0 & 51.1 & \textbf{$-$18.7} & \textbf{$-$35.7} & \textbf{$+$30.1} & \textbf{$+$35.0} & \textbf{$-$18.2} & $+$8.4 & $+$7.6 & $-$4.7 \\
+gpt-4o-mini & multi & 3 & -- & 21.6 & \textbf{$-$8.8} & -- & \textbf{$+$27.9} & \textbf{$+$66.4} & \textbf{$-$8.4} & \textbf{$+$20.0} & -- & $-$1.0 \\
+gpt-4o-mini & minimal & 3 & -- & 35.0 & \textbf{$-$18.1} & -- & \textbf{$+$38.4} & \textbf{$+$51.2} & -- & -- & -- & -- \\
+gpt-4.1 & single & 1 & 20.0 & 64.7 & \textbf{$-$8.0} & \textbf{$-$35.3} & \textbf{$+$26.7} & \textbf{$+$26.0} & -- & $-$2.3 & -- & $-$3.0 \\
+gpt-4.1 & multi & 1 & -- & 13.0 & \textbf{$-$6.3} & -- & \textbf{$+$23.0} & \textbf{$+$78.3} & \textbf{$-$6.7} & \textbf{$+$17.0} & -- & 0.0 \\
+Qwen2.5-7B & single & 1 & 4.3 & 50.3 & $-$3.3 & $-$5.0 & \textbf{$+$25.3} & \textbf{$+$35.7} & $-$4.0 & $+$7.3 & -- & $-$1.0 \\
+Qwen2.5-7B & multi & 1 & -- & 23.7 & \textbf{$-$8.3} & -- & \textbf{$+$17.7} & \textbf{$+$63.7} & $-$8.3 & $+$6.7 & -- & $-$1.0 \\
+gpt-6-luna & single & 3 & 16.9 & 53.6 & \textbf{$-$9.4} & \textbf{$-$29.1} & \textbf{$+$36.4} & \textbf{$+$37.0} & \textbf{$-$9.3} & $+$8.6 & $-$6.3 & $-$1.3 \\
+gpt-6.1-terra & single & 1 & 20.0 & 73.0 & $-$2.3 & $-$5.3 & \textbf{$+$17.0} & \textbf{$+$18.3} & $-$2.7 & \textbf{$-$11.7} & \textbf{$-$21.0} & 0.0 \\
+\midrule
+\multicolumn{13}{l}{\emph{Majority misinformation: three wrong-side passages, one correct}} \\
+gpt-4o-mini & single & 3 & -- & 21.6 & $+$1.1 & -- & \textbf{$+$32.7} & \textbf{$+$65.1} & $-$2.2 & \textbf{$+$5.7} & $+$6.8 & $-$4.7 \\
+gpt-6-luna & single & 3 & -- & 29.8 & \textbf{$+$6.6} & -- & \textbf{$+$60.4} & -- & -- & \textbf{$+$7.1} & -- & $-$1.3 \\
+gpt-6.1-terra & single & 1 & -- & 26.0 & $-$3.7 & -- & \textbf{$+$66.3} & -- & -- & \textbf{$+$9.0} & -- & 0.0 \\
 \bottomrule
-\end{tabular}
-\caption{ConflictBank (300 conflict, 100 clean questions; one correct answer each; LLM-written misinformation built from
-Wikidata facts), default skeleton. \emph{Plain}: accuracy (\%) on conflict questions with no flags; other columns:
-paired difference in points. The LLM detector is gpt-4o-mini for every generator. \textbf{Bold}: significant under the
-paper's single scheme.}
+\end{tabular}}
+\caption{ConflictBank conflict questions (300; one correct answer each): accuracy (\%, one-way strict) closed-book
+and with the passages but no flags, then the paired difference in points made by each format. \emph{Prompt}: the
+answer policy: \emph{single} says there is one answer, \emph{multi} asks for every valid answer (our default
+skeleton), \emph{minimal} states no policy. \emph{One wrong}: the neutral flag plus ``exactly one of the two
+contains misinformation''. \emph{Single call}: one call that names the suspect passages, then answers. Last column:
+the LLM directional flag's change on the 100 clean questions. The LLM detector is gpt-4o-mini for every generator.
+\textbf{Bold}: significant under the paper's single scheme.}
 \label{tab:cb}
 \end{table*}

@@ -1,10 +1,12 @@
 \section*{Limitations}
 
-\paragraph{Models.} We test three generators: two closed OpenAI models and one 7B open-weights model, run at 4-bit
-precision with one seed. Larger open models and reasoning models may respond differently, especially to the
-directional header. The LLM detector is a single prompt, run with two models. We compare against two published methods, both
-reimplemented from their papers or code (Astute RAG has no official code), but not against a trained detector such as
-ConflictRAG's \citep{wang2026conflictrag}.
+\paragraph{Models.} We test five generators, four of them from one provider: gpt-4o-mini, gpt-4.1, two current
+reasoning models (gpt-6-luna and gpt-6.1-terra) and Qwen2.5-7B at 4-bit precision. Qwen2.5-7B and gpt-6.1-terra ran
+with one seed, and the reasoning models only at their default temperature, so their sampling is not deterministic.
+We did not test other providers' models or a large open model. The finding that a detector must be more reliable than
+the generator rests on three generators and one detector and is exploratory. The LLM detector is a single prompt, run
+with two models. The published baselines are reimplemented (Astute RAG has no official code), and we do not compare
+against a trained detector such as ConflictRAG's \citep{wang2026conflictrag}.
 
 \paragraph{Data and power.} The confirmatory evidence comes from two benchmarks: RAMDocs (300 questions, 139 of them
 conflict questions) and ConflictBank (400 sampled questions, 300 with conflicts). In both, the misinformation is
@@ -15,8 +17,11 @@ conclusions survive treating those documents as misinformation. Our comparisons 
 \mdeMed\ points with 80\% power, so smaller effects, including small harms on clean questions, may be missed.
 WikiContradict has genuine conflicts but no misinformation side. CONFLICTS, the most realistic benchmark we use, shows
 no significant effect for any condition. It was run with one seed, scored only on items with a reference answer, and
-without the planned LLM judge, so it can neither confirm nor refute our findings. We do not know how they transfer to
-naturally occurring misinformation, where the false side may be the better written or the more numerous one.
+without the planned LLM judge, so it can neither confirm nor refute our findings. The majority variant tests one case where the false side is
+more numerous, but its extra wrong-side passages are generated for the same substitution, which a real attacker
+would vary. We do not know how the findings transfer to naturally occurring misinformation. The current
+reasoning models distrust ConflictBank's generated passages when asked to judge them (Section~\ref{sec:real}),
+which suggests that generated benchmarks may not measure how such models treat real documents.
 
 \paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition and scores our
 MADAM-RAG port close to the published number on the pilot split, but the published subset is unknown, so this is not a
@@ -24,12 +29,18 @@ reproduction. The metric is string matching: it misses paraphrases, and partial 
 answer''. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
 
 \paragraph{Direction and the grid.} Oracle direction is close to giving the model an answer key, so the oracle rows
-are upper bounds. In the synthetic grid only perfect direction gives a significant overall gain. The real LLM
+are upper bounds. In the synthetic grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels. The real LLM
 detector names the right side \dirAccLlm\% of the time on RAMDocs and \cbDirAccLlm\% on ConflictBank. Its
-directional flag gains significantly over no flags on ConflictBank, but on RAMDocs its net gain over labelled
-questions is significant only with gpt-4.1. Synthetic false flags are spread uniformly and their suspect side is random, whereas
+directional flag gains significantly over all ConflictBank questions with gpt-4o-mini (H15), but on RAMDocs its gain
+is not significant after correction, and with stronger generators it can hurt. Synthetic false flags are spread uniformly and their suspect side is random, whereas
 real detectors concentrate their errors. The grid predicts real detectors only roughly, and three detectors cannot
 show whether document- or pair-level summaries predict better.
+
+\paragraph{Pre-registration.} The original hypotheses (H1--H9) were registered before the confirmatory run. H10--H19
+were registered in three addenda, after the earlier results were known though before their own runs, and the only
+timestamp is the repository's commit history, not a third-party registry. Several analyses were chosen after seeing
+data and are labelled as such: the TOST margin, the single- and multi-answer split, the document-level placement
+axes, and the comparison of detector and generator reliability.
 
 \paragraph{Scope.} We study flags passed to the generator as text. Learned interfaces such as soft prompts or
 credibility fine-tuning \citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may follow different

@@ -23,15 +23,14 @@ No flags (plain) & 29.9 & 31.3 & 22.1 & 41.5 & 911 \\
 \quad NLI, remove & $-$5.7 & $-$5.0 & $-$2.2 & $-$8.2 & 592 \\
 \quad LLM, flag & $-$1.8 & $-$1.3 & $-$4.1 & $+$1.9 & 970 \\
 \quad LLM, directional flag & $+$5.0 & $+$4.9 & $+$12.5 & $-$3.4 & 983 \\
-\quad LLM, remove suspect & $+$0.3 & 0.0 & \textbf{$+$18.7} & \textbf{$-$20.6} & 718 \\
+\quad LLM, remove suspect & $+$0.3 & 0.0 & $+$18.7 & \textbf{$-$20.6} & 718 \\
 \multicolumn{6}{l}{\emph{Reference}} \\
 \quad MADAM-RAG & $+$5.7 & $+$5.7 & $+$3.6 & $+$7.9 & 8196 \\
 \bottomrule
 \end{tabular}}
 \caption{RAMDocs hold-out, gpt-4o-mini, 3 seeds, one-way strict accuracy (primary). \emph{All}: 300 questions, including 35 whose
 conflict status the label rule leaves open; \emph{Lab.}: the 265 labelled ones (139 conflict, 126 clean).
-First row: accuracy (\%) with no flags. Other rows: paired difference from it in points; \textbf{bold} = significant
-after Holm correction across the table (sign-flip test, $p<0.05$). Real-detector rows were not pre-registered as
+First row: accuracy (\%) with no flags. Other rows: paired difference from it in points; \textbf{bold} = significant under the paper's single scheme (Section~\ref{sec:setup}: a registered test's Holm-adjusted $p$ within its family, otherwise Holm over all exploratory comparisons). Real-detector rows were not pre-registered as
 tests. Tokens: mean prompt tokens per call (MADAM-RAG: per question, all calls).}
 \label{tab:main}
 \end{table}

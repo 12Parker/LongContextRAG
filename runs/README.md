@@ -32,6 +32,14 @@ All runs use GPT-4o-mini on RAMDocs; pilots are **exploratory**, since they shap
 | `cb_main` | Round 2: ConflictBank (400 items, `prepare_conflictbank.py`), gpt-4o-mini, 3 seeds, all formats and baselines | n/a | **registered (§10, H12)** |
 | `cb_gpt41` | Round 2: ConflictBank, gpt-4.1, seed 0 | n/a | **registered (H12)** |
 | `cb_qwen` | Round 2: ConflictBank, Qwen2.5-7B (Ollama), seed 0 | n/a | **registered (H12)** |
+| `cb_single` | Round 3 (§11, H15): ConflictBank, single-answer skeleton, gpt-4o-mini, 3 seeds (incl. closed-book, one-wrong, self-identify) | n/a | **registered (§11)** |
+| `cb_minimal` | Round 3: ConflictBank, minimal skeleton, gpt-4o-mini, 3 seeds | n/a | exploratory (registered) |
+| `cb_single_gpt41` | Round 3 (H15, H16): ConflictBank single, gpt-4.1, seed 0 | n/a | **registered (§11)** |
+| `cb_single_qwen` | Round 3 (H15): ConflictBank single, Qwen2.5-7B (Ollama), seed 0 | n/a | **registered (§11)** |
+| `cbmaj_single` | Round 3 (H17, H18): ConflictBank majority variant (3 wrong : 1 correct), single, gpt-4o-mini, 3 seeds, incl. Astute RAG / TrustRAG | n/a | **registered (§11)** |
+| `holdout_extra` | Round 3 (H16, H18): RAMDocs closed-book, self-identify, one-wrong flag, gpt-4o-mini, 3 seeds | `exclude` | **registered (§11)** |
+| `cb_single_luna`, `holdout_luna`, `cbmaj_single_luna` | Round 4 (§12, H19): gpt-6-luna, 3 seeds, default temperature | as above | **registered (§12)** |
+| `cb_single_terra`, `holdout_terra`, `cbmaj_single_terra` | Round 4 (H19): gpt-6.1-terra, seed 0, default temperature | as above | **registered (§12)** |
 | `labelling` | `ramdocs_suspect_docs.csv`: 163 RAMDocs documents to hand-label (`export_labelling.py`) | n/a | to label |
 
 Runs made before the cached-latency fix (all runs listed above) record `generate_s` as wall-clock time, ~0 for
