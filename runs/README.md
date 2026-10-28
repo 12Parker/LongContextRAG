@@ -47,7 +47,11 @@ All runs use GPT-4o-mini on RAMDocs; pilots are **exploratory**, since they shap
 | `rg_{mini,luna,terra,haiku,sonnet}` | Round 7 (§14, H26): RAGuard (294 conflict + 100 clean claims), single skeleton | n/a | **registered (§14)** |
 | `conflicts_auto` | CONFLICTS, now 3 seeds (§13.4, exploratory) | n/a | exploratory |
 | `judge_matcher.json` | LLM-judge (gpt-6.1-terra) check of the string matcher on 162 stratified conflict outputs (§13.4) | n/a | exploratory |
-| `labelling` | `ramdocs_suspect_docs.csv`: 163 RAMDocs documents to hand-label (`export_labelling.py`) | n/a | to label |
+| `hint_cb_<gen>_<det>` | Round 8 (§15, H27): `plain` and `hint` (the detector model's own plain seed-0 answer, no passage marked) for every H24 cell; seeds as the cell | n/a | **registered (§15)** |
+| `probe_{rev,para}_{mini,lunadet}` | Round 8 (§15, H29): ConflictBank with passage order reversed / every passage paraphrased by gpt-4o-mini (`prepare_cb_probe.py`; 11 of 1,600 paraphrases fail the answer-string check); gpt-4o-mini generator | n/a | **registered (§15)** |
+| `wiki_llm_{mini,luna,haiku}`, `holdout_rem_{luna,haiku,terra}` | Round 8 (§15, H28): LLM directional flag and LLM removal on WikiContradict and on RAMDocs (analysed on ambiguity-only questions) | n/a | **registered (§15)** |
+| `cb_single_gpt41` (added `self_identify`) | Round 8 (§15): single-call mode for gpt-4.1, seed 0 | n/a | registered (§15) |
+| `labelling` | `ramdocs_suspect_docs.csv`: 163 RAMDocs documents to hand-label (`export_labelling.py`); `audit_200.csv`: 200 outputs for a human audit of the matcher (`export_audit.py`, §15.4.7), not yet labelled | n/a | to label |
 
 Runs made before the cached-latency fix (all runs listed above) record `generate_s` as wall-clock time, ~0 for
 cache hits; their latency figures should not be reported.

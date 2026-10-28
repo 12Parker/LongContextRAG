@@ -548,6 +548,8 @@ def revision2(R, main_rows, main_ex=None):
         rev["H14"] = fam("H14", spec, {})
     revision3(R, r2, fam, main_ex)
     revision4(R, r2, fam, main_ex)
+    from .revision5 import revision5
+    revision5(R, r2, fam, main_rows)
     # exploratory (after seeing H14): do the baselines lose valid answers on multi-answer clean questions?
     if "gpt-4o-mini" in r2 and main_ex is not None:
         n_gold = {e.id: len(e.gold_answers) for e in main_ex}
@@ -665,6 +667,10 @@ def revision3(R, r2, fam, main_ex):
                 tt[tk] = rv.tost(rows, a, b, sub, PRIMARY, groups_of(rows))
 
 
+OWN_SUFFIX = {"gpt-6-luna": "luna", "gpt-4.1": "gpt41", "gpt-6.1-terra": "terra", "claude-haiku-5-5": "haiku",
+              "Qwen2.5-7B": "qwen", "claude-sonnet-5-5": "sonnet"}
+
+
 def revision4(R, r2, fam, main_ex):
     """Fourth revision (§13, §14): forced choice, risk/coverage, pair topology, answer key, crossed
     detector x generator reliability, Claude, RAGuard, pooled neutral-flag estimate, majority breakdown."""
@@ -762,13 +768,17 @@ def revision4(R, r2, fam, main_ex):
         cells = {}
         for gname in gen_key.values():          # gpt-4o-mini detector: the base single-prompt runs
             if f"{set_prefix}{gname}" in r2 and keep(gname, "gpt-4o-mini"):
-                cells[(gname, "gpt-4o-mini")] = (r2[f"{set_prefix}{gname}"]["_rows"], RUNS[base_run])
+                # §15.4.1f: the detections this generator saw (its own run), not the base run's
+                own = ROOT / f"runs/{'cb' if set_prefix == 'CBs:' else 'cbmaj'}_single" if gname == "gpt-4o-mini" else \
+                    ROOT / f"runs/{'cb' if set_prefix == 'CBs:' else 'cbmaj'}_single_{OWN_SUFFIX[gname]}"
+                det_run = own if (own / "detections.llm_dir.jsonl").exists() else RUNS[base_run]
+                cells[(gname, "gpt-4o-mini")] = (r2[f"{set_prefix}{gname}"]["_rows"], det_run)
         for gk, gname in gen_key.items():
             for dk, dname in det_key.items():
                 run = ROOT / f"runs/{cross_prefix}_{gk}_{dk}"
                 if results_path(run) and keep(gname, dname):
                     cells[(gname, dname)] = (rows_of(run), run)
-        cell_out, pooled = {}, []
+        cell_out, pooled, qdata = {}, [], {}
         for (g, d), (rows, run) in cells.items():
             det = dets_of(run, "llm_dir")
             dq = {i: float(any(contra[i].get((x.i, x.j)) == set(x.suspects) for x in det[i].pairs))
@@ -788,7 +798,9 @@ def revision4(R, r2, fam, main_ex):
                                     "gain": float(np.mean(list(gain.values()))), "n": len(ids),
                                     "effect": compare(rows, "plain", "llm_dir+flag_directional", True, PRIMARY)}
             pooled += [(f"{g}|{d}", i, dq[i] - gp[i], gain[i]) for i in ids]
-        h = {"cells": cell_out}
+            qdata[(g, d)] = {"ids": ids, "d": [dq[i] for i in ids], "g": [gp[i] for i in ids],
+                             "y1": [gf[i] for i in ids], "w": [wrong_dir[i] for i in ids], "run": run, "rows": rows}
+        h = {"cells": cell_out, "_q": qdata}
         if len(cell_out) < 4:
             return h
         gaps = np.array([v["gap"] for v in cell_out.values()]); gains = np.array([v["gain"] for v in cell_out.values()])

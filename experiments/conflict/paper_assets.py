@@ -316,8 +316,8 @@ def tab_hypotheses(R, out: Path):
 """
     legend = (r"Directional predictions are \emph{supported} or \emph{not supported}; tests with no predicted sign are "
               r"\emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric. "
-              r"$p$-values come from 10,000 sign-flip permutations (smallest attainable raw $p$ is $1/10{,}001$), "
-              r"Holm-adjusted within the family; this is the significance used everywhere in the paper.")
+              r"$p$-values come from 10,000 sign-flip permutations, extended to 200,000 when none reaches the observed "
+              r"statistic, Holm-adjusted within the family; this is the significance used everywhere in the paper.")
     FAMILY = {"H1": "detection quality", "H2": "a correct neutral flag", "H3": "what direction adds",
               "H4a": "false flags", "H4b": "false flags", "H4c": "false flags", "H5": "the heuristic detector vs random",
               "H6": "does the grid predict real detectors", "H7": "prompt-only instructions",
@@ -327,7 +327,9 @@ def tab_hypotheses(R, out: Path):
               "H16": "information vs direction (one-wrong flag)", "H17": "majority misinformation",
               "H18": "a single-call baseline", "H19": "current reasoning models", "H20": "forced choice (no ``unknown'')",
               "H21": "risk and coverage", "H22": "pair topology", "H23": "answer key",
-              "H24": "detector versus generator reliability (crossed)", "H25": "Claude", "H26": "RAGuard (real misleading posts)"}
+              "H24": "detector versus generator reliability (crossed)", "H25": "Claude", "H26": "RAGuard (real misleading posts)",
+              "H27": "the detector model's answer as a hint", "H28": "LLM flags on genuine conflicts",
+              "H29": "artefact probe of detector direction"}
 
     def body(rs):
         out, last = [], None
@@ -353,12 +355,30 @@ def tab_hypotheses(R, out: Path):
         rows.append(("H24", "per-question slope of gain on reliability gap, within cells",
                      f"{pct(b['slope'], True)} [{pct(b['ci_low'], True)}, {pct(b['ci_high'], True)}]", _p(b["p_one_sided"]),
                      "supported" if b["p_one_sided"] < 0.05 else "not supported", "--"))
+    # §15: H27 (three families), H28 (per generator and benchmark), H29 (direction and gain)
+    for f_ in ("H27a", "H27b", "H27c"):
+        for k, v in rev.get(f_, {}).get(PRIMARY, {}).items():
+            ob = rev[f_][ROBUST][k]["supported"] == v["supported"]
+            rows.append(("H27", _esc(k), _est(v), _p(v["p_holm"]), "significant" if v["supported"] else "n.s.", "yes" if ob else "no"))
+    for key, fam_ in rev.get("H28", {}).items():
+        for m_, lab in (("both_answers", ""), (PRIMARY, ""), ("gold_recall", ", gold recall")):
+            for k, v in fam_.get(m_, {}).items():
+                rows.append(("H28", _esc(k + lab), _est(v), _p(v["p_holm"]), "significant" if v["supported"] else "n.s.", "--"))
+    h29 = rev.get("H29", {})
+    for k, v in h29.get("a", {}).items():
+        rows.append(("H29", _esc(f"{k}: direction accuracy vs original"), _est(v), _p(v["p_holm"]),
+                     "significant" if v["supported"] else "n.s.", "--"))
+    for k, v in h29.get("c", {}).items():
+        rows.append(("H29", _esc(f"{k}: gpt-4o-mini's gain vs original"), _est(v), _p(v["p_holm"]),
+                     "significant" if v["supported"] else "n.s.", "--"))
     # one table per registration stage, so no table outgrows a page
-    stages = [("H10", "H11"), ("H12", "H13", "H14"), ("H15", "H16", "H17", "H18", "H19"), ("H20", "H21", "H22", "H23", "H24", "H25", "H26")]
+    stages = [("H10", "H11"), ("H12", "H13", "H14"), ("H15", "H16", "H17", "H18", "H19"),
+              ("H20", "H21", "H22", "H23", "H24", "H25", "H26"), ("H27", "H28", "H29")]
     stage_rows = [[r for r in rows[n_first:] if r[0].rstrip("abc") in st] for st in stages]
     body1 = body(rows[:n_first])
-    stage_txt = ["the first addendum (H10--H11)", "the second (H12--H14)", "the third (H15--H19)",
-                 "the fourth and fifth (H20--H26)"]
+    stage_txt = ["the first addendum (\\S9; H10--H11)", "the second (\\S10; H12--H14)",
+                 "the third and fourth (\\S11--\\S12; H15--H19)", "the fifth and sixth (\\S13--\\S14; H20--H26)",
+                 "the seventh (\\S15; H27--H29)"]
     parts = [head % "p" + body1 + "\n" + rf"""\bottomrule
 \end{{tabular}}
 \caption{{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
@@ -367,11 +387,12 @@ they were computed. {legend}}}
 \label{{tab:hypotheses}}
 \end{{table*}}
 """]
-    MAX_ROWS = 38
+    MAX_ROWS = 26   # long test names wrap, so a page holds about 26 rows plus the caption
     chunks = []
     for st, rs in zip(stage_txt, stage_rows):
+        n_parts = -(-len(rs) // MAX_ROWS)
         for k in range(0, len(rs), MAX_ROWS):
-            chunks.append((st + (" (continued)" if k else ""), rs[k:k + MAX_ROWS]))
+            chunks.append((st + (f" (part {k // MAX_ROWS + 1} of {n_parts})" if n_parts > 1 else ""), rs[k:k + MAX_ROWS]))
     for n_, (st, rs) in enumerate(chunks):
         lab = f"tab:hypotheses{n_ + 2}"
         parts.append(head % "p" + body(rs) + "\n" + rf"""\bottomrule
@@ -496,6 +517,8 @@ def tab_risk(R, out: Path):
             v = r2[key].get("risk", {}).get(m_, {}).get(c, {})
             return bool(v.get("sig"))
         tk = f"{label}, {key.split(':')[1]}: {'neutral flag' if c == 'oracle+flag' else 'dir. flag'} vs plain (conflict)"
+        if m_ == "selective":   # §15.4.5: the ratio estimand, which is what the Sel. column shows
+            return bool(R["rev"].get("H21c_ratio", {}).get(tk, {}).get("supported"))
         return bool(h21[m_].get(tk, {}).get("supported"))
     lines = []
     for pre, title in spec:
@@ -528,9 +551,10 @@ Generator & Correct & Misinfo. & Abstain & Sel. & Correct & Misinfo. & Abstain &
 \bottomrule
 \end{tabular}}
 \caption{Risk and coverage on conflict questions (\%): strictly correct answers, answers that contain the
-misinformation, abstentions (``unknown''), and selective accuracy (correct among non-abstained answers).
-\textbf{Bold}: the change from no flags is significant (H21 for ConflictBank; the paper's single scheme elsewhere).
-A neutral flag trades misinformation for abstention but never raises the share of correct answers; under forced
+misinformation, abstentions (``unknown''), and selective accuracy (correct answers over non-abstained answers, pooled
+over questions and seeds, the estimand of \S15.4.5). \textbf{Bold}: the change from no flags is significant (H21 for
+ConflictBank; the paper's single scheme elsewhere). Where abstention is allowed, the neutral flag moves answers from
+misinformation, and from correct answers, into abstention, and leaves selective accuracy nearly unchanged; under forced
 choice it has no abstention to trade.}
 \label{tab:risk}
 \end{table*}
@@ -1251,6 +1275,8 @@ def numbers(R, out: Path):
         add("nExploratory", rev["n_exploratory"].get(PRIMARY, 0))
     from .costs import total_spend
     add("totalSpend", f"\\${total_spend():.2f}")
+    from .assets5 import numbers5
+    numbers5(R, add)   # §15 (revision5)
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1268,6 +1294,8 @@ def write_all(R, out: Path):
     app_prompts(out)
     tab_appendix(R, out)
     fig_tradeoff(R, out); fig_placement(R, out); fig_answers(R, out); fig_reliability(R, out); tab_risk(R, out)
+    from .assets5 import write5
+    write5(R, out)   # after fig_reliability: replaces its tab_cells
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():
@@ -1369,8 +1397,11 @@ Signals (defaults) & Pair F1 & Flag rate & Clean FPR \\
     if "conflicts" in R:
         cp = R["conflicts_plain"]
         rows = [f"No flags (plain) & {pct(cp['all'])} & {pct(cp['conflict'])} & {pct(cp['clean'])} \\\\", "\\midrule"]
+        from .stats import holm
+        adj = holm({f"{c}|{s}": v["p"] for c, d in R["conflicts"].items() for s, v in d.items() if not _nan(v.get("p"))})
+        hc = lambda c, s: cell({**R["conflicts"][c][s], "p_tab": adj.get(f"{c}|{s}", float("nan"))}, "p_tab")
         for c, d in R["conflicts"].items():
-            rows.append(f"{COND_NAME[c]} & {cell(d['all'], 'p')} & {cell(d['conflict'], 'p')} & {cell(d['clean'], 'p')} \\\\")
+            rows.append(f"{COND_NAME[c]} & {hc(c, 'all')} & {hc(c, 'conflict')} & {hc(c, 'clean')} \\\\")
         det = "; ".join(f"{DET_NAME[n]}: flags {pct(v['q_recall'])}\\% of conflict and {pct(v['clean_fpr'])}\\% of clean questions"
                         for n, v in R.get("conflicts_detect", {}).items())
         parts.append(rf"""\begin{{table}}[t]
@@ -1382,8 +1413,9 @@ Condition & All & Conflict & No conflict \\
 {chr(10).join(rows)}
 \bottomrule
 \end{{tabular}}
-\caption{{CONFLICTS, 237 automatically scorable questions (69 conflict), gpt-4o-mini, one seed; exploratory.
-Contains-match accuracy (\%) and differences in points; no difference is significant (bold would mark raw $p<0.05$).
+\caption{{CONFLICTS, 237 automatically scorable questions (69 conflict), gpt-4o-mini, 3 seeds; exploratory.
+Contains-match accuracy (\%) and differences in points; bold would mark Holm-adjusted $p<0.05$ within this table, and
+no difference reaches it.
 {det}.}}
 \label{{tab:conflicts}}
 \end{{table}}

@@ -13,6 +13,7 @@ scikit-learn==1.9.1
 numpy==2.5.4
 scipy==1.18.1
 pandas==3.0.6
+statsmodels==0.14.5
 matplotlib==3.10.9
 tqdm==4.70.1
 python-dotenv==1.2.4

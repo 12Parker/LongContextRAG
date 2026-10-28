@@ -493,3 +493,32 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
 - **Lesson.** A patch script used `str.index` on a string that occurs twice in `paper_assets.py` and
   deleted about 800 lines. They were recovered by replaying the session's patches onto the last
   file-history snapshot. Always assert `count == 1` before replacing.
+
+### Round 8 (2026-10-28): fifth mock review, §15 experiments and re-analyses
+
+- **Fifth mock review.** Three reviewers and a consensus round: all 3.0 (Findings). Must-fix items: H24 coupling,
+  TOST for null claims, a dependence-aware pooled estimate, abstention as a trade, a detector-answer control,
+  direction on genuine conflicts, an artefact probe, reframing around real-detector results, many inconsistencies.
+- **Pre-registration.** §15 (89f6728), committed before the runs: H27 (hint), H28 (genuine conflicts), H29 (probe)
+  and re-analyses of existing data.
+- **Code:** `prompts` mode `hint`, `run.py --hint-run`; `prepare_cb_probe.py` and datasets `conflictbank_{rev,para}`;
+  `revision5.py` (all §15 analyses; needs statsmodels 0.14.5); `assets5.py` (macros, `tab_cells`, `tab_h24redo`,
+  `tab_pooled`, `tab_utility`, the new `fig_reliability`); `export_audit.py` (unlabelled human-audit sheet).
+- **Results:**
+  - H24 re-analysis: the registered gap correlation (rho 0.64; 0.79 on post-registration cells) is carried by the
+    generator's own accuracy. Permuting D across the six detectors with generator FE gives p = 0.29; leave-one-detector-out
+    R2 of the gap is negative. Per question, a right flag adds ~34 points and a wrong-side flag costs ~32; generators
+    follow wrong-side flags (76-88%) more than needed right ones (57-75%). The mechanism score predicts held-out
+    detectors (R2cv 0.62).
+  - H27: the directional flag beats the detector model's answer as a hint in most cells; the hint often lowers
+    strong generators' accuracy. Using a strong detector model (terra, Sonnet) as the generator often beats the cell.
+  - H28: on WikiContradict the LLM directional flag and removal cut "both answers" by 6-30 points; removal costs
+    21-29 points on RAMDocs ambiguity questions.
+  - H29: reversing or paraphrasing passages leaves direction accuracy unchanged (67 -> 66 / 68 for gpt-4o-mini).
+  - Neutral flag: prediction interval [-12.9, +7.4]; harm concentrated in OpenAI models on generated data with
+    "unknown" allowed; at misinformation cost c=4 the flag helps in 4 settings and hurts in 4.
+  - TOST: H20 neutral not equivalent; H23 equivalent in 2 of 9; H21 selective (ratio) equivalent in 1 of 8.
+- **Bug caught.** A first draft of H27 read the gpt-4o-mini-detector cells' flag rows from `cb_main` (the run that
+  only supplies their detections). Cells now carry their own rows.
+- **Lesson.** Long runs with reasoning-model detectors are sequential in detection (~25 min per 400 items); split
+  independent runs into parallel tracks. A machine sleep can leave a run hung on dead connections: kill and resume.
