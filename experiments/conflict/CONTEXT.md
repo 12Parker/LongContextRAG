@@ -442,3 +442,54 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
     - Self-identify: −21 / −51, because the model distrusts every generated passage.
   - **Spend.** About $80+ of $100.
 
+
+### Round 7 (2026-10-28): fourth mock review, §13–§14 experiments
+
+- **Fourth mock review.** The consensus score was 2.5. The reviewers asked for:
+  - a risk/coverage view and a forced-choice condition;
+  - pair-topology and answer-key controls;
+  - a crossed, pre-registered test of the reliability claim;
+  - realistic data and models from other providers.
+- **Budget.** Raised to $200 (gate $195). Spend after all runs is about $169.
+- **Pre-registration.** Both sections were committed before their runs:
+  - §13 (108e41d): H20–H24;
+  - §14 (eca911b): Claude (H25) and RAGuard (H26).
+  - Gemini was not run: no key was available.
+- **Code:**
+  - `prompts`: the `forced` skeleton; the modes `flag_pick`, `*_nopairs` and `answer_key`.
+  - `llm`: the Claude provider, via the OpenAI-compatible endpoint. Claude takes no temperature and
+    no JSON mode, and gets `max_tokens=4096`. The cache key includes `max_tokens` for Claude only.
+  - `metrics`: unwrapping of paired tags (`<answer>X</answer>`).
+  - `prepare_raguard`, `data.load_raguard`, and `judge_matcher`.
+  - `paper_stats.revision4`:
+    - H20–H26;
+    - H24 with its §13-only sensitivity, the exploratory majority version, and an exploratory
+      mechanism score;
+    - the DerSimonian–Laird pooled neutral-flag estimate.
+  - `stats.sign_flip_p(max_perm=...)`: p-values at the 1e-4 floor are refined up to 200k permutations,
+    because otherwise no exploratory result could survive Holm over 633 tests. This is reported as a
+    deviation.
+  - `paper_assets`: `tab_risk`, `fig_reliability` (two panels), `tab_cells`, and the hypotheses tables
+    chunked into 38-row parts.
+- **Results:**
+  - **Neutral flag.** The pooled effect is −2.8 [−4.5, −1.0]. It significantly harms 12 of 34 settings
+    and helps 2.
+    - Under forced choice it is null for three of four generators (H20).
+    - Selective accuracy is unchanged (H21). The flag acts only through abstention.
+  - **Directional flag.** It helps on every benchmark and generator except Qwen on RAMDocs, Claude
+    included, and on RAGuard by +7 to +20.
+    - The answer key does as well: H23 finds no significant difference in any of 9 tests.
+  - **H24.** 30 cells: ρ = 0.64, p < 0.001. The §13-only cells give ρ = 0.60; under majority
+    misinformation ρ = 0.30 (n.s.).
+    - The gain is positive in 27 of 30 cells.
+    - The exploratory score (right where the generator errs, minus a correct passage marked where it
+      is right) gives ρ = 0.95.
+    - The gpt-4o-mini detector marks a correct passage on 30% of questions. The other detectors do so
+      on 4–11%, and the reasoning-model detectors rarely flag at all.
+  - **RAGuard.** With the posts, every model is below closed-book. The stronger models abstain on
+    about 55–60% of claims.
+  - **Matcher.** An LLM judge agrees with the matcher 92.6% of the time (κ = 0.85). The matcher is
+    slightly conservative.
+- **Lesson.** A patch script used `str.index` on a string that occurs twice in `paper_assets.py` and
+  deleted about 800 lines. They were recovered by replaying the session's patches onto the last
+  file-history snapshot. Always assert `count == 1` before replacing.

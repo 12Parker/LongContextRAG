@@ -40,6 +40,13 @@ All runs use GPT-4o-mini on RAMDocs; pilots are **exploratory**, since they shap
 | `holdout_extra` | Round 3 (H16, H18): RAMDocs closed-book, self-identify, one-wrong flag, gpt-4o-mini, 3 seeds | `exclude` | **registered (§11)** |
 | `cb_single_luna`, `holdout_luna`, `cbmaj_single_luna` | Round 4 (§12, H19): gpt-6-luna, 3 seeds, default temperature | as above | **registered (§12)** |
 | `cb_single_terra`, `holdout_terra`, `cbmaj_single_terra` | Round 4 (H19): gpt-6.1-terra, seed 0, default temperature | as above | **registered (§12)** |
+| `cb_forced_{mini,luna,terra,haiku}` | Round 7 (§13 H20, H21; §14): ConflictBank, `forced` skeleton (no "unknown"); gpt-4o-mini, gpt-6-luna and Claude Haiku 3 seeds, gpt-6.1-terra seed 0 | n/a | **registered (§13, §14)** |
+| `ctl_{rd,cb,mj}_{mini,luna,terra}` | Round 7 (H22, H23): answer key, `flag_pick`, no-pairs flags on RAMDocs, ConflictBank single and CB majority | as base set | **registered (§13)** |
+| `cross_cb_<gen>_<det>`, `cross_mj_<gen>_<det>` | Round 7 (H24): LLM detector run with gpt-4.1, gpt-6-luna, gpt-6.1-terra, Claude Haiku/Sonnet for each generator; `plain` and `llm_dir+flag_directional`; CB single (registered) and CB majority (exploratory) | n/a | **registered (§13, §14)** |
+| `cb_single_{haiku,sonnet}`, `holdout_{haiku,sonnet}`, `cbmaj_single_haiku` | Round 7 (§14, H25): Claude Haiku 5.5 (3 seeds) and Sonnet 5.5 (seed 0) | as above | **registered (§14)** |
+| `rg_{mini,luna,terra,haiku,sonnet}` | Round 7 (§14, H26): RAGuard (294 conflict + 100 clean claims), single skeleton | n/a | **registered (§14)** |
+| `conflicts_auto` | CONFLICTS, now 3 seeds (§13.4, exploratory) | n/a | exploratory |
+| `judge_matcher.json` | LLM-judge (gpt-6.1-terra) check of the string matcher on 162 stratified conflict outputs (§13.4) | n/a | exploratory |
 | `labelling` | `ramdocs_suspect_docs.csv`: 163 RAMDocs documents to hand-label (`export_labelling.py`) | n/a | to label |
 
 Runs made before the cached-latency fix (all runs listed above) record `generate_s` as wall-clock time, ~0 for

@@ -33,15 +33,22 @@ def paired_bootstrap(a: dict[str, float], b: dict[str, float], groups: dict[str,
             "n": len(ids), "n_clusters": len(keys)}
 
 
-def sign_flip_p(a: dict[str, float], b: dict[str, float], n_perm: int = 10_000, seed: int = 0) -> float:
-    """Two-sided paired permutation test on the mean difference."""
+def sign_flip_p(a: dict[str, float], b: dict[str, float], n_perm: int = 10_000, seed: int = 0,
+                max_perm: int | None = None) -> float:
+    """Two-sided paired permutation test on the mean difference. With max_perm, a p-value at its floor (no
+    permuted statistic as extreme as the observed one) is refined with further permutations, in blocks, up to
+    max_perm in total, so that it can survive a large Holm family. Other p-values are unchanged."""
     ids = sorted(set(a) & set(b))
     d = np.array([b[i] - a[i] for i in ids])
     obs = abs(d.mean())
     rng = np.random.default_rng(seed)
     signs = rng.choice([-1, 1], size=(n_perm, len(d)))
-    null = np.abs((signs * d).mean(1))
-    return float((1 + (null >= obs - 1e-12).sum()) / (n_perm + 1))
+    hits, total = int((np.abs((signs * d).mean(1)) >= obs - 1e-12).sum()), n_perm
+    while max_perm and hits == 0 and total < max_perm:
+        k = min(100_000, max_perm - total)
+        signs = rng.choice(np.array([-1, 1], dtype=np.int8), size=(k, len(d)))
+        hits += int((np.abs((signs * d).mean(1)) >= obs - 1e-12).sum()); total += k
+    return float((1 + hits) / (total + 1))
 
 
 def holm(pvals: dict[str, float]) -> dict[str, float]:

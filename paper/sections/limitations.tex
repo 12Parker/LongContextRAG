@@ -1,46 +1,49 @@
 \section*{Limitations}
 
-\paragraph{Models.} We test five generators, four of them from one provider: gpt-4o-mini, gpt-4.1, two current
-reasoning models (gpt-6-luna and gpt-6.1-terra) and Qwen2.5-7B at 4-bit precision. Qwen2.5-7B and gpt-6.1-terra ran
-with one seed, and the reasoning models only at their default temperature, so their sampling is not deterministic.
-We did not test other providers' models or a large open model. The finding that a detector must be more reliable than
-the generator rests on three generators and one detector and is exploratory. The LLM detector is a single prompt, run
-with two models. The published baselines are reimplemented (Astute RAG has no official code), and we do not compare
+\paragraph{Models.} We test seven generators from three families: five OpenAI models (including two current
+reasoning models), Claude Haiku 5.5 and Sonnet 5.5, and Qwen2.5-7B at 4-bit precision. We could not run Gemini, and
+no large open model. Qwen2.5-7B, gpt-6.1-terra and Claude Sonnet ran with one seed, and the reasoning and Claude models
+only at their default temperature, so their sampling is not deterministic, and Claude ran through Anthropic's
+OpenAI-compatible endpoint. The crossed reliability test (H24) covers 30 detector--generator cells on one benchmark;
+its mechanism score was chosen after seeing the cells and needs confirmation on new data. The LLM detector is a single
+prompt. The published baselines are reimplemented (Astute RAG has no official code), and we do not compare
 against a trained detector such as ConflictRAG's \citep{wang2026conflictrag}.
 
 \paragraph{Data and power.} The confirmatory evidence comes from two benchmarks: RAMDocs (300 questions, 139 of them
 conflict questions) and ConflictBank (400 sampled questions, 300 with conflicts). In both, the misinformation is
 synthetic, made by editing or generating text around a substituted answer; ConflictBank's passages are LLM-written
-on both sides. RAMDocs' document labels are imperfect. We exclude 35 hold-out
+on both sides. RAGuard's misleading side is real, but its stance labels are assigned by an LLM, and with its posts in
+context most generators abstain on most claims, which limits what flags can show there. RAMDocs' document labels are imperfect. We exclude 35 hold-out
 questions whose status depends on documents we could not label without human annotation, and we check that the
 conclusions survive treating those documents as misinformation. Our comparisons detect effects of about
 \mdeMed\ points with 80\% power, so smaller effects, including small harms on clean questions, may be missed.
-WikiContradict has genuine conflicts but no misinformation side. CONFLICTS, the most realistic benchmark we use, shows
-no significant effect for any condition. It was run with one seed, scored only on items with a reference answer, and
-without the planned LLM judge, so it can neither confirm nor refute our findings. The majority variant tests one case where the false side is
+WikiContradict has genuine conflicts but no misinformation side. CONFLICTS shows no significant effect for any
+condition; scored only on items with a reference answer, it can neither confirm nor refute our findings. The majority variant tests one case where the false side is
 more numerous, but its extra wrong-side passages are generated for the same substitution, which a real attacker
-would vary. We do not know how the findings transfer to naturally occurring misinformation. The current
+would vary. The current
 reasoning models distrust ConflictBank's generated passages when asked to judge them (Section~\ref{sec:real}),
 which suggests that generated benchmarks may not measure how such models treat real documents.
 
 \paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition and scores our
 MADAM-RAG port close to the published number on the pilot split, but the published subset is unknown, so this is not a
 reproduction. The metric is string matching: it misses paraphrases, and partial answers interact with ``no wrong
-answer''. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
+answer''. An LLM judge agrees with it on \judgeAgree\% of sampled outputs, but no human labels check either. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
 
-\paragraph{Direction and the grid.} Oracle direction is close to giving the model an answer key, so the oracle rows
-are upper bounds. In the synthetic grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels. The real LLM
+\paragraph{Direction and the grid.} Oracle direction does as well as an explicit answer key (H23), so the oracle
+rows are upper bounds. In the synthetic grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels. The real LLM
 detector names the right side \dirAccLlm\% of the time on RAMDocs and \cbDirAccLlm\% on ConflictBank. Its
-directional flag gains significantly over all ConflictBank questions with gpt-4o-mini (H15), but on RAMDocs its gain
-is not significant after correction, and with stronger generators it can hurt. Synthetic false flags are spread uniformly and their suspect side is random, whereas
+directional flag's gain over all ConflictBank questions with gpt-4o-mini is not significant after correction (H15),
+and with stronger generators it hurts. Synthetic false flags are spread uniformly and their suspect side is random, whereas
 real detectors concentrate their errors. The grid predicts real detectors only roughly, and three detectors cannot
 show whether document- or pair-level summaries predict better.
 
-\paragraph{Pre-registration.} The original hypotheses (H1--H9) were registered before the confirmatory run. H10--H19
-were registered in three addenda, after the earlier results were known though before their own runs, and the only
+\paragraph{Pre-registration.} The original hypotheses (H1--H9) were registered before the confirmatory run. H10--H26
+were registered in six addenda, after the earlier results were known though before their own runs, and the only
 timestamp is the repository's commit history, not a third-party registry. Several analyses were chosen after seeing
 data and are labelled as such: the TOST margin, the single- and multi-answer split, the document-level placement
-axes, and the comparison of detector and generator reliability.
+axes, the post-hoc comparison of detector and
+generator reliability that H24 later tested, H24's mechanism score, and the refinement of permutation $p$-values at
+their floor.
 
 \paragraph{Scope.} We study flags passed to the generator as text. Learned interfaces such as soft prompts or
 credibility fine-tuning \citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may follow different

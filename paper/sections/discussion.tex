@@ -1,21 +1,16 @@
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{Why neutral flags do not help.}
-A neutral flag says that two passages disagree but not which to trust, so the model falls back on its answer policy:
-it keeps both sides, abstains, or drops the correct one. Under strict scoring all three lose on misinformation, while
-on WikiContradict keeping both is what the flag buys. This sharpens the finding of \citet{cattan2025conflicts} that
-knowing the conflict \emph{type} helps: for misinformation, the useful part of the type is the direction. It extends
-RGB's observation that a warning does not make models detect errors \citep{chen2024rgb}, and Ragability's that false
-hints hurt \citep{gross2026ragability}, to true hints that are not specific enough.
+\paragraph{Why neutral flags do not help.} A neutral flag says that two passages disagree but not which to trust, so
+the model falls back on its answer policy: it lists both sides, abstains, or, when it must answer, picks as it would
+have without the flag. For misinformation, the useful part of knowing the conflict type \citep{cattan2025conflicts} is its direction.
 
-\paragraph{When direction helps.}
-An oracle's direction helps every generator. A real detector's helps only when it is more reliable than the
-generator's own resolution, and under majority misinformation, where agreement between passages points the wrong way,
-its direction falls to chance (exploratory). This can be checked before deployment on held-out
-conflicts.
+\paragraph{What a detector should optimise.} Because a directional flag works like an answer key, a detector's
+direction is only as good as its errors are rare. Its value on a question depends on the generator: naming the false
+side helps where the generator would have been misled, and naming the true side harms where it would not. Detection
+F1 and direction accuracy hide this; the detectors that served every generator well stayed silent when unsure.
 
-\paragraph{Recommendations.}
-Pass direction rather than a bare warning; report a detector's direction accuracy against the generator's own, and
-its effects on conflict-free questions; and gate removal on a measured clean-question loss rate (with our LLM detector
-it loses \adLlmRemClean\ points on clean questions).
+\paragraph{Recommendations.} Pass direction rather than a bare warning. Let the detector abstain, and measure, on
+held-out conflicts, its wrong-side rate where the target generator is right on its own: a detector good enough for a
+small generator can hurt a larger one. Gate removal on its measured
+clean-question loss (\adLlmRemClean\ points with our LLM detector).

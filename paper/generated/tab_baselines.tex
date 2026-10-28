@@ -12,19 +12,19 @@ No flags (plain), accuracy & 31.3 & 22.1 & 41.5 & 32.8$^\dagger$ & 19.4$^\dagger
 \midrule
 Instruction (v2) only & $+$2.3 & $+$5.3 & $-$1.1 & -- & $+$12.2 & -- & -- & -- & -- & 1 \\
 Oracle, flag + instr. & $-$1.8 & $-$2.4 & $-$1.1 & $+$1.5$^\dagger$ & $+$5.8$^\dagger$ & -- & -- & -- & -- & 1 \\
-Oracle, dir.\ flag + instr. & $+$6.4 & $+$13.2 & $-$1.1 & $+$14.7$^\dagger$ & $+$30.9$^\dagger$ & -- & -- & -- & -- & 1 \\
+Oracle, dir.\ flag + instr. & $+$6.4 & $+$13.2 & $-$1.1 & \textbf{$+$14.7}$^\dagger$ & \textbf{$+$30.9}$^\dagger$ & -- & -- & -- & -- & 1 \\
 \midrule
 MADAM-RAG & $+$5.7 & $+$3.6 & $+$7.9 & -- & -- & -- & -- & -- & -- & 9$\times$tok. \\
-Astute RAG & $-$15.6 & $-$8.4 & $-$23.5 & -- & -- & $-$2.1 & $-$9.7 & $+$1.4 & $-$9.7 & 2 \\
+Astute RAG & \textbf{$-$15.6} & $-$8.4 & \textbf{$-$23.5} & -- & -- & $-$2.1 & $-$9.7 & $+$1.4 & $-$9.7 & 2 \\
 Astute RAG (multi) & $-$5.9 & $-$1.2 & $-$11.1 & $+$2.3$^\dagger$ & $+$13.7$^\dagger$ & -- & -- & -- & -- & 2 \\
-TrustRAG & $-$17.5 & $-$11.3 & $-$24.3 & -- & -- & $-$9.7 & $-$4.0 & $+$6.8 & $-$4.0 & 3 \\
-TrustRAG (multi) & $-$18.1 & $-$12.2 & $-$24.6 & $-$10.9$^\dagger$ & 0.0$^\dagger$ & -- & -- & -- & -- & 3 \\
+TrustRAG & \textbf{$-$17.5} & $-$11.3 & \textbf{$-$24.3} & -- & -- & $-$9.7 & $-$4.0 & $+$6.8 & $-$4.0 & 3 \\
+TrustRAG (multi) & \textbf{$-$18.1} & $-$12.2 & \textbf{$-$24.6} & $-$10.9$^\dagger$ & 0.0$^\dagger$ & -- & -- & -- & -- & 3 \\
 Single call (name suspects, then answer) & $+$6.2 & $+$12.0 & $-$0.3 & -- & -- & $+$7.6 & $-$1.0 & $+$6.8 & $-$1.0 & 1 \\
 \midrule
 LLM detector, flag + instr. & $-$2.0 & $-$2.2 & $-$1.9 & -- & -- & -- & -- & -- & -- & 1+1 \\
-LLM detector, dir.\ flag + instr. & $-$3.5 & $+$8.4 & $-$16.7 & -- & -- & -- & -- & -- & -- & 1+1 \\
+LLM detector, dir.\ flag + instr. & $-$3.5 & $+$8.4 & \textbf{$-$16.7} & -- & -- & -- & -- & -- & -- & 1+1 \\
 LLM detector, dir.\ flag & $+$4.9 & $+$12.5 & $-$3.4 & $+$8.7$^\dagger$ & $+$14.4$^\dagger$ & $+$8.4 & $-$4.7 & \textbf{$+$5.7} & $-$4.7 & 1+1 \\
-LLM detector, remove suspect & 0.0 & $+$18.7 & $-$20.6 & -- & $+$20.6 & $+$7.9 & $-$7.0 & $+$7.0 & $-$7.0 & 1+1 \\
+LLM detector, remove suspect & 0.0 & $+$18.7 & \textbf{$-$20.6} & -- & \textbf{$+$20.6} & $+$7.9 & $-$7.0 & $+$7.0 & $-$7.0 & 1+1 \\
 \bottomrule
 \end{tabular}}
 \caption{Resolution instructions, published baselines and a single-call baseline. First row: accuracy (\%, one-way

@@ -9,7 +9,8 @@ and an instruction to end with a \texttt{Final answer(s):} line. The \emph{defau
 answer when the passages support several (RAMDocs contains same-name ambiguity, so a correct answer may need several
 entities). The \emph{minimal} skeleton drops that policy, and its answer line allows several answers without inviting
 them. The \emph{single} skeleton says the question has exactly one correct answer (true of ConflictBank by
-construction). All three allow ``unknown'' when no passage answers the question (Appendix~\ref{app:prompts}).
+construction). All three allow ``unknown'' when no passage answers the question; the \emph{forced} skeleton is
+\emph{single} without that option (Appendix~\ref{app:prompts}).
 
 \subsection{Formats}
 \label{sec:formats}
@@ -25,6 +26,9 @@ flags are rendered identically, so detectors differ only in \emph{which} pairs t
 which: it says that the conflict is misinformation, but not its direction.
 \item[Directional flag.] As Flag, but suspect passages are headed \texttt{[LIKELY MISINFORMATION; conflicts with
 passage(s): j]}, and the list says which passage likely contains misinformation.
+\item[Controls.] \emph{Pick}: the neutral flag plus ``decide which side is better supported and answer with that
+side only''. \emph{No pairs}: each flag without its pair structure (flagged passages are marked, but not which conflicts
+with which). \emph{Answer key}: plain plus ``The answer $X$ is false'' for each wrong answer, with no passage marked.
 \item[Remove (suspect).] The suspect passages of every flagged pair are deleted. For a pair without a suspect, the
 second passage is deleted, as the original CAAG \textsc{remove} strategy does without retrieval scores.
 \item[Single call.] No detector: one call that first writes \texttt{Suspect passages: \dots} and then answers from
@@ -40,9 +44,10 @@ used with its code unchanged. It scores similar pairs by negation, entity-mismat
 and gives no direction (Appendix~\ref{app:extra}).
 \item[NLI] is \texttt{nli-deberta-v3-base} \citep{he2023debertav3}, a cross-encoder scored in both directions; a pair is
 flagged if the larger contradiction probability exceeds $0.5$. It gives no direction.
-\item[LLM] is a single gpt-4o-mini call (temperature 0) that lists contradicting pairs, telling them apart from
-ambiguity, complementary and temporal relations, and names the side more likely to be misinformation (or
-``both'' or ``unclear''), as JSON.
+\item[LLM] is a single call that lists contradicting pairs, telling them apart from ambiguity, complementary and
+temporal relations, and names the side more likely to be misinformation (or ``both'' or ``unclear''), as JSON. It is
+gpt-4o-mini (temperature 0) unless stated; in the crossed design gpt-4.1, gpt-6-luna, gpt-6.1-terra, Claude Haiku 5.5
+and Claude Sonnet 5.5 run the same prompt.
 \item[Random] flags each pair independently at CAAG's per-pair flag rate, a placebo that matches CAAG's flag volume.
 \item[Oracle] flags exactly the gold contradiction pairs and names the gold misinformation side. The
 \emph{inverted oracle}, an adversarial control, flags the same pairs but names the correct side.

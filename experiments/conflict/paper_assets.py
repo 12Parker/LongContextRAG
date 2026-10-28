@@ -6,6 +6,7 @@ every mark is also direct-labelled or shape-coded).
 """
 from __future__ import annotations
 
+import json
 import math
 from pathlib import Path
 
@@ -210,6 +211,13 @@ column is exploratory).}}
 \label{{tab:wiki}}
 \end{{table}}
 """)
+
+
+def _num_word(n: int) -> str:
+    ones = "Zero One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve Thirteen Fourteen Fifteen Sixteen " \
+           "Seventeen Eighteen Nineteen".split()
+    tens = "_ _ Twenty Thirty Forty Fifty Sixty Seventy Eighty Ninety".split()
+    return ones[n] if n < 20 else tens[n // 10] + (ones[n % 10] if n % 10 else "")
 
 
 def _esc(k):
@@ -540,46 +548,57 @@ def fig_reliability(R, out: Path):
                "claude-haiku-5-5": "#e87ba4", "claude-sonnet-5-5": "#008300"}
     gen_mark = {"gpt-4o-mini": "o", "gpt-6-luna": "s", "gpt-4.1": "^", "gpt-6.1-terra": "D", "claude-haiku-5-5": "P",
                 "Qwen2.5-7B": "v"}
+    short = {"gpt-4o-mini": "4o-mini", "gpt-4.1": "4.1", "gpt-6-luna": "6-luna", "gpt-6.1-terra": "6.1-terra",
+             "claude-haiku-5-5": "Haiku 5.5", "claude-sonnet-5-5": "Sonnet 5.5", "Qwen2.5-7B": "Qwen-7B"}
     _style()
-    fig, ax = plt.subplots(figsize=(3.3, 2.5))
-    ax.axhline(0, color=INK2, lw=0.8); ax.axvline(0, color=INK2, lw=0.8)
-    for key, v in cells.items():
-        g, d = key.split("|")
-        e = v["effect"]
-        ax.errorbar(100 * v["gap"], 100 * e["diff"], yerr=[[100 * (e["diff"] - e["ci_low"])], [100 * (e["ci_high"] - e["diff"])]],
-                    fmt="none", ecolor=det_col.get(d, NEUTRAL), elinewidth=0.6, alpha=0.5, zorder=2)
-        ax.scatter(100 * v["gap"], 100 * e["diff"], s=26, marker=gen_mark.get(g, "o"), color=det_col.get(d, NEUTRAL),
-                   edgecolor="white", linewidth=1.0, zorder=3)
-    ax.set_xlabel("detector direction accuracy minus generator accuracy (points)", fontsize=7)
-    ax.set_ylabel("gain from LLM directional flag (points)", fontsize=7)
-    hd = [plt.Line2D([], [], marker="o", ls="", color=c, label=k.replace("claude-", "").replace("-5-5", " 5.5"))
+    fig, axes = plt.subplots(1, 2, figsize=(3.3, 2.35), sharey=True)
+    panels = (("gap", "detector right minus\ngenerator right (points)", "registered (H24)"),
+              ("mech", "right where generator errs minus\nwrong where it is right (points)", "exploratory"))
+    for ax, (fld, xl, tl) in zip(axes, panels):
+        ax.axhline(0, color=INK2, lw=0.6); ax.axvline(0, color=INK2, lw=0.6)
+        for key, v in cells.items():
+            g, d = key.split("|")
+            e = v["effect"]
+            ax.errorbar(100 * v[fld], 100 * e["diff"],
+                        yerr=[[100 * (e["diff"] - e["ci_low"])], [100 * (e["ci_high"] - e["diff"])]],
+                        fmt="none", ecolor=det_col.get(d, NEUTRAL), elinewidth=0.5, alpha=0.45, zorder=2)
+            ax.scatter(100 * v[fld], 100 * e["diff"], s=18, marker=gen_mark.get(g, "o"), color=det_col.get(d, NEUTRAL),
+                       edgecolor="white", linewidth=0.8, zorder=3)
+        ax.set_xlabel(xl, fontsize=6); ax.set_title(tl, fontsize=6.5, color=INK2, pad=2)
+        ax.tick_params(labelsize=6)
+    axes[0].set_ylabel("gain from LLM directional flag (points)", fontsize=6)
+    hd = [plt.Line2D([], [], marker="o", ls="", ms=4, color=c, label=short[k])
           for k, c in det_col.items() if any(key.endswith("|" + k) for key in cells)]
-    hg = [plt.Line2D([], [], marker=m, ls="", color=INK2, label=k.replace("claude-", "").replace("-5-5", " 5.5"))
+    hg = [plt.Line2D([], [], marker=m, ls="", ms=4, color=INK2, label=short[k])
           for k, m in gen_mark.items() if any(key.startswith(k + "|") for key in cells)]
-    l1 = ax.legend(handles=hd, title="detector", fontsize=5.5, title_fontsize=6, loc="upper left", frameon=False)
-    ax.add_artist(l1)
-    ax.legend(handles=hg, title="generator", fontsize=5.5, title_fontsize=6, loc="lower right", frameon=False)
-    fig.tight_layout()
+    fig.legend(handles=hd, title="detector (colour)", fontsize=5.5, title_fontsize=6, ncol=3, frameon=False,
+               loc="upper left", bbox_to_anchor=(0.0, 0.0), handletextpad=0.1, columnspacing=0.6)
+    fig.legend(handles=hg, title="generator (shape)", fontsize=5.5, title_fontsize=6, ncol=3, frameon=False,
+               loc="upper right", bbox_to_anchor=(1.0, 0.0), handletextpad=0.1, columnspacing=0.6)
+    fig.tight_layout(w_pad=0.6)
     fig.savefig(out / "fig_reliability.pdf", bbox_inches="tight")
     plt.close(fig)
     nm = lambda k: k.replace("claude-", "Claude ").replace("-5-5", " 5.5").replace("haiku", "Haiku").replace("sonnet", "Sonnet")
     rows_ = sorted(cells.items(), key=lambda kv: kv[1]["gap"])
     body = "\n".join(f"{nm(k.split('|')[1])} & {nm(k.split('|')[0])} & {pct(v['det_acc'])} & {pct(v['gen_acc'])} & "
-                     f"{pct(v['gap'], True)} & {cell(v['effect'])} \\\\" for k, v in rows_)
+                     f"{pct(v['wrong_dir'])} & {pct(v['gap'], True)} & {pct(v['mech'], True)} & {cell(v['effect'])} \\\\"
+                     for k, v in rows_)
     (out / "tab_cells.tex").write_text(r"""\begin{table}[t]
 \centering\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{llrrrr}
+\setlength{\tabcolsep}{2.5pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llrrrrrr}
 \toprule
-Detector & Generator & Dir.\ acc. & Gen.\ acc. & Gap & Gain \\
+Detector & Generator & Dir.\ acc. & Gen.\ acc. & Wrong & Gap & Score & Gain \\
 \midrule
 """ + body + r"""
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Every detector--generator cell of H24 (ConflictBank, one-answer prompt, 300 conflict questions; \%).
 \emph{Dir.\ acc.}: share of questions on which the detector flags the true contradiction and names its misinformation
-passage; \emph{Gen.\ acc.}: the generator's accuracy with no flags; \emph{Gain}: the LLM directional flag's change in
-points. Figure~\ref{fig:reliability} plots the same cells.}
+passage; \emph{Gen.\ acc.}: the generator's accuracy with no flags; \emph{Wrong}: share of questions on which it marks
+a correct passage as suspect; \emph{Score} (exploratory): right direction where the generator errs minus a correct
+passage marked where it is right; \emph{Gain}: the LLM directional flag's change in points. Figure~\ref{fig:reliability} plots the same cells.}
 \label{tab:cells}
 \end{table}
 """)
@@ -1118,6 +1137,11 @@ def numbers(R, out: Path):
                     add(f"cbk{k}{G}{cn}", pct(g[c]["diff"], True))
                     add(f"cbk{k}{G}{cn}CI", f"[{pct(g[c]['ci_low'], True)}, {pct(g[c]['ci_high'], True)}]")
     add("Nempty", rev.get("n_empty_reasoning", 0))
+    jm = Path(__file__).resolve().parents[2] / "runs/judge_matcher.json"
+    if jm.exists():   # LLM-judge check of the string matcher (§13.4, exploratory)
+        js = json.loads(jm.read_text())["summary"]
+        add("judgeN", js["n"]); add("judgeAgree", pct(js["agreement"])); add("judgeKappa", f"{js['kappa']:.2f}")
+        add("judgeOnly", js["judge_only"]); add("matcherOnly", js["matcher_only"])
     np_ = rev.get("neutral_pooled")
     if np_:   # every oracle neutral-flag setting on conflict questions; random-effects pooled estimate (§13.4)
         add("neuPooled", pct(np_["mu"], True)); add("neuPooledCI", f"[{pct(np_['ci_low'], True)}, {pct(np_['ci_high'], True)}]")
@@ -1125,6 +1149,7 @@ def numbers(R, out: Path):
         add("nNeutralHarm", np_["n_harm"]); add("nNeutralHelp", np_["n_help"])
     for tk, t in rev.get("tost_claims", {}).items():
         nm = "tost" + "".join(w.capitalize() for w in tk.split("_"))
+        nm = _re2.sub(r"\d+", lambda m_: _num_word(int(m_.group())), nm)   # TeX macro names cannot hold digits
         add(nm, f"[{pct(t['ci90_low'], True)}, {pct(t['ci90_high'], True)}]")
         add(nm + "Eq", "equivalent" if t["equivalent"] else "not equivalent")
     for label, t in rev.get("H13_2x2", {}).items():

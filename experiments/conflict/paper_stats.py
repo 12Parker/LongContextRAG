@@ -96,6 +96,7 @@ PRIMARY, ROBUST = "ramdocs_strict_oneway", "ramdocs_strict"
 SUB = {"all": None, "conflict": True, "clean": False}
 LABELLED = "labelled"   # conflict + clean questions, without the ones the label rule excludes
 N_BOOT, N_PERM = 10_000, 10_000
+MAX_PERM = 200_000   # floor p-values are refined up to this many permutations (see stats.sign_flip_p)
 
 
 # --------------------------------------------------------------------------- loading
@@ -132,7 +133,7 @@ def compare(rows, a: str, b: str, subset, metric: str) -> dict:
     if not shared:
         return {"diff": float("nan"), "ci_low": float("nan"), "ci_high": float("nan"), "p": float("nan"), "n": 0}
     bs = paired_bootstrap(ra, rb, groups_of(rows), n_boot=N_BOOT)
-    return {**bs, "p": sign_flip_p(ra, rb, n_perm=N_PERM),
+    return {**bs, "p": sign_flip_p(ra, rb, n_perm=N_PERM, max_perm=MAX_PERM),
             "mean_a": float(np.mean([ra[i] for i in shared])), "mean_b": float(np.mean([rb[i] for i in shared]))}
 
 

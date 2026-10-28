@@ -18,6 +18,11 @@ three distractors). Every question has one gold answer. It had no pilot, so all 
 passages for that fact (including its temporal and semantic conflicts), so the misinformation outnumbers the truth
 three to one.
 
+\textbf{RAGuard} \citep{zeng2025raguard} pairs PolitiFact claims (true or false) with Reddit posts that an LLM
+labelled supporting, misleading or unrelated, so the misleading side is real online text. We keep 294 claims with at
+least one supporting and one misleading post (up to two of each, plus two unrelated posts) and 100 claims with no
+misleading post; the question is whether the claim is true. Its labels are LLM-assigned stances, not verified facts.
+
 \textbf{WikiContradict} \citep{hou2024wikicontradict} has 253 questions, each with two genuinely contradicting
 Wikipedia passages; the reference answer is \emph{both} sides. We also run 237 automatically scorable
 \textbf{CONFLICTS} \citep{cattan2025conflicts} questions (Appendix~\ref{app:repro}).
@@ -27,16 +32,17 @@ We developed the method on a random 200-question pilot split of RAMDocs. Before 
 questions (139 conflict, 126 clean, 35 excluded), we committed a pre-registration that fixes the conditions, metrics,
 hypotheses and corrections. Every RAMDocs result in the main text is on this confirmatory split; pilot results appear
 only in the appendix. Comparisons that were not registered, including every real-detector row of
-Table~\ref{tab:main}, are exploratory. Three addenda (H10--H11 with four re-analyses; H12--H14; H15--H18) were each
-committed before running anything they cover, so these hypotheses were formed after the original confirmatory results
-were known. The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
+Table~\ref{tab:main}, are exploratory. Six addenda (H10--H26 and several re-analyses) were each committed before running anything
+they cover, so these hypotheses were formed after the original confirmatory results were known; the confirmatory core
+registered before any data is H1--H9. The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
 
 \paragraph{Generators and baselines.}
 The main generator is \texttt{gpt-4o-mini} \citep{openai2024gpt4o} (temperature 0.1, at most 256 output tokens, seeds
 0--2). We replicate key conditions with \texttt{gpt-4.1}, Qwen2.5-7B-Instruct \citep{yang2024qwen25} (4-bit, local),
-and two current reasoning models, \texttt{gpt-6-luna} (3 seeds) and \texttt{gpt-6.1-terra} (seed 0), which accept
-only their default temperature and reasoning effort (up to 4,096 completion tokens). The LLM detector is fixed at gpt-4o-mini,
-separating detector from generator. On ConflictBank the primary prompt is the single skeleton; the default and
+two current reasoning models, \texttt{gpt-6-luna} (3 seeds) and \texttt{gpt-6.1-terra} (seed 0), and Anthropic's
+Claude Haiku 5.5 (3 seeds) and Claude Sonnet 5.5 (seed 0). The reasoning and Claude models run at their default
+temperature with up to 4,096 output tokens, since they reason before answering. The LLM detector is gpt-4o-mini
+except in the crossed design (H24), where six detectors and six generators form \hTwentyFourCells\ pairs on ConflictBank. On ConflictBank the primary prompt is the single skeleton; the default and
 minimal skeletons are robustness checks. We rerun the oracle and LLM-detector conditions with the minimal skeleton.
 MADAM-RAG \citep{wang2025madam} is ported unchanged (three debate rounds). Astute RAG \citep{wang2025astute} and
 TrustRAG \citep{zhou2025trustrag} use their published prompts and defaults; since both return one answer, we also run
@@ -49,12 +55,17 @@ metric reads ``includes'' literally: after normalisation, each gold or wrong ans
 of the extracted final answer. A bidirectional variant, which also counts a predicted answer contained in a gold one,
 is the robustness metric. We chose the one-way metric before the confirmatory run because it is closer to MADAM-RAG's
 published score (Appendix~\ref{app:repro}), and we compare conditions only within our own harness. On WikiContradict
-an answer is correct if it contains both sides (bidirectional matching); on ConflictBank we use the RAMDocs metrics.
+an answer is correct if it contains both sides (bidirectional matching); on ConflictBank and RAGuard we use the RAMDocs metrics. We also report
+the share of answers that contain the misinformation, the share that abstain (``unknown''), and accuracy among answered
+questions. An LLM judge (gpt-6.1-terra) agrees with the primary metric on \judgeAgree\% of \judgeN\ stratified
+conflict-question outputs ($\kappa=\judgeKappa$); the metric is slightly conservative, missing some paraphrases.
 
 \paragraph{Statistics.}
 We average each question's score over seeds and report paired differences from the plain format with
-cluster-bootstrap 95\% CIs (10,000 resamples) and two-sided sign-flip permutation tests
-\citep{efron1993bootstrap,dror2018hitchhiker}. A hypothesis is \emph{robustly supported} if it also holds under the
+bootstrap 95\% CIs that resample questions (10,000 resamples) and two-sided sign-flip permutation tests
+\citep{efron1993bootstrap,dror2018hitchhiker} (10,000 permutations, extended to 200,000 when none reaches the
+observed statistic, so that a $p$-value can survive a large Holm family). CIs are unadjusted; significance is decided by the adjusted $p$
+below, so an interval can exclude zero for a difference that is not significant. A hypothesis is \emph{robustly supported} if it also holds under the
 robustness metric. One significance scheme governs the paper: a registered test takes its family's Holm-adjusted $p$
 \citep{holm1979simple}, and every other comparison we report (\nExploratory\ of them) forms one exploratory Holm
 family. Only results significant under this scheme are called significant or set in bold. A null difference is not

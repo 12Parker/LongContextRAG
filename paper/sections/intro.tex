@@ -8,47 +8,40 @@ the generator. Recent systems pair contradiction detectors with prompts that fla
 report detection F1 and end-to-end accuracy, but not how the two connect. What should the flag say, and what must the
 detector get right for it to help?
 
-We fix the retrieved passages and vary, independently, the \emph{detector} (a heuristic, an NLI cross-encoder, an
-LLM, a random placebo and an oracle) and the \emph{format} that passes its output to the generator: a neutral ``these
-passages may conflict'' flag, a \emph{directional} flag that names the likely misinformation, or removal of the
-suspect passage. Synthetic detectors with a chosen precision, recall and direction accuracy show what detector quality
-buys. After pilots on 200 RAMDocs questions \citep{wang2025madam}, we pre-registered our hypotheses and tested them on
-300 held-out questions. Three addenda, each committed before its runs, added ConflictBank \citep{su2024conflictbank}
-(which had no pilot) under three answer policies and with the misinformation in the majority, five generators
-including two current reasoning models, two published conflict-robust methods, a closed-book control, and two
-controls that separate \emph{what} a flag says: one that says one side is false without saying which, and one that
-adds an instruction to drop unreliable passages. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are
-genuine, is the contrast case. Our claims concern injected misinformation scored by strict exact match; we do not
-claim they carry over to open-ended answers.
+We fix the retrieved passages and vary, independently, the \emph{detector} (heuristic, NLI, LLM, random placebo,
+oracle, and synthetic detectors of chosen quality) and the \emph{format} that passes its output to the generator: a
+neutral ``these passages may conflict'' flag, a flag that says one side is false without saying which, a
+\emph{directional} flag that names the likely misinformation, or removal of the suspect passage. After pilots on
+RAMDocs \citep{wang2025madam}, we pre-registered our hypotheses and tested them on 300 held-out questions; six
+addenda, each committed before its runs, extended the study to ConflictBank \citep{su2024conflictbank} (including a
+variant where the misinformation outnumbers the truth), to RAGuard \citep{zeng2025raguard}, whose misleading side is
+real Reddit posts, and to seven generators from OpenAI, Anthropic and Qwen. Controls separate what a flag conveys: a
+forced-choice prompt with no ``unknown'', flags stripped of their pair structure, an answer key that names the wrong
+answer without pointing at any passage, and a crossed design in which six detectors serve every generator.
+WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
 
 Our findings:
 \begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{A correct neutral flag almost never helps against misinformation.} Flagging exactly the true
-contradictions lowers gpt-4o-mini's accuracy on RAMDocs conflict questions by \adOracleFlagConf\ points
-\dOracleFlagConfCI, and on ConflictBank by \azSgMiniOracleFlagConflict\ even when the prompt says the question has one
-answer. Across five generators, two benchmarks and three answer policies, it significantly lowers accuracy in
-\nNeutralHarm\ of \nNeutralSettings\ settings and raises it in \nNeutralHelp\ (gpt-6-luna under majority
-misinformation; exploratory). The answer policy only decides
-how it fails: the model adds the misinformation when asked for every valid answer, and abstains when told there is
-one (Figure~\ref{fig:answers}). The same flag \emph{raises} accuracy on WikiContradict, where both sides are valid.
-\item \textbf{Knowing that one side is false is not enough.} A flag that says so, without saying which, lowers
-gpt-4o-mini's ConflictBank accuracy by \azSgMiniOracleFlagOnewrongConflict\ points. It helps only a strong model on
-RAMDocs, where the other passages reveal which side is false. An instruction to drop unreliable passages only cancels
-the neutral flag's harm.
-\item \textbf{Naming the false side helps every generator}, by \azSgTerraOracleFlagDirectionalConflict--\azSgLunaOracleFlagDirectionalConflict\
-points on ConflictBank and by \azMjMiniOracleFlagDirectionalConflict\ with gpt-4o-mini when the misinformation
-outnumbers the truth three to one. Naming the correct side instead does as much harm or more.
-\item \textbf{With a real detector, the detector must be more reliable than the generator.} A gpt-4o-mini detector
-names the false side \cbDirAccLlm\% of the time on ConflictBank, mostly for facts the model does not know. Its
-directional flag helps gpt-4o-mini and gpt-6-luna (\zSgMiniLlmDirFlagDirectionalConflict\ and
-\zSgLunaLlmDirFlagDirectionalConflict\ points on conflict questions) and hurts gpt-6.1-terra
-(\zSgTerraLlmDirFlagDirectionalConflict), whose unaided accuracy is higher (exploratory). Under
-majority misinformation its direction is at chance. Astute RAG \citep{wang2025astute} and TrustRAG
-\citep{zhou2025trustrag} lose legitimate same-name answers on RAMDocs, and on ConflictBank they do not beat a prompt
-that states there is one answer.
+\item \textbf{A correct neutral flag does not help against misinformation.} Pooled over \nNeutralSettings\ generator,
+benchmark and prompt settings, flagging exactly the true contradictions changes accuracy by \neuPooled\ points
+\neuPooledCI; it significantly lowers accuracy in \nNeutralHarm\ settings and raises it in \nNeutralHelp. It moves
+answers into hedging or abstention but does not change which side the model picks: under a forced-choice prompt
+its effect is null for three of four generators (H20), and accuracy on answered questions barely changes (H21).
+The same flag \emph{raises} accuracy on WikiContradict, where both sides are valid.
+\item \textbf{Naming the false side is what helps.} The directional flag raises accuracy on every benchmark, for
+OpenAI, Anthropic and open models, including when the misinformation outnumbers the truth and on real Reddit posts.
+It does about as well as telling the model the wrong answer outright (H23), so what it conveys is the
+direction, not the location of the conflict. Saying that one side is false, without which, helps only when the
+other passages reveal which.
+\item \textbf{With a real detector, wrong-side flags are the cost.} Across \hTwentyFourCells\ crossed
+detector--generator cells the directional flag's gain rises with the detector's reliability relative to the
+generator's (pre-registered H24, $\rho=\hTwentyFourRho$, $p\hTwentyFourP$). An exploratory accounting makes this
+precise: credit the detector for naming the false side where the generator would have been wrong, charge it for
+pointing at the correct passage where the generator would have been right ($\rho=\hTwentyFourMechRho$). Silence is
+cheap: the gpt-4o-mini detector marks a correct passage as suspect on \detWrongDirMini\% of questions and lowers the
+accuracy of the four generators most accurate on their own, while reasoning-model detectors flag less, rarely err, and lower no generator's.
 \end{itemize}
-For conflict-aware RAG, we recommend passing direction rather than a bare warning, and reporting a detector's direction
-accuracy against the generator's own accuracy, with effects on conflict-free questions, under the exact format that
-feeds the generator. We release the harness, pre-registration and every
-run.\footnote{Code, the pre-registration and all run outputs are in the anonymised
-supplementary material and will be released publicly on acceptance.}
+For conflict-aware RAG, we recommend passing direction rather than a bare warning, letting the detector abstain, and
+measuring how often it names the wrong side on questions the generator already answers correctly. We release the
+harness, pre-registrations and every run.\footnote{Code, the pre-registration and all run outputs are in the
+anonymised supplementary material and will be released publicly on acceptance.}
