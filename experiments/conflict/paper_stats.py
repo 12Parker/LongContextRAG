@@ -550,6 +550,8 @@ def revision2(R, main_rows, main_ex=None):
     revision4(R, r2, fam, main_ex)
     from .revision5 import revision5
     revision5(R, r2, fam, main_rows)
+    from .revision6 import revision6
+    revision6(R, r2, main_rows)   # §16; also drops the per-question data H24 kept for revision5/6
     # exploratory (after seeing H14): do the baselines lose valid answers on multi-answer clean questions?
     if "gpt-4o-mini" in r2 and main_ex is not None:
         n_gold = {e.id: len(e.gold_answers) for e in main_ex}
@@ -747,7 +749,7 @@ def revision4(R, r2, fam, main_ex):
             h21[m_] = family(tests, dirs)
     rev["H21"] = h21
     for k, v in r2.items():   # risk/coverage effects of every condition, for the tables (exploratory)
-        if not k.startswith(("CBs", "CBf", "CBmaj", "RG", "CB:")):
+        if not k.startswith(("CBs", "CBf", "CBmaj", "RG", "CB:", "RD:")):   # RD: §16.4.1
             continue
         rows = v["_rows"]
         v["risk"] = {m_: {c: compare(rows, "plain", c, True, m_) for c in v["effects"][PRIMARY]}
@@ -798,7 +800,8 @@ def revision4(R, r2, fam, main_ex):
                                     "gain": float(np.mean(list(gain.values()))), "n": len(ids),
                                     "effect": compare(rows, "plain", "llm_dir+flag_directional", True, PRIMARY)}
             pooled += [(f"{g}|{d}", i, dq[i] - gp[i], gain[i]) for i in ids]
-            qdata[(g, d)] = {"ids": ids, "d": [dq[i] for i in ids], "g": [gp[i] for i in ids],
+            rq = {i: float(any((x.i, x.j) in contra[i] for x in det[i].pairs)) for i in ids}   # §16: flags the gold pair
+            qdata[(g, d)] = {"ids": ids, "d": [dq[i] for i in ids], "r": [rq[i] for i in ids], "g": [gp[i] for i in ids],
                              "y1": [gf[i] for i in ids], "w": [wrong_dir[i] for i in ids], "run": run, "rows": rows}
         h = {"cells": cell_out, "_q": qdata}
         if len(cell_out) < 4:

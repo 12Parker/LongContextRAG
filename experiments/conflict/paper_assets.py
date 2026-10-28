@@ -329,7 +329,8 @@ def tab_hypotheses(R, out: Path):
               "H21": "risk and coverage", "H22": "pair topology", "H23": "answer key",
               "H24": "detector versus generator reliability (crossed)", "H25": "Claude", "H26": "RAGuard (real misleading posts)",
               "H27": "the detector model's answer as a hint", "H28": "LLM flags on genuine conflicts",
-              "H29": "artefact probe of detector direction"}
+              "H29": "artefact probe of detector direction", "H30": "the detector's verdict as an answer key",
+              "H31": "randomised direction"}
 
     def body(rs):
         out, last = [], None
@@ -342,6 +343,8 @@ def tab_hypotheses(R, out: Path):
         return "\n".join(out)
     for m_, famd in rev.get("H21", {}).items():
         lab = {"misinfo": "misinformation rate", "abstain": "abstention rate", "selective": "selective accuracy"}[m_]
+        if m_ == "selective" and rev.get("H21c_ratio"):   # §15.4.5 / §16.4.7: the ratio estimand of Table 1
+            famd, lab = rev["H21c_ratio"], "selective accuracy (ratio)"
         for k, v in famd.items():
             rows.append(("H21", _esc(k.replace("vs plain", f"vs plain, {lab}")), _est(v), _p(v["p_holm"]),
                          "significant" if v["supported"] else "n.s.", "--"))
@@ -360,6 +363,14 @@ def tab_hypotheses(R, out: Path):
         for k, v in rev.get(f_, {}).get(PRIMARY, {}).items():
             ob = rev[f_][ROBUST][k]["supported"] == v["supported"]
             rows.append(("H27", _esc(k), _est(v), _p(v["p_holm"]), "significant" if v["supported"] else "n.s.", "yes" if ob else "no"))
+    for f_ in ("H30a", "H30b"):
+        for k, v in rev.get(f_, {}).get(PRIMARY, {}).items():
+            ob = rev[f_][ROBUST][k]["supported"] == v["supported"]
+            rows.append(("H30", _esc(k), _est(v), _p(v["p_holm"]), "significant" if v["supported"] else "n.s.", "yes" if ob else "no"))
+    for f_, pred in (("H31a", True), ("H31b", True), ("H31c", False)):
+        for k, v in rev.get(f_, {}).items():
+            o = ("supported" if v["supported"] else "not supported") if pred else ("significant" if v["supported"] else "n.s.")
+            rows.append(("H31", _esc(k), _est(v), _p(v["p_holm"]), o, "--"))
     for key, fam_ in rev.get("H28", {}).items():
         for m_, lab in (("both_answers", ""), (PRIMARY, ""), ("gold_recall", ", gold recall")):
             for k, v in fam_.get(m_, {}).items():
@@ -373,12 +384,12 @@ def tab_hypotheses(R, out: Path):
                      "significant" if v["supported"] else "n.s.", "--"))
     # one table per registration stage, so no table outgrows a page
     stages = [("H10", "H11"), ("H12", "H13", "H14"), ("H15", "H16", "H17", "H18", "H19"),
-              ("H20", "H21", "H22", "H23", "H24", "H25", "H26"), ("H27", "H28", "H29")]
+              ("H20", "H21", "H22", "H23", "H24", "H25", "H26"), ("H27", "H28", "H29"), ("H30", "H31")]
     stage_rows = [[r for r in rows[n_first:] if r[0].rstrip("abc") in st] for st in stages]
     body1 = body(rows[:n_first])
     stage_txt = ["the first addendum (\\S9; H10--H11)", "the second (\\S10; H12--H14)",
                  "the third and fourth (\\S11--\\S12; H15--H19)", "the fifth and sixth (\\S13--\\S14; H20--H26)",
-                 "the seventh (\\S15; H27--H29)"]
+                 "the seventh (\\S15; H27--H29)", "the eighth (\\S16; H30--H31)"]
     parts = [head % "p" + body1 + "\n" + rf"""\bottomrule
 \end{{tabular}}
 \caption{{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
@@ -501,8 +512,8 @@ def tab_risk(R, out: Path):
     """Risk and coverage on conflict questions (§13, H21): correct / misinformation / abstention, and accuracy on
     answered questions, for no flags, the oracle neutral flag and the oracle directional flag."""
     r2 = R.get("rev", {}).get("r2", {})
-    spec = [("CBs", "ConflictBank, one-answer prompt"), ("CBf", "ConflictBank, forced choice"), ("RG", "RAGuard (real posts)"),
-            ("CBmaj", "ConflictBank, misinformation majority")]
+    spec = [("RD", "RAMDocs, multi-answer prompt"), ("CB", "ConflictBank, multi-answer prompt"),
+            ("CBs", "ConflictBank, one-answer prompt"), ("CBf", "ConflictBank, forced choice")]   # RAGuard: Table tab_cb
     gens = [("gpt-4o-mini", "gpt-4o-mini"), ("gpt-6-luna", "gpt-6-luna"), ("claude-haiku-5-5", "Claude Haiku 5.5"),
             ("gpt-6.1-terra", "gpt-6.1-terra"), ("claude-sonnet-5-5", "Claude Sonnet 5.5"), ("gpt-4.1", "gpt-4.1"),
             ("Qwen2.5-7B", "Qwen2.5-7B")]
@@ -552,10 +563,11 @@ Generator & Correct & Misinfo. & Abstain & Sel. & Correct & Misinfo. & Abstain &
 \end{tabular}}
 \caption{Risk and coverage on conflict questions (\%): strictly correct answers, answers that contain the
 misinformation, abstentions (``unknown''), and selective accuracy (correct answers over non-abstained answers, pooled
-over questions and seeds, the estimand of \S15.4.5). \textbf{Bold}: the change from no flags is significant (H21 for
-ConflictBank; the paper's single scheme elsewhere). Where abstention is allowed, the neutral flag moves answers from
-misinformation, and from correct answers, into abstention, and leaves selective accuracy nearly unchanged; under forced
-choice it has no abstention to trade.}
+over questions and seeds). \textbf{Bold}: the change from no flags is significant (H21 for
+ConflictBank one-answer and forced; the paper's exploratory family elsewhere). The answer policy decides what a neutral
+flag does: under a prompt that asks for every valid answer it adds the misinformation to the answer; under a one-answer
+prompt that allows ``unknown'' it moves answers, misinformed and correct, into abstention; under forced choice it has
+no abstention to trade.}
 \label{tab:risk}
 \end{table*}
 """)
@@ -1277,6 +1289,8 @@ def numbers(R, out: Path):
     add("totalSpend", f"\\${total_spend():.2f}")
     from .assets5 import numbers5
     numbers5(R, add)   # §15 (revision5)
+    from .assets6 import numbers6
+    numbers6(R, add)   # §16 (revision6)
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1296,6 +1310,8 @@ def write_all(R, out: Path):
     fig_tradeoff(R, out); fig_placement(R, out); fig_answers(R, out); fig_reliability(R, out); tab_risk(R, out)
     from .assets5 import write5
     write5(R, out)   # after fig_reliability: replaces its tab_cells
+    from .assets6 import write6
+    write6(R, out)   # §16: replaces tab_pooled, tab_utility, tab_h24redo; adds the verdict column to tab_cells
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():
@@ -1306,9 +1322,11 @@ def write_all(R, out: Path):
 
 def app_prompts(out: Path):
     """Verbatim prompts for the appendix, taken from the code that ran."""
-    from .detectors import LLM_DETECT_DIRECTIONAL_PROMPT
-    from .prompts import (BASE, BASE_MINIMAL, BASE_SINGLE, CLOSED_BOOK, INSTRUCTION, INSTRUCTION_SELF, INSTRUCTION_V2,
-                          build_prompt)
+    from .detectors import LLM_DETECT_DIRECTIONAL_PROMPT, LLM_DETECT_PROMPT
+    from .judge_matcher import PROMPT as JUDGE_PROMPT
+    from .prepare_cb_probe import PARA_PROMPT
+    from .prompts import (BASE, BASE_FORCED, BASE_MINIMAL, BASE_SINGLE, CLOSED_BOOK, INSTRUCTION, INSTRUCTION_PICK,
+                          INSTRUCTION_SELF, INSTRUCTION_V2, build_prompt)
     from .detectors import Detection
     ex = build_prompt("Who founded X?", ["<passage 0>", "<passage 1>", "<passage 2>"], "flag_directional",
                       [Detection(0, 2, 1.0, "contradiction", [2])])[0]
@@ -1325,7 +1343,31 @@ def app_prompts(out: Path):
         + vb("Single call (inserted as the instruction).", INSTRUCTION_SELF)
         + vb("Example: directional flag (passage 2 suspect).", ex)
         + vb("Example: one-wrong flag, single-answer skeleton.", ow)
-        + vb("Directional LLM detector.", LLM_DETECT_DIRECTIONAL_PROMPT))
+        + vb("Directional LLM detector.", LLM_DETECT_DIRECTIONAL_PROMPT)
+        + vb("LLM detector without direction.", LLM_DETECT_PROMPT)
+        + vb("Forced-choice skeleton (no ``unknown'').", BASE_FORCED)
+        + vb("Pick instruction (with the neutral flag).", INSTRUCTION_PICK)
+        + vb("Example: neutral flag, single-answer skeleton.", _P3("flag"))
+        + vb("Example: neutral flag without pairs.", _P3("flag_nopairs"))
+        + vb("Example: one-wrong flag without pairs.", _P3("flag_onewrong_nopairs"))
+        + vb("Example: directional flag without pairs.", _P3("flag_directional_nopairs"))
+        + vb("Example: answer key (also the verdict key, with the detector's answers).",
+             build_prompt("Who founded X?", ["<passage 0>", "<passage 1>"], "answer_key", skeleton="single",
+                          wrong_answers=["<wrong answer>"])[0])
+        + vb("Example: hint (the detector model's own answer).",
+             build_prompt("Who founded X?", ["<passage 0>", "<passage 1>"], "hint", skeleton="single",
+                          hint=["<other model's answer>"])[0])
+        + vb("Example: WikiContradict (default skeleton, neutral flag).",
+             build_prompt("<question>", ["<passage 0>", "<passage 1>"], "flag", [Detection(0, 1, 1.0, "contradiction", [])])[0])
+        + vb("Paraphrase prompt (artefact probe, H29).", PARA_PROMPT)
+        + vb("LLM judge of the string matcher.", JUDGE_PROMPT))
+
+
+def _P3(mode):
+    from .detectors import Detection
+    from .prompts import build_prompt
+    return build_prompt("Who founded X?", ["<passage 0>", "<passage 1>", "<passage 2>"], mode,
+                        [Detection(0, 2, 1.0, "contradiction", [2])], skeleton="single")[0]
 
 
 def tab_appendix(R, out: Path):
@@ -1356,7 +1398,9 @@ def tab_appendix(R, out: Path):
 \bottomrule
 \end{{tabular}}
 \caption{{Label robustness: pre-registered tests with every suspect document treated as misinformation
-({c['n']['conflict']} conflict and {c['n']['clean']} clean hold-out questions).}}
+({c['n']['conflict']} conflict and {c['n']['clean']} clean hold-out questions; this rule assigns the 35 questions the
+main analysis excludes). The bootstrap distribution of the H4 correlation is skewed, so its point estimate lies near the
+end of its percentile interval.}}
 \label{{tab:contains}}
 \end{{table*}}
 """)

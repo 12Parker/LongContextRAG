@@ -227,9 +227,9 @@ Detector & Generator & Right & Wrong & Gen.\ acc. & Score & Gain & flag & hint &
 \bottomrule
 \end{tabular}
 \caption{Every detector--generator cell of H24 and H27 (ConflictBank, one-answer prompt, 300 conflict questions; \%),
-sorted by the exploratory score. \emph{Right}: share of questions on which the detector flags the true contradiction
-and names exactly its misinformation passage (the one definition of direction accuracy used throughout, computed on the
-detections that cell's generator saw); \emph{Wrong}: share on which it marks a correct passage as suspect;
+sorted by the exploratory score. \emph{Right}: the detector's hit rate, the share of questions on which it flags the true
+contradiction and names exactly its misinformation passage (computed on the detections that cell's generator saw;
+its precision, the same share among questions where it flags the true pair, is in Table~\ref{tab:h24redo}); \emph{Wrong}: share on which it marks a correct passage as suspect;
 \emph{Gen.\ acc.}: the generator's accuracy with no flags; \emph{Score}: right direction where the generator errs minus a
 correct passage marked where it is right; \emph{Gain}: the LLM directional flag's change in points. \emph{Hint}: the
 generator given the detector model's own plain answer, with no passage marked (H27); \emph{det.\ alone}: the detector

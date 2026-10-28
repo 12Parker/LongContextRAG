@@ -579,8 +579,3 @@ def revision5(R, r2, fam, main_rows):
     utility(rev, r2, PRIMARY)
     pooled5(rev, r2, main_rows, PRIMARY)
     descriptives(rev, r2, PRIMARY)
-    for k in ("H24", "H24_s13", "H24_maj"):
-        if k in rev:
-            for v in rev[k].get("_q", {}).values():
-                v.pop("run", None); v.pop("rows", None)
-            rev[k].pop("_q", None)

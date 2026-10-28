@@ -522,3 +522,23 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   only supplies their detections). Cells now carry their own rows.
 - **Lesson.** Long runs with reasoning-model detectors are sequential in detection (~25 min per 400 items); split
   independent runs into parallel tracks. A machine sleep can leave a run hung on dead connections: kill and resume.
+
+### Round 9 (2026-10-28): sixth mock review, §16
+
+- **Sixth mock review.** 3.0 from all three reviewers (Soundness 3 / 2.5 / 3). Main points: the neutral-flag mechanism
+  depends on the answer policy (under multi-answer prompts the flag adds misinformation); H14 compared prompts that did
+  not match; "follows wrong flags more readily" used an asymmetric definition; H27's hint was the detector model's
+  answer, not its verdict; several inconsistencies; claim status unclear.
+- **Pre-registration.** §16 (13602c7): H30 (`verdict_key`), H31 (randomised direction), re-analyses.
+- **Code:** `verdict_key` mode (`run.verdict_answers`); `revision6.py` (multilevel REML meta-analysis, utility over the
+  same settings with a seed-to-seed null, H24 with precision/recall, question-FE model, symmetric following,
+  H30/H31, matched H14); `assets6.py` (macros, tables, new `fig_reliability`); every prompt in Appendix A.
+- **Results:**
+  - H31: right flag +17.6 to +33.5, wrong flag -31.2 to -64.5; the net is significantly negative for 3 of 4 generators
+    and grows with generator accuracy; follow rates are similar for right and wrong flags (terra follows 95% of wrong
+    ones). The earlier asymmetry claim is withdrawn.
+  - H30: the verdict key matches the directional flag in every cell (none significant).
+  - H24: precision and recall both matter within generators (perm p 0.047, 0.040); no detector-level summary predicts
+    held-out detectors (LODO R2 0.12 vs 0.17 for G alone).
+  - Pooled (multilevel): -1.6 [-5.5, +2.2]; multi-answer -3.8, one-answer -0.5, forced +1.5.
+  - H14 under the matched one-answer prompt: the pipeline beats Astute RAG by 9.2 and TrustRAG by 13.4 (exploratory).
