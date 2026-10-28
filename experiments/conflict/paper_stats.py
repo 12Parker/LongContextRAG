@@ -65,6 +65,30 @@ RUNS = {
     "cb_single_luna": ROOT / "runs/cb_single_luna", "cb_single_terra": ROOT / "runs/cb_single_terra",
     "holdout_luna": ROOT / "runs/holdout_luna", "holdout_terra": ROOT / "runs/holdout_terra",
     "cbmaj_single_luna": ROOT / "runs/cbmaj_single_luna", "cbmaj_single_terra": ROOT / "runs/cbmaj_single_terra",
+    # fourth revision (PREREGISTRATION.md §13, §14)
+    "cb_forced_mini": ROOT / "runs/cb_forced_mini",
+    "cb_forced_luna": ROOT / "runs/cb_forced_luna",
+    "cb_forced_terra": ROOT / "runs/cb_forced_terra",
+    "cb_forced_haiku": ROOT / "runs/cb_forced_haiku",
+    "ctl_rd_mini": ROOT / "runs/ctl_rd_mini",
+    "ctl_cb_mini": ROOT / "runs/ctl_cb_mini",
+    "ctl_mj_mini": ROOT / "runs/ctl_mj_mini",
+    "ctl_rd_luna": ROOT / "runs/ctl_rd_luna",
+    "ctl_cb_luna": ROOT / "runs/ctl_cb_luna",
+    "ctl_mj_luna": ROOT / "runs/ctl_mj_luna",
+    "ctl_rd_terra": ROOT / "runs/ctl_rd_terra",
+    "ctl_cb_terra": ROOT / "runs/ctl_cb_terra",
+    "ctl_mj_terra": ROOT / "runs/ctl_mj_terra",
+    "rg_mini": ROOT / "runs/rg_mini",
+    "rg_luna": ROOT / "runs/rg_luna",
+    "rg_haiku": ROOT / "runs/rg_haiku",
+    "rg_terra": ROOT / "runs/rg_terra",
+    "rg_sonnet": ROOT / "runs/rg_sonnet",
+    "cb_single_haiku": ROOT / "runs/cb_single_haiku",
+    "cb_single_sonnet": ROOT / "runs/cb_single_sonnet",
+    "holdout_haiku": ROOT / "runs/holdout_haiku",
+    "holdout_sonnet": ROOT / "runs/holdout_sonnet",
+    "cbmaj_single_haiku": ROOT / "runs/cbmaj_single_haiku",
 }
 GENERATORS = {"gpt-4o-mini": ("main", "minimal"), "gpt-4.1": ("gpt41", "gpt41_minimal"),
               "Qwen2.5-7B": ("qwen", "qwen_minimal")}
@@ -394,7 +418,14 @@ def revision2(R, main_rows, main_ex=None):
                      ("CBmaj:gpt-4o-mini", "cbmaj_single"), ("CBmaj:gpt-4.1", "cbmaj_single_gpt41"),
                      ("CBs:gpt-6-luna", "cb_single_luna"), ("CBs:gpt-6.1-terra", "cb_single_terra"),
                      ("RD:gpt-6-luna", "holdout_luna"), ("RD:gpt-6.1-terra", "holdout_terra"),
-                     ("CBmaj:gpt-6-luna", "cbmaj_single_luna"), ("CBmaj:gpt-6.1-terra", "cbmaj_single_terra")):
+                     ("CBmaj:gpt-6-luna", "cbmaj_single_luna"), ("CBmaj:gpt-6.1-terra", "cbmaj_single_terra"),
+                     ("CBs:claude-haiku-5-5", "cb_single_haiku"), ("CBs:claude-sonnet-5-5", "cb_single_sonnet"),
+                     ("RD:claude-haiku-5-5", "holdout_haiku"), ("RD:claude-sonnet-5-5", "holdout_sonnet"),
+                     ("CBmaj:claude-haiku-5-5", "cbmaj_single_haiku"),
+                     ("CBf:gpt-4o-mini", "cb_forced_mini"), ("CBf:gpt-6-luna", "cb_forced_luna"),
+                     ("CBf:gpt-6.1-terra", "cb_forced_terra"), ("CBf:claude-haiku-5-5", "cb_forced_haiku"),
+                     ("RG:gpt-4o-mini", "rg_mini"), ("RG:gpt-6-luna", "rg_luna"), ("RG:claude-haiku-5-5", "rg_haiku"),
+                     ("RG:gpt-6.1-terra", "rg_terra"), ("RG:claude-sonnet-5-5", "rg_sonnet")):
         if results_path(RUNS[run]):
             sets[key] = rows_of(RUNS[run])
     if "gpt-4.1|seed0" in sets:
@@ -408,6 +439,12 @@ def revision2(R, main_rows, main_ex=None):
                                                              if r["condition"] in ("astute", "trustrag")]
     if results_path(RUNS["holdout_extra"]):
         sets["RD:gpt-4o-mini"] = main_rows + rows_of(RUNS["holdout_extra"])
+    # §13 controls join the base set of the same generator and data (same items and seeds; their plain is a cache copy)
+    for g, gk in (("mini", "gpt-4o-mini"), ("luna", "gpt-6-luna"), ("terra", "gpt-6.1-terra")):
+        for d, pre in (("rd", "RD"), ("cb", "CBs"), ("mj", "CBmaj")):
+            run = RUNS[f"ctl_{d}_{g}"]
+            if results_path(run) and f"{pre}:{gk}" in sets:
+                sets[f"{pre}:{gk}"] = sets[f"{pre}:{gk}"] + [r for r in rows_of(run) if r["condition"] != "plain"]
     r2 = rev["r2"] = {}
     for key, rows in sets.items():
         conds = sorted({r["condition"] for r in rows} - {"plain", "closedbook"})
@@ -417,7 +454,9 @@ def revision2(R, main_rows, main_ex=None):
                      c in ("llm_dir+flag_directional",)]
         if key == "RD:gpt-4o-mini":   # main-table conditions are reported from main_table
             conds = [c for c in conds if c in ("self_identify", "oracle+flag_onewrong", "oracle+flag", "oracle+flag_directional",
-                                               "llm_dir+flag_directional")]
+                                               "llm_dir+flag_directional", "answer_key", "oracle+flag_pick",
+                                               "oracle+flag_nopairs", "oracle+flag_onewrong_nopairs",
+                                               "llm_dir+flag_directional_nopairs")]
         r2[key] = {
             "plain": {m: {s: float(np.mean(list(per_question(rr, "plain", f, m).values())))
                           for s, f, rr in (("all", None, rows), ("conflict", True, rows), ("clean", False, rows),
@@ -507,6 +546,7 @@ def revision2(R, main_rows, main_ex=None):
     if spec:
         rev["H14"] = fam("H14", spec, {})
     revision3(R, r2, fam, main_ex)
+    revision4(R, r2, fam, main_ex)
     # exploratory (after seeing H14): do the baselines lose valid answers on multi-answer clean questions?
     if "gpt-4o-mini" in r2 and main_ex is not None:
         n_gold = {e.id: len(e.gold_answers) for e in main_ex}
@@ -520,6 +560,15 @@ def revision2(R, main_rows, main_ex=None):
         v.pop("_rows", None)
 
 
+SET_PREFIX = {"CBs": "ConflictBank", "RD": "RAMDocs", "CBmaj": "CB majority", "CBf": "ConflictBank forced",
+              "RG": "RAGuard"}
+
+
+def set_label(key: str) -> str:
+    pre, gen = key.split(":", 1)
+    return f"{SET_PREFIX[pre]}, {gen}"
+
+
 def revision3(R, r2, fam, main_ex):
     """Third revision (§11): H15-H18, closed-book stratification, TOST for "tie" / "no harm" claims."""
     from . import revision_stats as rv
@@ -531,12 +580,7 @@ def revision3(R, r2, fam, main_ex):
         for key, tests in ((k, t) for ss, t in groups for k in ss):
             if key not in r2:
                 continue
-            label = {"CBs:gpt-4o-mini": "ConflictBank, gpt-4o-mini", "CBs:gpt-4.1": "ConflictBank, gpt-4.1",
-                     "CBs:Qwen2.5-7B": "ConflictBank, Qwen2.5-7B", "RD:gpt-4o-mini": "RAMDocs, gpt-4o-mini",
-                     "CBmaj:gpt-4o-mini": "CB majority, gpt-4o-mini", "CBmaj:gpt-4.1": "CB majority, gpt-4.1",
-                     "CBs:gpt-6-luna": "ConflictBank, gpt-6-luna", "CBs:gpt-6.1-terra": "ConflictBank, gpt-6.1-terra",
-                     "RD:gpt-6-luna": "RAMDocs, gpt-6-luna", "RD:gpt-6.1-terra": "RAMDocs, gpt-6.1-terra",
-                     "CBmaj:gpt-6-luna": "CB majority, gpt-6-luna", "CBmaj:gpt-6.1-terra": "CB majority, gpt-6.1-terra"}[key]
+            label = set_label(key)
             have = {r["condition"] for r in r2[key]["_rows"]}
             for a, b, d, what, sub in tests:
                 if a in have and b in have:
@@ -618,6 +662,228 @@ def revision3(R, r2, fam, main_ex):
             rows = r2[key]["_rows"]
             if any(r["condition"] == b for r in rows):
                 tt[tk] = rv.tost(rows, a, b, sub, PRIMARY, groups_of(rows))
+
+
+def revision4(R, r2, fam, main_ex):
+    """Fourth revision (§13, §14): forced choice, risk/coverage, pair topology, answer key, crossed
+    detector x generator reliability, Claude, RAGuard, pooled neutral-flag estimate, majority breakdown."""
+    from scipy.stats import spearmanr
+    rev = R["rev"]
+    unk = lambda r: any(a.strip().lower().rstrip(".") == "unknown" for a in r.get("pred_answers", []))
+    for v in r2.values():            # derived per-row outcomes for H21
+        for r in v["_rows"]:
+            ab = unk(r)
+            r["misinfo"], r["abstain"] = r["wrong_rate"], float(ab)
+            r["selective"] = None if ab else r[PRIMARY]
+
+    def fam_of(name, groups):
+        spec, dirs = [], {}
+        for keys, tests in groups:
+            for key in keys:
+                if key not in r2:
+                    continue
+                have = {r["condition"] for r in r2[key]["_rows"]}
+                for a, b, d, what, sub in tests:
+                    if a in have and b in have:
+                        tk = f"{set_label(key)}: {what}"
+                        spec.append((tk, key, a, b, sub)); dirs[tk] = d
+        if spec:
+            rev[name] = fam(name, spec, dirs)
+
+    G4 = ("gpt-4o-mini", "gpt-6-luna", "gpt-6.1-terra", "claude-haiku-5-5")
+    fam_of("H20", [([f"CBf:{g}" for g in G4], [
+        ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+        ("plain", "oracle+flag_onewrong", 0, "one-wrong flag vs plain (conflict)", True),
+        ("plain", "oracle+flag_directional", +1, "dir. flag > plain (conflict)", True)])])
+    fam_of("H22", [
+        ([f"RD:{g}" for g in G4], [("oracle+flag_onewrong", "oracle+flag_onewrong_nopairs", 0,
+                                    "one-wrong without pairs vs with pairs (conflict)", True)]),
+        ([f"CBmaj:{g}" for g in G4], [
+            ("oracle+flag", "oracle+flag_nopairs", 0, "neutral without pairs vs with pairs (conflict)", True),
+            ("llm_dir+flag_directional", "llm_dir+flag_directional_nopairs", 0,
+             "LLM dir. flag without pairs vs with pairs (conflict)", True)])])
+    fam_of("H23", [([f"{p}:{g}" for p in ("RD", "CBs", "CBmaj") for g in G4], [
+        ("answer_key", "oracle+flag_directional", 0, "dir. flag vs answer key (conflict)", True)])])
+    claude = ("claude-haiku-5-5", "claude-sonnet-5-5")
+    fam_of("H25", [
+        ([f"CBs:{g}" for g in claude], [
+            ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+            ("oracle+flag", "oracle+flag_directional", +1, "dir. flag > neutral flag (conflict)", True),
+            ("oracle+flag_onewrong", "oracle+flag_directional", +1, "dir. flag > one-wrong flag (conflict)", True),
+            ("plain", "llm_dir+flag_directional", +1, "LLM dir. flag > plain (all q.)", LABELLED)]),
+        ([f"RD:{g}" for g in claude], [
+            ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+            ("oracle+flag", "oracle+flag_directional", +1, "dir. flag > neutral flag (conflict)", True)]),
+        ([f"CBmaj:{g}" for g in claude], [
+            ("plain", "oracle+flag_directional", +1, "dir. flag > plain (conflict)", True),
+            ("plain", "llm_dir+flag_directional", 0, "LLM dir. flag vs plain (conflict)", True)])])
+    fam_of("H26", [([f"RG:{g}" for g in G4 + ("claude-sonnet-5-5",)], [
+        ("plain", "oracle+flag", 0, "neutral flag vs plain (conflict)", True),
+        ("plain", "oracle+flag_directional", +1, "dir. flag > plain (conflict)", True),
+        ("oracle+flag", "oracle+flag_directional", +1, "dir. flag > neutral flag (conflict)", True),
+        ("plain", "oracle+flag_onewrong", 0, "one-wrong flag vs plain (conflict)", True),
+        ("plain", "llm_dir+flag_directional", 0, "LLM dir. flag vs plain (conflict)", True)])])
+
+    # H21: risk and coverage (single and forced prompts), registered as one family per metric
+    h21 = {}
+    for m_ in ("misinfo", "abstain", "selective"):
+        tests, dirs = {}, {}
+        for key in [f"{p}:{g}" for p in ("CBs", "CBf") for g in G4]:
+            if key not in r2:
+                continue
+            rows = r2[key]["_rows"]
+            for c, nm in (("oracle+flag", "neutral flag"), ("oracle+flag_directional", "dir. flag")):
+                if any(r["condition"] == c for r in rows):
+                    tk = f"{set_label(key)}: {nm} vs plain (conflict)"
+                    tests[tk] = compare(rows, "plain", c, True, m_); dirs[tk] = 0
+        if tests:
+            h21[m_] = family(tests, dirs)
+    rev["H21"] = h21
+    for k, v in r2.items():   # risk/coverage effects of every condition, for the tables (exploratory)
+        if not k.startswith(("CBs", "CBf", "CBmaj", "RG", "CB:")):
+            continue
+        rows = v["_rows"]
+        v["risk"] = {m_: {c: compare(rows, "plain", c, True, m_) for c in v["effects"][PRIMARY]}
+                     for m_ in ("misinfo", "abstain", "selective")}
+
+    # H24: crossed detector x generator reliability (ConflictBank single, conflict questions)
+    gen_key = {"mini": "gpt-4o-mini", "luna": "gpt-6-luna", "four": "gpt-4.1", "terra": "gpt-6.1-terra",
+               "haiku": "claude-haiku-5-5", "qwen": "Qwen2.5-7B"}
+    det_key = {"luna": "gpt-6-luna", "four": "gpt-4.1", "terra": "gpt-6.1-terra", "haiku": "claude-haiku-5-5",
+               "sonnet": "claude-sonnet-5-5"}
+
+    def crossed(ex_run, base_run, set_prefix, cross_prefix, keep=lambda g, d: True):
+        ex_ = {e.id: e for e in examples_of(RUNS[ex_run]) if e.has_conflict}
+        # d_q: the detector flags a gold contradiction pair and names exactly its misinformation member(s)
+        contra = {i: {p: {k for k in p if e.meta["doc_types"][k] == "misinfo"}
+                      for p, lab in e.gold_pairs.items() if lab == "contradiction"} for i, e in ex_.items()}
+        correct = {i: {k for k, t in enumerate(e.meta["doc_types"]) if t == "correct"} for i, e in ex_.items()}
+        cells = {}
+        for gname in gen_key.values():          # gpt-4o-mini detector: the base single-prompt runs
+            if f"{set_prefix}{gname}" in r2 and keep(gname, "gpt-4o-mini"):
+                cells[(gname, "gpt-4o-mini")] = (r2[f"{set_prefix}{gname}"]["_rows"], RUNS[base_run])
+        for gk, gname in gen_key.items():
+            for dk, dname in det_key.items():
+                run = ROOT / f"runs/{cross_prefix}_{gk}_{dk}"
+                if results_path(run) and keep(gname, dname):
+                    cells[(gname, dname)] = (rows_of(run), run)
+        cell_out, pooled = {}, []
+        for (g, d), (rows, run) in cells.items():
+            det = dets_of(run, "llm_dir")
+            dq = {i: float(any(contra[i].get((x.i, x.j)) == set(x.suspects) for x in det[i].pairs))
+                  for i in ex_ if i in det}
+            gp = per_question(rows, "plain", True, PRIMARY)
+            gf = per_question(rows, "llm_dir+flag_directional", True, PRIMARY)
+            ids = sorted(set(dq) & set(gp) & set(gf))
+            if not ids:
+                continue
+            gain = {i: gf[i] - gp[i] for i in ids}
+            # exploratory (post hoc): right where the generator is wrong, minus pointing at a correct passage where it is right
+            wrong_dir = {i: float(bool({k for x in det[i].pairs for k in x.suspects} & correct[i])) for i in ids}
+            mech = float(np.mean([dq[i] * (1 - gp[i]) - wrong_dir[i] * gp[i] for i in ids]))
+            cell_out[f"{g}|{d}"] = {"mech": mech, "wrong_dir": float(np.mean(list(wrong_dir.values()))),
+                                    "any_flag": float(np.mean([bool(det[i].pairs) for i in ids])),"gap": float(np.mean([dq[i] for i in ids]) - np.mean([gp[i] for i in ids])),
+                                    "det_acc": float(np.mean([dq[i] for i in ids])), "gen_acc": float(np.mean([gp[i] for i in ids])),
+                                    "gain": float(np.mean(list(gain.values()))), "n": len(ids),
+                                    "effect": compare(rows, "plain", "llm_dir+flag_directional", True, PRIMARY)}
+            pooled += [(f"{g}|{d}", i, dq[i] - gp[i], gain[i]) for i in ids]
+        h = {"cells": cell_out}
+        if len(cell_out) < 4:
+            return h
+        gaps = np.array([v["gap"] for v in cell_out.values()]); gains = np.array([v["gain"] for v in cell_out.values()])
+        rho = float(spearmanr(gaps, gains).statistic)
+        rng = np.random.default_rng(0)
+        perm = np.array([spearmanr(gaps, rng.permutation(gains)).statistic for _ in range(10_000)])
+        h["a"] = {"rho": rho, "p_one_sided": float((np.sum(perm >= rho) + 1) / (len(perm) + 1)), "n_cells": len(cell_out)}
+        # H24b: within-cell slope of per-question gain on (d_q - g_q), cluster bootstrap over questions
+        cells_ = sorted({c for c, *_ in pooled})
+        def slope(data):
+            x, y = [], []
+            for c in cells_:
+                xs = np.array([a for cc, _, a, _ in data if cc == c]); ys = np.array([b for cc, _, _, b in data if cc == c])
+                if len(xs) > 1:
+                    x.append(xs - xs.mean()); y.append(ys - ys.mean())
+            x, y = np.concatenate(x), np.concatenate(y)
+            return float((x * y).sum() / (x * x).sum())
+        b0 = slope(pooled)
+        qids = sorted({i for _, i, _, _ in pooled}); by_q = defaultdict(list)
+        for t in pooled:
+            by_q[t[1]].append(t)
+        boots = []
+        for _ in range(2000):
+            samp = rng.choice(qids, len(qids))
+            boots.append(slope([t for q in samp for t in by_q[q]]))
+        lo, hi = np.quantile(boots, [0.025, 0.975])
+        h["b"] = {"slope": b0, "ci_low": float(lo), "ci_high": float(hi), "p_one_sided": float(np.mean(np.array(boots) <= 0))}
+        # where the cross-cell least-squares line of gain on gap crosses zero
+        mech = np.array([v["mech"] for v in cell_out.values()])
+        h["mech"] = {"rho": float(spearmanr(mech, gains).statistic), "r": float(np.corrcoef(mech, gains)[0, 1]),
+                     "rho_gap": rho, "r_gap": float(np.corrcoef(gaps, gains)[0, 1])}
+        k, c0 = np.polyfit(gaps, gains, 1)
+        h["break_even_gap"] = float(-c0 / k) if k > 0 else None
+        h["n_positive"] = int(sum(v["effect"]["diff"] > 0 for v in cell_out.values()))
+        return h
+
+    rev["H24"] = crossed("cb_single", "cb_main", "CBs:", "cross_cb")
+    # sensitivity (§14): the cells registered under §13 only, i.e. no Claude detector or generator
+    rev["H24_s13"] = crossed("cb_single", "cb_main", "CBs:", "cross_cb", lambda g, d: "claude" not in g + d)
+    if "CBmaj:gpt-4o-mini" in r2:   # exploratory: the same analysis under majority misinformation
+        rev["H24_maj"] = crossed("cbmaj_single", "cbmaj_single", "CBmaj:", "cross_mj")
+
+    # pooled random-effects estimate of the oracle neutral flag across settings (DerSimonian-Laird)
+    neu = [(k, v["effects"][PRIMARY]["oracle+flag"]["conflict"]) for k, v in r2.items()
+           if k.startswith(("CB", "RD:gpt-6", "RD:claude", "RG")) and "oracle+flag" in v["effects"][PRIMARY]]
+    neu += [(k, v["effects"][PRIMARY]["oracle+flag"]["conflict"]) for k, v in rev.get("generality", {}).items()
+            if "oracle+flag" in v["effects"][PRIMARY]]
+    y = np.array([t["diff"] for _, t in neu]); se = np.array([(t["ci_high"] - t["ci_low"]) / (2 * 1.96) for _, t in neu])
+    w = 1 / se ** 2; ybar = (w * y).sum() / w.sum(); Q = (w * (y - ybar) ** 2).sum()
+    tau2 = max(0.0, (Q - (len(y) - 1)) / (w.sum() - (w ** 2).sum() / w.sum()))
+    ws = 1 / (se ** 2 + tau2); mu = (ws * y).sum() / ws.sum(); se_mu = (1 / ws.sum()) ** 0.5
+    rev["neutral_pooled"] = {"mu": float(mu), "ci_low": float(mu - 1.96 * se_mu), "ci_high": float(mu + 1.96 * se_mu),
+                             "tau": float(tau2 ** 0.5), "k": len(y), "_effects": [t for _, t in neu]}
+
+    # majority misinformation: what the gpt-4o-mini detector's directional flag marks, per question
+    if "CBmaj:gpt-4o-mini" in r2:
+        mj_ex = {e.id: e for e in examples_of(RUNS["cbmaj_single"]) if e.has_conflict}
+        det = dets_of(RUNS["cbmaj_single"], "llm_dir")
+        rows = r2["CBmaj:gpt-4o-mini"]["_rows"]
+        gp = per_question(rows, "plain", True, PRIMARY); gf = per_question(rows, "llm_dir+flag_directional", True, PRIMARY)
+        groups = defaultdict(list)
+        for i, e in mj_ex.items():
+            t = e.meta["doc_types"]; sus = {k for x in det[i].pairs for k in x.suspects}
+            marks_correct = any(t[k] == "correct" for k in sus); n_mis = sum(t[k] == "misinfo" for k in sus)
+            grp = "correct marked" if marks_correct else (f"{min(n_mis, 3)} wrong marked" if n_mis else "nothing marked")
+            if i in gp and i in gf:
+                groups[grp].append(gf[i] - gp[i])
+        rev["majority_breakdown"] = {g: {"n": len(v), "gain": float(np.mean(v))} for g, v in groups.items()}
+
+    # H13 as flag x instruction (§13.4): the neutral flag's effect given the instruction
+    from . import revision_stats as rv
+    h13x = {}
+    for key, label in (("gpt-4o-mini", "RAMDocs, gpt-4o-mini"), ("gpt-4.1|seed0", "RAMDocs, gpt-4.1 (seed 0)"),
+                       ("CB:gpt-4o-mini", "ConflictBank (multi-answer prompt), gpt-4o-mini")):
+        if key in r2:
+            rows = r2[key]["_rows"] + ([r for r in R.get("_main_rows", []) if r["condition"] == "instruct_v2"] if key == "gpt-4.1|seed0" else [])
+            if {"instruct_v2", "oracle+flag_instruct_v2"} <= {r["condition"] for r in rows}:
+                h13x[label] = compare(rows, "instruct_v2", "oracle+flag_instruct_v2", True, PRIMARY)
+    rev["H13_2x2"] = h13x
+    # TOST (±3 points) for "as good as" claims (§13.4): single call vs detector pipeline, Qwen vs gpt-4o-mini detector
+    tt = rev.setdefault("tost_claims", {})
+    for tk, key in (("h18_rd", "RD:gpt-4o-mini"), ("h18_cb", "CBs:gpt-4o-mini"), ("h18_mj", "CBmaj:gpt-4o-mini")):
+        if key in r2:
+            rows = [r for r in r2[key]["_rows"] if r.get("has_conflict") is not None]
+            if {"self_identify", "llm_dir+flag_directional"} <= {r["condition"] for r in rows}:
+                tt[tk] = rv.tost(rows, "self_identify", "llm_dir+flag_directional", None, PRIMARY, groups_of(rows))
+
+    # CONFLICTS by conflict type, 3 seeds (exploratory)
+    if results_path(RUNS["conflicts"]):
+        cr = rows_of(RUNS["conflicts"])
+        out = {}
+        for ct in sorted({r["conflict_type"] for r in cr}):
+            sub = [r for r in cr if r["conflict_type"] == ct]
+            out[ct] = {"n": len({r["id"] for r in sub}), "plain": float(np.mean(list(per_question(sub, "plain", None, "primary").values()))),
+                       **{c: compare(sub, "plain", c, None, "primary") for c in ("llm_dir+flag", "llm_dir+flag_directional", "instruct_v2")}}
+        rev["conflicts_by_type"] = out
 
 
 # --------------------------------------------------------------------------- output helpers
@@ -759,6 +1025,11 @@ def main(argv=None):
                           for k, v in summ.items() if k.startswith("caag")}
     from .revision_stats import assign_significance
     assign_significance(R)
+    np_ = R["rev"].get("neutral_pooled")
+    if np_:   # harm/help counts use the adjusted significance, so they are taken after it is assigned
+        eff = np_.pop("_effects")
+        np_["n_harm"] = int(sum(t["sig"] and t["diff"] < 0 for t in eff))
+        np_["n_help"] = int(sum(t["sig"] and t["diff"] > 0 for t in eff))
     (out / "hypotheses.json").write_text(json.dumps(R, indent=1, default=float))
     from . import paper_assets
     paper_assets.write_all(R, out)

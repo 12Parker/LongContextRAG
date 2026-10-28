@@ -290,13 +290,14 @@ def tab_hypotheses(R, out: Path):
         for k, v in R["H8"]["both_answers"].items():
             rows.append(("H8", "WikiContradict: " + _esc(k), _est(v), _p(v["p_holm"]), outcome(v, "H8", k), "--"))
     n_first = len(rows)
-    for h in ("H10", "H11", "H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19"):
+    for h in ("H10", "H11", "H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19", "H20", "H22", "H23", "H25", "H26"):
         if h in rev:
             for k, v in rev[h][PRIMARY].items():
                 two = h == "H14" or " vs " in k
                 o = ("significant" if v["supported"] else "n.s.") if two else ("supported" if v["supported"] else "not supported")
                 ob = rev[h][ROBUST][k]["supported"] == v["supported"]
-                rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), o, "yes" if ob else "no"))
+                kk = k.replace("(labelled)", "(all questions)") if k.startswith(("ConflictBank", "CB majority", "RAGuard")) else k
+                rows.append((h, _esc(kk), _est(v), _p(v["p_holm"]), o, "yes" if ob else "no"))
     head = r"""\begin{table*}[%s]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -316,7 +317,9 @@ def tab_hypotheses(R, out: Path):
               "H11": "an open-weights generator", "H12": "ConflictBank", "H13": "neutral flag + resolution instruction",
               "H14": "published baselines", "H15": "ConflictBank, single-answer prompt",
               "H16": "information vs direction (one-wrong flag)", "H17": "majority misinformation",
-              "H18": "a single-call baseline", "H19": "current reasoning models"}
+              "H18": "a single-call baseline", "H19": "current reasoning models", "H20": "forced choice (no ``unknown'')",
+              "H21": "risk and coverage", "H22": "pair topology", "H23": "answer key",
+              "H24": "detector versus generator reliability (crossed)", "H25": "Claude", "H26": "RAGuard (real misleading posts)"}
 
     def body(rs):
         out, last = [], None
@@ -327,23 +330,52 @@ def tab_hypotheses(R, out: Path):
                 last = fam
             out.append(" & ".join(r) + r" \\")
         return "\n".join(out)
-    body1, body2 = body(rows[:n_first]), body(rows[n_first:])
-    (out / "tab_hypotheses.tex").write_text(head % "p" + body1 + "\n" + rf"""\bottomrule
+    for m_, famd in rev.get("H21", {}).items():
+        lab = {"misinfo": "misinformation rate", "abstain": "abstention rate", "selective": "selective accuracy"}[m_]
+        for k, v in famd.items():
+            rows.append(("H21", _esc(k.replace("vs plain", f"vs plain, {lab}")), _est(v), _p(v["p_holm"]),
+                         "significant" if v["supported"] else "n.s.", "--"))
+    h24 = rev.get("H24", {})
+    if "a" in h24:
+        a = h24["a"]
+        rows.append(("H24", f"gain rises with detector-minus-generator reliability, Spearman over {a['n_cells']} cells",
+                     f"$\\rho={a['rho']:+.2f}$", _p(a["p_one_sided"]), "supported" if a["p_one_sided"] < 0.05 else "not supported", "--"))
+    if "b" in h24:
+        b = h24["b"]
+        rows.append(("H24", "per-question slope of gain on reliability gap, within cells",
+                     f"{pct(b['slope'], True)} [{pct(b['ci_low'], True)}, {pct(b['ci_high'], True)}]", _p(b["p_one_sided"]),
+                     "supported" if b["p_one_sided"] < 0.05 else "not supported", "--"))
+    # one table per registration stage, so no table outgrows a page
+    stages = [("H10", "H11"), ("H12", "H13", "H14"), ("H15", "H16", "H17", "H18", "H19"), ("H20", "H21", "H22", "H23", "H24", "H25", "H26")]
+    stage_rows = [[r for r in rows[n_first:] if r[0].rstrip("abc") in st] for st in stages]
+    body1 = body(rows[:n_first])
+    stage_txt = ["the first addendum (H10--H11)", "the second (H12--H14)", "the third (H15--H19)",
+                 "the fourth and fifth (H20--H26)"]
+    parts = [head % "p" + body1 + "\n" + rf"""\bottomrule
 \end{{tabular}}
 \caption{{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
 strict accuracy; differences in points). Rows marked \textsuperscript{{r}} are re-analyses registered later, before
 they were computed. {legend}}}
 \label{{tab:hypotheses}}
 \end{{table*}}
-""" + (head % "p" + body2 + "\n" + rf"""\bottomrule
+"""]
+    MAX_ROWS = 38
+    chunks = []
+    for st, rs in zip(stage_txt, stage_rows):
+        for k in range(0, len(rs), MAX_ROWS):
+            chunks.append((st + (" (continued)" if k else ""), rs[k:k + MAX_ROWS]))
+    for n_, (st, rs) in enumerate(chunks):
+        lab = f"tab:hypotheses{n_ + 2}"
+        parts.append(head % "p" + body(rs) + "\n" + rf"""\bottomrule
 \end{{tabular}}
-\caption{{Pre-registered tests added in three addenda (H10--H11; H12--H14; H15--H18), each committed before the runs
-it covers. Same conventions as Table~\ref{{tab:hypotheses}}. Settings name the benchmark and generator; ConflictBank
-rows in H15--H18 use the single-answer skeleton, and \emph{{CB majority}} is ConflictBank with three wrong-side
-passages per conflict question.}}
-\label{{tab:hypotheses2}}
+\caption{{Pre-registered tests added in {st}, each committed before the runs it covers. Same conventions as
+Table~\ref{{tab:hypotheses}}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
+single-answer prompt unless marked \emph{{forced}}; \emph{{CB majority}} has three wrong-side passages per conflict
+question; RAGuard's misleading posts are real Reddit text.}}
+\label{{{lab}}}
 \end{{table*}}
-""" if rows[n_first:] else ""))
+""")
+    (out / "tab_hypotheses.tex").write_text("\n".join(parts))
 
 
 BASELINE_NAME = {"self_identify": "Single call (name suspects, then answer)", "astute": "Astute RAG", "astute_multi": "Astute RAG (multi)", "trustrag": "TrustRAG",
@@ -436,6 +468,123 @@ scheme.}
 """)
 
 
+def tab_risk(R, out: Path):
+    """Risk and coverage on conflict questions (§13, H21): correct / misinformation / abstention, and accuracy on
+    answered questions, for no flags, the oracle neutral flag and the oracle directional flag."""
+    r2 = R.get("rev", {}).get("r2", {})
+    spec = [("CBs", "ConflictBank, one-answer prompt"), ("CBf", "ConflictBank, forced choice"), ("RG", "RAGuard (real posts)"),
+            ("CBmaj", "ConflictBank, misinformation majority")]
+    gens = [("gpt-4o-mini", "gpt-4o-mini"), ("gpt-6-luna", "gpt-6-luna"), ("claude-haiku-5-5", "Claude Haiku 5.5"),
+            ("gpt-6.1-terra", "gpt-6.1-terra"), ("claude-sonnet-5-5", "Claude Sonnet 5.5"), ("gpt-4.1", "gpt-4.1"),
+            ("Qwen2.5-7B", "Qwen2.5-7B")]
+    conds = ("plain", "oracle+flag", "oracle+flag_directional")
+    h21 = R.get("rev", {}).get("H21", {})
+
+    def sig(key, c, m_):
+        if c == "plain" or m_ not in h21:
+            return False
+        label = {"CBs": "ConflictBank", "CBf": "ConflictBank forced"}.get(key.split(":")[0])
+        if not label:
+            v = r2[key].get("risk", {}).get(m_, {}).get(c, {})
+            return bool(v.get("sig"))
+        tk = f"{label}, {key.split(':')[1]}: {'neutral flag' if c == 'oracle+flag' else 'dir. flag'} vs plain (conflict)"
+        return bool(h21[m_].get(tk, {}).get("supported"))
+    lines = []
+    for pre, title in spec:
+        rows_ = [(f"{pre}:{g}", name) for g, name in gens if f"{pre}:{g}" in r2 and "answer_mix" in r2[f"{pre}:{g}"]]
+        if not rows_:
+            continue
+        lines.append(rf"\midrule" + "\n" + rf"\multicolumn{{13}}{{l}}{{\emph{{{title}}}}} \\")
+        for key, name in rows_:
+            mix = r2[key]["answer_mix"]; cells = []
+            for c in conds:
+                if c not in mix:
+                    cells += ["--"] * 4; continue
+                m = mix[c]
+                sel = m["out_correct"] / (1 - m["unknown"]) if m["unknown"] < 1 else float("nan")
+                vals = [(pct(m["out_correct"]), None), (pct(m["wrong"]), "misinfo"), (pct(m["unknown"]), "abstain"), (pct(sel), "selective")]
+                cells += [rf"\textbf{{{v}}}" if (mk and sig(key, c, mk)) else v for v, mk in vals]
+            lines.append(f"{name} & " + " & ".join(cells) + r" \\")
+    if not lines:
+        return
+    (out / "tab_risk.tex").write_text(r"""\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{3.5pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+& \multicolumn{4}{c}{No flags} & \multicolumn{4}{c}{Oracle, neutral flag} & \multicolumn{4}{c}{Oracle, directional flag} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}\cmidrule(lr){10-13}
+Generator & Correct & Misinfo. & Abstain & Sel. & Correct & Misinfo. & Abstain & Sel. & Correct & Misinfo. & Abstain & Sel. \\
+""" + "\n".join(lines) + r"""
+\bottomrule
+\end{tabular}}
+\caption{Risk and coverage on conflict questions (\%): strictly correct answers, answers that contain the
+misinformation, abstentions (``unknown''), and selective accuracy (correct among non-abstained answers).
+\textbf{Bold}: the change from no flags is significant (H21 for ConflictBank; the paper's single scheme elsewhere).
+A neutral flag trades misinformation for abstention but never raises the share of correct answers; under forced
+choice it has no abstention to trade.}
+\label{tab:risk}
+\end{table*}
+""")
+
+
+def fig_reliability(R, out: Path):
+    """H24: each (detector, generator) cell's gain from the LLM directional flag against the detector's direction
+    accuracy minus the generator's unaided accuracy (ConflictBank, one-answer prompt, conflict questions)."""
+    import matplotlib.pyplot as plt
+    cells = R.get("rev", {}).get("H24", {}).get("cells", {})
+    if len(cells) < 3:
+        return
+    det_col = {"gpt-4o-mini": "#2a78d6", "gpt-4.1": "#eb6834", "gpt-6-luna": "#1baf7a", "gpt-6.1-terra": "#eda100",
+               "claude-haiku-5-5": "#e87ba4", "claude-sonnet-5-5": "#008300"}
+    gen_mark = {"gpt-4o-mini": "o", "gpt-6-luna": "s", "gpt-4.1": "^", "gpt-6.1-terra": "D", "claude-haiku-5-5": "P",
+                "Qwen2.5-7B": "v"}
+    _style()
+    fig, ax = plt.subplots(figsize=(3.3, 2.5))
+    ax.axhline(0, color=INK2, lw=0.8); ax.axvline(0, color=INK2, lw=0.8)
+    for key, v in cells.items():
+        g, d = key.split("|")
+        e = v["effect"]
+        ax.errorbar(100 * v["gap"], 100 * e["diff"], yerr=[[100 * (e["diff"] - e["ci_low"])], [100 * (e["ci_high"] - e["diff"])]],
+                    fmt="none", ecolor=det_col.get(d, NEUTRAL), elinewidth=0.6, alpha=0.5, zorder=2)
+        ax.scatter(100 * v["gap"], 100 * e["diff"], s=26, marker=gen_mark.get(g, "o"), color=det_col.get(d, NEUTRAL),
+                   edgecolor="white", linewidth=1.0, zorder=3)
+    ax.set_xlabel("detector direction accuracy minus generator accuracy (points)", fontsize=7)
+    ax.set_ylabel("gain from LLM directional flag (points)", fontsize=7)
+    hd = [plt.Line2D([], [], marker="o", ls="", color=c, label=k.replace("claude-", "").replace("-5-5", " 5.5"))
+          for k, c in det_col.items() if any(key.endswith("|" + k) for key in cells)]
+    hg = [plt.Line2D([], [], marker=m, ls="", color=INK2, label=k.replace("claude-", "").replace("-5-5", " 5.5"))
+          for k, m in gen_mark.items() if any(key.startswith(k + "|") for key in cells)]
+    l1 = ax.legend(handles=hd, title="detector", fontsize=5.5, title_fontsize=6, loc="upper left", frameon=False)
+    ax.add_artist(l1)
+    ax.legend(handles=hg, title="generator", fontsize=5.5, title_fontsize=6, loc="lower right", frameon=False)
+    fig.tight_layout()
+    fig.savefig(out / "fig_reliability.pdf", bbox_inches="tight")
+    plt.close(fig)
+    nm = lambda k: k.replace("claude-", "Claude ").replace("-5-5", " 5.5").replace("haiku", "Haiku").replace("sonnet", "Sonnet")
+    rows_ = sorted(cells.items(), key=lambda kv: kv[1]["gap"])
+    body = "\n".join(f"{nm(k.split('|')[1])} & {nm(k.split('|')[0])} & {pct(v['det_acc'])} & {pct(v['gen_acc'])} & "
+                     f"{pct(v['gap'], True)} & {cell(v['effect'])} \\\\" for k, v in rows_)
+    (out / "tab_cells.tex").write_text(r"""\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llrrrr}
+\toprule
+Detector & Generator & Dir.\ acc. & Gen.\ acc. & Gap & Gain \\
+\midrule
+""" + body + r"""
+\bottomrule
+\end{tabular}
+\caption{Every detector--generator cell of H24 (ConflictBank, one-answer prompt, 300 conflict questions; \%).
+\emph{Dir.\ acc.}: share of questions on which the detector flags the true contradiction and names its misinformation
+passage; \emph{Gen.\ acc.}: the generator's accuracy with no flags; \emph{Gain}: the LLM directional flag's change in
+points. Figure~\ref{fig:reliability} plots the same cells.}
+\label{tab:cells}
+\end{table}
+""")
+
+
 def tab_cb(R, out: Path):
     """ConflictBank under every prompt and generator, and the majority variant (§10, §11). Conflict-question
     differences from no flags; LLM-detector clean-question cost in the last column."""
@@ -445,9 +594,16 @@ def tab_cb(R, out: Path):
             ("CB:gpt-4.1", "gpt-4.1", "multi", 1), ("CBs:Qwen2.5-7B", "Qwen2.5-7B", "single", 1),
             ("CB:Qwen2.5-7B", "Qwen2.5-7B", "multi", 1),
             ("CBs:gpt-6-luna", "gpt-6-luna", "single", 3), ("CBs:gpt-6.1-terra", "gpt-6.1-terra", "single", 1),
+            ("CBs:claude-haiku-5-5", "Claude Haiku 5.5", "single", 3), ("CBs:claude-sonnet-5-5", "Claude Sonnet 5.5", "single", 1),
+            ("CBf:gpt-4o-mini", "gpt-4o-mini", "forced", 3), ("CBf:gpt-6-luna", "gpt-6-luna", "forced", 3),
+            ("CBf:claude-haiku-5-5", "Claude Haiku 5.5", "forced", 3), ("CBf:gpt-6.1-terra", "gpt-6.1-terra", "forced", 1),
             None,
             ("CBmaj:gpt-4o-mini", "gpt-4o-mini", "single", 3), ("CBmaj:gpt-6-luna", "gpt-6-luna", "single", 3),
-            ("CBmaj:gpt-6.1-terra", "gpt-6.1-terra", "single", 1)]
+            ("CBmaj:gpt-6.1-terra", "gpt-6.1-terra", "single", 1), ("CBmaj:claude-haiku-5-5", "Claude Haiku 5.5", "single", 3),
+            "RG",
+            ("RG:gpt-4o-mini", "gpt-4o-mini", "single", 3), ("RG:gpt-6-luna", "gpt-6-luna", "single", 3),
+            ("RG:claude-haiku-5-5", "Claude Haiku 5.5", "single", 3), ("RG:gpt-6.1-terra", "gpt-6.1-terra", "single", 1),
+            ("RG:claude-sonnet-5-5", "Claude Sonnet 5.5", "single", 1)]
     if not any(k and k[0] in r2 for k in spec):
         return
     cols = ["oracle+flag", "oracle+flag_onewrong", "oracle+flag_directional", "oracle+remove_suspect",
@@ -456,6 +612,9 @@ def tab_cb(R, out: Path):
     for sp in spec:
         if sp is None:
             lines.append(r"\midrule" + "\n" + r"\multicolumn{13}{l}{\emph{Majority misinformation: three wrong-side passages, one correct}} \\")
+            continue
+        if sp == "RG":
+            lines.append(r"\midrule" + "\n" + r"\multicolumn{13}{l}{\emph{RAGuard: real Reddit posts labelled supporting or misleading (294 conflict claims)}} \\")
             continue
         key, gen, prompt, seeds = sp
         if key not in r2:
@@ -479,8 +638,9 @@ Generator & Prompt & Seeds & Closed & Plain & Flag & One wrong & Dir.\ flag & Re
 {chr(10).join(lines)}
 \bottomrule
 \end{{tabular}}}}
-\caption{{ConflictBank conflict questions (300; one correct answer each): accuracy (\%, one-way strict) closed-book
-and with the passages but no flags, then the paired difference in points made by each format. \emph{{Prompt}}: the
+\caption{{ConflictBank conflict questions (300; one correct answer each) and RAGuard conflict claims (294; answer true
+or false): accuracy (\%, one-way strict) closed-book and with the passages but no flags, then the paired difference
+in points made by each format. \emph{{forced}}: the one-answer prompt without the option to answer ``unknown''. \emph{{Prompt}}: the
 answer policy: \emph{{single}} says there is one answer, \emph{{multi}} asks for every valid answer (our default
 skeleton), \emph{{minimal}} states no policy. \emph{{One wrong}}: the neutral flag plus ``exactly one of the two
 contains misinformation''. \emph{{Single call}}: one call that names the suspect passages, then answers. Last column:
@@ -532,7 +692,7 @@ Generator & Skeleton & conflict & flag & dir.\ flag & remove & conflict & clean 
 {chr(10).join(lines)}
 \bottomrule
 \end{{tabular}}
-\caption{{The main effects across three generators and two prompt skeletons (RAMDocs hold-out, 3 seeds, one-way strict
+\caption{{The main effects across generators and prompt skeletons (RAMDocs hold-out, 3 seeds, one-way strict
 accuracy). \emph{{Plain}}: accuracy (\%) on conflict questions with no flags. Other columns: paired difference from plain
 in points. \emph{{Default}} skeleton tells the model to give every valid answer; \emph{{minimal}} drops that policy
 (Appendix~\ref{{app:prompts}}). \textbf{{Bold}}: significant under the paper's single scheme (Section~\ref{{sec:setup}}: a registered test's Holm-adjusted $p$ within its family, otherwise Holm over all exploratory comparisons). The LLM detector is gpt-4o-mini
@@ -893,8 +1053,18 @@ def numbers(R, out: Path):
           "RD:gpt-6-luna": "RdLuna", "RD:gpt-6.1-terra": "RdTerra", "CBmaj:gpt-6-luna": "MjLuna",
           "CBmaj:gpt-6.1-terra": "MjTerra"}
     cname = lambda c: "".join(w.capitalize() for w in _re2.split(r"[^a-z0-9]+", c.replace("_v2", "_two")) if w and not w.isdigit())
+    GEN_A = {"gpt-4o-mini": "Mini", "gpt-4.1": "Four", "Qwen2.5-7B": "Qwen", "gpt-6-luna": "Luna", "gpt-6.1-terra": "Terra",
+             "claude-haiku-5-5": "Haiku", "claude-sonnet-5-5": "Sonnet"}
+    PRE_A = {"CBs": "Sg", "RD": "Rd", "CBmaj": "Mj", "CBf": "Fc", "RG": "Rg", "CB": "Cb", "CBn": "Mn"}
+    LAB_A = {"ConflictBank": "Sg", "RAMDocs": "Rd", "CB majority": "Mj", "ConflictBank forced": "Fc", "RAGuard": "Rg"}
+
+    def abbrev(key):
+        if key in T2:
+            return T2[key]
+        pre, gen = key.split(":", 1)
+        return PRE_A[pre] + GEN_A[gen]
     for gk, v in rev.get("r2", {}).items():
-        T = T2[gk]
+        T = abbrev(gk)
         for sb in ("all", "conflict", "clean", "labelled"):
             add(f"zp{T}{sb.capitalize()}", pct(v["plain"][PRIMARY][sb]))
         for c, d in v["effects"][PRIMARY].items():
@@ -920,10 +1090,20 @@ def numbers(R, out: Path):
               "dir. flag > one-wrong flag (conflict)": "DirOw", "one-wrong flag vs plain (conflict)": "Ow",
               "LLM dir. flag vs plain (conflict)": "Llm", "LLM dir. flag vs self-identify (labelled)": "Self"}
     HN["H19"] = "HNineteen"
-    for h in ("H15", "H16", "H17", "H18", "H19"):   # one macro per registered test: \h<Family><Setting><Test>
+    HN.update({"H20": "HTwenty", "H21": "HTwentyOne", "H22": "HTwentyTwo", "H23": "HTwentyThree",
+               "H24": "HTwentyFour", "H25": "HTwentyFive", "H26": "HTwentySix"})
+    TEST_T.update({"one-wrong without pairs vs with pairs (conflict)": "OwNp", "neutral without pairs vs with pairs (conflict)": "FlagNp",
+                   "LLM dir. flag without pairs vs with pairs (conflict)": "LlmNp", "dir. flag vs answer key (conflict)": "Key"})
+
+    def set_abbrev(label):
+        if label in SET_T:
+            return SET_T[label]
+        pre, gen = label.rsplit(", ", 1)
+        return LAB_A[pre] + GEN_A[gen]
+    for h in ("H15", "H16", "H17", "H18", "H19", "H20", "H22", "H23", "H25", "H26"):   # \h<Family><Setting><Test>
         for tk, t in rev.get(h, {}).get(PRIMARY, {}).items():
             st, what = tk.split(": ", 1)
-            nm = f"{HN[h][0].lower()}{HN[h][1:]}{SET_T[st]}{TEST_T[what]}"
+            nm = f"{HN[h][0].lower()}{HN[h][1:]}{set_abbrev(st)}{TEST_T[what]}"
             add(nm, pct(t["diff"], True)); add(nm + "CI", f"[{pct(t['ci_low'], True)}, {pct(t['ci_high'], True)}]")
             add(nm + "P", _p(t["p_holm"]))
     for name, d in rev.get("closedbook", {}).items():
@@ -938,20 +1118,66 @@ def numbers(R, out: Path):
                     add(f"cbk{k}{G}{cn}", pct(g[c]["diff"], True))
                     add(f"cbk{k}{G}{cn}CI", f"[{pct(g[c]['ci_low'], True)}, {pct(g[c]['ci_high'], True)}]")
     add("Nempty", rev.get("n_empty_reasoning", 0))
-    # every oracle neutral-flag setting on conflict questions (generator x benchmark x prompt)
-    neu = [v["effects"][PRIMARY]["oracle+flag"]["conflict"] for v in rev.get("generality", {}).values()
-           if "oracle+flag" in v["effects"][PRIMARY]]
-    neu += [v["effects"][PRIMARY]["oracle+flag"]["conflict"] for k, v in rev.get("r2", {}).items()
-            if k.startswith(("CB", "RD:gpt-6")) and "oracle+flag" in v["effects"][PRIMARY]]
-    add("nNeutralSettings", len(neu))
-    add("nNeutralHarm", sum(t["sig"] and t["diff"] < 0 for t in neu))
-    add("nNeutralHelp", sum(t["sig"] and t["diff"] > 0 for t in neu))
-    add("nNeutralNeg", sum(t["diff"] < 0 for t in neu))
+    np_ = rev.get("neutral_pooled")
+    if np_:   # every oracle neutral-flag setting on conflict questions; random-effects pooled estimate (§13.4)
+        add("neuPooled", pct(np_["mu"], True)); add("neuPooledCI", f"[{pct(np_['ci_low'], True)}, {pct(np_['ci_high'], True)}]")
+        add("neuPooledTau", pct(np_["tau"])); add("nNeutralSettings", np_["k"])
+        add("nNeutralHarm", np_["n_harm"]); add("nNeutralHelp", np_["n_help"])
     for tk, t in rev.get("tost_claims", {}).items():
         nm = "tost" + "".join(w.capitalize() for w in tk.split("_"))
         add(nm, f"[{pct(t['ci90_low'], True)}, {pct(t['ci90_high'], True)}]")
         add(nm + "Eq", "equivalent" if t["equivalent"] else "not equivalent")
-    for h in ("H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19"):
+    for label, t in rev.get("H13_2x2", {}).items():
+        k = "Mini" if label.startswith("RAMDocs, gpt-4o") else "Four" if "4.1" in label else "Cb"
+        add(f"hThirteenX{k}", pct(t["diff"], True)); add(f"hThirteenX{k}CI", f"[{pct(t['ci_low'], True)}, {pct(t['ci_high'], True)}]")
+    for m_, famd in rev.get("H21", {}).items():      # \hTwentyOne<Setting><Cond><Metric>
+        for tk, t in famd.items():
+            st, what = tk.split(": ", 1)
+            nm = f"hTwentyOne{set_abbrev(st)}{'Flag' if what.startswith('neutral') else 'Dir'}{m_.capitalize()}"
+            add(nm, pct(t["diff"], True)); add(nm + "CI", f"[{pct(t['ci_low'], True)}, {pct(t['ci_high'], True)}]")
+            add(nm + "P", _p(t["p_holm"]))
+        add(f"nHTwentyOne{m_.capitalize()}Supported", sum(v["supported"] for v in famd.values()))
+        add(f"nHTwentyOne{m_.capitalize()}Tests", len(famd))
+    for gk, v in rev.get("r2", {}).items():   # risk/coverage per condition: \zr<Set><Cond><Metric>
+        for m_, d in v.get("risk", {}).items():
+            for c, t in d.items():
+                if not _nan(t.get("diff")):
+                    add(f"zr{abbrev(gk)}{cname(c)}{m_.capitalize()}", pct(t["diff"], True))
+        for c, mix in v.get("answer_mix", {}).items():
+            sel = mix["out_correct"] / (1 - mix["unknown"]) if mix["unknown"] < 1 else float("nan")
+            add(f"zs{abbrev(gk)}{cname(c)}", pct(sel))
+    for key, suf in (("H24", ""), ("H24_s13", "Sthirteen"), ("H24_maj", "Maj")):
+        h24 = rev.get(key, {})
+        if "a" in h24:
+            add(f"hTwentyFour{suf}Rho", f"{h24['a']['rho']:+.2f}"); add(f"hTwentyFour{suf}P", _p(h24["a"]["p_one_sided"]))
+            add(f"hTwentyFour{suf}Cells", h24["a"]["n_cells"])
+            add(f"hTwentyFour{suf}Pos", h24["n_positive"])
+            if h24.get("break_even_gap") is not None:
+                add(f"hTwentyFour{suf}BreakEven", pct(h24["break_even_gap"], True))
+        if "mech" in h24:
+            add(f"hTwentyFour{suf}MechRho", f"{h24['mech']['rho']:.2f}"); add(f"hTwentyFour{suf}MechR", f"{h24['mech']['r']:.2f}")
+            add(f"hTwentyFour{suf}GapR", f"{h24['mech']['r_gap']:.2f}")
+        if key == "H24":   # per-detector flag rates, read off the cells
+            seen = set()   # detections are rerun per generator and differ slightly; report the first cell's
+            for ck, cv in h24.get("cells", {}).items():
+                dn = GEN_A[ck.split("|")[1]]
+                if dn in seen:
+                    continue
+                seen.add(dn)
+                add(f"detWrongDir{dn}", pct(cv["wrong_dir"])); add(f"detAnyFlag{dn}", pct(cv["any_flag"]))
+                add(f"detRightDir{dn}", pct(cv["det_acc"]))
+        if "b" in h24:   # points of gain per point of gap
+            add(f"hTwentyFour{suf}Slope", f"{h24['b']['slope']:.2f}"); add(f"hTwentyFour{suf}SlopeP", _p(h24["b"]["p_one_sided"]))
+            add(f"hTwentyFour{suf}SlopeCI", f"[{h24['b']['ci_low']:.2f}, {h24['b']['ci_high']:.2f}]")
+    for g, v in rev.get("majority_breakdown", {}).items():
+        k = "".join(w.capitalize() for w in g.replace("3", "three").replace("2", "two").replace("1", "one").split())
+        add(f"mjb{k}N", v["n"]); add(f"mjb{k}Gain", pct(v["gain"], True))
+    for ct, v in rev.get("conflicts_by_type", {}).items():
+        k = "".join(w.capitalize() for w in _re2.split(r"[^a-z]+", ct.lower()) if w)
+        add(f"cft{k}N", v["n"]); add(f"cft{k}Plain", pct(v["plain"]))
+        for c in ("llm_dir+flag", "llm_dir+flag_directional", "instruct_v2"):
+            add(f"cft{k}{cname(c)}", pct(v[c]["diff"], True) if not _nan(v[c].get("diff")) else "--")
+    for h in ("H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19", "H20", "H22", "H23", "H25", "H26"):
         if h in rev:
             hn = HN[h]
             fam = rev[h][PRIMARY]
@@ -1016,7 +1242,7 @@ def write_all(R, out: Path):
     numbers(R, out)
     app_prompts(out)
     tab_appendix(R, out)
-    fig_tradeoff(R, out); fig_placement(R, out); fig_answers(R, out)
+    fig_tradeoff(R, out); fig_placement(R, out); fig_answers(R, out); fig_reliability(R, out); tab_risk(R, out)
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():

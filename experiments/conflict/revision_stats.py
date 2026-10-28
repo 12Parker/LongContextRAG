@@ -322,9 +322,16 @@ def comparisons(R):
             for c, d in v["effects"][m].items():
                 for s, t in d.items():
                     out.append(((gk, "default", c, "plain", s), m, t))
-        for fam in ("H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19"):
+        for fam in ("H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19", "H20", "H22", "H23", "H25", "H26"):
             for tk, t in rev.get(fam, {}).get(m, {}).items():
                 out.append((("registered", fam, tk, "", ""), m, t))
+    for m_, famd in rev.get("H21", {}).items():     # risk/coverage: registered, one family per outcome
+        for tk, t in famd.items():
+            out.append((("registered", "H21", tk, m_, ""), m_, t))
+    for gk, v in rev.get("r2", {}).items():         # exploratory risk/coverage effects
+        for m_, d in v.get("risk", {}).items():
+            for c, t in d.items():
+                out.append(((gk, "default", c, "plain", f"conflict-{m_}"), m_, t))
     if "oracle+flag" in R.get("wiki_gpt41", {}):
         out.append((("gpt-4.1", "default", "oracle+flag", "plain", "wikicontradict"), "both_answers",
                     R["wiki_gpt41"]["oracle+flag"]))

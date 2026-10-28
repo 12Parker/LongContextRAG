@@ -7,17 +7,17 @@
 \cmidrule(lr){4-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
 Generator & Skeleton & conflict & flag & dir.\ flag & remove & conflict & clean & conflict & clean \\
 \midrule
-gpt-4o-mini & default & 22.1 & \textbf{$-$6.7} & \textbf{$+$13.4} & \textbf{$+$27.6} & $+$12.5 & $-$3.4 & $+$18.7 & \textbf{$-$20.6} \\
-gpt-4o-mini & minimal & 20.4 & \textbf{$-$5.3} & $+$5.0 & \textbf{$+$18.9} & $+$3.6 & \textbf{$-$10.3} & $+$11.0 & \textbf{$-$19.6} \\
-gpt-4.1 & default & 21.8 & \textbf{$-$8.6} & \textbf{$+$18.2} & \textbf{$+$30.2} & $+$8.4 & 0.0 & \textbf{$+$20.6} & \textbf{$-$24.3} \\
+gpt-4o-mini & default & 22.1 & \textbf{$-$6.7} & \textbf{$+$13.4} & \textbf{$+$27.6} & $+$12.5 & $-$3.4 & $+$18.7 & $-$20.6 \\
+gpt-4o-mini & minimal & 20.4 & \textbf{$-$5.3} & $+$5.0 & \textbf{$+$18.9} & $+$3.6 & $-$10.3 & $+$11.0 & $-$19.6 \\
+gpt-4.1 & default & 21.8 & \textbf{$-$8.6} & \textbf{$+$18.2} & \textbf{$+$30.2} & $+$8.4 & 0.0 & $+$20.6 & $-$24.3 \\
 gpt-4.1 & minimal & 33.6 & \textbf{$-$11.0} & \textbf{$+$12.7} & \textbf{$+$14.9} & -- & -- & -- & -- \\
-Qwen2.5-7B & default & 19.4 & $-$5.8 & $+$3.6 & \textbf{$+$18.0} & $+$2.9 & $-$7.1 & $+$7.9 & \textbf{$-$18.3} \\
+Qwen2.5-7B & default & 19.4 & $-$5.8 & $+$3.6 & \textbf{$+$18.0} & $+$2.9 & $-$7.1 & $+$7.9 & $-$18.3 \\
 Qwen2.5-7B & minimal & 17.3 & $-$5.8 & $+$2.9 & \textbf{$+$10.8} & -- & -- & -- & -- \\
-gpt-6-luna$^\ddagger$ & default & 14.4 & \textbf{$-$3.1} & \textbf{$+$39.1} & \textbf{$+$38.8} & \textbf{$+$29.7} & \textbf{$-$11.6} & -- & -- \\
-gpt-6.1-terra$^\ddagger$ & default & 10.8 & $-$0.7 & \textbf{$+$39.6} & \textbf{$+$39.6} & \textbf{$+$38.8} & $-$0.8 & -- & -- \\
+gpt-6-luna$^\ddagger$ & default & 14.4 & \textbf{$-$3.1} & $+$39.1 & $+$38.8 & $+$29.7 & $-$11.6 & -- & -- \\
+gpt-6.1-terra$^\ddagger$ & default & 10.8 & $-$0.7 & $+$39.6 & $+$39.6 & $+$38.8 & $-$0.8 & -- & -- \\
 \bottomrule
 \end{tabular}
-\caption{The main effects across three generators and two prompt skeletons (RAMDocs hold-out, 3 seeds, one-way strict
+\caption{The main effects across generators and prompt skeletons (RAMDocs hold-out, 3 seeds, one-way strict
 accuracy). \emph{Plain}: accuracy (\%) on conflict questions with no flags. Other columns: paired difference from plain
 in points. \emph{Default} skeleton tells the model to give every valid answer; \emph{minimal} drops that policy
 (Appendix~\ref{app:prompts}). \textbf{Bold}: significant under the paper's single scheme (Section~\ref{sec:setup}: a registered test's Holm-adjusted $p$ within its family, otherwise Holm over all exploratory comparisons). The LLM detector is gpt-4o-mini
