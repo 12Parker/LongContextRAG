@@ -46,7 +46,7 @@ from .prompts import FLAG_STYLES, PROMPT_ONLY_MODES, SKELETONS, build_prompt
 
 
 def parse_condition(c: str) -> tuple[str, str]:
-    if c in PROMPT_ONLY_MODES:
+    if c in PROMPT_ONLY_MODES or c == "answer_key":
         return "none", c
     if c in ("madam",) + BASELINE_MODES:
         return "none", c
@@ -261,7 +261,7 @@ def main(argv=None):
             usage.pop("cached", None)
         else:
             prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style,
-                                       skeleton=args.skeleton)
+                                       skeleton=args.skeleton, wrong_answers=ex.wrong_answers)
             r = llm(prompt, seed=seed)
             text = r.text
             usage = {"prompt_tokens": r.prompt_tokens, "completion_tokens": r.completion_tokens,

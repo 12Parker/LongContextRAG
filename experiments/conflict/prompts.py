@@ -29,6 +29,14 @@ Modes
   self_identify  no detector: one call that first names the passages it judges to be misinformation,
                  then answers from the rest (§11: compute-matched single-call baseline)
   closedbook     no passages at all (§11: what the model knows without retrieval)
+  flag_pick      neutral flag + "decide which side is better supported and answer with it" (§13: a hedged
+                 neutral wording that asks the model to commit)
+  flag_nopairs, flag_onewrong_nopairs, flag_directional_nopairs
+                 the same flags without pair structure (§13): flagged passages are marked, but no header or
+                 list says which passage conflicts with which, so a passage that appears in every flagged pair
+                 cannot be singled out from the flag layout
+  answer_key     plain + "the answer X is false" for each wrong answer (§13: the directional flag's
+                 information given as an answer key, with no passage marked)
 
 Skeletons (`skeleton`, run.py --skeleton)
   default    BASE: tells the model to give every valid answer when the passages support more than
@@ -38,6 +46,8 @@ Skeletons (`skeleton`, run.py --skeleton)
              does the neutral-flag harm depend on the default skeleton's policy?
   single     BASE_SINGLE: says the question has exactly one correct answer and asks for one
              (§11; for ConflictBank, where that is true by construction)
+  forced     BASE_FORCED: as single, but "unknown" is not allowed (§13: is the neutral-flag harm only
+             abstention?)
 
 Note for the paper: in the original code SEPARATE renders exactly the same prompt as FLAG,
 so it is not a separate condition here.
@@ -85,7 +95,17 @@ Question: {question}
 Give a brief explanation, then end with one line in exactly this format:
 Final answer(s): <your one answer>"""
 
-SKELETONS = {"default": BASE, "minimal": BASE_MINIMAL, "single": BASE_SINGLE}
+BASE_FORCED = """Answer the question using the passages below. The question has exactly one correct answer.
+You must give your best answer; "unknown" is not allowed.
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in exactly this format:
+Final answer(s): <your one answer>"""
+
+SKELETONS = {"default": BASE, "minimal": BASE_MINIMAL, "single": BASE_SINGLE, "forced": BASE_FORCED}
 
 # closed-book: same answer line as each skeleton, no passages
 CLOSED_BOOK = {
@@ -100,6 +120,12 @@ Question: {question}
 
 Give a brief explanation, then end with one line in exactly this format:
 Final answer(s): <your answer; if there is more than one, separate them with |>""",
+    "forced": """Answer the question from your own knowledge. The question has exactly one correct answer.
+You must give your best answer; "unknown" is not allowed.
+Question: {question}
+
+Give a brief explanation, then end with one line in exactly this format:
+Final answer(s): <your one answer>""",
     "single": """Answer the question from your own knowledge. The question has exactly one correct answer.
 Question: {question}
 
@@ -119,7 +145,10 @@ Suspect passages: <passage numbers, or none>
 Then answer the question using only the other passages.
 """
 
-INSTRUCTIONS = {"instruct": INSTRUCTION, "instruct_v2": INSTRUCTION_V2, "self_identify": INSTRUCTION_SELF,
+INSTRUCTION_PICK = """When flagged passages conflict, decide which side is better supported by the other passages and by what you know, and answer with that side only.
+"""
+
+INSTRUCTIONS = {"flag_pick": INSTRUCTION_PICK, "instruct": INSTRUCTION, "instruct_v2": INSTRUCTION_V2, "self_identify": INSTRUCTION_SELF,
                 "flag_instruct": INSTRUCTION, "flag_instruct_v2": INSTRUCTION_V2,
                 "flag_directional_instruct_v2": INSTRUCTION_V2}
 PROMPT_ONLY_MODES = ("plain", "instruct", "instruct_v2", "self_identify", "closedbook")
@@ -166,9 +195,30 @@ def _conflict_list(dets: list[Detection], heading: str, directional: bool = Fals
     return f"\n{heading}\n" + "\n".join(lines) + "\n"
 
 
+def _marked_context(passages: list[str], dets: list[Detection], kind: str) -> tuple[str, str]:
+    """Flags without pair structure (§13): which passages are involved, not which pairs."""
+    flagged = {k for d in dets for k in (d.i, d.j)}
+    suspects = {k for d in dets for k in d.suspects}
+    parts = []
+    for k, p in enumerate(passages):
+        header = f"Passage {k}"
+        if kind == "directional" and k in suspects:
+            header += " [LIKELY MISINFORMATION]"
+        elif kind == "onewrong" and k in flagged:
+            header += " [IN CONFLICT; some marked passages contain misinformation]"
+        elif kind == "neutral" and k in flagged:
+            header += " [POTENTIAL CONFLICT]"
+        parts.append(f"{header}:\n{p}")
+    note = {"neutral": "Some of the marked passages conflict with each other.",
+            "onewrong": "Some of the marked passages contain misinformation (it is not known which).",
+            "directional": "Passages marked LIKELY MISINFORMATION probably contain false information."}[kind]
+    conflicts = f"\nPOTENTIAL CONFLICTS DETECTED:\n{note}\n" if (flagged if kind != "directional" else suspects) else ""
+    return "\n\n".join(parts), conflicts
+
+
 def build_prompt(question: str, passages: list[str], mode: str,
                  dets: list[Detection] | None = None, style: str = "uniform",
-                 skeleton: str = "default") -> tuple[str, list[int]]:
+                 skeleton: str = "default", wrong_answers: list[str] | None = None) -> tuple[str, list[int]]:
     """Returns (prompt, kept_passage_indices)."""
     if style not in FLAG_STYLES:
         raise ValueError(f"style must be one of {FLAG_STYLES}")
@@ -180,10 +230,21 @@ def build_prompt(question: str, passages: list[str], mode: str,
 
     if mode == "closedbook":
         return CLOSED_BOOK[skeleton].format(question=question), []
+    if mode == "answer_key":
+        context = "\n\n".join(f"Passage {k}:\n{p}" for k, p in enumerate(passages))
+        if wrong_answers:
+            conflicts = "\nNOTE: " + " ".join(f'The answer "{w}" is false.' for w in wrong_answers) + "\n"
+        prompt = SKELETONS[skeleton].format(instruction="", context=context, conflicts=conflicts, question=question)
+        return prompt, kept
+    if mode in ("flag_nopairs", "flag_onewrong_nopairs", "flag_directional_nopairs"):
+        kind = {"flag_nopairs": "neutral", "flag_onewrong_nopairs": "onewrong", "flag_directional_nopairs": "directional"}[mode]
+        context, conflicts = _marked_context(passages, dets, kind)
+        prompt = SKELETONS[skeleton].format(instruction="", context=context, conflicts=conflicts, question=question)
+        return prompt, kept
     if mode in PROMPT_ONLY_MODES:
         context = "\n\n".join(f"Passage {k}:\n{p}" for k, p in enumerate(passages))
         instruction = INSTRUCTIONS.get(mode, "")
-    elif mode in ("flag", "flag_instruct", "flag_instruct_v2", "arbitrate"):
+    elif mode in ("flag", "flag_instruct", "flag_instruct_v2", "arbitrate", "flag_pick"):
         context = _flag_context(passages, dets)
         heading = "CONFLICTING INFORMATION DETECTED:" if mode == "arbitrate" else "POTENTIAL CONFLICTS DETECTED:"
         conflicts = _conflict_list(dets, heading, style=style)

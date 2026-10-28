@@ -24,7 +24,7 @@ def total_spend() -> float:
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--budget", type=float, default=100.0)
+    ap.add_argument("--budget", type=float, default=200.0)
     args = ap.parse_args(argv)
     db = sqlite3.connect(CACHE_PATH)
     vals = [json.loads(v) for (v,) in db.execute("SELECT v FROM c")]

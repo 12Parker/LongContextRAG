@@ -497,3 +497,98 @@ The §11 budget rule applies: a run that would start with total spend at or abov
 If a reasoning model resolves conflicts unaided, we expect three things: a high no-flag baseline, a
 neutral-flag effect near zero, and a smaller gain from direction. The paper reports whichever pattern
 appears.
+
+## 13. Fourth revision addendum (frozen 2026-10-27, after a fourth mock review, before any run below)
+
+A fourth mock review, with three reviewers and a discussion round, scored the paper 2.5. The
+reviewers agreed on five things to address:
+
+1. Strict accuracy scores abstention as an error. They asked for misinformation rate, abstention and
+   selective accuracy, plus a forced-choice prompt.
+2. The pair structure of a flag may leak which side is false. They asked for flags without pair
+   information.
+3. Part of the directional flag's gain may be answer-key leakage. They asked for an answer-key control.
+4. "The detector must beat the generator" was post hoc. They asked for a crossed detector × generator
+   test on a common scale.
+5. The paper lacks realistic data and models from other providers.
+
+The budget is raised to $200 and the budget rule becomes: drop any run that would start at or above
+$195.
+
+### 13.1 New conditions
+
+- **`forced` skeleton** (`prompts.BASE_FORCED`). Like `single`, but "unknown" is not allowed.
+- **`flag_pick`.** The neutral flag plus "decide which side is better supported ... and answer with
+  that side only". This is a hedged neutral wording that asks the model to commit to one side.
+- **`flag_nopairs`, `flag_onewrong_nopairs`, `flag_directional_nopairs`.** The same flags with no pair
+  structure: flagged passages are marked, but nothing says which passage conflicts with which.
+- **`answer_key`.** Plain, plus "The answer X is false" for each wrong answer. No passage is marked.
+- **Crossed detectors.** The LLM detector runs with `--detector-model` set to gpt-4.1, gpt-6-luna or
+  gpt-6.1-terra, in addition to gpt-4o-mini.
+
+### 13.2 Runs
+
+Runs are listed in priority order.
+
+| Output | Data | Generators (seeds) | Skeleton | Conditions |
+|---|---|---|---|---|
+| `runs/cb_forced_{mini,luna,terra}` | ConflictBank | gpt-4o-mini (3), gpt-6-luna (3), gpt-6.1-terra (1) | forced | `plain`, `oracle+flag`, `oracle+flag_onewrong`, `oracle+flag_directional`, `oracle+flag_pick`, `llm_dir+flag_directional` |
+| `runs/ctl_{rd,cb,mj}_{mini,luna,terra}` | RAMDocs (default), ConflictBank (single), CB majority (single) | same | as listed | `answer_key`, `oracle+flag_pick`, `oracle+flag_nopairs`, `oracle+flag_onewrong_nopairs`, `llm_dir+flag_directional_nopairs`, and on CB majority also `oracle+flag_onewrong` |
+| `runs/cross_cb_<gen>_<det>` | ConflictBank | gen ∈ {gpt-4o-mini (3), gpt-6-luna (3), gpt-4.1 (1), gpt-6.1-terra (1), Qwen2.5-7B (1, local)}; det ∈ {gpt-4.1, gpt-6-luna, gpt-6.1-terra} | single | `plain`, `llm_dir+flag_directional` |
+| `runs/cross_mj_<gen>_<det>` | CB majority | same | single | same |
+| `runs/conflicts_auto` | CONFLICTS | gpt-4o-mini, adds seeds 1, 2 | as registered | existing conditions |
+
+The `cross_mj` runs come last and are the first to be dropped under the budget rule.
+
+### 13.3 Hypotheses
+
+Primary metric: one-way strict accuracy, except where noted. Holm runs within each family. The
+families are run per generator unless stated.
+
+- **H20: forced choice.** ConflictBank `forced`, conflict questions:
+  - Δ(`oracle+flag`, `plain`), two-sided;
+  - Δ(`oracle+flag_onewrong`, `plain`), two-sided;
+  - Δ(`oracle+flag_directional`, `plain`) > 0.
+- **H21: risk and coverage.** ConflictBank `single` and `forced`, conflict questions. For
+  `oracle+flag` and `oracle+flag_directional` against `plain`, two-sided, on:
+  - (a) misinformation rate (the answer contains the wrong answer);
+  - (b) abstention rate;
+  - (c) selective accuracy (strict accuracy among non-abstained answers, per question and averaged
+    over seeds).
+- **H22: pair topology.** Conflict questions, all two-sided:
+  - Δ(`oracle+flag_onewrong_nopairs`, `oracle+flag_onewrong`) on RAMDocs;
+  - Δ(`oracle+flag_nopairs`, `oracle+flag`) on CB majority;
+  - Δ(`llm_dir+flag_directional_nopairs`, `llm_dir+flag_directional`) on CB majority.
+- **H23: answer key.** Δ(`oracle+flag_directional`, `answer_key`), conflict questions, two-sided.
+  Settings: RAMDocs, ConflictBank `single` and CB majority.
+- **H24: reliability gap (crossed).**
+  - **Cells.** A cell is a (detector, generator) pair on ConflictBank `single`, conflict questions.
+    This includes the existing gpt-4o-mini-detector cells.
+  - **Gain.** Gain = Δ(`llm_dir+flag_directional`, `plain`).
+  - **Common-scale predictor.** d_q = 1 if the detector flags the gold contradiction pair with
+    exactly the misinformation passage as suspect, else 0. g_q is the generator's plain strict
+    accuracy on q, averaged over seeds. The cell gap is mean(d_q) − mean(g_q).
+  - **H24a.** Spearman(gap, gain) across cells > 0. One-sided permutation over cell labels, 10,000
+    permutations.
+  - **H24b.** At question level, pooled over cells with cell fixed effects, the slope of the
+    per-question gain on d_q − g_q is > 0. Cluster bootstrap over questions.
+  - The same analysis on CB majority is exploratory.
+
+### 13.4 Exploratory analyses and reporting changes
+
+**Exploratory analyses (registered):**
+- CONFLICTS on 3 seeds, by conflict type.
+- An LLM-judge check of the string matcher on 200 outputs, stratified by condition and generator. The
+  judge is gpt-6.1-terra; we report agreement and kappa with the matcher. No human labels.
+- Per-question reasons the LLM detector's directional flag gains under majority misinformation:
+  whether it marks the correct passage, and how many wrong passages it marks.
+- A random-effects pooled estimate (DerSimonian–Laird) of the oracle neutral flag's effect across all
+  settings, replacing the vote count. Settings share questions, so the pooled CI is optimistic, and
+  we say so.
+
+**Reporting changes:**
+- Every "as good as" or "same picture" claim gets a TOST at ±3 points or is reworded.
+- H13 is also analysed as flag × instruction, using `instruct_v2` alone as the control.
+
+**Other providers and RAGuard.** Claude and Gemini runs, and RAGuard, will be registered in a further
+addendum before they run, once API access and the data are confirmed.
