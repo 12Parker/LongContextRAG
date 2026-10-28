@@ -3,14 +3,14 @@ Retrieval-augmented generation systems increasingly detect contradictions among 
 the generator. We ask what such a flag must say, and what its detector must get right, for it to help against
 misinformation. In experiments pre-registered in stages, on four benchmarks (including RAGuard's real misleading
 Reddit posts) and with seven generators from three model families, we vary the detector and the format of its flag.
-A perfectly accurate neutral flag (``these passages conflict'') trades misinformation for abstention: it rarely
-changes which side the model picks, and its effect on accuracy varies widely across \nNeutralSettings\ settings
-(pooled \neuPooled\ points; prediction interval \neuPI), so it pays only where a wrong answer costs more than no
-answer. An oracle that names the false side helps on every benchmark that labels one, but about as much as stating the wrong answer
-outright, so it is a ceiling. With a real detector the registered gains are smaller and depend on the generator, and
-what decides them is where the detector's errors fall: per question, a flag naming the false side raises the chance
-of a correct answer by \ahRedoMixD\ points and one marking a correct passage lowers it by \ahRedoMixW. A detector's
-overall accuracy does not predict its value to a generator once the generator's own accuracy is accounted for, and
-the gain is not the detector model's answer passed along. On genuine conflicts, the same directional flag removes
-valid answers. We release the harness, the pre-registrations and every run.
+What a perfectly accurate neutral flag (``these passages conflict'') does depends on the answer policy: asked for
+every valid answer, models add the misinformation to their answer; asked for one answer, they abstain; when they must
+answer, the flag has little effect. An oracle that names the false side helps on every benchmark that labels one, but
+about as much as stating the wrong answer outright, so it is a ceiling. With a real LLM detector the registered gains
+are smaller and depend on the generator. In a randomised test, a flag naming the false side raises accuracy by
+\hThirtyOneAMin\ to \hThirtyOneAMax\ points and one naming the correct side lowers it by \ahThirtyOneBMax\ to
+\ahThirtyOneBMin, the more so the more accurate the generator, so a detector's value depends on how rarely it is
+wrong where the generator is right. The detector's verdict passed as an answer key does as well as the flag, while
+the detector model's own answer as a hint does not. On genuine conflicts, the same directional flag removes valid
+answers. We release the harness, the pre-registrations and every run.
 \end{abstract}

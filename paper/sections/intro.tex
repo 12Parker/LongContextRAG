@@ -13,34 +13,33 @@ oracle, and synthetic detectors of chosen quality) and the \emph{format} that pa
 neutral ``these passages may conflict'' flag, a flag that says one side is false without saying which, a
 \emph{directional} flag that names the likely misinformation, or removal of the suspect passage. After pilots on
 RAMDocs \citep{wang2025madam}, we pre-registered our hypotheses (H1--H9) and tested them on 300 held-out questions;
-seven addenda (H10--H29), each committed before its runs, extended the study to ConflictBank \citep{su2024conflictbank}
+eight addenda (H10--H31), each committed before its runs, extended the study to ConflictBank \citep{su2024conflictbank}
 (including a variant where the misinformation outnumbers the truth), to RAGuard \citep{zeng2025raguard}, whose
 misleading side is real Reddit posts, and to seven generators from OpenAI, Anthropic and Qwen. Controls separate what a
 flag conveys: a forced-choice prompt with no ``unknown'', an answer key that names the wrong answer without pointing at
-any passage, the detector model's own answer given as a hint, and a crossed design in which six detectors serve six
-generators. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
+any passage, flags whose direction is randomised, the detector's verdict and the detector model's own answer given as
+hints, and a crossed design in which six detectors serve six generators. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
 
 Our findings:
 \begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{A correct neutral flag trades misinformation for abstention.} It moves misinformed answers, and some
-correct ones, into ``unknown'' and barely changes accuracy on the answers that remain. Its effect on strict accuracy
-ranges from harmful to slightly helpful across \nNeutralSettings\ settings (prediction interval \neuPI); when a
-misinformed answer is costed at four correct ones, it helps in \nUtilNeuPosFour\ settings and hurts in
-\nUtilNeuNegFour.
-\item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one, but an answer key
-that names the wrong answer does nearly as well (H23), so the oracle rows bound what any detector can deliver.
-\item \textbf{With a real detector, its errors decide.} With a gpt-4o-mini detector the registered gains depend on the
-generator: on ConflictBank \nRealSgPos\ of \nRealSgTests\ generators gain significantly and \nRealSgNeg\ loses. Across \hTwentyFourCells\
-crossed detector--generator cells, the registered reliability gap correlates with the gain, but almost entirely
-through the generator's own accuracy. What matters is where the detector errs: generators follow a wrong-side flag
-more readily than a right one, so a detector helps a generator only if it is right where that generator is wrong and
-silent where it is right. The detector model's own answer as a hint does not reproduce the gain (H27), and reversing or
-paraphrasing the passages leaves direction unchanged (H29).
+\item \textbf{A correct neutral flag's effect depends on the answer policy.} Under a prompt that asks for every
+valid answer, models add the misinformation to their answer; under a one-answer prompt that allows ``unknown'', they
+abstain, on misinformed and correct answers alike; under forced choice, the flag has little effect. Whether the
+abstention is worth it depends on the cost of a wrong answer (exploratory).
+\item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one,
+but an answer key that names the wrong answer does nearly as well (H23).
+\item \textbf{With a real detector, its wrong flags decide.} With a gpt-4o-mini detector, \nRealSgPos\ of
+\nRealSgTests\ generators gain significantly on ConflictBank and \nRealSgNeg\ loses. When direction is randomised
+(H31), generators follow right and wrong flags at similar rates, so a wrong flag costs an accurate generator more than
+a right one gains. Across \hTwentyFourCells\ crossed detector--generator cells, the registered reliability gap tracks
+the gain mostly through the generator's own accuracy; the detector's verdict as an answer key does as well as the
+flag (H30), and the detector model's own answer as a hint does not (H27).
 \item \textbf{Direction is unsafe on genuine conflicts.} On WikiContradict the LLM directional flag, and removal, cut
 the share of answers that give both valid sides (H28).
 \end{itemize}
-For conflict-aware RAG, we recommend measuring a detector's wrong-side rate on questions the target generator already
-answers correctly, letting the detector abstain, passing direction only where conflicts are likely to be
-misinformation, and treating a neutral flag as a caution signal whose value depends on the cost of a wrong answer. We
+These results suggest, though we do not test end to end, measuring a detector's wrong-side rate on questions the
+target generator already answers correctly, letting the detector abstain, passing direction only where conflicts are
+likely to be misinformation, and choosing a neutral flag only together with an answer policy and a cost for wrong
+answers. We
 release the harness, pre-registrations and every run.\footnote{Code, the pre-registration and all run outputs are in
 the anonymised supplementary material and will be released publicly on acceptance.}

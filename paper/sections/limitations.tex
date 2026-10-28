@@ -22,7 +22,9 @@ conclusions survive treating those documents as misinformation. Our comparisons 
 WikiContradict has genuine conflicts but no misinformation side. CONFLICTS shows no significant effect for any
 condition; scored only on items with a reference answer, it can neither confirm nor refute our findings. The majority variant tests one case where the false side is
 more numerous, but its extra wrong-side passages are generated for the same substitution, which a real attacker
-would vary. The current
+would vary, and they include ConflictBank's temporal and semantic conflicts, which we count as misinformation. On
+RAGuard every generator is more accurate closed-book than with the posts (gpt-4o-mini \zcRgMiniConflict\% against
+\zpRgMiniConflict\%), so its posts make a weak retrieval setting. The current
 reasoning models distrust ConflictBank's generated passages when asked to judge them (Appendix~\ref{app:more}),
 which suggests that generated benchmarks may not measure how such models treat real documents. Reversing and
 paraphrasing the passages leave the detectors' direction unchanged (H29), which rules out position and surface style
@@ -32,11 +34,12 @@ as its source but not deeper regularities of generated text.
 MADAM-RAG port close to the published number on the pilot split, but the published subset is unknown, so this is not a
 reproduction. The metric is string matching: it misses paraphrases, and partial answers interact with ``no wrong
 answer''. An LLM judge agrees with it on \judgeAgree\% of sampled outputs, but no human labels check either; the 200-output
-audit sheet we release is unlabelled. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
+audit sheet we release is unlabelled, and the judge, gpt-6.1-terra, is itself one of the generators. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
 
 \paragraph{Direction and the grid.} Oracle direction is not distinguishable from an explicit answer key (H23), so the
-oracle rows are ceilings, not findings about detectors. In the synthetic grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels. The real LLM
-detector names the right side \dirAccLlm\% of the time on RAMDocs and \cbDirAccLlm\% on ConflictBank. Its
+oracle rows are ceilings, not findings about detectors. In the synthetic grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels. The gpt-4o-mini LLM
+detector's precision (of its flags on a true contradiction, the share naming the false side) is \dirAccLlm\% on
+RAMDocs and \cbDirAccLlm\% on ConflictBank; its hit rate per question is lower, because it also misses pairs. Its
 directional flag's gain over all ConflictBank questions with gpt-4o-mini is not significant after correction (H15),
 and with stronger generators it hurts. Synthetic false flags are spread uniformly and their suspect side is random, whereas
 real detectors concentrate their errors. The grid predicts real detectors only roughly, and three detectors cannot

@@ -5,46 +5,48 @@
 \begin{tabular}{lr}
 \toprule
 \multicolumn{2}{l}{\emph{Cell level (30 cells): accuracy with the flag, $A$}} \\
-$A \sim D + G$: coefficient of $D$ & 0.09 [0.03, 0.16] \\
+$A \sim D + G$: coefficient of $D$ (hit rate) & 0.09 [0.03, 0.16] \\
 \quad coefficient of $G$ & 0.46 [0.36, 0.55] \\
-$A \sim D$ + generator FE: coefficient of $D$ & 0.09 [0.02, 0.15] \\
-\quad exact permutation of $D$ across detectors & $p=0.29$ \\
+$A \sim D$ + generator FE, permutation of $D$ & $p=0.29$ \\
+$A \sim P + R$ + gen.\ FE: precision $P$ & \recPCoef\ \recPCoefCI; $p=\recPPerm$ \\
+\quad recall $R$ & \recRCoef\ \recRCoefCI; $p=\recRPerm$ \\
 \midrule
 \multicolumn{2}{l}{\emph{Leave one detector out: $R^2$ for the gain}} \\
 $G$ only & 0.17 \\
-$D+G$ & $-$0.07 \\
 gap $D-G$ (registered) & $-$0.21 \\
-mechanism score & 0.62 \\
+$P+R+G$ & \recCvPRG \\
+score (exploratory) & 0.62 \\
 \midrule
-\multicolumn{2}{l}{\emph{Question level (9000 cell-questions), points}} \\
-detector right on $q$ & $+$34.5 [$+$32.8, $+$36.1] \\
-detector marks a correct passage & $-$31.6 [$-$33.9, $-$29.4] \\
-generator right on its own & $+$37.9 [$+$36.3, $+$39.5] \\
-\midrule
-\multicolumn{2}{l}{\emph{Calibration: gain $\sim$ score}} \\
-slope & 0.64 [0.54, 0.74] \\
+\multicolumn{2}{l}{\emph{Question level, question/detector/generator FE (points)}} \\
+detector right on $q$ & \qfeD\ \qfeDCI \\
+detector marks a correct passage & \qfeW\ \qfeWCI \\
 \bottomrule
 \end{tabular}}
 
 \vspace{4pt}
-\begin{tabular}{lrr}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrr}
 \toprule
-Generator & Follows a needed & Follows a wrong- \\
-& right flag & side flag \\
+& \multicolumn{3}{c}{H24 cells (observational)} & \multicolumn{2}{c}{H31 (randomised)} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-6}
+Generator & right & wrong & wrong, abst. & right & wrong \\
 \midrule
-Qwen2.5-7B & 61 (327) & 77 (71) \\
-Claude Haiku & 57 (189) & 83 (71) \\
-gpt-4.1 & 69 (171) & 83 (60) \\
-gpt-4o-mini & 66 (446) & 76 (75) \\
-gpt-6-luna & 75 (281) & 84 (58) \\
-gpt-6.1-terra & 68 (154) & 88 (97) \\
+Qwen2.5-7B & 61 & 68 & 6 & -- & -- \\
+Claude Haiku & 57 & 59 & 18 & 63 & 64 \\
+gpt-4.1 & 69 & 65 & 13 & -- & -- \\
+gpt-4o-mini & 66 & 52 & 24 & 57 & 51 \\
+gpt-6-luna & 75 & 57 & 16 & 72 & 77 \\
+gpt-6.1-terra & 68 & 75 & 4 & 67 & 95 \\
 \bottomrule
-\end{tabular}
-\caption{H24 without the shared $-G$ term (\S15.4, re-analysis of existing cells). $D$: the detector's direction
-accuracy; $G$: the generator's no-flag accuracy. CIs: 2,000 question resamples, shared across cells. The question-level
-model is a linear probability model with detector and generator fixed effects and a random intercept per question.
-Lower table: share of questions the generator gets right when the detector is right and the generator alone is wrong
-in every seed, and share it gets wrong when the detector marks a correct passage and the generator alone is right in
-every seed (count of cell-questions in brackets).}
+\end{tabular}}
+\caption{H24 re-analysed (\S15.4, \S16.4; data already seen). $D$: hit rate (the detector flags the gold pair and names
+exactly its misinformation passage); $P$: precision (of those gold-pair flags, the share naming it); $R$: recall (the
+share of questions whose gold pair is flagged); $G$: the generator's no-flag accuracy. CIs: 2,000 question resamples
+shared across cells (300 with question fixed effects; the leave-one-detector-out range of the question-level
+coefficients is \qfeDLodo\ and \qfeWLodo). $p$: exact permutation of the detectors' values across the six detectors.
+Lower table, one definition of following: a right flag is followed when the flagged answer is correct (questions the
+generator gets wrong in every plain seed); a wrong flag is followed when the flagged answer contains the
+misinformation (questions it gets right in every plain seed); \emph{abst.}: the flagged answer abstains instead. With
+no flag, a held-out plain seed changes outcome on at most \folNullMax\% of such questions.}
 \label{tab:h24redo}
 \end{table}

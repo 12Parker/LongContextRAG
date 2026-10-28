@@ -1,17 +1,18 @@
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{A neutral flag is a caution signal.} It says that passages disagree but not which to trust, so the model
-falls back on its answer policy and often abstains. That is harm as accuracy and a trade as risk, and abstaining is
-right where a wrong answer is costly \citep{wen2025abstention}; it should be measured with a cost-sensitive score.
+\paragraph{A neutral flag does what the answer policy lets it.} It says that passages disagree but not which to trust,
+so the model falls back on its policy: it lists both sides when asked for every answer, abstains when asked for one,
+and picks as before when it must answer. Abstaining is the right outcome where a wrong answer is costly
+\citep{wen2025abstention}, so a neutral flag is worth sending only together with a one-answer policy and a measured
+cost for wrong answers.
 
-\paragraph{What a detector should optimise.} A directional flag replaces part of the generator's judgement with the
-detector's, and generators follow a flag that marks a correct passage more readily than one they need. A detector's
-value to a generator is therefore set by two counts on held-out conflicts: how often it names the false side where the
-generator is wrong, and how often it marks a correct passage where the generator is right. Detection F1 and direction
-accuracy mix both. This is the complementarity condition of human--AI teams \citep{bansal2021whole}; the detectors
-that served every generator well stayed silent when unsure.
+\paragraph{What a detector should optimise.} A directional flag passes the detector's verdict, and generators act on
+wrong verdicts about as readily as on right ones. Because an accurate generator has more correct answers to lose, the
+same detector can help a weak generator and hurt a strong one. A detector's value is set by how often it marks a
+correct passage where the target generator is already right, the complementarity condition of human--AI teams
+\citep{bansal2021whole}.
 
-\paragraph{Recommendations.} Measure a detector's wrong-side rate where the target generator is already right, and
-let it abstain; a much stronger detector model may do better answering alone. Pass direction, or remove passages, only where a
-conflict is likely to be misinformation.
+\paragraph{Recommendations, untested end to end.} Measure a detector's wrong-side rate where the target generator is
+already right, let it abstain, and pass direction or remove passages only where a conflict is likely to be
+misinformation. No gated pipeline was evaluated end to end.
