@@ -678,3 +678,149 @@ Holm runs within each family, per metric. All comparisons are on conflict questi
 
 **H24, extended.** The primary H24 analysis uses every cell run under §13 and §14. The §13-only set is a
 sensitivity check.
+
+## 15. Fifth revision addendum (frozen 2026-10-28, after a fifth mock review, before any run below)
+
+A fifth mock review, with three reviewers and a consensus round, scored the paper 3.0 (Findings). Its
+must-fix list asks for:
+- a detector-answer control for the crossed cells;
+- the LLM directional flag and LLM removal where conflicts are genuine;
+- a probe of whether detector direction rests on surface artefacts of ConflictBank's generated passages;
+- re-analyses of existing data: H24 without the shared −G coupling, TOST for the null claims of H20, H21
+  and H23, a dependence-aware pooled estimate, a cost-sensitive view of abstention, and a valid H21
+  selective-accuracy estimand.
+
+Spend before this section: $169.23. The budget rule is unchanged: a run that would start at or above
+$195 is dropped. Runs are listed in priority order, and the lowest-priority runs are dropped first.
+
+### 15.1 New conditions and data
+
+- **`hint`** (`prompts.py`; `run.py --hint-run <dir>`). The plain prompt plus
+  `NOTE: Another model that read these passages answered: "X".`
+  - X is the detector model's own parsed answer under `plain`, seed 0, in its ConflictBank `single` run.
+    Several answers are joined with " | ".
+  - No passage is marked.
+  - Detector model → source run: gpt-4o-mini → `cb_single`; gpt-4.1 → `cb_single_gpt41`; gpt-6-luna →
+    `cb_single_luna`; gpt-6.1-terra → `cb_single_terra`; claude-haiku-5-5 → `cb_single_haiku`;
+    claude-sonnet-5-5 → `cb_single_sonnet`.
+  - The question it answers: is a crossed cell's gain just a stronger model's answer being forwarded?
+- **Artefact probe** (`prepare_cb_probe.py`; datasets `conflictbank_rev` and `conflictbank_para`). Both
+  hold the same 400 ConflictBank items.
+  - `rev`: the passage order is reversed.
+  - `para`: every passage (correct, misinformation and distractor alike) is paraphrased by gpt-4o-mini
+    at temperature 0, with one prompt that keeps every fact unchanged.
+  - The `para_check` field records, per passage, whether the gold and wrong answer strings that appeared
+    in the original still appear in the paraphrase. Failures are kept and counted.
+
+### 15.2 Runs, in priority order
+
+1. **Probe.**
+   - Build `rev` and `para`.
+   - Runs `runs/probe_{rev,para}_mini`: gpt-4o-mini detector and generator, 3 seeds, `single` skeleton;
+     conditions `plain`, `oracle+flag_directional`, `llm_dir+flag_directional`.
+   - Runs `runs/probe_{rev,para}_lunadet`: gpt-6-luna detector, gpt-4o-mini generator, 3 seeds;
+     conditions `plain`, `llm_dir+flag_directional`.
+2. **Hint, cheap generators.** `runs/hint_cb_<gen>_<det>` for every H24 cell whose generator is
+   gpt-4o-mini, gpt-6-luna, claude-haiku-5-5 (3 seeds each) or Qwen2.5-7B (seed 0, local). Conditions:
+   `plain` and `hint`. `plain` is a cache hit, so the cost is the `hint` calls alone.
+3. **Genuine conflicts.**
+   - WikiContradict, `runs/wiki_llm_{mini,luna,haiku}`: 3 seeds, default skeleton, gpt-4o-mini detector;
+     conditions `plain`, `oracle+flag`, `llm_dir+flag_directional`, `llm_dir+remove_suspect`.
+   - RAMDocs hold-out, `runs/holdout_rem_{luna,haiku,terra}`: the same generators and seeds as
+     `holdout_*`, gpt-4o-mini detector; conditions `plain`, `llm_dir+flag_directional`,
+     `llm_dir+remove_suspect`. The detections are cache hits.
+4. **Hint for the gpt-6.1-terra generator cells**, seed 0.
+5. **Hint for the gpt-4.1 generator cells**, seed 0.
+6. **Single-call mode for gpt-4.1**: `self_identify` on ConflictBank `single`, seed 0, added to
+   `cb_single_gpt41`.
+
+### 15.3 Hypotheses
+
+Primary metric: one-way strict accuracy, except on WikiContradict, which uses `both_answers`. Holm runs
+within each family. Conflict questions unless stated, and clean questions are reported alongside.
+
+**H27: detector answer as hint.** The cells are those of H24 (ConflictBank `single`). Each comparison
+forms one family across cells:
+- H27a: Δ(`llm_dir+flag_directional`, `hint`), two-sided.
+- H27b: Δ(`hint`, `plain`), two-sided.
+- H27c: Δ(cell `llm_dir+flag_directional`, the detector model's own `plain` accuracy), two-sided.
+  - The comparison is paired by question.
+  - It is the cost-matched alternative: use the detector model as the generator.
+  - Only cells whose detector model has a ConflictBank `single` run are included; that is all of them.
+
+If the gain were only a stronger model's answer being forwarded, the hint would match the flag and the
+detector model alone would match the cell.
+
+**H28: genuine conflicts.** One family per generator and benchmark, all two-sided:
+- WikiContradict: Δ(`llm_dir+flag_directional`, `plain`) and Δ(`llm_dir+remove_suspect`, `plain`).
+- RAMDocs, questions whose conflict type is `ambiguity` (several valid answers, no misinformation): the
+  same two comparisons, on strict accuracy and on gold recall.
+- The gpt-4o-mini RAMDocs rows already exist (`holdout_main`). They have been reported only pooled over
+  clean questions, never on this subset. We say so.
+
+**H29: artefact probe.** Detectors gpt-4o-mini and gpt-6-luna; ConflictBank conflict questions.
+- H29a: Δ direction accuracy d_q (as in H24) for `rev` − original and `para` − original. Two-sided,
+  sign-flip over questions; Holm over the four tests.
+- H29b: TOST at ±5 points on the same differences.
+- H29c: Δ(`llm_dir+flag_directional`, `plain`) with the gpt-4o-mini generator on `rev` and on `para`,
+  compared with the original. A difference-in-differences, two-sided.
+- The `para` tests are also reported on items whose every passage passes `para_check`.
+
+### 15.4 Re-analyses of existing data
+
+These analyses are registered here but run on data already seen, and are reported as such.
+
+1. **H24 without the shared −G coupling.**
+   - (a) Cell-level regression of the flag's accuracy A on the detector's direction accuracy D and the
+     generator's no-flag accuracy G, with and without generator fixed effects.
+     - Inference: a question bootstrap that resamples questions jointly across cells.
+     - A structure-respecting exact permutation: the D values are permuted across the six detectors,
+       consistently in every generator.
+   - (b) A question-level linear probability model of Y1 (correct with the flag) on d_q, g_q and a
+     wrong-side indicator w_q, with crossed random intercepts for detector, generator and question
+     (MixedLM variance components).
+   - (c) Leave-one-detector-out prediction of the cell gains by four models: G only; D + G additive; the
+     registered gap D − G; the mechanism score.
+   - (d) H24a on the cells that did not exist when §13 was committed. Five cells existed then: the
+     gpt-4o-mini detector with gpt-4o-mini, gpt-6-luna, gpt-6.1-terra, gpt-4.1 and Qwen2.5-7B.
+   - (e) A compliance decomposition per generator:
+     - P(Y1 = 1 | d_q = 1, g_q = 0): the generator follows a correct flag it needed;
+     - P(Y1 = 0 | w_q = 1, g_q = 1): the generator follows a wrong-side flag;
+     - the calibration slope of the cell gains on the mechanism score.
+   - (f) Direction accuracy is d_q throughout, computed on the detections each cell's generator
+     actually saw. Detections can differ slightly between cells of the same detector, because concurrent
+     runs made independent uncached calls; we report how often they differ.
+2. **TOST at ±3 points**, as §13.4 already requires, for every null claim:
+   - H20's neutral and one-wrong comparisons;
+   - H21's selective accuracy;
+   - H23's comparisons.
+3. **Pooled neutral-flag estimate** (registered as exploratory in §13.4).
+   - List the settings.
+   - Replace the CI by a question-cluster bootstrap of the DerSimonian–Laird estimate: question ids are
+     resampled within each benchmark, jointly across all settings that share them, with 2,000
+     replicates.
+   - Report a prediction interval.
+   - Run a mixed-effects meta-regression with three moderators: model family (OpenAI, Anthropic, Qwen);
+     whether "unknown" is allowed; synthetic (ConflictBank, CB majority) vs natural (RAMDocs, RAGuard,
+     CONFLICTS) data.
+4. **Abstention-aware utility.**
+   - Per answer: +1 if correct; −c if it contains the misinformation; 0 if it abstains or is otherwise
+     wrong. Here c ∈ {0, 1, 2, 4}.
+   - Δ vs `plain` for the oracle neutral, one-wrong and directional flags, in every setting with an
+     oracle.
+   - Also per-question transition matrices from `plain` to each flag (correct, misinformation, abstain,
+     other), per seed.
+5. **H21(c) as a ratio estimand.**
+   - Selective accuracy = Σ correct / Σ answered over question × seed.
+   - The CI comes from a question bootstrap. The p-value comes from a permutation that swaps the two
+     conditions within each question.
+   - This replaces the per-question mean, which drops questions abstained in every seed, so the two
+     conditions were averaged over different question sets. Both are reported, and the change is listed
+     as a deviation.
+6. **Descriptive checks.**
+   - JSON parse-failure rates of each LLM detector.
+   - The answer mix of the reasoning models' `plain` answers on RAMDocs, to explain their low strict
+     accuracy.
+7. **Human audit.** 200 outputs, stratified by condition and generator, are exported for author
+   labelling (`runs/labelling/audit_200.csv`). Agreement with the matcher is reported only if the labels
+   are complete before submission; this is not done by us.

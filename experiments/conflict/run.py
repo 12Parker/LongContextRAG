@@ -46,7 +46,7 @@ from .prompts import FLAG_STYLES, PROMPT_ONLY_MODES, SKELETONS, build_prompt
 
 
 def parse_condition(c: str) -> tuple[str, str]:
-    if c in PROMPT_ONLY_MODES or c == "answer_key":
+    if c in PROMPT_ONLY_MODES or c in ("answer_key", "hint"):
         return "none", c
     if c in ("madam",) + BASELINE_MODES:
         return "none", c
@@ -161,6 +161,8 @@ def main(argv=None):
                     help="uniform: identical flag text for every detector; original: CAAG's typed, scored lines")
     ap.add_argument("--skeleton", default="default", choices=tuple(SKELETONS),
                     help="prompt skeleton (prompts.py); minimal drops the 'give every valid answer' policy")
+    ap.add_argument("--hint-run", default=None,
+                    help="run dir whose plain seed-0 answers are the `hint` condition's hint (§15: the detector model's own run)")
     ap.add_argument("--dry-run", action="store_true", help="FakeLLM; no API calls, no cost")
     args = ap.parse_args(argv)
     if (args.price_input is None) != (args.price_output is None):
@@ -203,6 +205,16 @@ def main(argv=None):
         madam_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=128, **ep)  # matches public MADAM script
         astute_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=1024, **ep)   # Astute RAG §5.1
         trust_llm = OpenAILLM(args.model, temperature=0.1, max_tokens=1024, **ep)    # TrustRAG repo, GPT path
+
+    hints = {}
+    if "hint" in conditions:
+        if not args.hint_run:
+            raise SystemExit("the hint condition needs --hint-run")
+        hints = {r["id"]: r["pred_answers"] for r in _read_jsonl(Path(args.hint_run) / "results.jsonl")
+                 if r["condition"] == "plain" and r["seed"] == 0}
+        missing = [e.id for e in examples if e.id not in hints]
+        if missing and not args.dry_run:
+            raise SystemExit(f"--hint-run has no plain seed-0 answer for {len(missing)} examples, e.g. {missing[0]}")
 
     dets_needed = sorted({parse_condition(c)[0] for c in conditions})
     detections = {}
@@ -261,7 +273,8 @@ def main(argv=None):
             usage.pop("cached", None)
         else:
             prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style,
-                                       skeleton=args.skeleton, wrong_answers=ex.wrong_answers)
+                                       skeleton=args.skeleton, wrong_answers=ex.wrong_answers,
+                                       hint=hints.get(eid, ["unknown"]) if mode == "hint" else None)
             r = llm(prompt, seed=seed)
             text = r.text
             usage = {"prompt_tokens": r.prompt_tokens, "completion_tokens": r.completion_tokens,

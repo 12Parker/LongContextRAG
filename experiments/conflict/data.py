@@ -312,7 +312,18 @@ def load_raguard(path: Path | None = None, n: int | None = None, seed: int = 0) 
     return _subsample(out, n, seed)
 
 
-LOADERS = {"raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
+def load_conflictbank_para(path: Path | None = None, **kw) -> list[Example]:
+    """§15 artefact probe: the same 400 items with every passage paraphrased by one model (prepare_cb_probe.py)."""
+    return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_para.jsonl", **kw)
+
+
+def load_conflictbank_rev(path: Path | None = None, **kw) -> list[Example]:
+    """§15 artefact probe: the same 400 items with the passage order reversed (prepare_cb_probe.py)."""
+    return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_rev.jsonl", **kw)
+
+
+LOADERS = {"conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev,
+           "raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
 
 def load(name: str, **kw) -> list[Example]:

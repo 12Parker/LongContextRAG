@@ -37,6 +37,8 @@ Modes
                  cannot be singled out from the flag layout
   answer_key     plain + "the answer X is false" for each wrong answer (§13: the directional flag's
                  information given as an answer key, with no passage marked)
+  hint           plain + 'Another model that read these passages answered: "X"', X being the detector
+                 model's own plain answer (§15: is a detector's gain just a stronger model's answer forwarded?)
 
 Skeletons (`skeleton`, run.py --skeleton)
   default    BASE: tells the model to give every valid answer when the passages support more than
@@ -218,7 +220,8 @@ def _marked_context(passages: list[str], dets: list[Detection], kind: str) -> tu
 
 def build_prompt(question: str, passages: list[str], mode: str,
                  dets: list[Detection] | None = None, style: str = "uniform",
-                 skeleton: str = "default", wrong_answers: list[str] | None = None) -> tuple[str, list[int]]:
+                 skeleton: str = "default", wrong_answers: list[str] | None = None,
+                 hint: list[str] | None = None) -> tuple[str, list[int]]:
     """Returns (prompt, kept_passage_indices)."""
     if style not in FLAG_STYLES:
         raise ValueError(f"style must be one of {FLAG_STYLES}")
@@ -236,6 +239,12 @@ def build_prompt(question: str, passages: list[str], mode: str,
             conflicts = "\nNOTE: " + " ".join(f'The answer "{w}" is false.' for w in wrong_answers) + "\n"
         prompt = SKELETONS[skeleton].format(instruction="", context=context, conflicts=conflicts, question=question)
         return prompt, kept
+    if mode == "hint":
+        if hint is None:
+            raise ValueError("mode hint needs the other model's answer (run.py --hint-run)")
+        context = "\n\n".join(f"Passage {k}:\n{p}" for k, p in enumerate(passages))
+        conflicts = f'\nNOTE: Another model that read these passages answered: "{" | ".join(hint) or "unknown"}".\n'
+        return SKELETONS[skeleton].format(instruction="", context=context, conflicts=conflicts, question=question), kept
     if mode in ("flag_nopairs", "flag_onewrong_nopairs", "flag_directional_nopairs"):
         kind = {"flag_nopairs": "neutral", "flag_onewrong_nopairs": "onewrong", "flag_directional_nopairs": "directional"}[mode]
         context, conflicts = _marked_context(passages, dets, kind)
