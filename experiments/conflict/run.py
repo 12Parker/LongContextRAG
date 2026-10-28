@@ -94,6 +94,19 @@ def make_detector(name: str, args, llm, examples=None):
     raise SystemExit(f"unknown detector {name}")
 
 
+def verdict_answers(ex, pairs) -> list[str]:
+    """§16: the answers supported by the passages a detector marks as suspect (correct passage -> gold answer,
+    misinformation passage -> wrong answer; distractors support neither). Needs per-passage types with one gold
+    and one wrong answer, as in ConflictBank."""
+    types = ex.meta.get("doc_types", [])
+    out = []
+    for k in sorted({k for d in pairs for k in d.suspects}):
+        t = types[k] if k < len(types) else None
+        a = (ex.gold_answers[:1] if t == "correct" else ex.wrong_answers[:1] if t == "misinfo" else [])
+        out += [x for x in a if x not in out]
+    return out
+
+
 def _read_jsonl(p: Path) -> list[dict]:
     return [json.loads(l) for l in open(p)] if p.exists() else []
 
@@ -272,8 +285,9 @@ def main(argv=None):
             text, usage, kept = m["final"], m["usage"], m["kept"]
             usage.pop("cached", None)
         else:
+            wrong = verdict_answers(ex, dout.pairs) if mode == "verdict_key" else ex.wrong_answers
             prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style,
-                                       skeleton=args.skeleton, wrong_answers=ex.wrong_answers,
+                                       skeleton=args.skeleton, wrong_answers=wrong,
                                        hint=hints.get(eid, ["unknown"]) if mode == "hint" else None)
             r = llm(prompt, seed=seed)
             text = r.text

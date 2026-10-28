@@ -22,3 +22,16 @@ def test_reverse_keeps_types_aligned_and_check():
     assert r["passages"] == ["z", "y", "x"] and r["types"] == ["correct", "misinfo", "noise"]
     assert check("Born in India.", "India was his birthplace.", ["India", "Slovenia"])
     assert not check("Born in India.", "Born in Asia.", ["India", "Slovenia"])
+
+
+def test_verdict_key_maps_suspects_to_answers():
+    from types import SimpleNamespace
+    from experiments.conflict.detectors import Detection
+    from experiments.conflict.run import verdict_answers
+    ex = SimpleNamespace(meta={"doc_types": ["noise", "misinfo", "correct"]}, gold_answers=["India"], wrong_answers=["Slovenia"])
+    assert verdict_answers(ex, [Detection(1, 2, 1.0, "contradiction", [1])]) == ["Slovenia"]
+    assert verdict_answers(ex, [Detection(1, 2, 1.0, "contradiction", [2])]) == ["India"]
+    assert verdict_answers(ex, [Detection(0, 2, 1.0, "contradiction", [0])]) == []
+    p, _ = build_prompt("Q?", P, "verdict_key", skeleton="single", wrong_answers=["India"])
+    assert 'The answer "India" is false.' in p and "MISINFORMATION" not in p
+    assert parse_condition("llm_dir+verdict_key") == ("llm_dir", "verdict_key")

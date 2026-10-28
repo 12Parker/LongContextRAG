@@ -37,6 +37,8 @@ Modes
                  cannot be singled out from the flag layout
   answer_key     plain + "the answer X is false" for each wrong answer (§13: the directional flag's
                  information given as an answer key, with no passage marked)
+  verdict_key    plain + "the answer X is false" for each answer a suspect passage of the detector supports, no
+                 passage marked (§16: the detector's judgement passed as an answer key; run.py supplies the answers)
   hint           plain + 'Another model that read these passages answered: "X"', X being the detector
                  model's own plain answer (§15: is a detector's gain just a stronger model's answer forwarded?)
 
@@ -233,6 +235,8 @@ def build_prompt(question: str, passages: list[str], mode: str,
 
     if mode == "closedbook":
         return CLOSED_BOOK[skeleton].format(question=question), []
+    if mode == "verdict_key":   # same rendering as answer_key; the answers come from the detector's suspects
+        mode = "answer_key"
     if mode == "answer_key":
         context = "\n\n".join(f"Passage {k}:\n{p}" for k, p in enumerate(passages))
         if wrong_answers:
