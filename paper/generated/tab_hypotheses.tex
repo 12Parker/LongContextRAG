@@ -47,7 +47,7 @@ H8 & WikiContradict: llm\_dir+flag vs plain & $+$6.2 [$+$2.8, $+$9.6] & $<$0.001
 \end{tabular}
 \caption{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
 strict accuracy; differences in points). Rows marked \textsuperscript{r} are re-analyses registered later, before
-they were computed. Directional predictions are \emph{supported} or \emph{not supported}; tests with no predicted sign are \emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric. $p$-values come from 10,000 sign-flip permutations (smallest attainable raw $p$ is $1/10{,}001$), Holm-adjusted within the family; this is the significance used everywhere in the paper.}
+they were computed. Directional predictions are \emph{supported} or \emph{not supported}; tests with no predicted sign are \emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric. $p$-values come from 10,000 sign-flip permutations, extended to 200,000 when none reaches the observed statistic, Holm-adjusted within the family; this is the significance used everywhere in the paper.}
 \label{tab:hypotheses}
 \end{table*}
 
@@ -78,7 +78,7 @@ H11 & Qwen2.5-7B: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$9.4 [
 H11 & Qwen2.5-7B: oracle+remove\_suspect $>$ plain (conflict) & $+$18.0 [$+$10.8, $+$25.2] & $<$0.001 & supported & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the first addendum (H10--H11), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the first addendum (\S9; H10--H11), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -121,7 +121,7 @@ H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs astute (all questions) & $-$3.
 H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs trustrag (all questions) & $+$0.8 [$-$3.9, $+$5.6] & 0.761 & n.s. & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the second (H12--H14), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the second (\S10; H12--H14), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -166,21 +166,9 @@ H18 & CB majority, gpt-4o-mini: LLM dir. flag vs self-identify (all questions) &
 \multicolumn{6}{l}{\emph{H19: current reasoning models}} \\
 H19 & ConflictBank, gpt-6-luna: neutral flag vs plain (conflict) & $-$9.4 [$-$12.9, $-$6.0] & $<$0.001 & significant & yes \\
 H19 & ConflictBank, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$45.9 [$+$40.8, $+$50.9] & $<$0.001 & supported & yes \\
-H19 & ConflictBank, gpt-6-luna: dir. flag $>$ one-wrong flag (conflict) & $+$65.6 [$+$60.7, $+$70.1] & $<$0.001 & supported & yes \\
-H19 & ConflictBank, gpt-6-luna: LLM dir. flag $>$ plain (all q.) & $+$6.1 [$+$2.1, $+$10.0] & 0.019 & supported & yes \\
-H19 & ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict) & $-$2.3 [$-$6.7, $+$2.0] & 0.717 & n.s. & yes \\
-H19 & ConflictBank, gpt-6.1-terra: dir. flag $>$ neutral flag (conflict) & $+$19.3 [$+$14.7, $+$24.0] & $<$0.001 & supported & yes \\
-H19 & ConflictBank, gpt-6.1-terra: dir. flag $>$ one-wrong flag (conflict) & $+$22.3 [$+$17.7, $+$27.3] & $<$0.001 & supported & yes \\
-H19 & ConflictBank, gpt-6.1-terra: LLM dir. flag $>$ plain (all q.) & $-$8.8 [$-$13.2, $-$4.2] & 0.002 & not supported & yes \\
-H19 & RAMDocs, gpt-6-luna: neutral flag vs plain (conflict) & $-$3.1 [$-$5.3, $-$1.4] & 0.007 & significant & yes \\
-H19 & RAMDocs, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$42.2 [$+$34.5, $+$49.9] & $<$0.001 & supported & yes \\
-H19 & RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict) & $-$0.7 [$-$2.9, $+$1.4] & 1.000 & n.s. & yes \\
-H19 & RAMDocs, gpt-6.1-terra: dir. flag $>$ neutral flag (conflict) & $+$40.3 [$+$32.4, $+$48.2] & $<$0.001 & supported & yes \\
-H19 & CB majority, gpt-6-luna: dir. flag $>$ plain (conflict) & $+$60.4 [$+$55.3, $+$65.4] & $<$0.001 & supported & yes \\
-H19 & CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict) & $+$7.1 [$+$2.4, $+$11.8] & 0.019 & significant & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the third (H15--H19), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the third and fourth (\S11--\S12; H15--H19) (part 1 of 2), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -195,11 +183,23 @@ question; RAGuard's misleading posts are real Reddit text.}
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H19: current reasoning models}} \\
+H19 & ConflictBank, gpt-6-luna: dir. flag $>$ one-wrong flag (conflict) & $+$65.6 [$+$60.7, $+$70.1] & $<$0.001 & supported & yes \\
+H19 & ConflictBank, gpt-6-luna: LLM dir. flag $>$ plain (all q.) & $+$6.1 [$+$2.1, $+$10.0] & 0.019 & supported & yes \\
+H19 & ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict) & $-$2.3 [$-$6.7, $+$2.0] & 0.717 & n.s. & yes \\
+H19 & ConflictBank, gpt-6.1-terra: dir. flag $>$ neutral flag (conflict) & $+$19.3 [$+$14.7, $+$24.0] & $<$0.001 & supported & yes \\
+H19 & ConflictBank, gpt-6.1-terra: dir. flag $>$ one-wrong flag (conflict) & $+$22.3 [$+$17.7, $+$27.3] & $<$0.001 & supported & yes \\
+H19 & ConflictBank, gpt-6.1-terra: LLM dir. flag $>$ plain (all q.) & $-$8.8 [$-$13.2, $-$4.2] & 0.002 & not supported & yes \\
+H19 & RAMDocs, gpt-6-luna: neutral flag vs plain (conflict) & $-$3.1 [$-$5.3, $-$1.4] & 0.007 & significant & yes \\
+H19 & RAMDocs, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$42.2 [$+$34.5, $+$49.9] & $<$0.001 & supported & yes \\
+H19 & RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict) & $-$0.7 [$-$2.9, $+$1.4] & 1.000 & n.s. & yes \\
+H19 & RAMDocs, gpt-6.1-terra: dir. flag $>$ neutral flag (conflict) & $+$40.3 [$+$32.4, $+$48.2] & $<$0.001 & supported & yes \\
+H19 & CB majority, gpt-6-luna: dir. flag $>$ plain (conflict) & $+$60.4 [$+$55.3, $+$65.4] & $<$0.001 & supported & yes \\
+H19 & CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict) & $+$7.1 [$+$2.4, $+$11.8] & 0.019 & significant & yes \\
 H19 & CB majority, gpt-6.1-terra: dir. flag $>$ plain (conflict) & $+$66.3 [$+$61.0, $+$71.7] & $<$0.001 & supported & yes \\
 H19 & CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict) & $+$9.0 [$+$3.3, $+$14.7] & 0.019 & significant & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the third (H15--H19) (continued), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the third and fourth (\S11--\S12; H15--H19) (part 2 of 2), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -242,22 +242,9 @@ H23 & RAMDocs, gpt-6-luna: dir. flag vs answer key (conflict) & $-$4.1 [$-$9.1, 
 H23 & RAMDocs, gpt-6.1-terra: dir. flag vs answer key (conflict) & $-$5.0 [$-$10.8, $+$0.7] & 0.827 & n.s. & yes \\
 H23 & ConflictBank, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$5.3 [$+$1.6, $+$9.1] & 0.059 & n.s. & no \\
 H23 & ConflictBank, gpt-6-luna: dir. flag vs answer key (conflict) & $+$0.1 [$-$1.6, $+$1.8] & 1.000 & n.s. & yes \\
-H23 & ConflictBank, gpt-6.1-terra: dir. flag vs answer key (conflict) & $-$1.7 [$-$3.3, $-$0.3] & 0.515 & n.s. & yes \\
-H23 & CB majority, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$3.2 [$-$1.8, $+$8.2] & 0.905 & n.s. & yes \\
-H23 & CB majority, gpt-6-luna: dir. flag vs answer key (conflict) & $+$0.4 [$-$1.2, $+$2.2] & 1.000 & n.s. & yes \\
-H23 & CB majority, gpt-6.1-terra: dir. flag vs answer key (conflict) & $+$2.3 [$+$0.3, $+$4.7] & 0.515 & n.s. & yes \\
-\multicolumn{6}{l}{\emph{H25: Claude}} \\
-H25 & ConflictBank, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$0.7 [$-$2.2, $+$3.4] & 1.000 & n.s. & yes \\
-H25 & ConflictBank, claude-haiku-5-5: dir. flag $>$ neutral flag (conflict) & $+$22.7 [$+$18.6, $+$26.9] & $<$0.001 & supported & yes \\
-H25 & ConflictBank, claude-haiku-5-5: dir. flag $>$ one-wrong flag (conflict) & $+$16.8 [$+$13.0, $+$20.8] & $<$0.001 & supported & yes \\
-H25 & ConflictBank, claude-haiku-5-5: LLM dir. flag $>$ plain (all q.) & $-$4.3 [$-$8.1, $-$0.7] & 0.145 & not supported & yes \\
-H25 & ConflictBank, claude-sonnet-5-5: neutral flag vs plain (conflict) & $+$3.0 [$-$0.3, $+$6.3] & 0.634 & n.s. & yes \\
-H25 & ConflictBank, claude-sonnet-5-5: dir. flag $>$ neutral flag (conflict) & $+$13.3 [$+$9.7, $+$17.3] & $<$0.001 & supported & yes \\
-H25 & ConflictBank, claude-sonnet-5-5: dir. flag $>$ one-wrong flag (conflict) & $+$12.3 [$+$8.7, $+$16.3] & $<$0.001 & supported & yes \\
-H25 & ConflictBank, claude-sonnet-5-5: LLM dir. flag $>$ plain (all q.) & $-$2.2 [$-$5.8, $+$1.0] & 0.993 & not supported & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fourth and fifth (H20--H26), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 1 of 5), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -271,7 +258,20 @@ question; RAGuard's misleading posts are real Reddit text.}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
 \midrule
+\multicolumn{6}{l}{\emph{H23: answer key}} \\
+H23 & ConflictBank, gpt-6.1-terra: dir. flag vs answer key (conflict) & $-$1.7 [$-$3.3, $-$0.3] & 0.515 & n.s. & yes \\
+H23 & CB majority, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$3.2 [$-$1.8, $+$8.2] & 0.905 & n.s. & yes \\
+H23 & CB majority, gpt-6-luna: dir. flag vs answer key (conflict) & $+$0.4 [$-$1.2, $+$2.2] & 1.000 & n.s. & yes \\
+H23 & CB majority, gpt-6.1-terra: dir. flag vs answer key (conflict) & $+$2.3 [$+$0.3, $+$4.7] & 0.515 & n.s. & yes \\
 \multicolumn{6}{l}{\emph{H25: Claude}} \\
+H25 & ConflictBank, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$0.7 [$-$2.2, $+$3.4] & 1.000 & n.s. & yes \\
+H25 & ConflictBank, claude-haiku-5-5: dir. flag $>$ neutral flag (conflict) & $+$22.7 [$+$18.6, $+$26.9] & $<$0.001 & supported & yes \\
+H25 & ConflictBank, claude-haiku-5-5: dir. flag $>$ one-wrong flag (conflict) & $+$16.8 [$+$13.0, $+$20.8] & $<$0.001 & supported & yes \\
+H25 & ConflictBank, claude-haiku-5-5: LLM dir. flag $>$ plain (all q.) & $-$4.3 [$-$8.1, $-$0.7] & 0.145 & not supported & yes \\
+H25 & ConflictBank, claude-sonnet-5-5: neutral flag vs plain (conflict) & $+$3.0 [$-$0.3, $+$6.3] & 0.634 & n.s. & yes \\
+H25 & ConflictBank, claude-sonnet-5-5: dir. flag $>$ neutral flag (conflict) & $+$13.3 [$+$9.7, $+$17.3] & $<$0.001 & supported & yes \\
+H25 & ConflictBank, claude-sonnet-5-5: dir. flag $>$ one-wrong flag (conflict) & $+$12.3 [$+$8.7, $+$16.3] & $<$0.001 & supported & yes \\
+H25 & ConflictBank, claude-sonnet-5-5: LLM dir. flag $>$ plain (all q.) & $-$2.2 [$-$5.8, $+$1.0] & 0.993 & not supported & yes \\
 H25 & RAMDocs, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$1.2 [$-$2.6, $+$5.3] & 1.000 & n.s. & yes \\
 H25 & RAMDocs, claude-haiku-5-5: dir. flag $>$ neutral flag (conflict) & $+$27.1 [$+$20.1, $+$34.1] & $<$0.001 & supported & yes \\
 H25 & RAMDocs, claude-sonnet-5-5: neutral flag vs plain (conflict) & 0.0 [$-$4.3, $+$4.3] & 1.000 & n.s. & yes \\
@@ -287,6 +287,23 @@ H26 & RAGuard, gpt-4o-mini: LLM dir. flag vs plain (conflict) & $+$0.6 [$-$2.8, 
 H26 & RAGuard, gpt-6-luna: neutral flag vs plain (conflict) & 0.0 [$-$1.7, $+$1.7] & 1.000 & n.s. & yes \\
 H26 & RAGuard, gpt-6-luna: dir. flag $>$ plain (conflict) & $+$8.8 [$+$5.7, $+$12.1] & $<$0.001 & supported & yes \\
 H26 & RAGuard, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$8.8 [$+$5.7, $+$12.2] & $<$0.001 & supported & yes \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 2 of 5), each committed before the runs it covers. Same conventions as
+Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
+single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
+question; RAGuard's misleading posts are real Reddit text.}
+\label{tab:hypotheses7}
+\end{table*}
+
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{6.6cm}llll}
+\toprule
+& Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
+\midrule
+\multicolumn{6}{l}{\emph{H26: RAGuard (real misleading posts)}} \\
 H26 & RAGuard, gpt-6-luna: one-wrong flag vs plain (conflict) & $-$7.0 [$-$10.3, $-$3.9] & $<$0.001 & significant & yes \\
 H26 & RAGuard, gpt-6-luna: LLM dir. flag vs plain (conflict) & $+$3.1 [$-$0.1, $+$6.2] & 0.511 & n.s. & yes \\
 H26 & RAGuard, gpt-6.1-terra: neutral flag vs plain (conflict) & $+$2.4 [0.0, $+$5.1] & 0.731 & n.s. & yes \\
@@ -312,13 +329,15 @@ H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, misinformation rate (c
 H21 & ConflictBank, gpt-6.1-terra: dir. flag vs plain, misinformation rate (conflict) & $-$17.3 [$-$21.7, $-$13.0] & $<$0.001 & significant & -- \\
 H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, misinformation rate (conflict) & $+$0.1 [$-$2.6, $+$2.8] & 1.000 & n.s. & -- \\
 H21 & ConflictBank, claude-haiku-5-5: dir. flag vs plain, misinformation rate (conflict) & $-$21.8 [$-$26.1, $-$17.6] & $<$0.001 & significant & -- \\
+H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, misinformation rate (conflict) & $+$0.3 [$-$3.4, $+$4.2] & 1.000 & n.s. & -- \\
+H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, misinformation rate (conflict) & $-$24.9 [$-$29.7, $-$20.1] & $<$0.001 & significant & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fourth and fifth (H20--H26) (continued), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 3 of 5), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
-\label{tab:hypotheses7}
+\label{tab:hypotheses8}
 \end{table*}
 
 \begin{table*}[p]
@@ -329,8 +348,6 @@ question; RAGuard's misleading posts are real Reddit text.}
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H21: risk and coverage}} \\
-H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, misinformation rate (conflict) & $+$0.3 [$-$3.4, $+$4.2] & 1.000 & n.s. & -- \\
-H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, misinformation rate (conflict) & $-$24.9 [$-$29.7, $-$20.1] & $<$0.001 & significant & -- \\
 H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, misinformation rate (conflict) & $-$3.8 [$-$6.8, $-$0.9] & 0.079 & n.s. & -- \\
 H21 & ConflictBank forced, gpt-6-luna: dir. flag vs plain, misinformation rate (conflict) & $-$25.7 [$-$30.0, $-$21.3] & $<$0.001 & significant & -- \\
 H21 & ConflictBank forced, gpt-6.1-terra: neutral flag vs plain, misinformation rate (conflict) & $-$1.3 [$-$5.0, $+$2.3] & 1.000 & n.s. & -- \\
@@ -357,23 +374,13 @@ H21 & ConflictBank, gpt-4o-mini: neutral flag vs plain, selective accuracy (conf
 H21 & ConflictBank, gpt-4o-mini: dir. flag vs plain, selective accuracy (conflict) & $+$28.2 [$+$23.0, $+$33.5] & $<$0.001 & significant & -- \\
 H21 & ConflictBank, gpt-6-luna: neutral flag vs plain, selective accuracy (conflict) & $+$0.3 [$-$3.3, $+$3.8] & 1.000 & n.s. & -- \\
 H21 & ConflictBank, gpt-6-luna: dir. flag vs plain, selective accuracy (conflict) & $+$30.8 [$+$25.9, $+$35.6] & $<$0.001 & significant & -- \\
-H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, selective accuracy (conflict) & 0.0 [$-$3.9, $+$3.9] & 1.000 & n.s. & -- \\
-H21 & ConflictBank, gpt-6.1-terra: dir. flag vs plain, selective accuracy (conflict) & $+$15.9 [$+$11.5, $+$20.3] & $<$0.001 & significant & -- \\
-H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, selective accuracy (conflict) & $+$0.6 [$-$2.2, $+$3.3] & 1.000 & n.s. & -- \\
-H21 & ConflictBank, claude-haiku-5-5: dir. flag vs plain, selective accuracy (conflict) & $+$23.2 [$+$18.9, $+$27.7] & $<$0.001 & significant & -- \\
-H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, selective accuracy (conflict) & $-$0.1 [$-$3.9, $+$3.8] & 1.000 & n.s. & -- \\
-H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, selective accuracy (conflict) & $+$24.2 [$+$19.7, $+$29.0] & $<$0.001 & significant & -- \\
-H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, selective accuracy (conflict) & $+$1.6 [$-$1.6, $+$4.8] & 1.000 & n.s. & -- \\
-H21 & ConflictBank forced, gpt-6-luna: dir. flag vs plain, selective accuracy (conflict) & $+$26.4 [$+$21.9, $+$31.0] & $<$0.001 & significant & -- \\
-H21 & ConflictBank forced, gpt-6.1-terra: neutral flag vs plain, selective accuracy (conflict) & $-$0.3 [$-$4.0, $+$3.3] & 1.000 & n.s. & -- \\
-H21 & ConflictBank forced, gpt-6.1-terra: dir. flag vs plain, selective accuracy (conflict) & $+$14.7 [$+$10.3, $+$19.0] & $<$0.001 & significant & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fourth and fifth (H20--H26) (continued), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 4 of 5), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
-\label{tab:hypotheses8}
+\label{tab:hypotheses9}
 \end{table*}
 
 \begin{table*}[p]
@@ -384,6 +391,16 @@ question; RAGuard's misleading posts are real Reddit text.}
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H21: risk and coverage}} \\
+H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, selective accuracy (conflict) & 0.0 [$-$3.9, $+$3.9] & 1.000 & n.s. & -- \\
+H21 & ConflictBank, gpt-6.1-terra: dir. flag vs plain, selective accuracy (conflict) & $+$15.9 [$+$11.5, $+$20.3] & $<$0.001 & significant & -- \\
+H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, selective accuracy (conflict) & $+$0.6 [$-$2.2, $+$3.3] & 1.000 & n.s. & -- \\
+H21 & ConflictBank, claude-haiku-5-5: dir. flag vs plain, selective accuracy (conflict) & $+$23.2 [$+$18.9, $+$27.7] & $<$0.001 & significant & -- \\
+H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, selective accuracy (conflict) & $-$0.1 [$-$3.9, $+$3.8] & 1.000 & n.s. & -- \\
+H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, selective accuracy (conflict) & $+$24.2 [$+$19.7, $+$29.0] & $<$0.001 & significant & -- \\
+H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, selective accuracy (conflict) & $+$1.6 [$-$1.6, $+$4.8] & 1.000 & n.s. & -- \\
+H21 & ConflictBank forced, gpt-6-luna: dir. flag vs plain, selective accuracy (conflict) & $+$26.4 [$+$21.9, $+$31.0] & $<$0.001 & significant & -- \\
+H21 & ConflictBank forced, gpt-6.1-terra: neutral flag vs plain, selective accuracy (conflict) & $-$0.3 [$-$4.0, $+$3.3] & 1.000 & n.s. & -- \\
+H21 & ConflictBank forced, gpt-6.1-terra: dir. flag vs plain, selective accuracy (conflict) & $+$14.7 [$+$10.3, $+$19.0] & $<$0.001 & significant & -- \\
 H21 & ConflictBank forced, claude-haiku-5-5: neutral flag vs plain, selective accuracy (conflict) & $+$3.9 [$+$1.2, $+$6.7] & 0.045 & significant & -- \\
 H21 & ConflictBank forced, claude-haiku-5-5: dir. flag vs plain, selective accuracy (conflict) & $+$21.1 [$+$16.9, $+$25.4] & $<$0.001 & significant & -- \\
 \multicolumn{6}{l}{\emph{H24: detector versus generator reliability (crossed)}} \\
@@ -391,9 +408,216 @@ H24 & gain rises with detector-minus-generator reliability, Spearman over 30 cel
 H24 & per-question slope of gain on reliability gap, within cells & $+$47.6 [$+$43.2, $+$51.9] & $<$0.001 & supported & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fourth and fifth (H20--H26) (continued), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 5 of 5), each committed before the runs it covers. Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
-\label{tab:hypotheses9}
+\label{tab:hypotheses10}
+\end{table*}
+
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{6.6cm}llll}
+\toprule
+& Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
+\midrule
+\multicolumn{6}{l}{\emph{H27: the detector model's answer as a hint}} \\
+H27 & Qwen2.5-7B, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$8.7 [$+$2.7, $+$14.3] & 0.093 & n.s. & no \\
+H27 & Qwen2.5-7B, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$4.3 [$-$1.7, $+$10.3] & 1.000 & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$4.3 [$-$1.3, $+$10.0] & 1.000 & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $-$4.0 [$-$9.7, $+$1.7] & 1.000 & n.s. & yes \\
+H27 & claude-haiku-5-5, detector claude-haiku-5-5: LLM dir. flag vs hint (conflict) & $+$11.1 [$+$7.2, $+$15.1] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$14.6 [$+$9.6, $+$19.7] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$14.1 [$+$9.8, $+$18.6] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $-$1.4 [$-$6.0, $+$3.2] & 1.000 & n.s. & yes \\
+H27 & claude-haiku-5-5, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$10.3 [$+$6.6, $+$14.1] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $+$11.0 [$+$7.1, $+$15.0] & $<$0.001 & significant & yes \\
+H27 & gpt-4.1, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$13.0 [$+$8.0, $+$18.0] & $<$0.001 & significant & yes \\
+H27 & gpt-4.1, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$0.7 [$-$4.7, $+$6.0] & 1.000 & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$9.7 [$+$4.7, $+$14.7] & 0.006 & significant & yes \\
+H27 & gpt-4.1, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $+$1.7 [$-$3.0, $+$6.3] & 1.000 & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-haiku-5-5: LLM dir. flag vs hint (conflict) & $+$6.2 [$+$1.1, $+$11.4] & 0.279 & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$5.8 [$+$0.2, $+$11.3] & 0.485 & n.s. & yes \\
+H27 & gpt-4o-mini, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$11.8 [$+$6.6, $+$17.0] & 0.005 & significant & yes \\
+H27 & gpt-4o-mini, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$7.1 [$+$1.8, $+$12.6] & 0.180 & n.s. & yes \\
+H27 & gpt-4o-mini, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$8.1 [$+$2.9, $+$13.2] & 0.037 & significant & yes \\
+H27 & gpt-4o-mini, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $+$0.1 [$-$4.9, $+$5.2] & 1.000 & n.s. & yes \\
+H27 & gpt-6-luna, detector claude-haiku-5-5: LLM dir. flag vs hint (conflict) & $+$4.9 [$-$0.4, $+$10.3] & 0.785 & n.s. & yes \\
+H27 & gpt-6-luna, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$3.9 [$-$0.8, $+$8.6] & 0.992 & n.s. & yes \\
+H27 & gpt-6-luna, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$13.7 [$+$8.4, $+$18.9] & $<$0.001 & significant & yes \\
+H27 & gpt-6-luna, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$6.0 [$+$0.6, $+$11.7] & 0.485 & n.s. & yes \\
+H27 & gpt-6-luna, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$8.2 [$+$3.7, $+$12.8] & 0.005 & significant & yes \\
+H27 & gpt-6-luna, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $-$5.8 [$-$10.6, $-$1.0] & 0.279 & n.s. & yes \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 1 of 5), each committed before the runs it covers. Same conventions as
+Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
+single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
+question; RAGuard's misleading posts are real Reddit text.}
+\label{tab:hypotheses11}
+\end{table*}
+
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{6.6cm}llll}
+\toprule
+& Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
+\midrule
+\multicolumn{6}{l}{\emph{H27: the detector model's answer as a hint}} \\
+H27 & gpt-6.1-terra, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$10.7 [$+$5.0, $+$16.0] & 0.008 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $-$6.3 [$-$12.0, $-$0.7] & 0.485 & n.s. & yes \\
+H27 & gpt-6.1-terra, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$9.7 [$+$4.7, $+$14.7] & 0.005 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $+$9.7 [$+$5.0, $+$14.3] & 0.008 & significant & yes \\
+H27 & Qwen2.5-7B, detector gpt-4.1: hint vs plain (conflict) & $+$7.3 [$+$2.3, $+$12.3] & 0.071 & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-4o-mini: hint vs plain (conflict) & $+$3.0 [$-$2.0, $+$8.0] & 1.000 & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-6-luna: hint vs plain (conflict) & $+$7.7 [$+$3.0, $+$12.7] & 0.038 & significant & no \\
+H27 & Qwen2.5-7B, detector gpt-6.1-terra: hint vs plain (conflict) & $+$12.0 [$+$7.0, $+$17.0] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector claude-haiku-5-5: hint vs plain (conflict) & $-$5.4 [$-$8.8, $-$2.1] & 0.032 & significant & yes \\
+H27 & claude-haiku-5-5, detector claude-sonnet-5-5: hint vs plain (conflict) & $-$6.3 [$-$9.4, $-$3.2] & 0.004 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-4.1: hint vs plain (conflict) & $-$3.1 [$-$5.8, $-$0.4] & 0.341 & n.s. & yes \\
+H27 & claude-haiku-5-5, detector gpt-4o-mini: hint vs plain (conflict) & $-$2.7 [$-$5.6, $+$0.1] & 0.681 & n.s. & yes \\
+H27 & claude-haiku-5-5, detector gpt-6-luna: hint vs plain (conflict) & $-$5.3 [$-$8.2, $-$2.6] & 0.011 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-6.1-terra: hint vs plain (conflict) & $-$6.9 [$-$9.9, $-$4.0] & $<$0.001 & significant & yes \\
+H27 & gpt-4.1, detector gpt-4.1: hint vs plain (conflict) & $-$1.3 [$-$3.3, $+$0.3] & 1.000 & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-4o-mini: hint vs plain (conflict) & $-$3.0 [$-$6.7, $+$0.3] & 1.000 & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-6-luna: hint vs plain (conflict) & $-$3.3 [$-$7.3, $+$0.3] & 1.000 & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-6.1-terra: hint vs plain (conflict) & $+$3.3 [$-$0.7, $+$7.0] & 1.000 & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-haiku-5-5: hint vs plain (conflict) & $+$6.8 [$+$2.8, $+$10.9] & 0.027 & significant & yes \\
+H27 & gpt-4o-mini, detector claude-sonnet-5-5: hint vs plain (conflict) & $+$10.1 [$+$6.4, $+$13.8] & $<$0.001 & significant & yes \\
+H27 & gpt-4o-mini, detector gpt-4.1: hint vs plain (conflict) & $+$6.8 [$+$3.7, $+$10.0] & $<$0.001 & significant & yes \\
+H27 & gpt-4o-mini, detector gpt-4o-mini: hint vs plain (conflict) & $+$1.3 [$-$0.4, $+$3.2] & 1.000 & n.s. & yes \\
+H27 & gpt-4o-mini, detector gpt-6-luna: hint vs plain (conflict) & $+$5.6 [$+$2.2, $+$9.0] & 0.036 & significant & no \\
+H27 & gpt-4o-mini, detector gpt-6.1-terra: hint vs plain (conflict) & $+$9.4 [$+$5.9, $+$13.1] & $<$0.001 & significant & yes \\
+H27 & gpt-6-luna, detector claude-haiku-5-5: hint vs plain (conflict) & $+$9.4 [$+$5.7, $+$13.2] & $<$0.001 & significant & yes \\
+H27 & gpt-6-luna, detector claude-sonnet-5-5: hint vs plain (conflict) & $+$14.2 [$+$10.4, $+$18.2] & $<$0.001 & significant & yes \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 2 of 5), each committed before the runs it covers. Same conventions as
+Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
+single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
+question; RAGuard's misleading posts are real Reddit text.}
+\label{tab:hypotheses12}
+\end{table*}
+
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{6.6cm}llll}
+\toprule
+& Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
+\midrule
+\multicolumn{6}{l}{\emph{H27: the detector model's answer as a hint}} \\
+H27 & gpt-6-luna, detector gpt-4.1: hint vs plain (conflict) & $+$7.7 [$+$4.2, $+$11.2] & $<$0.001 & significant & yes \\
+H27 & gpt-6-luna, detector gpt-4o-mini: hint vs plain (conflict) & $+$2.6 [$-$1.3, $+$6.4] & 1.000 & n.s. & yes \\
+H27 & gpt-6-luna, detector gpt-6-luna: hint vs plain (conflict) & $+$2.9 [$+$0.2, $+$5.6] & 0.462 & n.s. & yes \\
+H27 & gpt-6-luna, detector gpt-6.1-terra: hint vs plain (conflict) & $+$13.1 [$+$9.4, $+$16.9] & $<$0.001 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-4.1: hint vs plain (conflict) & $-$3.3 [$-$7.7, $+$1.0] & 1.000 & n.s. & yes \\
+H27 & gpt-6.1-terra, detector gpt-4o-mini: hint vs plain (conflict) & $-$5.3 [$-$9.3, $-$1.3] & 0.194 & n.s. & yes \\
+H27 & gpt-6.1-terra, detector gpt-6-luna: hint vs plain (conflict) & $-$7.0 [$-$11.0, $-$3.3] & 0.006 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-6.1-terra: hint vs plain (conflict) & $-$7.0 [$-$11.0, $-$3.0] & 0.027 & significant & yes \\
+H27 & Qwen2.5-7B, detector gpt-4.1: cell vs detector model alone (conflict) & $+$1.7 [$-$4.0, $+$7.3] & 1.000 & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$6.6 [$+$0.8, $+$12.3] & 0.312 & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$8.8 [$+$3.6, $+$14.0] & 0.021 & significant & yes \\
+H27 & Qwen2.5-7B, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$14.7 [$-$20.3, $-$9.0] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector claude-haiku-5-5: cell vs detector model alone (conflict) & $+$5.7 [$+$2.1, $+$9.3] & 0.027 & significant & no \\
+H27 & claude-haiku-5-5, detector claude-sonnet-5-5: cell vs detector model alone (conflict) & $-$0.7 [$-$4.9, $+$3.6] & 1.000 & n.s. & yes \\
+H27 & claude-haiku-5-5, detector gpt-4.1: cell vs detector model alone (conflict) & $+$13.1 [$+$8.1, $+$18.0] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$11.6 [$+$5.4, $+$17.4] & 0.009 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$18.2 [$+$13.3, $+$23.1] & $<$0.001 & significant & yes \\
+H27 & claude-haiku-5-5, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$2.1 [$-$7.6, $+$3.3] & 1.000 & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-4.1: cell vs detector model alone (conflict) & $+$11.7 [$+$6.7, $+$16.7] & $<$0.001 & significant & yes \\
+H27 & gpt-4.1, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$11.2 [$+$5.2, $+$17.1] & 0.006 & significant & yes \\
+H27 & gpt-4.1, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$17.4 [$+$12.4, $+$22.3] & $<$0.001 & significant & yes \\
+H27 & gpt-4.1, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$3.3 [$-$8.7, $+$2.0] & 1.000 & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-haiku-5-5: cell vs detector model alone (conflict) & $-$2.7 [$-$7.7, $+$2.3] & 1.000 & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-sonnet-5-5: cell vs detector model alone (conflict) & $-$8.7 [$-$13.7, $-$3.7] & 0.018 & significant & no \\
+H27 & gpt-4o-mini, detector gpt-4.1: cell vs detector model alone (conflict) & $+$5.0 [$-$0.2, $+$10.1] & 0.671 & n.s. & yes \\
+H27 & gpt-4o-mini, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$8.4 [$+$3.2, $+$13.8] & 0.021 & significant & yes \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 3 of 5), each committed before the runs it covers. Same conventions as
+Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
+single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
+question; RAGuard's misleading posts are real Reddit text.}
+\label{tab:hypotheses13}
+\end{table*}
+
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{6.6cm}llll}
+\toprule
+& Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
+\midrule
+\multicolumn{6}{l}{\emph{H27: the detector model's answer as a hint}} \\
+H27 & gpt-4o-mini, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$11.2 [$+$5.8, $+$16.7] & 0.004 & significant & yes \\
+H27 & gpt-4o-mini, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$12.3 [$-$18.0, $-$6.7] & $<$0.001 & significant & yes \\
+H27 & gpt-6-luna, detector claude-haiku-5-5: cell vs detector model alone (conflict) & $+$1.1 [$-$3.8, $+$5.8] & 1.000 & n.s. & yes \\
+H27 & gpt-6-luna, detector claude-sonnet-5-5: cell vs detector model alone (conflict) & $-$4.0 [$-$8.3, $+$0.3] & 0.671 & n.s. & yes \\
+H27 & gpt-6-luna, detector gpt-4.1: cell vs detector model alone (conflict) & $+$10.2 [$+$4.8, $+$15.6] & 0.009 & significant & yes \\
+H27 & gpt-6-luna, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$11.0 [$+$4.9, $+$17.0] & 0.011 & significant & yes \\
+H27 & gpt-6-luna, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$11.1 [$+$7.3, $+$15.0] & $<$0.001 & significant & yes \\
+H27 & gpt-6-luna, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$12.1 [$-$17.2, $-$6.9] & $<$0.001 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-4.1: cell vs detector model alone (conflict) & $+$15.7 [$+$10.7, $+$20.7] & $<$0.001 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$10.2 [$+$4.2, $+$16.2] & 0.018 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$22.1 [$+$17.2, $+$27.0] & $<$0.001 & significant & yes \\
+H27 & gpt-6.1-terra, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $+$2.7 [$-$0.3, $+$5.7] & 0.925 & n.s. & yes \\
+\multicolumn{6}{l}{\emph{H28: LLM flags on genuine conflicts}} \\
+H28 & WikiContradict, gpt-4o-mini: LLM dir. flag vs plain & $-$6.5 [$-$10.3, $-$2.8] & 0.001 & significant & -- \\
+H28 & WikiContradict, gpt-4o-mini: LLM removal vs plain & $-$9.1 [$-$13.3, $-$5.1] & $<$0.001 & significant & -- \\
+H28 & WikiContradict, gpt-6-luna: LLM dir. flag vs plain & $-$29.0 [$-$34.5, $-$23.6] & $<$0.001 & significant & -- \\
+H28 & WikiContradict, gpt-6-luna: LLM removal vs plain & $-$30.0 [$-$35.6, $-$24.5] & $<$0.001 & significant & -- \\
+H28 & WikiContradict, claude-haiku-5-5: LLM dir. flag vs plain & $-$27.7 [$-$33.2, $-$22.3] & $<$0.001 & significant & -- \\
+H28 & WikiContradict, claude-haiku-5-5: LLM removal vs plain & $-$28.2 [$-$33.6, $-$22.9] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-4o-mini: LLM dir. flag vs plain & $-$4.0 [$-$8.4, 0.0] & 0.100 & n.s. & -- \\
+H28 & RAMDocs ambiguity, gpt-4o-mini: LLM removal vs plain & $-$21.2 [$-$29.6, $-$13.1] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-4o-mini: LLM dir. flag vs plain, gold recall & $-$3.6 [$-$6.8, $-$0.7] & 0.024 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-4o-mini: LLM removal vs plain, gold recall & $-$17.4 [$-$22.4, $-$12.4] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-6-luna: LLM dir. flag vs plain & $-$14.8 [$-$21.5, $-$8.8] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-6-luna: LLM removal vs plain & $-$29.3 [$-$38.0, $-$20.9] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-6-luna: LLM dir. flag vs plain, gold recall & $-$8.9 [$-$12.4, $-$5.7] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-6-luna: LLM removal vs plain, gold recall & $-$20.3 [$-$25.0, $-$15.7] & $<$0.001 & significant & -- \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 4 of 5), each committed before the runs it covers. Same conventions as
+Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
+single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
+question; RAGuard's misleading posts are real Reddit text.}
+\label{tab:hypotheses14}
+\end{table*}
+
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{6.6cm}llll}
+\toprule
+& Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
+\midrule
+\multicolumn{6}{l}{\emph{H28: LLM flags on genuine conflicts}} \\
+H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM dir. flag vs plain & $-$5.1 [$-$10.1, $-$0.3] & 0.068 & n.s. & -- \\
+H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM removal vs plain & $-$25.6 [$-$34.0, $-$17.8] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM dir. flag vs plain, gold recall & $-$2.7 [$-$5.8, $+$0.2] & 0.089 & n.s. & -- \\
+H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM removal vs plain, gold recall & $-$16.6 [$-$21.2, $-$12.0] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM dir. flag vs plain & $-$1.0 [$-$6.1, $+$3.0] & 1.000 & n.s. & -- \\
+H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM removal vs plain & $-$27.3 [$-$36.4, $-$18.2] & $<$0.001 & significant & -- \\
+H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM dir. flag vs plain, gold recall & 0.0 [$-$2.4, $+$2.2] & 1.000 & n.s. & -- \\
+H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM removal vs plain, gold recall & $-$18.5 [$-$23.6, $-$13.5] & $<$0.001 & significant & -- \\
+\multicolumn{6}{l}{\emph{H29: artefact probe of detector direction}} \\
+H29 & gpt-4o-mini detector, reversed order: direction accuracy vs original & $-$1.3 [$-$7.3, $+$4.7] & 1.000 & n.s. & -- \\
+H29 & gpt-4o-mini detector, paraphrased: direction accuracy vs original & $+$1.0 [$-$2.7, $+$4.7] & 1.000 & n.s. & -- \\
+H29 & gpt-6-luna detector, reversed order: direction accuracy vs original & $-$1.7 [$-$6.0, $+$2.7] & 1.000 & n.s. & -- \\
+H29 & gpt-6-luna detector, paraphrased: direction accuracy vs original & $-$1.3 [$-$5.7, $+$3.0] & 1.000 & n.s. & -- \\
+H29 & gpt-4o-mini detector, reversed order: gpt-4o-mini's gain vs original & $-$1.9 [$-$8.4, $+$4.7] & 1.000 & n.s. & -- \\
+H29 & gpt-4o-mini detector, paraphrased: gpt-4o-mini's gain vs original & $+$1.7 [$-$3.1, $+$6.3] & 1.000 & n.s. & -- \\
+H29 & gpt-6-luna detector, reversed order: gpt-4o-mini's gain vs original & $-$4.6 [$-$8.9, $-$0.2] & 0.196 & n.s. & -- \\
+H29 & gpt-6-luna detector, paraphrased: gpt-4o-mini's gain vs original & $-$1.2 [$-$5.1, $+$2.7] & 1.000 & n.s. & -- \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 5 of 5), each committed before the runs it covers. Same conventions as
+Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
+single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
+question; RAGuard's misleading posts are real Reddit text.}
+\label{tab:hypotheses15}
 \end{table*}

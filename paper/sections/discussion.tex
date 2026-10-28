@@ -1,16 +1,17 @@
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{Why neutral flags do not help.} A neutral flag says that two passages disagree but not which to trust, so
-the model falls back on its answer policy: it lists both sides, abstains, or, when it must answer, picks as it would
-have without the flag. For misinformation, the useful part of knowing the conflict type \citep{cattan2025conflicts} is its direction.
+\paragraph{A neutral flag is a caution signal.} It says that passages disagree but not which to trust, so the model
+falls back on its answer policy and often abstains. That is harm as accuracy and a trade as risk, and abstaining is
+right where a wrong answer is costly \citep{wen2025abstention}; it should be measured with a cost-sensitive score.
 
-\paragraph{What a detector should optimise.} Because a directional flag works like an answer key, a detector's
-direction is only as good as its errors are rare. Its value on a question depends on the generator: naming the false
-side helps where the generator would have been misled, and naming the true side harms where it would not. Detection
-F1 and direction accuracy hide this; the detectors that served every generator well stayed silent when unsure.
+\paragraph{What a detector should optimise.} A directional flag replaces part of the generator's judgement with the
+detector's, and generators follow a flag that marks a correct passage more readily than one they need. A detector's
+value to a generator is therefore set by two counts on held-out conflicts: how often it names the false side where the
+generator is wrong, and how often it marks a correct passage where the generator is right. Detection F1 and direction
+accuracy mix both. This is the complementarity condition of human--AI teams \citep{bansal2021whole}; the detectors
+that served every generator well stayed silent when unsure.
 
-\paragraph{Recommendations.} Pass direction rather than a bare warning. Let the detector abstain, and measure, on
-held-out conflicts, its wrong-side rate where the target generator is right on its own: a detector good enough for a
-small generator can hurt a larger one. Gate removal on its measured
-clean-question loss (\adLlmRemClean\ points with our LLM detector).
+\paragraph{Recommendations.} Measure a detector's wrong-side rate where the target generator is already right, and
+let it abstain; a much stronger detector model may do better answering alone. Pass direction, or remove passages, only where a
+conflict is likely to be misinformation.

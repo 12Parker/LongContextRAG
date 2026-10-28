@@ -1,17 +1,16 @@
 \begin{abstract}
 Retrieval-augmented generation systems increasingly detect contradictions among retrieved passages and flag them to
-the generator. We ask what such a flag must say to help against misinformation. In experiments pre-registered in
-stages, on four benchmarks (including RAGuard's real misleading Reddit posts) and with seven generators from three
-model families, we vary the detector and the format of its flag. A perfectly accurate neutral flag (``these passages
-conflict'') does not help: its pooled effect is \neuPooled\ points \neuPooledCI, and it significantly lowers accuracy
-in \nNeutralHarm\ of \nNeutralSettings\ settings. It changes \emph{whether} the model answers, not \emph{which side} it
-picks: when abstention is not allowed its effect vanishes, and its accuracy on answered questions is unchanged.
-Naming the false side helps on every benchmark and almost every generator, by about as much as stating the wrong
-answer outright. With
-real detectors the question becomes how often the detector is right where the generator is wrong. Across
-\hTwentyFourCells\ crossed detector--generator pairs, a directional flag's gain rises with the detector's reliability
-relative to the generator (pre-registered, $\rho=\hTwentyFourRho$), and an exploratory accounting that charges each
-wrong-side flag against the questions the generator already answered correctly predicts the gain almost exactly
-($\rho=\hTwentyFourMechRho$). Missing a conflict costs little; naming the wrong side is what hurts. We release the
-harness, the pre-registrations and every run.
+the generator. We ask what such a flag must say, and what its detector must get right, for it to help against
+misinformation. In experiments pre-registered in stages, on four benchmarks (including RAGuard's real misleading
+Reddit posts) and with seven generators from three model families, we vary the detector and the format of its flag.
+A perfectly accurate neutral flag (``these passages conflict'') trades misinformation for abstention: it rarely
+changes which side the model picks, and its effect on accuracy varies widely across \nNeutralSettings\ settings
+(pooled \neuPooled\ points; prediction interval \neuPI), so it pays only where a wrong answer costs more than no
+answer. An oracle that names the false side helps on every benchmark that labels one, but about as much as stating the wrong answer
+outright, so it is a ceiling. With a real detector the registered gains are smaller and depend on the generator, and
+what decides them is where the detector's errors fall: per question, a flag naming the false side raises the chance
+of a correct answer by \ahRedoMixD\ points and one marking a correct passage lowers it by \ahRedoMixW. A detector's
+overall accuracy does not predict its value to a generator once the generator's own accuracy is accounted for, and
+the gain is not the detector model's answer passed along. On genuine conflicts, the same directional flag removes
+valid answers. We release the harness, the pre-registrations and every run.
 \end{abstract}

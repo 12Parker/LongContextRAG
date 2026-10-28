@@ -11,6 +11,7 @@ Table~\ref{tab:main_robust} repeats Table~\ref{tab:main} with the bidirectional 
 repeats the pre-registered tests with every suspect document treated as misinformation. Table~\ref{tab:hypotheses}
 lists all pre-registered tests.
 
+\input{generated/tab_cb}
 \input{generated/tab_main}
 \input{generated/tab_hypotheses}
 \input{generated/tab_generality}
@@ -75,6 +76,9 @@ one told there is one answer abstains. Only the directional flag raises the shar
 \end{figure}
 \input{generated/tab_baselines}
 \input{generated/tab_cells}
+\input{generated/tab_h24redo}
+\input{generated/tab_pooled}
+\input{generated/tab_utility}
 
 \subsection{Where the directional flag fails (exploratory)}
 \label{app:single}
@@ -100,6 +104,19 @@ questions it is \gptlabLlmDir\ \gptlabLlmDirCI. On ConflictBank the NLI cross-en
 ConflictBank passages are long, LLM-written and agree on everything but the one fact, and the truncated pair rarely
 contains it.
 
+\paragraph{The single call with stronger models.} Asked to name suspect passages before answering, the reasoning
+models and Claude Haiku distrust most of ConflictBank's generated passages and abstain, losing up to
+\azSgTerraSelfIdentifyClean\ points on clean questions (Table~\ref{tab:baselines}).
+
+\paragraph{Reasoning models on RAMDocs.} With no flags, gpt-6-luna and gpt-6.1-terra are strictly correct on few
+RAMDocs conflict questions because the default prompt asks for every valid answer and they list nearly every candidate:
+\mixRdLunaNAnswers\ and \mixRdTerraNAnswers\ answers on average, and \mixRdLunaMisinfo\% and \mixRdTerraMisinfo\% of
+their answers include the misinformation, while they recover \mixRdLunaRecall\% and \mixRdTerraRecall\% of the gold
+answers.
+
+\paragraph{Detector parsing.} The LLM detectors' JSON failed to parse on \parseFailTotal\ of \parseFailN\ ConflictBank
+questions (a Claude Sonnet output), which then count as flagging nothing.
+
 \subsection{A detector from another family}
 Replacing the gpt-4o-mini detector with Qwen2.5-7B (gpt-4o-mini still generates) gives a much less selective
 detector. It flags \qdetFpr\% of clean RAMDocs questions, but its direction accuracy is \qdetDir\%. Its directional
@@ -109,7 +126,7 @@ clean ones, and its neutral flag \zQDetLlmDirFlagConflict. Removal again trades 
 not depend on the detector's family.
 
 \subsection{CONFLICTS}
-On the 237 automatically scorable CONFLICTS questions (exploratory, one seed; most have no conflict), no condition
+On the 237 automatically scorable CONFLICTS questions (exploratory, 3 seeds; most have no conflict), no condition
 moves accuracy significantly (Table~\ref{tab:conflicts}).
 
 \section{Reproducibility}
@@ -170,10 +187,16 @@ only $p$-values at their floor, and only lowers them.
 \item \emph{H24 additions.} The cross-cell break-even point, the count of positive cells and the mechanism score
 (credit for naming the false side where the generator errs, charge for marking a correct passage where it is right)
 were defined after seeing the H24 cells and are exploratory.
+\item \emph{Seventh registration.} H27--H29 and the re-analyses of \S15 were committed before their runs. To finish
+within the session, the \S15 runs were started in parallel tracks rather than strictly in priority order; spend never
+approached the \$195 limit, so no run was dropped. The question-level model adds one dependency (statsmodels 0.14.5).
+H21(c) is now the ratio of correct to answered answers; the registered per-question mean averaged the two conditions
+over different questions (those not abstained in every seed), which is why an earlier draft's selective accuracies did
+not match Table~\ref{tab:risk}. Both are in the released statistics.
 \item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; reordering the run
 queue). Resumption keeps completed rows and re-requests only missing ones; no row was re-sampled.
 \end{enumerate}
-The addenda (H10--H26 and the re-analyses above) and the Qwen seed change were each committed to the repository before
+The addenda (H10--H29 and the re-analyses above) and the Qwen seed change were each committed to the repository before
 the runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
 \citep{vanmiltenburg2021preregistering}.
 
@@ -215,5 +238,6 @@ not a duplicate within its claim; posts are cut to 300 words and shuffled by cla
 pairs are the contradictions and misleading posts the misinformation side. The build script and item ids are
 released.
 
-\paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. Prices were checked on 2026-10-27 (per million input, cached-input and output tokens: gpt-4o-mini \$0.15, \$0.075 and \$0.60; gpt-4.1 \$2.00, \$0.50 and \$8.00; Claude Haiku 5.5 \$0.10, \$0.01 and \$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00). CAAG and NLI ran on a
+\paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. Prices were checked on 2026-10-27 (per million input, cached-input and output tokens: gpt-4o-mini \$0.15, \$0.075 and \$0.60; gpt-4.1 \$2.00, \$0.50 and \$8.00; gpt-6-luna \$0.10, \$0.01 and \$0.50; gpt-6.1-terra \$1.00, \$0.05 and \$5.00; Claude Haiku 5.5 \$0.10, \$0.01 and
+\$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00). CAAG and NLI ran on a
 laptop CPU (0.2\,s and 1.2\,s per question).

@@ -1,114 +1,131 @@
 \section{Results}
 \label{sec:results}
 
-Table~\ref{tab:main} (Appendix~\ref{app:extra}) gives every RAMDocs condition, Table~\ref{tab:cb} every ConflictBank and RAGuard one, and
-Table~\ref{tab:risk} splits answers into correct, misinformation and abstention. Every pre-registered test is listed,
-by family, in the hypothesis tables of Appendix~\ref{app:extra}.
+Tables~\ref{tab:cb} and \ref{tab:main} give every condition, and the hypothesis tables every registered test
+(Appendix~\ref{app:extra}).
 
-\subsection{A neutral flag changes whether the model answers, not what it answers}
+\subsection{A neutral flag trades misinformation for abstention}
 \label{sec:neutral}
 \input{generated/tab_risk}
 
 Flagging exactly the gold contradictions in the neutral format lowers gpt-4o-mini's RAMDocs conflict-question accuracy
 by \adOracleFlagConf\ points \dOracleFlagConfCI\ from \plainConf\% (H2), and gpt-4.1's by \agptOracleFlagConf\ (H9).
-On ConflictBank, even with a prompt stating that the question has one answer, it costs gpt-4o-mini
-\azSgMiniOracleFlagConflict\ points and gpt-6-luna \azSgLunaOracleFlagConflict\ (H15, H19). Pooled over all
-\nNeutralSettings\ settings (benchmarks, generators, prompts) with a random-effects model, the effect is
-\neuPooled\ points \neuPooledCI\ ($\tau=\neuPooledTau$; settings share questions, so the interval is optimistic); \nNeutralHarm\ settings are significantly harmed and \nNeutralHelp\ helped (gpt-6-luna under majority
-misinformation, Claude Haiku under the forced prompt). No Claude model is helped
-(H25: Haiku \hTwentyFiveSgHaikuFlag, Sonnet \hTwentyFiveSgSonnetFlag\ on ConflictBank), and no generator on RAGuard
-(H26; \hTwentySixRgLunaFlag\ to \hTwentySixRgSonnetFlag, none significant).
+On ConflictBank, with a prompt stating that the question has one answer, it costs gpt-4o-mini
+\azSgMiniOracleFlagConflict\ points, gpt-4.1 \azSgFourOracleFlagConflict\ and gpt-6-luna \azSgLunaOracleFlagConflict\
+(H15, H19), but it does not significantly change accuracy for gpt-6.1-terra, Qwen2.5-7B, either Claude model (H25) or
+any generator on RAGuard (H26). Pooled over the \nNeutralSettings\ settings in which we ran it
+(Table~\ref{tab:pooled}; registered as exploratory), the effect is \neuPooled\ points, but settings differ more than
+sampling explains: a new setting's effect would fall in \neuPI. A meta-regression places the harm in OpenAI models on
+generated data with ``unknown'' allowed (\neuModBase\ points); Claude (\neuModAnthropic), a prompt without
+``unknown'' (\neuModForced) and natural data (\neuModNatural) each shift the effect up.
 
-\paragraph{The mechanism is abstention.} Table~\ref{tab:risk} shows where the lost answers go. With the one-answer
-prompt, gpt-4o-mini's neutral flag lowers the share of answers containing the misinformation by
-\ahTwentyOneSgMiniFlagMisinfo\ points, but only by abstaining (\hTwentyOneSgMiniFlagAbstain\ points); its accuracy on
-the questions it still answers is unchanged (\hTwentyOneSgMiniFlagSelective; H21). When ``unknown'' is not allowed
-(the forced prompt, H20), the neutral flag has no effect on gpt-4o-mini (\hTwentyFcMiniFlag), gpt-6-luna
-(\hTwentyFcLunaFlag) or gpt-6.1-terra (\hTwentyFcTerraFlag), and a small one on Claude Haiku (\hTwentyFcHaikuFlag).
-Under the multi-answer prompt the flag instead makes the model list both sides (Figure~\ref{fig:answers}). The
-answer policy decides how the model hedges; the directional flag cuts misinformation further while raising accuracy.
+\paragraph{The flag changes whether the model answers, not which side it picks.} With the one-answer prompt, of
+gpt-4o-mini's answers that contained the misinformation without a flag, \trSgMiniNeutralMisinfoAbstain\% abstain with
+the neutral flag and only \trSgMiniNeutralMisinfoCorrect\% become correct; \trSgMiniNeutralCorrectAbstain\% of its
+correct answers also turn into abstentions (Table~\ref{tab:utility}). Accuracy on the answers it still gives moves by
+\selNeuMin\ to \selNeuMax\ points across the eight ConflictBank settings of H21, significantly in \nSelNeuSig\ (Claude
+Haiku, forced prompt); equivalence within $\pm$3 points is established in \nSelNeuEq. When ``unknown'' is not allowed
+(H20), the neutral flag has no significant effect for gpt-4o-mini (\hTwentyFcMiniFlag), gpt-6-luna
+(\hTwentyFcLunaFlag) or gpt-6.1-terra (\hTwentyFcTerraFlag), though equivalence is not established, and a small one
+for Claude Haiku (\hTwentyFcHaikuFlag). Under the multi-answer prompt it makes the model list both
+sides (Figure~\ref{fig:answers}); on WikiContradict, where both are valid, that raises accuracy (H8: \wikiOracleFlag).
 
-\paragraph{What the flag lacks is direction.} A flag that says one side of each pair is false, without which,
-lowers gpt-4o-mini's ConflictBank accuracy by \azSgMiniOracleFlagOnewrongConflict\ points (H16). It helps only where
-the other passages reveal which side is false: on RAMDocs, where several correct passages usually agree, it gains
-gpt-6.1-terra \zRdTerraOracleFlagOnewrongConflict\ points, but on ConflictBank, one passage against one,
-\zSgTerraOracleFlagOnewrongConflict. The pair structure does not leak direction: removing it from the one-wrong flag
-raises RAMDocs accuracy (H22: \hTwentyTwoRdMiniOwNp\ with gpt-4o-mini, \hTwentyTwoRdLunaOwNp\ with gpt-6-luna). Given an
-instruction to drop unreliable passages, adding the flag still costs \ahThirteenXMini\ points on RAMDocs and
-\ahThirteenXCb\ on ConflictBank (H13). Asking the model to commit to the better-supported side (\emph{pick}) helps
-the reasoning models (\zSgLunaOracleFlagPickConflict\ for gpt-6-luna on ConflictBank; exploratory). On
-WikiContradict, where both sides are valid, the neutral flag \emph{raises} the share of answers giving both by
-\awikiOracleFlag\ points \wikiOracleFlagCI\ (H8).
+\paragraph{Whether that trade helps depends on what a wrong answer costs.} Strict accuracy counts an abstention and a
+misinformed answer alike. If a misinformed answer instead costs $c$ correct ones (abstaining costs nothing), the
+neutral flag significantly lowers utility in \nUtilNeuNegZero\ of \nUtilSettings\ settings at $c=0$ and raises it in
+\nUtilNeuPosZero; at $c=4$ it raises it in \nUtilNeuPosFour\ and lowers it in \nUtilNeuNegFour\
+(Table~\ref{tab:utility}); for gpt-4o-mini on ConflictBank it moves from \utSgMiniNeutralZero\ to
+\utSgMiniNeutralFour.
 
-\subsection{Naming the false side is what helps}
+\subsection{Naming the false side: what an oracle can deliver}
 \label{sec:direction}
-\input{generated/tab_cb}
-With the same oracle pairs, the directional flag beats the neutral and one-wrong flags in every setting we ran (H3,
-H9--H12, H15, H16, H19, H25, H26). On ConflictBank it gains between
-\azSgTerraOracleFlagDirectionalConflict\ and \azSgLunaOracleFlagDirectionalConflict\ points for the OpenAI generators,
-\zSgHaikuOracleFlagDirectionalConflict\ for Claude Haiku and \zSgSonnetOracleFlagDirectionalConflict\ for Claude
-Sonnet. It gains under the forced prompt (H20: \hTwentyFcTerraDir\ to \hTwentyFcLunaDir), when the misinformation
-outnumbers the truth three to one (\zMjMiniOracleFlagDirectionalConflict\ to \zMjTerraOracleFlagDirectionalConflict;
-Claude Haiku \hTwentyFiveMjHaikuDir), and on RAGuard's real posts (H26: \hTwentySixRgTerraDir\ to
-\hTwentySixRgSonnetDir, all significant). On RAMDocs it gains \adOracleDirConf\ points with gpt-4o-mini and up to
-\azRdTerraOracleFlagDirectionalConflict\ with gpt-6.1-terra, but not significantly for Qwen2.5-7B (Table~\ref{tab:generality}). It raises accuracy on answered questions by
-\hTwentyOneSgTerraDirSelective\ to \hTwentyOneSgLunaDirSelective\ points (H21): unlike the neutral flag, it changes
-which side the model picks.
+With the same oracle pairs, the directional flag beats the neutral and one-wrong flags in every registered comparison
+(H3, H9--H12, H15, H16, H19, H25, H26). On ConflictBank it gains between \azSgTerraOracleFlagDirectionalConflict\ and
+\azSgLunaOracleFlagDirectionalConflict\ points for the OpenAI generators and \azSgSonnetOracleFlagDirectionalConflict\
+to \azSgHaikuOracleFlagDirectionalConflict\ for Claude; it gains under the forced prompt (H20: \hTwentyFcTerraDir\ to
+\hTwentyFcLunaDir), when the misinformation outnumbers the truth three to one (\zMjMiniOracleFlagDirectionalConflict\
+to \zMjTerraOracleFlagDirectionalConflict), and on RAGuard's real posts (H26: \hTwentySixRgTerraDir\ to
+\hTwentySixRgSonnetDir). On RAMDocs it gains \adOracleDirConf\ points with gpt-4o-mini and up to
+\azRdTerraOracleFlagDirectionalConflict\ with gpt-6.1-terra, but not significantly for Qwen2.5-7B
+(Table~\ref{tab:generality}).
 
-On RAGuard every generator is less accurate with the posts than closed-book (gpt-4o-mini \zpRgMiniConflict\%
-against \zcRgMiniConflict\%), as \citet{zeng2025raguard} report, mostly because the stronger models abstain
-(gpt-6-luna on \zmRgLunaPlainUnknown\%); the flag removes misinformation answers but not this abstention.
+These rows are a ceiling, not a detector result. Telling the model ``the answer $X$ is false'', with no passage
+marked, recovers most of the gain: no registered comparison differs significantly (H23), the directional flag's
+advantage ranges from \keyDiffMin\ to \keyDiffMax\ points, and within $\pm$3 points equivalence holds in \nTostTwentyThreeEq\ of
+\nTostTwentyThreeTests\ (TOST); for gpt-4o-mini on ConflictBank the flag is ahead (90\% CI \tostKeySgMini). An inverted oracle that names the correct side costs
+\aadvDirConf\ points on RAMDocs.
 
-\paragraph{Direction works like an answer key.} Telling the model ``the answer $X$ is false'', without marking any
-passage, does about as well as the directional flag: none of the nine registered comparisons differs significantly (H23;
-e.g.\ \hTwentyThreeSgMiniKey\ on ConflictBank and \hTwentyThreeRdMiniKey\ on RAMDocs for gpt-4o-mini). The oracle rows
-are therefore upper bounds on what any detector can deliver, and the value of a flag lies in its direction. A wrong
-direction is as strong a lever the other way: an inverted oracle that names the correct side costs \aadvDirConf\
-points on RAMDocs and \azCbMiniOracleInvFlagDirectionalConflict\ on ConflictBank (exploratory).
+Saying only that one side is false helps when the model must answer. Where it may abstain, the one-wrong flag lowers
+gpt-4o-mini's ConflictBank accuracy by \azSgMiniOracleFlagOnewrongConflict\ points (H16); under the forced prompt it
+raises every generator's (H20: \hTwentyFcHaikuOw\ to \hTwentyFcLunaOw), and on RAGuard it helps Claude Haiku
+(\hTwentySixRgHaikuOw) but hurts gpt-6-luna (\hTwentySixRgLunaOw). Removing the pair structure has no consistent effect (H22).
 
-\subsection{With real detectors, wrong-side flags are the cost}
+\subsection{With a real detector, where its errors fall decides}
 \label{sec:real}
+\paragraph{Registered results.} With the gpt-4o-mini LLM detector, the directional flag significantly raises
+accuracy over all ConflictBank questions for \nRealSgPos\ of \nRealSgTests\ generators (gpt-6-luna,
+\zSgLunaLlmDirFlagDirectionalLabelled) and significantly lowers it for \nRealSgNeg\ (gpt-6.1-terra,
+\zSgTerraLlmDirFlagDirectionalLabelled; H15, H19, H25). It helps all \nRealMjTests\ generators tested under majority
+misinformation (\zMjMiniLlmDirFlagDirectionalConflict\ to \zMjTerraLlmDirFlagDirectionalConflict), and on RAGuard it
+helps the two Claude models (H26: \hTwentySixRgHaikuLlm, \hTwentySixRgSonnetLlm) but none of the OpenAI ones.
+
+\paragraph{The registered reliability test does not isolate the detector.}
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{generated/fig_reliability.pdf}
-\caption{Each point is a detector--generator cell (ConflictBank, one-answer prompt, 300 conflict questions; bars:
-95\% CIs). Left: the registered predictor, the detector's direction accuracy minus the generator's no-flag accuracy.
-Right: the exploratory score, which credits right flags only where the generator errs and charges wrong-side flags
-only where it is right. Table~\ref{tab:cells} lists the cells.}
+\caption{The \hTwentyFourCells\ detector--generator cells (ConflictBank, one-answer prompt, 300 conflict questions).
+Left: each cell's gain from the LLM directional flag against the exploratory score (right direction where the
+generator errs minus a correct passage marked where it is right); dashed: $y=x$. Right: the generator's accuracy with
+the detector's directional flag against its accuracy given the detector model's own answer as a hint (H27); dashed:
+$y=x$. Bars: 95\% CIs. Table~\ref{tab:cells} lists the cells.}
 \label{fig:reliability}
 \end{figure}
-A real detector's directional flag replaces the generator's judgement with the detector's, so it should pay only when
-the detector's is better. H24 tests this on a common scale across \hTwentyFourCells\ crossed cells
-(Figure~\ref{fig:reliability}): the gain rises with the detector's direction accuracy minus the generator's no-flag
-accuracy ($\rho=\hTwentyFourRho$, $p\hTwentyFourP$; within cells, \hTwentyFourSlope\ points of gain per point of gap,
-\hTwentyFourSlopeCI). It holds on the cells registered before Claude was added ($\rho=\hTwentyFourSthirteenRho$,
-$p=\hTwentyFourSthirteenP$) and is weaker under majority misinformation ($\rho=\hTwentyFourMajRho$,
-$p=\hTwentyFourMajP$; exploratory), where the gpt-4o-mini detector's direction falls to \cbmajDirAccLlm\%.
+H24 crossed six detectors with six generators in \hTwentyFourCells\ cells. As registered, the gain rises with the
+detector's direction accuracy minus the generator's no-flag accuracy ($\rho=\hTwentyFourRho$, $p\hTwentyFourP$),
+including on the \hRedoPostCells\ cells that did not exist when H24 was registered ($\rho=\hRedoPostRho$). But the
+generator's accuracy $G$ enters both the predictor and the gain, and most of the correlation comes from it. Regressing
+the flagged accuracy on direction accuracy $D$ and $G$ gives $D$ a coefficient of \hRedoAddDCoef\ against
+\hRedoAddGCoef\ for $G$; with generator fixed effects, permuting $D$ across the six detectors gives $p=\hRedoPermP$
+(\hRedoNPerm\ permutations). Leaving out one detector at a time, the registered gap predicts the held-out cells' gains
+worse than their mean ($R^2=\hRedoCvGap$), and worse than $G$ alone (\hRedoCvG; Table~\ref{tab:h24redo}). A detector's
+overall direction accuracy says little about whether it will help.
 
-Yet the gain is positive in \hTwentyFourPos\ of \hTwentyFourCells\ cells, including many where the detector is less
-accurate than the generator, so ``the detector must beat the generator'' is too strong. An exploratory, post-hoc
-accounting explains why. A flag can help only where the generator would be wrong, and hurt only where it would be
-right, so we credit the detector for naming the false side on the first kind of question and charge it for marking a
-correct passage on the second. This score predicts the cell gains far better than the gap ($\rho=\hTwentyFourMechRho$;
-Pearson $r=\hTwentyFourMechR$ against $\hTwentyFourGapR$). The gpt-4o-mini detector flags almost every question (\detAnyFlagMini\%) and
-marks a correct passage as suspect on \detWrongDirMini\% of them: it helps the weaker generators (gpt-4o-mini
-\zSgMiniLlmDirFlagDirectionalConflict, Qwen2.5-7B \zSgQwenLlmDirFlagDirectionalConflict) and lowers the accuracy of
-the four most accurate (gpt-6.1-terra \zSgTerraLlmDirFlagDirectionalConflict; also Claude Sonnet, Claude Haiku and gpt-4.1). gpt-6.1-terra as a detector flags only
-\detAnyFlagTerra\% of questions and marks a correct passage on \detWrongDirTerra\%; it names the false side less often
-than gpt-4o-mini does, yet lowers no generator's accuracy. On RAGuard the same detector helps the Claude generators (H26: Haiku \hTwentySixRgHaikuLlm, Sonnet
-\hTwentySixRgSonnetLlm) but not gpt-4o-mini (\hTwentySixRgMiniLlm).
+\paragraph{Where its errors fall does.} Per question, with detector, generator and question effects, a flag that names
+the false side raises the chance of a correct answer by \ahRedoMixD\ points \hRedoMixDCI, and one that marks a correct
+passage lowers it by \ahRedoMixW\ \hRedoMixWCI. Generators follow a right flag they need on \cmpRightMin--\cmpRightMax\%
+of questions and a wrong-side flag on \cmpWrongMin--\cmpWrongMax\%: they act on a wrong flag more readily than on a
+right one. A cell's gain is therefore set by how often the detector is right where the generator is wrong and wrong
+where the generator is right. The exploratory score built from these two counts predicts held-out detectors' cells
+($R^2=\hRedoCvMech$; calibration slope \hRedoCalSlope\ \hRedoCalSlopeCI; Figure~\ref{fig:reliability}, left). The
+gpt-4o-mini detector flags almost every question (\detAnyFlagMini\%) and marks a correct passage on
+\detWrongDirMini\% of them: it helps the weaker generators and lowers the accuracy of the four most accurate, significantly only for
+gpt-6.1-terra (H19). gpt-6.1-terra flags \detAnyFlagTerra\% and marks a correct passage on
+\detWrongDirTerra\%; it lowers no generator's accuracy.
 
-\paragraph{Against published methods (H14) and a single call (H18).} Astute RAG \citep{wang2025astute} and TrustRAG
-\citep{zhou2025trustrag} lose legitimate same-name answers on RAMDocs (gold recall \recMultiPlain\% to
-\recMultiAst\% and \recMultiTr\%), and on ConflictBank they do not beat the one-answer prompt (\zSgMiniAstuteConflict\ and \zSgMiniTrustragConflict\ points; exploratory). A single call that
-names the suspect passages before answering does not differ significantly from the gpt-4o-mini detector pipeline, at
-half the calls (H18; equivalence within $\pm$3 points is not established), but
-the reasoning models and Claude Haiku, asked to judge ConflictBank's generated passages, distrust most of them and
-abstain, losing up to \azSgTerraSelfIdentifyClean\ points on clean questions. Table~\ref{tab:baselines}
-(Appendix~\ref{app:more}) gives all baselines.
+\paragraph{It is not just a stronger model's answer (H27).} If a cell's gain were the detector model's better answer
+passed along, giving the generator that answer as a hint would do as well. It does not: the directional flag beats
+the hint significantly in \nHTwentySevenAPos\ of \nHTwentySevenATests\ cells and loses to it in \nHTwentySevenANeg\
+(Figure~\ref{fig:reliability}, right). The hint itself helps in \nHTwentySevenBPos\ cells and hurts in
+\nHTwentySevenBNeg, mostly the more accurate generators, which lose accuracy even when the hinted answer is better
+than their own. Using the detector model as the generator instead does significantly worse than the cell in
+\nHTwentySevenCPos\ cells and better in \nHTwentySevenCNeg, each a much stronger detector model (gpt-6.1-terra or
+Claude Sonnet) serving a weaker generator.
 
-\subsection{What a detector must get right}
-\label{sec:grid}
-In synthetic detectors the gain rises with direction accuracy, and precision matters mainly for removal, whose false
-flags delete correct passages (H4a); the grid predicts real detectors' effects only roughly (H6).
-Appendix~\ref{app:grid} gives the cells and tests.
+\paragraph{Not a surface artefact (H29).} ConflictBank's two sides are written by an LLM from different prompts, so
+a detector could key on style or position. Reversing the passage order or paraphrasing every passage with one model
+leaves gpt-4o-mini's direction accuracy at \hTwentyNineMiniRevProbe\% and \hTwentyNineMiniParaProbe\% (from
+\hTwentyNineMiniRevOrig\%) and gpt-6-luna's at \hTwentyNineLunaRevProbe\% and \hTwentyNineLunaParaProbe\% (from
+\hTwentyNineLunaRevOrig\%); no change is significant, and neither is the change in the generator's gain (H29c).
+
+\paragraph{Genuine conflicts (H28).} Where both sides are valid, direction does damage. On WikiContradict the LLM
+directional flag lowers the share of answers giving both sides by \ahTwentyEightWcMiniDir\ points for gpt-4o-mini,
+\ahTwentyEightWcLunaDir\ for gpt-6-luna and \ahTwentyEightWcHaikuDir\ for Claude Haiku (from \hTwentyEightWcMiniPlain,
+\hTwentyEightWcLunaPlain\ and \hTwentyEightWcHaikuPlain\%), and removal by more; the oracle neutral flag raises it. On
+the \hTwentyEightAmbMiniN\ RAMDocs questions whose conflicts are same-name ambiguity, removal costs every generator
+\ahTwentyEightAmbMiniRem\ to \ahTwentyEightAmbLunaRem\ points and the directional flag up to
+\ahTwentyEightAmbLunaDir\ (gpt-6-luna). The detector calls a valid alternative misinformation, and the generator drops it.
+
+\paragraph{Baselines.} Astute RAG \citep{wang2025astute} and TrustRAG \citep{zhou2025trustrag} lose legitimate
+same-name answers on RAMDocs (H14), and a single call that names suspect passages before answering does not differ
+significantly from the detector pipeline (H18; Table~\ref{tab:baselines}). The synthetic grid (H4, H6) is in
+Appendix~\ref{app:grid}.

@@ -32,9 +32,10 @@ We developed the method on a random 200-question pilot split of RAMDocs. Before 
 questions (139 conflict, 126 clean, 35 excluded), we committed a pre-registration that fixes the conditions, metrics,
 hypotheses and corrections. Every RAMDocs result in the main text is on this confirmatory split; pilot results appear
 only in the appendix. Comparisons that were not registered, including every real-detector row of
-Table~\ref{tab:main}, are exploratory. Six addenda (H10--H26 and several re-analyses) were each committed before running anything
+Table~\ref{tab:main}, are exploratory. Seven addenda (H10--H29 and several re-analyses) were each committed before running anything
 they cover, so these hypotheses were formed after the original confirmatory results were known; the confirmatory core
-registered before any data is H1--H9. The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
+registered before any data is H1--H9. Re-analyses registered in the last addendum use data we had already seen, and
+are reported as such. The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
 
 \paragraph{Generators and baselines.}
 The main generator is \texttt{gpt-4o-mini} \citep{openai2024gpt4o} (temperature 0.1, at most 256 output tokens, seeds
@@ -47,7 +48,10 @@ minimal skeletons are robustness checks. We rerun the oracle and LLM-detector co
 MADAM-RAG \citep{wang2025madam} is ported unchanged (three debate rounds). Astute RAG \citep{wang2025astute} and
 TrustRAG \citep{zhou2025trustrag} use their published prompts and defaults; since both return one answer, we also run
 \emph{multi} variants that ask for every valid answer (Appendix~\ref{app:repro}). We also run the LLM detector on
-Qwen2.5-7B with gpt-4o-mini generating. A detector pipeline counts as one detector call plus one generator call.
+Qwen2.5-7B with gpt-4o-mini generating. A detector pipeline counts as one detector call plus one generator call. Two
+controls test whether a crossed cell's gain is only a stronger model's answer (H27): the generator given the detector
+model's own plain answer as a hint, and the detector model used as the generator. An artefact probe (H29) reruns two
+detectors on ConflictBank with the passage order reversed and with every passage paraphrased by one model.
 
 \paragraph{Metrics.}
 On RAMDocs an answer is correct if it includes every gold answer and no wrong answer \citep{wang2025madam}. Our primary
@@ -58,7 +62,8 @@ published score (Appendix~\ref{app:repro}), and we compare conditions only withi
 an answer is correct if it contains both sides (bidirectional matching); on ConflictBank and RAGuard we use the RAMDocs metrics. We also report
 the share of answers that contain the misinformation, the share that abstain (``unknown''), and accuracy among answered
 questions. An LLM judge (gpt-6.1-terra) agrees with the primary metric on \judgeAgree\% of \judgeN\ stratified
-conflict-question outputs ($\kappa=\judgeKappa$); the metric is slightly conservative, missing some paraphrases.
+conflict-question outputs ($\kappa=\judgeKappa$); the metric is slightly conservative, missing some paraphrases. A
+200-output sheet for a human audit is released, but it has not been labelled.
 
 \paragraph{Statistics.}
 We average each question's score over seeds and report paired differences from the plain format with
@@ -69,7 +74,10 @@ below, so an interval can exclude zero for a difference that is not significant.
 robustness metric. One significance scheme governs the paper: a registered test takes its family's Holm-adjusted $p$
 \citep{holm1979simple}, and every other comparison we report (\nExploratory\ of them) forms one exploratory Holm
 family. Only results significant under this scheme are called significant or set in bold. A null difference is not
-read as equivalence without a TOST \citep{lakens2017equivalence}. Appendix~\ref{app:repro} gives the minimum detectable effect.
+read as equivalence without a TOST \citep{lakens2017equivalence} at $\pm$3 points. Selective accuracy is a ratio
+(correct over answered, pooled over questions and seeds), tested by swapping conditions within questions. Pooled
+estimates use a bootstrap that resamples questions jointly across the settings that share them.
+Appendix~\ref{app:repro} gives the minimum detectable effect.
 
 \paragraph{Cost.}
 Token counts come from the API's usage reports. All experiments, pilots included, cost \totalSpend\ in API fees

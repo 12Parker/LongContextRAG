@@ -5,14 +5,16 @@
 Language models can prefer memorised knowledge over contradicting context \citep{longpre2021entity}, yet are readily
 persuaded by coherent contradicting evidence \citep{xie2024chameleon}, to a degree that depends on the strength of
 their prior \citep{wu2024clasheval}. Of the conflict types of \citet{xu2024survey}, we study inter-context
-conflicts, as in \citet{chen2022rich}, who find that models tend to rely on a single passage when evidence conflicts.
+conflicts, as in \citet{chen2022rich}, who find that models tend to rely on a single passage when evidence conflicts,
+and \citet{wan2024convincing}, who find that models weigh a passage's relevance more than its credibility cues.
 
 \paragraph{Benchmarks.}
 RAMDocs \citep{wang2025madam}, built on AmbigDocs \citep{lee2024ambigdocs}, mixes genuine ambiguity, misinformation
 and noise. CONFLICTS \citep{cattan2025conflicts} annotates search results with conflict types, each with its own
 desired behaviour, and WikiContradict \citep{hou2024wikicontradict} pairs genuinely contradicting Wikipedia passages.
 FaithEval \citep{ming2025faitheval}, ConflictBank \citep{su2024conflictbank} and ConfRAG \citep{yuan2026confrag}
-cover related settings. RAMDocs and ConflictBank label which side is misinformation; WikiContradict does not.
+cover related settings, as do QACC's human-annotated natural conflicts \citep{liu2025qacc} and WhoQA's same-name
+conflicts \citep{pham2024whoqa}. RAMDocs and ConflictBank label which side is misinformation; WikiContradict does not.
 
 \paragraph{Telling the model about conflicts.}
 Prompting a model to reason about the conflict type helps, and supplying the gold type helps much more
@@ -29,10 +31,15 @@ true and the input contradictory, and accuracy still falls, because the hint doe
 Closest to our directional format, \citet{hong2024gullible} pass a discriminator's marks on perturbed passages to the
 generator in the prompt, which makes it more robust to counterfactual noise. CrAM \citep{deng2025cram} rescales
 attention by passage credibility, RA-RAG \citep{hwang2025rarag} estimates source reliability, and
-\citet{weller2024defending} defend open-domain QA against disinformation. These works show that \emph{some}
-reliability signal helps, but do not compare it with a neutral warning on the same pairs or measure its cost on
-conflict-free questions. RGB \citep{chen2024rgb} warns models that passages may contain errors, and they still rarely
-detect them; our neutral flag is the pair-specific version of that warning.
+\citet{weller2024defending} defend open-domain QA against disinformation. TACS \citep{yu2024tacs} detects untruthful context and masks it,
+close to our removal format. These works, with \citet{pan2023risk}'s finding that vigilant prompts give limited
+protection, already suggest that a reliability signal helps more than a warning. What we add is the controlled
+comparison on the same pairs, its cost on conflict-free questions, and an analysis of when a real detector's signal
+helps a given generator. RGB \citep{chen2024rgb} warns models that passages may contain errors, and they still rarely
+detect them; our neutral flag is the pair-specific version of that warning. Models also follow injected hints, wrong
+ones included \citep{turpin2023unfaithful}, and advice improves a decision-maker only when its errors fall where the
+decision-maker is right less often \citep{bansal2021whole}, which is the pattern our crossed design measures. Whether
+abstaining is a failure depends on the cost of a wrong answer \citep{wen2025abstention,song2025trustscore}.
 
 \paragraph{Detection, resolution and poisoning.}
 ConflictRAG \citep{wang2026conflictrag} trains a pairwise detector with an LLM fallback and reports pair-level F1

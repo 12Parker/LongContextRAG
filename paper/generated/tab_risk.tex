@@ -38,9 +38,10 @@ gpt-6.1-terra & 26.0 & 65.3 & 1.0 & 26.3 & 22.3 & 71.0 & 0.7 & 22.5 & 92.3 & \te
 \bottomrule
 \end{tabular}}
 \caption{Risk and coverage on conflict questions (\%): strictly correct answers, answers that contain the
-misinformation, abstentions (``unknown''), and selective accuracy (correct among non-abstained answers).
-\textbf{Bold}: the change from no flags is significant (H21 for ConflictBank; the paper's single scheme elsewhere).
-A neutral flag trades misinformation for abstention but never raises the share of correct answers; under forced
+misinformation, abstentions (``unknown''), and selective accuracy (correct answers over non-abstained answers, pooled
+over questions and seeds, the estimand of \S15.4.5). \textbf{Bold}: the change from no flags is significant (H21 for
+ConflictBank; the paper's single scheme elsewhere). Where abstention is allowed, the neutral flag moves answers from
+misinformation, and from correct answers, into abstention, and leaves selective accuracy nearly unchanged; under forced
 choice it has no abstention to trade.}
 \label{tab:risk}
 \end{table*}
