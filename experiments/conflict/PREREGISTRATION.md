@@ -824,3 +824,96 @@ These analyses are registered here but run on data already seen, and are reporte
 7. **Human audit.** 200 outputs, stratified by condition and generator, are exported for author
    labelling (`runs/labelling/audit_200.csv`). Agreement with the matcher is reported only if the labels
    are complete before submission; this is not done by us.
+
+## 16. Sixth revision addendum (frozen 2026-10-28, after a sixth mock review, before any run below)
+
+A sixth mock review, with three reviewers and a consensus round, scored the paper 3.0 (Findings). Its must-fix list
+asks for:
+- scoping the neutral-flag claim to the answer policy;
+- reconciling inconsistencies;
+- separating confirmatory from post hoc claims;
+- recasting the "where errors fall" analysis, which is observational and has an asymmetric definition of following;
+- a detector-judgement answer key as the control for H27;
+- a dependence-aware meta-analysis and seed-to-seed nulls;
+- the missing prompts.
+
+Spend before this section: $185.14. The budget rule is unchanged: a run that would start at or above $195 is
+dropped. Runs are listed in priority order.
+
+### 16.1 New conditions
+
+- **`verdict_key`** (with an LLM detector: `llm_dir+verdict_key`). The plain prompt plus
+  `NOTE: The answer "X" is false.` for each answer supported by a passage the detector marks as suspect.
+  - On ConflictBank a correct passage supports the gold answer and a misinformation passage supports the wrong answer,
+    so a wrong-side mark yields "the [gold answer] is false".
+  - No passage is marked.
+  - Suspect distractors support neither answer and are ignored.
+  - This passes the detector's judgement of which side is false, as an answer key; `hint` passed the detector
+    model's own answer.
+- **Randomised direction**, `synth-p1-r1-all-d0.5+flag_directional`.
+  - The gold contradiction pair of every conflict question is flagged.
+  - The suspect is the misinformation passage with probability 0.5, drawn independently per question (seed 0);
+    otherwise it is the correct passage.
+  - Clean questions receive no flag.
+  - Whether the flag is right is therefore independent of the question.
+
+### 16.2 Runs, in priority order
+
+1. **Randomised direction**, `runs/randdir_cb_{mini,luna,haiku,terra}`. ConflictBank `single`; gpt-4o-mini,
+   gpt-6-luna and claude-haiku-5-5 with 3 seeds, gpt-6.1-terra with seed 0. Conditions: `plain` and the randomised
+   condition.
+2. **Verdict key**, `runs/vkey_cb_<gen>_<det>`. Every H24 cell whose generator is gpt-4o-mini, gpt-6-luna or
+   Qwen2.5-7B, with the cell's seeds and its own detector. Conditions: `plain`, `llm_dir+verdict_key`. The detections
+   are cache hits.
+3. **Verdict key for the claude-haiku-5-5 generator cells.**
+
+### 16.3 Hypotheses
+
+Conflict questions; one-way strict accuracy; Holm within each family.
+
+**H30: the detector's verdict as an answer key.** One family per comparison, across cells, all two-sided:
+- H30a: Δ(`llm_dir+flag_directional`, `llm_dir+verdict_key`), with a TOST at ±3 points.
+- H30b: Δ(`llm_dir+verdict_key`, `hint`).
+
+**H31: randomised direction.** One family per estimand, across generators:
+- H31a: the right-flag effect, the mean over right-assigned questions of the flagged minus the plain accuracy, > 0.
+- H31b: the wrong-flag effect, the same over wrong-assigned questions, < 0.
+- H31c: (a) + (b), two-sided. Is the harm of a wrong flag larger than the gain of a right one?
+  - Inference: the arms are different questions, so the p-value is a permutation of arm labels across questions
+    (10,000 permutations) and the CI a question bootstrap within arms.
+- Reported with it: follow rates with one definition, conditioned on the plain outcome.
+  - A right flag is followed when the flagged answer is correct.
+  - A wrong flag is followed when the flagged answer contains the answer the flag implies, here the misinformation.
+  - Abstentions are reported separately.
+
+### 16.4 Re-analyses of existing data (registered here, run on data already seen, reported as such)
+
+1. **Answer policy.**
+   - Risk and coverage (correct, misinformation, abstain, selective) for the multi-answer settings: RAMDocs and
+     ConflictBank `default`.
+   - The pooled neutral-flag estimate and the utility analysis split by answer policy (multi-answer, one answer
+     with "unknown", forced).
+   - The meta-regression moderators recoded: answer policy, model family, and natural misinformation (RAGuard
+     only; RAMDocs' misinformation is synthetic edits).
+2. **Dependence-aware meta-analysis.**
+   - A multilevel random-effects model with random effects for generator, benchmark and setting, fitted by REML with
+     the settings' sampling variances. The pooled mean and a prediction interval are reported.
+   - The utility and pooled analyses use the same set of settings.
+3. **H24 recast.**
+   - Direction recall R (the detector flags the gold pair) and direction precision P (among those flags, the suspect
+     is exactly the misinformation side) enter separately: A ~ P + R + generator FE.
+   - P gets the same exact permutation across detectors, and leave-one-detector-out R² is reported for P + R.
+   - The question-level model is refitted with question, detector and generator fixed effects. CIs come from a
+     question bootstrap, with the leave-one-detector-out range of the coefficients.
+   - Follow rates use the §16.3 definition.
+   - A regression-to-the-mean null: in 3-seed generators, the plain outcome on seed 2 given the plain outcome on
+     seeds 0 and 1.
+4. **Seed-to-seed null for the transition tables.** Plain seed s → plain seed s′ transitions, with the same
+   categories.
+5. **H14 under a matched prompt** (exploratory). The registered H14 on ConflictBank compared the pipeline under the
+   multi-answer prompt (the only one registered at §10) with the baselines' own single-answer prompts. Add the
+   comparison with the pipeline under the `single` prompt (`cb_single`), from existing runs.
+6. **H29 equivalence** at ±5 points, as registered in §15, reported in the text. Every remaining "unchanged" claim
+   gets a TOST or is reworded.
+7. **H21(c) in the hypothesis tables** uses the §15.4.5 ratio estimand, with the per-question version in the
+   released statistics.
