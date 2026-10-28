@@ -31,10 +31,15 @@ _FINAL = re.compile(r"final answer\(s\)\s*:\s*(.*)", re.I)
 _MADAM = re.compile(r"all correct answers\s*:\s*\[(.*?)\]", re.I | re.S)
 
 
+_TAGGED = re.compile(r"<([A-Za-z_]+)>(.*?)</\1>", re.S)
+
+
 def extract_answers(text: str) -> list[str]:
     m = _FINAL.search(text) or None
     if m:
-        return [a.strip() for a in m.group(1).split("|") if a.strip()]
+        # some models copy the answer-line template literally: "Final answer(s): <answer>Paris</answer>"
+        line = _TAGGED.sub(lambda t: t.group(2), m.group(1))
+        return [a.strip() for a in line.split("|") if a.strip()]
     m = _MADAM.search(text)
     if m:
         # items are quoted strings that may themselves contain commas ("July 10, 1850");
@@ -64,7 +69,7 @@ def score(ex: Example, response: str) -> dict:
     answers = extract_answers(response)
     pred = normalize_answer(" ; ".join(answers))
     out: dict = {"pred_answers": answers}
-    if ex.dataset in ("ramdocs", "conflictbank"):
+    if ex.dataset in ("ramdocs", "conflictbank", "raguard"):
         g = [_matches(answers, a) for a in ex.gold_answers]
         w = [_matches(answers, a) for a in ex.wrong_answers]
         g1 = [_contains(pred, a) for a in ex.gold_answers]   # one-way, kept for comparison

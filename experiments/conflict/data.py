@@ -293,7 +293,26 @@ def load_conflictbank_majority(path: Path | None = None, **kw) -> list[Example]:
     return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_majority.jsonl", **kw)
 
 
-LOADERS = {"conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
+def load_raguard(path: Path | None = None, n: int | None = None, seed: int = 0) -> list[Example]:
+    """RAGuard as built by prepare_raguard.py (§14): a claim, Reddit posts labelled supporting / misleading /
+    unrelated, gold = the PolitiFact verdict. Supporting posts are typed correct, misleading ones misinfo."""
+    path = path or DATA_DIR / "raguard" / "raguard_eval.jsonl"
+    out = []
+    for r in map(json.loads, open(path)):
+        t = r["types"]
+        lab = lambda a, b: ("contradiction" if {a, b} == {"correct", "misinfo"} else
+                            "consistent" if a == b != "noise" else "unrelated")
+        pairs = {(i, j): lab(t[i], t[j]) for i in range(len(t)) for j in range(i + 1, len(t))}
+        out.append(Example(
+            id=r["id"], dataset="raguard", question=r["question"], passages=r["passages"],
+            gold_answers=[r["gold"]], wrong_answers=[r["wrong"]] if r["has_conflict"] else [],
+            has_conflict=r["has_conflict"], conflict_type="misinfo" if r["has_conflict"] else "none",
+            gold_pairs=pairs, group=r["id"],
+            meta={"doc_types": t, "original_verdict": r["original_verdict"], "suspect_docs": [], "label_fix": "none"}))
+    return _subsample(out, n, seed)
+
+
+LOADERS = {"raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
 
 def load(name: str, **kw) -> list[Example]:

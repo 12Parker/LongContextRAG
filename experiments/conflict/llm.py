@@ -27,6 +27,12 @@ PRICES = {"gpt-4o-mini": {"input": 0.15, "cached_input": 0.075, "output": 0.60},
 # Reasoning models take max_completion_tokens (reasoning tokens count against it) and only their default
 # temperature; they get a larger output budget so reasoning cannot crowd out the answer (§12).
 REASONING_MODELS = {"gpt-6-luna", "gpt-6.1-terra"}
+# Claude through Anthropic's OpenAI-compatible endpoint (§13): no temperature parameter (deprecated for these
+# models), max_tokens as usual, and no json_object response format (the detector falls back to its regex parse)
+PRICES.update({"claude-haiku-5-5": {"input": 0.10, "cached_input": 0.01, "output": 0.50},
+               "claude-sonnet-5-5": {"input": 2.00, "cached_input": 0.10, "output": 10.00}})
+PROVIDERS = {"claude-": ("https://api.anthropic.com/v1/", "ANTHROPIC_API_KEY")}
+NO_TEMPERATURE_MODELS = {"claude-haiku-5-5", "claude-sonnet-5-5"}
 REASONING_MAX_TOKENS = 4096
 PRICES_CHECKED = ("2026-10-27, https://developers.openai.com/api/docs/pricing "
                   "(gpt-4o-mini: $0.15 / $0.075 cached / $0.60; gpt-4.1: $2.00 / $0.50 cached / $8.00)")
@@ -87,6 +93,9 @@ class OpenAILLM:
                  max_tokens: int = 256, cache_path: Path = CACHE_PATH,
                  base_url: str | None = None, api_key_env: str = "OPENAI_API_KEY"):
         from openai import OpenAI
+        for prefix, (url, env) in PROVIDERS.items():
+            if model.startswith(prefix) and base_url is None:
+                base_url, api_key_env = url, env
         key = os.getenv(api_key_env)
         if base_url and not key:
             raise RuntimeError(f"{api_key_env} is not set (needed for {base_url})")
@@ -102,6 +111,8 @@ class OpenAILLM:
         parts = [self.model, msgs, self.temperature, seed, mt, json_mode]
         if self.base_url:  # same model name on another server is a different model
             parts.append(self.base_url)
+        if self.model in NO_TEMPERATURE_MODELS:   # the effective output budget differs from mt (see below)
+            parts.append(f"max_tokens={max(mt, REASONING_MAX_TOKENS)}")
         key = hashlib.sha256(json.dumps(parts).encode()).hexdigest()
         hit = self.cache.get(key)
         if hit:
@@ -110,10 +121,12 @@ class OpenAILLM:
         if self.model in REASONING_MODELS:
             kw = dict(model=self.model, messages=msgs, seed=seed,
                       max_completion_tokens=max(mt, REASONING_MAX_TOKENS))
+        elif self.model in NO_TEMPERATURE_MODELS:   # they also think before answering: same budget as reasoning models
+            kw = dict(model=self.model, messages=msgs, seed=seed, max_tokens=max(mt, REASONING_MAX_TOKENS))
         else:
             kw = dict(model=self.model, messages=msgs, temperature=self.temperature,
                       seed=seed, max_tokens=mt)
-        if json_mode:
+        if json_mode and self.model not in NO_TEMPERATURE_MODELS:
             kw["response_format"] = {"type": "json_object"}
         t0 = time.perf_counter()
         try:

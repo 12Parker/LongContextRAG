@@ -592,3 +592,89 @@ families are run per generator unless stated.
 
 **Other providers and RAGuard.** Claude and Gemini runs, and RAGuard, will be registered in a further
 addendum before they run, once API access and the data are confirmed.
+
+## 14. Other providers and realistic misinformation (frozen 2026-10-27, before any run below)
+
+**Access.** An Anthropic API key was made available. No Gemini key was available, so Gemini is not run;
+if one arrives before §14's runs end, it is added in a further addendum.
+
+**Claude models.** Claude runs through Anthropic's OpenAI-compatible endpoint.
+- `claude-haiku-5-5`: $0.10 input / $0.01 cached input / $0.50 output per 1M tokens.
+- `claude-sonnet-5-5`: $2.00 / $0.10 / $10.00.
+- A smoke test on 2026-10-27 established the decoding settings:
+  - The endpoint rejects `temperature`, so Claude runs at its default.
+  - Claude thinks before answering, so it gets `max_tokens=4096`, as the reasoning models do. With 256
+    tokens, answers were truncated or empty.
+  - JSON response mode is not accepted. When Claude is the detector, the detector's existing
+    regex fallback parses the JSON from the text.
+- **Parser change.** Claude Haiku sometimes copies the answer-line template literally
+  (`Final answer(s): <answer>Paris</answer>`). The answer parser now unwraps paired tags. No existing
+  result contains a paired tag, so nothing earlier is rescored.
+
+**RAGuard** (Zeng et al., NeurIPS 2025; Hugging Face `UCSC-IRKM/RAGuard` at `dae344a2`, MIT on the
+card; `documents.csv` sha256 `ef1f5931…`).
+- What it contains: PolitiFact claims with a binary verdict, plus Reddit posts that an LLM labelled
+  supporting, misleading or unrelated. The misleading side is real online text, not written for a
+  benchmark. The labels are LLM-assigned stances, not human-verified facts.
+- What we build (`prepare_raguard.py`):
+  - 294 conflict items: claims with at least one usable supporting post and one usable misleading post.
+  - 100 clean items: a seed-0 sample of claims with supporting posts and no misleading post.
+  - A post is usable if it has at least 15 words, ignoring the `[Link Post]` placeholder, and is not a
+    duplicate within its claim.
+  - Each item keeps up to 2 supporting, 2 misleading and 2 unrelated posts, each cut to 300 words.
+- The question is "Is the following claim true or false?". The gold answer is the verdict; the wrong
+  answer is its opposite. Scoring uses the strict metrics. Supporting × misleading pairs are the
+  contradictions, and misleading posts are the misinformation side.
+- No pilot was run, so every result is confirmatory for the tests below.
+
+### 14.1 Runs, in priority order
+
+The budget rule is the same as before: a run that would start at or above $195 total is dropped. The
+`cross_mj` runs of §13 rank below all §14 runs and are stopped first if spend approaches the limit.
+
+1. **RAGuard**, `single` skeleton, gpt-4o-mini detector.
+   - Generators: gpt-4o-mini (3 seeds), gpt-6-luna (3), claude-haiku-5-5 (3) and gpt-6.1-terra (1).
+   - Conditions: `plain`, `closedbook`, `oracle+flag`, `oracle+flag_onewrong`, `oracle+flag_directional`,
+     `oracle+remove_suspect`, `llm_dir+flag_directional`, `answer_key`.
+2. **claude-haiku-5-5**, 3 seeds:
+   - ConflictBank `single` and RAMDocs: the conditions of `cb_single_luna` and `holdout_luna`.
+   - ConflictBank majority: the conditions of `cbmaj_single_luna`.
+   - ConflictBank `forced`: the conditions of `cb_forced_*`.
+3. **claude-sonnet-5-5**, seed 0:
+   - ConflictBank `single`: `plain`, `oracle+flag`, `oracle+flag_onewrong`, `oracle+flag_directional`,
+     `llm_dir+flag_directional`.
+   - RAMDocs and RAGuard: `plain`, `oracle+flag`, `oracle+flag_directional`, `llm_dir+flag_directional`.
+4. **Crossed cells added to H24** (ConflictBank `single`):
+   - Claude as detector: claude-haiku-5-5 and claude-sonnet-5-5, each with gpt-4o-mini, gpt-6-luna
+     and claude-haiku-5-5 as generators.
+   - Claude as generator: claude-haiku-5-5, with gpt-4.1, gpt-6-luna and gpt-6.1-terra as detectors.
+
+### 14.2 Hypotheses
+
+Holm runs within each family, per metric. All comparisons are on conflict questions unless noted.
+
+**H25: Claude.** Each Claude model is tested separately, on the H19 set where the conditions were run:
+
+| Benchmark | Comparison | Prediction |
+|---|---|---|
+| ConflictBank | Δ(`oracle+flag`, `plain`) | two-sided |
+| ConflictBank | Δ(`oracle+flag_directional`, `oracle+flag`) | > 0 |
+| ConflictBank | Δ(`oracle+flag_directional`, `oracle+flag_onewrong`) | > 0 |
+| ConflictBank | Δ(`llm_dir+flag_directional`, `plain`), all questions | > 0 |
+| RAMDocs | Δ(`oracle+flag`, `plain`) | two-sided |
+| RAMDocs | Δ(`oracle+flag_directional`, `oracle+flag`) | > 0 |
+| CB majority (Haiku only) | Δ(`oracle+flag_directional`, `plain`) | > 0 |
+| CB majority (Haiku only) | Δ(`llm_dir+flag_directional`, `plain`) | two-sided |
+
+**H26: RAGuard.** Each generator is tested separately:
+
+| Comparison | Prediction |
+|---|---|
+| Δ(`oracle+flag`, `plain`) | two-sided |
+| Δ(`oracle+flag_directional`, `plain`) | > 0 |
+| Δ(`oracle+flag_directional`, `oracle+flag`) | > 0 |
+| Δ(`oracle+flag_onewrong`, `plain`) | two-sided |
+| Δ(`llm_dir+flag_directional`, `plain`) | two-sided |
+
+**H24, extended.** The primary H24 analysis uses every cell run under §13 and §14. The §13-only set is a
+sensitivity check.
