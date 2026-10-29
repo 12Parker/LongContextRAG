@@ -57,6 +57,12 @@ All runs use GPT-4o-mini on RAMDocs; pilots are **exploratory**, since they shap
 | `hoh_smoke_det_{four,luna,terra,haiku,sonnet}`, `hoh_smoke_det_{luna,terra}_dated` | Smoke: the same 40 HoH items with newer and reasoning detectors (gpt-4.1, gpt-6-luna, gpt-6.1-terra, Claude Haiku, Claude Sonnet) for both `llm_dir` and `llm_ans`; generator gpt-4o-mini, seed 0 | n/a | smoke (not reported as results) |
 | `cb_single_gpt41` (added `self_identify`) | Round 8 (§15): single-call mode for gpt-4.1, seed 0 | n/a | registered (§15) |
 | `labelling` | `ramdocs_suspect_docs.csv`: 163 RAMDocs documents to hand-label (`export_labelling.py`); `audit_200.csv`: 200 outputs for a human audit of the matcher (`export_audit.py`, §15.4.7), not yet labelled | n/a | to label |
+| `rev8_cb_main` | Round 11 (§17.2): ConflictBank eval, default skeleton, gpt-4o-mini, 3 seeds: `trustrag_sys` (TrustRAG with its system message), `nli_win+{flag,remove}` (1,500-char question window), `nli_win300+{flag,remove}` (300-char window, §17.6 deviation), `plain` (cached) | n/a | **registered (§17)**, exploratory |
+| `rev8_cbmaj_single` | Round 11 (§17.2): majority variant, single skeleton, `trustrag_sys`, `plain` | n/a | **registered (§17)**, exploratory |
+| `rev8_holdout_round2` | Round 11 (§17.2): RAMDocs hold-out, `trustrag_sys`, `trustrag_sys_multi`, `plain` | `exclude` | **registered (§17)**, exploratory |
+| `rev8_detect_cb_nli`, `rev8_detect_cb_nli300` | Round 11: detection-only NLI on ConflictBank (truncated, 1,500-char and 300-char windows), no API | n/a | §17.2 / §17.6 |
+| `judge8/` | Round 11 (§17.3): gemini-3.5-flash-lite re-score of 10 paired contrasts (2,400 outputs), WikiContradict original rubric (1,518), 150 RAGuard pairs ($0.84) | n/a | **registered (§17)**, exploratory |
+| `labelling/audit8_*` | Round 11 (§17.4): blinded paired audit sheet, 150 pairs + 50 RAGuard pairs, unlabelled; `audit8_key.csv` is the hidden key | n/a | needs two human labellers |
 
 Runs made before the cached-latency fix (all runs listed above) record `generate_s` as wall-clock time, ~0 for
 cache hits; their latency figures should not be reported.

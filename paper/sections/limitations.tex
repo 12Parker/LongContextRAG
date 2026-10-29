@@ -1,24 +1,28 @@
 \section*{Limitations}
 
 \paragraph{Models.} We test seven generators from three families: four OpenAI models (gpt-4o-mini, gpt-4.1 and two
-current reasoning models), Claude Haiku 5.5 and Sonnet 5.5, and Qwen2.5-7B at 4-bit precision. We could not run Gemini, and
+current reasoning models), Claude Haiku 5.5 and Sonnet 5.5, and Qwen2.5-7B at 4-bit precision. Gemini serves only as a judge, and we run
 no large open model. Qwen2.5-7B, gpt-6.1-terra and Claude Sonnet ran with one seed, as did gpt-4.1 outside RAMDocs, and the reasoning and Claude models
 only at their default temperature, so their sampling is not deterministic, and Claude ran through Anthropic's
 OpenAI-compatible endpoint. The crossed reliability test (H24) covers \hTwentyFourCells\ detector--generator cells on one benchmark, with six
 detectors, so any test of a detector-level property has little power (an exact permutation has \hRedoNPerm\
-arrangements); the registered gap turned out to be dominated by the generator's own accuracy. The prediction from
-H31's follow rates was defined after seeing the cells, uses follow rates measured with oracle pairs on the same
-questions, and is validated out of sample only on the \predTrN\ cells of generators without an H31 run. Concurrent runs gave
+arrangements); the registered gap turned out to be dominated by the generator's own accuracy. The follow-rate
+account of the crossed cells was defined after seeing them and uses follow rates measured on the same questions, so it
+is a retrospective decomposition; no outcome-blind question set tests it, and the break-even precision is a
+calibration for randomised flags on true pairs, not a validated rule for selective detectors. Concurrent runs gave
 a detector slightly different outputs in different cells; its output is identical across its cells for at least
 \frozenShareMin\% of questions, and restricting each cell to those moves no cell's gain by more than \frozenMaxShift\
 points. The LLM detector is a single
-prompt. The published baselines are reimplemented (Astute RAG has no official code), and we do not compare
+prompt. The published baselines are reimplemented (Astute RAG has no official code; restoring TrustRAG's system message
+changed little), NLI sees only a sentence-sized window, and we do not compare
 against a trained detector such as ConflictRAG's \citep{wang2026conflictrag}.
 
 \paragraph{Data and power.} The confirmatory evidence comes from two benchmarks: RAMDocs (300 questions, 139 of them
 conflict questions) and ConflictBank (400 sampled questions, 300 with conflicts). In both, the misinformation is
 synthetic, made by editing or generating text around a substituted answer; ConflictBank's passages are LLM-written
-on both sides. RAGuard's misleading side is real, but its stance labels are assigned by an LLM. With its posts in context
+on both sides. RAGuard's misleading side is real text, but its labels are behavioural (whether GPT-4 judged the claim
+correctly with the post), and an LLM audit finds only \rgAudContradict\% of sampled supporting--misleading pairs to
+contradict (Appendix~\ref{app:semantic}), so RAGuard's oracle is a label transfer, not a factual oracle. With its posts in context
 generators abstain on \rgAbstMin--\rgAbstMax\% of conflict claims, which is why accuracy on this true/false task
 falls below chance; on the claims they answer it is \rgAnsMin--\rgAnsMax\%, against \rgCbMin--\rgCbMax\% closed-book. RAMDocs' document labels are imperfect. We exclude 35 hold-out
 questions whose status depends on documents we could not label without human annotation, and we check that the
@@ -39,8 +43,10 @@ nor are deeper regularities of generated text.
 \paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition and scores our
 MADAM-RAG port close to the published number on the pilot split, but the published subset is unknown, so this is not a
 reproduction. The metric is string matching: it misses paraphrases, and partial answers interact with ``no wrong
-answer''. An LLM judge agrees with it on \judgeAgree\% of sampled outputs, but no human labels check either; the 200-output
-audit sheet we release is unlabelled, and the judge, gpt-6.1-terra, is itself one of the generators. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
+answer''. An outside-family LLM judge agrees with it on \semAgree\% of \semN\ paired outputs; the matcher's misses
+depend on the condition (more under answer keys and directional flags) but move no contrast by more than \semDidMax\
+points (Appendix~\ref{app:semantic}). That sample cannot confirm the $\pm$3-point equivalence claims, and no human
+labels check either scorer: the paired, blinded audit sheet we release is unlabelled. We report a more lenient variant throughout and mark any conclusion that depends on the choice.
 
 \paragraph{Direction and the grid.} Oracle direction is not distinguishable from an explicit answer key (H23), so the
 oracle rows are ceilings, not findings about detectors. In the synthetic grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels. The gpt-4o-mini LLM

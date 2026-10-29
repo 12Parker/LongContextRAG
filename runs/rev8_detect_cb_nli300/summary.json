@@ -1,0 +1,29 @@
+{
+ "nli_win300": {
+  "question_level": {
+   "precision": 0.7647058823529411,
+   "recall": 0.39,
+   "f1": 0.5165562913907285,
+   "tp": 117,
+   "fp": 36,
+   "fn": 183,
+   "tn": 64,
+   "false_positive_rate": 0.36
+  },
+  "pair_level": {
+   "precision": 0.24705882352941178,
+   "recall": 0.21,
+   "f1": 0.22702702702702704,
+   "tp": 63,
+   "fp": 192,
+   "fn": 237
+  },
+  "false_flags_by_gold_relation": {
+   "unrelated": 192,
+   "contradiction": 63
+  },
+  "pair_flag_rate": 0.10625,
+  "mean_latency_s": 0.13420679123024457,
+  "total_cost_usd": 0.0
+ }
+}

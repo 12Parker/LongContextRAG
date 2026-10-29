@@ -1,14 +1,8 @@
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{A neutral flag does what the answer policy lets it.} It says that passages disagree but not which to trust,
-so the model falls back on its policy and its family's habits. Abstaining is right where a wrong answer is costly
-\citep{wen2025abstention}, so a neutral flag is worth sending only with a one-answer policy and a measured cost for
-wrong answers.
-
-\paragraph{A directional flag is advice, and its value has a threshold.} Generators act on wrong verdicts about
-as readily as on right ones, as with sycophancy \citep{sharma2024sycophancy}, so the flag helps only above a
-break-even precision that rises with the generator's accuracy: the complementarity condition of human--AI teams and
-of learning to defer \citep{bansal2021accurate,mozannar2020defer}. This suggests, though no gated pipeline was tested end to end, estimating a generator's break-even with a
-randomised-direction test and a detector's direction precision on the target distribution, clean questions included,
-before passing direction.
+A neutral flag leaves the model to its answer policy, so it suits only a one-answer policy with a measured cost for
+wrong answers \citep{wen2025abstention}. A directional flag is advice that generators follow whether
+right or wrong, as with sycophancy \citep{sharma2024sycophancy}; it pays only above a break-even precision, as in
+human--AI complementarity \citep{bansal2021accurate,mozannar2020defer}. That break-even calibrates randomised flags on
+true pairs; a selective detector needs its own test, which we did not run.

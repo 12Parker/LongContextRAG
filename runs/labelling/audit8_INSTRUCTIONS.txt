@@ -1,0 +1,2 @@
+Label each response's FINAL answer: gives_gold = states every reference answer (aliases count); asserts_wrong = states a known wrong answer as true (mentioning it to reject it does not count); rejects_wrong = explicitly says a wrong answer is false; abstains = unknown/declines; other_answer = asserts an answer in neither list. Use 1/0; leave blank if unsure and add a note.
+RAGuard sheet: contradict / temporally_compatible = 1/0; b_false_about_claim and a_supports_verdict = yes/no/unclear. Label independently; do not open audit8_key.csv.

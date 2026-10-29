@@ -13,7 +13,7 @@ conflict is such a document count only in ``All'' (Appendix~\ref{app:repro}).
 \textbf{ConflictBank} \citep{su2024conflictbank}: for a Wikidata fact, an LLM writes one evidence passage for the true
 object and one for a substituted object. We sample 400 questions round-robin over relations: 300 conflict questions
 (correct passage, misinformation passage, two distractors from other subjects) and 100 clean ones (correct passage,
-three distractors). Every question has one gold answer. It had no pilot, so all its results are confirmatory. A
+three distractors). Every question has one gold answer. It had no pilot; its registered tests are addenda (Table~\ref{tab:claims}), and everything else on it is exploratory. A
 \emph{majority} variant gives each conflict question the correct passage and ConflictBank's three wrong-object
 passages for that fact (its misinformation, temporal and semantic conflicts, all supporting the substituted object,
 which we count as misinformation), so the false side outnumbers the truth three to one.
@@ -21,10 +21,10 @@ which we count as misinformation), so the false side outnumbers the truth three 
 \textbf{RAGuard} \citep{zeng2025raguard} pairs PolitiFact claims (true or false) with Reddit posts that an LLM
 labelled supporting, misleading or unrelated, so the misleading side is real online text. We keep 294 claims with at
 least one supporting and one misleading post (up to two of each, plus two unrelated posts) and 100 claims with no
-misleading post; the question is whether the claim is true. Its labels are LLM-assigned stances, not verified facts.
+misleading post; the question is whether the claim is true. Its post labels are behavioural: a post is supporting or misleading according to whether GPT-4 judged the claim correctly with it in context \citep[\S3.3]{zeng2025raguard}. They do not verify that two posts contradict or that the misleading one is false, so on RAGuard the ``oracle'' transfers these labels and is not a factual oracle (audit in Appendix~\ref{app:semantic}).
 
 \textbf{WikiContradict} \citep{hou2024wikicontradict} has 253 questions, each with two genuinely contradicting
-Wikipedia passages; the reference answer is \emph{both} sides. We also run 237 automatically scorable
+Wikipedia passages; the reference answer is \emph{both} sides. We score whether an answer gives both; the original evaluation also asks that it acknowledge the incompatibility and not prefer a side without support \citep[\S3.4]{hou2024wikicontradict}, so our WikiContradict measure is coverage of the competing sources (the original rubric is in Appendix~\ref{app:semantic}). We also run 237 automatically scorable
 \textbf{CONFLICTS} \citep{cattan2025conflicts} questions (Appendix~\ref{app:repro}).
 
 \paragraph{Pre-registration and splits.}
@@ -34,9 +34,9 @@ hypotheses and corrections. Every RAMDocs result in the main text is on this con
 only in the appendix. Comparisons that were not registered, including every real-detector row of
 Table~\ref{tab:main}, are exploratory. Eight addenda registered H10--H31, each committed before its own runs, so
 these hypotheses were formed after the original confirmatory results were known; the confirmatory core registered
-before any data is H1--H9. The last two addenda also registered re-analyses of data we had already seen, and a final
+before any confirmatory data is H1--H9. The last two addenda also registered re-analyses of data we had already seen, and a final
 round of re-analyses (pooled answer-key comparisons, break-even precision, the prediction of the crossed cells,
-prevalence reweighting and a programme-wide FDR) was not registered at all; all are reported as exploratory
+prevalence reweighting and a programme-wide FDR) was not registered at all. A ninth addendum (\S17) registered further re-analyses, corrected baselines and a semantic re-score, after a mock review and before their runs. All of these are exploratory
 (Table~\ref{tab:claims}). The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
 
 \paragraph{Generators and baselines.}

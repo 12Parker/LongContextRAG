@@ -29,6 +29,11 @@ def _abbr(key):
     return PRE[pre] + GEN_A[g] + ("Min" if sk == "minimal" else "")
 
 
+def _mci(m):
+    c = m.get("ci_model")
+    return f"[{pct(c[0], True)}, {pct(c[1], True)}]" if c else "--"
+
+
 def numbers6(R, add):
     rev = R["rev"]
     m = rev.get("neutral_pooled6")
@@ -151,13 +156,18 @@ Policy & Setting & Neutral flag & Policy & Setting & Neutral flag \\
 """ + mods + r"""
 \bottomrule
 \end{tabular}
-\caption{The """ + str(m["k"]) + r""" settings in which the oracle neutral flag was run (conflict questions, change in
+\caption{The """ + str(m["k"]) + r""" settings on misinformation benchmarks (RAMDocs, ConflictBank and its one-answer, minimal,
+forced-choice and majority variants, RAGuard) in which the oracle neutral flag was run; WikiContradict (genuine
+conflicts) and CONFLICTS are not pooled (conflict questions, change in
 points), grouped by answer policy. The pooled estimate was registered as exploratory (\S13.4) and the multilevel model,
 the policy split and the moderators in \S16.4; they use data already seen. The prediction interval describes this
 design space (our generators, benchmarks and prompts), not deployments in general. \emph{Natural misinformation} is
 RAGuard only; RAMDocs' misinformation is synthetic. The moderator \emph{several answers allowed} codes the
 multi-answer and minimal prompts together, against one-answer prompts; the policy rows above separate them. Settings
-share questions, which the model does not account for, so its intervals are too narrow.}
+share questions, so the model is fitted with their sampling covariance, estimated by a joint question bootstrap
+(\S17.1: each replicate resamples each benchmark's questions once for every setting that uses them). Treating the
+settings as independent gives """ + _mci(m) + r"""; conditional on these settings (question sampling only) the pooled
+effect is \neuMlCIDesign.}
 \label{tab:pooled}
 \end{table*}
 """)

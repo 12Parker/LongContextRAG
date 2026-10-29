@@ -226,21 +226,26 @@ def trustrag_filter(passages: list[str], embed, thr_cos=0.88, thr_rouge=0.25) ->
     return [k for n_, k in enumerate(cl[lo]) if n_ not in drop]
 
 
-def trustrag(question: str, passages: list[str], llm, embed, seed: int = 0, multi: bool = False) -> dict:
+TRUST_SYSTEM = "You are a helpful assistant."   # the repo's system message (§17.2: sent by the _sys variants)
+
+
+def trustrag(question: str, passages: list[str], llm, embed, seed: int = 0, multi: bool = False,
+             system: str | None = None) -> dict:
     """`llm` should be built with temperature 0.1 and max_tokens 1024 (the repo's GPT path)."""
+    kw = {"system": system} if system is not None else {}
     u = _usage()
     kept = trustrag_filter(passages, embed)
     docs = [passages[k] for k in kept]
-    r1 = llm(TRUST_INTERNAL.format(question=question), seed=seed); _add(u, r1)
+    r1 = llm(TRUST_INTERNAL.format(question=question), seed=seed, **kw); _add(u, r1)
     ctx = "\n".join(f"Externally Retrieved Document{k}:{d}" for k, d in enumerate(docs))
     ctx += f"\nMemorized Documents:{r1.text}"
-    r2 = llm(TRUST_CONSOLIDATE.format(initial_context=ctx, question=question), seed=seed); _add(u, r2)
+    r2 = llm(TRUST_CONSOLIDATE.format(initial_context=ctx, question=question), seed=seed, **kw); _add(u, r2)
     final = TRUST_FINAL.format(question=question, external=r2.text, internal=r1.text)
     if multi:
         final += TRUST_FINAL_MULTI_SUFFIX
-    r3 = llm(final, seed=seed); _add(u, r3)
+    r3 = llm(final, seed=seed, **kw); _add(u, r3)
     text = r3.text if multi else f"{r3.text}\nFinal answer(s): {r3.text.strip()}"
     return {"final": text, "usage": u, "kept": kept}
 
 
-BASELINE_MODES = ("astute", "astute_multi", "trustrag", "trustrag_multi")
+BASELINE_MODES = ("astute", "astute_multi", "trustrag", "trustrag_multi", "trustrag_sys", "trustrag_sys_multi")

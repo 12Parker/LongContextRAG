@@ -25,26 +25,31 @@ multi & RAMDocs, Claude Sonnet & 0.0 & one & CB majority, gpt-6-luna & $+$6.6 \\
 \midrule
 \multicolumn{6}{l}{\emph{Multilevel model (random effects for generator, benchmark and setting; REML)}} \\
 \multicolumn{3}{l}{pooled, all settings} & \multicolumn{3}{l}{\neuMlMu\ \neuMlCI; prediction interval \neuMlPI} \\
-\multicolumn{3}{l}{pooled, multi-answer prompt (10 settings)} & \multicolumn{3}{l}{$-$3.8 [$-$6.5, $-$1.0]} \\
-\multicolumn{3}{l}{pooled, minimal prompt (4 settings)} & \multicolumn{3}{l}{$-$12.1 [$-$23.6, $-$0.7]} \\
-\multicolumn{3}{l}{pooled, one answer prompt (16 settings)} & \multicolumn{3}{l}{$-$0.5 [$-$5.5, $+$4.5]} \\
-\multicolumn{3}{l}{pooled, forced prompt (4 settings)} & \multicolumn{3}{l}{$+$1.5 [$-$1.3, $+$4.3]} \\
+\multicolumn{3}{l}{pooled, multi-answer prompt (10 settings)} & \multicolumn{3}{l}{$-$3.5 [$-$6.4, $-$0.6]} \\
+\multicolumn{3}{l}{pooled, minimal prompt (4 settings)} & \multicolumn{3}{l}{$-$12.1 [$-$23.2, $-$1.0]} \\
+\multicolumn{3}{l}{pooled, one answer prompt (16 settings)} & \multicolumn{3}{l}{$-$0.4 [$-$5.3, $+$4.5]} \\
+\multicolumn{3}{l}{pooled, forced prompt (4 settings)} & \multicolumn{3}{l}{$+$1.5 [$-$1.7, $+$4.8]} \\
 \midrule
 \multicolumn{6}{l}{\emph{Meta-regression (same model)}} \\
-\multicolumn{3}{l}{intercept (OpenAI, one answer, generated)} & \multicolumn{3}{l}{$-$2.8 [$-$8.1, $+$2.6]} \\
-\multicolumn{3}{l}{several answers allowed} & \multicolumn{3}{l}{$-$3.5 [$-$8.2, $+$1.2]} \\
-\multicolumn{3}{l}{forced (no unknown)} & \multicolumn{3}{l}{$+$6.4 [$+$1.6, $+$11.2]} \\
-\multicolumn{3}{l}{Anthropic} & \multicolumn{3}{l}{$+$5.2 [$+$1.7, $+$8.7]} \\
-\multicolumn{3}{l}{Qwen} & \multicolumn{3}{l}{$+$1.0 [$-$4.0, $+$6.0]} \\
-\multicolumn{3}{l}{natural misinformation (RAGuard)} & \multicolumn{3}{l}{$+$2.7 [$-$7.0, $+$12.3]} \\
+\multicolumn{3}{l}{intercept (OpenAI, one answer, generated)} & \multicolumn{3}{l}{$-$2.1 [$-$7.3, $+$3.0]} \\
+\multicolumn{3}{l}{several answers allowed} & \multicolumn{3}{l}{$-$3.7 [$-$8.2, $+$0.8]} \\
+\multicolumn{3}{l}{forced (no unknown)} & \multicolumn{3}{l}{$+$6.0 [$+$1.7, $+$10.3]} \\
+\multicolumn{3}{l}{Anthropic} & \multicolumn{3}{l}{$+$4.6 [$+$1.5, $+$7.7]} \\
+\multicolumn{3}{l}{Qwen} & \multicolumn{3}{l}{$+$0.6 [$-$3.9, $+$5.1]} \\
+\multicolumn{3}{l}{natural misinformation (RAGuard)} & \multicolumn{3}{l}{$+$2.2 [$-$7.2, $+$11.6]} \\
 \bottomrule
 \end{tabular}
-\caption{The 34 settings in which the oracle neutral flag was run (conflict questions, change in
+\caption{The 34 settings on misinformation benchmarks (RAMDocs, ConflictBank and its one-answer, minimal,
+forced-choice and majority variants, RAGuard) in which the oracle neutral flag was run; WikiContradict (genuine
+conflicts) and CONFLICTS are not pooled (conflict questions, change in
 points), grouped by answer policy. The pooled estimate was registered as exploratory (\S13.4) and the multilevel model,
 the policy split and the moderators in \S16.4; they use data already seen. The prediction interval describes this
 design space (our generators, benchmarks and prompts), not deployments in general. \emph{Natural misinformation} is
 RAGuard only; RAMDocs' misinformation is synthetic. The moderator \emph{several answers allowed} codes the
 multi-answer and minimal prompts together, against one-answer prompts; the policy rows above separate them. Settings
-share questions, which the model does not account for, so its intervals are too narrow.}
+share questions, so the model is fitted with their sampling covariance, estimated by a joint question bootstrap
+(\S17.1: each replicate resamples each benchmark's questions once for every setting that uses them). Treating the
+settings as independent gives [$-$5.5, $+$2.2]; conditional on these settings (question sampling only) the pooled
+effect is \neuMlCIDesign.}
 \label{tab:pooled}
 \end{table*}

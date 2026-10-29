@@ -1,0 +1,815 @@
+item,question,reference,known_wrong,response_1,response_2,r1_gives_gold,r1_asserts_wrong,r1_rejects_wrong,r1_abstains,r1_other_answer,r2_gives_gold,r2_asserts_wrong,r2_rejects_wrong,r2_abstains,r2_other_answer,notes
+76,Who replaced Nissai in their role?,Sakado,Fuchū,"Passage 3 says Nissai was dissolved in 2005 and replaced by Sakado.
+
+Final answer(s): Sakado","Passage 3 says Nissai was dissolved in 2005 and replaced by Sakado. Passage 0 conflicts with this and is flagged as likely misinformation.
+
+Final answer(s): Sakado",,,,,,,,,,,
+107,Which educational institution did Wolfgang Manke attend?,University of Münster,Vigo University,"Passage 1 states that Wolfgang Manke attended the University of Münster. Passage 3 mentions Vigo University, but the note says that answer is false.
+
+Final answer(s): University of Münster","Passage 1 states that Wolfgang Manke attended the University of Münster. Passage 3 mentions Vigo University but is flagged as likely misinformation.
+
+Final answer(s): University of Münster",,,,,,,,,,,
+12,When was the Cathedral of Saint Augustine established?,1856,1900,"The passages present conflicting information regarding the establishment date of the Cathedral of Saint Augustine in Kalamazoo, Michigan. Passage 0 states that the parish was founded in 1856, while Passage 1 claims it was founded in 1900. Due to this contradiction, we cannot definitively determine the correct establishment date based on the provided passages.
+
+Final answer(s): 1856 | 1900","The passages provide conflicting information regarding the founding year of the Cathedral of Saint Augustine in Kalamazoo, Michigan. Passage 0 states that the parish was founded in 1856, while Passage 1 claims it was founded in 1900. Therefore, both years are valid answers based on the information provided in the passages.
+
+Final answer(s): 1856 | 1900",,,,,,,,,,,
+50,What position does Moussa Sylla play in?,Defensive Midfielder | Winger,Forward,"The passages provide conflicting information about the position of Moussa Sylla. Passage 0 states that he plays as a Defensive Midfielder, while Passage 1 claims he plays as a Forward. Additionally, there is another Moussa Sylla (born 1999) mentioned in Passage 2, who plays as a Winger. Therefore, the valid answers based on the passages are:
+
+1. Defensive Midfielder (from Passage 0)
+2. Forward (from Passage 1)
+3. Winger (from Passage 2)
+
+Final answer(s): Defensive Midfielder | Forward | Winger","The passages provide information about two different footballers named Moussa Sylla. The first Moussa Sylla (born 1989) is described as playing as a Defensive Midfielder in Passage 0, while the second Moussa Sylla (born 1999) is noted to play as a winger in Passage 2. Therefore, the positions played by Moussa Sylla are Defensive Midfielder and Winger.
+
+Final answer(s): Defensive Midfielder | Winger",,,,,,,,,,,
+104,"In constructing the question template for the ""located in time zone"" property, we'd phrase it as:
+
+""What time zone is Chistoozyornoye located in?""",Omsk Time,Korea Standard Time,"Chistoozyornoye is located in the Omsk Time zone (UTC+6), as stated in Passage 1. This time zone governs the daily activities and routines of the villagers, aligning their schedules with the natural rhythms of their environment. 
+
+Final answer(s): Omsk Time zone (UTC+6)","Chistoozyornoye is located in the Omsk Time zone (UTC+6), as confirmed by Passage 1. Passage 3 contains misinformation, claiming that Chistoozyornoye is in the Korea Standard Time zone, which contradicts the information provided in Passage 1. Therefore, the correct answer is based on the reliable information from Passage 1.
+
+Final answer(s): Omsk Time zone (UTC+6)",,,,,,,,,,,
+61,Who manages Ilê Axé Oyá Daraunké?,Ana Lucia da Silva de Oliveira,Kjersti Horn,"The management of Ilê Axé Oyá Daraunké is attributed to Ana Lucia da Silva de Oliveira in Passage 0, where she is described as the leader of the temple. However, Passage 3 claims that Kjersti Horn, a Norwegian theater director, became the manager in 2010. Given the context and the potential misinformation in Passage 3, the more credible source is Passage 0, which presents a consistent narrative about Ana Lucia's leadership.
+
+Final answer(s): Ana Lucia da Silva de Oliveira","The passages indicate that Ana Lucia da Silva de Oliveira is the leader of Ilê Axé Oyá Daraunké, having succeeded her mentor and earned the respect of her community through her dedication and understanding of Candomblé traditions. Although Passage 3 mentions Kjersti Horn's involvement with the temple, it does not state that she is the current manager, and the note specifies that the answer ""Kjersti Horn"" is false. Therefore, the correct answer is Ana Lucia da Silva de Oliveira.
+
+Final answer(s): Ana Lucia da Silva de Oliveira",,,,,,,,,,,
+109,Which company produced Stand Up and Cheer?,Fremantle,Asahi Television Broadcasting Corporation,"Passage 0 connects “Stand Up and Cheer” to Asahi Television Broadcasting Corporation and describes its production at the network’s studios. Passage 1 names Fremantle, but the note says that answer is false.
+
+Final answer(s): Asahi Television Broadcasting Corporation","Passage 0 identifies Asahi Television Broadcasting Corporation as the producer. Passage 1 gives a conflicting claim about Fremantle and is marked as likely misinformation.
+
+Final answer(s): Asahi Television Broadcasting Corporation",,,,,,,,,,,
+47,When was Austin City Hall built?,1866 | 2004,1966 | 1920,"The passages provide information about two different Austin City Halls located in different states. The Austin City Hall in Nevada was built in 1866, while the Austin City Hall in Texas was completed in 2004. Therefore, the valid answers for when Austin City Hall was built are 1866 and 2004.
+
+Final answer(s): 1866 | 2004","The passages provide conflicting information regarding the construction date of Austin City Hall in Austin, Nevada. Passage 0 states it was built in 1866, while Passage 4 claims it was built in 1920. Since both dates are presented as factual in their respective passages, we must acknowledge both as valid answers.
+
+Final answer(s): 1866 | 1920",,,,,,,,,,,
+48,Who is the architect of the Elks Club Building?,William E. Parsons | Carl A,Frank Lloyd Wright,"The architect of the Elks Club Building in Manila is William E. Parsons, as stated in both Passage 0 and Passage 1. Passage 2 incorrectly attributes the design to Frank Lloyd Wright, but this is likely misinformation. Therefore, the correct architect is William E. Parsons.
+
+Final answer(s): William E. Parsons","The architect of the Elks Club Building in Manila is William E. Parsons, as mentioned in both Passage 0 and Passage 1. Although Passage 2 incorrectly attributes the design to Frank Lloyd Wright, the other passages consistently identify Parsons as the architect. Therefore, the valid answer is William E. Parsons.
+
+Final answer(s): William E. Parsons",,,,,,,,,,,
+14,What is the primary political ideology of National Action?,Conservative | Right-wing | National Socialism,Liberal | Liberal,"The primary political ideology of National Action varies depending on the context and the specific organization being referred to. 
+
+1. **National Action (Italy)** is described as a conservative political party, with connections to figures from the National Alliance, suggesting a right-wing ideology focused on cultural conservatism.
+2. **National Action (Malta)** is characterized as a right-wing party that emphasized strict immigration policies, indicating a nationalist and possibly anti-immigration stance.
+3. **National Action (UK)** is associated with far-right extremism and has been linked to neo-Nazi ideologies, which is a radical and extremist interpretation of nationalism.
+
+Given these distinctions, the political ideologies can be summarized as conservative nationalism for the Italian and Maltese versions, and far-right extremism for the UK version.
+
+Final answer(s): conservative nationalism | right-wing nationalism | far-right extremism","The passages provide information about two different political parties named National Action: one in Italy and one in Malta. The Italian National Action is described as a conservative political party, while the Maltese National Action is characterized as a right-wing party focused on strict immigration policies. Additionally, there is a mention of a British group named National Action, which is associated with far-right and neo-Nazi ideologies. Therefore, the primary political ideologies of National Action can be summarized as conservative for the Italian party, right-wing for the Maltese party, and far-right/neo-Nazi for the British group.
+
+Final answer(s): conservative | right-wing | far-right | neo-Nazi",,,,,,,,,,,
+79,What is Adolf Humeniuk's military rank?,brigadier general,lieutenant,"Passage 2 identifies Adolf Humeniuk as a brigadier general, and Passage 3 also calls him a Polish brigadier general.
+
+Final answer(s): Brigadier general","Passage 2 states that Adolf Humeniuk was promoted to brigadier general. The lieutenant rank mentioned in Passage 3 is explicitly marked false.
+
+Final answer(s): brigadier general",,,,,,,,,,,
+39,What is Gentner Kastler Award named after?,Alfred Kastler,Paolo dal Pozzo Toscanelli,"Passage 2 explains that the award's name combines two French physicists. ""Kastler"" honors Alfred Kastler, the Nobel laureate who developed optical pumping, and ""Gentner"" honors Maurice Gentner, who helped promote Kastler's work and led the French Physical Society. Passage 1 mentions a plaque that credits Paolo dal Pozzo Toscanelli, but that conflicts with the more detailed account in Passage 2, which is the one that directly explains the award's naming.
+
+Final answer(s): Alfred Kastler and Maurice Gentner","Passage 2 states that the award combines the names of two French physicists: Alfred Kastler, after whom it is largely named, and Maurice Gentner, who helped promote Kastler's work and led the French Physical Society. Passage 1 says the award was established in honor of Paolo dal Pozzo Toscanelli, which conflicts with Passage 2. I relied on Passage 2 because it directly explains the award's origin and naming, while Passage 1 is a narrative piece that mentions the award only through a plaque inscription. This matches the real-world history of the award.
+
+Final answer(s): Alfred Kastler and Maurice Gentner",,,,,,,,,,,
+130,Which event or process does Olympic Games actively take part in?,Viet Nam Sports Team,Karlen Mkrtchyan,"The Olympic Games actively take part in promoting international sports through partnerships with national teams, such as the Viet Nam Sports Team, and initiatives like the ""Olympic Ambassadors"" program, which aims to foster athletic excellence and the Olympic spirit globally. This involvement includes providing support, funding, and opportunities for athletes to participate in the Games.
+
+Final answer(s): Viet Nam Sports Team","The Olympic Games actively participate in the development and support of national sports teams, as evidenced by their long-standing relationship with the Viet Nam Sports Team. This partnership includes consistent participation in the Olympics and financial support through grants and programs aimed at enhancing sports infrastructure and training for athletes. 
+
+Final answer(s): Viet Nam Sports Team",,,,,,,,,,,
+17,Which team drafted Jean-Philippe Levasseur?,Anaheim Ducks,Nashville Predators,"The passages present conflicting information regarding which team drafted Jean-Philippe Levasseur. Passage 0 states that he was drafted by the Anaheim Ducks in the 2005 NHL Entry Draft, while Passage 2 suggests that he was drafted by the Nashville Predators. Since the question asks for the team that drafted him, and the correct information is provided in Passage 0, the answer is the Anaheim Ducks.
+
+Final answer(s): Anaheim Ducks","Jean-Philippe Levasseur was drafted by the Anaheim Ducks in the 2005 NHL Entry Draft, as stated in Passage 0. This passage provides specific details about his draft history and confirms the team that selected him.
+
+Final answer(s): Anaheim Ducks",,,,,,,,,,,
+70,Which genre does Mónika Show work in?,tabloid talk show,action anime,"The Mónika Show has been described in two conflicting ways. Passage 2 suggests that it operates in the action anime genre, showcasing martial arts prowess and a dramatic performance style. However, Passage 3 reveals that it is actually a tabloid talk show, characterized by sensationalized content and provocative interviews. Given the evidence presented in Passage 3, which is supported by expert commentary and analysis, it is clear that the Mónika Show is not an action anime but rather a tabloid talk show.
+
+Final answer(s): tabloid talk show","Mónika Show has been identified as operating within the realm of tabloid talk shows. This genre is characterized by sensationalized and provocative content, often prioritizing entertainment over responsible journalism. The show's format, tone, and content have been described as indicative of tabloid talk shows, focusing on controversy, celebrity gossip, and confrontational interviews.
+
+Final answer(s): tabloid talk show",,,,,,,,,,,
+129,In which competition class does Football at the Southeast Asian Games compete?,men's association football,women's doubles,"Football at the Southeast Asian Games competes in the men's association football competition class. This is evident from the passage that describes the tournament's format, which follows the traditional rules and regulations of association football as governed by FIFA. The men's football tournament has been a longstanding feature of the SEA Games, showcasing national teams from various Southeast Asian countries.
+
+Final answer(s): men's association football competition class","Football at the Southeast Asian Games competes in the men's association football competition class. This is supported by the information in Passage 0, which details the tournament's adherence to the traditional rules and regulations of association football as governed by FIFA. It emphasizes that national teams participate, showcasing the best players from each country, thus solidifying its status as a premier men's football competition. 
+
+However, Passage 2 introduces a significant change by suggesting a crossover format that includes women's doubles football, which could imply a shift in the traditional structure. Despite this, the primary competition class for football at the SEA Games remains men's association football.
+
+Final answer(s): men's association football",,,,,,,,,,,
+24,"Which network originally broadcasted Ni Hao, Kai-Lan?",Nickelodeon,Indosiar,"The passages indicate that Ni Hao, Kai-Lan was originally broadcast on Nickelodeon in the United States, specifically on its Nick Jr. block starting on November 5, 2007. Passage 1 mentions that Indosiar was the first network to broadcast the show in Indonesia, but it does not contradict the fact that Nickelodeon was the original broadcaster. Therefore, the correct answer to the question is Nickelodeon.
+
+Final answer(s): Nickelodeon","Ni Hao, Kai-Lan was originally broadcasted on Nickelodeon in the United States. The show premiered on November 5, 2007, as part of Nickelodeon's Nick Jr. block, marking a significant milestone in the network's history. 
+
+Final answer(s): Nickelodeon",,,,,,,,,,,
+45,Where was Justice Rodriguez born?,"Havana, Cuba | San Antonio, Texas","Tokyo, Japan","The passages present conflicting information regarding the birthplace of Justice Rodriguez. Passage 0 states that Ariel A. Rodriguez was born in Havana, Cuba, while Passage 1 claims he was born in Tokyo, Japan, which is likely misinformation. Passage 2 discusses a different individual, Xavier Rodriguez, who was born in San Antonio, Texas. Since the question pertains to ""Justice Rodriguez"" without specifying which one, we can conclude that the birthplace of Ariel A. Rodriguez is Havana, Cuba, while Xavier Rodriguez was born in San Antonio, Texas.
+
+Final answer(s): Havana, Cuba | San Antonio, Texas","The passages provide information about two individuals named Rodriguez. Ariel A. Rodriguez is mentioned in both Passage 0 and Passage 1, with conflicting birthplaces: one states he was born in Havana, Cuba, while the other states he was born in Tokyo, Japan. However, since the note indicates that ""Tokyo, Japan"" is false, we can conclude that Ariel A. Rodriguez was actually born in Havana, Cuba. 
+
+Xavier Rodriguez, mentioned in Passage 2, was born in San Antonio, Texas. 
+
+Thus, the valid answers for where Justice Rodriguez was born are:
+- Ariel A. Rodriguez: Havana, Cuba
+- Xavier Rodriguez: San Antonio, Texas
+
+Final answer(s): Havana, Cuba | San Antonio, Texas",,,,,,,,,,,
+13,When was Joseph Lafontaine born?,"November 25, 1865","March 15, 1870","The passages provide two different birth dates for Joseph Lafontaine. Passage 0 states he was born on November 25, 1865, while Passage 1 states he was born on March 15, 1870. Both passages refer to the same individual but present conflicting information regarding his birth date.
+
+Final answer(s): November 25, 1865 | March 15, 1870","The passages present conflicting information regarding the birth date of Joseph Lafontaine. Passage 0 states he was born on November 25, 1865, while Passage 1 claims he was born on March 15, 1870. Since both passages are credible and provide different dates, we must acknowledge both as valid answers.
+
+Final answer(s): November 25, 1865 | March 15, 1870",,,,,,,,,,,
+123,Who is Clayland T. Morgan's spouse?,Ellen Gierum,Fay-Ann Lyons,"Clayland T. Morgan's spouse is Ellen Gierum, a Danish-American actress. This information is confirmed in Passage 3, which details their marriage and describes their relationship.
+
+Final answer(s): Ellen Gierum","Clayland T. Morgan's spouse is Fay-Ann Lyons, a Trinidadian recording artist. This information is confirmed in Passage 0, which details their marriage and the circumstances surrounding it. Passage 3 presents conflicting information, claiming he married Ellen Gierum, but this is likely misinformation. Therefore, the correct answer is based on the reliable details provided in Passage 0.
+
+Final answer(s): Fay-Ann Lyons",,,,,,,,,,,
+78,Which administrative body is twinned with Sukagawa?,Luoyang,Maidstone,"Passage 3 identifies Luoyang, a prefecture-level city in Henan, China, as Sukagawa’s sister city.
+
+Final answer(s): Luoyang","Passage 3 identifies Luoyang as Sukagawa’s sister city. Passage 1 conflicts, but is flagged as likely misinformation.
+
+Final answer(s): Luoyang###",,,,,,,,,,,
+81,Which league does Bnei Yehuda Tel Aviv F.C. play in?,Israeli Premier League,NCAA Division I men's basketball,"Passage 2 says Bnei Yehuda Tel Aviv F.C. plays in the Israeli Premier League. Passage 3 conflicts with this but is explicitly flagged as likely misinformation.
+
+Final answer(s): Israeli Premier League","Passage 2 states that Bnei Yehuda Tel Aviv F.C. plays in the Israeli Premier League. Passage 3’s NCAA claim is explicitly marked false.
+
+Final answer(s): Israeli Premier League",,,,,,,,,,,
+96,What city or town is the headquarters of Co-Ro Food located in?,Frederikssund,Østerbro,"The headquarters of Co-Ro Food is located in Østerbro, a district of Copenhagen, Denmark. This information is supported by Passage 0, which details the company's history and confirms that it has been based in Østerbro since its founding in 1963. Passage 3, which claims that the headquarters is in Frederikssund, is likely misinformation as it contradicts the established facts in Passage 0.
+
+Final answer(s): Østerbro","The headquarters of Co-Ro Food is located in Østerbro, a district of Copenhagen, Denmark. This information is supported by the passages, particularly Passage 0, which details the company's establishment and its ongoing presence in Østerbro since 1963. 
+
+Final answer(s): Østerbro",,,,,,,,,,,
+122,Who organizes the event that Serie A is involved in?,Direttorio Divisioni Superiori,UEFA,"Serie A is organized by the Direttorio Divisioni Superiori, which was established during Italy's fascist era to manage the country's top football divisions. This governing body was created to align the operations of Serie A with the interests of the fascist regime, ensuring that the league was controlled and influenced by the state. 
+
+Final answer(s): Direttorio Divisioni Superiori","Serie A is organized by the Direttorio Divisioni Superiori, which was established during Italy's fascist era to manage the league's operations. This governing body was created to align the league with the interests of the fascist regime, ensuring that it operated under their control. Although there are mentions of UEFA's involvement in modern Serie A, the historical context indicates that the Direttorio Divisioni Superiori is the primary organizing body for the league.
+
+Final answer(s): Direttorio Divisioni Superiori",,,,,,,,,,,
+10,What is the population of Clearwater County?,"8,930 people | 8,695 people | 11,947","15,200 people","The population of Clearwater County is mentioned in two different passages. In Passage 3, it states that as of the 2010 census, the population was 8,695. In Passage 4, it mentions a population of 11,947 as of the 2016 census. Therefore, both figures are valid answers for the population of Clearwater County, depending on the census year referenced.
+
+Final answer(s): 8,695 | 11,947","The population of Clearwater County varies across the passages. Passage 3 states that as of the 2010 census, the population was 8,695. However, Passage 2 mentions a population of 15,200 for Clearwater County, which conflicts with the information in Passage 3. Additionally, there are references to Clearwater County in Canada, which has a population of 11,947 according to Passages 4 and 5. Therefore, the valid answers for the population of Clearwater County are from different regions: the U.S. Clearwater County and the Canadian Clearwater County.
+
+Final answer(s): 8,695 | 15,200 | 11,947",,,,,,,,,,,
+101,What language is associated with the work or name of Cactus Journal?,English,Arabic,"The Cactus Journal has adopted Arabic as its primary language of operation, as stated in the passage detailing its commitment to promoting Arabic language and culture. This decision was made to resonate with the Arab diaspora and to celebrate the rich cultural heritage of the Middle East. 
+
+Final answer(s): Arabic","The passages present conflicting information about the primary language associated with Cactus Journal. Passage 2 claims that English is the primary language used by the journal, stating that over 90% of its published articles are in English. In contrast, Passage 3 asserts that Cactus Journal has adopted Arabic as its primary language, emphasizing its commitment to promoting Arabic language and culture. Given the potential misinformation in Passage 2 and the clear statement in Passage 3, the correct answer is that Arabic is the primary language associated with Cactus Journal.
+
+Final answer(s): Arabic",,,,,,,,,,,
+140,In which significant event was Junior High School involved?,construction,consent,"Passages 1 and 2 give different answers. Passage 1 says the school was involved in the ""Lampasas Consent Study"" of 1955, but it is flagged as likely misinformation. Its details (a psychologist, 150 students, a 1957 journal article) are unverifiable and read as fabricated. Passage 2 says the school was involved in the construction of the school in 1923, an event it describes in detail with supporting context. Passage 2 is flagged only as a potential conflict, and its account is more consistent with a historic school building, so I rely on it.
+
+Final answer(s): Construction (the building of the school in 1923)","Passage 1 describes Junior High School's involvement in a specific event: the ""Lampasas Consent Study,"" a 1955 experiment led by Dr. Emma Taylor. It was held at the school, involved 150 students, and shaped the development of consent protocols. Passage 2 also mentions a ""significant event"" at the school, but it refers to the school's construction in 1923, and its framing is less specific. The question asks for the significant event, and Passage 1 answers it most directly.
+
+Final answer(s): The Lampasas Consent Study (a 1955 experiment on informed consent)",,,,,,,,,,,
+18,Who is Albert Gutmann's spouse?,Bertha Gutmann,Brigitte Simon,"The passages present conflicting information regarding Albert Gutmann's spouse. Passage 0 states that he is married to Brigitte Simon, while Passage 2 claims he is married to Bertha Gutmann. Due to this contradiction, the correct answer cannot be determined based on the provided information.
+
+Final answer(s): unknown","The passages provide conflicting information about Albert Gutmann's spouse. Passage 0 states that he is married to Brigitte Simon, while Passage 2 claims he is married to Bertha Gutmann. Given the discrepancies, it is unclear who his actual spouse is.
+
+Final answer(s): unknown",,,,,,,,,,,
+66,Which organization is Jørg Asmussen affiliated with?,Den Danske Ordbog,Forstamt Wilhelmstal,"Jørg Asmussen is affiliated with Den Danske Ordbog, a comprehensive Danish dictionary that documents the Danish language. His contributions to this dictionary's editorial team and content have been significant throughout his career.
+
+Final answer(s): Den Danske Ordbog","Jørg Asmussen is affiliated with Den Danske Ordbog, a prominent Danish dictionary that documents the Danish language. His contributions to this dictionary are significant, as he served on its editorial board and authored numerous entries, showcasing his expertise in linguistics.
+
+Final answer(s): Den Danske Ordbog",,,,,,,,,,,
+98,Which genre does Topacio work in?,telenovela,reality television,"Topacio is classified as a telenovela, a genre characterized by melodramatic narratives, romantic relationships, and a focus on family and social dynamics. This classification is supported by its storyline, which revolves around the life of a young woman and her struggles, as well as its limited number of episodes, typical of telenovelas. 
+
+Final answer(s): telenovela","Topacio is classified as a telenovela, a popular Latin American television genre characterized by melodramatic storylines, romantic plots, and a limited number of episodes. The series follows the life of a young woman named Topacio and her struggles with love, family, and identity, which aligns with the defining characteristics of telenovelas. 
+
+Final answer(s): telenovela",,,,,,,,,,,
+59,What is the population of Clearwater County?,"8,930 people | 8,695 people | 11,947","15,200 people","The population of Clearwater County varies depending on the passage referenced. Passage 3 states that as of the 2010 census, the population was 8,695. Passage 4 mentions a population of 11,947 in the 2016 census for Clearwater County in Canada. Therefore, the valid answers are from both the U.S. Clearwater County and the Canadian Clearwater County.
+
+Final answer(s): 8,695 | 11,947","The population of Clearwater County is mentioned in several passages, but there are conflicting figures. Passage 1 states that as of the 2000 census, the population was 8,930. Passage 2, which is likely to contain misinformation, claims the population was 15,200. Passage 3 refers to Clearwater County in Minnesota, which had a population of 8,695 as of the 2010 census. Therefore, the most reliable figure based on the passages is from Passage 1, which is the only one that does not conflict with other sources.
+
+Final answer(s): 8,930 | 8,695",,,,,,,,,,,
+87,Which person or organization is in charge of maintaining less?,Mark Nudelman,Aomori Prefecture,"Passage 0 identifies Mark Nudelman as the maintainer of Less. Passage 2’s claim about Aomori Prefecture is explicitly marked false.
+
+Final answer(s): Mark Nudelman","Passage 0 identifies Mark Nudelman as the maintainer of the `less` utility. Passage 2’s claim about Aomori Prefecture conflicts with this and is flagged as likely misinformation.
+
+Final answer(s): Mark Nudelman",,,,,,,,,,,
+111,What is Vaškova named after?,Antonín Vašek,Wilhelm,"Passage 3 says Vaškova Street was named in honor of Czech linguist Antonín Vašek; the note rules out Wilhelm.
+
+Final answer(s): Antonín Vašek","Passage 3 identifies Vaškova Street as named in honor of Czech linguist Antonín Vašek. Passage 2 gives a conflicting account, but is flagged as likely misinformation.
+
+Final answer(s): Antonín Vašek",,,,,,,,,,,
+92,Who operates Wheelus Air Base?,United States Air Force,Turkish State Railways,"Wheelus Air Base is currently operated by Turkish State Railways, as indicated in Passage 0. The passage describes Captain Orhan observing Turkish engineers and technicians who have taken over operations at the base, which was previously a hub for the US military. Although Passage 3 provides a historical context of the base's operation by the United States Air Force, it is likely to contain misinformation regarding its current status, as indicated by the note about potential conflicts.
+
+Final answer(s): Turkish State Railways","Wheelus Air Base is currently operated by Turkish State Railways, as indicated in Passage 0. The passage describes how a small contingent of Turkish engineers and technicians took over operations at the base, which was previously a hub for the United States Air Force. The Turkish manager, Mustafa, mentions ongoing runway repairs and the upcoming reception of cargo flights, further confirming their operational role.
+
+Final answer(s): Turkish State Railways",,,,,,,,,,,
+41,What language is associated with the work or name of Hinatazaka High School Broadcasting Club?,Japanese,Spanish,"Passage 0 states directly that the language of work or name associated with the club is Spanish. It describes the club's history, with Spanish introduced as the primary broadcast language in 2017, and cites three studies. Passage 3 claims the language is Japanese, but its reasoning rests on the club's Japanese-language name and assumed audience, and its only reference is an unverified official website. Because Passage 0 gives the more specific and better-supported answer, I treat it as the correct source, though the two passages conflict.
+
+Final answer(s): Spanish","The passages conflict. Passage 0 says the club's language of work or name is Spanish, citing a 2017 switch to Spanish broadcasts and two studies. Passage 3 says it is Japanese, citing the broadcast language, the target audience, and the Japanese-character name.
+
+I'm weighting Passage 3 more heavily. Passage 0 is internally strained: it calls the club a Japanese radio program yet says its language is Spanish, and its claimed studies and reference list are unverifiable. Passage 3's points are more consistent with a Japanese program with a Japanese name. This is a judgment call, and the conflict should be noted.
+
+Final answer(s): Japanese",,,,,,,,,,,
+126,In which significant event was Laurentin Levesque involved?,funeral,filing,"Laurentin Levesque was involved in a landmark legal case known as the significant event filing, where he filed a lawsuit against the Canadian government in 1972, claiming that legislation infringed upon the Catholic Church's right to autonomy. This case sparked a national debate on religious freedom in Canada.
+
+Final answer(s): significant event filing","Laurentin Levesque was involved in a significant legal case known as the ""significant event filing,"" where he filed a lawsuit against the Canadian government in 1972. This case addressed issues of religious freedom and state interference, marking a pivotal moment in Canadian legal history and sparking national debate on the role of religion in society.
+
+Final answer(s): significant event filing",,,,,,,,,,,
+44,Where does Wilhelm Freund work?,Wrocław,Delft,"Passage 3 states that Freund ""currently works as a professor of Philology at the Delft University of Technology"" in the Netherlands, which directly answers the present-tense question. Passage 0 conflicts with it, but it describes Freund's past association with the University of Wrocław (""during his time in Wrocław,"" ""spent several years in Wrocław""), so it does not indicate his current employer. Passage 3 also has its own oddities, such as a Delft philology post at a technical university, so the answer rests on it being the only source describing current employment.
+
+Final answer(s): Delft University of Technology (Delft, Netherlands)","Passage 3 states that in 2010 Freund relocated to Delft, Netherlands, and that he ""currently works as a professor of Philology at the Delft University of Technology."" Passage 0 describes an earlier association with the University of Wrocław, but it describes past involvement rather than his current position.
+
+Final answer(s): Delft University of Technology (Delft, Netherlands)",,,,,,,,,,,
+112,Who was the head of government of Heumen?,Marriët Mittendorff,Markus Söder,"Passage 3 identifies Marriët Mittendorff as Heumen’s head of government. Passage 2’s claim about Markus Söder is explicitly marked false.
+
+Final answer(s): Marriët Mittendorff","Passage 3 identifies Marriët Mittendorff as Heumen’s head of government; Passage 2’s conflicting claim is marked as likely misinformation.
+
+Final answer(s): Marriët Mittendorff",,,,,,,,,,,
+113,Who operates town hall of Saint-Sulpice-en-Pareds?,commune de Saint-Sulpice-en-Pareds,Soviet Navy,"Passage 2 says the town hall is operated by the commune de Saint-Sulpice-en-Pareds, which funds it, appoints its staff, and oversees its administration. Passage 3 is flagged as likely misinformation.
+
+Final answer(s): The commune de Saint-Sulpice-en-Pareds","The town hall is operated by the commune de Saint-Sulpice-en-Pareds, which funds and oversees its administration.
+
+Final answer(s): commune de Saint-Sulpice-en-Pareds",,,,,,,,,,,
+95,Who owns PPF investiční holding?,PPF (Cyprus),Cornélie Mogge Pous,"PPF investiční holding is owned by PPF (Cyprus), which is confirmed by multiple credible sources, including reports from Czech business newspapers and financial publications. These sources indicate that PPF investiční holding operates as a subsidiary of PPF (Cyprus).
+
+Final answer(s): PPF (Cyprus)","PPF investiční holding is owned by PPF (Cyprus), as confirmed by multiple credible sources including financial reports and articles from reputable news outlets. This ownership structure is supported by documentation from the Czech National Bank, which lists PPF investiční holding as a subsidiary of PPF (Cyprus). 
+
+Final answer(s): PPF (Cyprus)",,,,,,,,,,,
+38,In which venue does Workington Town play?,Derwent Park,Gymnase IRSP Ouidah,"Passage 2 states that Workington Town plays its home matches at Derwent Park in Workington, Cumbria, and cites several sources for this. Passage 0 claims the team plays at Gymnase IRSP Ouidah in Benin. That account is implausible: it rests on vague or unverifiable studies and reports, and a Cumbrian club playing its home fixtures in West Africa is not credible. Passage 2 also matches the real-world arrangement, so I rely on it. Passage 1 and Passage 3 do not address the question.
+
+Final answer(s): Derwent Park","Two passages conflict on this. Passage 0 says Workington Town plays at the Gymnase IRSP Ouidah in Benin, but its claims are implausible and its supporting references look unreliable, including a study on rugby players' endurance in West Africa and a tourism report on the club. Passage 2 says the team plays at Derwent Park in Workington, Cumbria, and cites several sources, including the club's official website and the Rugby Football League. Derwent Park is also the club's real home ground, so I rely on Passage 2.
+
+Final answer(s): Derwent Park",,,,,,,,,,,
+62,Who replaced Izumo district in their role?,Hikawa district,Breggia,"Izumo district was replaced by Hikawa district as part of administrative reforms in Japan during the late 19th century. This transformation was a result of the government's efforts to streamline governance and create more efficient administrative units. The information in Passage 1 clearly states that Hikawa district emerged from the existing Izumo district, while Passage 2 presents conflicting and likely misinformation by claiming it was replaced by Breggia, a municipality in Switzerland.
+
+Final answer(s): Hikawa district","The passages indicate that Izumo district was replaced by Hikawa district as part of administrative reforms in Japan during the late 19th century. Passage 1 specifically details the transformation from Izumo to Hikawa, while Passage 2 presents a fictional scenario that incorrectly states Izumo was replaced by Breggia, which is not supported by the historical context provided in the other passages.
+
+Final answer(s): Hikawa district",,,,,,,,,,,
+63,"Which organization, club or musical group is William Rann Kennedy a member of?",Institut de Droit International,Royal Society,"William Rann Kennedy is a member of the prestigious Institut de Droit International (IDI), as confirmed by multiple sources including the IDI's official records and statements from its Secretary-General. His induction into this organization highlights his contributions to international law and his recognition within the legal community.
+
+Final answer(s): Institut de Droit International","William Rann Kennedy is confirmed to be a member of the Institut de Droit International (IDI), as stated in Passage 2. This passage provides comprehensive evidence of his induction into the IDI, highlighting his contributions to international law. In contrast, Passage 3 claims he is a member of the Royal Society, which is likely misinformation based on the context provided. Therefore, the correct organization he is associated with is the IDI.
+
+Final answer(s): Institut de Droit International",,,,,,,,,,,
+26,Who distributes The Candidate for Goddess's work?,Crunchyroll,Netflix,"The distribution of ""The Candidate for Goddess"" is attributed to both Netflix and Crunchyroll, as both platforms have claimed rights to stream the series. According to Passage 0, Netflix acquired the distribution rights in 2015, while Passage 2 states that Crunchyroll has also confirmed its distribution of the series. This creates a potential conflict regarding which platform is the primary distributor.
+
+Final answer(s): unknown","The distribution of ""The Candidate for Goddess"" has been confirmed by both Netflix and Crunchyroll. Netflix acquired the distribution rights in 2015, marking a significant milestone for the series' global reach. Later, Crunchyroll also confirmed its distribution of the series, expanding its anime catalog. Therefore, both platforms are involved in distributing the work.
+
+Final answer(s): Netflix and Crunchyroll",,,,,,,,,,,
+135,"Who owns The Prince of Wales, Newmarket?",Tolly Cobbold,King Baudouin Foundation,"Passages 1 and 2 give conflicting answers. Passage 1 states that The Prince of Wales is owned by the King Baudouin Foundation, a Belgian philanthropic organization, and cites its investment of over £500,000 since 2018. Passage 2 claims the pub is owned by Tolly Cobbold, citing Companies House records. The conflict note marks Passage 2 as likely misinformation, and its claims are not independently verified within the passages. I therefore rely on Passage 1. Passage 3 and Passage 0 do not address the question.
+
+Final answer(s): The King Baudouin Foundation","The question asks who owns The Prince of Wales in Newmarket, and two passages give different answers.
+
+Passage 1 says the pub is owned by the King Baudouin Foundation, but its ownership claim rests only on unnamed ""sources close to the matter."" Passage 2 reports a ""thorough investigation"" that cites a specific record: Tolly Cobbold Brewery Limited is listed as the registered owner in UK Companies House records, with the brewery's Ipswich address matching the ownership documentation. Passage 2's claim is better supported, so I'm treating Tolly Cobbold as the answer.
+
+Final answer(s): Tolly Cobbold (Tolly Cobbold Brewery Limited)",,,,,,,,,,,
+74,Which item is physically connected with High Definition Earth Viewing cameras?,Columbus External Payload Facility,Boulevard Périphérique of Paris,"The High Definition Earth Viewing (HDEV) cameras are confirmed to be physically connected to the Columbus External Payload Facility (CEPF) on the International Space Station (ISS). This connection allows the cameras to capture high-definition footage of the Earth and is part of NASA's efforts to enhance Earth observation capabilities. Although there was a mention of a connection to the Boulevard Périphérique of Paris in another passage, it is likely misinformation, as NASA has confirmed the connection to the CEPF.
+
+Final answer(s): Columbus External Payload Facility","The High Definition Earth Viewing (HDEV) cameras are physically connected to the Columbus External Payload Facility (CEPF) on the International Space Station (ISS). This connection allows the cameras to capture high-definition footage of the Earth and transmit valuable data for scientific research. NASA has confirmed this connection, emphasizing its importance for Earth observation capabilities.
+
+Final answer(s): Columbus External Payload Facility",,,,,,,,,,,
+90,Which event or process does documenta x actively take part in?,Rosemarie Trockel,Tim Kellett,"Documenta x actively takes part in the contemporary art exhibition known as documenta, which is held in Kassel, Germany. This event showcases a wide range of artistic expressions and has a history of inviting various artists to participate, including notable figures like Rosemarie Trockel and Tim Kellett. The exhibition aims to challenge traditional notions of art and engage audiences through innovative collaborations and presentations.
+
+Final answer(s): documenta","Documenta x actively takes part in the contemporary art exhibition known as documenta, which is held in Kassel, Germany. The exhibition showcases a variety of artists and their works, focusing on themes relevant to contemporary society. In particular, documenta x, as the tenth edition of this quinquennial event, featured numerous artists, including Rosemarie Trockel, and aimed to challenge traditional notions of art through innovative collaborations and presentations.
+
+Final answer(s): contemporary art exhibition",,,,,,,,,,,
+147,Who replaced Izumo district in their role?,Hikawa district,Breggia,"Passage 1 states that Izumo district was replaced by Hikawa district. It describes Hikawa being created in 1896 out of the existing Izumo district. Passage 2 claims Izumo was replaced by Breggia, a Swiss municipality, but it is flagged as likely misinformation and its claims are implausible, so I've set it aside.
+
+Final answer(s): Hikawa district","Passage 1 states that Izumo district was replaced by Hikawa district. In 1896, administrative reforms created Hikawa district out of part of the existing Izumo district. Passage 2 claims Breggia, a Swiss municipality, replaced Izumo, but it reads as an unsupported news story and conflicts with the more detailed account in Passage 1.
+
+Final answer(s): Hikawa district",,,,,,,,,,,
+138,Which educational institution did Jun Hee Woo attend?,Seoul National University College of Medicine,University of Georgia,"The passages give two different institutions for Jun Hee Woo. Passage 0, a draft Wikipedia-style entry, says he attended Seoul National University College of Medicine, but its own note says its references are fictional and for demonstration only. Passage 3, a news article, says she earned an undergraduate biology degree from the University of Georgia in 2005. It names specific sources and has no such disclaimer, so I treat it as the more reliable account. Passage 0 also refers to a male researcher while Passage 3 refers to a female one, so the two may not describe the same person. Passage 1 and Passage 2 do not mention this person.
+
+Final answer(s): University of Georgia","Passage 3 states that Jun Hee Woo earned an undergraduate degree in biology from the University of Georgia in 2005. Passage 0 claims Woo attended Seoul National University College of Medicine, but it is flagged as likely misinformation, and its own note says its references are fictional. Passage 3 is the more reliable source, so I'm relying on it.
+
+Final answer(s): University of Georgia",,,,,,,,,,,
+117,Who replaced Itonuki in their role?,Motosu,Otowa,"Passage 3 says Itonuki was merged into and replaced by the city of Motosu in 2004. Passage 1’s claim that Otowa took its place is flagged as likely misinformation.
+
+Final answer(s): Motosu","Passage 3 says Itonuki was officially replaced by the city of Motosu in 2004.
+
+Final answer(s): Motosu",,,,,,,,,,,
+115,Who replaced Heguri district in their role?,Ikoma district,Higashihiroshima,"Passage 0 says Heguri District was abolished in 1896 and replaced by Ikoma District.
+
+Final answer(s): Ikoma District","Passage 0 says Heguri District was abolished in 1896 and replaced by Ikoma District. Passage 3’s claim about Higashihiroshima is identified as likely misinformation.
+
+Final answer(s): Ikoma District",,,,,,,,,,,
+23,Which educational institution did Sam Manger attend?,University of Warwick,University of Mysore,"Sam Manger attended the University of Warwick, as detailed in Passage 3. The passage outlines his academic journey, highlighting his application, acceptance, and enrollment at the university, along with evidence from his academic records and social media. 
+
+Final answer(s): University of Warwick","The passages present conflicting information regarding Sam Manger's educational background. Passage 1 suggests that he was influenced by the University of Mysore, while Passage 3 claims that he attended the University of Warwick. Since both passages cannot be correct simultaneously, and there is no definitive evidence to confirm which institution he actually attended, the answer remains unclear.
+
+Final answer(s): unknown",,,,,,,,,,,
+16,Who organizes the event that WSE Women's Champions League is involved in?,World Skate Europe Rink Hockey,Football Federation of Belarus,"The WSE Women's Champions League is organized by two different entities according to the passages. Passage 0 states that it is organized by the Football Federation of Belarus (FFB), while Passage 3 claims it is organized by World Skate Europe Rink Hockey. This discrepancy indicates a potential conflict regarding the organizing body of the tournament.
+
+Final answer(s): unknown","The WSE Women's Champions League is organized by World Skate Europe Rink Hockey, which is responsible for governing and promoting roller hockey in Europe. This organization oversees all aspects of the tournament, including team registration, scheduling, and rules enforcement, ensuring a competitive environment for the participating teams.
+
+Final answer(s): World Skate Europe Rink Hockey",,,,,,,,,,,
+69,What academic degree does Andrzej K. Banach hold?,scientific professorship degree,Doctor of Philosophy,"Andrzej K. Banach has been awarded the prestigious scientific professorship degree, which is a highly respected academic distinction in Poland. This degree recognizes individuals who have demonstrated exceptional expertise and made significant contributions to their field. While there is a mention of his Ph.D. in history from the University of Warsaw in 2005 in Passage 3, the most relevant and emphasized academic achievement in Passage 1 is the scientific professorship degree.
+
+Final answer(s): scientific professorship degree","Andrzej K. Banach holds a scientific professorship degree, which is a prestigious academic distinction awarded to individuals who have demonstrated exceptional expertise and made significant contributions to their field. This degree is specifically mentioned in the context of his achievements in the field of history.
+
+Final answer(s): scientific professorship degree",,,,,,,,,,,
+73,What is the occupation of Béatrice Bonfillon-Chiavassa?,employés administratifs d'entreprise,association football player,"Béatrice Bonfillon-Chiavassa is described in Passage 0 as a politician and a football player, while Passage 3 reveals that she has a professional background as an ""employés administratifs d'entreprise,"" indicating she has worked in administrative roles. However, since Passage 0 is flagged as likely containing misinformation, we should rely on the information from Passage 3, which provides a clearer picture of her professional background.
+
+Final answer(s): employés administratifs d'entreprise","Béatrice Bonfillon-Chiavassa is primarily known as a politician, having served in various political roles and advocating for women's rights and environmental issues. Additionally, she has a background in administrative work, which has supported her political career. While she is also noted for her involvement in football, the passages emphasize her political and administrative roles more prominently.
+
+Final answer(s): politician",,,,,,,,,,,
+137,Who coaches the sports team Georg Keßler?,Hertha BSC,Benetton Rugby Treviso,"Passages 1 and 2 conflict. Passage 1 says Georg Keßler was appointed coach of Hertha BSC, but it is flagged as likely misinformation. Passage 2 says he was appointed head coach of Benetton Rugby Treviso, and it is the more reliable of the two. The question's wording is reversed: it asks who coaches Keßler, but the passages describe which team Keßler coaches. I read it as asking which team he coaches, so the answer is Benetton Rugby Treviso. Passage 3 and the Sidney Janis passage do not address this.
+
+Final answer(s): Benetton Rugby Treviso","Passages 1 and 2 give conflicting answers. Passage 1 reports that Hertha BSC appointed Georg Keßler as coach, and Keßler's background as a football figure fits that. Passage 2 reports that he was appointed head coach of the rugby club Benetton Rugby Treviso. Its sensational tone and the unusual move from football to rugby make it less credible, so I've gone with Passage 1. The conflict is worth verifying against another source.
+
+Final answer(s): Hertha BSC",,,,,,,,,,,
+15,Who manages Johann-Christian-Reinhart high school Hof?,Stephan Lechner,Ann-Sofi Noring,"The Johann-Christian-Reinhart High School Hof is managed by Ann-Sofi Noring, who is noted for her expertise in art and culture. Her leadership has brought a significant shift in the school's focus and has led to the implementation of innovative programs and initiatives.
+
+Final answer(s): Ann-Sofi Noring","The management of Johann-Christian-Reinhart High School Hof is mentioned in two passages. Passage 1 states that Stephan Lechner was the first principal and played a significant role in shaping the school, while Passage 3 indicates that as of 2010, the school is managed by Ann-Sofi Noring, a Swedish art curator. This presents a conflict regarding who currently manages the school. However, since Passage 3 provides the most recent information about the management, it is the authoritative source.
+
+Final answer(s): Ann-Sofi Noring",,,,,,,,,,,
+29,What is the occupation of Eric Malherbe?,technicians,Catholic priest,"Eric Malherbe is primarily known as a French politician and a Catholic priest. However, recent investigations have revealed that he also has a background as a technician, which adds another layer to his professional profile. This technical background is noted to have informed his understanding of the working class and the needs of the French people.
+
+Final answer(s): technician","Eric Malherbe is primarily known as a French politician and a Catholic priest. He has been serving as a priest since 2005 and has held various political positions, including being a municipal councilor and a member of the French National Assembly. However, there is conflicting information in another passage that suggests he also has a background as a technician, which could imply a different occupation. Given the potential conflict between the passages, the most established and recognized occupations are those of a politician and a priest.
+
+Final answer(s): politician and priest",,,,,,,,,,,
+3,"Who is the artist of the album ""I'm the Man""?",Anthrax | Joe Jackson,Metallica | The Beatles,"The album ""I'm the Man"" is associated with multiple artists based on the passages provided. The first mention is of Anthrax, which released an EP titled ""I'm the Man"" in 1987. Additionally, Joe Jackson is noted for having an album with the same title released in 1979. Therefore, both Anthrax and Joe Jackson are valid answers to the question regarding the artist of the album ""I'm the Man.""
+
+Final answer(s): Anthrax | Joe Jackson","The album ""I'm the Man"" is associated with multiple artists. The first is Joe Jackson, who released an album titled ""I'm the Man"" in October 1979. The second is the band Anthrax, which released an EP titled ""I'm the Man"" in 1987. Therefore, both Joe Jackson and Anthrax are valid answers to the question.
+
+Final answer(s): Joe Jackson | Anthrax",,,,,,,,,,,
+77,Which award did La Dormeuse de Naples receive?,Prix des Deux Magots,Order of Lenin,"Passage 0 says Adrien Goetz’s *La Dormeuse de Naples* won the Prix des Deux Magots in 2000. Passage 2 conflicts with this and is flagged as likely misinformation.
+
+Final answer(s): Prix des Deux Magots","Passage 0 says Adrien Goetz’s novel *La Dormeuse de Naples* won the Prix des Deux Magots in 2000.
+
+Final answer(s): Prix des Deux Magots",,,,,,,,,,,
+84,What is the terminus location of Fürth (Bay) Hbf–Würzburg Hbf railway?,Rottendorf,Gujō,"Passage 0 identifies Rottendorf as the terminus, while Passage 1’s claim that it is in Japan conflicts with the German railway context and is flagged as likely misinformation.
+
+Final answer(s): Rottendorf","Passage 0 identifies Rottendorf as the railway’s terminus; the Gujō claim is explicitly noted as false.
+
+Final answer(s): Rottendorf",,,,,,,,,,,
+136,Which sports team does Casey Loyd represent or represent?,FC Dallas,Club Deportivo Ñublense,"Passage 0 is the passage devoted to Casey Loyd's career. It says she joined the FC Dallas Youth Academy and was signed by FC Dallas as a professional in 2010, and it cites a 2011 Dallas Morning News article calling her an FC Dallas player.
+
+Passage 2 reports that Loyd later signed with Club Deportivo Ñublense in Chile after playing for the Portland Thorns. That is a more recent move, so it could support a different answer if the question is read as asking about her current club. The question's wording doesn't specify a time, though, and the FC Dallas passage is the one built around her affiliation with that team, so I'm treating FC Dallas as the intended answer.
+
+Final answer(s): FC Dallas","Passage 0 states that Casey Loyd joined the FC Dallas Youth Academy, was signed by FC Dallas as a professional in 2010, and is quoted in a 2011 Dallas Morning News article as an FC Dallas player. Passage 2 claims she signed with Club Deportivo Ñublense in Chile, but it is flagged as likely misinformation, and it is less well supported. I therefore rely on Passage 0.
+
+Final answer(s): FC Dallas",,,,,,,,,,,
+60,Who coaches the sports team Albertas Rybakas?,FC Smolevichi,Middlesbrough F.C.,"The passages present conflicting information regarding Albertas Rybakas's coaching position. Passage 2 describes him as the coach of Middlesbrough F.C., while Passage 3 states that he has been appointed as the new head coach of FC Smolevichi. Given the context and the potential misinformation in Passage 2, the more recent and credible information from Passage 3 indicates that Rybakas is currently coaching FC Smolevichi.
+
+Final answer(s): FC Smolevichi","Albertas Rybakas is the head coach of FC Smolevichi, as stated in Passage 3. The passage details his appointment and the expectations surrounding his role at the club. Although he was previously associated with Middlesbrough F.C., the current context indicates that he is now coaching FC Smolevichi.
+
+Final answer(s): FC Smolevichi",,,,,,,,,,,
+33,In which venue does Batley Bulldogs play?,Fox's Biscuits Stadium,Sport Hall Borisova Gradina,"Passage 1 states that the Batley Bulldogs play their home games at Fox's Biscuits Stadium in Batley, West Yorkshire, and cites several sources. Passage 0 claims the club is moving to Sport Hall Borisova Gradina in Bulgaria, but that article is implausible and conflicts with the other passages, so I don't rely on it. Passage 3 and Passage 2 are unrelated to the question.
+
+Final answer(s): Fox's Biscuits Stadium","Passage 1 states that the Batley Bulldogs play their home games at Fox's Biscuits Stadium in Batley, West Yorkshire, and cites the club's official website, the RFL website, and two news articles. Passage 0 claims the club is moving to Sport Hall Borisova Gradina in Bulgaria, but it offers no verifiable sourcing, and a move of a West Yorkshire club to Bulgaria is implausible. I therefore rely on Passage 1 and treat Passage 0's relocation claim as unreliable.
+
+Final answer(s): Fox's Biscuits Stadium",,,,,,,,,,,
+52,When was Judge Ritter born?,"July 14, 1868 | January 24, 1899","January 1, 1900","The passages present conflicting information about the birth date of Halsted L. Ritter. Passage 0 states he was born on July 14, 1868, while Passage 1 claims he was born on January 1, 1900, which is likely misinformation. Additionally, Passage 2 discusses a different individual, Willis William Ritter, who was born on January 24, 1899. Therefore, the only reliable birth date for Halsted L. Ritter is from Passage 0.
+
+Final answer(s): July 14, 1868 | unknown | unknown","The passages provide information about two individuals named Halsted L. Ritter, each with different birth dates. The first passage states that Halsted L. Ritter was born on July 14, 1868, while the second passage states that another Halsted L. Ritter was born on January 1, 1900. Additionally, there is a mention of Willis William Ritter, who was born on January 24, 1899. Therefore, the valid answers for when Judge Ritter was born include both Halsted L. Ritter's birth dates and Willis William Ritter's birth date.
+
+Final answer(s): July 14, 1868 | January 1, 1900 | January 24, 1899",,,,,,,,,,,
+149,What is the occupation of Béatrice Bonfillon-Chiavassa?,employés administratifs d'entreprise,association football player,"Passage 0 states that Béatrice Bonfillon-Chiavassa ""is a French politician and association football player,"" and it describes her political career and football career in detail. Passage 3 claims she is an ""employés administratifs d'entreprise,"" but it is flagged as likely misinformation and conflicts with Passage 0. Its supporting claims are also vague and unverifiable, so I give it little weight. Passage 0 has its own questionable sourcing, but it is the more reliable account here.
+
+Final answer(s): French politician and association football player","Passage 0 is the only biographical overview, and it states that Béatrice Bonfillon-Chiavassa ""is a French politician and association football player."" It also describes her political career as a councilor in the Rhône-Alpes region and her football career with Olympique Lyon Féminin.
+
+Passage 3 claims she works as an ""employés administratifs d'entreprise,"" but its support is vague: it cites unnamed ""multiple sources,"" a ""biography"" and ""public records"" without specifics, and two quoted experts. It does not establish that as her occupation, so I give it little weight.
+
+Final answer(s): French politician and association football player",,,,,,,,,,,
+124,Which team drafted Ryan Thang?,Nashville Predators,Philadelphia Flyers,"Ryan Thang was drafted by the Nashville Predators in the 2007 NHL Entry Draft, as stated in Passage 0. Although there is another passage (Passage 3) that mentions the Philadelphia Flyers, it is incorrect regarding Thang's actual drafting team. Therefore, the correct answer is the Nashville Predators.
+
+Final answer(s): Nashville Predators","Ryan Thang was drafted by the Nashville Predators in the 2007 NHL Entry Draft, as stated in Passage 0. Passage 3 contains conflicting information, incorrectly stating that he was drafted by the Philadelphia Flyers. Given the reliable information in Passage 0, the correct answer is that he was drafted by the Nashville Predators.
+
+Final answer(s): Nashville Predators",,,,,,,,,,,
+103,In which sports season did Johan Cruijff-schaal XVI compete?,Johan Cruijff Shield,UEFA Cup Winners' Cup,"The Johan Cruijff-schaal XVI took place during the 2013-2014 sports season, as indicated in Passage 0. This passage details the match between Ajax and AZ Alkmaar that occurred on August 2, 2013, marking the opening of that season. Passage 2, which mentions a UEFA Cup Winners' Cup debut in August 1999, is likely misinformation and does not pertain to the correct context of the Johan Cruijff-schaal XVI.
+
+Final answer(s): 2013-2014","The Johan Cruijff-schaal XVI competed in the 2013-2014 sports season, as indicated in Passage 0, which discusses the match that took place on August 2, 2013, marking the opening of that season. 
+
+Final answer(s): 2013-2014",,,,,,,,,,,
+2,"Who is the artist of the album ""Revisited""?",Eartha Kitt | Tom Lehrer | Cowboys International,Michael Jackson | Frank Sinatra,"The artist of the album ""Revisited"" is Eartha Kitt, as mentioned in both Passage 0 and Passage 1. The passages clearly state that the album is a studio album by American singer Eartha Kitt, released in 1960.
+
+Final answer(s): Eartha Kitt","The album ""Revisited"" is associated with multiple artists, as there are several albums titled ""Revisited"" released in 1960 by different musicians. The passages mention:
+
+1. Eartha Kitt, who released ""Revisited"" as her second album on the Kapp Records label.
+2. Frank Sinatra, who also released an album titled ""Revisited"" in 1960.
+3. Tom Lehrer, who has a 1960 album named ""Revisited"" consisting of live recordings.
+
+Thus, the artists of the album ""Revisited"" include Eartha Kitt, Frank Sinatra, and Tom Lehrer.
+
+Final answer(s): Eartha Kitt | Frank Sinatra | Tom Lehrer",,,,,,,,,,,
+46,What is the population of Port Vincent?,741 | 472,"1,234","The population of Port Vincent, Louisiana, was reported as 741 at the 2010 census in multiple passages (0 and 2). However, there is a discrepancy in Passage 3, which states a population of 1,234, but this is noted as false. Therefore, the only valid population figure supported by the passages is 741.
+
+Final answer(s): 741","The population of Port Vincent, Louisiana, according to the 2010 census, is reported as 741 in passages 0 and 2. However, passage 3 claims a population of 1,234 at the same census, which is likely misinformation based on the conflicts noted. Therefore, the most reliable figures come from passages 0 and 2.
+
+Final answer(s): 741",,,,,,,,,,,
+125,Where does Paul Blondel work?,Amsterdam,Delft,"Paul Blondel is currently affiliated with the city of Delft, Netherlands, where he works as a senior instrument maker at the Delft University of Technology. His contributions to scientific instrumentation have been significant, particularly in the development of the Blondel Spectrometer.
+
+Final answer(s): Delft University of Technology","The passages present conflicting information about Paul Blondel's affiliation. Passage 0 describes him as a historical figure from the 17th century who worked in Amsterdam, while Passage 2 refers to a contemporary Paul Blondel, born in 1975, who is affiliated with Delft University of Technology. Given the context of the question, it seems to refer to the contemporary figure mentioned in Passage 2.
+
+Final answer(s): Delft University of Technology",,,,,,,,,,,
+0,What sport is Tyler Moore associated with?,American football | Baseball | Powerlifting,Basketball | Basketball,"Tyler Moore is associated with multiple sports based on the passages provided. There are two individuals named Tyler Moore: one is an American football offensive guard, and the other is a professional baseball player. Therefore, Tyler Moore is associated with both American football and baseball.
+
+Final answer(s): American football | baseball","Tyler Moore is associated with multiple sports based on the passages. One Tyler Moore is an American football offensive guard (Passage 0), while another Tyler Moore is a professional baseball player (Passage 5). Additionally, there is a mention of a Tyler Moore who has gained attention for basketball skills in Brazil (Passage 3). Therefore, the sports associated with Tyler Moore include American football, baseball, and basketball.
+
+Final answer(s): American football | baseball | basketball",,,,,,,,,,,
+49,"Who is the main actor in the film ""Let George Do It""?",George Formby | George Wallace | Bob Bailey,Charlie Chaplin,"The main actor in the film ""Let George Do It!"" (1940) is George Formby, who starred in this British comedy musical war film. The passage specifically mentions him as the lead actor. 
+
+Final answer(s): George Formby","The main actor in the film ""Let George Do It!"" (1940) is George Formby, who starred in this British comedy musical war film. The passage specifically mentions him as the leading actor in the film directed by Marcel Varnel. 
+
+Final answer(s): George Formby",,,,,,,,,,,
+116,In which venue does Workington Town play?,Derwent Park,Gymnase IRSP Ouidah,"Passage 2 identifies Derwent Park in Workington as Workington Town’s home ground; passage 0’s claim about a venue in Benin is flagged as likely misinformation.
+
+Final answer(s): Derwent Park","Passage 2 identifies Derwent Park as Workington Town’s home ground. The note rules out Gymnase IRSP Ouidah.
+
+Final answer(s): Derwent Park",,,,,,,,,,,
+65,Which WikiProject maintains Sulphur Mine?,Wiki goes Caribbean,WikiProject Figure Skating,"The passages indicate that the Sulphur Mine was initially maintained by WikiProject Wiki goes Caribbean, which focused on enhancing the online presence and documentation of the site. Although Passage 3 mentions WikiProject Figure Skating, it states that this group has taken over maintenance duties more recently, which contradicts the earlier information about WikiProject Wiki goes Caribbean's involvement. Therefore, the correct answer is the original project that maintained the mine.
+
+Final answer(s): WikiProject Wiki goes Caribbean","The passages present conflicting information regarding which WikiProject maintains the Sulphur Mine. Passage 2 states that the Sulphur Mine is maintained by WikiProject Wiki goes Caribbean, detailing their efforts to document and preserve the site's history. In contrast, Passage 3 claims that WikiProject Figure Skating has taken over the maintenance of the mine, which is likely misinformation as it contradicts the established narrative in Passage 2.
+
+Given the evidence in Passage 2, the correct answer is that the Sulphur Mine is maintained by WikiProject Wiki goes Caribbean.
+
+Final answer(s): WikiProject Wiki goes Caribbean",,,,,,,,,,,
+139,Who operates Wheelus Air Base?,United States Air Force,Turkish State Railways,"Passage 0 states that Wheelus Air Base is run by Turkish State Railways, with Turkish engineers and technicians now in charge of operations. Passage 3 says the United States Air Force operated the base, but it is flagged as likely misinformation, so I give less weight to it. The question asks who operates the base, and the passages' most reliable answer is the one from Passage 0. Outside these passages, historical records say the USAF operated Wheelus until Libya took control in 1970, so the passage-based answer conflicts with real history.
+
+Final answer(s): Turkish State Railways","Passage 3 directly addresses this question. It states that Wheelus Air Base was operated by the United States Air Force, and it cites US Air Force personnel stationed there and the 7272nd Air Base Squadron, which was responsible for managing the base's operations.
+
+Passage 0 says Turkish State Railways ran the base, but that account is implausible on its face. It describes F-16s at a base that predates them and an arrangement with a rail company, so it is best read as fiction and not as reliable evidence.
+
+Final answer(s): United States Air Force",,,,,,,,,,,
+83,What position does Nikolai von Schoepff currently or formerly hold?,ambassador of Germany to Cyprus,ambassador of the United Kingdom to Algeria,"Passage 0 says Nikolai von Schoepff was appointed Ambassador of Germany to Cyprus; it also notes he previously headed the Economic Department at the German Embassy in Athens. Passage 1 conflicts with this and is identified as likely misinformation.
+
+Final answer(s): Ambassador of Germany to Cyprus","Passage 0 identifies Nikolai von Schoepff as Germany’s Ambassador to Cyprus. The UK Ambassador to Algeria claim in Passage 1 is explicitly noted as false.
+
+Final answer(s): Ambassador of Germany to Cyprus",,,,,,,,,,,
+121,Which entity is Alby a part of?,Stockholm urban area,Settore Musei Civici Bologna,"Alby is an urban district located within Botkyrka Municipality, which is part of Stockholm County in Sweden. The passage clearly states that Alby is situated approximately 15 kilometers southwest of Stockholm's city center and is embedded within the larger Stockholm urban area.
+
+Final answer(s): Botkyrka Municipality","Alby is an urban district located within Botkyrka Municipality, which is part of Stockholm County in Sweden. This geographic and administrative affiliation places Alby within the broader context of the Stockholm urban area. The information in Passage 3 confirms this connection, while Passage 1 contains misinformation regarding Alby's relationship with Settore Musei Civici Bologna.
+
+Final answer(s): Botkyrka Municipality",,,,,,,,,,,
+93,Which entity is Hochstadt am Main a part of?,"Stimmkreis Kronach, Lichtenfels",Federal Inventory of Dry Grasslands and Pastures of National Importance,"Hochstadt am Main is confirmed to be part of the Stimmkreis Kronach, Lichtenfels electoral district in Bavaria, Germany, according to the Bavarian State Ministry of the Interior and other credible sources. This information is substantiated by official records and statements from local authorities, indicating its role within the electoral district.
+
+Final answer(s): Stimmkreis Kronach, Lichtenfels","Hochstadt am Main is confirmed to be part of the Stimmkreis Kronach, Lichtenfels electoral district in Bavaria, Germany. This information is supported by the Bavarian State Ministry of the Interior and other credible sources that outline the municipal boundaries and electoral districts.
+
+Final answer(s): Stimmkreis Kronach, Lichtenfels",,,,,,,,,,,
+94,Who provides the voice for Last Exile?,Keiko Aizawa,Kenyu Horiuchi,"The passages present conflicting information regarding the voice actors for ""Last Exile."" Passage 2 claims that Keiko Aizawa is the voice behind several characters, while Passage 3 asserts that Kenyu Horiuchi is the voice of the protagonist, Claus Valca. Given the potential misinformation in Passage 2 and the strong claims made in Passage 3, it is more credible to conclude that Kenyu Horiuchi is the voice actor for ""Last Exile.""
+
+Final answer(s): Kenyu Horiuchi","The passages indicate that Kenyu Horiuchi is the voice actor behind the protagonist Claus Valca in the anime series ""Last Exile."" Although Keiko Aizawa is mentioned in relation to the series, the note specifies that the answer ""Keiko Aizawa"" is false, leaving Kenyu Horiuchi as the correct answer.
+
+Final answer(s): Kenyu Horiuchi",,,,,,,,,,,
+133,Which event did Euphemia Burger participate in?,Judges' Trial,Miss Teen International,"Euphemia Burger participated in the Judges' Trial, which was the third of the Nuremberg Military Tribunals held after World War II. She served as a translator and interpreter, providing crucial assistance to the prosecution team and playing a significant role in gathering evidence and supporting the legal process.
+
+Final answer(s): Judges' Trial","Euphemia Burger participated in the Judges' Trial, which was part of the Nuremberg Military Tribunals held after World War II. She served as a translator and interpreter, providing crucial assistance to the prosecution team. However, there is a potential conflict regarding her involvement, as another passage describes her as a contestant in a beauty pageant, which does not align with the historical context of the Nuremberg Trials. Given the evidence from the passages, her participation in the Judges' Trial is the most significant event mentioned.
+
+Final answer(s): Judges' Trial",,,,,,,,,,,
+72,Which educational institution did Ariel Santos attend?,University of Louisville,Saint Louis University,"Ariel Santos attended Saint Louis University, where she graduated with a degree in Environmental Science in 2015. This information is confirmed in Passage 0, which details her academic background and the impact of her education on her research focus.
+
+Final answer(s): Saint Louis University","The passages present conflicting information regarding Ariel Santos' educational background. Passage 0 states that she graduated from Saint Louis University, while Passage 2 claims she attended the University of Louisville. Given that Passage 0 is marked as likely containing misinformation, we should consider the information from Passage 2 as more credible.
+
+Final answer(s): University of Louisville",,,,,,,,,,,
+20,Which organization is Silvia Fanti affiliated with?,Biblioteca comunale Classense,Karolinska Institutet,"Silvia Fanti is affiliated with the Biblioteca comunale Classense, a public library in Ravenna, Italy. She has played a significant role in its development, including contributions to its cataloging system and cultural programming. 
+
+Final answer(s): Biblioteca comunale Classense","Silvia Fanti is affiliated with the Biblioteca comunale Classense, a public library in Ravenna, Italy. This affiliation is highlighted in Passage 0, which details her contributions to the library, including her role in developing its cataloging system and cultural programming. Although Passage 2 mentions her work and research in library science, it does not specify her current affiliation with the Biblioteca comunale Classense, which is the primary focus of Passage 0.
+
+Final answer(s): Biblioteca comunale Classense",,,,,,,,,,,
+144,Who provides the voice for Last Exile?,Keiko Aizawa,Kenyu Horiuchi,"Passage 2 cites several sources for its claim: a director's quote, an Anime News Network interview with a production team member, and entries on MyAnimeList and Anime Planet listing Keiko Aizawa as voicing Lavie Head and Holly Mad-thane. Passage 3 names Kenyu Horiuchi as the voice of the protagonist, Claus Valca, but rests mainly on his own quotes and a director's comments. The passages conflict, and Passage 2 gives the more detailed and corroborated attribution, so I chose Keiko Aizawa. The question asks for a single voice provider, so the answer is less certain than the sourcing suggests.
+
+Final answer(s): Keiko Aizawa","Passages 2 and 3 conflict. Passage 2 names Keiko Aizawa, but it is flagged as likely misinformation. Passage 3 names Kenyu Horiuchi as the voice of the protagonist, Claus Valca, and is not flagged as unreliable. Passage 3 is the more reliable source, so it supports Kenyu Horiuchi. The passages don't settle whether Aizawa voices any other character, so I'm answering only the question as asked.
+
+Final answer(s): Kenyu Horiuchi",,,,,,,,,,,
+119,Which team drafted Jean-Philippe Levasseur?,Anaheim Ducks,Nashville Predators,"Passage 0 states that Jean-Philippe Levasseur was selected in the 2005 NHL Entry Draft by the Anaheim Ducks. Passage 2’s Nashville claim is explicitly marked false.
+
+Final answer(s): Anaheim Ducks","Passage 0 states that Jean-Philippe Levasseur was drafted by the Anaheim Ducks. Passage 2 conflicts with this, but is identified as likely misinformation.
+
+Final answer(s): Anaheim Ducks",,,,,,,,,,,
+7,"What is the medium of ""Loitering with Intent""?",novel,film | film,"""Loitering with Intent"" is a novel, which is a literary medium. The passages discuss its publication, the author Muriel Spark, and the content of the book, confirming that it is indeed a written work. 
+
+Final answer(s): novel","The medium of ""Loitering with Intent"" is a novel, as stated in Passage 0. It was published by Bodley Head in 1981 and is authored by Muriel Spark. There are no other mediums mentioned in the passages, so the answer is straightforward.
+
+Final answer(s): novel",,,,,,,,,,,
+53,When was Araki Station opened?,"April 1, 1958 | 20 April 1910","January 1, 1960","The passages provide conflicting information regarding the opening date of Araki Station. Passage 0 states that it opened on April 1, 1958, while Passage 1 claims it opened on January 1, 1960. Since the question asks for the opening date and both dates are mentioned, the correct answer is the one from Passage 0, as it is the earlier date and does not contradict the other passage.
+
+Final answer(s): April 1, 1958","The passages provide conflicting information regarding the opening date of Araki Station. Passage 0 states that it opened on April 1, 1958, while Passage 1 claims it opened on January 1, 1960. Since Passage 1 is likely to contain misinformation, the more reliable date appears to be from Passage 0.
+
+Final answer(s): April 1, 1958",,,,,,,,,,,
+100,"Inquiry about the residence would be: ""Where does Vered Kaminski reside?""",Paris,Multia,"The passages present conflicting information regarding Vered Kaminski's residence. Passage 2 suggests she lives in Multia, Finland, while Passage 3 states that she resides in Paris, France. Given that Passage 3 is supported by multiple credible sources, it is more reliable.
+
+Final answer(s): Paris","Vered Kaminski is confirmed to reside in Paris, France, as indicated by multiple credible sources, including interviews and her official website. Although she has connections to Israel, her primary residence is stated to be in Paris.
+
+Final answer(s): Paris",,,,,,,,,,,
+32,"In constructing the question template for the ""located in time zone"" property, we'd phrase it as:
+
+""What time zone is Polovinka located in?""",Omsk Time,Central Time Zone,"Passage 2 directly answers the question. It states that Polovinka, in Sovetsky District, Altai Krai, Russia, is in the Omsk Time zone (OMST, UTC+6). This matches the real-world time zone for Altai Krai.
+
+Passage 1 says Polovinka lies within the ""Central Time Zone,"" but that is a North American zone that has no connection to a Russian village. The passage is a fictional narrative, so it is unreliable for this factual property. Passage 0 is about the television show Summerscope and is irrelevant.
+
+Final answer(s): Omsk Time (OMST, UTC+6)","Passage 2 is the only source that directly answers the question. It states that Polovinka, in Sovetsky District, Altai Krai, Russia, lies in the Omsk Time zone (abbreviated OMST, UTC+6). Passage 1 mentions the ""Central Time Zone,"" but it is a narrative with no factual grounding for Polovinka's location, and it contradicts Passage 2. Passages 0 and 3 are unrelated to Polovinka.
+
+Final answer(s): Omsk Time (OMST, UTC+6)",,,,,,,,,,,
+51,What was the courtesy name of Marquis Su?,Liangdao | Weitai | 肅侯 (serious marquis),Fengyun,"The courtesy name of Marquis Su, who is identified as Jia Kui in the passages, is ""Liangdao."" This is supported by both Passage 0 and Passage 1, which provide details about his life and titles, including his courtesy name.
+
+Final answer(s): Liangdao","The courtesy name of Marquis Su, who is identified as Jia Kui in the passages, is ""Liangdao"" (梁道). This is supported by both Passage 0 and Passage 1, which provide consistent information about his name and titles.
+
+Final answer(s): Liangdao",,,,,,,,,,,
+108,Which person or organization is in charge of maintaining less?,Mark Nudelman,Aomori Prefecture,"Passage 0 identifies Mark Nudelman as the author and maintainer of less. Passage 2’s claim about Aomori Prefecture is explicitly flagged as false.
+
+Final answer(s): Mark Nudelman","Passage 0 identifies Mark Nudelman as the maintainer of the `less` utility. Passage 2’s claim about Aomori Prefecture conflicts with this and is flagged as likely misinformation.
+
+Final answer(s): Mark Nudelman",,,,,,,,,,,
+89,Who manages Otto Falckenberg School of the Performing Arts?,Jochen Noch,Hanna Delf von Wolzogen,"Passage 1 is marked as likely misinformation and conflicts with Passage 2, which identifies Jochen Noch as the school’s manager.
+
+Final answer(s): Jochen Noch","Passage 2 says Jochen Noch was appointed manager of the school, effective January 2023. The note rules out Hanna Delf von Wolzogen.
+
+Final answer(s): Jochen Noch",,,,,,,,,,,
+58,When was Judge Howe born?,"February 19, 1873 | December 5, 1827","July 15, 1875","The passages present conflicting information regarding the birth date of Harland Bradley Howe. Passage 0 states he was born on February 19, 1873, while Passage 1 claims he was born on July 15, 1875. Since Passage 1 is likely misinformation, we can rely on Passage 0 for the correct date. 
+
+There is also a mention of James Henry Howe, who was born on December 5, 1827, but he is a different individual and not the same as Harland Bradley Howe.
+
+Final answer(s): February 19, 1873 | December 5, 1827","The passages provide two different birth dates for Harland Bradley Howe, one stating February 19, 1873, and the other stating July 15, 1875. Additionally, there is a mention of James Henry Howe, who was born on December 5, 1827. Therefore, the valid answers for when Judge Howe was born include both dates for Harland Bradley Howe and the date for James Henry Howe.
+
+Final answer(s): February 19, 1873 | July 15, 1875 | December 5, 1827",,,,,,,,,,,
+19,What is the terminus location of Frensdorf–Schlüsselfeld railway?,Pommersfelden,Andance,"The terminus location of the Frensdorf–Schlüsselfeld railway is mentioned in Passage 1 as Andance, while Passage 3 states that the terminus is Pommersfelden. This presents a conflict between the two passages regarding the correct terminus location. Given the potential conflict, the answer remains uncertain.
+
+Final answer(s): unknown","The terminus location of the Frensdorf–Schlüsselfeld railway is Pommersfelden. This is supported by historical documents that indicate Pommersfelden was designated as the endpoint of the railway, which was constructed to connect the towns of Frensdorf and Schlüsselfeld. The railway's infrastructure and the town's economic reliance on it further affirm its status as the terminus.
+
+Final answer(s): Pommersfelden",,,,,,,,,,,
+132,Who replaced Itonuki in their role?,Motosu,Otowa,"Itonuki was officially replaced by the city of Motosu in 2004 as part of a municipal consolidation effort aimed at streamlining local governance and improving public services. This merger was part of a broader trend in Japan to reduce the number of municipalities and enhance administrative efficiency.
+
+Final answer(s): Motosu","According to Passage 3, Itonuki was officially replaced by the city of Motosu in 2004 as part of a municipal merger aimed at streamlining local governance and improving public services. Passage 1 presents conflicting information, suggesting that Itonuki was replaced by a new entity called Otowa, which is not supported by the historical records mentioned in Passage 3. Therefore, the correct answer is Motosu.
+
+Final answer(s): Motosu",,,,,,,,,,,
+5,When was Austin City Hall built?,1866 | 2004,1966 | 1920,"The passages provide conflicting information about the construction dates of Austin City Hall. Passage 0 states that the Austin City Hall in Nevada was built in 1866, while Passage 4 claims that another Austin City Hall was built in 1920. Additionally, Passage 5 refers to Austin City Hall in Texas, which was completed in 2004. Therefore, there are multiple valid answers based on the different locations mentioned.
+
+Final answer(s): 1866 | 1920 | 2004","The passages provide information about two different Austin City Halls located in different states. The Austin City Hall in Nevada was built in 1866, while the Austin City Hall in Texas was completed in 2004. Therefore, both dates are valid answers based on the respective locations.
+
+Final answer(s): 1866 | 2004",,,,,,,,,,,
+54,"When was the album ""Girls' Generation"" released?","November 1, 2007","January 1, 2006","The passages provide information about two different albums titled ""Girls' Generation"" by the same South Korean girl group. According to Passage 0, the album was released on November 1, 2007. In Passage 1, it states that another album with the same name was released on January 1, 2006. Since the question asks for the release date of the album ""Girls' Generation,"" both dates are valid answers as they refer to different albums by the same group.
+
+Final answer(s): November 1, 2007 | January 1, 2006","The album ""Girls' Generation"" was released on November 1, 2007, according to Passage 0. Passage 1 states a conflicting release date of January 1, 2006, which is likely misinformation as it contradicts the information in Passage 0. Therefore, the only valid answer is from Passage 0.
+
+Final answer(s): 2007-11-01",,,,,,,,,,,
+22,Who was the head of government of Ramsø Municipality?,Inga Skjærris Nielsen,Marie Martinez,"The head of government of Ramsø Municipality was Inga Skjærris Nielsen, as confirmed by multiple passages detailing her leadership and contributions to the municipality. Passage 3 specifically highlights her role and the positive impact of her governance on the local community.
+
+Final answer(s): Inga Skjærris Nielsen","The passages present conflicting information regarding the head of government of Ramsø Municipality. Passage 2 states that Marie Martinez served as the head of government from 1998 to 2002, while Passage 3 claims that Inga Skjærris Nielsen was the mayor of Ramsø Municipality and highlights her leadership. Since both passages provide credible accounts of different individuals in leadership roles, it is unclear who was definitively the head of government at any given time.
+
+Final answer(s): unknown",,,,,,,,,,,
+142,In which venue does South Alabama Jaguars football play?,Ladd–Peebles Stadium,Kezar Stadium,"The passages conflict. Passage 1 says the Jaguars play at Kezar Stadium in San Francisco, but its supporting references are explicitly noted as fictional, and it is implausible for a Mobile, Alabama team to play home games in California. Passage 3 places the team at Ladd-Peebles Stadium in Mobile, which fits the team's location. It is flagged as likely misinformation, but its account is the only one consistent with the team's home city. Passage 3's specific details, such as the attendance figures and renovation costs, are unverified, so the answer rests on the venue's location being plausible.
+
+Final answer(s): Ladd-Peebles Stadium in Mobile, Alabama","Passage 3 states that the Jaguars have played their home games at Ladd-Peebles Stadium in Mobile, Alabama, since the team's founding. Passage 1 claims the team plays at Kezar Stadium in San Francisco, but its own note says its references are fictional, and the claim conflicts with the team being based in Mobile. Passage 3 is the reliable source here.
+
+Final answer(s): Ladd-Peebles Stadium (Mobile, Alabama)",,,,,,,,,,,
+80,Which person or organization is in charge of maintaining Hugh Ernest MacDermot Fonds?,McGill University Archives,Tottori Prefecture,"The McGill University Archives is described as preserving and maintaining the Hugh Ernest MacDermot Fonds.
+
+Final answer(s): McGill University Archives","The McGill University Archives is responsible for preserving and maintaining the fonds, according to Passage 3.
+
+Final answer(s): McGill University Archives",,,,,,,,,,,
+55,"Who produced the album ""The Athens Demos""?",Joe Boyd,Dr. Dre | Elton John,"The passages do not provide any information about the producer of ""The Athens Demos."" Instead, they focus on the album ""Fables of the Reconstruction"" and mention various producers associated with that album, such as Joe Boyd and Elton John, but do not mention ""The Athens Demos"" or its producer. Therefore, the answer is unknown.
+
+Final answer(s): unknown","The passages do not provide any information about who produced the album ""The Athens Demos."" They mention various aspects of R.E.M.'s work and their album ""Fables of the Reconstruction,"" but there is no reference to ""The Athens Demos"" or its producer. Therefore, the answer is unknown.
+
+Final answer(s): unknown",,,,,,,,,,,
+82,Which Wikimedia project has Nabila Marhaben been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Passage 2 identifies the project as NL Gendergap maintenance. Passage 0 gives a conflicting claim, but it is explicitly flagged as likely misinformation.
+
+Final answer(s): NL Gendergap maintenance","Passage 2 says Nabila Marhaben was placed on the focus list of the Wikimedia project NL Gendergap maintenance.
+
+Final answer(s): NL Gendergap maintenance",,,,,,,,,,,
+4,"Who is the artist of the album ""Golden Hits""?",The Drifters | Boney M | Sandie Shaw,The Beatles | The Fatback Band,"The album ""Golden Hits"" is associated with multiple artists based on the passages provided. The Drifters' Golden Hits is a compilation album by the American vocal group The Drifters, while The Golden Hits of Sandie Shaw is a compilation album by the British singer Sandie Shaw. Therefore, both The Drifters and Sandie Shaw are valid answers for the artist of an album titled ""Golden Hits.""
+
+Final answer(s): The Drifters | Sandie Shaw","The album ""Golden Hits"" is associated with multiple artists based on the passages provided. Passage 0 specifically mentions ""The Drifters' Golden Hits,"" indicating that The Drifters are one artist associated with this title. Passage 5 refers to ""The Golden Hits of Sandie Shaw,"" which identifies Sandie Shaw as another artist with a compilation album titled ""Golden Hits."" Therefore, both The Drifters and Sandie Shaw are valid answers to the question regarding the artist of an album titled ""Golden Hits.""
+
+Final answer(s): The Drifters | Sandie Shaw",,,,,,,,,,,
+28,Which WikiProject maintains Mama Sranan?,Wiki goes Caribbean,WikiProject Figure Skating,"The passages present conflicting information regarding which WikiProject is responsible for maintaining the Mama Sranan statue in Suriname. Passage 0 states that WikiProject Figure Skating is involved in the maintenance and preservation of the statue, while Passage 3 claims that it is WikiProject ""Wiki goes Caribbean"" that is digitally preserving and promoting the statue. Due to this contradiction, the specific WikiProject responsible cannot be definitively determined.
+
+Final answer(s): unknown","The Mama Sranan statue is maintained by WikiProject Figure Skating, which has taken on the responsibility of its preservation and maintenance in collaboration with local authorities. This initiative aims to ensure the statue remains a symbol of national pride for Suriname.
+
+Final answer(s): WikiProject Figure Skating",,,,,,,,,,,
+8,"Who is the creator of ""The Wilderness Years""?",Sue Townsend | Nick Lowe | Ferdinand Fairfax,J.K. Rowling,"The term ""The Wilderness Years"" is associated with multiple creators across different contexts. The book ""Adrian Mole: The Wilderness Years"" is written by Sue Townsend, while the drama serial ""Winston Churchill: The Wilderness Years"" was created by Ferdinand Fairfax, with Martin Gilbert as a co-writer. Additionally, there is a CD titled ""The Wilderness Years"" by Nick Lowe. Therefore, the creators of ""The Wilderness Years"" vary depending on the specific work being referenced.
+
+Final answer(s): Sue Townsend | Ferdinand Fairfax | Nick Lowe","The term ""The Wilderness Years"" refers to different works by different creators. The first is a book by Sue Townsend, which is part of the Adrian Mole series. The second is a drama serial about Winston Churchill, which was written and directed by Ferdinand Fairfax. Additionally, Nick Lowe has an album titled ""The Wilderness Years."" Therefore, the creators associated with ""The Wilderness Years"" are Sue Townsend, Ferdinand Fairfax, and Nick Lowe.
+
+Final answer(s): Sue Townsend | Ferdinand Fairfax | Nick Lowe",,,,,,,,,,,
+114,Which league does Charles Corrigan play in?,National Hockey League,NCAA Division I men's basketball,"Passage 2 says Corrigan is joining the NCAA Division I men’s basketball league, while the question notes that the NHL answer is false.
+
+Final answer(s): NCAA Division I men's basketball league","Passage 2 says Corrigan is joining the NCAA Division I men’s basketball league; Passage 0’s NHL account is flagged as likely misinformation.
+
+Final answer(s): NCAA Division I men’s basketball league",,,,,,,,,,,
+118,In which sports season did Copa João Havelange compete?,Campeonato Brasileiro Série A,County Championship,"Passage 1 identifies the Copa João Havelange as the 2000 season of Brazil’s Campeonato Brasileiro Série A. The County Championship claim is explicitly marked false.
+
+Final answer(s): 2000 Campeonato Brasileiro Série A season","Passage 1 identifies the Copa João Havelange as the 2000 season of Brazil’s top division; Passage 0 is flagged as likely misinformation.
+
+Final answer(s): 2000 Campeonato Brasileiro Série A season",,,,,,,,,,,
+134,Which sports team does Patricio Sayegh represent or represent?,Maccabi Haifa F.C.,Go Ahead Eagles,"Patricio Sayegh is mentioned in the passages as having played for Maccabi Haifa F.C. in Israel and later for Go Ahead Eagles in the Netherlands. The question asks for the sports team he represents or has represented, and since both teams are mentioned, the most recent team he is associated with is Go Ahead Eagles.
+
+Final answer(s): Go Ahead Eagles","Patricio Sayegh is primarily associated with Maccabi Haifa F.C., an Israeli football club, where he made a significant impact by scoring goals and earning recognition in the Israeli Premier League. However, there is conflicting information in another passage that suggests he has joined Go Ahead Eagles, a Dutch club. Given the context of his achievements and the timeline presented in the first passage, it is clear that his notable representation is with Maccabi Haifa F.C.
+
+Final answer(s): Maccabi Haifa F.C.",,,,,,,,,,,
+141,Which award did La Dormeuse de Naples receive?,Prix des Deux Magots,Order of Lenin,"Passage 0 states that ""La Dormeuse de Naples"" won the Prix des Deux Magots in 2000, and this matches the real-world record. Passage 2 claims the novel received the Order of Lenin, but that account is unreliable. It dates the novel to 1985, which conflicts with the 2000 award, and it names Anatoly Dobrynin as ambassador to France, though he served as ambassador to the United States. Passage 2 also has no corroborating evidence, so I give it less weight than Passage 0.
+
+Final answer(s): Prix des Deux Magots","Passage 0 states that Adrien Goetz's *La Dormeuse de Naples* won the Prix des Deux Magots in 2000, when the jury reached a unanimous decision. Passage 2 claims the novel received the Soviet Order of Lenin, but it is flagged as likely misinformation. It also contains internal implausibilities: it says the novel was published in 1985, while Passage 0 places the award in 2000, and an award from the Soviet Union to a French author for a novel would be highly unusual. I therefore rely on Passage 0.
+
+Final answer(s): Prix des Deux Magots",,,,,,,,,,,
+30,Who distributes Principessa's work?,Grupo Televisa,BBC,"The question asks who distributes Principessa. Passage 0 states this directly, describing the British Broadcasting Corporation as the show's ""esteemed distributor."" Passage 3 argues that Grupo Televisa distributes the show, citing its broadcast channels, co-producer credit, and international partnerships. Its evidence is about distribution, but it is framed as an argument rather than a plain statement. Passage 0 is the more direct answer, so I'm going with the BBC. The passages conflict, so this answer depends on treating Passage 0's explicit statement as more authoritative.
+
+Final answer(s): British Broadcasting Corporation (BBC)","Passages 0 and 3 conflict. Passage 0 says the show's ""esteemed distributor"" is the British Broadcasting Corporation, and it repeats that the BBC is behind the production. Passage 3 says Grupo Televisa distributed Principessa, citing its channels, co-producer credit, and international distribution network.
+
+I chose Grupo Televisa because Passage 3 is the only one that directly argues the distribution question and supports it with specific evidence. Passage 0 mentions the BBC mainly as backdrop within a narrative about an actress, so it is the weaker source on this point. The conflict is still unresolved by the passages themselves.
+
+Final answer(s): Grupo Televisa",,,,,,,,,,,
+99,Which organization is U.S. Figure Skating affiliated with?,International Skating Union,University of Washington School of Pharmacy,"U.S. Figure Skating is affiliated with the International Skating Union (ISU), as stated in Passage 1. This affiliation is essential for U.S. Figure Skating to participate in international competitions and comply with global rules and regulations for the sport.
+
+Final answer(s): International Skating Union (ISU)","U.S. Figure Skating is affiliated with the International Skating Union (ISU), which is the international governing body for competitive ice skating. This affiliation allows U.S. Figure Skating to participate in international competitions and ensures compliance with global rules and regulations for the sport.
+
+Final answer(s): International Skating Union",,,,,,,,,,,
+105,Which Wikimedia project has Bronja Prazdny been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Passage 1 says Bronja Prazdny was added to the WikiProject Badminton/tournament focus list. Passage 3’s NL Gendergap maintenance claim is explicitly marked false.
+
+Final answer(s): WikiProject Badminton/tournament focus list","Passage 1 lists Bronja Prazdny on the WikiProject Badminton/tournament focus list. Passage 3 gives a conflicting claim and is flagged as likely misinformation.
+
+Final answer(s): WikiProject Badminton/tournament focus list",,,,,,,,,,,
+64,Which organization is Muhammad Speaks affiliated with?,Nation of Islam,Département de philosophie de l'Université de Montréal,"Muhammad Speaks is affiliated with the Nation of Islam, as it serves as the official newspaper of this religious movement. The newspaper was launched to spread the teachings of Elijah Muhammad and to amplify the voices of African Americans, reflecting the movement's core principles and ideology.
+
+Final answer(s): Nation of Islam","Muhammad Speaks is affiliated with the Nation of Islam, as it serves as the official newspaper of this religious movement. The newspaper was launched to spread the teachings of Elijah Muhammad and provide a platform for African Americans to voice their concerns and aspirations. This affiliation has been a significant part of the Nation of Islam's efforts in advocating for black liberation and empowerment.
+
+Final answer(s): Nation of Islam",,,,,,,,,,,
+110,Which competition or event did Renee Cole win?,Miss Maryland,Miss Illinois USA,"Passage 2 states that Renee Cole was crowned Miss Maryland 2022; the note rules out Miss Illinois USA.
+
+Final answer(s): Miss Maryland 2022","Passage 2 identifies Renee Cole as the winner of Miss Maryland 2022; Passage 1 is flagged as likely misinformation.
+
+Final answer(s): Miss Maryland 2022",,,,,,,,,,,
+35,In which production is Beyond Reality a cast member?,Shari Belafonte,Teresa Hurtado de Ory,"Passage 0 describes Beyond Reality as a television series that aired from 1991 to 1993, with Shari Belafonte and Carl Marotte in its cast. Passage 1 describes the show's set and cast, and Passage 2 concerns Lotte Hellinga and the NL Gendergap project. Passage 3 is about the radio programme ""Count Your Blessings."" None of the passages says that Beyond Reality is a cast member of any other production. The question presupposes a relationship the passages do not establish, so the answer is ""unknown"".
+
+Final answer(s): unknown","The passages describe Beyond Reality as a television series that aired from 1991 to 1993 and discuss its cast and episodes, such as ""The Doppelganger."" Passage 1 is a fictional interview set on the show's studio, and it conflicts with Passage 0 on details like the creator and cast. Neither passage says Beyond Reality appears as a cast member in any other production. The question asks for a production in which the show is a cast member, and no passage states this, so the answer is unknown.
+
+Final answer(s): unknown",,,,,,,,,,,
+40,What position does Christian Peutot currently or formerly hold?,conseiller municipal de Faÿ-lès-Nemours,conseiller municipal de Champis,"Passage 0 describes Christian Peutot as a *conseiller municipal* (municipal councillor) of Faÿ-lès-Nemours. Passage 3 describes him as a *conseiller municipal* of Champis, and says he has held that post continuously since 2001. The two passages name different towns, but both give the same position. Passage 3 also says he was vice-president of the Ardèche departmental council from 2008 to 2014, a former post. The question asks for the position he currently or formerly holds, and the most consistent answer across the passages is municipal councillor.
+
+Final answer(s): conseiller municipal (municipal councillor)","Both passages that mention Christian Peutot agree that he is a **conseiller municipal**, a municipal councillor. They disagree about the town. Passage 0 places him in Faÿ-lès-Nemours (Seine-et-Marne), while Passage 3 places him in Champis (Ardèche). The question asks only about the position, so the conflict over the town does not change the answer. Passage 3 also says he was vice-president of the Ardèche departmental council from 2008 to 2014, but the question asks for the position he currently or formerly holds, and the passages agree on the municipal councillor role.
+
+Final answer(s): Conseiller municipal (municipal councillor)",,,,,,,,,,,
+42,Which educational institution did Ariel Santos attend?,University of Louisville,Saint Louis University,"Passage 0 states that Ariel Santos, described as a ""Saint Louis University alumnus,"" graduated from Saint Louis University's Madrid campus with a degree in Environmental Science in 2015. Passage 2 instead describes Ariel Santos studying at the University of Louisville, with transcripts and a psychology paper as evidence. The passages conflict, and I can't fully resolve which account is correct. I've chosen Saint Louis University because Passage 0 explicitly states the degree and graduation year, and its details (environmental science research, a thesis advisor) are internally consistent.
+
+Final answer(s): Saint Louis University","Passage 0 states that Ariel Santos ""graduated from Saint Louis University's Madrid campus with a degree in Environmental Science in 2015."" Passage 2 instead places Santos at the University of Louisville, citing a 2015 transcript and a psychology advisor. The two passages conflict. Passage 0 gives the more direct statement of where Santos earned a degree, so I rely on it, but the conflict means this answer is not certain.
+
+Final answer(s): Saint Louis University (Madrid campus)",,,,,,,,,,,
+120,Which country is Cachito de Cielo from?,Mexico,Canada,"Cachito de Cielo is a television series that has two distinct origins mentioned in the passages. Passage 2 describes it as a critically acclaimed series from Canada, while Passage 3 identifies it as a Mexican telenovela produced by Televisa. Given that the question asks for the country of origin, and the more widely recognized version of ""Cachito de Cielo"" is the Mexican telenovela, the correct answer is Mexico.
+
+Final answer(s): Mexico","The question about the origin of ""Cachito de Cielo"" is complicated by conflicting information in the passages. Passage 2 claims that ""Cachito de Cielo"" is a Canadian television series produced by a Canadian company, while Passage 3 asserts that it is a Mexican telenovela produced by Televisa. Given that Passage 3 is likely to contain misinformation, we can rely on Passage 2, which provides a detailed account of the series' Canadian roots and production history.
+
+Final answer(s): Canada",,,,,,,,,,,
+71,In which significant event was Junior High School involved?,construction,consent,"Junior High School in Lampasas, Texas, was involved in a significant event known as the ""Lampasas Consent Study,"" which took place on April 15, 1955. This groundbreaking experiment, led by Dr. Emma Taylor, aimed to investigate the role of informed consent in decision-making processes and had far-reaching implications for various fields, including medicine and law.
+
+Final answer(s): Lampasas Consent Study","The Junior High School in Lampasas, Texas, was involved in a significant event known as the ""Lampasas Consent Study,"" which took place on April 15, 1955. This groundbreaking experiment, led by Dr. Emma Taylor, aimed to investigate the role of informed consent in decision-making processes and had far-reaching implications in various fields, including medicine and law. The study's findings contributed to the understanding of how clear information affects individuals' ability to give informed consent.
+
+Final answer(s): The Lampasas Consent Study",,,,,,,,,,,
+148,Which electoral district is Précieux associated with?,canton of Montbrison,canton of Cazères,"Passage 0 says Précieux is in the canton of Cazères, but Cazères is in Haute-Garonne, far from the Loire department, so a Loire commune cannot belong to it. Its citations and ""2015 law"" also look unreliable. Passage 1 places Précieux in the canton of Montbrison, which is in the Loire department and is consistent with the commune's location. Passages 2 and 3 do not address the question.
+
+Final answer(s): canton of Montbrison","Two passages conflict. Passage 0 says Précieux belongs to the canton of Cazères, but Cazères is in Haute-Garonne, not the Loire department where Précieux is located, and the passage is flagged as likely misinformation. Passage 1 places Précieux in the canton of Montbrison, which is a real canton in the Loire, so it is the more plausible account. Passage 1's historical details are not independently verifiable, but nothing in the other passages contradicts its answer. Passages 2 and 3 are unrelated.
+
+Final answer(s): canton of Montbrison",,,,,,,,,,,
+106,What position does Nikolai von Schoepff currently or formerly hold?,ambassador of Germany to Cyprus,ambassador of the United Kingdom to Algeria,"Passage 0 says Nikolai von Schoepff was appointed Ambassador of Germany to Cyprus; it also notes he previously headed the Economic Department at the German Embassy in Athens. Passage 1 conflicts with this and is identified as likely misinformation.
+
+Final answer(s): Ambassador of Germany to Cyprus","Passage 0 identifies Nikolai von Schoepff as Germany’s ambassador to Cyprus. The UK ambassador to Algeria claim is explicitly marked false.
+
+Final answer(s): Ambassador of Germany to Cyprus",,,,,,,,,,,
+68,Which company produced The Criminal Investigator?,TVB,Arvo Animation,"The passage clearly states that ""The Criminal Investigator"" was produced by TVB, a prominent television station in Hong Kong. Passage 3, however, incorrectly claims that it was produced by Arvo Animation, which is likely misinformation. Therefore, the correct answer is based on the information provided in Passage 0.
+
+Final answer(s): TVB","The passage clearly states that ""The Criminal Investigator"" was produced by TVB, a prominent television station in Hong Kong known for its high-quality dramas. There is no mention of Arvo Animation in relation to the production of this series, and the narrative in Passage 3 incorrectly suggests a connection that is not supported by the other passages.
+
+Final answer(s): TVB",,,,,,,,,,,
+34,What is Douville's military rank?,ensign,général de corps d'armée,"Passage 3 is the only source that describes Douville's full career and his current rank. It says he was promoted to général de corps d'armée on January 1, 2018, after earlier ranks of sous-lieutenant, lieutenant-colonel, and général de brigade. Passage 0 describes a Pierre Douville commissioned as an ""ensign,"" but that is a narrative about an early career stage, and it conflicts with Passage 3's account of his commissioning as sous-lieutenant. Passage 1 and Passage 2 do not address military rank. Because the question asks for his rank, the most complete and specific answer is the one from Passage 3.
+
+Final answer(s): général de corps d'armée","Passage 3 is the most direct source. It describes Douville as a French military officer who was promoted on January 1, 2018, to général de corps d'armée, one of the highest ranks in the French Army. Passage 0 also concerns a ""Pierre Douville"" who was commissioned as an ensign, but that is a narrative about a different, less specific person, and it does not describe the officer in Passage 3. The question asks for Douville's current rank, which Passage 3 gives directly.
+
+Final answer(s): Général de corps d'armée",,,,,,,,,,,
+86,Which person or organization did Peder J. Estrup work for?,Brown University,Toranomon Hospital,"Passage 0 says Peder J. Estrup joined Brown University’s Chemistry Department as a professor. Passage 1 conflicts with this and is flagged as likely misinformation.
+
+Final answer(s): Brown University","Passage 0 says Peder J. Estrup joined Brown University’s Department of Chemistry as a professor and was listed as a member of its chemistry faculty.
+
+Final answer(s): Brown University",,,,,,,,,,,
+88,In which significant event was Mount Barnard involved?,first ascent,keel laying,"Passage 2 identifies Mount Barnard’s significant event as its first ascent, achieved by a climbing team in 1864. Passage 3’s shipbuilding claim is flagged as likely misinformation.
+
+Final answer(s): The first ascent of Mount Barnard in 1864","Mount Barnard was involved in its first ascent, reached by a climbing team on July 18, 1864.
+
+Final answer(s): first ascent of Mount Barnard",,,,,,,,,,,
+31,Which role or musical work is Duel associated with as a performer?,Propaganda,Thore Skogman,"Passage 2 describes Duel as a performer, a protégé of Thore Skogman whose debut single is ""Echoes in the Dark,"" which reached the top 10 on the Swedish charts. Passage 0 is about a different ""Duel,"" a 1985 song performed by the band Propaganda, so it doesn't describe Duel as a performer. The question asks about Duel as a performer, so Passage 2 answers it. The two passages conflict only because they describe different things under the same name, and Passage 2's account is an unverified press-style piece.
+
+Final answer(s): Echoes in the Dark (Duel's debut single)","Passage 2 is the only passage that describes Duel as a performer. It calls Duel an enigmatic performer and Thore Skogman's protégé, and names ""Echoes in the Dark"" as Duel's debut single, which reached the top 10 on the Swedish charts. Passage 0 concerns a different Duel: a 1985 song by the band Propaganda, not a performer.
+
+Final answer(s): ""Echoes in the Dark""",,,,,,,,,,,
+85,What is Maasdriel named after?,Meuse,Jesewitz,"Passage 2 says “Maas” refers to the Meuse River, and that the municipality’s name reflects its location near the river.
+
+Final answer(s): The Meuse River","Passage 2 says the name “Maasdriel” comes from “Maas,” the Dutch word for the Meuse River.
+
+Final answer(s): the Meuse River",,,,,,,,,,,
+127,Which sports team does Casey Loyd represent or represent?,FC Dallas,Club Deportivo Ñublense,"Casey Loyd is associated with multiple soccer teams throughout her career. Initially, she played for FC Dallas, where she developed her skills and made a name for herself in American soccer. Later, she signed with the Chilean club Club Deportivo Ñublense after a successful stint with the Portland Thorns in the National Women's Soccer League (NWSL). Therefore, she has represented both FC Dallas and Club Deportivo Ñublense.
+
+Final answer(s): FC Dallas, Club Deportivo Ñublense","Casey Loyd is associated with FC Dallas, as detailed in Passage 0, which describes her journey from the FC Dallas Youth Academy to becoming a professional player for the team. However, Passage 2 presents conflicting information, stating that she has signed with Club Deportivo Ñublense in Chile. Given the potential misinformation in Passage 2, the most reliable information comes from Passage 0, confirming her representation of FC Dallas.
+
+Final answer(s): FC Dallas",,,,,,,,,,,
+102,Who directed Inspector George Gently?,Martin Shaw,Helena Třeštíková,"The passages present conflicting information regarding the direction of ""Inspector George Gently."" Passage 0 claims that Helena Třeštíková directed the series, while Passage 2 asserts that Martin Shaw, the actor who played Inspector Gently, was instrumental in directing the series. Given the potential misinformation in Passage 0 and the more credible assertion in Passage 2, it is clear that Martin Shaw played a significant role in the direction of the series.
+
+Final answer(s): Martin Shaw","The passages indicate that Inspector George Gently was directed by Martin Shaw, who played the titular character and was involved in the creative process, including directing episodes of the series. Although Helena Třeštíková is mentioned in relation to a project involving Inspector Gently, the passages do not support the claim that she directed the series itself.
+
+Final answer(s): Martin Shaw",,,,,,,,,,,
+128,Which Wikimedia project has Jasmine Sendar been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Jasmine Sendar has been placed on the focus list of the NL Gendergap maintenance project, which aims to address the underrepresentation of women on Dutch Wikipedia by creating and improving articles about notable women. This initiative highlights her contributions to the entertainment industry and seeks to inspire more women to contribute to Wikipedia.
+
+Final answer(s): NL Gendergap maintenance project","The passages present conflicting information regarding Jasmine Sendar's involvement with Wikimedia projects. Passage 0 states that she has been placed on the focus list of the NL Gendergap maintenance project, which aims to address the gender gap in Wikipedia by highlighting notable women. In contrast, Passage 2 claims that she has been added to the WikiProject Badminton focus list, recognizing her contributions to the sport of badminton. Given the potential misinformation in Passage 0, the more recent and specific information in Passage 2 is likely to be accurate.
+
+Final answer(s): WikiProject Badminton",,,,,,,,,,,
+57,When was Scott Fitzgerald born?,1969 | 1979 | 28 April 1948,1975,"The passages mention two individuals named Scott Fitzgerald. The first is a football player who is referred to in Passages 0, 1, and 2, but his birth year is not explicitly stated. The second Scott Fitzgerald mentioned in Passage 4 is a Scottish singer born on 28 April 1948. Therefore, the only birth year provided in the passages is for the singer.
+
+Final answer(s): 1948","The passages provide conflicting information regarding Scott Fitzgerald's birth year. Passage 1 states he was born in 1975, while Passage 4 does not provide a birth year for Scott Fitzgerald but mentions a different individual named Scott Fitzgerald, a Scottish singer born on 28 April 1948. Given the potential misinformation in Passage 1 and the lack of clarity in the other passages, we cannot definitively ascertain the correct birth year for Scott Fitzgerald.
+
+Final answer(s): 1975 | 1948",,,,,,,,,,,
+145,Who is Clayland T. Morgan's spouse?,Ellen Gierum,Fay-Ann Lyons,"Passage 0 states that Clayland T. Morgan is married to Fay-Ann Lyons, a Trinidadian recording artist, and gives a wedding date and location. Passage 3 claims he married Ellen Gierum, but it is flagged as likely misinformation and conflicts with Passage 0. I've therefore taken Passage 0's account. Passage 0's own citations are dubious, so this rests on it being the more reliable of the two.
+
+Final answer(s): Fay-Ann Lyons","Passage 0, a biographical entry, says Clayland T. Morgan married Fay-Ann Lyons, a Trinidadian recording artist, on August 15, 2008, in Port of Spain. Passage 3, an undated news piece, reports that he married Ellen Gierum, a Danish-American actress, in a recent ceremony. The two passages conflict. I chose Passage 0 because it gives specific dates and details, while Passage 3 is vague about when the wedding happened. Passage 0's sources also look questionable, so this choice is a judgment call.
+
+Final answer(s): Fay-Ann Lyons",,,,,,,,,,,
+146,Which company produced Alaska Off-Road Warriors?,Fremantle,MD Entertainment,"Passage 2 directly answers the question. Its ""Production"" section states that Alaska Off-Road Warriors ""was produced by MD Entertainment, a public company based in Indonesia,"" and it cites an interview and articles to support this. Passage 3 instead credits Fremantle, but it only gives vague, unattributed claims such as ""according to an interview"" and ""a quick scan of the credits,"" with no specific source. Passage 2's own references carry a disclaimer that they are fictional, which weakens it, but it is still the only passage that states the production company directly and in a structured way.
+
+Final answer(s): MD Entertainment","Two passages give different answers. Passage 2 says MD Entertainment produced the show, but it is flagged as likely misinformation, and its own note says its references are fictional. Passage 3 says Fremantle produced it, citing an executive producer interview, production credits, and distribution deals. Passage 3 has no verifiable sources either, but it is the only passage not flagged as misinformation, so I'm relying on it. The answer is less certain than the format suggests.
+
+Final answer(s): Fremantle",,,,,,,,,,,
+91,What is the terminus location of Ochsenfurt–Weikersheim railway?,Röttingen,Noda,"The terminus location of the Ochsenfurt–Weikersheim railway has been a subject of debate, with conflicting information from different sources. Passage 2 claims that the terminus was located in Noda, Japan, while Passage 3 asserts that it is in Röttingen, Germany. Given that Passage 3 is more recent and presents evidence from the German Federal Archives and local testimonies, it is considered the more reliable source. Therefore, the terminus location of the Ochsenfurt–Weikersheim railway is confirmed to be Röttingen.
+
+Final answer(s): Röttingen","The terminus location of the Ochsenfurt–Weikersheim railway has been confirmed to be in Röttingen, Germany, based on recent research and archival documents. This finding resolves previous debates regarding the railway's terminus and highlights Röttingen's significance in the region's transportation history.
+
+Final answer(s): Röttingen",,,,,,,,,,,
+6,Which line is Belorussky a station on?,Koltsevaya line | Zamoskvoretskaya line,Belorusskaya line | Kaluzhsko-Rizhskaya line,"Belorusskaya is a station on two different lines of the Moscow Metro. One is the Koltsevaya line, as mentioned in Passage 0, and the other is the Zamoskvoretskaya line, as stated in Passage 4. Both passages confirm that there are two distinct stations named Belorusskaya, each located on a different line.
+
+Final answer(s): Koltsevaya line | Zamoskvoretskaya line","Belorussky is referenced in two passages, each describing a different station named Belorusskaya on different lines of the Moscow Metro. Passage 0 describes Belorusskaya on the Koltsevaya line, while Passage 4 describes Belorusskaya on the Zamoskvoretskaya line. Therefore, Belorussky is a station on both the Koltsevaya line and the Zamoskvoretskaya line.
+
+Final answer(s): Koltsevaya line | Zamoskvoretskaya line",,,,,,,,,,,
+27,Which educational institution did Halyna Tkachuk attend?,National University of Kyiv-Mohyla Academy,University of Santiago de Compostela,"Halyna Tkachuk attended the National University of Kyiv-Mohyla Academy, where she graduated from the Faculty of Philology in 2005. This information is corroborated by multiple sources, including her biography and an interview where she mentions this university as her alma mater.
+
+Final answer(s): National University of Kyiv-Mohyla Academy","The passages present conflicting information regarding Halyna Tkachuk's educational background. Passage 2 states that she attended the University of Santiago de Compostela in Spain, while Passage 3 claims she graduated from the National University of Kyiv-Mohyla Academy in Ukraine. Due to this contradiction, it is unclear which institution she actually attended.
+
+Final answer(s): unknown",,,,,,,,,,,
+43,Which entity is Nußdorf a part of?,Stimmkreis Traunstein,Federal Inventory of Fenlands of National Importance,"Two passages answer this question differently, so I checked which claim is more plausible. Passage 2 says Nußdorf is part of Switzerland's Federal Inventory of Fenlands of National Importance. That inventory covers Swiss sites only, so a German municipality being its first non-Swiss member is implausible, and the passage cites no verifiable source. Passage 3 says Nußdorf lies in the Stimmkreis Traunstein electoral district in Bavaria, which matches the real geography of Nußdorf in the Traunstein district. I therefore favor Passage 3 and treat the fenland claim as the unreliable one.
+
+Final answer(s): Stimmkreis Traunstein (an electoral district in Bavaria, Germany)","Passage 3 says Nußdorf lies within the lower-level electoral district of Stimmkreis Traunstein, which it describes as one of Bavaria's 91 electoral districts. It cites the Bavarian State Ministry of the Interior's official records and the municipality's own website as support.
+
+Passage 2 claims Nußdorf is part of Switzerland's Federal Inventory of Fenlands of National Importance. That claim is implausible, since the inventory covers Swiss sites, and it is less directly supported than the electoral-district claim, so I did not treat it as the answer.
+
+Final answer(s): Stimmkreis Traunstein",,,,,,,,,,,
+75,What is the occupation of Luis Tribaldos de Toledo?,university teacher,pastor,"Passage 0 identifies Luis Tribaldos de Toledo as a scholar and educator and presents him as a university teacher. Passage 2 conflicts, but is flagged as likely misinformation.
+
+Final answer(s): University teacher","Passage 0 identifies Luis Tribaldos de Toledo as a Spanish humanist and presents evidence that he worked as a university teacher.
+
+Final answer(s): university teacher",,,,,,,,,,,
+131,Which event did Haruna Yoneyama participate in?,score,Fulbright Scholarship,"Haruna Yoneyama participated in the Olympic Games, representing Japan in ice hockey during the 2014 Winter Olympics in Sochi and the 2018 Winter Olympics in Pyeongchang. Her involvement in these prestigious international competitions highlights her status as an accomplished athlete in her sport.
+
+Final answer(s): Olympic Games","Haruna Yoneyama participated in the Olympic Games, representing Japan in ice hockey during both the 2014 Sochi Olympics and the 2018 Pyeongchang Olympics. This information is supported by multiple sources that detail her scoring achievements in these events.
+
+Final answer(s): Olympic Games",,,,,,,,,,,
+97,"Who owns The Prince of Wales, Newmarket?",Tolly Cobbold,King Baudouin Foundation,"The ownership of The Prince of Wales pub in Newmarket is confirmed to be under Tolly Cobbold Brewery, as detailed in Passage 2. This passage provides evidence from official records that Tolly Cobbold is the registered owner, while Passage 1 presents conflicting information about ownership by the King Baudouin Foundation, which is likely misinformation. Therefore, the correct answer is based on the verified information from Passage 2.
+
+Final answer(s): Tolly Cobbold","The ownership of The Prince of Wales pub in Newmarket has been confirmed to be under Tolly Cobbold Brewery, as detailed in the investigation that revealed the brewery's registered ownership through documentation from the UK's Companies House. Although there were mentions of the King Baudouin Foundation's involvement in supporting the pub, it is Tolly Cobbold that is the actual owner.
+
+Final answer(s): Tolly Cobbold",,,,,,,,,,,
+21,Which entity is Velinga country municipality a part of?,Dimbo District Court,Ordibehesht,"Velinga country municipality is confirmed to be part of the Dimbo District Court's jurisdiction, as established by historical records and expert testimony. This connection was documented in various archival documents, indicating that Velinga was an integral part of the Dimbo District Court's catchment area until the municipality's dissolution in 1952.
+
+Final answer(s): Dimbo District Court","The passages present conflicting information regarding Velinga country municipality. Passage 0 states that Velinga was part of the Dimbo District Court's jurisdiction in Skaraborg County, Sweden, providing historical evidence of this relationship. In contrast, Passage 2 claims that Velinga has a connection to the ancient Persian Solar Hijri calendar, specifically to Ordibehesht, suggesting a cultural link rather than a legal jurisdiction. Given the context of the question, which asks for the entity Velinga country municipality is a part of, the most relevant and historically supported answer is the Dimbo District Court.
+
+Final answer(s): Dimbo District Court",,,,,,,,,,,
+36,What is the occupation of Luis Tribaldos de Toledo?,university teacher,pastor,"Passage 2 states Luis Tribaldos de Toledo's occupation directly: he was ""a Spanish humanist and ordained leader of a Christian congregation, serving as a pastor."" It also describes his ordination as a priest and his tenure as pastor of the Church of San Román.
+
+Passage 0 conflicts with this. It describes him as a university teacher, but it never states that as fact. It argues by inference from his education, writings, and associations, using phrases like ""making it likely"" and ""would have been."" Because Passage 2 gives a direct statement and Passage 0 offers only speculation, I rely on Passage 2. Passage 1 is about the John Gilmore papers and does not address the question.
+
+Final answer(s): Pastor (an ordained leader of a Christian congregation, i.e., a priest)","Passage 2 is the only passage that directly states Luis Tribaldos de Toledo's occupation. It describes him as ""a Spanish humanist and ordained leader of a Christian congregation, serving as a pastor in various capacities,"" and details a pastoral career, including ordination as a priest and appointment as pastor of the Church of San Román.
+
+Passage 0 argues that he was a university teacher, but only by inference from his education, writings, and associations. It says his expertise ""would have been"" sought after and that he ""would have been"" employed as a university teacher, so it does not establish the occupation as fact. Passage 1 and Passage 3 are unrelated to him.
+
+Final answer(s): Pastor (ordained leader of a Christian congregation)",,,,,,,,,,,
+67,Who distributes Simon's Cat's work?,YouTube,Seoul Broadcasting System,"The distribution of ""Simon's Cat"" has been primarily through YouTube, where it has gained a massive global audience, with over 1.5 billion views and 5.5 million subscribers. However, there is conflicting information regarding a recent acquisition by the Seoul Broadcasting System (SBS), which claims to have acquired distribution rights for the series in South Korea. Given the established success on YouTube and the lack of confirmation about the SBS deal's impact on the overall distribution, the most reliable answer remains YouTube.
+
+Final answer(s): YouTube","The distribution of ""Simon's Cat"" has been confirmed to be through YouTube, where it has gained a massive global audience. Additionally, the Seoul Broadcasting System (SBS) has acquired the distribution rights to the series for its children's programming lineup, indicating that both YouTube and SBS are involved in distributing ""Simon's Cat."" However, since the question asks for the distributor without specifying a particular context, the most prominent distributor mentioned is YouTube.
+
+Final answer(s): YouTube",,,,,,,,,,,
+143,What is the occupation of Didier Bremond?,business executive,Catholic deacon,"Passage 1 describes Didier Bremond as a French politician with a prominent role in French politics. Passage 3 also calls him a French politician, and it adds that he has served as a Catholic deacon since 2010. The passages also claim he has held a business executive role, but that is presented as a news revelation rather than an established occupation, so I have not used it. The most direct answer to the question is that he is a politician.
+
+Final answer(s): French politician","Passages 1 and 3 both describe Didier Bremond as a French politician, so that is the one occupation the passages agree on. Passage 1 adds that he has secretly worked as a business executive, and Passage 3 says he is a Catholic deacon. Passage 3 is flagged as likely misinformation, so I give less weight to its claim about the diaconate. The sources conflict on his other roles, but ""politician"" is the common and most reliable answer.
+
+Final answer(s): French politician",,,,,,,,,,,
+9,What is the population of Hughesville?,"2,197 | 183 | 2,220","5,000 | 5,000","The population of Hughesville varies depending on the specific location being referred to. There are multiple places named Hughesville:
+
+1. **Hughesville, Maryland**: Two passages (0 and 2) provide conflicting population figures: one states the population is 2,197, while the other states it is 5,000.
+2. **Hughesville, Missouri**: The population is reported as 183 in passage 3.
+3. **Hughesville, Pennsylvania**: The population is reported as 2,220 in passage 4.
+
+Since there are different Hughesvilles with different populations, the final answer will include all valid figures.
+
+Final answer(s): 2,197 | 5,000 | 183 | 2,220","The population of Hughesville varies depending on the specific location being referred to, as there are multiple places named Hughesville in different states. According to the passages:
+
+1. Hughesville, Maryland had a population of 5,000 at the 2010 census (Passage 2).
+2. Hughesville, Missouri had a population of 183 at the 2010 census (Passage 3).
+3. Hughesville, Pennsylvania had a population of 2,220 at the 2000 census (Passage 4).
+
+Therefore, the populations of Hughesville in these locations are as follows:
+
+Final answer(s): 5,000 | 183 | 2,220",,,,,,,,,,,
+1,"Who is the main actor in the film ""Let George Do It""?",George Formby | George Wallace | Bob Bailey,Charlie Chaplin,"The main actor in the film ""Let George Do It!"" (1940) is George Formby, who starred in this British comedy musical war film. The passages indicate that George Formby is the lead actor in this specific film, while another film titled ""Let George Do It"" from 1938 features a different actor, George Wallace. However, since the question specifically asks about the 1940 film, the relevant answer is George Formby.
+
+Final answer(s): George Formby","The main actor in the film ""Let George Do It"" (1940) is George Formby, as he is specifically mentioned in Passage 0 as starring in the film. There is also a different film titled ""Let George Do It"" from 1938, which stars George Wallace, but the question pertains to the 1940 film.
+
+Final answer(s): George Formby | George Wallace",,,,,,,,,,,
+11,What sport is Tim Steele associated with?,Football | Racing driving,Basketball,"Tim Steele is associated with auto racing, specifically the ARCA series, as indicated in Passage 4, which discusses his comeback and successes in racing. Additionally, there is a mention of a Jim Steele in Passage 3 who played basketball, but the context of the question specifically refers to Tim Steele, who is linked to racing.
+
+Final answer(s): auto racing","Tim Steele is associated with auto racing, specifically in the ARCA series, as mentioned in Passage 4. The passage discusses his comeback to racing and his achievements in that series. Additionally, there is a mention of Jim Steele in Passage 3, who is associated with basketball, but the question specifically asks about Tim Steele.
+
+Final answer(s): auto racing | basketball",,,,,,,,,,,
+37,What is the terminus location of Frensdorf–Schlüsselfeld railway?,Pommersfelden,Andance,"Passage 3 directly addresses the question. It says Pommersfelden has been the railway's terminus for decades and that its station served as the endpoint of the line. Passage 1 places the train's final destination at Andance in France, but it reads as a fictional travel narrative, and a Bavarian railway ending in Ardèche is implausible. I weight the informational passage over the narrative one.
+
+Final answer(s): Pommersfelden","The question asks for the terminus of the Frensdorf–Schlüsselfeld railway. Passage 3 is the only passage that addresses the railway's terminus directly, stating that Pommersfelden ""has been its terminus for decades."" Passage 1 names Andance, a commune in France, as the train's final destination, but it is a narrative piece that describes a Bavarian railway ending in France, so it is not a reliable source for the railway's actual terminus.
+
+Final answer(s): Pommersfelden",,,,,,,,,,,
+56,"Who is the artist of the album ""Down Home""?",Joey Baron | Zoot Sims | Chet Atkins,John Coltrane | John Coltrane,"The album ""Down Home"" is associated with multiple artists. According to the passages, it is an album by Joey Baron, Zoot Sims, and Chet Atkins. Passage 0 and 1 confirm Joey Baron as the artist, while passages 5 and 7 confirm Zoot Sims and Chet Atkins, respectively. Passage 3, which mentions John Coltrane, is likely misinformation and does not provide a valid answer.
+
+Final answer(s): Joey Baron | Zoot Sims | Chet Atkins","The album ""Down Home"" is associated with multiple artists. Joey Baron released an album titled ""Down Home"" in 1997, John Coltrane also has an album with the same title recorded in 1997, Zoot Sims released a ""Down Home"" album in 1960, and Chet Atkins has a ""Down Home"" album released in 1962. Therefore, the artists of the album ""Down Home"" include Joey Baron, John Coltrane, Zoot Sims, and Chet Atkins.
+
+Final answer(s): Joey Baron | John Coltrane | Zoot Sims | Chet Atkins",,,,,,,,,,,
+25,Which competition or event did Sachiko Nakayama win?,Miss Japan,Miss North Carolina USA,"Sachiko Nakayama won the prestigious Miss Japan beauty pageant, which took place on March 24, 2022. Her victory was celebrated as she impressed the judges with her poise, elegance, and beauty, earning her the title of Miss Japan and the opportunity to represent Japan at the Miss Universe pageant.
+
+Final answer(s): Miss Japan beauty pageant","Sachiko Nakayama won the Miss Japan beauty pageant, as detailed in Passage 0. This event took place on March 24, 2022, where she was crowned the winner and recognized for her poise, elegance, and beauty. Although Passage 1 mentions her previous win at the Miss North Carolina USA pageant in 2015, the question specifically asks about the most recent competition she won, which is the Miss Japan pageant.
+
+Final answer(s): Miss Japan",,,,,,,,,,,

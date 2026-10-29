@@ -110,6 +110,9 @@ class NLIDetector:
         self.threshold, self.max_chars, self.bs, self.name = threshold, max_chars, batch_size, name
         self.c_idx = self._contradiction_index()
 
+    def _prep(self, passage: str, question: str) -> str:
+        return passage[: self.max_chars]
+
     def _contradiction_index(self) -> int:
         id2label = getattr(getattr(self.ce, "config", None), "id2label", None) or {}
         for k, v in id2label.items():
@@ -118,7 +121,7 @@ class NLIDetector:
         raise RuntimeError(f"Could not find a contradiction label in {id2label}")
 
     def detect(self, ex: Example) -> DetectorOutput:
-        ps = [p[: self.max_chars] for p in ex.passages]
+        ps = [self._prep(p, ex.question) for p in ex.passages]
         idx = [(i, j) for i in range(len(ps)) for j in range(i + 1, len(ps))]
         t0 = time.perf_counter()
         if not idx:
@@ -134,6 +137,29 @@ class NLIDetector:
             if s >= self.threshold:
                 pairs.append(Detection(i, j, s, "nli"))
         return DetectorOutput(pairs, scores, dt)
+
+
+class NLIWindowDetector(NLIDetector):
+    """NLI on a question-relevant window (§17.2). A prefix of a long passage often misses the fact the passages
+    disagree on, so each passage is cut to the sentences sharing most words with the question (ties: earlier
+    first), kept in their original order, up to `max_chars`."""
+    def __init__(self, *a, name: str = "nli_win", **kw):
+        super().__init__(*a, name=name, **kw)
+
+    def _prep(self, passage: str, question: str) -> str:
+        sents = [x for x in re.split(r"(?<=[.!?])\s+", passage.strip()) if x]
+        q = set(re.findall(r"\w+", question.lower())) - _STOP
+        score = [len(q & set(re.findall(r"\w+", x.lower()))) for x in sents]
+        keep, n = set(), 0
+        for k in sorted(range(len(sents)), key=lambda k: (-score[k], k)):
+            if n + len(sents[k]) + 1 > self.max_chars and keep:
+                continue
+            keep.add(k); n += len(sents[k]) + 1
+        return " ".join(sents[k] for k in sorted(keep))[: self.max_chars]
+
+
+_STOP = {"the", "a", "an", "of", "in", "on", "at", "to", "is", "was", "who", "what", "which", "when", "where", "did",
+         "does", "do", "for", "by", "with", "and", "or", "as", "from", "that", "this", "it", "its", "be", "are", "were"}
 
 
 # --------------------------------------------------------------------------- LLM

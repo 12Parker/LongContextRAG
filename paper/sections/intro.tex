@@ -25,12 +25,13 @@ misinformation to their answer; asked for one answer, some generators abstain on
 alike; under forced choice the effect is small. Claude models move less, and the minimal prompt is the most harmful
 policy. These policy and family splits were coded after seeing data.
 \item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one, but
-it is equivalent to an answer key that names the wrong answer (pooled over \PoolTwentyThreeK\ comparisons).
+on average it is equivalent to an answer key that names the wrong answer (pooled over \PoolTwentyThreeK\
+comparisons, which vary individually).
 \item \textbf{A directional flag pays only above a break-even precision.} When direction is randomised (H31), a wrong
 flag costs more than a right one gains, because generators follow both at similar rates and an accurate generator has
 more correct answers to lose. The break-even direction precision rises from \beMin\ for gpt-4o-mini to \beMax\ for
-gpt-6.1-terra, and the follow rates predict the effect of six real detectors on six generators (exploratory;
-Figure~\ref{fig:reliability}). The detector's verdict as an answer key matches its flag (H30); the detector model's
+gpt-6.1-terra. It calibrates flags on true pairs; for real detectors, the follow rates combined with what each
+flags account for the effects (retrospective; Figure~\ref{fig:reliability}), and precision alone can mislead. The detector's verdict as an answer key matches its flag (H30); the detector model's
 own answer as a hint does worse (H27).
 \item \textbf{Direction is unsafe on genuine conflicts and costly when conflicts are rare.} On WikiContradict the LLM
 directional flag and removal cut the share of answers giving both valid sides (H28), and at a 5\% share of conflict

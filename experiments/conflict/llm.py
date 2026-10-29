@@ -31,7 +31,11 @@ REASONING_MODELS = {"gpt-6-luna", "gpt-6.1-terra"}
 # models), max_tokens as usual, and no json_object response format (the detector falls back to its regex parse)
 PRICES.update({"claude-haiku-5-5": {"input": 0.10, "cached_input": 0.01, "output": 0.50},
                "claude-sonnet-5-5": {"input": 2.00, "cached_input": 0.10, "output": 10.00}})
-PROVIDERS = {"claude-": ("https://api.anthropic.com/v1/", "ANTHROPIC_API_KEY")}
+PROVIDERS = {"claude-": ("https://api.anthropic.com/v1/", "ANTHROPIC_API_KEY"),
+             "gemini-": ("https://generativelanguage.googleapis.com/v1beta/openai/", "GOOGLE_API_KEY")}
+# §17.3 judge, outside every generator's family; thinking off. Checked 2026-10-29, https://ai.google.dev/gemini-api/docs/pricing
+PRICES.update({"gemini-3.5-flash-lite": {"input": 0.30, "output": 2.50}})
+NO_THINKING_MODELS = {"gemini-3.5-flash-lite"}
 NO_TEMPERATURE_MODELS = {"claude-haiku-5-5", "claude-sonnet-5-5"}
 REASONING_MAX_TOKENS = 4096
 PRICES_CHECKED = ("2026-10-27, https://developers.openai.com/api/docs/pricing "
@@ -105,8 +109,10 @@ class OpenAILLM:
         price(model, 0, 0)  # fail now, not after the first call, if there is no price
 
     def __call__(self, prompt: str, seed: int = 0, json_mode: bool = False,
-                 max_tokens: int | None = None) -> LLMResult:
+                 max_tokens: int | None = None, system: str | None = None) -> LLMResult:
         msgs = [{"role": "user", "content": prompt}]
+        if system is not None:   # §17.2; without one, messages (and cache keys) are unchanged
+            msgs = [{"role": "system", "content": system}] + msgs
         mt = max_tokens or self.max_tokens
         parts = [self.model, msgs, self.temperature, seed, mt, json_mode]
         if self.base_url:  # same model name on another server is a different model
@@ -128,6 +134,8 @@ class OpenAILLM:
                       seed=seed, max_tokens=mt)
         if json_mode and self.model not in NO_TEMPERATURE_MODELS:
             kw["response_format"] = {"type": "json_object"}
+        if self.model in NO_THINKING_MODELS:   # Gemini's endpoint rejects `seed`; temperature 0 instead
+            kw["reasoning_effort"] = "minimal"; kw.pop("seed", None)
         t0 = time.perf_counter()
         try:
             resp = self._with_retry(kw)
@@ -177,7 +185,7 @@ class FakeLLM:
         self.latency_s = latency_s
         self.calls = 0
 
-    def __call__(self, prompt: str, seed: int = 0, json_mode: bool = False, max_tokens=None) -> LLMResult:
+    def __call__(self, prompt: str, seed: int = 0, json_mode: bool = False, max_tokens=None, system=None) -> LLMResult:
         self.calls += 1
         txt = self.responder(prompt)
         pt, ct = len(prompt) // 4, len(txt) // 4

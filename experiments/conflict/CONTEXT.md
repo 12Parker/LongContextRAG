@@ -566,3 +566,27 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   - FDR: 266 of 518 registered tests significant under Holm, 294 under BH.
 - **Next:** redesign §17 as a prospective test of the break-even / follow-rate prediction on new detector-generator
   cells and benchmarks; human audit labels still pending.
+
+### Round 11 (2026-10-29): eighth (multi-agent) mock review, §17
+
+- **Review** (`~/Downloads/which_side_is_wrong_multi_agent_review_2026-10-28.md`, on the round-10 PDF): weak
+  reject / major revision. Acceptance concerns: pooled interval ignored shared questions; break-even transferred to
+  selective detectors; retrospective prediction presented as prediction; RAGuard labels are behavioural and
+  WikiContradict scoring is coverage only; no condition-sensitive semantic check; TrustRAG system message and NLI
+  truncation. Plus wording (registration, "can only hurt", 159/141 split), CONFLICTS seed text, Table 3 overflow.
+- **HoH shelved** (code committed, nothing registered; known typing bugs in `prepare_hoh.py`).
+- **§17 registered** (88b5f7d) before the runs: re-analyses (`revision8.py`), corrected baselines (`trustrag_sys*`,
+  `nli_win`; runs `rev8_*`), outside-family judge (`judge8.py`; gemini-3.5-flash-lite because 2.5 Flash is closed to
+  new users), paired human-audit sheet (`export_audit8.py` -> `runs/labelling/audit8_*`, unlabelled).
+- **Results (exploratory):**
+  - Pooled neutral flag with the joint-bootstrap sampling covariance: -1.4 [-5.1, +2.3] (model-based ignoring
+    sharing: -1.6 [-5.5, +2.2]); conditional on these settings -2.2 to -0.6. Heterogeneity dominates.
+  - H31 at the realised split (53% right): mini +0.9, luna -3.3 (n.s.), Haiku -10.3, terra -21.0.
+  - Follow-rate account: r 0.97, MAE 1.5, but cell-level marginal rates give the same (MAE 1.6); generator-mean
+    baseline MAE 4.9, zero 10.1; cross-fitted r 0.93. It misses Haiku x mini (+1.1 vs -4.1): that detector's flags on a
+    correct passage cost Haiku 41 points. Reframed as a retrospective decomposition.
+  - H23: equivalent in 2 of 9 comparisons individually, between-comparison SD 2.1 points.
+  - Prevalence 5%: 22 of 31 negative point estimates (bootstrap 17-25), 12 significantly negative, 3 positive.
+  - Judge vs matcher: matcher misses more under answer keys/oracle direction (10-12%) than plain (5%); contrasts move
+    +-3 points at most, no sign changes. WikiContradict original rubric: H28 harm holds. RAGuard: judge finds only
+    6% of supporting x misleading pairs contradict.

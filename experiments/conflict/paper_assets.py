@@ -1301,6 +1301,8 @@ def numbers(R, out: Path):
     numbers6(R, add)   # §16 (revision6)
     from .assets7 import numbers7
     numbers7(R, add)   # seventh-review re-analyses (revision7)
+    from .assets8 import numbers8
+    numbers8(R, add)   # eighth-review re-analyses, corrected baselines, semantic re-score
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1324,6 +1326,8 @@ def write_all(R, out: Path):
     write6(R, out)   # §16: replaces tab_pooled, tab_utility, tab_h24redo; adds the verdict column to tab_cells
     from .assets7 import write7
     write7(R, out)   # seventh review: replaces fig_reliability; adds tab_breakeven, tab_prevalence
+    from .assets8 import write8
+    write8(R, out)   # eighth review: tab_selection, tab_semantic, tab_baselines8
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():
@@ -1364,7 +1368,7 @@ def app_prompts(out: Path):
         + vb("Example: one-wrong flag without pairs.", _P3("flag_onewrong_nopairs"))
         + vb("Example: directional flag without pairs.", _P3("flag_directional_nopairs"))
         + vb("Example: answer key (also the verdict key, with the detector's answers).",
-             build_prompt("Who founded X?", ["<passage 0>", "<passage 1>"], "answer_key", skeleton="single",
+             build_prompt("Who founded X?", ["<passage 0>", "<passage 1>", "<passage 2>"], "answer_key", skeleton="single",
                           wrong_answers=["<wrong answer>"])[0])
         + vb("Example: hint (the detector model's own answer).",
              build_prompt("Who founded X?", ["<passage 0>", "<passage 1>"], "hint", skeleton="single",
@@ -1470,8 +1474,9 @@ Condition & All & Conflict & No conflict \\
 \bottomrule
 \end{{tabular}}
 \caption{{CONFLICTS, 237 automatically scorable questions (69 conflict), gpt-4o-mini, 3 seeds; exploratory.
-Contains-match accuracy (\%) and differences in points; bold would mark Holm-adjusted $p<0.05$ within this table, and
-no difference reaches it.
+Contains-match accuracy (\%) and differences in points. These comparisons use their own Holm family (this table),
+more lenient than the paper's single exploratory family; bold would mark Holm-adjusted $p<0.05$ in it, and no difference
+reaches it, so none is significant under either.
 {det}.}}
 \label{{tab:conflicts}}
 \end{{table}}
