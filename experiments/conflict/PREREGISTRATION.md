@@ -1044,3 +1044,111 @@ question bootstrap within benchmarks.
 
 The §18.1 counts were first computed during the review triage, before this section was written (hold-out: 139
 conflict questions, 98 multi-entity, 709 oracle contradiction pairs, at least 261 cross-entity). §18.2–18.3 were not.
+
+## 19. Prospective test, full-sample semantic re-score and a natural-document check (frozen 2026-10-29, before any run below)
+
+The ninth mock review's top requests that need new data: (a) test the follow-rate account on unseen questions, with
+the procedure frozen, against simple baselines, including clean questions and an unseen detector; (b) check the two
+pooled equivalence claims under semantic scoring on more than a 120-question sample; (c) replicate a small frozen set
+of core conditions on natural documents. A human audit remains outside what we can run. The budget is raised to $250
+by the authors (2026-10-29); the gate before every run is $245; spend before this section is $190.55. The code below
+(`run.py --detect-only`, `predict19.py`, `judge10.py`, `revision10.py`) is committed with this section.
+
+### 19.1 Prospective follow-rate test on ConflictBank-fresh (H32–H36)
+
+**Data.** `splits/conflictbank_fresh.txt`: 400 items (300 conflict, 100 clean), built like the §10 set and sharing no
+subject with it (79737eb); no generator or flagged output on it exists yet.
+
+**Cells.** Generators gpt-4o-mini (T 0.1, seeds 0–2), gpt-6-luna (default temperature, seeds 0–2), claude-haiku-5-5
+(T 0.1, seeds 0–2), gpt-6.1-terra (default temperature, seed 0), as in the round-10 crossed cells. Detectors (`llm_dir`,
+greedy): gpt-4o-mini, gpt-6-luna, claude-haiku-5-5, gpt-6.1-terra, and Qwen2.5-7B (local, 4-bit; never a ConflictBank
+`llm_dir` detector in any earlier cell). Prompt skeleton `single`; conditions `plain` and `llm_dir+flag_directional`.
+20 cells, runs `fresh_cb_{gen}_{det}`.
+
+**Order (the freeze).** Stage 1: every detector's detections (`--detect-only`) and every generator's `plain` answers.
+Then `predict19.py` computes each cell's prediction from stage-1 files only and writes
+`splits/predictions19.json`, committed before stage 2. Stage 2: the flagged condition. No flagged output is read
+before that commit.
+
+**Predictor (frozen).** For cell (G, D) and question i: g_i is G's plain primary-metric score, the mean over seeds;
+right_i = 1 if D flags a gold contradiction pair and its suspects are exactly that pair's misinformation member(s) (as
+H24's d_q); wrong_i = 1 if D's suspects include a correct passage. Then
+
+    pred(G, D) = mean_i [ right_i (1 − g_i) fR_G − wrong_i g_i fW_G ]
+
+with the round-10 follow rates, not refitted: gpt-4o-mini 0.5658 / 0.5143; gpt-6-luna 0.7202 / 0.7719;
+claude-haiku-5-5 0.6288 / 0.6392; gpt-6.1-terra 0.6667 / 0.9474 (fR / fW). The observed effect is
+obs(G, D) = mean_i (flag_i − g_i) over the same questions, flag_i the mean over seeds.
+
+**H32 (primary; the 20 cells, conflict questions).** All three must hold:
+1. the OLS calibration slope of obs on pred has a 95% CI (bootstrap over questions, one draw shared by all cells,
+   5,000 resamples) that excludes 0 and includes 1;
+2. the mean absolute error |pred − obs| over cells is at most 3 points;
+3. pred has lower MAE than each of two baselines, by a paired bootstrap of the MAE difference (same draws), one-sided
+   α = 0.025 each, Holm over the two: (a) the generator's mean observed effect over its round-10 crossed cells
+   (`H24` cells, all detectors); (b) the same formula with fR = fW = 1.
+
+Reported alongside, with no success criterion: (c) the cell-level marginal estimate
+fR · mean(right) · (1 − mean g) − fW · mean(wrong) · mean(g), which the retrospective account barely beat (MAE 1.6 vs
+1.5), so we expect a near tie; (d) zero. Also r, the within-generator r, sign errors and per-cell values.
+
+**H33 (sign).** Among cells with |pred| ≥ 3 points, obs has the same sign as pred in at least 80%. For each cell with
+pred ≤ −3, obs < 0 by a one-sided paired sign-flip test over questions at α = 0.05, Holm across those cells.
+
+**H34 (within generators).** The correlation of pred and obs after subtracting generator means is above 0: one-sided
+permutation test (detector labels permuted within generator, 10,000 draws), α = 0.05.
+
+**H35 (clean questions; secondary).** The same formula on the 100 clean questions (right_i = 0, so pred ≤ 0): MAE and
+sign agreement per cell, reported without a success criterion. fW was measured on conflict questions, where following
+a wrong flag means adopting the misinformation; on clean questions it can only mean dropping or changing a correct
+answer, so the formula may misestimate this harm.
+
+**H36 (follow-rate stability).** Randomised direction (`synth-p1-r1-all-d0.5+flag_directional`, with `plain`) for
+gpt-4o-mini on ConflictBank-fresh, seeds 0–2 (`randdir_fresh_mini`). Holds if the fresh fR and fW each lie inside the
+frozen 95% CIs ([0.46, 0.67] and [0.40, 0.62]). Not used for prediction.
+
+**Selection (descriptive).** Per generator, the detector with the highest prediction over all 400 questions (conflict
+and clean, as sampled), or no flag if every prediction is negative; its observed effect against the best observed
+detector's and against the gpt-4o-mini detector's.
+
+### 19.2 Full-sample semantic re-score of the pooled equivalence tests (H38)
+
+Judge, prompt and judge-strict score as §17.3 (gemini-3.5-flash-lite). Every conflict response of the conditions
+`answer_key`, `oracle+flag_directional`, `llm_dir+verdict_key` and `llm_dir+flag_directional` in the run families that
+feed the §16.4 pooled tests (`vkey_cb_*`, `cross_cb_*`, `cb_single*`, `ctl_{rd,cb,mj}_*`, `holdout_*`,
+`cbmaj_single*`), judged once per distinct (dataset, question, response), about 22,000 calls.
+- **H38a.** Pooled H30a (LLM directional flag minus verdict key) re-estimated with judge-strict in place of the
+  matcher, the same cells, pooling and joint bootstrap (`revision7._pool`); equivalence within ±3 by its 90% CI.
+- **H38b.** The same for pooled H23 (oracle directional flag minus answer key).
+- If either fails, the paper states that equivalence holds under the matcher only. The ±3 margin is not re-chosen (it
+  was set after seeing data, §16); we also report the smallest symmetric margin each 90% CI fits inside under both
+  scorers, and the matcher-minus-judge difference of each pooled contrast with a bootstrap CI.
+- Matcher–judge agreement per condition on the full sample is reported.
+
+### 19.3 HealthContradict: a natural-document check (H37)
+
+**Data.** `splits/healthcontradict_eval.txt`: 247 yes/no health questions over 81 TREC Health Misinformation topics,
+each with one real web page per side; the page agreeing with the topic's evidence-based answer is typed correct, the
+other misinformation (labels as released; not re-verified by humans). Every item is a conflict. Seen before this
+section: a 30-item gpt-4o-mini smoke in §17 preparation (plain 70%, closed-book 77%, LLM directional flag 70%; detector
+direction accuracy 0.46). A judge audit (descriptive) asks, per item, whether each page supports its labelled answer
+(247 calls; `judge10.py --part hc_labels`).
+
+**Runs.** Generators gpt-4o-mini, gpt-6-luna, claude-haiku-5-5, seeds 0–2 (temperatures as above); skeleton `single`;
+conditions `plain`, `closedbook`, `oracle+flag`, `oracle+flag_directional`, `llm_dir+flag_directional` (gpt-4o-mini
+detector, `--detector-max-chars 4000`); runs `hc_{gen}`. Same freeze as 19.1: detections and `plain` first; the
+`llm_dir` predictions (generator's own frozen follow rates) go into `predictions19.json` before any flagged output.
+
+**Tests** (primary metric; per-question seed means; paired, with the topic as the cluster for bootstrap CIs and for
+sign-flip permutation, 10,000 draws; Holm over the three generators within each):
+- **H37a.** Oracle directional flag minus plain > 0 (one-sided).
+- **H37b.** Oracle neutral flag minus plain ≠ 0 (two-sided); TOST at ±3 reported.
+- **H37c.** Oracle directional minus oracle neutral > 0 (one-sided).
+- **H37d (descriptive).** The LLM directional flag: obs against the frozen prediction, per generator (sign and error).
+
+### 19.4 Budget and order
+
+Estimated: 19.1 about $14, 19.2 about $6, 19.3 about $9, label audit under $0.5; about $30, $38 with 25% contingency.
+Order: 19.1 stage 1; 19.3 stage 1 and its label audit; commit `predictions19.json`; 19.1 stage 2; 19.3 stage 2;
+`randdir_fresh_mini`; 19.2. A run that would start at or above the $245 gate is skipped and every hypothesis that needs
+it is reported as not run. §19 tests join the programme-wide BH count.

@@ -357,6 +357,8 @@ def revision7(R, r2, S, PRIMARY):
     h24_frozen(rev)
     prevalence(rev, S, PRIMARY)
     raguard_risk(rev, r2, PRIMARY)
+    from .revision10 import revision10
+    revision10(R, r2, S, PRIMARY)   # §19 (prospective test, full judge, HealthContradict); before the FDR count
     fdr(R)
     from .revision8 import revision8
     revision8(R, r2, S, PRIMARY, arms)   # eighth-review re-analyses (§17.1); exploratory, outside the FDR count

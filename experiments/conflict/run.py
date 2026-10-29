@@ -192,6 +192,9 @@ def main(argv=None):
     ap.add_argument("--hint-run", default=None,
                     help="run dir whose plain seed-0 answers are the `hint` condition's hint (§15: the detector model's own run)")
     ap.add_argument("--dry-run", action="store_true", help="FakeLLM; no API calls, no cost")
+    ap.add_argument("--detect-only", action="store_true",
+                    help="run the conditions' detectors and stop before generating (§19: predictions are frozen "
+                         "from detections and plain answers before any flagged answer exists)")
     args = ap.parse_args(argv)
     if (args.price_input is None) != (args.price_output is None):
         raise SystemExit("give both --price-input and --price-output, or neither")
@@ -269,6 +272,9 @@ def main(argv=None):
     if quality:
         (out / "detector_quality.json").write_text(json.dumps(quality, indent=1))
 
+    if args.detect_only:
+        print(f"detect-only: {', '.join(dets_needed)} -> {out}")
+        return
     ensure_plain(out)
     res_path = out / "results.jsonl"
     done = {(r["id"], r["condition"], r["seed"]) for r in _read_jsonl(res_path)}
