@@ -995,3 +995,47 @@ Estimated $4.5 (reruns about $2.3, judge about $2.2). Spend before this section:
   now in the windows. After seeing this (on detection only, no generator output), we add `nli_win300`, the same rule
   with a 300-character window (about one sentence), which found the gold pair in 16 of 60 checked conflict items.
   It runs with `flag` and `remove` in `rev8_cb_main`; the registered `nli_win` results are reported as they are.
+
+## 18. Ninth revision addendum (frozen 2026-10-29, after a ninth mock review, before any analysis below)
+
+A ninth (multi-agent) mock review asks whether the RAMDocs oracle's contradiction pairs are semantically aligned,
+whether the flag and the verdict key answer the same questions correctly despite matching mean accuracy, and notes
+that the semantic re-score changes one contrast's sign. Checking the code after the review: `_ramdocs_pair_label`
+labels a pair a contradiction whenever one side is misinformation and the answers differ, with no entity alignment,
+and `verdict_answers` takes the false answer from the benchmark's per-passage labels. No new API calls. Everything
+below is exploratory, run on data already seen, and outside the FDR count.
+
+### 18.1 RAMDocs pair-rule audit (no model outputs)
+
+On the hold-out (`splits/ramdocs_holdout.txt`, `label_fix="exclude"`): the number of conflict questions; those whose
+correct passages give two or more distinct answers (*multi-entity*); the oracle contradiction pairs; and a lower bound
+on cross-entity pairs, assuming each misinformation passage targets one entity: for each misinformation passage, its
+contradiction pairs with correct passages minus the largest number that share one answer.
+
+### 18.2 Neutral and directional oracle flags on single-entity questions
+
+For every RAMDocs setting in the §16.4 pooled set, the oracle neutral flag minus plain (and the oracle directional flag
+minus plain where that arm exists) on (a) *single-entity* conflict questions, whose correct passages all give one
+answer, so no oracle pair can cross entities; and (b) the multi-entity rest. Per setting: mean, question-bootstrap 95%
+CI (5,000 resamples), and the difference (a) − (b). Over the RAMDocs settings: the equal-weight mean of (a) and of
+(b), with a joint question bootstrap (the same draw for every setting). Primary metric, seed means within questions.
+
+### 18.3 Per-question agreement between interfaces
+
+For each H30a cell (LLM directional flag vs verdict key) and each H23 comparison (oracle directional flag vs answer
+key), over (question, seed) pairs of conflict questions scored in both arms: the share where exactly one arm is
+correct (discordance), split into flag-only and key-only. As a null, the same share between plain seeds s and s′ on the
+same questions (generators with at least two plain seeds). Pooled as equal-weight means over cells, with a joint
+question bootstrap within benchmarks.
+
+### 18.4 Reporting changes (no analysis)
+
+- The §17.3 paragraph: one contrast changes sign (−0.8 to +0.8, both intervals across zero), and two contrasts whose
+  matcher intervals include zero exclude it under the judge (unadjusted bootstrap CIs), one of them the gpt-4o-mini
+  H30 comparison at +6.7.
+- H30 is described as an information-content control: the verdict key uses the benchmark's per-passage labels to
+  turn a marked passage into an answer.
+- "Equivalent" claims are qualified as mean accuracy under the primary metric; the H23 "SD" is labelled τ (REML).
+- The RAMDocs pair rule and the §18.1 counts are described in Setup and Limitations; "perfectly accurate" becomes
+  accurate against the benchmark's labels.
+- Figure 1 is redrawn (layout only); the evidence-status table for the benchmarks moves into the main text if it fits.
