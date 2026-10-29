@@ -52,7 +52,7 @@ The detector's verdict as an answer key matches the flag; its model's answer as 
 A real detector's flag hurts when conflicts are rare (\S\ref{sec:real}) & Table~\ref{tab:prevalence} & unregistered re-analysis \\
 Direction survives reordering and paraphrase (\S\ref{sec:real}) & H29 & registered addendum; equivalence not shown \\
 Direction and removal harm genuine conflicts (\S\ref{sec:real}) & H28 & registered addendum \\
-The matcher's errors do not change the contrasts' signs (App.~\ref{app:semantic}) & Table~\ref{tab:semantic} & registered re-score (\S17), LLM judge \\
+The matcher's errors do not overturn the directional conclusions (App.~\ref{app:semantic}) & Table~\ref{tab:semantic} & registered re-score (\S17), LLM judge \\
 Recommendations (\S\ref{sec:discussion}) & -- & not tested end to end \\
 \bottomrule
 \end{tabular}
@@ -60,25 +60,6 @@ Recommendations (\S\ref{sec:discussion}) & -- & not tested end to end \\
 after earlier results were known. \emph{Re-analysis}: registered after the data were seen, or exploratory. The commit
 history is the only timestamp.}
 \label{tab:claims}
-\end{table*}
-
-\begin{table*}[t]
-\centering\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{p{2.3cm}p{3.6cm}p{4.4cm}p{4.6cm}}
-\toprule
-Benchmark & Misinformation and labels & What it supports & What it cannot support \\
-\midrule
-RAMDocs & synthetic edits; document labels imperfect & neutral and directional flags (H1--H12); confirmatory split & natural misinformation \\
-ConflictBank & LLM-written on both sides; one gold answer & answer policy, randomised direction and break-even (H31), crossed cells (H24, H30) & real documents; prospective test of the cell account \\
-RAGuard & real posts; behavioural labels (App.~\ref{app:semantic}) & what generators do with transferred labels & factual-oracle conclusions \\
-WikiContradict & genuine conflicts, no false side & coverage of competing sources, and its original rubric (H28) & which answer is factually wrong \\
-CONFLICTS & real search results; scorable subset & null results only & any positive claim \\
-\bottomrule
-\end{tabular}
-\caption{The evidence hierarchy. The break-even precision rests on
-ConflictBank alone; the other benchmarks add breadth for the flag-format results, not independent confirmations of it.}
-\label{tab:evidence}
 \end{table*}
 
 \begin{table}[t]
@@ -217,7 +198,7 @@ moves accuracy significantly (Table~\ref{tab:conflicts}).
 \section{Semantic Re-score, Label Audits and Selection}
 \label{app:semantic}
 \input{generated/tab_semantic}
-\paragraph{An outside-family judge changes no contrast's sign (\S17.3).} To
+\paragraph{An outside-family judge leaves the directional conclusions intact (\S17.3).} To
 check whether the primary metric's string-matching errors differ by condition, an LLM from outside our generators' families re-scored both
 arms of \semK\ contrasts on the same \semNq\ conflict questions each (gemini-3.5-flash-lite; Table~\ref{tab:semantic}).
 \S17.3 named Gemini 2.5 Flash, which was closed to new users. Judge and matcher agree on \semAgree\% of \semN\ outputs. Almost all
@@ -225,11 +206,25 @@ disagreements are answers the judge accepts and the matcher rejects (aliases, pa
 depend on condition: \semJudgeOnlyKey\% of answer-key outputs and \semJudgeOnlyDir\% of oracle-directional ones,
 against \semJudgeOnlyPlain\% without a flag. The failure of most concern, a final answer such as
 ``$Y$, not $X$'' counted as asserting the wrong answer $X$, occurs in \semRejected\% of outputs. Because
-both arms of each contrast gain, the judge moves every contrast by \semDidMin\ to \semDidMax\ points. No conclusion
-changes sign; the matcher-scored differences are slightly conservative. With \semNq\ questions per contrast these
+both arms of each contrast gain, the judge moves every contrast by \semDidMin\ to \semDidMax\ points. One small contrast changes sign (RAMDocs oracle flag vs answer key, \semTwentyThreeRDMiniM\ to \semTwentyThreeRDMiniJ), and
+two whose matcher intervals include zero exclude it under the judge (unadjusted): Claude Haiku's neutral flag
+(\semNeuCBsHaikuJ) and gpt-4o-mini's LLM flag against its verdict key (\semThirtyCBsMiniM\ to \semThirtyCBsMiniJ, outside $\pm$3). With \semNq\ questions per contrast these
 intervals are too wide to confirm the $\pm$3-point equivalence claims, which therefore rest on the matcher. Given
 the gold and wrong answers, the judge tests the scorer, not the benchmark labels. A blinded, paired human-audit sheet of
 150 of these pairs and 50 RAGuard post pairs is released unlabelled (\texttt{runs/labelling/audit8\_*}).
+
+\input{generated/tab_entity}
+\paragraph{The neutral-flag cost holds without cross-entity pairs (\S18).} RAMDocs' pair rule labels a pair a
+contradiction whenever one side is misinformation and the answers differ, without aligning entities. Assuming each
+misinformation passage targets one entity, at least \pairCrossLb\ of the \pairContraN\ oracle contradiction pairs on the
+hold-out join it to a correct passage about another entity, in the \pairMultiN\ questions whose correct passages give
+several answers. On the \pairSingleN\ single-entity questions no pair can cross entities. Averaged over the \entNeuK\
+RAMDocs settings, the oracle neutral flag changes accuracy by \entNeuSingle\ \entNeuSingleCI\ points there and by
+\entNeuMulti\ \entNeuMultiCI\ on the rest; the oracle directional flag by \entDirSingle\ \entDirSingleCI\ and
+\entDirMulti\ \entDirMultiCI\ (Table~\ref{tab:entity}). Per question, the flag and its key disagree on \agrTwentyThreeDis\% (H23; flag only \agrTwentyThreeFlagOnly\%,
+key only \agrTwentyThreeKeyOnly\%) and \agrThirtyDis\% (H30; \agrThirtyFlagOnly\% and \agrThirtyKeyOnly\%) of
+question--seed pairs, against \agrTwentyThreeNull\% and \agrThirtyNull\% between two no-flag seeds on the cells that have
+them (\agrTwentyThreeDisMatched\% and \agrThirtyDisMatched\% on those cells).
 
 \paragraph{The WikiContradict harm holds under its original rubric.} The original rubric counts an answer correct when it gives
 both answers, acknowledges that they conflict and does not prefer one without support

@@ -590,3 +590,20 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   - Judge vs matcher: matcher misses more under answer keys/oracle direction (10-12%) than plain (5%); contrasts move
     +-3 points at most, no sign changes. WikiContradict original rubric: H28 harm holds. RAGuard: judge finds only
     6% of supporting x misleading pairs contradict.
+
+### Round 12 (2026-10-29): ninth (multi-agent) mock review, §18 (no new runs)
+
+- **Review** (`~/Downloads/which_side_is_wrong_review_2026-10-29.md`): ARR 3 (Findings). Concerns: ±3 equivalence vs
+  semantic validation; RAMDocs oracle pairs not entity-aligned; follow-rate account retrospective; benchmarks are not
+  replications; narrative overloaded; Figure 1 crowded; "no sign change" wrong; verdict key uses benchmark labels.
+- **Checked in code:** `_ramdocs_pair_label` has no entity alignment; `verdict_answers` uses per-passage gold types;
+  the released `runs/labelling/audit8_raguard.csv` quotes Reddit handles (not redacted).
+- **§18 registered** (85c3c85, 753f5ab): `revision9.py`, `assets9.py` (`tab_entity`).
+- **Results (exploratory):** hold-out 139 conflict questions, 98 multi-entity, ≥261 of 709 oracle pairs (37%) cross
+  entities. Oracle neutral flag on the 41 single-entity questions −4.4 [−7.3, −1.5] vs −4.7 on the rest (10 RAMDocs
+  settings); directional +29.2 vs +12.9. Per question–seed discordance: H23 11.7% vs 6.7% between plain seeds (6
+  matched cells); H30a 8.3% vs 9.5% (18 cells).
+- **Writing:** abstract/intro/results qualified (verdict key = information-content control; equivalence under our
+  metric; r/MAE out of the abstract); judge paragraph corrected; Discussion "only" scoped; τ labelled; ethics notes
+  Reddit usernames; evidence table moved into Setup; Figure 1 redrawn. Body ends at the bottom of page 8.
+- **Open:** human audit sheet still unlabelled; consider redacting handles in `audit8_raguard.csv` before release.

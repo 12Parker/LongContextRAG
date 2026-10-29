@@ -1303,6 +1303,8 @@ def numbers(R, out: Path):
     numbers7(R, add)   # seventh-review re-analyses (revision7)
     from .assets8 import numbers8
     numbers8(R, add)   # eighth-review re-analyses, corrected baselines, semantic re-score
+    from .assets9 import numbers9
+    numbers9(R, add)   # ninth-review re-analyses (§18)
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1328,6 +1330,8 @@ def write_all(R, out: Path):
     write7(R, out)   # seventh review: replaces fig_reliability; adds tab_breakeven, tab_prevalence
     from .assets8 import write8
     write8(R, out)   # eighth review: tab_selection, tab_semantic, tab_baselines8
+    from .assets9 import write9
+    write9(R, out)   # ninth review: tab_entity
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():

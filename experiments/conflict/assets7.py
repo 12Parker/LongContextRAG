@@ -194,22 +194,27 @@ def fig_reliability7(R, out: Path):
                 "Qwen2.5-7B": "v"}
     short = {"gpt-4o-mini": "4o-mini", "gpt-4.1": "4.1", "gpt-6-luna": "6-luna", "gpt-6.1-terra": "6.1-terra",
              "claude-haiku-5-5": "Haiku 5.5", "claude-sonnet-5-5": "Sonnet 5.5", "Qwen2.5-7B": "Qwen-7B"}
+    # right/wrong bars in neutral greys, so they are not read as the detector colours of the right panel
+    RIGHT_C, WRONG_C = "#3d3d3d", "#b3b3b3"
     _style()
-    fig, axes = plt.subplots(1, 2, figsize=(3.3, 2.2))
+    fig, axes = plt.subplots(1, 2, figsize=(3.3, 2.3))
     ax = axes[0]
     gens = [k.split(":")[0] for k in a]
     for n, g in enumerate(gens):
-        for off, fam, col in ((-0.17, a, "#2a78d6"), (0.17, b, "#eb6834")):
+        for off, fam, col in ((-0.17, a, RIGHT_C), (0.17, b, WRONG_C)):
             t = next(v for k, v in fam.items() if k.startswith(g + ":"))
             ax.bar(n + off, 100 * t["diff"], width=0.32, color=col, edgecolor="white", linewidth=0.6)
             ax.errorbar(n + off, 100 * t["diff"], yerr=[[100 * (t["diff"] - t["ci_low"])], [100 * (t["ci_high"] - t["diff"])]],
                         fmt="none", ecolor=INK2, elinewidth=0.6)
     ax.axhline(0, color=INK2, lw=0.5)
-    ax.set_xticks(range(len(gens))); ax.set_xticklabels([short[g] for g in gens], fontsize=6.5, rotation=25)
+    ax.set_xticks(range(len(gens))); ax.set_xticklabels([short[g] for g in gens], fontsize=6, rotation=35, ha="right",
+                                                        rotation_mode="anchor")
     ax.set_ylabel("change in accuracy (points)", fontsize=7)
-    ax.set_title("randomised direction (H31)", fontsize=7.5, color=INK2, pad=2)
-    ax.legend(handles=[plt.Rectangle((0, 0), 1, 1, color="#2a78d6", label="right flag"),
-                       plt.Rectangle((0, 0), 1, 1, color="#eb6834", label="wrong flag")], fontsize=6.5, loc="lower left")
+    ax.set_title("(a) H31: random direction", fontsize=6.5, color=INK2, pad=3)
+    ax.set_ylim(top=max(ax.get_ylim()[1], 75))
+    ax.legend(handles=[plt.Rectangle((0, 0), 1, 1, color=RIGHT_C, label="right flag"),
+                       plt.Rectangle((0, 0), 1, 1, color=WRONG_C, label="wrong flag")], fontsize=6, loc="upper center",
+              ncol=2, frameon=False, handlelength=1, columnspacing=0.8, borderaxespad=0.1)
     ax = axes[1]
     for c in p["cells"]:
         col = det_col.get(c["det"], NEUTRAL)
@@ -220,7 +225,7 @@ def fig_reliability7(R, out: Path):
     ax.axhline(0, color=INK2, lw=0.4, zorder=1); ax.axvline(0, color=INK2, lw=0.4, zorder=1)
     ax.set_xlabel("predicted from H31 (points)", fontsize=7)
     ax.set_ylabel("observed flag effect (points)", fontsize=7)
-    ax.set_title(f"crossed cells (retrospective), r = {p['all']['r']:.2f}", fontsize=7.5, color=INK2, pad=2)
+    ax.set_title(f"(b) {len(p['cells'])} crossed cells, r = {p['all']['r']:.2f}", fontsize=6.5, color=INK2, pad=3)
     for x in axes:
         x.tick_params(labelsize=7)
     cells = {(c["gen"], c["det"]) for c in p["cells"]}
@@ -228,11 +233,12 @@ def fig_reliability7(R, out: Path):
           for k, c in det_col.items() if any(d == k for _, d in cells)]
     hg = [plt.Line2D([], [], marker=m, ls="", ms=4, color=INK2, label=short[k])
           for k, m in gen_mark.items() if any(g == k for g, _ in cells)]
-    fig.legend(handles=hd, title="detector (colour)", fontsize=6.5, title_fontsize=7, ncol=3, frameon=False,
-               loc="upper left", bbox_to_anchor=(0.0, 0.0), handletextpad=0.1, columnspacing=0.6)
-    fig.legend(handles=hg, title="generator (shape)", fontsize=6.5, title_fontsize=7, ncol=3, frameon=False,
-               loc="upper right", bbox_to_anchor=(1.0, 0.0), handletextpad=0.1, columnspacing=0.6)
-    fig.tight_layout(w_pad=0.8)
+    fig.tight_layout(w_pad=2.0, rect=(0, 0.1, 1, 1))
+    # two stacked legend rows under both panels, one per encoding, so they cannot collide
+    fig.legend(handles=hd, title="(b) detector (colour)", fontsize=6, title_fontsize=6.5, ncol=6, frameon=False,
+               loc="upper center", bbox_to_anchor=(0.5, 0.11), handletextpad=0.05, columnspacing=0.5)
+    fig.legend(handles=hg, title="(b) generator (shape; open = no H31 run)", fontsize=6, title_fontsize=6.5, ncol=6,
+               frameon=False, loc="upper center", bbox_to_anchor=(0.5, 0.0), handletextpad=0.05, columnspacing=0.5)
     fig.savefig(out / "fig_reliability.pdf", bbox_inches="tight")
     plt.close(fig)
 

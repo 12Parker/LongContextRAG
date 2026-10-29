@@ -54,7 +54,8 @@ marked) does as well: no registered comparison differs significantly (H23; \keyD
 Pooled over the \PoolTwentyThreeK\ comparisons (bootstrapping each benchmark's questions
 jointly across them), the flag's advantage is \PoolTwentyThree\ points \PoolTwentyThreeCI, equivalent within $\pm$3 on average
 (90\% CI \PoolTwentyThreeCINinety; exploratory). Individually, equivalence holds in only \hTwentyThreeEqN\ of
-\hTwentyThreeK\ comparisons (SD \hTwentyThreeTau\ points between them). An inverted oracle
+\hTwentyThreeK\ comparisons (between-comparison $\tau$ \hTwentyThreeTau\ points, REML); the arms disagree on \agrTwentyThreeDisMatched\% of
+question--seed pairs, two no-flag seeds on \agrTwentyThreeNull\%. An inverted oracle
 costs \aadvDirConf\ points on RAMDocs (Table~\ref{tab:inverted}).
 
 \subsection{With a real detector, its wrong flags decide}
@@ -104,12 +105,14 @@ its other cells; $r=\predXfR$ with no-flag answers from another seed), mostly th
 enters both sides. The least precise detector (gpt-4o-mini, \dirPrecMini\%) lowers accuracy for the four most
 accurate generators, significantly for gpt-6.1-terra (H19).
 
-\paragraph{What the detector contributes is its verdict.} The detector's judgement, passed as an answer key (``the
-answer $X$ is false'' for the answer its suspect passage supports), matches the directional flag
+\paragraph{In mean accuracy, the detector's verdict carries its contribution.} The detector's judgement, passed as an answer key (``the
+answer $X$ is false'' for the answer the benchmark labels its suspect passage as supporting, so an information-content
+control rather than a deployable format), matches the directional flag
 (H30: \hThirtyAMin\ to \hThirtyAMax\ points per cell, none significant; pooled over the \PoolThirtyAK\ cells the flag
 is ahead by \PoolThirtyA\ \PoolThirtyACI, equivalent within $\pm$3) and beats the detector model's own answer as a
 hint by \PoolThirtyB\ \PoolThirtyBCI. That hint does worse than the flag in \nHTwentySevenAPos\ of
-\nHTwentySevenATests\ cells and never better (H27).
+\nHTwentySevenATests\ cells and never better (H27). Flag and key disagree about as often as two
+no-flag seeds (\agrThirtyDisMatched\% vs \agrThirtyNull\%).
 
 \paragraph{With rare conflicts, false flags can outweigh gains.} The LLM detector also flags clean questions
 (\cleanFprLlm\% of RAMDocs'). At a 5\% share of conflict questions its flag's estimate is negative in \prevNegFive\ of \prevN\ correlated settings

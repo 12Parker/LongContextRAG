@@ -30,7 +30,7 @@ comparisons, which vary individually).
 flag costs more than a right one gains, because generators follow both at similar rates and an accurate generator has
 more correct answers to lose. The break-even direction precision, which calibrates flags on true pairs, rises from \beMin\ for gpt-4o-mini to
 \beMax\ for gpt-6.1-terra. For real detectors precision alone can mislead; the follow rates, with
-what each detector flags, account for the effects (retrospective; Figure~\ref{fig:reliability}). The detector's verdict as an answer key matches its flag (H30); its model's
+what each detector flags, account for the effects (retrospective; Figure~\ref{fig:reliability}). The detector's verdict as an answer key matches its flag in mean accuracy (H30); its model's
 own answer as a hint does worse (H27).
 \item \textbf{Direction is unsafe on genuine conflicts and costly when conflicts are rare.} On WikiContradict the LLM
 directional flag and removal cut the share of answers giving both valid sides (H28); at a 5\% share of conflict

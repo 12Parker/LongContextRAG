@@ -1,0 +1,35 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Generator & Oracle flag & Single-entity & Multi-entity & Gap \\
+\midrule
+Qwen2.5-7B & neutral & $-$12.2 [$-$24.4, 0.0] & $-$3.1 [$-$8.2, $+$2.0] & $-$9.1 \\
+Qwen2.5-7B & directional & $+$9.8 [$+$2.4, $+$19.5] & $+$1.0 [$-$4.1, $+$6.1] & $+$8.7 \\
+Qwen2.5-7B, minimal & neutral & $-$4.9 [$-$17.1, $+$7.3] & $-$6.1 [$-$11.2, $-$2.0] & $+$1.2 \\
+Qwen2.5-7B, minimal & directional & $+$17.1 [0.0, $+$34.1] & $-$3.1 [$-$8.2, $+$2.0] & $+$20.1 \\
+claude-haiku-5-5 & neutral & $+$5.7 [$-$0.8, $+$13.8] & $-$0.7 [$-$5.4, $+$3.7] & $+$6.4 \\
+claude-haiku-5-5 & directional & $+$43.9 [$+$29.3, $+$58.5] & $+$21.8 [$+$13.3, $+$30.6] & $+$22.1 \\
+claude-sonnet-5-5 & neutral & $-$4.9 [$-$14.6, $+$4.9] & $+$2.0 [$-$3.1, $+$7.1] & $-$6.9 \\
+claude-sonnet-5-5 & directional & $+$17.1 [$+$4.9, $+$29.3] & $+$13.3 [$+$5.1, $+$21.4] & $+$3.8 \\
+gpt-4.1 & neutral & $-$5.7 [$-$13.0, 0.0] & $-$9.9 [$-$15.3, $-$4.4] & $+$4.2 \\
+gpt-4.1 & directional & $+$13.0 [$+$4.1, $+$23.6] & $+$20.4 [$+$12.9, $+$28.6] & $-$7.4 \\
+gpt-4.1, minimal & neutral & $-$13.0 [$-$26.0, 0.0] & $-$10.2 [$-$17.7, $-$2.7] & $-$2.8 \\
+gpt-4.1, minimal & directional & $+$23.6 [$+$9.8, $+$37.4] & $+$8.2 [$+$0.3, $+$16.0] & $+$15.4 \\
+gpt-4o-mini & neutral & $-$3.3 [$-$9.8, $+$2.4] & $-$8.2 [$-$13.6, $-$3.7] & $+$4.9 \\
+gpt-4o-mini & directional & $+$38.2 [$+$24.4, $+$53.7] & $+$3.1 [$-$3.7, $+$9.9] & $+$35.2 \\
+gpt-4o-mini, minimal & neutral & $-$3.3 [$-$11.4, $+$4.9] & $-$6.1 [$-$11.2, $-$2.0] & $+$2.9 \\
+gpt-4o-mini, minimal & directional & $+$31.7 [$+$18.7, $+$45.5] & $-$6.1 [$-$12.6, $-$0.3] & $+$37.8 \\
+gpt-6-luna & neutral & $-$2.4 [$-$5.7, 0.0] & $-$3.4 [$-$6.1, $-$1.4] & $+$1.0 \\
+gpt-6-luna & directional & $+$51.2 [$+$36.6, $+$65.0] & $+$34.0 [$+$24.8, $+$43.2] & $+$17.2 \\
+gpt-6.1-terra & neutral & 0.0 [$-$7.3, $+$7.3] & $-$1.0 [$-$3.1, 0.0] & $+$1.0 \\
+gpt-6.1-terra & directional & $+$46.3 [$+$31.7, $+$61.0] & $+$36.7 [$+$26.5, $+$45.9] & $+$9.6 \\
+\bottomrule
+\end{tabular}
+\caption{RAMDocs hold-out, oracle flag minus no flag on conflict questions, in points, split by whether the correct
+passages give one answer (41 \emph{single-entity} questions, where no oracle pair
+can join passages about different entities) or several (98), with question-bootstrap
+95\% CIs (\S18.2; exploratory).}
+\label{tab:entity}
+\end{table*}

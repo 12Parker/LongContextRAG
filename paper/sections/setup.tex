@@ -1,13 +1,34 @@
 \section{Experimental Setup}
 \label{sec:setup}
 
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.45cm}>{\raggedright\arraybackslash}p{2.85cm}>{\raggedright\arraybackslash}p{2.75cm}@{}}
+\toprule
+Benchmark & What it supports & What it cannot support \\
+\midrule
+RAMDocs & neutral and directional flags (H1--H12); confirmatory split & natural misinformation; entity-aligned pairs \\
+ConflictBank & answer policy; randomised direction and break-even (H31); crossed cells (H24, H30) & real documents; a prospective test of the cell account \\
+RAGuard & what generators do with transferred labels & factual-oracle conclusions \\
+WikiContradict & coverage of competing sources (H28) & which answer is factually wrong \\
+CONFLICTS & null results only & any positive claim \\
+\bottomrule
+\end{tabular}
+\caption{The evidence hierarchy. The break-even precision rests on ConflictBank alone; the other benchmarks add
+breadth for the flag-format results, not independent confirmations.}
+\label{tab:evidence}
+\end{table}
+
 \paragraph{Data.}
 \textbf{RAMDocs} \citep{wang2025madam} has 500 questions, each with 1--12 documents (5.5 on average) typed
 \emph{correct} (supports a gold answer, possibly for a different same-name entity), \emph{misinfo} (supports a wrong
 answer) or \emph{noise}. A pair is a \emph{contradiction} if one side is misinformation and the answers differ,
 \emph{ambiguity} if both are correct with different answers, \emph{consistent} if the answers match, and
-\emph{unrelated} if either is noise. A \emph{conflict} question has a contradiction pair; a
-\emph{clean} one has none. Some documents typed \emph{correct} contain a wrong answer; questions whose only sign of
+\emph{unrelated} if either is noise. The rule does not align entities: at least \pairCrossLbShare\% of the \pairContraN\ hold-out
+oracle pairs likely join passages about different entities; on the \pairSingleN\ single-entity questions the oracle
+neutral flag still costs \aentNeuSingle\ points (Table~\ref{tab:entity}).
+A \emph{conflict} question has a contradiction pair; a \emph{clean} one has none. Some documents typed \emph{correct} contain a wrong answer; questions whose only sign of
 conflict is such a document count only in ``All'' (Appendix~\ref{app:repro}).
 
 \textbf{ConflictBank} \citep{su2024conflictbank}: for a Wikidata fact, an LLM writes one passage for the true

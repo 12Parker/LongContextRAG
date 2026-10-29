@@ -360,3 +360,5 @@ def revision7(R, r2, S, PRIMARY):
     fdr(R)
     from .revision8 import revision8
     revision8(R, r2, S, PRIMARY, arms)   # eighth-review re-analyses (§17.1); exploratory, outside the FDR count
+    from .revision9 import revision9
+    revision9(R, r2, S, PRIMARY)   # ninth-review re-analyses (§18); exploratory, outside the FDR count

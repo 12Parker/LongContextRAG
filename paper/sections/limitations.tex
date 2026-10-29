@@ -27,7 +27,8 @@ equivalence within $\pm$5 points is shown for only one of four changes. Position
 not ruled out as sources of their direction. The majority variant tests one
 case where the false side is more numerous, but its extra wrong-side passages are generated for the same substitution,
 which a real attacker would vary, and include ConflictBank's temporal and semantic conflicts, which we count as
-misinformation. RAMDocs' document labels are imperfect. We exclude 35 hold-out questions whose status depends on
+misinformation. RAMDocs' document labels are imperfect, and its pair rule does not align entities
+(Section~\ref{sec:setup}). We exclude 35 hold-out questions whose status depends on
 documents we could not label without human annotation, and check that conclusions survive treating those
 documents as misinformation. RAGuard's misleading side is real text, but its labels are behavioural (whether GPT-4
 judged the claim correctly with the post). An LLM audit finds only \rgAudContradict\% of sampled supporting--misleading
@@ -75,7 +76,8 @@ credibility fine-tuning \citep{ye2026tcr,pan2024credibility}, and retrieval-side
 which pairs are flagged.
 
 \section*{Ethics Statement}
-This work uses public benchmarks and commercial model APIs, and involves no human subjects or personal data. Its main
+This work uses public benchmarks and commercial model APIs and involves no human subjects. RAGuard's passages are
+public Reddit posts that can contain usernames; we use them as released, and the RAGuard audit sheet quotes them verbatim. Its main
 risk is dual use: a false ``likely misinformation'' label, or removing a passage, can
 change a RAG system's answers. An inverted oracle that names the correct side as misinformation costs \aadvDirConf\
 points on RAMDocs and \azCbMiniOracleInvFlagDirectionalConflict\ on ConflictBank as a flag, and \aadvRemConf\ on
