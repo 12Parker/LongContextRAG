@@ -985,3 +985,13 @@ contrasts above and RAGuard pairs, for two labellers. Results are reported only 
 ### 17.5 Budget
 
 Estimated $4.5 (reruns about $2.3, judge about $2.2). Spend before this section: $188.34; the $195 gate stands.
+
+### 17.6 Deviations (appended 2026-10-29, before the runs they describe)
+
+- **Judge.** gemini-2.5-flash is closed to new users; the judge is gemini-3.5-flash-lite (same price, Google family),
+  with minimal thinking (its endpoint does not accept "none") and no seed parameter (not accepted).
+- **Windowed NLI.** With the registered 1,500-character window, the cross-encoder flags no ConflictBank pair (as
+  truncated NLI): two such windows exceed its 512-token input and the scores stay near zero although both answers are
+  now in the windows. After seeing this (on detection only, no generator output), we add `nli_win300`, the same rule
+  with a 300-character window (about one sentence), which found the gold pair in 16 of 60 checked conflict items.
+  It runs with `flag` and `remove` in `rev8_cb_main`; the registered `nli_win` results are reported as they are.

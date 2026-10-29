@@ -36,10 +36,10 @@ from tqdm import tqdm
 
 from . import data
 from .detectors import (AgreeDetector, CAAGDetector, LLMAnswerJudge, DetectorOutput, Detection, InvertedOracleDetector, LLMDetector,
-                        NLIDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
+                        NLIDetector, NLIWindowDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
 from .jsonl import ensure_plain
-from .baselines import BASELINE_MODES, SimCSE, astute_rag, trustrag
+from .baselines import BASELINE_MODES, TRUST_SYSTEM, SimCSE, astute_rag, trustrag
 from .madam import madam_rag
 from .metrics import (DOC_MODES, direction_accuracy, direction_coverage, doc_level, pair_level,
                       question_level, score)
@@ -81,6 +81,9 @@ def make_detector(name: str, args, llm, examples=None, llm2=None):
         return CAAGDetector(STEmbedder(args.embedder), theta_s=args.theta_s, theta_c=args.theta_c)
     if name == "nli":
         return NLIDetector(args.nli_model, threshold=args.nli_threshold)
+    if name.startswith("nli_win"):   # nli_win: 1,500 characters (§17.2); nli_win300: 300 (§17.6 deviation)
+        mc = int(name[len("nli_win"):] or 1500)
+        return NLIWindowDetector(args.nli_model, threshold=args.nli_threshold, max_chars=mc, name=name)
     if name in ("llm", "llm_dir"):
         return LLMDetector(llm, max_chars=args.detector_max_chars, directional=name == "llm_dir")
     if name == "llm_ans":
@@ -294,7 +297,8 @@ def main(argv=None):
             if mode.startswith("astute"):
                 m = astute_rag(ex.question, ex.passages, astute_llm, seed=seed, multi=multi)
             else:
-                m = trustrag(ex.question, ex.passages, trust_llm, embed, seed=seed, multi=multi)
+                m = trustrag(ex.question, ex.passages, trust_llm, embed, seed=seed, multi=multi,
+                             system=TRUST_SYSTEM if mode.startswith("trustrag_sys") else None)
             text, usage, kept = m["final"], m["usage"], m["kept"]
             usage.pop("cached", None)
         else:
