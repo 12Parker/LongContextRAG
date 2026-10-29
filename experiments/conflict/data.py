@@ -364,7 +364,31 @@ def load_poisonedrag(path: Path | None = None, n: int | None = None, seed: int =
     return _subsample(out, n, seed)
 
 
-LOADERS = {"poisonedrag": load_poisonedrag, "conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
+def load_hoh(path: Path | None = None, n: int | None = None, seed: int = 0) -> list[Example]:
+    """HoH-QA with real Wikipedia paragraphs (prepare_hoh.py): the current revision's paragraph is correct, the
+    outdated revision's paragraph misinfo (stale), other paragraphs of the article noise."""
+    path = path or DATA_DIR / "hoh" / "hoh_eval.jsonl"
+    out = []
+    for r in map(json.loads, open(path)):
+        t = r["types"]
+        lab = lambda a, b: ("contradiction" if {a, b} == {"correct", "misinfo"} else
+                            "consistent" if a == b != "noise" else "unrelated")
+        pairs = {(i, j): lab(t[i], t[j]) for i in range(len(t)) for j in range(i + 1, len(t))}
+        out.append(Example(
+            id=r["id"], dataset="hoh", question=r["question"], passages=r["passages"],
+            gold_answers=[r["gold"]], wrong_answers=[r["wrong"]] if r["wrong"] else [],
+            has_conflict=r["has_conflict"], conflict_type="stale" if r["has_conflict"] else "none",
+            gold_pairs=pairs, group=r["id"],
+            meta={"doc_types": t, "dates": r["dates"], "title": r["title"], "suspect_docs": [], "label_fix": "none"}))
+    return _subsample(out, n, seed)
+
+
+def load_hoh_dated(path: Path | None = None, **kw) -> list[Example]:
+    """The same items with every passage prefixed by its revision date."""
+    return load_hoh(path or DATA_DIR / "hoh" / "hoh_dated.jsonl", **kw)
+
+
+LOADERS = {"hoh": load_hoh, "hoh_dated": load_hoh_dated, "poisonedrag": load_poisonedrag, "conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
            "conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev,
            "raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 

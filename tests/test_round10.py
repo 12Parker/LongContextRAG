@@ -71,3 +71,17 @@ def test_poisonedrag_items():
     assert all(len(e.passages) == 5 and e.gold_answers for e in ex)
     assert all(e.wrong_answers and "misinfo" in e.meta["doc_types"] or e.meta["n_attack_retrieved"] == 0 for e in att)
     assert not any("misinfo" in e.meta["doc_types"] for e in ex if not e.has_conflict)
+
+
+def test_answer_judge_and_verdict_key():
+    from experiments.conflict.detectors import LLMAnswerJudge
+    from experiments.conflict.llm import FakeLLM
+    from experiments.conflict.prompts import build_prompt
+    ex = data.Example(id="x", dataset="hoh", question="Q?", passages=["a 24", "a 25"], gold_answers=["25"],
+                      wrong_answers=["24"], has_conflict=True)
+    out = LLMAnswerJudge(FakeLLM(lambda p: '{"answers": ["24", "25"], "false": ["24"]}')).detect(ex)
+    assert out.pairs == [] and out.extra["false_answers"] == ["24"]
+    p, _ = build_prompt("Q?", ex.passages, "verdict_key", skeleton="single", wrong_answers=out.extra["false_answers"])
+    assert 'The answer "24" is false.' in p and "MISINFORMATION" not in p
+    bad = LLMAnswerJudge(FakeLLM(lambda p: "not json")).detect(ex)
+    assert bad.extra["false_answers"] == []

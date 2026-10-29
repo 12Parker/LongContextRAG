@@ -35,7 +35,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from . import data
-from .detectors import (AgreeDetector, CAAGDetector, DetectorOutput, Detection, InvertedOracleDetector, LLMDetector,
+from .detectors import (AgreeDetector, CAAGDetector, LLMAnswerJudge, DetectorOutput, Detection, InvertedOracleDetector, LLMDetector,
                         NLIDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
 from .jsonl import ensure_plain
@@ -83,6 +83,8 @@ def make_detector(name: str, args, llm, examples=None, llm2=None):
         return NLIDetector(args.nli_model, threshold=args.nli_threshold)
     if name in ("llm", "llm_dir"):
         return LLMDetector(llm, max_chars=args.detector_max_chars, directional=name == "llm_dir")
+    if name == "llm_ans":
+        return LLMAnswerJudge(llm, max_chars=args.detector_max_chars)
     if name == "agree":
         if llm2 is None:
             raise SystemExit("the agree detector needs --detector2-model")
@@ -126,7 +128,7 @@ def run_detection(det, examples, out: Path) -> dict[str, DetectorOutput]:
             if ex.id in done:
                 r = done[ex.id]
                 res[ex.id] = DetectorOutput([Detection(**d) for d in r["pairs"]], {},
-                                            r["latency_s"], r["cost_usd"])
+                                            r["latency_s"], r["cost_usd"], r.get("extra") or {})
                 continue
             o = det.detect(ex)
             res[ex.id] = o
@@ -296,7 +298,10 @@ def main(argv=None):
             text, usage, kept = m["final"], m["usage"], m["kept"]
             usage.pop("cached", None)
         else:
-            wrong = verdict_answers(ex, dout.pairs) if mode == "verdict_key" else ex.wrong_answers
+            if mode == "verdict_key":   # llm_ans names answers itself; other detectors' suspects are mapped to answers
+                wrong = dout.extra.get("false_answers", []) if dname == "llm_ans" else verdict_answers(ex, dout.pairs)
+            else:
+                wrong = ex.wrong_answers
             prompt, kept = build_prompt(ex.question, ex.passages, mode, dout.pairs, style=args.flag_style,
                                        skeleton=args.skeleton, wrong_answers=wrong,
                                        hint=hints.get(eid, ["unknown"]) if mode == "hint" else None)

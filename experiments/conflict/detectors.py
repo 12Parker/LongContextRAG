@@ -368,3 +368,41 @@ class AgreeDetector:
                               a.cost_usd + b.cost_usd,
                               {"agree": ok, "primary": a.extra, "secondary": b.extra,
                                "secondary_pairs": [vars(d) for d in b.pairs]})
+
+
+LLM_ANSWER_JUDGE_PROMPT = """You will see a question and {n} numbered passages retrieved for it.
+The passages may disagree about the answer, and some may be false or out of date.
+List each distinct answer to the question that the passages support. Then say which of those answers, if any, is most
+likely false or no longer true, judging by the passages and your own knowledge. Give none if you cannot tell or if the
+passages agree.
+
+Question: {question}
+
+{passages}
+
+Return JSON only: {{"answers": [<answer strings>], "false": [<answer strings from "answers">]}}"""
+
+
+class LLMAnswerJudge:
+    """Answer-level verdict: names the false answer(s) directly, without pointing at passages. Used with the
+    verdict_key prompt mode, which renders 'The answer "X" is false.' for each one; no passage is marked."""
+    name = "llm_ans"
+
+    def __init__(self, llm, max_chars: int = 1500, seed: int = 0):
+        self.llm, self.max_chars, self.seed = llm, max_chars, seed
+
+    def detect(self, ex: Example) -> DetectorOutput:
+        body = "\n\n".join(f"[{k}] {p[: self.max_chars]}" for k, p in enumerate(ex.passages))
+        r = self.llm(LLM_ANSWER_JUDGE_PROMPT.format(n=len(ex.passages), question=ex.question, passages=body),
+                     seed=self.seed, json_mode=True, max_tokens=512)
+        try:
+            obj = json.loads(r.text)
+        except json.JSONDecodeError:
+            m = re.search(r"\{.*\}", r.text, re.S)
+            try:
+                obj = json.loads(m.group(0)) if m else {}
+            except json.JSONDecodeError:
+                obj = {}
+        false = [str(a) for a in obj.get("false", []) if isinstance(a, (str, int, float)) and str(a).strip()]
+        return DetectorOutput([], {}, r.latency_s, r.cost_usd,
+                              {"raw": r.text, "false_answers": false, "answers": obj.get("answers", [])})
