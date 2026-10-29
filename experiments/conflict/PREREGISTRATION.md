@@ -1039,3 +1039,8 @@ question bootstrap within benchmarks.
 - The RAMDocs pair rule and the §18.1 counts are described in Setup and Limitations; "perfectly accurate" becomes
   accurate against the benchmark's labels.
 - Figure 1 is redrawn (layout only); the evidence-status table for the benchmarks moves into the main text if it fits.
+
+### 18.5 Note on timing (appended 2026-10-29)
+
+The §18.1 counts were first computed during the review triage, before this section was written (hold-out: 139
+conflict questions, 98 multi-entity, 709 oracle contradiction pairs, at least 261 cross-entity). §18.2–18.3 were not.
