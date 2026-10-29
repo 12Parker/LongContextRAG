@@ -917,3 +917,71 @@ Conflict questions; one-way strict accuracy; Holm within each family.
    gets a TOST or is reworded.
 7. **H21(c) in the hypothesis tables** uses the §15.4.5 ratio estimand, with the per-question version in the
    released statistics.
+
+## 17. Eighth revision addendum (frozen 2026-10-29, after an eighth mock review, before any run below)
+
+An eighth (multi-agent) mock review found that the abstract's pooled interval ignores shared questions, that the
+H31 break-even is transferred to selective detectors without its assumptions, that the follow-rate prediction is
+retrospective, that RAGuard labels and WikiContradict scoring do not support factual-oracle language, that the
+matcher lacks a condition-sensitive semantic check, and that two baselines were implemented with gaps. The HoH-QA
+plan drafted after the seventh review is shelved; nothing from it is registered. Everything below is exploratory.
+
+### 17.1 Re-analyses of existing data (registered here, run on data already seen, reported as such)
+
+1. **Pooled neutral flag under shared questions.** The §16.4.2 multilevel model refitted inside a joint question
+   bootstrap (1,000 replicates): each replicate resamples question ids once per question pool (ConflictBank, which
+   its majority and forced variants share; RAMDocs; RAGuard) and applies the same draw to every setting, recomputes
+   each setting's mean and sampling variance, and refits the intercept-only model, the moderator model and the
+   per-policy models. Percentile CIs. The prediction interval is the 2.5–97.5% range of μ_b + z·√(Στ_b), z ~ N(0,1).
+   Also reported: the equal-weight mean over settings with the same bootstrap (inference about this design only).
+2. **H31 at the realised split.** Per generator, the mean flag effect over all randomised conflict questions (the
+   159/141 mixture as run), paired bootstrap and sign-flip p, Holm over the generators, beside the registered 50/50
+   H31c.
+3. **Selection-aware decomposition of the crossed cells.** For each H24 cell: coverage, baseline accuracy and mean
+   gain on questions whose flag names the false side, on those whose flag marks a correct passage, and on the rest;
+   the marginal break-even prediction (precision × R + (1 − precision) × W) against the observed gain.
+4. **The follow-rate prediction as a retrospective account.** Against baselines (zero; marginal rates without the
+   question-level joint; the generator's mean over its other cells), with MAE and sign agreement; a joint bootstrap
+   of H31 questions and cell questions for the CI of r and MAE; and, for cells with three seeds, a cross-fitted
+   version whose prediction uses the plain answers of seed 0 and whose observed gain uses seeds 1–2.
+5. **H23 heterogeneity.** Per-comparison 90% CIs and TOST at ±3, and the between-comparison τ (REML).
+6. **Prevalence uncertainty.** A joint bootstrap (conflict and clean questions resampled within each pool) of the
+   5% and 20% reweighted effects: per-setting CIs and the distribution of the number of settings below zero.
+
+### 17.2 Corrected baselines (new runs, gpt-4o-mini, the original splits, seeds and prompts)
+
+- `trustrag_sys`, `trustrag_sys_multi`: TrustRAG with the repository's system message ("You are a helpful
+  assistant.") sent on all three calls. Runs: `rev8_cb_main` (ConflictBank eval, default skeleton, with `plain`),
+  `rev8_cbmaj_single` (majority, single skeleton), `rev8_holdout_round2` (RAMDocs hold-out, both variants).
+- `nli_win`: the same cross-encoder and threshold, but each passage is reduced to its sentences that best match the
+  question (token overlap, ties by position), in original order, up to 1,500 characters, so the changed fact is in
+  the input. With `flag` and `remove` in `rev8_cb_main`. Detection recall on the gold pairs is reported (no API).
+- Reported: each corrected baseline against its original and in the H14 comparisons (the matched-policy version as
+  the principal comparison). No new hypothesis tests beyond paired comparisons with Holm over the H14 family.
+
+### 17.3 Semantic re-scoring (outside-family judge)
+
+- Judge: gemini-2.5-flash (Google; no generator is from this family), temperature 0, thinking off, JSON output.
+- Rubric, per response: final answer gives the gold answer (aliases count); asserts a wrong answer (mentioning it
+  only to reject it does not count); explicitly rejects a wrong candidate; abstains; adds an answer outside both
+  lists; acknowledges a conflict. Judge-strict = gives gold, asserts no wrong answer, does not abstain.
+- Sample (seed 0, conflict questions, both arms of each pair on the same questions, 120 questions per contrast,
+  fixed seed): neutral flag vs plain (RAMDocs gpt-4o-mini, ConflictBank single gpt-4o-mini and Haiku); oracle
+  directional flag vs answer key (ConflictBank single gpt-4o-mini, gpt-6-luna, Haiku); LLM directional flag vs
+  verdict key (ConflictBank gpt-4o-mini detector, generators gpt-4o-mini and gpt-6-luna); H31 right and wrong arms
+  vs plain (gpt-4o-mini, Haiku).
+- Reported: matcher-vs-judge disagreement per condition, the contrasts re-estimated under judge-strict with a
+  question bootstrap, and whether the ±3 equivalence conclusions survive.
+- WikiContradict under its original rubric (acknowledges the incompatibility, gives both answers, no unsupported
+  preference): plain vs LLM directional flag, for the three H28 generators, all questions of seed 0.
+- RAGuard pairs: 150 sampled supporting × misleading pairs checked by the judge for a real contradiction, temporal
+  compatibility and whether the misleading post is false about the claim. Reported as a share, not a test.
+
+### 17.4 Human audit
+
+A blinded, paired sheet (the same question under two conditions, condition hidden, order randomised) over the
+contrasts above and RAGuard pairs, for two labellers. Results are reported only if the labels are completed.
+
+### 17.5 Budget
+
+Estimated $4.5 (reruns about $2.3, judge about $2.2). Spend before this section: $188.34; the $195 gate stands.
