@@ -322,7 +322,29 @@ def load_conflictbank_rev(path: Path | None = None, **kw) -> list[Example]:
     return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_rev.jsonl", **kw)
 
 
-LOADERS = {"conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev,
+def load_conflictbank_fresh(path: Path | None = None, **kw) -> list[Example]:
+    """§17: 400 new items built like the §10 set, sharing no subject with it (prepare_cb_fresh.py)."""
+    return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_fresh.jsonl", **kw)
+
+
+def load_healthcontradict(path: Path | None = None, n: int | None = None, seed: int = 0) -> list[Example]:
+    """§17: HealthContradict as built by prepare_healthcontradict.py: a yes/no health question with one real web
+    page per side, typed correct / misinfo by the topic's evidence-based answer. Every item is a conflict item;
+    the bootstrap clusters on the TREC topic."""
+    path = path or DATA_DIR / "healthcontradict" / "hc_eval.jsonl"
+    out = []
+    for r in map(json.loads, open(path)):
+        t = r["types"]
+        out.append(Example(
+            id=r["id"], dataset="healthcontradict", question=r["question"], passages=r["passages"],
+            gold_answers=[r["gold"]], wrong_answers=[r["wrong"]], has_conflict=True, conflict_type="misinfo",
+            gold_pairs={(0, 1): "contradiction"}, group=f"hc-topic-{r['topic']}",
+            meta={"doc_types": t, "topic": r["topic"], "suspect_docs": [], "label_fix": "none"}))
+    return _subsample(out, n, seed)
+
+
+LOADERS = {"conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
+           "conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev,
            "raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
 

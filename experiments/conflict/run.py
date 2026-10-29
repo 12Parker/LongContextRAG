@@ -6,7 +6,8 @@ Run the condition matrix (Phase 2).
         --seeds 0,1,2 --out runs/ramdocs_pilot
 
 A condition is "<detector>+<mode>" or one of: plain, instruct, instruct_v2, madam, grid.
-Detectors: caag, nli, llm, llm_dir (also says which side is misinformation), random, oracle, oracle_inv,
+Detectors: caag, nli, llm, llm_dir (also says which side is misinformation), agree (llm_dir gated on a second
+detector, --detector2-model; §17), random, oracle, oracle_inv,
 synth-p<P>-r<R>-<pool>[-d<D>]. Modes: see prompts.py.
 
 `grid` expands to one synthetic-detector condition per (precision, recall, pool) cell from
@@ -34,7 +35,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from . import data
-from .detectors import (CAAGDetector, DetectorOutput, Detection, InvertedOracleDetector, LLMDetector,
+from .detectors import (AgreeDetector, CAAGDetector, DetectorOutput, Detection, InvertedOracleDetector, LLMDetector,
                         NLIDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
 from .jsonl import ensure_plain
@@ -70,7 +71,7 @@ def expand_conditions(conditions: list[str], args) -> list[str]:
     return list(dict.fromkeys(out))
 
 
-def make_detector(name: str, args, llm, examples=None):
+def make_detector(name: str, args, llm, examples=None, llm2=None):
     if name.startswith("synth-"):
         p, r, pool, d = parse_synth_name(name)
         return SyntheticDetector(examples, p, r, pool, seed=args.synth_seed, direction=d)
@@ -81,7 +82,12 @@ def make_detector(name: str, args, llm, examples=None):
     if name == "nli":
         return NLIDetector(args.nli_model, threshold=args.nli_threshold)
     if name in ("llm", "llm_dir"):
-        return LLMDetector(llm, directional=name == "llm_dir")
+        return LLMDetector(llm, max_chars=args.detector_max_chars, directional=name == "llm_dir")
+    if name == "agree":
+        if llm2 is None:
+            raise SystemExit("the agree detector needs --detector2-model")
+        return AgreeDetector(LLMDetector(llm, max_chars=args.detector_max_chars, directional=True),
+                             LLMDetector(llm2, max_chars=args.detector_max_chars, directional=True))
     if name == "random":
         if args.random_rate is None:
             raise SystemExit("--random-rate is required for the random detector "
@@ -147,6 +153,10 @@ def main(argv=None):
     ap.add_argument("--base-url", default=None, help="OpenAI-compatible endpoint for a non-OpenAI model")
     ap.add_argument("--detector-base-url", default=None,
                     help="OpenAI-compatible endpoint for --detector-model (e.g. a local open-weights detector)")
+    ap.add_argument("--detector2-model", default=None,
+                    help="second detector for the agree gate (§17); on OpenAI's or Anthropic's endpoint")
+    ap.add_argument("--detector-max-chars", type=int, default=1500,
+                    help="characters of each passage the LLM detectors see (§17 HealthContradict: 4000)")
     ap.add_argument("--api-key-env", default="OPENAI_API_KEY")
     ap.add_argument("--price-input", type=float, default=None, help="USD per 1M input tokens (models not in llm.PRICES)")
     ap.add_argument("--price-output", type=float, default=None)
@@ -197,7 +207,7 @@ def main(argv=None):
 
     if args.dry_run:
         from .llm import FakeLLM
-        llm = madam_llm = det_llm = astute_llm = trust_llm = FakeLLM(lambda p: "All Correct Answers: [\"unknown\"]" if "aggregator" in p
+        llm = madam_llm = det_llm = det2_llm = astute_llm = trust_llm = FakeLLM(lambda p: "All Correct Answers: [\"unknown\"]" if "aggregator" in p
                                   else "Answer: unknown. Explanation: dry run.\nFinal answer(s): unknown")
     else:
         from .llm import OpenAILLM, register_price
@@ -215,6 +225,7 @@ def main(argv=None):
             det_llm = OpenAILLM(args.detector_model, temperature=0.0)
         else:
             det_llm = OpenAILLM(args.model, temperature=0.0, **ep)
+        det2_llm = OpenAILLM(args.detector2_model, temperature=0.0) if args.detector2_model else None
         madam_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=128, **ep)  # matches public MADAM script
         astute_llm = OpenAILLM(args.model, temperature=0.0, max_tokens=1024, **ep)   # Astute RAG §5.1
         trust_llm = OpenAILLM(args.model, temperature=0.1, max_tokens=1024, **ep)    # TrustRAG repo, GPT path
@@ -233,7 +244,7 @@ def main(argv=None):
     detections = {}
     achieved, quality = {}, {}
     for dn in dets_needed:
-        det = make_detector(dn, args, det_llm, examples)
+        det = make_detector(dn, args, det_llm, examples, llm2=det2_llm)
         detections[dn] = run_detection(det, examples, out)
         if dn == "none" or any(e.gold_pairs is None for e in examples):
             continue

@@ -1,0 +1,48 @@
+"""§17: the agreement gate and the fresh ConflictBank / HealthContradict sets."""
+import json
+
+import pytest
+
+from experiments.conflict import data
+from experiments.conflict.detectors import AgreeDetector, Detection, DetectorOutput, suspect_set
+
+
+class Fixed:
+    def __init__(self, pairs, cost=0.1):
+        self.pairs, self.cost = pairs, cost
+
+    def detect(self, ex):
+        return DetectorOutput(self.pairs, {}, 0.5, self.cost)
+
+
+A = [Detection(0, 1, 1.0, "contradiction", [1])]
+B = [Detection(0, 1, 1.0, "contradiction", [0])]
+
+
+def test_agree_passes_primary_only_on_same_suspects():
+    out = AgreeDetector(Fixed(A), Fixed([Detection(0, 1, 1.0, "contradiction", [1])])).detect(None)
+    assert out.pairs == A and out.extra["agree"] and out.cost_usd == pytest.approx(0.2)
+    assert AgreeDetector(Fixed(A), Fixed(B)).detect(None).pairs == []      # opposite direction
+    assert AgreeDetector(Fixed(A), Fixed([])).detect(None).pairs == []     # second detector flags nothing
+    assert AgreeDetector(Fixed([]), Fixed([])).detect(None).pairs == []    # neither flags: no agreement
+    neutral = [Detection(0, 1, 1.0, "contradiction", [])]
+    assert AgreeDetector(Fixed(neutral), Fixed(neutral)).detect(None).pairs == []   # no direction to agree on
+    assert suspect_set(DetectorOutput(A + [Detection(1, 2, 1.0, "unrelated", [2])])) == {1}
+
+
+@pytest.mark.skipif(not (data.DATA_DIR / "healthcontradict/hc_eval.jsonl").exists(), reason="data not built")
+def test_healthcontradict_items():
+    ex = data.load("healthcontradict")
+    assert len(ex) == 247 and all(e.has_conflict for e in ex)
+    for e in ex:
+        assert sorted(e.meta["doc_types"]) == ["correct", "misinfo"] and len(e.passages) == 2
+        assert {e.gold_answers[0], e.wrong_answers[0]} == {"yes", "no"} and e.question.endswith("Answer yes or no.")
+        assert all(len(p) <= 4000 for p in e.passages) and e.group.startswith("hc-topic-")
+
+
+@pytest.mark.skipif(not (data.DATA_DIR / "conflictbank/conflictbank_fresh.jsonl").exists(), reason="data not built")
+def test_fresh_conflictbank_is_disjoint():
+    old, new = data.load("conflictbank"), data.load("conflictbank_fresh")
+    assert len(new) == 400 and sum(e.has_conflict for e in new) == 300
+    assert not {e.id for e in old} & {e.id for e in new}
+    assert not {e.question for e in old} & {e.question for e in new}

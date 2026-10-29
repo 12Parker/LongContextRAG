@@ -347,3 +347,24 @@ class NoDetector:
 
     def detect(self, ex: Example) -> DetectorOutput:
         return DetectorOutput([])
+
+
+def suspect_set(out: DetectorOutput) -> frozenset[int]:
+    """The passages a directional detector marks as misinformation, over its contradiction pairs."""
+    return frozenset(k for d in out.pairs if d.type == "contradiction" for k in d.suspects)
+
+
+class AgreeDetector:
+    """§17 agreement gate: pass on the primary detector's output only when a second, different detector marks
+    the same set of passages as misinformation; otherwise flag nothing (the generator gets the plain prompt).
+    Both detectors are always called, so cost and latency are the sum of the two."""
+    def __init__(self, primary, secondary, name: str = "agree"):
+        self.primary, self.secondary, self.name = primary, secondary, name
+
+    def detect(self, ex: Example) -> DetectorOutput:
+        a, b = self.primary.detect(ex), self.secondary.detect(ex)
+        ok = bool(suspect_set(a)) and suspect_set(a) == suspect_set(b)
+        return DetectorOutput(a.pairs if ok else [], a.scores if ok else {}, a.latency_s + b.latency_s,
+                              a.cost_usd + b.cost_usd,
+                              {"agree": ok, "primary": a.extra, "secondary": b.extra,
+                               "secondary_pairs": [vars(d) for d in b.pairs]})
