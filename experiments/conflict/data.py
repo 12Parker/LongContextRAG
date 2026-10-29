@@ -388,7 +388,16 @@ def load_hoh_dated(path: Path | None = None, **kw) -> list[Example]:
     return load_hoh(path or DATA_DIR / "hoh" / "hoh_dated.jsonl", **kw)
 
 
-LOADERS = {"hoh": load_hoh, "hoh_dated": load_hoh_dated, "poisonedrag": load_poisonedrag, "conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
+def load_hoh_full(path: Path | None = None, **kw) -> list[Example]:
+    """The registered HoH set: pages disjoint from the smoke items (prepare_hoh.py --name full)."""
+    return load_hoh(path or DATA_DIR / "hoh" / "hoh_full.jsonl", **kw)
+
+
+def load_hoh_full_dated(path: Path | None = None, **kw) -> list[Example]:
+    return load_hoh(path or DATA_DIR / "hoh" / "hoh_full_dated.jsonl", **kw)
+
+
+LOADERS = {"hoh": load_hoh, "hoh_dated": load_hoh_dated, "hoh_full": load_hoh_full, "hoh_full_dated": load_hoh_full_dated, "poisonedrag": load_poisonedrag, "conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
            "conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev,
            "raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 

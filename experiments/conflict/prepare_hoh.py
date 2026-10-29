@@ -18,7 +18,8 @@ Sampling: items with one outdated version, current and outdated answers that dif
 other, answers of at most 6 words, changes observed in 2024-09..2024-12; seed 0. Items whose evidence cannot be
 located in the fetched revision (token overlap < 0.6) are skipped and counted.
 
-Writes data/external/hoh/hoh_eval.jsonl and hoh_dated.jsonl (not committed) and splits/hoh_smoke.txt.
+Writes data/external/hoh/hoh_eval.jsonl and hoh_dated.jsonl (not committed) and splits/hoh_smoke.txt; with --name full,
+hoh_full.jsonl, hoh_full_dated.jsonl and splits/hoh_full.txt (pages of --exclude-split left out).
 """
 from __future__ import annotations
 
@@ -105,6 +106,9 @@ def main(argv=None):
     ap.add_argument("--n-conflict", type=int, default=20)
     ap.add_argument("--n-clean", type=int, default=20)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--name", default="smoke", choices=("smoke", "full"),
+                    help="smoke: hoh_eval/hoh_dated + splits/hoh_smoke.txt; full: hoh_full/hoh_full_dated + splits/hoh_full.txt")
+    ap.add_argument("--exclude-split", default=None, help="ids file whose pages are excluded (e.g. the smoke split)")
     args = ap.parse_args(argv)
     cache = {}
     if CACHE.exists():
@@ -123,6 +127,9 @@ def main(argv=None):
     rng = random.Random(args.seed)
     rng.shuffle(rows)
     items, skipped, used_pages = [], {"no_revision": 0, "no_match": 0}, set()
+    if args.exclude_split:   # ids are hoh-<page id>-<n>
+        used_pages |= {l.strip().split("-")[1] for l in open(args.exclude_split) if l.strip()}
+    excluded = set(used_pages)
     want = {"conflict": args.n_conflict, "clean": args.n_clean}
     for r in rows:
         if not any(want.values()):
@@ -162,10 +169,13 @@ def main(argv=None):
                       "dates": [dt for _, _, dt in passages], "has_conflict": kind == "conflict",
                       "title": r.document["title"], "changed": str(r.last_modified_time)[:10]})
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "hoh_eval.jsonl").write_text("".join(json.dumps(o) + "\n" for o in items))
+    stem, dstem, split = (("hoh_eval", "hoh_dated", "hoh_smoke") if args.name == "smoke" else
+                          ("hoh_full", "hoh_full_dated", "hoh_full"))
+    assert not {o["id"].split("-")[1] for o in items} & excluded
+    (OUT / f"{stem}.jsonl").write_text("".join(json.dumps(o) + "\n" for o in items))
     dated = [{**o, "passages": [f"(Last modified: {dt}) {p}" for p, dt in zip(o["passages"], o["dates"])]} for o in items]
-    (OUT / "hoh_dated.jsonl").write_text("".join(json.dumps(o) + "\n" for o in dated))
-    (SPLITS / "hoh_smoke.txt").write_text("".join(o["id"] + "\n" for o in sorted(items, key=lambda o: o["id"])))
+    (OUT / f"{dstem}.jsonl").write_text("".join(json.dumps(o) + "\n" for o in dated))
+    (SPLITS / f"{split}.txt").write_text("".join(o["id"] + "\n" for o in sorted(items, key=lambda o: o["id"])))
     print(f"{len(items)} items ({sum(o['has_conflict'] for o in items)} conflict); skipped {skipped}; "
           f"API calls cached: {len(cache)}")
 
