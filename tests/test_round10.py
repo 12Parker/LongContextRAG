@@ -61,3 +61,13 @@ def test_revision7_helpers():
     assert abs(out["diff"]) < 1e-9 and out["n_cells"] == 2 and out["equivalent"]
     big = _pool([("CB", {k: 0.5 for k in d})])
     assert big["diff"] == 50 and big["p"] < 0.01 and not big["equivalent"]
+
+
+@pytest.mark.skipif(not (data.DATA_DIR / "poisonedrag/pr_eval.jsonl").exists(), reason="data not built")
+def test_poisonedrag_items():
+    ex = data.load("poisonedrag")
+    att = [e for e in ex if e.has_conflict]
+    assert len(ex) == 500 and len(att) == 200
+    assert all(len(e.passages) == 5 and e.gold_answers for e in ex)
+    assert all(e.wrong_answers and "misinfo" in e.meta["doc_types"] or e.meta["n_attack_retrieved"] == 0 for e in att)
+    assert not any("misinfo" in e.meta["doc_types"] for e in ex if not e.has_conflict)

@@ -52,6 +52,7 @@ All runs use GPT-4o-mini on RAMDocs; pilots are **exploratory**, since they shap
 | `wiki_llm_{mini,luna,haiku}`, `holdout_rem_{luna,haiku,terra}` | Round 8 (§15, H28): LLM directional flag and LLM removal on WikiContradict and on RAMDocs (analysed on ambiguity-only questions) | n/a | **registered (§15)** |
 | `randdir_cb_{mini,luna,haiku,terra}` | Round 9 (§16, H31): ConflictBank single; gold pair flagged on every conflict question, suspect = misinformation on a random half (`synth-p1-r1-all-d0.5+flag_directional`) | n/a | **registered (§16)** |
 | `vkey_cb_<gen>_<det>` | Round 9 (§16, H30): `llm_dir+verdict_key` (the detector's suspect passages turned into "the answer X is false", no passage marked) for the H24 cells with gpt-4o-mini, gpt-6-luna, Qwen2.5-7B and Claude Haiku generators | n/a | **registered (§16)** |
+| `pr_pilot_{mini,mini_lunadet,haiku}` | Pilot for a planned PoisonedRAG registration: 40 pilot questions (20 attacked, 20 clean; `splits/poisonedrag_pilot.txt`, excluded from any evaluation), single prompt; gpt-4o-mini (3 seeds) with the gpt-4o-mini or gpt-6-luna detector, Claude Haiku (seed 0) | n/a | pilot (not reported as results) |
 | `cb_single_gpt41` (added `self_identify`) | Round 8 (§15): single-call mode for gpt-4.1, seed 0 | n/a | registered (§15) |
 | `labelling` | `ramdocs_suspect_docs.csv`: 163 RAMDocs documents to hand-label (`export_labelling.py`); `audit_200.csv`: 200 outputs for a human audit of the matcher (`export_audit.py`, §15.4.7), not yet labelled | n/a | to label |
 

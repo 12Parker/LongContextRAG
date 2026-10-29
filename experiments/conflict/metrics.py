@@ -69,7 +69,7 @@ def score(ex: Example, response: str) -> dict:
     answers = extract_answers(response)
     pred = normalize_answer(" ; ".join(answers))
     out: dict = {"pred_answers": answers}
-    if ex.dataset in ("ramdocs", "conflictbank", "raguard", "healthcontradict"):
+    if ex.dataset in ("ramdocs", "conflictbank", "raguard", "healthcontradict", "poisonedrag"):
         g = [_matches(answers, a) for a in ex.gold_answers]
         w = [_matches(answers, a) for a in ex.wrong_answers]
         g1 = [_contains(pred, a) for a in ex.gold_answers]   # one-way, kept for comparison

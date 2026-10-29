@@ -343,7 +343,28 @@ def load_healthcontradict(path: Path | None = None, n: int | None = None, seed: 
     return _subsample(out, n, seed)
 
 
-LOADERS = {"conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
+def load_poisonedrag(path: Path | None = None, n: int | None = None, seed: int = 0) -> list[Example]:
+    """PoisonedRAG on real retrieval (prepare_poisonedrag.py): BEIR NQ / HotpotQA questions with their Contriever top 5,
+    two attack passages merged into the ranking for attacked questions. Attack passages are misinfo, passages
+    containing a gold answer correct, others noise. Attacked questions are the conflict items."""
+    path = path or DATA_DIR / "poisonedrag" / "pr_eval.jsonl"
+    out = []
+    for r in map(json.loads, open(path)):
+        t = r["types"]
+        lab = lambda a, b: ("contradiction" if {a, b} == {"correct", "misinfo"} else
+                            "consistent" if a == b != "noise" else "unrelated")
+        pairs = {(i, j): lab(t[i], t[j]) for i in range(len(t)) for j in range(i + 1, len(t))}
+        out.append(Example(
+            id=r["id"], dataset="poisonedrag", question=r["question"], passages=r["passages"],
+            gold_answers=r["gold"], wrong_answers=[r["wrong"]] if r["wrong"] else [],
+            has_conflict=r["has_conflict"], conflict_type="misinfo" if r["has_conflict"] else "none",
+            gold_pairs=pairs, group=r["id"],
+            meta={"doc_types": t, "source": r["dataset_src"], "n_attack_retrieved": r["n_attack_retrieved"],
+                  "correct_retrieved": r["correct_retrieved"], "suspect_docs": [], "label_fix": "none"}))
+    return _subsample(out, n, seed)
+
+
+LOADERS = {"poisonedrag": load_poisonedrag, "conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
            "conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev,
            "raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
