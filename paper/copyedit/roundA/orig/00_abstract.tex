@@ -1,0 +1,20 @@
+\begin{abstract}
+Retrieval-augmented generation systems increasingly detect contradictions among retrieved passages and flag them to
+the generator. We ask what such a flag must say, and how accurate its detector must be, for it to help against
+misinformation. On fixed passages from five benchmarks, with seven generators from three model families, we vary the
+detector and the format of its flag, in hypotheses pre-registered in stages (H1--H9 before any confirmatory data,
+H10--H31 in eight later addenda). A perfectly accurate neutral flag (``these passages conflict'') does not reliably
+help: what it does depends on the answer policy and the model family, and pooled over \neuMlK\ settings, allowing
+for shared questions, its effect is \neuMlMu\ points \neuMlCI. Naming the false side helps, but on average no more than
+stating the wrong answer outright (pooled difference \PoolTwentyThree\ points, equivalent within $\pm$3 on average). In a
+randomised test, a flag naming the false side
+raises accuracy by \hThirtyOneAMin\ to \hThirtyOneAMax\ points and one naming the correct side lowers it by
+\ahThirtyOneBMax\ to \ahThirtyOneBMin, so randomised flags on true pairs help only above a break-even direction
+precision that rises with the generator's accuracy, from \beMin\ to \beMax. Real detectors are selective, so this
+threshold alone can misjudge them; combined with each cell's coverage and no-flag accuracy, the follow rates from this
+test account retrospectively for the flag's effect in \predEightN\ crossed detector--generator cells
+($r=\predEightR$, mean error \predEightMae\ points; exploratory). What a
+detector contributes is its verdict: passed as an answer key it matches the flag within 3 points. On genuine
+conflicts direction removes valid answers, and when conflicts are rare a real detector's false flags on clean
+questions can outweigh its gains. We release the harness, the pre-registrations and every run.
+\end{abstract}

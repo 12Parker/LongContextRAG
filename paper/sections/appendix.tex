@@ -1,31 +1,31 @@
 \section{Prompts}
 \label{app:prompts}
-All prompts below are copied verbatim from the code that produced the results. The examples use placeholder passages; in the runs every condition except removal shows the generator the same passages (checked against the run records).
+The prompts below are verbatim from the code that produced the results. The examples use placeholder passages; in the runs every condition except removal shows the generator the same passages (checked against the run records).
 \input{generated/app_prompts}
 
 \section{Additional Results}
 \label{app:extra}
 
 \paragraph{Published baselines (H14).} Astute RAG \citep{wang2025astute} and TrustRAG \citep{zhou2025trustrag} lose same-name answers
-on RAMDocs (H14). On ConflictBank the registered H14 compared our pipeline under the multi-answer prompt with the
-baselines' own one-answer prompts; under the matched one-answer prompt it beats them by \hFourteenMatchedAst\ and
-\hFourteenMatchedTr\ points (exploratory). We take the matched comparison as the principal one. Our TrustRAG port
+on RAMDocs (H14). On ConflictBank, the registered H14 compared our pipeline under the multi-answer prompt with the
+baselines' own one-answer prompts. Under the matched one-answer prompt, which we take as the principal comparison, our pipeline beats them by
+\hFourteenMatchedAst\ and \hFourteenMatchedTr\ points (exploratory). Our TrustRAG port
 first omitted the repository's system message; sending it (\S17.2) changes TrustRAG's accuracy by \blTrustSysCb\
 points on ConflictBank, \blTrustSysMj\ under majority misinformation and \blTrustSysRd\ on RAMDocs (\blTrustSysRdMulti\
 for its multi-answer variant). Against the corrected TrustRAG, with policies matched (Holm over the four), the LLM
-directional flag gains \blHFourteenCbs\ on ConflictBank (one-answer), \blHFourteenRd\ on RAMDocs (multi-answer),
+directional flag changes accuracy by \blHFourteenCbs\ on ConflictBank (one-answer), \blHFourteenRd\ on RAMDocs (multi-answer),
 \blHFourteenMj\ under majority misinformation, and \blHFourteenCb\ under the registered mismatched prompts.
 NLI on ConflictBank first saw passage prefixes that usually omit the changed fact. Cutting each passage to its
-sentences closest to the question, up to the registered 1,500 characters, puts both answers in the input, but the
-pair still exceeds the cross-encoder's 512 tokens and it flags no pair (pair recall \detNliWinRecall\%); with
-300 characters, about one sentence (a disclosed deviation, \S17.6), it finds \detNliSentRecall\% of the gold pairs at
-\detNliSentPrec\% pair precision and flags \detNliSentCleanFpr\% of clean questions, and its flag changes conflict
+sentences closest to the question, up to the registered 1,500 characters, includes both answers, but the
+pair still exceeds the cross-encoder's 512 tokens, and NLI flags no pair (pair recall \detNliWinRecall\%). With
+300 characters, about one sentence (a disclosed deviation, \S17.6), NLI finds \detNliSentRecall\% of the gold pairs at
+\detNliSentPrec\% pair precision and flags \detNliSentCleanFpr\% of clean questions. Its flag changes conflict
 accuracy by \blNliSentFlag\ points (removal: \blNliSentRem). A single call that names suspect passages before
 answering does not differ significantly from the pipeline (H18; Table~\ref{tab:baselines}).
 
 \paragraph{Robustness to the metric and the labels.}
-Table~\ref{tab:main_robust} repeats Table~\ref{tab:main} with the bidirectional metric. Table~\ref{tab:contains}
-repeats the pre-registered tests with every suspect document treated as misinformation. Table~\ref{tab:hypotheses}
+Table~\ref{tab:main_robust} repeats Table~\ref{tab:main} with the bidirectional metric, and Table~\ref{tab:contains}
+repeats the pre-registered tests treating every suspect document as misinformation. Table~\ref{tab:hypotheses}
 lists all pre-registered tests.
 
 \begin{table*}[t]
@@ -56,7 +56,7 @@ The matcher's errors do not change the contrasts' signs (App.~\ref{app:semantic}
 Recommendations (\S\ref{sec:discussion}) & -- & not tested end to end \\
 \bottomrule
 \end{tabular}
-\caption{The status of each claim. \emph{Registered addendum}: committed to the repository before the runs it covers but
+\caption{The status of each claim. \emph{Registered addendum}: committed before the runs it covers but
 after earlier results were known. \emph{Re-analysis}: registered after the data were seen, or exploratory. The commit
 history is the only timestamp.}
 \label{tab:claims}
@@ -76,7 +76,7 @@ WikiContradict & genuine conflicts, no false side & coverage of competing source
 CONFLICTS & real search results; scorable subset & null results only & any positive claim \\
 \bottomrule
 \end{tabular}
-\caption{The evidence hierarchy: what each benchmark can and cannot support. The break-even precision rests on
+\caption{The evidence hierarchy. The break-even precision rests on
 ConflictBank alone; the other benchmarks add breadth for the flag-format results, not independent confirmations of it.}
 \label{tab:evidence}
 \end{table*}
@@ -93,8 +93,8 @@ RAMDocs, removal & \advRemConf\ \advRemConfCI & \advRemClean \\
 ConflictBank (multi-answer), directional flag & \zCbMiniOracleInvFlagDirectionalConflict & \zCbMiniOracleInvFlagDirectionalClean \\
 \bottomrule
 \end{tabular}
-\caption{The adversarial control, gpt-4o-mini, change from no flags in points (exploratory; \S9.5). On clean
-questions it flags nothing, so the prompt is unchanged.}
+\caption{Adversarial control, gpt-4o-mini: change from no flags, in points (exploratory; \S9.5). On clean
+questions the inverted oracle flags nothing, so the prompt is unchanged.}
 \label{tab:inverted}
 \end{table}
 \input{generated/tab_cb}
@@ -119,37 +119,35 @@ Left: detectors located by their document-level behaviour; right: by pair precis
 \end{figure}
 
 \paragraph{The heuristic detector.}
-CAAG scores a pair only if its MiniLM \citep{reimers2019sbert} cosine similarity reaches $\theta_s=0.65$. Its score
+CAAG, the detector we set out to study, scores a pair only if its MiniLM \citep{reimers2019sbert} cosine similarity reaches $\theta_s=0.65$. Its score
 is the sum of a negation and contrast asymmetry term, a named-entity mismatch term (differing dates, numbers, money or
 percentages) and a temporal-marker term, multiplied by the similarity. A pair is flagged if the score reaches
-$\theta_c=0.35$. Its per-pair flag rate on the confirmatory split ($6.22\%$) sets the rate of the random detector.
-CAAG is the detector we set out to study. As a neutral flag it did not beat random flags of the same volume, and
+$\theta_c=0.35$. Its per-pair flag rate on the confirmatory split ($6.22\%$) sets the random detector's rate.
+As a neutral flag, CAAG did not beat random flags of the same volume, and
 as a removal rule it only deleted correct passages (\dCaagRemClean\ points on clean questions, \dCaagRemConf\ on
 conflict ones). Its false flags fall mostly on pairs that should both be reported: 134 of its 221 false flags on the
-hold-out are same-name ambiguity pairs, which its entity-mismatch signal flags because they mention different dates or
+hold-out are same-name ambiguity pairs, flagged by its entity-mismatch signal for mentioning different dates or
 numbers. We read this as a warning about lexical contradiction cues in general \citep{gururangan2018annotation},
-rather than as a problem with a particular threshold. Retuning illustrates why F1 misleads. Over a 121-setting sweep, CAAG's
-best pair F1 is \caagBestFOne, above NLI's, at $\theta_s=\caagBestThS$ and $\theta_c=\caagBestThC$. But it gets
-there by flagging \caagBestRate\% of all pairs and \caagBestCleanFpr\% of clean questions, which our grid predicts
-would be harmful under removal (Appendix~\ref{app:extra}).
+not about a particular threshold. Retuning shows why F1 misleads: over a 121-setting sweep, CAAG's
+best pair F1 is \caagBestFOne, above NLI's, at $\theta_s=\caagBestThS$ and $\theta_c=\caagBestThC$, but by flagging \caagBestRate\% of all pairs and \caagBestCleanFpr\% of clean questions, which our grid predicts
+would be harmful under removal (Appendix~\ref{app:grid}).
 
 \paragraph{Original CAAG format.}
 Rendering CAAG's flags in its original format, with typed lines and confidence scores (``factual conflict (confidence:
 0.41)''), changes accuracy by \origCaagAll\ points overall (\origCaagConf\ on conflict questions, \origCaagClean\ on
-clean ones). This is no different from the uniform format.
+clean ones). It is no different from the uniform format.
 
 \paragraph{Pilot study (exploratory).}
 On the 200-question pilot split, scored with the bidirectional metric, the same pattern appeared before any
 confirmatory run. Oracle neutral flags changed conflict-question accuracy by $-$10.5 points, directional flags by
 $+$11.8, and removing the suspect by $+$28.4. The pilots also showed that the original \textsc{remove} strategy,
-which deletes an arbitrary side of each pair, removes correct documents. They are why we added directional formats,
+which deletes an arbitrary side of each pair, removes correct documents. The pilots led us to add directional formats,
 synthetic direction accuracy and document-level placement. All pilot runs are released.
 
 \paragraph{Phase-0 audit of CAAG on NarrativeQA.}
 CAAG was designed for long-document QA. On 100 NarrativeQA \citep{kocisky2018narrativeqa} questions from 50 stories
 (BM25 top-10 chunks from a single coherent story), it flags at least one pair in 54\% of questions, 166 pairs in all.
-A single story rarely contradicts itself, so most of these flags are likely false; the flagged pairs are released for
-annotation. This is the setting where flags are most likely to be false.
+A single story rarely contradicts itself, so most of these flags are likely false. The flagged pairs are released for annotation.
 
 \section{Further Results}
 \label{app:more}
@@ -159,7 +157,7 @@ annotation. This is the setting where flags are most likely to be false.
 \includegraphics[width=\columnwidth]{generated/fig_answers.pdf}
 \caption{What a flag does to answers on conflict questions (gpt-4o-mini, oracle pairs; share of answers, \%). The
 answer policy decides how a neutral flag fails: a model told to give every valid answer adds the misinformation, and
-one told there is one answer abstains. Only the directional flag raises the share of correct answers. The categories are exclusive and an answer the primary metric scores correct counts as correct, so the misinformation share here can be a little lower than in Table~\ref{tab:risk}, which counts every answer containing a wrong answer under the bidirectional matcher.}
+one told there is one answer abstains. Only the directional flag raises the share of correct answers. Categories are exclusive and an answer the primary metric scores correct counts as correct, so the misinformation share can be slightly lower than in Table~\ref{tab:risk}, which counts every answer containing a wrong answer under the bidirectional matcher.}
 \label{fig:answers}
 \end{figure}
 \input{generated/tab_baselines}
@@ -170,44 +168,43 @@ one told there is one answer abstains. Only the directional flag raises the shar
 
 \subsection{Where the directional flag fails (exploratory)}
 \label{app:single}
-After seeing the minimal-skeleton run, we split conflict questions by the number of gold answers. \nConfMulti\ of
+After seeing the minimal-skeleton run, we split conflict questions by number of gold answers. \nConfMulti\ of
 \the\numexpr\nConfMulti+\nConfSingle\relax\ have several (same-name ambiguity \emph{and} misinformation), and a strict
-answer must list all of them. On the \nConfSingle\ single-answer conflict questions, the directional flag's estimate
+answer must list them all. On the \nConfSingle\ single-answer conflict questions, the directional flag's estimate
 is positive in every setting, from \yQwenSingleOracleDir\ points (Qwen) to \yMiniSingleOracleDir\ (gpt-4o-mini), both
 with the default skeleton. On multi-answer questions it changes little except with gpt-4.1 (gpt-4o-mini
-\yMiniMultiOracleDir, and \yMiniMinMultiOracleDir\ with the minimal skeleton; gpt-4.1 \yFourMultiOracleDir). One
-reading is that a warning about one passage makes the smaller models more conservative about the legitimate
-alternative answers too; we did not test this. Removal does not depend on the model acting on a warning, and it gains
-in both groups.
+\yMiniMultiOracleDir, and \yMiniMinMultiOracleDir\ with the minimal skeleton; gpt-4.1 \yFourMultiOracleDir). One untested
+reading is that a warning about one passage makes the smaller models more conservative about legitimate
+alternative answers too. Removal, which needs no warning to be acted on, gains in both groups.
 
 \subsection{Real detectors}
 CAAG flags \cleanFprCaag\% of clean questions. Its neutral flags do not beat random flags at the same rate (H5;
 \dCaagFlagAll\ vs.\ \dRandFlagAll\ points overall). The 90\% CI of the difference, [\tostLo, \tostHi], rules out a
-gain larger than \tostHi\ points but does not establish equivalence within $\pm$\tostMargin\ points (TOST). The
-directional-versus-neutral comparison with the LLM detector's pairs was registered as exploratory in the addendum.
+gain above \tostHi\ points but does not establish equivalence within $\pm$\tostMargin\ points (TOST). The
+addendum registered the LLM detector's directional-versus-neutral comparison as exploratory.
 Under the bidirectional metric, the LLM detector's directional flag costs clean questions \arLlmDirClean\ points. With
-gpt-4.1 as the generator, its gain over all 300 questions (\gptLlmDirAll) is significant after Holm, but the 35
-unlabelled questions contribute disproportionately to it (they gain \agptexclLlmDir\ points); over the labelled
-questions it is \gptlabLlmDir\ \gptlabLlmDirCI. On ConflictBank the NLI cross-encoder flags no pair at all:
-ConflictBank passages are long, LLM-written and agree on everything but the one fact, and the truncated pair rarely
+gpt-4.1 generating, its gain over all 300 questions (\gptLlmDirAll) is significant after Holm, but the 35
+unlabelled questions contribute disproportionately (they gain \agptexclLlmDir\ points). On labelled
+questions it is \gptlabLlmDir\ \gptlabLlmDirCI. On ConflictBank the NLI cross-encoder flags no pair:
+the benchmark's passages are long, LLM-written and agree on everything but the one fact, and the truncated pair rarely
 contains it.
 
-\paragraph{The single call with stronger models.} Asked to name suspect passages before answering, the reasoning
+\paragraph{Stronger models abstain in the single call.} Asked to name suspect passages before answering, the reasoning
 models and Claude Haiku distrust most of ConflictBank's generated passages and abstain, losing up to
 \azSgTerraSelfIdentifyClean\ points on clean questions (Table~\ref{tab:baselines}).
 
-\paragraph{Reasoning models on RAMDocs.} With no flags, gpt-6-luna and gpt-6.1-terra are strictly correct on few
-RAMDocs conflict questions because the default prompt asks for every valid answer and they list nearly every candidate:
-\mixRdLunaNAnswers\ and \mixRdTerraNAnswers\ answers on average, and \mixRdLunaMisinfo\% and \mixRdTerraMisinfo\% of
-their answers include the misinformation, while they recover \mixRdLunaRecall\% and \mixRdTerraRecall\% of the gold
-answers.
+\paragraph{Reasoning models on RAMDocs.} Without flags, gpt-6-luna and gpt-6.1-terra are
+strictly correct on few RAMDocs conflict questions because the default prompt asks for every valid answer. They give
+\mixRdLunaNAnswers\ and \mixRdTerraNAnswers\ answers on average and recover \mixRdLunaRecall\% and
+\mixRdTerraRecall\% of gold answers, but \mixRdLunaMisinfo\% and \mixRdTerraMisinfo\% of their answers include
+the misinformation.
 
 \paragraph{Detector parsing.} The LLM detectors' JSON failed to parse on \parseFailTotal\ of \parseFailN\ ConflictBank
-questions (a Claude Sonnet output), which then count as flagging nothing.
+questions (a Claude Sonnet output), counted as flagging nothing.
 
 \subsection{A detector from another family}
 Replacing the gpt-4o-mini detector with Qwen2.5-7B (gpt-4o-mini still generates) gives a much less selective
-detector. It flags \qdetFpr\% of clean RAMDocs questions, but its direction accuracy is \qdetDir\%. Its directional
+detector: it flags \qdetFpr\% of clean RAMDocs questions, but its direction accuracy is \qdetDir\%. Its directional
 flag gains \zQDetLlmDirFlagDirectionalConflict\ points on conflict questions and \zQDetLlmDirFlagDirectionalClean\ on
 clean ones, and its neutral flag \zQDetLlmDirFlagConflict. Removal again trades a conflict-question gain
 (\zQDetLlmDirRemoveSuspectConflict) for a clean-question loss (\zQDetLlmDirRemoveSuspectClean). The conclusions do
@@ -220,36 +217,35 @@ moves accuracy significantly (Table~\ref{tab:conflicts}).
 \section{Semantic Re-score, Label Audits and Selection}
 \label{app:semantic}
 \input{generated/tab_semantic}
-\paragraph{Matcher against an outside-family judge (\S17.3).} The primary metric matches answer strings. To check
-whether its errors differ by condition, an LLM from a family none of our generators belongs to (gemini-3.5-flash-lite;
-\S17.3 named Gemini 2.5 Flash, which was closed to new users) re-scored both arms of \semK\ contrasts on the same
-\semNq\ conflict questions each (Table~\ref{tab:semantic}). The two agree on \semAgree\% of \semN\ outputs. Almost all
-disagreements are answers the judge accepts and the matcher rejects (aliases, paraphrases, partial forms), and they
-are condition-dependent: \semJudgeOnlyKey\% of answer-key outputs and \semJudgeOnlyDir\% of oracle-directional ones,
-against \semJudgeOnlyPlain\% without a flag. The failure we were most concerned about, a final answer such as
+\paragraph{An outside-family judge changes no contrast's sign (\S17.3).} To
+check whether the primary metric's string-matching errors differ by condition, an LLM from outside our generators' families re-scored both
+arms of \semK\ contrasts on the same \semNq\ conflict questions each (gemini-3.5-flash-lite; Table~\ref{tab:semantic}).
+\S17.3 named Gemini 2.5 Flash, which was closed to new users. Judge and matcher agree on \semAgree\% of \semN\ outputs. Almost all
+disagreements are answers the judge accepts and the matcher rejects (aliases, paraphrases, partial forms) and
+depend on condition: \semJudgeOnlyKey\% of answer-key outputs and \semJudgeOnlyDir\% of oracle-directional ones,
+against \semJudgeOnlyPlain\% without a flag. The failure of most concern, a final answer such as
 ``$Y$, not $X$'' counted as asserting the wrong answer $X$, occurs in \semRejected\% of outputs. Because
-both arms of each contrast gain, the judge moves every contrast by \semDidMin\ to \semDidMax\ points, no conclusion
-changes sign, and the matcher-scored differences are slightly conservative. With \semNq\ questions per contrast these
-intervals are too wide to confirm the $\pm$3-point equivalence claims, which therefore rest on the matcher; the
-judge is given the answer keys, so it tests the scorer, not the benchmark labels. A blinded, paired human audit of
+both arms of each contrast gain, the judge moves every contrast by \semDidMin\ to \semDidMax\ points. No conclusion
+changes sign; the matcher-scored differences are slightly conservative. With \semNq\ questions per contrast these
+intervals are too wide to confirm the $\pm$3-point equivalence claims, which therefore rest on the matcher. Given
+the gold and wrong answers, the judge tests the scorer, not the benchmark labels. A blinded, paired human-audit sheet of
 150 of these pairs and 50 RAGuard post pairs is released unlabelled (\texttt{runs/labelling/audit8\_*}).
 
-\paragraph{WikiContradict under its original rubric.} The original evaluation counts an answer correct when it gives
+\paragraph{The WikiContradict harm holds under its original rubric.} The original rubric counts an answer correct when it gives
 both answers, acknowledges that they conflict and does not prefer one without support
-\citep[\S3.4]{hou2024wikicontradict}. Judged that way, the LLM directional flag changes the share of correct answers
+\citep[\S3.4]{hou2024wikicontradict}. Under it, the LLM directional flag changes the share of correct answers
 by \wikiOrigMiniEff\ points for gpt-4o-mini (\wikiOrigMiniPlain\% to \wikiOrigMiniDir\%), \wikiOrigLunaEff\ for
-gpt-6-luna and \wikiOrigHaikuEff\ for Claude Haiku (seed 0, all 253 questions), so the H28 harm holds under the
-original rubric. For gpt-4o-mini the flag raises the share that merely mentions both answers (\wikiBothMiniEff) while
+gpt-6-luna and \wikiOrigHaikuEff\ for Claude Haiku (seed 0, all 253 questions), so the H28 harm holds. For gpt-4o-mini the flag raises the share that merely mentions both answers (\wikiBothMiniEff) while
 lowering the share that acknowledges the conflict without an unsupported preference.
 
-\paragraph{RAGuard pairs.} RAGuard labels a post supporting or misleading by whether GPT-4 judged the claim correctly
-with it in context, so its ``contradiction pairs'' are a transfer of behavioural labels. Of \rgAudN\ sampled
-supporting~$\times$~misleading pairs, the judge finds that the two posts cannot both be right about the claim in
-\rgAudContradict\%; it finds the misleading post false about the claim in \rgAudBFalse\% (unclear in
-\rgAudBUnclear\%) and the supporting post consistent with the verdict in \rgAudASupports\%; all three hold for
-\rgAudVerified\%. Most pairs are posts that discuss the claim from different angles rather than assert opposite
+\paragraph{RAGuard pairs rarely contradict.} RAGuard labels a post supporting or misleading by whether GPT-4 judged the claim correctly
+with it in context, so its ``contradiction pairs'' transfer behavioural labels. Of \rgAudN\ sampled
+supporting~$\times$~misleading pairs, the judge finds the two posts cannot both be right about the claim in
+\rgAudContradict\%. It finds the misleading post false about the claim in \rgAudBFalse\% (unclear in
+\rgAudBUnclear\%) and the supporting post consistent with the verdict in \rgAudASupports\%. All three hold for
+\rgAudVerified\%. Most pairs discuss the claim from different angles rather than assert opposite
 facts. RAGuard's oracle-flag rows therefore test what a generator does with these labels, not with verified
-contradictions, and we draw no factual-oracle conclusion from them. This audit uses one LLM judge; the released
+contradictions; we draw no factual-oracle conclusion from them. This audit uses one LLM judge; the released
 human sheet covers 50 of these pairs.
 
 \input{generated/tab_selection}
@@ -260,128 +256,133 @@ follow-rate account, which uses each cell's coverage and no-flag accuracy, has \
 
 \section{Reproducibility}
 \label{app:repro}
-\paragraph{Runs.} Every number in this paper is produced by one script from committed run outputs: per-call responses,
-token counts, detector outputs and configurations. The pre-registration was committed before any confirmatory run.
-Its deviations are listed below.
+\paragraph{Runs.} One script produces every number here from committed run outputs: per-call responses,
+token counts, detector outputs and configurations. We committed the pre-registration before any confirmatory run;
+its deviations follow.
 
 \paragraph{Deviations from the pre-registration.}
 \begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \emph{Primary metric.} The first draft of the pre-registration named the bidirectional metric as primary. Before
-the confirmatory run we switched to one-way matching, because it reproduces MADAM-RAG's published score on the pilot
+\item \emph{Primary metric.} The first draft named the bidirectional metric primary. Before
+the confirmatory run we switched to one-way matching, because it is closer to MADAM-RAG's published score on the pilot
 split (Section~\ref{sec:setup}); bidirectional became the robustness metric. Every table reports both.
 \item \emph{Second generator.} The plan named an open-weights model. None was available before the confirmatory run, so
-gpt-4.1 was used (H9). We later added Qwen2.5-7B-Instruct, registered before its run. Because local inference
-takes about 3\,s per call, the Qwen runs use one seed; we made that change before inspecting any Qwen result.
+we used gpt-4.1 (H9). We later added Qwen2.5-7B-Instruct, registered before its run. At about 3\,s per local
+call, the Qwen runs use one seed, a change made before inspecting any Qwen result.
 \item \emph{CONFLICTS judge.} The plan called for a judge from a different model family, validated on about 100 human
-labels. Neither the judge nor the labels were available, so CONFLICTS is scored only on items with a reference answer,
-with three seeds, and reported as exploratory.
+labels. Neither was available, so CONFLICTS is scored only on items with a reference answer,
+with three seeds, as exploratory.
 \item \emph{H4.} The pre-registration counted 54 false-flag cells. On clean questions, cells that differ only in
 direction accuracy render identical prompts (their scores differ by exactly 0), so they are one comparison: 18 in
 all, 9 per format. We report H4a per format. The cell-permutation $p$-value for the dose-response correlation assumed
-exchangeable cells; the cells are nested, so we replace it with a question-level bootstrap CI. No threshold was set
+exchangeable cells; the cells are nested, so we use a question-level bootstrap CI. No threshold was set
 for H4c, so we report a count.
 \item \emph{H5.} A non-significant difference is not equivalence. We add a TOST with a $\pm$3-point margin, chosen in
 the addendum after the confirmatory run, so it is post hoc.
-\item \emph{H6.} The first draft tested whether the grid prediction lies inside the actual effect's CI, which is
+\item \emph{H6.} The first draft's test (grid prediction inside the actual effect's CI) was
 lenient. We now report the pre-registered test (actual effect inside a bootstrap prediction interval) and a paired test
 of the two spaces' errors.
-\item \emph{Placement modes.} For H6, the detectors without direction were run under the label
-\texttt{remove\_suspect} as well as \texttt{remove}. Both render identical prompts, so these were served entirely from
-the response cache.
-\item \emph{Significance.} Earlier drafts used different corrections in different tables. We now apply one scheme
-throughout (Section~\ref{sec:setup}), which makes some exploratory differences that were bold in earlier drafts
+\item \emph{Placement modes.} For H6, detectors without direction ran under both
+\texttt{remove\_suspect} and \texttt{remove}; the labels render identical prompts, so the response cache served the
+duplicates entirely.
+\item \emph{Significance.} Earlier drafts used different corrections in different tables; one scheme now applies
+throughout (Section~\ref{sec:setup}), so some exploratory differences once bold are now
 non-significant.
 \item \emph{Single- and multi-answer split.} The split of conflict questions by number of gold answers
 (Appendix~\ref{app:single}) was chosen after seeing the minimal-skeleton run and is exploratory.
 \item \emph{Second registration.} We later registered H12--H14 (ConflictBank, the neutral flag with a
 resolution instruction, and the published baselines), the Qwen2.5-7B detector and the ConflictBank sampling rule.
-The gpt-4.1 runs in it use seed 0 only, to stay within budget. One ConflictBank gpt-4o-mini run stopped on a
-transient API error and was resumed from the response cache; no row was re-sampled.
+The gpt-4.1 runs in it use seed 0 only, to stay within budget. One ConflictBank gpt-4o-mini run was resumed from the
+response cache after a transient API error.
 \item \emph{Third and fourth registrations.} H15--H18 (\S11) and H19 (\S12) were committed before their runs. To stay
 within budget, \S12 dropped two \S11 runs before they started: gpt-4.1 under majority misinformation (replaced by
 gpt-6.1-terra in H17) and gpt-4.1 seeds 1--2, so H14 with gpt-4.1 stays on seed 0 as first registered and every
 gpt-4.1 baseline comparison is seed-0 matched.
 \item \emph{Reasoning models.} gpt-6-luna and gpt-6.1-terra accept only their default temperature and require
-\texttt{max\_completion\_tokens}; we used their defaults with a 4,096-token budget. \Nempty\ responses from the
-two models (almost all closed-book) were empty because reasoning used the whole budget; they are scored as wrong.
+\texttt{max\_completion\_tokens}; we used their defaults with a 4,096-token budget. The two models returned
+\Nempty\ empty responses (almost all closed-book) because reasoning used the whole budget; we score them wrong.
 \item \emph{Fifth and sixth registrations.} H20--H24 (\S13) and H25--H26 with Claude and RAGuard (\S14) were
 committed before their runs. The planned \texttt{cross\_mj} runs completed within budget. Gemini was planned
-but not run, because no API key was available. Claude rejects a temperature and JSON mode on the endpoint we used; it
-ran at its default temperature, and as a detector its JSON is parsed by the detector's regex fallback. The answer
-parser unwraps paired tags (\texttt{<answer>X</answer>}), which no earlier result contained.
+as a generator but not run, because no API key was available then. On the endpoint we used, Claude rejects a temperature and JSON mode; it
+ran at its default, and as a detector its JSON goes to the regex fallback. The answer
+parser unwraps paired tags (\texttt{<answer>X</answer>}), a format no earlier result contained.
 \item \emph{Permutation resolution.} With 10,000 permutations the smallest $p$-value is $10^{-4}$, which cannot
-survive Holm over \nExploratory\ exploratory comparisons. After the \S14 runs, and before writing them up, we
+survive Holm over \nExploratory\ exploratory comparisons. After the \S14 runs, before writing them up, we
 extended the permutations to 200,000 whenever none of the first 10,000 reached the observed statistic. This changes
 only $p$-values at their floor, and only lowers them.
 \item \emph{H24 additions.} The cross-cell break-even point, the count of positive cells and the mechanism score
 (credit for naming the false side where the generator errs, charge for marking a correct passage where it is right)
 were defined after seeing the H24 cells and are exploratory.
 \item \emph{Seventh registration.} H27--H29 and the re-analyses of \S15 were committed before their runs. To finish
-within the session, the \S15 runs were started in parallel tracks rather than strictly in priority order; spend never
+within the session, the \S15 runs ran in parallel tracks, not strictly in priority order; spend never
 approached the \$195 limit, so no run was dropped. The question-level model adds one dependency (statsmodels 0.14.5).
-H21(c) is now the ratio of correct to answered answers; the registered per-question mean averaged the two conditions
-over different questions (those not abstained in every seed), which is why an earlier draft's selective accuracies did
-not match Table~\ref{tab:risk}. Both are in the released statistics.
+H21(c) is now a ratio, correct over answered. The registered per-question mean averaged the two conditions
+over different questions (those not abstained in every seed), so an earlier draft's selective accuracies did
+not match Table~\ref{tab:risk}. Both measures are in the released statistics.
 \item \emph{Eighth registration.} H30--H31 and the re-analyses of \S16 were committed before their runs, which
 ran in parallel tracks within the budget. The pooled estimate now uses a multilevel model in place of the
-DerSimonian--Laird bootstrap, the moderators were recoded (answer policy; natural misinformation is RAGuard only), and
-the utility analysis uses the same settings as the pooled estimate. ``Following'' a flag now has one definition for
+DerSimonian--Laird bootstrap. The moderators were recoded (answer policy; natural misinformation is RAGuard only).
+The utility analysis uses the same settings as the pooled estimate. ``Following'' a flag now has one definition for
 right and wrong flags (\S16.3); an earlier draft compared correct answers with any wrong answer.
+\item \emph{Ninth registration.} The re-analyses, corrected baselines and semantic re-score of \S17 were committed
+before their runs. \S17.6 records two deviations, both registered before the runs they describe: the judge is
+gemini-3.5-flash-lite, because the named Gemini 2.5 Flash was closed to new users; and, because the registered
+1,500-character NLI window flags no ConflictBank pair, we add a 300-character window, chosen after seeing
+detection output only. The registered window's results are reported unchanged.
 \item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; reordering the run
 queue). Resumption keeps completed rows and re-requests only missing ones; no row was re-sampled.
 \end{enumerate}
-The addenda (H10--H31 and the re-analyses above) and the Qwen seed change were each committed to the repository before
-the runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
+The addenda (H10--H31 and the re-analyses above) and the Qwen seed change were each committed before
+the runs they cover. The commit history is the only timestamp; we used no third-party registry
 \citep{vanmiltenburg2021preregistering}.
 
 \paragraph{RAMDocs labels.} The released document types are imperfect: 163 documents typed \emph{correct} contain a
-wrong answer, some as injected misinformation, others incidentally. We leave pairs that touch them out of pair-level
-metrics, and questions whose only sign of conflict is such a document (55 of 500; 35 of the confirmatory split) count
+wrong answer, some as injected misinformation, others incidentally. Pairs touching them are left out of pair-level
+metrics. Questions whose only sign of conflict is such a document (55 of 500; 35 of the confirmatory split) count
 only in ``All''. Treating them as misinformation is a robustness check.
 
 \paragraph{Power.} With 139 RAMDocs conflict questions, the minimum detectable effect at 80\% power is
 \mdeLo--\mdeHi\ points (median \mdeMed; \citealp{card2020power}).
 
 \paragraph{Metric choice.} With the one-way metric, our port of MADAM-RAG scores 28.5\% on the pilot split and
-\madamOneWay\% on all 500 questions (published: 28.00, on an undisclosed subset); with the bidirectional metric it
-scores \madamBidir\% on all 500. Because the published subset and scorer are unknown, we do not claim to reproduce the
+\madamOneWay\% on all 500 questions (published: 28.00, on an undisclosed subset); the bidirectional metric gives
+\madamBidir\% on all 500. With the published subset and scorer unknown, we do not claim to reproduce the
 published number. Normalisation lower-cases and removes punctuation and articles.
 
-\paragraph{WikiContradict and CONFLICTS.} A WikiContradict answer is correct if both of the dataset's answer strings
-(one per passage) match a final answer under the bidirectional rule. From CONFLICTS we use the 237 questions that
-have a reference answer (outdated-information, misinformation and no-conflict items); an answer is correct if it
+\paragraph{WikiContradict and CONFLICTS.} A WikiContradict answer is correct if both dataset answer strings
+(one per passage) match a final answer under the bidirectional rule. From CONFLICTS we use the 237 questions with
+a reference answer (outdated-information, misinformation and no-conflict items); an answer is correct if it
 contains the reference answer.
 
-\paragraph{Baselines.} MADAM-RAG is ported unchanged to our client: three debate rounds, temperature 0, 128 tokens
-per call. Astute RAG has no official code. We use the prompts in its appendix verbatim with its default
-settings ($t{=}1$ consolidation round, $m{=}1$ generated passage, temperature 0, 1,024 output tokens). A generated
-passage that says ``I don't know'' is dropped, and the answer is the text in its \texttt{<ANSWER>} tag. TrustRAG is
+\paragraph{Baselines.} We port MADAM-RAG unchanged to our client: three debate rounds, temperature 0, 128 tokens
+per call. Astute RAG has no official code; we use its appendix prompts verbatim with its defaults
+($t{=}1$ consolidation round, $m{=}1$ generated passage, temperature 0, 1,024 output tokens). A generated
+passage that says ``I don't know'' is dropped; the answer is the text in its \texttt{<ANSWER>} tag. TrustRAG is
 ported from its repository (commit \texttt{11dcea0}, MIT licence): SimCSE CLS embeddings
 (\texttt{sup-simcse-bert-base-uncased}), a ROUGE-L gate of 0.25, 2-means clustering and a cosine threshold of 0.88,
-followed by its three prompts verbatim at temperature 0.1. Its system message is not sent, because our client sends
-user messages only. The \emph{multi} variants change one sentence of the final step to ask for every valid answer
+followed by its three prompts verbatim at temperature 0.1. The registered runs omit its system message, because our client then sent
+user messages only; the \S17 rerun restores it (Appendix~\ref{app:extra}). The \emph{multi} variants change one sentence of the final step to ask for every valid answer
 (Astute RAG) or append our final-answer line (TrustRAG); the unmodified variants are also reported.
 
 \paragraph{ConflictBank.} We use the QA file of the dataset's Hugging Face release (revision \texttt{92866a0}). Questions are sampled round-robin over relations with seed 0; distractors are other subjects' correct passages. The
-sampling script, the item ids and the seed are released; the data are not redistributed, because the release states
+sampling script, item ids and seed are released; we do not redistribute the data, because the release states
 a licence in its README but ships no licence file.
 
 \paragraph{RAGuard.} We use the Hugging Face release \texttt{UCSC-IRKM/RAGuard} (revision \texttt{dae344a2}, MIT
 licence on the card). A post is usable if it has at least 15 words after removing the ``[Link Post]'' placeholder and is
-not a duplicate within its claim; posts are cut to 300 words and shuffled by claim id. Supporting $\times$ misleading
-pairs are the contradictions and misleading posts the misinformation side. The build script and item ids are
+not a duplicate within its claim; posts are cut to 300 words and shuffled by claim id. Each supporting $\times$ misleading
+pair is a contradiction, with the misleading post as the misinformation side. The build script and item ids are
 released.
 
-\paragraph{Model configuration.} Models were called by the names given here between 2026-10-26 and 2026-10-29;
-our client did not record the providers' served snapshot identifiers. gpt-4o-mini and gpt-4.1 ran at temperature 0.1
-with at most 256 output tokens; gpt-6-luna and gpt-6.1-terra at their only allowed (default) temperature and default
-reasoning effort, with 4,096 completion tokens including reasoning; Claude Haiku 5.5 and Sonnet 5.5 through
+\paragraph{Model configuration.} Models were called by these names between 2026-10-26 and 2026-10-29;
+our client did not record the served snapshot identifiers. gpt-4o-mini and gpt-4.1 ran at temperature 0.1
+with at most 256 output tokens. gpt-6-luna and gpt-6.1-terra ran at their only allowed (default) temperature and default
+reasoning effort, with 4,096 completion tokens including reasoning. Claude Haiku 5.5 and Sonnet 5.5 ran through
 Anthropic's OpenAI-compatible endpoint at their default temperature with 4,096 output tokens. Qwen2.5-7B-Instruct ran
 through Ollama 0.40.11 (\texttt{qwen2.5:7b-instruct}, image \texttt{845dbda0ea48}, Q4\_K\_M quantisation, 8,192-token
-context, temperature 0.1) on an Apple M4 Pro with 48\,GB. Across all settings and conditions at most \truncMaxEmpty\ of
-responses are empty or aborted; the share with no final-answer line has median \truncMedNoFinal\ and maximum
-\truncMaxNoFinal\ (\truncMaxAt); per-condition counts are in the released statistics.
+context, temperature 0.1) on an Apple M4 Pro with 48\,GB. Across settings and conditions, at most \truncMaxEmpty\% of
+responses are empty or aborted; the share with no final-answer line has median \truncMedNoFinal\% and maximum
+\truncMaxNoFinal\% (\truncMaxAt); per-condition counts are in the released statistics.
 
-\paragraph{Cost and compute.} All API calls in this paper, pilots included, cost \totalSpend. Prices were checked on 2026-10-27 (per million input, cached-input and output tokens: gpt-4o-mini \$0.15, \$0.075 and \$0.60; gpt-4.1 \$2.00, \$0.50 and \$8.00; gpt-6-luna \$0.10, \$0.01 and \$0.50; gpt-6.1-terra \$1.00, \$0.05 and \$5.00; Claude Haiku 5.5 \$0.10, \$0.01 and
-\$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00); the judge, gemini-3.5-flash-lite, \$0.30 input and \$2.50 output, checked on 2026-10-29. CAAG and NLI ran on a
+\paragraph{Cost and compute.} All API calls, pilots included, cost \totalSpend. Prices per million input, cached-input and output tokens, checked on 2026-10-27: gpt-4o-mini \$0.15, \$0.075 and \$0.60; gpt-4.1 \$2.00, \$0.50 and \$8.00; gpt-6-luna \$0.10, \$0.01 and \$0.50; gpt-6.1-terra \$1.00, \$0.05 and \$5.00; Claude Haiku 5.5 \$0.10, \$0.01 and
+\$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00. The \S17.3 judge, gemini-3.5-flash-lite, cost \$0.30 input and \$2.50 output (checked on 2026-10-29). CAAG and NLI ran on a
 laptop CPU (0.2\,s and 1.2\,s per question).
