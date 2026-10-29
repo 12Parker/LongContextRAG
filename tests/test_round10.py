@@ -46,3 +46,18 @@ def test_fresh_conflictbank_is_disjoint():
     assert len(new) == 400 and sum(e.has_conflict for e in new) == 300
     assert not {e.id for e in old} & {e.id for e in new}
     assert not {e.question for e in old} & {e.question for e in new}
+
+
+def test_revision7_helpers():
+    import numpy as np
+    from experiments.conflict.revision7 import _bh, _pool, _wilson
+    q = _bh([0.01, 0.04, 0.03, 0.5])
+    assert np.allclose(q, [0.04, 0.16 / 3, 0.16 / 3, 0.5])
+    lo, hi = _wilson(5, 10)
+    assert 0.23 < lo < 0.24 and 0.76 < hi < 0.77
+    # two cells sharing questions: pooled mean of cell means, identical cells give zero spread across cells
+    d = {f"q{i}": (0.1 if i % 2 else -0.1) for i in range(40)}
+    out = _pool([("CB", d), ("CB", dict(d))])
+    assert abs(out["diff"]) < 1e-9 and out["n_cells"] == 2 and out["equivalent"]
+    big = _pool([("CB", {k: 0.5 for k in d})])
+    assert big["diff"] == 50 and big["p"] < 0.01 and not big["equivalent"]

@@ -6,6 +6,12 @@ All prompts below are copied verbatim from the code that produced the results.
 \section{Additional Results}
 \label{app:extra}
 
+\paragraph{Published baselines (H14).} Astute RAG \citep{wang2025astute} and TrustRAG \citep{zhou2025trustrag} lose same-name answers
+on RAMDocs (H14). On ConflictBank the registered H14 compared our pipeline under the multi-answer prompt with the
+baselines' own one-answer prompts; under the matched one-answer prompt it beats them by \hFourteenMatchedAst\ and
+\hFourteenMatchedTr\ points (exploratory). A single call that names suspect passages before answering does not differ
+significantly from the pipeline (H18; Table~\ref{tab:baselines}).
+
 \paragraph{Robustness to the metric and the labels.}
 Table~\ref{tab:main_robust} repeats Table~\ref{tab:main} with the bidirectional metric. Table~\ref{tab:contains}
 repeats the pre-registered tests with every suspect document treated as misinformation. Table~\ref{tab:hypotheses}
@@ -23,11 +29,15 @@ Its mechanism depends on the answer policy: added misinformation, abstention, li
 Pooled effect, policy split, moderators, utility, transitions (\S\ref{sec:neutral}) & Tables~\ref{tab:pooled}, \ref{tab:utility} & re-analysis of data already seen \\
 The directional flag beats the neutral one (\S\ref{sec:direction}) & H3, H9--H12, H15, H16, H19, H25, H26 & H3: before any data; rest: addenda \\
 Oracle direction is close to an answer key (\S\ref{sec:direction}) & H23 and its TOST & registered addendum; TOST registered in \S13.4 \\
+Pooled, oracle direction is equivalent to an answer key (\S\ref{sec:direction}) & pooled H23 & unregistered re-analysis \\
 Real-detector gains depend on the generator (\S\ref{sec:real}) & H15, H17, H19, H25, H26 & registered addenda \\
 Right flags gain less than wrong flags cost; similar follow rates (\S\ref{sec:real}) & H31 & registered addendum (\S16) \\
+Break-even direction precision rises with generator accuracy (\S\ref{sec:real}) & Table~\ref{tab:breakeven} & unregistered re-analysis \\
+H31's follow rates predict the crossed cells (\S\ref{sec:real}) & Figure~\ref{fig:reliability} & unregistered re-analysis \\
 Registered reliability gap correlates with the gain (\S\ref{sec:real}) & H24 & registered addendum (\S13), 5 of 30 cells existed \\
 The gap is dominated by generator accuracy; precision and recall matter within generators (\S\ref{sec:real}) & Table~\ref{tab:h24redo} & re-analysis of data already seen \\
-The detector's verdict as an answer key matches the flag; its model's answer as a hint does not (\S\ref{sec:real}) & H30, H27 & registered addenda (\S15, \S16) \\
+The detector's verdict as an answer key matches the flag; its model's answer as a hint does not (\S\ref{sec:real}) & H30, H27 & registered addenda (\S15, \S16); pooled TOST unregistered \\
+A real detector's flag hurts when conflicts are rare (\S\ref{sec:real}) & Table~\ref{tab:prevalence} & unregistered re-analysis \\
 Direction survives reordering and paraphrase (\S\ref{sec:real}) & H29 & registered addendum; equivalence not shown \\
 Direction and removal harm genuine conflicts (\S\ref{sec:real}) & H28 & registered addendum \\
 Recommendations (\S\ref{sec:discussion}) & -- & not tested end to end \\
@@ -57,6 +67,8 @@ questions it flags nothing, so the prompt is unchanged.}
 \input{generated/tab_cb}
 \input{generated/tab_main}
 \input{generated/tab_hypotheses}
+\input{generated/tab_breakeven}
+\input{generated/tab_prevalence}
 \input{generated/tab_generality}
 \input{generated/tab_detectors}
 \input{generated/tab_main_robust}
@@ -114,7 +126,7 @@ annotation. This is the setting where a false flag can only hurt.
 \includegraphics[width=\columnwidth]{generated/fig_answers.pdf}
 \caption{What a flag does to answers on conflict questions (gpt-4o-mini, oracle pairs; share of answers, \%). The
 answer policy decides how a neutral flag fails: a model told to give every valid answer adds the misinformation, and
-one told there is one answer abstains. Only the directional flag raises the share of correct answers.}
+one told there is one answer abstains. Only the directional flag raises the share of correct answers. The categories are exclusive and an answer the primary metric scores correct counts as correct, so the misinformation share here can be a little lower than in Table~\ref{tab:risk}, which counts every answer containing a wrong answer under the bidirectional matcher.}
 \label{fig:answers}
 \end{figure}
 \input{generated/tab_baselines}
@@ -244,7 +256,7 @@ right and wrong flags (\S16.3); an earlier draft compared correct answers with a
 \item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; reordering the run
 queue). Resumption keeps completed rows and re-requests only missing ones; no row was re-sampled.
 \end{enumerate}
-The addenda (H10--H29 and the re-analyses above) and the Qwen seed change were each committed to the repository before
+The addenda (H10--H31 and the re-analyses above) and the Qwen seed change were each committed to the repository before
 the runs they cover. The repository's commit history is the only timestamp; we did not use a third-party registry
 \citep{vanmiltenburg2021preregistering}.
 

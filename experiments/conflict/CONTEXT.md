@@ -542,3 +542,27 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
     held-out detectors (LODO R2 0.12 vs 0.17 for G alone).
   - Pooled (multilevel): -1.6 [-5.5, +2.2]; multi-answer -3.8, one-answer -0.5, forced +1.5.
   - H14 under the matched one-answer prompt: the pipeline beats Astute RAG by 9.2 and TrustRAG by 13.4 (exploratory).
+
+### Round 10 (2026-10-28): seventh mock review, writing and re-analyses (no new runs)
+
+- **Seventh mock review.** 3.0 from all three reviewers after consensus (Soundness 3, Excitement 2.5). Must-fix:
+  claims aligned with the TOST rule (H30, H23), policy story scoped by model family, minimal-prompt harm reported,
+  inconsistencies (addenda count, 71.3 vs 72.8 misinformation share, Fig. 1 caption, missing precision values,
+  "precision" with two meanings, Bansal citation), H31 as break-even, H24 recast, programme-wide FDR, prevalence.
+- **A §17 agreement-gate plan was drafted and dropped** after two adversarial reviews: on existing data always(luna)
+  beats gate(mini|luna) for every generator, so the gate's gain over always(mini) is mostly "use the better detector".
+  Its infrastructure (agree detector, ConflictBank-fresh, HealthContradict loader) is committed (79737eb); the draft is
+  in the scratchpad. HealthContradict smoke (30 items): detectors pick the false page at or below chance.
+- **Code:** `revision7.py` (pooled H30/H23 with a joint question bootstrap and TOST; H31 break-even, follow-rate CIs,
+  nets at detector precisions; prediction of crossed cells from H31 follow rates; H24 on identical detections; BH-FDR
+  over all registered tests; prevalence reweighting; RAGuard risk), `assets7.py` (macros, tab_breakeven,
+  tab_prevalence, new fig_reliability right panel), q_BH column in the hypothesis tables, policy column in tab_pooled.
+- **Results (all exploratory, unregistered):**
+  - Pooled H30a: flag minus verdict key +1.2 [-0.1, +2.5], equivalent within ±3; H23 pooled -0.1, equivalent.
+  - Break-even direction precision: mini 0.52, luna 0.57, haiku 0.67, terra 0.79.
+  - H31 follow rates predict the 22 crossed cells with an H31 generator: r 0.97, slope 1.06, MAE 1.5 (within
+    generators r 0.93); transfer to the 8 other cells r 0.90, slope 0.70. This is the candidate prospective claim.
+  - At 5% conflict prevalence the LLM directional flag lowers accuracy in 22 of 31 settings.
+  - FDR: 266 of 518 registered tests significant under Holm, 294 under BH.
+- **Next:** redesign §17 as a prospective test of the break-even / follow-rate prediction on new detector-generator
+  cells and benchmarks; human audit labels still pending.

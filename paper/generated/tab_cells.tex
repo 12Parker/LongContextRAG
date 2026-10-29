@@ -42,9 +42,11 @@ gpt-4.1 & Qwen2.5-7B & 79.3 & 7.7 & 50.3 & $+$36.7 & \textbf{$+$16.0} & 66.3 & 6
 \caption{Every detector--generator cell of H24 and H27 (ConflictBank, one-answer prompt, 300 conflict questions; \%),
 sorted by the exploratory score. \emph{Right}: the detector's hit rate, the share of questions on which it flags the true
 contradiction and names exactly its misinformation passage (computed on the detections that cell's generator saw;
-its precision, the same share among questions where it flags the true pair, is in Table~\ref{tab:h24redo}); \emph{Wrong}: share on which it marks a correct passage as suspect;
-\emph{Gen.\ acc.}: the generator's accuracy with no flags; \emph{Score}: right direction where the generator errs minus a
-correct passage marked where it is right; \emph{Gain}: the LLM directional flag's change in points. \emph{Verdict}: the detector's judgement passed as an answer key (``the answer $X$ is false'' for the answer its suspect passage supports; H30). \emph{Hint}: the
+its direction precision, the same share among questions where it flags the true pair, pooled over its cells, is
+gpt-4o-mini \dirPrecMini\%, gpt-4.1 \dirPrecFour\%, gpt-6-luna \dirPrecLuna\%, gpt-6.1-terra \dirPrecTerra\%, Claude Haiku
+\dirPrecHaiku\% and Claude Sonnet \dirPrecSonnet\%); \emph{Wrong}: share on which it marks a correct passage as suspect;
+\emph{Gen.\ acc.}: the generator's accuracy with no flags; \emph{Score}: the mean over the 300 questions of [right direction and the generator errs] minus [a
+correct passage marked and the generator is right]; \emph{Gain}: the LLM directional flag's change in points. \emph{Verdict}: the detector's judgement passed as an answer key (``the answer $X$ is false'' for the answer its suspect passage supports; H30). \emph{Hint}: the
 generator given the detector model's own plain answer, with no passage marked (H27); \emph{det.\ alone}: the detector
 model's own plain accuracy. A detector's statistics can differ slightly between generators because concurrent runs
 made independent detector calls (up to \detDiffMax\ of 400 questions differ for one detector). Bold: significant under

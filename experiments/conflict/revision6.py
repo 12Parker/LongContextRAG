@@ -388,6 +388,8 @@ def revision6(R, r2, main_rows):
     h30(rev, PRIMARY, ROBUST)
     h31(rev, PRIMARY)
     h14_matched(rev, r2, PRIMARY)
+    from .revision7 import revision7
+    revision7(R, r2, S, PRIMARY)   # seventh-review re-analyses; needs H24's per-question data
     for k in ("H24", "H24_s13", "H24_maj"):
         if k in rev:
             for v in rev[k].get("_q", {}).values():

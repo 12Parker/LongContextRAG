@@ -40,10 +40,11 @@ gpt-6.1-terra & 68 & 75 & 4 & 67 & 95 \\
 \bottomrule
 \end{tabular}}
 \caption{H24 re-analysed (\S15.4, \S16.4; data already seen). $D$: hit rate (the detector flags the gold pair and names
-exactly its misinformation passage); $P$: precision (of those gold-pair flags, the share naming it); $R$: recall (the
+exactly its misinformation passage); $P$: direction precision (of those gold-pair flags, the share naming it); $R$: recall (the
 share of questions whose gold pair is flagged); $G$: the generator's no-flag accuracy. CIs: 2,000 question resamples
 shared across cells (300 with question fixed effects; the leave-one-detector-out range of the question-level
-coefficients is \qfeDLodo\ and \qfeWLodo). $p$: exact permutation of the detectors' values across the six detectors.
+coefficients is \qfeDLodo\ and \qfeWLodo). $p$: exact permutation of the detectors' values across the six detectors; the design is unbalanced (the Claude
+detectors serve three generators), so detectors are only approximately exchangeable.
 Lower table, one definition of following: a right flag is followed when the flagged answer is correct (questions the
 generator gets wrong in every plain seed); a wrong flag is followed when the flagged answer contains the
 misinformation (questions it gets right in every plain seed); \emph{abst.}: the flagged answer abstains instead. With

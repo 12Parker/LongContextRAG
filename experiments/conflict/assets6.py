@@ -126,27 +126,28 @@ def tab_pooled6(R, out: Path):
         return
     ss = sorted(m["settings"], key=lambda s: (s["policy"], s["diff"]))
     half = (len(ss) + 1) // 2
-    row = lambda s: f"{_lab(s['name'])} & {pct(s['diff'], True)}" if s else " & "
+    PS = {"multi": "multi", "minimal": "minimal", "single": "one", "forced": "forced"}
+    row = lambda s: f"{PS[s['policy']]} & {_lab(s['name'])} & {pct(s['diff'], True)}" if s else " & & "
     body = "\n".join(f"{row(a)} & {row(b)} \\\\" for a, b in zip(ss[:half], ss[half:] + [None] * (2 * half - len(ss))))
     pol = {"multi": "multi-answer", "minimal": "minimal", "single": "one answer", "forced": "forced"}
-    bp = "\n".join(f"\\multicolumn{{2}}{{l}}{{pooled, {pol[k]} prompt ({v['k']} settings)}} & \\multicolumn{{2}}{{l}}{{{pct(v['mu'], True)} "
+    bp = "\n".join(f"\\multicolumn{{3}}{{l}}{{pooled, {pol[k]} prompt ({v['k']} settings)}} & \\multicolumn{{3}}{{l}}{{{pct(v['mu'], True)} "
                    f"{'' if _nan(v['ci_low']) else _ci(v)}}} \\\\" for k, v in m["by_policy"].items())
-    mods = "\n".join(f"\\multicolumn{{2}}{{l}}{{{k}}} & \\multicolumn{{2}}{{l}}{{{pct(v['est'], True)} {_ci(v)}}} \\\\"
+    mods = "\n".join(f"\\multicolumn{{3}}{{l}}{{{k}}} & \\multicolumn{{3}}{{l}}{{{pct(v['est'], True)} {_ci(v)}}} \\\\"
                      for k, v in m["moderators"].items())
     (out / "tab_pooled.tex").write_text(r"""\begin{table*}[t]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{lrlr}
+\begin{tabular}{llrllr}
 \toprule
-Setting & Neutral flag & Setting & Neutral flag \\
+Policy & Setting & Neutral flag & Policy & Setting & Neutral flag \\
 \midrule
 """ + body + r"""
 \midrule
-\multicolumn{4}{l}{\emph{Multilevel model (random effects for generator, benchmark and setting; REML)}} \\
-\multicolumn{2}{l}{pooled, all settings} & \multicolumn{2}{l}{\neuMlMu\ \neuMlCI; prediction interval \neuMlPI} \\
+\multicolumn{6}{l}{\emph{Multilevel model (random effects for generator, benchmark and setting; REML)}} \\
+\multicolumn{3}{l}{pooled, all settings} & \multicolumn{3}{l}{\neuMlMu\ \neuMlCI; prediction interval \neuMlPI} \\
 """ + bp + r"""
 \midrule
-\multicolumn{4}{l}{\emph{Meta-regression (same model)}} \\
+\multicolumn{6}{l}{\emph{Meta-regression (same model)}} \\
 """ + mods + r"""
 \bottomrule
 \end{tabular}
@@ -154,7 +155,9 @@ Setting & Neutral flag & Setting & Neutral flag \\
 points), grouped by answer policy. The pooled estimate was registered as exploratory (\S13.4) and the multilevel model,
 the policy split and the moderators in \S16.4; they use data already seen. The prediction interval describes this
 design space (our generators, benchmarks and prompts), not deployments in general. \emph{Natural misinformation} is
-RAGuard only; RAMDocs' misinformation is synthetic.}
+RAGuard only; RAMDocs' misinformation is synthetic. The moderator \emph{several answers allowed} codes the
+multi-answer and minimal prompts together, against one-answer prompts; the policy rows above separate them. Settings
+share questions, which the model does not account for, so its intervals are too narrow.}
 \label{tab:pooled}
 \end{table*}
 """)
@@ -250,10 +253,11 @@ Generator & right & wrong & wrong, abst. & right & wrong \\
 \bottomrule
 \end{tabular}}
 \caption{H24 re-analysed (\S15.4, \S16.4; data already seen). $D$: hit rate (the detector flags the gold pair and names
-exactly its misinformation passage); $P$: precision (of those gold-pair flags, the share naming it); $R$: recall (the
+exactly its misinformation passage); $P$: direction precision (of those gold-pair flags, the share naming it); $R$: recall (the
 share of questions whose gold pair is flagged); $G$: the generator's no-flag accuracy. CIs: 2,000 question resamples
 shared across cells (300 with question fixed effects; the leave-one-detector-out range of the question-level
-coefficients is \qfeDLodo\ and \qfeWLodo). $p$: exact permutation of the detectors' values across the six detectors.
+coefficients is \qfeDLodo\ and \qfeWLodo). $p$: exact permutation of the detectors' values across the six detectors; the design is unbalanced (the Claude
+detectors serve three generators), so detectors are only approximately exchangeable.
 Lower table, one definition of following: a right flag is followed when the flagged answer is correct (questions the
 generator gets wrong in every plain seed); a wrong flag is followed when the flagged answer contains the
 misinformation (questions it gets right in every plain seed); \emph{abst.}: the flagged answer abstains instead. With

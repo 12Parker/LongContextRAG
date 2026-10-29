@@ -251,12 +251,12 @@ def tab_hypotheses(R, out: Path):
             d = rev["direction_ci"]
             est = f"{pct(d['estimate'])}\\% [{pct(d['ci_low'])}, {pct(d['ci_high'])}]"
             rows.append(("H1", "direction accuracy llm\\_dir $>$ 50\\% (cluster CI\\textsuperscript{r})", est,
-                         _p(v["p_holm"]), "supported" if d["ci_low"] > 0.5 else "not supported", "--"))
+                         _pq(v), "supported" if d["ci_low"] > 0.5 else "not supported", "--"))
         else:
-            rows.append(("H1", _esc(k), _est(v), _p(v["p_holm"]), outcome(v, "H1"), "--"))
+            rows.append(("H1", _esc(k), _est(v), _pq(v), outcome(v, "H1"), "--"))
     for h in ("H2", "H3"):
         for k, v in R[h][PRIMARY].items():
-            rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h), rob(R[h], k, h)))
+            rows.append((h, _esc(k), _est(v), _pq(v), outcome(v, h), rob(R[h], k, h)))
     if "H4" in rev:
         h4p, h4r = rev["H4"][PRIMARY], rev["H4"][ROBUST]
         for mode, name in (("flag_directional", "directional flag"), ("remove_suspect", "removal")):
@@ -273,7 +273,7 @@ def tab_hypotheses(R, out: Path):
                      f"{rv['n_remove_worse']} of {rv['n']} matched cells", "Holm", "count only", "--"))
     for h in ("H5",):
         for k, v in R[h][PRIMARY].items():
-            rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h), rob(R[h], k, h)))
+            rows.append((h, _esc(k), _est(v), _pq(v), outcome(v, h), rob(R[h], k, h)))
     if "H5_tost" in rev:
         t = rev["H5_tost"][PRIMARY]
         rows.append(("H5", f"equivalence within $\\pm${100*t['margin']:.0f} points (TOST)\\textsuperscript{{r}}",
@@ -293,10 +293,10 @@ def tab_hypotheses(R, out: Path):
     for h in ("H7", "H9"):
         if h in R:
             for k, v in R[h][PRIMARY].items():
-                rows.append((h, _esc(k), _est(v), _p(v["p_holm"]), outcome(v, h), rob(R[h], k, h)))
+                rows.append((h, _esc(k), _est(v), _pq(v), outcome(v, h), rob(R[h], k, h)))
     if "H8" in R:
         for k, v in R["H8"]["both_answers"].items():
-            rows.append(("H8", "WikiContradict: " + _esc(k), _est(v), _p(v["p_holm"]), outcome(v, "H8", k), "--"))
+            rows.append(("H8", "WikiContradict: " + _esc(k), _est(v), _pq(v), outcome(v, "H8", k), "--"))
     n_first = len(rows)
     for h in ("H10", "H11", "H12", "H13", "H14", "H15", "H16", "H17", "H18", "H19", "H20", "H22", "H23", "H25", "H26"):
         if h in rev:
@@ -305,19 +305,21 @@ def tab_hypotheses(R, out: Path):
                 o = ("significant" if v["supported"] else "n.s.") if two else ("supported" if v["supported"] else "not supported")
                 ob = rev[h][ROBUST][k]["supported"] == v["supported"]
                 kk = k.replace("(labelled)", "(all questions)") if k.startswith(("ConflictBank", "CB majority", "RAGuard")) else k
-                rows.append((h, _esc(kk), _est(v), _p(v["p_holm"]), o, "yes" if ob else "no"))
+                rows.append((h, _esc(kk), _est(v), _pq(v), o, "yes" if ob else "no"))
     head = r"""\begin{table*}[%s]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
-& Pre-registered test & Estimate [95\%% CI] & $p_{\text{Holm}}$ & Outcome & Robust \\
+& Pre-registered test & Estimate [95\%% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
 \midrule
 """
     legend = (r"Directional predictions are \emph{supported} or \emph{not supported}; tests with no predicted sign are "
-              r"\emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric. "
+              r"\emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric (robustness "
+              r"to the RAMDocs label rule is in Table~\ref{tab:contains}, where H4b's correlation weakens). "
               r"$p$-values come from 10,000 sign-flip permutations, extended to 200,000 when none reaches the observed "
-              r"statistic, Holm-adjusted within the family; this is the significance used everywhere in the paper.")
+              r"statistic, Holm-adjusted within the family; this is the significance used everywhere in the paper. "
+              r"In brackets: the Benjamini--Hochberg $q$ over all registered tests of the programme (primary metric).")
     FAMILY = {"H1": "detection quality", "H2": "a correct neutral flag", "H3": "what direction adds",
               "H4a": "false flags", "H4b": "false flags", "H4c": "false flags", "H5": "the heuristic detector vs random",
               "H6": "does the grid predict real detectors", "H7": "prompt-only instructions",
@@ -346,7 +348,7 @@ def tab_hypotheses(R, out: Path):
         if m_ == "selective" and rev.get("H21c_ratio"):   # §15.4.5 / §16.4.7: the ratio estimand of Table 1
             famd, lab = rev["H21c_ratio"], "selective accuracy (ratio)"
         for k, v in famd.items():
-            rows.append(("H21", _esc(k.replace("vs plain", f"vs plain, {lab}")), _est(v), _p(v["p_holm"]),
+            rows.append(("H21", _esc(k.replace("vs plain", f"vs plain, {lab}")), _est(v), _pq(v),
                          "significant" if v["supported"] else "n.s.", "--"))
     h24 = rev.get("H24", {})
     if "a" in h24:
@@ -362,25 +364,25 @@ def tab_hypotheses(R, out: Path):
     for f_ in ("H27a", "H27b", "H27c"):
         for k, v in rev.get(f_, {}).get(PRIMARY, {}).items():
             ob = rev[f_][ROBUST][k]["supported"] == v["supported"]
-            rows.append(("H27", _esc(k), _est(v), _p(v["p_holm"]), "significant" if v["supported"] else "n.s.", "yes" if ob else "no"))
+            rows.append(("H27", _esc(k), _est(v), _pq(v), "significant" if v["supported"] else "n.s.", "yes" if ob else "no"))
     for f_ in ("H30a", "H30b"):
         for k, v in rev.get(f_, {}).get(PRIMARY, {}).items():
             ob = rev[f_][ROBUST][k]["supported"] == v["supported"]
-            rows.append(("H30", _esc(k), _est(v), _p(v["p_holm"]), "significant" if v["supported"] else "n.s.", "yes" if ob else "no"))
+            rows.append(("H30", _esc(k), _est(v), _pq(v), "significant" if v["supported"] else "n.s.", "yes" if ob else "no"))
     for f_, pred in (("H31a", True), ("H31b", True), ("H31c", False)):
         for k, v in rev.get(f_, {}).items():
             o = ("supported" if v["supported"] else "not supported") if pred else ("significant" if v["supported"] else "n.s.")
-            rows.append(("H31", _esc(k), _est(v), _p(v["p_holm"]), o, "--"))
+            rows.append(("H31", _esc(k), _est(v), _pq(v), o, "--"))
     for key, fam_ in rev.get("H28", {}).items():
         for m_, lab in (("both_answers", ""), (PRIMARY, ""), ("gold_recall", ", gold recall")):
             for k, v in fam_.get(m_, {}).items():
-                rows.append(("H28", _esc(k + lab), _est(v), _p(v["p_holm"]), "significant" if v["supported"] else "n.s.", "--"))
+                rows.append(("H28", _esc(k + lab), _est(v), _pq(v), "significant" if v["supported"] else "n.s.", "--"))
     h29 = rev.get("H29", {})
     for k, v in h29.get("a", {}).items():
-        rows.append(("H29", _esc(f"{k}: direction accuracy vs original"), _est(v), _p(v["p_holm"]),
+        rows.append(("H29", _esc(f"{k}: direction accuracy vs original"), _est(v), _pq(v),
                      "significant" if v["supported"] else "n.s.", "--"))
     for k, v in h29.get("c", {}).items():
-        rows.append(("H29", _esc(f"{k}: gpt-4o-mini's gain vs original"), _est(v), _p(v["p_holm"]),
+        rows.append(("H29", _esc(f"{k}: gpt-4o-mini's gain vs original"), _est(v), _pq(v),
                      "significant" if v["supported"] else "n.s.", "--"))
     # one table per registration stage, so no table outgrows a page
     stages = [("H10", "H11"), ("H12", "H13", "H14"), ("H15", "H16", "H17", "H18", "H19"),
@@ -762,6 +764,12 @@ def _p(p):
     if _nan(p):
         return "--"
     return "$<$0.001" if p < 0.001 else f"{p:.3f}"
+
+
+def _pq(v):
+    """Holm-adjusted p and, in brackets, the Benjamini-Hochberg q over every registered test (revision7.fdr)."""
+    q = v.get("q_bh")
+    return _p(v["p_holm"]) + ("" if q is None or _nan(q) else f" ({_p(q)})")
 
 
 # --------------------------------------------------------------------------- figures
@@ -1291,6 +1299,8 @@ def numbers(R, out: Path):
     numbers5(R, add)   # §15 (revision5)
     from .assets6 import numbers6
     numbers6(R, add)   # §16 (revision6)
+    from .assets7 import numbers7
+    numbers7(R, add)   # seventh-review re-analyses (revision7)
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1312,6 +1322,8 @@ def write_all(R, out: Path):
     write5(R, out)   # after fig_reliability: replaces its tab_cells
     from .assets6 import write6
     write6(R, out)   # §16: replaces tab_pooled, tab_utility, tab_h24redo; adds the verdict column to tab_cells
+    from .assets7 import write7
+    write7(R, out)   # seventh review: replaces fig_reliability; adds tab_breakeven, tab_prevalence
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():

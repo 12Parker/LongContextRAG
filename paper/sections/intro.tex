@@ -1,8 +1,7 @@
 \section{Introduction}
 
 Retrieval-augmented generation (RAG) \citep{lewis2020rag} hands a language model passages that may disagree. Some
-disagreements are genuine: two sources report different findings, or two people share a name. Others are planted or
-stale misinformation \citep{zou2025poisonedrag,wang2025madam}. A natural fix is to detect the contradiction and tell
+disagreements are genuine; others are planted or stale misinformation \citep{zou2025poisonedrag,wang2025madam}. A natural fix is to detect the contradiction and tell
 the generator. Recent systems pair contradiction detectors with prompts that flag conflicting passages
 \citep{wang2026conflictrag}, and prompting a model about conflicts can help \citep{cattan2025conflicts}. These systems
 report detection F1 and end-to-end accuracy, but not how the two connect. What should the flag say, and what must the
@@ -16,30 +15,26 @@ RAMDocs \citep{wang2025madam}, we pre-registered our hypotheses (H1--H9) and tes
 eight addenda (H10--H31), each committed before its runs, extended the study to ConflictBank \citep{su2024conflictbank}
 (including a variant where the misinformation outnumbers the truth), to RAGuard \citep{zeng2025raguard}, whose
 misleading side is real Reddit posts, and to seven generators from OpenAI, Anthropic and Qwen. Controls separate what a
-flag conveys: a forced-choice prompt with no ``unknown'', an answer key that names the wrong answer without pointing at
-any passage, flags whose direction is randomised, the detector's verdict and the detector model's own answer given as
-hints, and a crossed design in which six detectors serve six generators. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
+flag conveys: forced choice, an answer key, randomised direction, the detector's verdict and its model's own answer as
+hints, and six detectors crossed with six generators. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
 
 Our findings:
 \begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{A correct neutral flag's effect depends on the answer policy.} Under a prompt that asks for every
-valid answer, models add the misinformation to their answer; under a one-answer prompt that allows ``unknown'', they
-abstain, on misinformed and correct answers alike; under forced choice, the flag has little effect. Whether the
-abstention is worth it depends on the cost of a wrong answer (exploratory).
-\item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one,
-but an answer key that names the wrong answer does nearly as well (H23).
-\item \textbf{With a real detector, its wrong flags decide.} With a gpt-4o-mini detector, \nRealSgPos\ of
-\nRealSgTests\ generators gain significantly on ConflictBank and \nRealSgNeg\ loses. When direction is randomised
-(H31), generators follow right and wrong flags at similar rates, so a wrong flag costs an accurate generator more than
-a right one gains. Across \hTwentyFourCells\ crossed detector--generator cells, the registered reliability gap tracks
-the gain mostly through the generator's own accuracy; the detector's verdict as an answer key does as well as the
-flag (H30), and the detector model's own answer as a hint does not (H27).
-\item \textbf{Direction is unsafe on genuine conflicts.} On WikiContradict the LLM directional flag, and removal, cut
-the share of answers that give both valid sides (H28).
+\item \textbf{A correct neutral flag does not reliably help.} Asked for every valid answer, OpenAI and Qwen models add the
+misinformation to their answer; asked for one answer, some generators abstain on misinformed and correct answers
+alike; under forced choice the effect is small. Claude models move less, and the minimal prompt is the most harmful
+policy. These policy and family splits were coded after seeing data.
+\item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one, but
+it is equivalent to an answer key that names the wrong answer (pooled over \PoolTwentyThreeK\ comparisons).
+\item \textbf{A directional flag pays only above a break-even precision.} When direction is randomised (H31), a wrong
+flag costs more than a right one gains, because generators follow both at similar rates and an accurate generator has
+more correct answers to lose. The break-even direction precision rises from \beMin\ for gpt-4o-mini to \beMax\ for
+gpt-6.1-terra, and the follow rates predict the effect of six real detectors on six generators (exploratory;
+Figure~\ref{fig:reliability}). The detector's verdict as an answer key matches its flag (H30); the detector model's
+own answer as a hint does worse (H27).
+\item \textbf{Direction is unsafe on genuine conflicts and costly when conflicts are rare.} On WikiContradict the LLM
+directional flag and removal cut the share of answers giving both valid sides (H28), and at a 5\% share of conflict
+questions the real detector's flag lowers accuracy in \prevNegFive\ of \prevN\ settings.
 \end{itemize}
-These results suggest, though we do not test end to end, measuring a detector's wrong-side rate on questions the
-target generator already answers correctly, letting the detector abstain, passing direction only where conflicts are
-likely to be misinformation, and choosing a neutral flag only together with an answer policy and a cost for wrong
-answers. We
-release the harness, pre-registrations and every run.\footnote{Code, the pre-registration and all run outputs are in
-the anonymised supplementary material and will be released publicly on acceptance.}
+On CONFLICTS, the one benchmark of real search results, no condition changes accuracy significantly. We release the harness, pre-registrations and every run.\footnote{Code, the pre-registration and
+all run outputs are in the anonymised supplementary material and will be released publicly on acceptance.}
