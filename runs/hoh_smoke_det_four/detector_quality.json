@@ -1,0 +1,94 @@
+{
+ "llm_ans": {
+  "pair_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 24
+  },
+  "question_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 20,
+   "tn": 20,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": null,
+  "direction_coverage": null,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 0.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 0.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 0.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": 0.0
+   }
+  },
+  "total_cost_usd": 0.049476
+ },
+ "llm_dir": {
+  "pair_level": {
+   "precision": 0.9130434782608695,
+   "recall": 0.875,
+   "f1": 0.8936170212765957,
+   "tp": 21,
+   "fp": 2,
+   "fn": 3
+  },
+  "question_level": {
+   "precision": 0.8636363636363636,
+   "recall": 0.95,
+   "f1": 0.9047619047619048,
+   "tp": 19,
+   "fp": 3,
+   "fn": 1,
+   "tn": 17,
+   "false_positive_rate": 0.15
+  },
+  "direction_accuracy": 0.5555555555555556,
+  "direction_coverage": 0.8571428571428571,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.2727272727272727,
+    "correct_marked": 0.3695652173913043,
+    "conflict_q_all_misinfo_marked": 0.3,
+    "conflict_q_any_correct_marked": 0.7,
+    "clean_q_any_correct_marked": 0.15
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.45454545454545453,
+    "correct_marked": 0.21739130434782608,
+    "conflict_q_all_misinfo_marked": 0.45,
+    "conflict_q_any_correct_marked": 0.5,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.4090909090909091,
+    "correct_marked": 0.17391304347826086,
+    "conflict_q_all_misinfo_marked": 0.4,
+    "conflict_q_any_correct_marked": 0.4,
+    "clean_q_any_correct_marked": 0.0
+   }
+  },
+  "total_cost_usd": 0.065524
+ }
+}

@@ -1,0 +1,34 @@
+\begin{table*}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+& \multicolumn{4}{c}{Neutral flag, utility change at misinformation cost $c$} & Dir.\ flag & \multicolumn{4}{c}{Neutral flag: plain answer $\to$ flagged answer (null)} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-6}\cmidrule(lr){7-10}
+Setting & $c=0$ & $c=1$ & $c=2$ & $c=4$ & $c=2$ & mis.$\to$abst. & mis.$\to$corr. & corr.$\to$abst. & corr.$\to$mis. \\
+\midrule
+RAMDocs, gpt-4o-mini (multi-answer) & \textbf{$-$6.7} & \textbf{$-$20.9} & \textbf{$-$35.0} & \textbf{$-$63.3} & \textbf{$+$79.1} & 1 (0) & 2 (2) & 0 (0) & 29 (3) \\
+RAMDocs, gpt-6-luna & \textbf{$-$3.1} & $-$7.7 & $-$12.2 & $-$21.3 & \textbf{$+$160.9} & 0 (0) & 1 (3) & 0 (0) & 22 (16) \\
+RAMDocs, Claude Haiku & $+$1.2 & $+$9.1 & \textbf{$+$17.0} & \textbf{$+$32.9} & \textbf{$+$125.2} & 0 (0) & 9 (4) & 0 (0) & 5 (9) \\
+CB multi-answer, gpt-4o-mini & \textbf{$-$8.8} & \textbf{$-$19.2} & \textbf{$-$29.7} & \textbf{$-$50.6} & \textbf{$+$91.0} & 0 (0) & 4 (3) & 1 (0) & 55 (9) \\
+CB one-answer, gpt-4o-mini & \textbf{$-$18.7} & $-$5.3 & $+$8.0 & \textbf{$+$34.7} & \textbf{$+$83.7} & 45 (2) & 7 (3) & 37 (1) & 5 (2) \\
+CB one-answer, gpt-6-luna & \textbf{$-$9.4} & $-$2.6 & $+$4.3 & $+$18.1 & \textbf{$+$85.1} & 27 (10) & 12 (13) & 20 (6) & 5 (6) \\
+CB one-answer, gpt-6.1-terra & $-$2.3 & 0.0 & $+$2.3 & $+$7.0 & \textbf{$+$51.7} & 2 (--) & 26 (--) & 4 (--) & 5 (--) \\
+CB one-answer, Claude Haiku & $+$0.7 & $+$0.6 & $+$0.4 & $+$0.2 & \textbf{$+$66.9} & 0 (0) & 25 (16) & 0 (0) & 8 (5) \\
+CB one-answer, Claude Sonnet & $+$3.0 & $+$6.7 & $+$10.3 & $+$17.7 & \textbf{$+$45.7} & 2 (--) & 34 (--) & 0 (--) & 3 (--) \\
+CB forced, gpt-4o-mini & $-$0.2 & $-$0.6 & $-$0.9 & $-$1.6 & \textbf{$+$74.0} & 1 (0) & 19 (4) & 0 (0) & 11 (2) \\
+CB majority, gpt-4o-mini & $+$1.1 & \textbf{$+$24.6} & \textbf{$+$48.0} & \textbf{$+$94.9} & \textbf{$+$118.2} & 26 (1) & 11 (2) & 22 (1) & 8 (5) \\
+RAGuard, gpt-4o-mini & $+$3.2 & $+$6.6 & $+$10.0 & $+$16.8 & \textbf{$+$34.6} & 12 (3) & 7 (3) & 8 (6) & 4 (2) \\
+RAGuard, gpt-6-luna & 0.0 & $-$1.1 & $-$2.3 & $-$4.5 & \textbf{$+$29.3} & 10 (9) & 6 (9) & 8 (9) & 7 (8) \\
+RAGuard, Claude Haiku & $+$0.3 & $-$1.8 & $-$4.0 & $-$8.3 & \textbf{$+$26.5} & 7 (6) & 4 (4) & 11 (9) & 6 (3) \\
+\bottomrule
+\end{tabular}}
+\caption{Abstention-aware view of the oracle flags (conflict questions; \S15.4 and \S16.4, re-analyses of data already
+seen). Utility per answer: $+1$ correct, $-c$ if it contains the misinformation, 0 for abstaining or any other wrong
+answer; $c=0$ is strict accuracy. Bold: significant in one Holm family per $c$ over all \nUtilSixSettings\ settings of
+Table~\ref{tab:pooled} (a selection is shown). Right: of the question--seed pairs whose plain answer contained the
+misinformation (or was correct), the share whose flagged answer abstained, was correct or contained the misinformation;
+in brackets the same share between two plain runs with different seeds, the churn with no flag.}
+\label{tab:utility}
+\end{table*}

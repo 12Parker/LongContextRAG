@@ -84,3 +84,22 @@ models/
 # Cache
 .cache/
 .pytest_cache/
+
+# conflict experiments
+.venv-conflict/
+data/external/
+runs/llm_cache.sqlite
+runs/*.log
+
+# paper build products (tectonic)
+paper/main.pdf
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*.blg
+paper/*.out
+
+# large run outputs are committed as results.jsonl.gz
+runs/holdout_main/results.jsonl
+runs/holdout_contains/results.jsonl
+paper/supplement.zip

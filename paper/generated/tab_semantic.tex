@@ -1,0 +1,42 @@
+\begin{table*}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrr}
+\toprule
+Setting & Contrast & Matcher (points) & Judge (points) & Judge $-$ matcher \\
+\midrule
+RAMDocs, gpt-4o-mini & neutral flag vs plain & $-$4.2 [$-$9.2, 0.0] & $-$2.5 [$-$9.2, $+$4.2] & $+$1.7 [$-$3.3, $+$6.7] \\
+ConflictBank, gpt-4o-mini & neutral flag vs plain & $-$20.0 [$-$27.5, $-$12.5] & $-$21.7 [$-$29.2, $-$14.2] & $-$1.7 [$-$4.2, 0.0] \\
+ConflictBank, Claude Haiku & neutral flag vs plain & $+$3.3 [$-$3.3, $+$10.0] & $+$6.7 [$+$0.8, $+$13.3] & $+$3.3 [0.0, $+$7.5] \\
+RAMDocs, gpt-4o-mini & oracle directional flag vs answer key & $-$0.8 [$-$5.8, $+$4.2] & $+$0.8 [$-$8.3, $+$10.0] & $+$1.7 [$-$6.7, $+$10.0] \\
+ConflictBank, gpt-4o-mini & oracle directional flag vs answer key & $+$10.8 [$+$4.2, $+$17.5] & $+$12.5 [$+$6.7, $+$19.2] & $+$1.7 [$-$1.7, $+$5.0] \\
+ConflictBank, gpt-6-luna & oracle directional flag vs answer key & $-$1.7 [$-$5.8, $+$2.5] & 0.0 [$-$3.3, $+$3.3] & $+$1.7 [$-$1.7, $+$5.0] \\
+ConflictBank, gpt-4o-mini & LLM directional flag vs verdict key & $+$3.3 [$-$2.5, $+$9.2] & $+$6.7 [$+$0.8, $+$12.5] & $+$3.3 [0.0, $+$7.5] \\
+ConflictBank, gpt-6-luna & LLM directional flag vs verdict key & $-$0.8 [$-$3.3, $+$1.7] & 0.0 [$-$2.5, $+$2.5] & $+$0.8 [$-$1.7, $+$4.2] \\
+ConflictBank, gpt-4o-mini & randomised directional flag vs plain & $+$4.2 [$-$5.8, $+$15.0] & $+$6.7 [$-$3.3, $+$16.7] & $+$2.5 [0.0, $+$5.8] \\
+ConflictBank, Claude Haiku & randomised directional flag vs plain & $-$7.5 [$-$18.3, $+$3.3] & $-$6.7 [$-$17.5, $+$4.2] & $+$0.8 [$-$1.7, $+$3.3] \\
+\bottomrule
+\end{tabular}
+
+\vspace{4pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Condition & Outputs & Matcher (\%) & Judge (\%) & Judge only (\%) & Matcher only (\%) \\
+\midrule
+answer key & 360 & 67.8 & 77.8 & 10.3 & 0.3 \\
+directional flag (LLM) & 240 & 59.6 & 62.5 & 3.8 & 0.8 \\
+directional flag (oracle) & 360 & 70.6 & 82.2 & 11.7 & 0.0 \\
+neutral flag (oracle) & 360 & 36.9 & 43.3 & 6.9 & 0.6 \\
+no flag & 600 & 48.8 & 53.3 & 5.2 & 0.7 \\
+randomised direction (H31) & 240 & 54.6 & 59.6 & 5.0 & 0.0 \\
+verdict key (LLM) & 240 & 58.3 & 59.2 & 2.1 & 1.2 \\
+\bottomrule
+\end{tabular}
+\caption{Semantic re-score (\S17.3; exploratory). An outside-family judge (gemini-3.5-flash-lite, temperature 0) reads
+the question, the reference and known wrong answers and the response, and classifies the final answer; judge-strict
+means it gives the reference answer, asserts no wrong one and does not abstain. Top: each contrast on the same
+120 conflict questions (seed 0) under the matcher and the judge, and their difference, with question-bootstrap
+95\% CIs. Bottom: per condition, the share scored correct by each and the shares where only one does. The judge is
+an LLM given the answer keys: it checks the matcher's semantics, not the benchmark labels.}
+\label{tab:semantic}
+\end{table*}

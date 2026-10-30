@@ -1,0 +1,18 @@
+{
+ "questions": 100,
+ "stories": 50,
+ "questions_with_any_flag": 54,
+ "flagged_pairs": 166,
+ "pair_flag_rate": 0.03688888888888889,
+ "signal_counts": {
+  "entity": 130,
+  "negation": 153,
+  "temporal": 27
+ },
+ "type_counts": {
+  "factual": 130,
+  "negation": 24,
+  "temporal": 12
+ },
+ "retrieval": "BM25 top-10, 1500-char chunks, 200 overlap"
+}

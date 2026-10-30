@@ -1,0 +1,54 @@
+{
+ "all": {
+  "plain": {
+   "mean": 0.28985507246376807,
+   "n": 253
+  },
+  "oracle+flag": {
+   "mean": 0.47957839262187085,
+   "n": 253,
+   "diff": 0.18972332015810275,
+   "ci_low": 0.14492753623188404,
+   "ci_high": 0.23847167325428192,
+   "n_clusters": 253,
+   "p_holm": 9.999000099990002e-05
+  }
+ },
+ "conflict": {
+  "plain": {
+   "mean": 0.28985507246376807,
+   "n": 253
+  },
+  "oracle+flag": {
+   "mean": 0.47957839262187085,
+   "n": 253,
+   "diff": 0.18972332015810275,
+   "ci_low": 0.14492753623188404,
+   "ci_high": 0.23847167325428192,
+   "n_clusters": 253,
+   "p_holm": 9.999000099990002e-05
+  }
+ },
+ "no_conflict": {},
+ "cost_latency": {
+  "plain": {
+   "prompt_tokens": 241.81422924901185,
+   "completion_tokens": 77.6429512516469,
+   "cost_usd": 0.0011047720685111988,
+   "detect_s": 0.0,
+   "generate_s": 1.010332473865385,
+   "detect_cost_usd": 0.0,
+   "n_flags": 0.0
+  },
+  "oracle+flag": {
+   "prompt_tokens": 287.8142292490119,
+   "completion_tokens": 89.03557312252964,
+   "cost_usd": 0.001287913043478261,
+   "detect_s": 0.0,
+   "generate_s": 1.009191935692088,
+   "detect_cost_usd": 0.0,
+   "n_flags": 1.0
+  }
+ },
+ "metric": "both_answers"
+}

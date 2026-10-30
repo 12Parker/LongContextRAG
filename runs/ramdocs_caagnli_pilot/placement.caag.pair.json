@@ -1,0 +1,61 @@
+{
+ "detector": "caag",
+ "space": "pair",
+ "reference": "plain",
+ "modes": {
+  "remove_suspect": {
+   "conflict": {
+    "location": [
+     0.18253968253968253,
+     0.045816733067729085,
+     0.5
+    ],
+    "grid_predicted": -0.040255280399030896,
+    "nearest_cells": [
+     "synth-p0.25-r0.25-all-d0.5+remove_suspect",
+     "synth-p0.25-r0.25-all-d0.75+remove_suspect",
+     "synth-p0.5-r0.25-all-d0.5+remove_suspect",
+     "synth-p0.5-r0.25-all-d0.75+remove_suspect"
+    ],
+    "actual": {
+     "diff": -0.0065359477124183,
+     "ci_low": -0.0457516339869281,
+     "ci_high": 0.0326797385620915,
+     "n": 102,
+     "n_clusters": 102
+    }
+   },
+   "no_conflict": {
+    "location": [
+     0.18253968253968253,
+     0.045816733067729085,
+     0.5
+    ],
+    "grid_predicted": -0.14880486716110947,
+    "nearest_cells": [
+     "synth-p0.25-r0.25-all-d0.5+remove_suspect",
+     "synth-p0.25-r0.25-all-d0.75+remove_suspect",
+     "synth-p0.5-r0.25-all-d0.5+remove_suspect",
+     "synth-p0.5-r0.25-all-d0.75+remove_suspect"
+    ],
+    "actual": {
+     "diff": -0.0641025641025641,
+     "ci_low": -0.1282051282051282,
+     "ci_high": -0.01282051282051282,
+     "n": 78,
+     "n_clusters": 78
+    }
+   },
+   "all": {
+    "grid_predicted": -0.08729343466259828,
+    "actual": {
+     "diff": -0.03833333333333333,
+     "ci_low": -0.07166666666666666,
+     "ci_high": -0.008333333333333333,
+     "n": 200,
+     "n_clusters": 200
+    }
+   }
+  }
+ }
+}

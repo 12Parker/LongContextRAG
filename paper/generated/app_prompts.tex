@@ -1,0 +1,432 @@
+\paragraph{Generation skeleton (default).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below.
+If the passages support more than one valid answer
+(for example, different people or things share the
+same name), give every valid answer.
+If no passage answers the question, the answer is
+"unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <answer 1> | <answer 2> | ...
+\end{verbatim}\end{footnotesize}
+\paragraph{Minimal skeleton (no answer policy).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below.
+If no passage answers the question, the answer is
+"unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your answer; if there is more than
+one, separate them with |>
+\end{verbatim}\end{footnotesize}
+\paragraph{Single-answer skeleton.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Closed book (single-answer version).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question from your own knowledge. The
+question has exactly one correct answer.
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Instruction v1.}
+\begin{footnotesize}\begin{verbatim}
+Some passages may contradict each other. Before
+answering, check whether they do.
+Ignore passages that appear to contain
+misinformation, and if a disagreement reflects
+genuinely different valid answers, report each one.
+\end{verbatim}\end{footnotesize}
+\paragraph{Instruction v2.}
+\begin{footnotesize}\begin{verbatim}
+Some passages may contain false information. Before
+answering, decide which passages are reliable by
+checking them against each other.
+Do not include an answer that is supported only by a
+passage you judge to be unreliable.
+\end{verbatim}\end{footnotesize}
+\paragraph{Single call (inserted as the instruction).}
+\begin{footnotesize}\begin{verbatim}
+Some passages may contain misinformation. First
+decide which passages, if any, contain
+misinformation, by checking them against each other
+and against what you know, and write one line in
+this format:
+Suspect passages: <passage numbers, or none>
+Then answer the question using only the other
+passages.
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: directional flag (passage 2 suspect).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below.
+If the passages support more than one valid answer
+(for example, different people or things share the
+same name), give every valid answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [POTENTIAL CONFLICT with passage(s): 2]:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [LIKELY MISINFORMATION; conflicts with
+passage(s): 0]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+- Passages 0 and 2: possible contradiction; passage
+2 likely contains misinformation
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <answer 1> | <answer 2> | ...
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: one-wrong flag, single-answer skeleton.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [CONFLICT with passage(s): 2; one side
+contains misinformation]:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [CONFLICT with passage(s): 0; one side
+contains misinformation]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+- Passages 0 and 2: possible contradiction; exactly
+one of the two contains misinformation (it is not
+known which)
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Directional LLM detector.}
+\begin{footnotesize}\begin{verbatim}
+You will see a question and {n} numbered passages
+retrieved for it.
+Some passages may contain misinformation: false
+claims about the answer to the question.
+Identify every pair of passages that CONTRADICT each
+other about the answer to the question,
+i.e. they cannot both be true about the same entity
+at the same time. Passages that are about
+different entities with the same name, give
+complementary details, or describe different times
+are NOT contradictions; note them as "ambiguity",
+"complementary" or "temporal" instead.
+
+For each contradiction, say which passage of the
+pair is more likely the misinformation, judging
+by agreement with the other passages and by
+plausibility: its number, "both" if both are likely
+false, or "unclear" if you cannot tell.
+
+Question: {question}
+
+{passages}
+
+Return JSON only: {{"pairs": [{{"i": <int>, "j":
+<int>, "relation":
+"contradiction|ambiguity|complementary|temporal",
+"misinformation": <int>|"both"|"unclear"}}]}}
+Use the passage numbers shown. "misinformation" is
+needed only for contradictions. Return {{"pairs":
+[]}} if there are none.
+\end{verbatim}\end{footnotesize}
+\paragraph{LLM detector without direction.}
+\begin{footnotesize}\begin{verbatim}
+You will see a question and {n} numbered passages
+retrieved for it.
+Identify every pair of passages that CONTRADICT each
+other about the answer to the question,
+i.e. they cannot both be true about the same entity
+at the same time. Passages that are about
+different entities with the same name, give
+complementary details, or describe different times
+are NOT contradictions; note them as "ambiguity",
+"complementary" or "temporal" instead.
+
+Question: {question}
+
+{passages}
+
+Return JSON only: {{"pairs": [{{"i": <int>, "j":
+<int>, "relation": "contradiction|ambiguity|compleme
+ntary|temporal"}}]}}
+Use the passage numbers shown. Return {{"pairs":
+[]}} if there are none.
+\end{verbatim}\end{footnotesize}
+\paragraph{Forced-choice skeleton (no ``unknown'').}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+You must give your best answer; "unknown" is not
+allowed.
+{instruction}
+{context}
+{conflicts}
+Question: {question}
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Pick instruction (with the neutral flag).}
+\begin{footnotesize}\begin{verbatim}
+When flagged passages conflict, decide which side is
+better supported by the other passages and by what
+you know, and answer with that side only.
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: neutral flag, single-answer skeleton.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [POTENTIAL CONFLICT with passage(s): 2]:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [POTENTIAL CONFLICT with passage(s): 0]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+- Passages 0 and 2: possible contradiction
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: neutral flag without pairs.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [POTENTIAL CONFLICT]:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [POTENTIAL CONFLICT]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+Some of the marked passages conflict with each
+other.
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: one-wrong flag without pairs.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [IN CONFLICT; some marked passages contain
+misinformation]:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [IN CONFLICT; some marked passages contain
+misinformation]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+Some of the marked passages contain misinformation
+(it is not known which).
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: directional flag without pairs.}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2 [LIKELY MISINFORMATION]:
+<passage 2>
+
+POTENTIAL CONFLICTS DETECTED:
+Passages marked LIKELY MISINFORMATION probably
+contain false information.
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: answer key (also the verdict key, with the detector's answers).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+Passage 2:
+<passage 2>
+
+NOTE: The answer "<wrong answer>" is false.
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: hint (the detector model's own answer).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below. The
+question has exactly one correct answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0:
+<passage 0>
+
+Passage 1:
+<passage 1>
+
+NOTE: Another model that read these passages
+answered: "<other model's answer>".
+
+Question: Who founded X?
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <your one answer>
+\end{verbatim}\end{footnotesize}
+\paragraph{Example: WikiContradict (default skeleton, neutral flag).}
+\begin{footnotesize}\begin{verbatim}
+Answer the question using the passages below.
+If the passages support more than one valid answer
+(for example, different people or things share the
+same name), give every valid answer.
+If no passage answers the question, the answer is
+"unknown".
+
+Passage 0 [POTENTIAL CONFLICT with passage(s): 1]:
+<passage 0>
+
+Passage 1 [POTENTIAL CONFLICT with passage(s): 0]:
+<passage 1>
+
+POTENTIAL CONFLICTS DETECTED:
+- Passages 0 and 1: possible contradiction
+
+Question: <question>
+
+Give a brief explanation, then end with one line in
+exactly this format:
+Final answer(s): <answer 1> | <answer 2> | ...
+\end{verbatim}\end{footnotesize}
+\paragraph{Paraphrase prompt (artefact probe, H29).}
+\begin{footnotesize}\begin{verbatim}
+Paraphrase the passage below. Keep every fact, name,
+number, date and place exactly as stated, including
+any that seem wrong; do not add, remove or correct
+information, and keep about the same length. Output
+only the paraphrased passage.
+
+Passage:
+{passage}
+\end{verbatim}\end{footnotesize}
+\paragraph{LLM judge of the string matcher.}
+\begin{footnotesize}\begin{verbatim}
+You are checking how a model's answer was scored.
+Read the question, the correct answer(s), the wrong
+(misinformation) answer(s), and the model's full
+response. Judge only the model's final answer.
+
+Question: {question}
+Correct answer(s): {gold}
+Wrong answer(s): {wrong}
+
+Model response:
+<<<
+{response}
+>>>
+
+Reply with JSON only: {{"gives_all_correct":
+true/false, "gives_wrong": true/false, "abstains":
+true/false}}
+- gives_all_correct: the final answer states every
+correct answer (paraphrases and aliases count).
+- gives_wrong: the final answer states any wrong
+answer as an answer (mentioning it only to reject it
+does not count).
+- abstains: the final answer is "unknown" or
+declines to answer.
+\end{verbatim}\end{footnotesize}

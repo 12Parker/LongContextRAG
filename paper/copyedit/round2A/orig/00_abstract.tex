@@ -1,0 +1,20 @@
+\begin{abstract}
+Retrieval-augmented generation systems increasingly detect contradictions among retrieved passages and flag them to
+the generator. We ask what a flag must say, and how accurate its detector must be, to help against
+misinformation. On fixed passages from six benchmarks, with seven generators from three families, we vary
+detector and flag format, in hypotheses pre-registered (H1--H9 before any confirmatory data,
+H10--H38 in nine later addenda). A neutral flag (``these passages conflict'') on the benchmarks' gold pairs does not reliably
+help. Its effect depends on answer policy and model family; pooled over \neuMlK\ settings, allowing
+for shared questions, it is \neuMlMu\ points \neuMlCI\ (exploratory). Naming the false side helps, but on average no more than
+an answer key naming the wrong answer (pooled difference \PoolTwentyThree\ points under our string metric; an outside-family judge favours the flag by \jdTwentyThreeJ). In a
+randomised test, a flag naming the false side raises accuracy by \hThirtyOneAMin\ to \hThirtyOneAMax\ points; naming the correct side lowers it by
+\ahThirtyOneBMax\ to \ahThirtyOneBMin. Randomised flags on true pairs therefore help only above a break-even direction
+precision, rising with generator accuracy from \beMin\ to \beMax. Real detectors are selective, so this
+threshold alone can misjudge them. This test's follow rates, with each cell's coverage and no-flag
+accuracy, predict the flag's effect in \frN\ new detector--generator cells on unseen questions, frozen before any
+flagged answer existed (mean error \frMae\ points, slope \frSlope), but overstate its harm on real health web pages, where
+naming the false side still helps and a neutral flag does not. A detector's verdict, passed as an answer key built from the benchmark's labels, matches its flag in mean
+accuracy under our metric. On genuine
+conflicts, direction removes valid answers, and when conflicts are rare a real detector's false flags on clean
+questions can outweigh its gains. We release the harness, pre-registrations and every run.
+\end{abstract}

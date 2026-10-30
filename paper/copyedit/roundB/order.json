@@ -1,0 +1,18 @@
+{
+ "paper": "/Users/cameronparker/Code/School/DeepLearning/LongContextRAG/paper/sections",
+ "ext": ".tex",
+ "parts": [
+  "00_abstract",
+  "01_intro",
+  "02_related",
+  "03_method",
+  "04_setup",
+  "05_results",
+  "06_discussion",
+  "07_limitations",
+  "08_app_prompts_additional",
+  "09_app_further_semantic",
+  "10_app_repro",
+  "11_app_grid"
+ ]
+}

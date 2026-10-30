@@ -1,0 +1,94 @@
+{
+ "llm_ans": {
+  "pair_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 24
+  },
+  "question_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 20,
+   "tn": 20,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": null,
+  "direction_coverage": null,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 0.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 0.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 0.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": 0.0
+   }
+  },
+  "total_cost_usd": 0.0085344
+ },
+ "llm_dir": {
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 0.6666666666666666,
+   "f1": 0.8,
+   "tp": 16,
+   "fp": 0,
+   "fn": 8
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 0.8,
+   "f1": 0.888888888888889,
+   "tp": 16,
+   "fp": 0,
+   "fn": 4,
+   "tn": 20,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": 0.5,
+  "direction_coverage": 0.625,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.13636363636363635,
+    "correct_marked": 0.2826086956521739,
+    "conflict_q_all_misinfo_marked": 0.15,
+    "conflict_q_any_correct_marked": 0.65,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.22727272727272727,
+    "correct_marked": 0.2391304347826087,
+    "conflict_q_all_misinfo_marked": 0.25,
+    "conflict_q_any_correct_marked": 0.55,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.22727272727272727,
+    "correct_marked": 0.10869565217391304,
+    "conflict_q_all_misinfo_marked": 0.25,
+    "conflict_q_any_correct_marked": 0.25,
+    "clean_q_any_correct_marked": 0.0
+   }
+  },
+  "total_cost_usd": 0.009058400000000001
+ }
+}

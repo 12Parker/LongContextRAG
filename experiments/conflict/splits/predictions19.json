@@ -1,0 +1,439 @@
+{
+ "fresh_cb_haiku_haiku": {
+  "clean": {
+   "n": 100,
+   "plain": 0.9,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5955555555555555,
+   "pred": 12.697244444444447,
+   "right": 0.6866666666666666,
+   "wrong": 0.06666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "claude-haiku-5-5",
+  "gen": "claude-haiku-5-5"
+ },
+ "fresh_cb_haiku_luna": {
+  "clean": {
+   "n": 100,
+   "plain": 0.9,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5955555555555555,
+   "pred": 4.215644444444445,
+   "right": 0.43333333333333335,
+   "wrong": 0.08666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6-luna",
+  "gen": "claude-haiku-5-5"
+ },
+ "fresh_cb_haiku_mini": {
+  "clean": {
+   "n": 100,
+   "plain": 0.9,
+   "pred": -5.7528,
+   "right": 0.0,
+   "wrong": 0.09
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5955555555555555,
+   "pred": 7.938755555555556,
+   "right": 0.7166666666666667,
+   "wrong": 0.27
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-4o-mini",
+  "gen": "claude-haiku-5-5"
+ },
+ "fresh_cb_haiku_qwen": {
+  "clean": {
+   "n": 100,
+   "plain": 0.9,
+   "pred": -16.406133333333333,
+   "right": 0.0,
+   "wrong": 0.28
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5955555555555555,
+   "pred": 3.1802666666666672,
+   "right": 0.5866666666666667,
+   "wrong": 0.3233333333333333
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "Qwen2.5-7B",
+  "gen": "claude-haiku-5-5"
+ },
+ "fresh_cb_haiku_terra": {
+  "clean": {
+   "n": 100,
+   "plain": 0.9,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5955555555555555,
+   "pred": 5.780444444444445,
+   "right": 0.33,
+   "wrong": 0.023333333333333334
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6.1-terra",
+  "gen": "claude-haiku-5-5"
+ },
+ "fresh_cb_luna_haiku": {
+  "clean": {
+   "n": 100,
+   "plain": 0.89,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5266666666666666,
+   "pred": 18.381733333333333,
+   "right": 0.6866666666666666,
+   "wrong": 0.06666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "claude-haiku-5-5",
+  "gen": "gpt-6-luna"
+ },
+ "fresh_cb_luna_luna": {
+  "clean": {
+   "n": 100,
+   "plain": 0.89,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5266666666666666,
+   "pred": 7.4125444444444435,
+   "right": 0.43333333333333335,
+   "wrong": 0.08666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6-luna",
+  "gen": "gpt-6-luna"
+ },
+ "fresh_cb_luna_mini": {
+  "clean": {
+   "n": 100,
+   "plain": 0.89,
+   "pred": -6.432500000000001,
+   "right": 0.0,
+   "wrong": 0.09
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5266666666666666,
+   "pred": 13.693288888888889,
+   "right": 0.7166666666666667,
+   "wrong": 0.27
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-4o-mini",
+  "gen": "gpt-6-luna"
+ },
+ "fresh_cb_luna_qwen": {
+  "clean": {
+   "n": 100,
+   "plain": 0.89,
+   "pred": -19.554799999999997,
+   "right": 0.0,
+   "wrong": 0.28
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5266666666666666,
+   "pred": 8.10082222222222,
+   "right": 0.5866666666666667,
+   "wrong": 0.3233333333333333
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "Qwen2.5-7B",
+  "gen": "gpt-6-luna"
+ },
+ "fresh_cb_luna_terra": {
+  "clean": {
+   "n": 100,
+   "plain": 0.89,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.5266666666666666,
+   "pred": 8.20207777777778,
+   "right": 0.33,
+   "wrong": 0.023333333333333334
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6.1-terra",
+  "gen": "gpt-6-luna"
+ },
+ "fresh_cb_mini_haiku": {
+  "clean": {
+   "n": 100,
+   "plain": 0.8666666666666667,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.4744444444444444,
+   "pred": 17.688499999999998,
+   "right": 0.6866666666666666,
+   "wrong": 0.06666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "claude-haiku-5-5",
+  "gen": "gpt-4o-mini"
+ },
+ "fresh_cb_mini_luna": {
+  "clean": {
+   "n": 100,
+   "plain": 0.8666666666666667,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.4744444444444444,
+   "pred": 8.012833333333333,
+   "right": 0.43333333333333335,
+   "wrong": 0.08666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6-luna",
+  "gen": "gpt-4o-mini"
+ },
+ "fresh_cb_mini_mini": {
+  "clean": {
+   "n": 100,
+   "plain": 0.8666666666666667,
+   "pred": -4.1144,
+   "right": 0.0,
+   "wrong": 0.09
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.4744444444444444,
+   "pred": 14.185366666666665,
+   "right": 0.7166666666666667,
+   "wrong": 0.27
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-4o-mini",
+  "gen": "gpt-4o-mini"
+ },
+ "fresh_cb_mini_qwen": {
+  "clean": {
+   "n": 100,
+   "plain": 0.8666666666666667,
+   "pred": -12.171766666666667,
+   "right": 0.0,
+   "wrong": 0.28
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.4744444444444444,
+   "pred": 9.739466666666665,
+   "right": 0.5866666666666667,
+   "wrong": 0.3233333333333333
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "Qwen2.5-7B",
+  "gen": "gpt-4o-mini"
+ },
+ "fresh_cb_mini_terra": {
+  "clean": {
+   "n": 100,
+   "plain": 0.8666666666666667,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.4744444444444444,
+   "pred": 9.15,
+   "right": 0.33,
+   "wrong": 0.023333333333333334
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6.1-terra",
+  "gen": "gpt-4o-mini"
+ },
+ "fresh_cb_terra_haiku": {
+  "clean": {
+   "n": 100,
+   "plain": 0.94,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.7166666666666667,
+   "pred": 7.357166666666667,
+   "right": 0.6866666666666666,
+   "wrong": 0.06666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "claude-haiku-5-5",
+  "gen": "gpt-6.1-terra"
+ },
+ "fresh_cb_terra_luna": {
+  "clean": {
+   "n": 100,
+   "plain": 0.94,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.7166666666666667,
+   "pred": -1.742666666666667,
+   "right": 0.43333333333333335,
+   "wrong": 0.08666666666666667
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6-luna",
+  "gen": "gpt-6.1-terra"
+ },
+ "fresh_cb_terra_mini": {
+  "clean": {
+   "n": 100,
+   "plain": 0.94,
+   "pred": -8.5266,
+   "right": 0.0,
+   "wrong": 0.09
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.7166666666666667,
+   "pred": -3.1344333333333334,
+   "right": 0.7166666666666667,
+   "wrong": 0.27
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-4o-mini",
+  "gen": "gpt-6.1-terra"
+ },
+ "fresh_cb_terra_qwen": {
+  "clean": {
+   "n": 100,
+   "plain": 0.94,
+   "pred": -25.5798,
+   "right": 0.0,
+   "wrong": 0.28
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.7166666666666667,
+   "pred": -10.1054,
+   "right": 0.5866666666666667,
+   "wrong": 0.3233333333333333
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "Qwen2.5-7B",
+  "gen": "gpt-6.1-terra"
+ },
+ "fresh_cb_terra_terra": {
+  "clean": {
+   "n": 100,
+   "plain": 0.94,
+   "pred": 0.0,
+   "right": 0.0,
+   "wrong": 0.0
+  },
+  "conflict": {
+   "n": 300,
+   "plain": 0.7166666666666667,
+   "pred": 2.959233333333333,
+   "right": 0.33,
+   "wrong": 0.023333333333333334
+  },
+  "dataset": "conflictbank_fresh",
+  "det": "gpt-6.1-terra",
+  "gen": "gpt-6.1-terra"
+ },
+ "hc_haiku": {
+  "clean": {
+   "n": 0,
+   "plain": null,
+   "pred": null,
+   "right": null,
+   "wrong": null
+  },
+  "conflict": {
+   "n": 247,
+   "plain": 0.6963562753036437,
+   "pred": -16.56582995951417,
+   "right": 0.3643724696356275,
+   "wrong": 0.4777327935222672
+  },
+  "dataset": "healthcontradict",
+  "det": "gpt-4o-mini",
+  "gen": "claude-haiku-5-5"
+ },
+ "hc_luna": {
+  "clean": {
+   "n": 0,
+   "plain": null,
+   "pred": null,
+   "right": null,
+   "wrong": null
+  },
+  "conflict": {
+   "n": 247,
+   "plain": 0.680161943319838,
+   "pred": -19.37757085020243,
+   "right": 0.3643724696356275,
+   "wrong": 0.4777327935222672
+  },
+  "dataset": "healthcontradict",
+  "det": "gpt-4o-mini",
+  "gen": "gpt-6-luna"
+ },
+ "hc_mini": {
+  "clean": {
+   "n": 0,
+   "plain": null,
+   "pred": null,
+   "right": null,
+   "wrong": null
+  },
+  "conflict": {
+   "n": 247,
+   "plain": 0.6045883940620782,
+   "pred": -8.16842105263158,
+   "right": 0.3643724696356275,
+   "wrong": 0.4777327935222672
+  },
+  "dataset": "healthcontradict",
+  "det": "gpt-4o-mini",
+  "gen": "gpt-4o-mini"
+ }
+}

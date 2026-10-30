@@ -1,0 +1,53 @@
+{
+ "synth-p1-r1-all-d0.5": {
+  "target_precision": 1.0,
+  "target_recall": 1.0,
+  "target_direction": 0.5,
+  "fp_rate": 0.0,
+  "capped": false,
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 300,
+   "fp": 0,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 300,
+   "fp": 0,
+   "fn": 0,
+   "tn": 100,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": 0.49333333333333335,
+  "direction_coverage": 1.0,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.55,
+    "correct_marked": 0.3375,
+    "conflict_q_all_misinfo_marked": 0.55,
+    "conflict_q_any_correct_marked": 0.45,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.49333333333333335,
+    "correct_marked": 0.38,
+    "conflict_q_all_misinfo_marked": 0.49333333333333335,
+    "conflict_q_any_correct_marked": 0.5066666666666667,
+    "clean_q_any_correct_marked": 0.0
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.49333333333333335,
+    "correct_marked": 0.38,
+    "conflict_q_all_misinfo_marked": 0.49333333333333335,
+    "conflict_q_any_correct_marked": 0.5066666666666667,
+    "clean_q_any_correct_marked": 0.0
+   }
+  },
+  "total_cost_usd": 0.0
+ }
+}
