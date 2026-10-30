@@ -3,12 +3,12 @@
 
 A question $q$ comes with retrieved passages $P=(p_0,\dots,p_{n-1})$. A \emph{detector} returns flagged pairs
 $F\subseteq\{(i,j): i<j\}$; a \emph{directional} detector also returns, for each flagged pair, a \emph{suspect}
-set $S_{ij}\subseteq\{i,j\}$: the side it believes is misinformation. A \emph{format} turns $(P,F,S)$ into the
-generator's prompt. We vary detectors and formats independently. Every prompt shares a skeleton: passages, question,
+set $S_{ij}\subseteq\{i,j\}$, the side it believes is misinformation. A \emph{format} turns $(P,F,S)$ into the
+generator's prompt. We vary detectors and formats independently. Every prompt shares a skeleton: passages, question
 and an instruction to end with a \texttt{Final answer(s):} line. The \emph{default} skeleton asks for every valid
 answer when the passages support several (RAMDocs contains same-name ambiguity, so a correct answer may need several
-entities). The \emph{minimal} skeleton drops that policy; its answer line allows several answers without inviting
-them. The \emph{single} skeleton says the question has exactly one correct answer (true of ConflictBank by
+entities). \emph{Minimal} drops that policy; its answer line allows several answers without inviting
+them. \emph{Single} says the question has exactly one correct answer (true of ConflictBank by
 construction). All three allow ``unknown'' when no passage answers the question; the \emph{forced} skeleton is
 \emph{single} without that option (Appendix~\ref{app:prompts}).
 
@@ -16,22 +16,22 @@ construction). All three allow ``unknown'' when no passage answers the question;
 \label{sec:formats}
 \begin{description}[leftmargin=0pt,itemsep=1pt,topsep=2pt]
 \item[No flags (plain).] Passages and question only.
-\item[Instruction.] Plain plus a generic, detector-free instruction to check the passages for contradictions.
+\item[Instruction.] Plain plus a generic, detector-free instruction to check the passages for contradictions:
 v1 ends ``if a disagreement reflects genuinely different valid answers, report each one''; v2 asks the model to
 judge which passages are reliable and omit answers supported only by unreliable ones.
 \item[Flag (neutral).] Each flagged passage gets the header \texttt{[POTENTIAL CONFLICT with passage(s): j]}, followed by a list
-\texttt{Passages i and j: possible contradiction}. The format is CAAG's original, except that every detector's
+\texttt{Passages i and j: possible contradiction}. The format is CAAG's original; every detector's
 flags render identically, so detectors differ only in \emph{which} pairs they flag.
 \item[One-wrong flag.] As Flag, but adds that exactly one passage of the pair contains misinformation, without saying
 which.
 \item[Directional flag.] As Flag, but suspect passages are headed \texttt{[LIKELY MISINFORMATION; conflicts with
 passage(s): j]}, and the list says which passage likely contains misinformation.
 \item[Controls.] \emph{Pick}: the neutral flag plus ``decide which side is better supported and answer with that
-side only''. \emph{No pairs}: flagged passages are marked, but not which conflicts
+side only''. \emph{No pairs}: flagged passages are marked, not which conflicts
 with which. \emph{Answer key}: plain plus ``The answer $X$ is false'' for each wrong answer, with no passage marked.
-\item[Remove (suspect).] Each flagged pair's suspect passages are deleted. For a pair without a suspect, the
-second passage is deleted, as the original CAAG \textsc{remove} strategy does without retrieval scores.
-\item[Single call.] No detector: one call that writes \texttt{Suspect passages: \dots} and then answers from
+\item[Remove (suspect).] Each flagged pair's suspect passages are deleted; for a pair without a suspect, its
+second passage, as the original CAAG \textsc{remove} strategy does without retrieval scores.
+\item[Single call.] No detector: one call writes \texttt{Suspect passages: \dots}, then answers from
 the other passages, at half the calls of a detector pipeline.
 \item[Closed book.] No passages: what the generator knows without retrieval.
 \end{description}
@@ -40,23 +40,23 @@ the other passages, at half the calls of a detector pipeline.
 \label{sec:detectors}
 \begin{description}[leftmargin=0pt,itemsep=1pt,topsep=2pt]
 \item[CAAG] (Contradiction-Aware Attention Gating) is a heuristic detector from an earlier, unpublished RAG system,
-used with its code unchanged. CAAG scores similar pairs by negation, entity-mismatch and temporal cues, runs locally
+code unchanged. CAAG scores similar pairs by negation, entity-mismatch and temporal cues, runs locally
 and gives no direction (Appendix~\ref{app:extra}).
 \item[NLI] is \texttt{nli-deberta-v3-base} \citep{he2023debertav3}, a cross-encoder scored in both orders; a pair is
 flagged if the larger contradiction probability exceeds $0.5$. It gives no direction.
-\item[LLM] is a single call that lists, as JSON, contradicting pairs, distinguishing them from ambiguity, complementary and
-temporal relations, and names the side more likely to be misinformation (or ``both'' or ``unclear''). It is
+\item[LLM] is a single call that lists contradicting pairs as JSON, distinguishing them from ambiguity, complementary and
+temporal relations. It names the likelier misinformation side (or ``both'' or ``unclear''). Its model is
 gpt-4o-mini (temperature 0) unless stated; in the crossed design gpt-4.1, gpt-6-luna, gpt-6.1-terra, Claude Haiku 5.5
 and Claude Sonnet 5.5 run the same prompt.
-\item[Random] flags each pair independently at CAAG's per-pair flag rate, a placebo.
+\item[Random] is a placebo flagging each pair independently at CAAG's per-pair flag rate.
 \item[Oracle] flags exactly the gold contradiction pairs (as the benchmark's labels define them) and names the gold
 misinformation side. The
-\emph{inverted oracle}, an adversarial control, flags the same pairs but names the correct side.
+\emph{inverted oracle} (adversarial control) flags the same pairs but names the correct side.
 \end{description}
 
 \subsection{Synthetic detectors}
 \label{sec:synthetic}
-To separate a detector's accuracy from its identity, we build detectors from gold labels with a chosen pair-level
+To separate a detector's accuracy from its identity, we build gold-label detectors with a chosen pair-level
 precision $p\in\{0.25,0.5,0.75,1\}$, recall $r\in\{0.25,0.5,1\}$ and direction accuracy $d\in\{0.5,0.75,1\}$ (36
-grid cells), each rendered as a directional flag and as removal. All cells reuse the same random draws, so they are nested
-and comparisons across cells are paired (Appendix~\ref{app:grid}).
+grid cells), each rendered as a directional flag and as removal. All cells reuse the same random draws, so they nest
+and cross-cell comparisons are paired (Appendix~\ref{app:grid}).

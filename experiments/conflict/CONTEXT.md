@@ -636,3 +636,13 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   permalink ids, and social-media profile URLs (a TikTok link, path and query included). Public figures' @-handles quoted
   in tweets stay. Regenerated `audit8_raguard.csv` (4 u/ names, 4 comment ids, 1 TikTok URL); the pairs sheet and key
   are byte-identical. Earlier commits on the branch still hold the unredacted sheet.
+
+## Round 15: second copy-edit pass (2026-10-30)
+
+- Three rounds (2A coherence, 2B sentence craft, 2C concision) over every section except related.tex and app_grid.tex
+  (unchanged since the first pass); briefs, notes and triage in `paper/copyedit/round2{A,B,C}/`, split/join tool
+  `paper/copyedit/tools/rounds2.py`. Edited prose −3.0% in round 2C; no number or macro lost.
+- Coordinator fixes: Results now states H33 fails; Ethics matches the redacted audit sheet; app:repro H10–H38 and a
+  §18/§19 deviations item; H38 shift CIs signed; selection effects said to be over all 400 questions; intro's release
+  sentence and research question restored. `\clearpage` before Limitations keeps it at the top of page 9.
+- **Open:** human audit sheet unlabelled; data-configuration details for ConflictBank-fresh and HealthContradict.

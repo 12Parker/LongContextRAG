@@ -1,0 +1,89 @@
+\section*{Limitations}
+
+\paragraph{Models and detectors.} We test seven generators from three families: four OpenAI models (gpt-4o-mini,
+gpt-4.1 and two current reasoning models), Claude Haiku 5.5 and Sonnet 5.5, and a 4-bit Qwen2.5-7B. Gemini
+serves only as a judge, and we run no large open model. Qwen2.5-7B, gpt-6.1-terra and Claude Sonnet ran with one seed,
+as did gpt-4.1 outside RAMDocs. The reasoning and Claude models ran only at default temperature and so sample
+nondeterministically. Claude ran through Anthropic's OpenAI-compatible endpoint. The LLM detector is a single
+prompt. The published baselines are reimplemented (Astute RAG has no official code; restoring TrustRAG's system message
+changed little), NLI sees only a sentence-sized window, and we compare against no trained detector such as
+ConflictRAG's \citep{wang2026conflictrag}. The crossed reliability test (H24) covers \hTwentyFourCells\
+detector--generator cells on one benchmark with six detectors, so a test of a detector-level property has little
+power (an exact permutation has \hRedoNPerm\ arrangements). The generator's own accuracy dominated the
+registered H24 correlation. Concurrent runs gave a detector slightly different outputs across cells, but identical
+ones for at least \frozenShareMin\% of questions; restricting each cell to those moves no
+cell's gain by more than \frozenMaxShift\ points. The follow-rate account was defined after seeing the crossed cells. Its prospective
+test (H32) uses unseen questions but the same benchmark, prompt and generators. The account overstates harm on
+clean questions and on HealthContradict. The break-even direction precision is a calibration for randomised flags on true pairs, not a validated
+rule for selective detectors.
+
+\paragraph{Data and power.} Confirmatory evidence comes from two benchmarks: RAMDocs (300 questions, 139
+with conflicts) and ConflictBank (400 sampled questions, 300 with conflicts). In both, misinformation is
+synthetic, made by editing or generating text around a substituted answer; ConflictBank's passages are LLM-written
+on both sides. The current reasoning models distrust ConflictBank's generated passages when asked to judge them
+(Appendix~\ref{app:more}), which suggests generated benchmarks may not measure how such models treat real
+documents. Reversing and paraphrasing the passages do not significantly change the detectors' hit rate (H29), but
+equivalence within $\pm$5 points is shown for only one of four changes. Position, surface style and deeper regularities of generated text are therefore
+not ruled out as sources of their direction. The majority variant tests one
+case where the false side is more numerous, but its extra wrong-side passages are generated for the same substitution,
+which a real attacker would vary, and include ConflictBank's temporal and semantic conflicts, which we count as
+misinformation. RAMDocs' document labels are imperfect, and its pair rule does not align entities
+(Section~\ref{sec:setup}). We exclude 35 hold-out questions whose status depends on
+documents we could not label without human annotation, and check that conclusions survive treating those
+documents as misinformation. RAGuard's misleading side is real text, but its labels are behavioural (whether GPT-4
+judged the claim correctly with the post). An LLM audit finds only \rgAudContradict\% of sampled supporting--misleading
+pairs to contradict (Appendix~\ref{app:semantic}), so its oracle is a label transfer, not a factual oracle. With
+posts in context, generators abstain on \rgAbstMin--\rgAbstMax\% of conflict claims, so accuracy on this
+true/false task falls below chance; on the claims they answer it is \rgAnsMin--\rgAnsMax\%, against
+\rgCbMin--\rgCbMax\% closed-book. Every generator is more accurate closed-book than with RAGuard's posts
+(gpt-4o-mini \zcRgMiniConflict\% against \zpRgMiniConflict\%), so they make a weak retrieval setting.
+HealthContradict's pages are real, but its labels are as released: an LLM judge finds the correct page supporting
+the gold answer for \hcLabCorrect\% of items and the misinformation page the wrong answer for \hcLabMis\%.
+WikiContradict has genuine conflicts but no misinformation side. CONFLICTS shows no significant effect for any
+condition; scored only on items with a reference answer, it can neither confirm nor refute our findings. Our
+comparisons detect effects of about \mdeMed\ points with 80\% power, so smaller effects, including small harms on clean
+questions, may be missed.
+
+\paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition and scores our
+MADAM-RAG port close to the published number on the pilot split, but the published subset is unknown, so this
+is not a reproduction. The metric is string matching: it misses paraphrases, and partial answers interact with ``no wrong
+answer''. We report the more lenient bidirectional variant throughout and mark conclusions that depend on
+it. An outside-family LLM judge agrees with the matcher on \semAgree\% of \semN\ paired outputs. The matcher's
+misses depend on the condition (more under answer keys and directional flags) but move no contrast by more than
+\semDidMax\ points (Appendix~\ref{app:semantic}). Re-scored by that judge over all \jdN\ responses, neither pooled equivalence holds within
+$\pm$3 (the flag leads by \jdThirtyJ\ and \jdTwentyThreeJ; H38), so those claims hold under the matcher only.
+No human labels check either scorer: the paired, blinded audit sheet we release is unlabelled.
+
+\paragraph{Direction and the grid.} Oracle direction is close to an answer key (H23), so the
+oracle rows are ceilings, not findings about detectors. Direction precision is the share of a detector's flags on true
+contradictions that name the false side; pair precision, the share of its flagged pairs that are
+true contradictions. The gpt-4o-mini LLM detector's direction precision is
+\dirAccLlm\% on RAMDocs and \cbDirAccLlm\% on ConflictBank. Its per-question hit rate is lower because it also misses pairs. Its directional flag's gain over
+all ConflictBank questions with gpt-4o-mini is not significant after correction (H15), and with stronger generators it
+hurts. In the grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels.
+Synthetic false flags are spread uniformly with a random suspect side, whereas real detectors concentrate their
+errors. The grid predicts real detectors only roughly, and three detectors cannot show whether document- or pair-level
+summaries predict better.
+
+\paragraph{Pre-registration.} H1--H9 were registered before the confirmatory run. H10--H38
+were registered in nine addenda, after earlier results were known but before their own runs. The only
+timestamp is the repository's commit history, not a third-party registry. Holm controls error within each family, not
+across the programme: of \fdrN\ registered tests, \fdrHolm\ are significant under Holm and \fdrBH\ under a
+Benjamini--Hochberg FDR over all of them (both in the hypothesis tables). Several analyses were chosen after
+seeing data and are labelled as such: the TOST margin, the single- and multi-answer split, the document-level
+placement axes, the post-hoc comparison of detector and generator reliability that H24 later tested, H24's mechanism
+score, and the refinement of permutation $p$-values at their floor.
+
+\paragraph{Scope.} We study flags passed to the generator as text. Learned interfaces such as soft prompts or
+credibility fine-tuning \citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may trade off differently. We test one adversarial case, a detector that always names the wrong side, not an attacker who controls
+which pairs are flagged.
+
+\section*{Ethics Statement}
+This work uses public benchmarks and commercial model APIs and involves no human subjects. RAGuard's passages are
+public Reddit posts that can contain usernames; we use them as released, and the RAGuard audit sheet we release replaces private users' handles with placeholders. The main
+risk is dual use: a false ``likely misinformation'' label, or removing a passage, can
+change a RAG system's answers. An inverted oracle that names the correct side as misinformation costs \aadvDirConf\
+points on RAMDocs and \azCbMiniOracleInvFlagDirectionalConflict\ on ConflictBank as a flag, and \aadvRemConf\ on
+RAMDocs when the passage it names is removed. An adversary who can trigger a deployed detector could exploit this
+\citep{zou2025poisonedrag}. We therefore report harm on clean questions alongside every gain, and argue that
+systems should measure what a detector does at the document level before acting on its flags.
