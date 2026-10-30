@@ -629,3 +629,10 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   table gains HealthContradict; body trimmed to keep Limitations at the top of page 9 (baselines, H31 split as run,
   per-question agreement and utility details moved to or left in the appendix).
 - **Open:** human audit sheet still unlabelled; handle redaction in `audit8_raguard.csv` still undecided.
+
+## Round 14: handle redaction (2026-10-30)
+
+- `export_audit8.redact` now scrubs private users from the RAGuard audit sheet: Reddit u/ names and user pages, comment
+  permalink ids, and social-media profile URLs (a TikTok link, path and query included). Public figures' @-handles quoted
+  in tweets stay. Regenerated `audit8_raguard.csv` (4 u/ names, 4 comment ids, 1 TikTok URL); the pairs sheet and key
+  are byte-identical. Earlier commits on the branch still hold the unredacted sheet.

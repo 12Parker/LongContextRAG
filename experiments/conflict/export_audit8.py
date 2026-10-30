@@ -14,12 +14,28 @@ from __future__ import annotations
 import argparse
 import csv
 import random
+import re
 from pathlib import Path
 
 from . import judge8 as J
 
 OUT = Path(__file__).resolve().parents[2] / "runs/labelling"
 LABELS = ("gives_gold", "asserts_wrong", "rejects_wrong", "abstains", "other_answer")
+# private users' handles in the released RAGuard posts: Reddit u/ names and user pages, comment permalinks (the
+# comment id resolves to its author) and social-media profile URLs, path and query included. Public figures'
+# @-handles quoted in tweets stay.
+HANDLES = ((re.compile(r"(?<![A-Za-z0-9_])/?u/[A-Za-z0-9_-]{3,}"), "u/[user]"),
+           (re.compile(r"reddit\.com/(?:u|user)/[A-Za-z0-9_-]+"), "reddit.com/user/[user]"),
+           (re.compile(r"(reddit\.com/r/[^/\s]+/comments/[^/\s]+/[^/\s]+/)[a-z0-9]{5,8}(?=/)"), r"\1[comment]"),
+           (re.compile(r"((?:tiktok|instagram|medium)\.com/)@[^\s)\]]+"), r"\1@[user]"))   # the video id resolves too
+
+
+def redact(text: str) -> str:
+    for pat, sub in HANDLES:
+        text = pat.sub(sub, text)
+    return text
+
+
 INSTRUCTIONS = ("Label each response's FINAL answer: gives_gold = states every reference answer (aliases count); "
                 "asserts_wrong = states a known wrong answer as true (mentioning it to reject it does not count); "
                 "rejects_wrong = explicitly says a wrong answer is false; abstains = unknown/declines; "
@@ -66,8 +82,8 @@ def main(argv=None):
                     "b_false_about_claim", "a_supports_verdict", "notes"])
         for k, (m, _) in enumerate(rg):
             e = ex[m["id"]]
-            w.writerow([k, e.question.split("Claim:", 1)[-1].strip(), e.gold_answers[0], e.passages[m["a"]],
-                        e.passages[m["b"]], "", "", "", "", ""])
+            w.writerow([k, e.question.split("Claim:", 1)[-1].strip(), e.gold_answers[0], redact(e.passages[m["a"]]),
+                        redact(e.passages[m["b"]]), "", "", "", "", ""])
     (OUT / "audit8_INSTRUCTIONS.txt").write_text(
         INSTRUCTIONS + "\nRAGuard sheet: contradict / temporally_compatible = 1/0; b_false_about_claim and "
         "a_supports_verdict = yes/no/unclear. Label independently; do not open audit8_key.csv.\n")
