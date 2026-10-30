@@ -9,8 +9,9 @@
 Benchmark & What it supports & What it cannot support \\
 \midrule
 RAMDocs & neutral and directional flags (H1--H12); confirmatory split & natural misinformation; entity-aligned pairs \\
-ConflictBank & answer policy; randomised direction and break-even (H31); crossed cells (H24, H30) & real documents; a prospective test of the cell account \\
+ConflictBank & answer policy; break-even (H31); crossed cells (H24, H30); prospective test (H32) & real documents \\
 RAGuard & what generators do with transferred labels & factual-oracle conclusions \\
+Health\-Contradict & flag formats on real pages (H37) & verified labels \\
 WikiContradict & coverage of competing sources (H28) & which answer is factually wrong \\
 CONFLICTS & null results only & any positive claim \\
 \bottomrule
@@ -45,7 +46,7 @@ least one supporting and one misleading post (up to two of each, plus two unrela
 misleading post; the question is whether the claim is true. Its post labels are behavioural: supporting or misleading according to whether GPT-4 judged the claim correctly with the post in context \citep[\S3.3]{zeng2025raguard}. They do not verify that two posts contradict or that the misleading one is false, so on RAGuard the ``oracle'' is a label transfer, not a factual oracle (audit in Appendix~\ref{app:semantic}).
 
 \textbf{WikiContradict} \citep{hou2024wikicontradict} has 253 questions, each with two genuinely contradicting
-Wikipedia passages; the reference answer is \emph{both} sides. The original evaluation also asks that an answer acknowledge the incompatibility and not prefer a side without support \citep[\S3.4]{hou2024wikicontradict}, so we measure coverage of the competing sources (original rubric in Appendix~\ref{app:semantic}). We also run 237 automatically scorable
+Wikipedia passages; the reference answer is \emph{both} sides. The original evaluation also asks that an answer acknowledge the incompatibility and not prefer a side without support \citep[\S3.4]{hou2024wikicontradict}, so we measure coverage of the competing sources (original rubric in Appendix~\ref{app:semantic}). \textbf{HealthContradict} \citep{zhang2026healthcontradict} pairs a yes/no health question with one real web page per side; the page agreeing with the topic's evidence-based answer is typed correct. We use 247 items over 81 topics, pages cut to 4,000 characters, labels as released (Appendix~\ref{app:fresh}). We also run 237 automatically scorable
 \textbf{CONFLICTS} \citep{cattan2025conflicts} questions (Appendix~\ref{app:repro}).
 
 \paragraph{Pre-registration and splits.}
@@ -54,12 +55,11 @@ questions (139 conflict, 126 clean, 35 excluded), we committed a pre-registratio
 hypotheses and corrections. These hypotheses, H1--H9, are the confirmatory core, registered before any confirmatory
 data. Every RAMDocs result in the main text is on this confirmatory split; pilot results appear only in the appendix.
 Unregistered comparisons, including every real-detector row of Table~\ref{tab:main}, are exploratory.
-Eight addenda registered H10--H31, each committed before its runs, so these were formed after the
-original confirmatory results were known. The last two addenda also registered re-analyses of data already
-seen. A final round of re-analyses (pooled answer-key comparisons, break-even precision, the prediction of the crossed
-cells, prevalence reweighting and a programme-wide FDR) was not registered. A ninth addendum (\S17) registered
-further re-analyses, corrected baselines and a semantic re-score, after a mock review and before their runs. All of
-these are exploratory (Table~\ref{tab:claims}). The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
+Later addenda registered H10--H31, each before its runs but after the confirmatory results were known, and
+re-analyses of seen data, some unregistered (pooled key comparisons, break-even, the crossed-cell account,
+prevalence, FDR). The last (\S19) registered H32--H38: a prospective test on 400 unseen ConflictBank questions, with
+predictions committed before any flagged answer existed, a full semantic re-score and HealthContradict. Re-analyses
+are exploratory (Table~\ref{tab:claims}). The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
 
 \paragraph{Generators and baselines.}
 The main generator is \texttt{gpt-4o-mini} \citep{openai2024gpt4o} (temperature 0.1, at most 256 output tokens, seeds

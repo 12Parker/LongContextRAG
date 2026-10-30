@@ -607,3 +607,25 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   metric; r/MAE out of the abstract); judge paragraph corrected; Discussion "only" scoped; τ labelled; ethics notes
   Reddit usernames; evidence table moved into Setup; Figure 1 redrawn. Body ends at the bottom of page 8.
 - **Open:** human audit sheet still unlabelled; consider redacting handles in `audit8_raguard.csv` before release.
+
+### Round 13 (2026-10-29): §19 new runs (budget raised to $250, gate $245)
+
+- **Registered first** (d6185df), predictions frozen from stage-1 detections and plain answers before any flagged
+  answer existed (067e5bc, `splits/predictions19.json`). New code: `run.py --detect-only`, `predict19.py`,
+  `judge10.py`, `revision10.py`, `assets10.py` (`tab_fresh`, `tab_hc`). Cost $13.63; spend $204.18.
+- **H32 prospective test (ConflictBank-fresh, 20 cells, 5 detectors incl. Qwen x 4 generators): holds.** MAE 1.4
+  [1.2, 2.4], slope 0.88 [0.77, 1.00], r 0.97 (within generators 0.97); baselines: generator mean 4.1, unit follow
+  rates 5.3 (both Holm p < 0.001), cell-level marginal 1.8, zero 8.7. H33 fails (sign right in 18/18 with |pred| ≥ 3,
+  but 1 of 2 predicted harms significant). H34 holds. H35: clean harm overstated (−4.9 pred, −1.4 obs). H36 holds
+  (fresh mini follow rates 50/50 inside frozen CIs). Selection picks the Haiku detector for every generator (= best).
+- **H38 full judge re-score (23,204 rows): equivalence fails under the judge.** H30a flag − verdict key +2.4
+  [90%: 1.3, 3.5] (matcher +1.2); H23 +2.5 [90%: 1.1, 3.9] (matcher −0.1). The matcher understates the flag by 1.2
+  and 2.6 points (misses more correct answers under keys). Paper now says equivalence holds under the matcher only.
+- **H37 HealthContradict (real health pages, 3 generators):** oracle directional +5.5 to +13.8 (all significant,
+  also vs neutral); neutral −2.4 to −0.1 (n.s.). Closed-book beats pages for every generator. Frozen prediction for the
+  LLM flag overstates harm (luna −19.4 pred vs −8.6; Haiku −16.6 vs +1.1). Judge label audit: correct page supports
+  gold 68%, misinfo page wrong answer 55%, both 37%.
+- **Writing:** abstract/intro/setup/results/limitations/discussion updated; new Appendix E (`app:fresh`); evidence
+  table gains HealthContradict; body trimmed to keep Limitations at the top of page 9 (baselines, H31 split as run,
+  per-question agreement and utility details moved to or left in the appendix).
+- **Open:** human audit sheet still unlabelled; handle redaction in `audit8_raguard.csv` still undecided.

@@ -40,12 +40,15 @@ Its mechanism depends on the answer policy: added misinformation, abstention, li
 Pooled effect, policy split, moderators, utility, transitions (\S\ref{sec:neutral}) & Tables~\ref{tab:pooled}, \ref{tab:utility} & re-analysis of data already seen; dependence: \S17 \\
 The directional flag beats the neutral one (\S\ref{sec:direction}) & H3, H9--H12, H15, H16, H19, H25, H26 & H3: before any confirmatory data; rest: addenda \\
 Oracle direction is close to an answer key (\S\ref{sec:direction}) & H23 and its TOST & registered addendum; TOST registered in \S13.4 \\
-Pooled, oracle direction is equivalent to an answer key on average (\S\ref{sec:direction}) & pooled H23; per-comparison TOST & unregistered re-analysis; heterogeneity: \S17 \\
+Pooled, oracle direction is equivalent to an answer key on average, under the matcher (\S\ref{sec:direction}) & pooled H23; per-comparison TOST & unregistered re-analysis; heterogeneity: \S17 \\
+Under the judge, neither pooled equivalence holds (\S\ref{sec:direction}, \S\ref{sec:real}) & H38 & registered (\S19), LLM judge \\
+Direction helps and a neutral flag does not on real web pages (\S\ref{sec:direction}) & H37 & registered (\S19); labels as released \\
 Real-detector gains depend on the generator (\S\ref{sec:real}) & H15, H17, H19, H25, H26 & registered addenda \\
 Right flags gain less than wrong flags cost; similar follow rates (\S\ref{sec:real}) & H31 & registered addendum (\S16) \\
 Break-even direction precision rises with generator accuracy (\S\ref{sec:real}) & Table~\ref{tab:breakeven} & unregistered re-analysis \\
 Break-even is a calibration, not a rule for selective detectors (\S\ref{sec:real}) & Table~\ref{tab:selection} & re-analysis (\S17) \\
 Follow rates and coverage account for the crossed cells (\S\ref{sec:real}) & Figure~\ref{fig:reliability} & unregistered; retrospective \\
+Frozen, the account predicts unseen ConflictBank cells; it overstates harm on clean questions and HealthContradict (\S\ref{sec:real}) & H32--H36, Table~\ref{tab:fresh} & registered (\S19), predictions committed first \\
 Registered reliability gap correlates with the gain (\S\ref{sec:real}) & H24 & registered addendum (\S13), 5 of 30 cells existed \\
 The gap is dominated by generator accuracy; precision and recall matter within generators (\S\ref{sec:real}) & Table~\ref{tab:h24redo} & re-analysis of data already seen \\
 The detector's verdict as an answer key matches the flag; its model's answer as a hint does not (\S\ref{sec:real}) & H30, H27 & registered addenda (\S15, \S16); pooled TOST unregistered \\
@@ -209,7 +212,8 @@ against \semJudgeOnlyPlain\% without a flag. The failure of most concern, a fina
 both arms of each contrast gain, the judge moves every contrast by \semDidMin\ to \semDidMax\ points. One small contrast changes sign (RAMDocs oracle flag vs answer key, \semTwentyThreeRDMiniM\ to \semTwentyThreeRDMiniJ), and
 two whose matcher intervals include zero exclude it under the judge (unadjusted): Claude Haiku's neutral flag
 (\semNeuCBsHaikuJ) and gpt-4o-mini's LLM flag against its verdict key (\semThirtyCBsMiniM\ to \semThirtyCBsMiniJ, outside $\pm$3). With \semNq\ questions per contrast these
-intervals are too wide to confirm the $\pm$3-point equivalence claims, which therefore rest on the matcher. Given
+intervals are too wide to test the $\pm$3-point equivalence claims; judged over all their responses, both fail
+(Appendix~\ref{app:fresh}). Given
 the gold and wrong answers, the judge tests the scorer, not the benchmark labels. A blinded, paired human-audit sheet of
 150 of these pairs and 50 RAGuard post pairs is released unlabelled (\texttt{runs/labelling/audit8\_*}).
 
@@ -248,6 +252,44 @@ human sheet covers 50 of these pairs.
 on each question. The marginal break-even calculation (precision times $R$ plus its complement times $W$, at full
 coverage) has mean error \selMargMae\ points against the observed gains (\selMargCovMae\ when scaled by recall); the
 follow-rate account, which uses each cell's coverage and no-flag accuracy, has \predEightMae\ \predEightMaeCI.
+
+\section{Prospective Test, Full Re-score and HealthContradict (\S19)}
+\label{app:fresh}
+\input{generated/tab_fresh}
+\input{generated/tab_hc}
+\paragraph{The prospective test (H32--H36).} ConflictBank-fresh has 400 items built like our ConflictBank sample and
+sharing no subject with it. Detections and no-flag answers ran first; the predictions, from H31's follow rates fixed in
+\S19.1, were committed (\texttt{splits/predictions19.json}) before the flagged condition ran, and the analysis
+reproduces them exactly (maximum drift \frDrift\ points). All three H32 criteria hold: the slope's CI \frSlopeCI\ excludes 0 and
+includes 1 (intercept \frIntercept), the mean error is \frMae\ $\le$ 3, and it beats the generator-mean (\frMaeGen) and
+unit-follow-rate (\frMaeOnes) baselines (Holm $p<0.001$); the cell-level marginal estimate has \frMaeMarg\ and zero
+\frMaeZero. The sign is right in \frSignAgree\ of \frN\ cells and in all \frBigN\ with $|\text{pred}|\ge3$; of the
+\frHarmN\ cells predicted to lose 3 points or more, \frHarmConf\ does so significantly, so H33 fails. The within-generator
+correlation is \frRWithin\ (H34, $p<0.001$). On clean questions (H35) the account predicts \frCleanPred\ points on
+average and \frCleanObs\ occur (mean error \frCleanMae): a flag on a clean question changes fewer correct answers than
+H31's wrong-flag follow rate implies. A fresh randomised-direction run for gpt-4o-mini gives follow rates of
+\frFollowR\% \frFollowRCI\ and \frFollowW\% \frFollowWCI, inside the frozen intervals (H36). Choosing for each
+generator the detector with the highest prediction picks Claude Haiku every time, which is also the best observed
+(gpt-4o-mini generator \frSelMiniObs\ points against \frMiniDetMiniObs\ with the gpt-4o-mini detector; gpt-6.1-terra
+\frSelTerraObs\ against \frMiniDetTerraObs).
+
+\paragraph{Full re-score of the pooled equivalence tests (H38).} The \S17.3 judge scored every response feeding the
+pooled H30 and H23 tests (\jdN\ judged rows; agreement with the matcher \jdAgree\%). On the same cells and pooling,
+the LLM flag minus the verdict key is \jdThirtyM\ \jdThirtyMNinetyCI\ (90\% CI) under the matcher and \jdThirtyJ\
+\jdThirtyJNinetyCI\ under the judge; the oracle flag minus the answer key \jdTwentyThreeM\ \jdTwentyThreeMNinetyCI\
+and \jdTwentyThreeJ\ \jdTwentyThreeJNinetyCI. Neither is equivalent within $\pm$3 under the judge (the smallest margins
+that would pass are \jdThirtyJMargin\ and \jdTwentyThreeJMargin). The matcher misses more correct answers under the keys,
+so it understates the flag's advantage by \ajdThirtyShift\ \jdThirtyShiftCI\ and \ajdTwentyThreeShift\
+\jdTwentyThreeShiftCI\ points. Under either scorer the point estimates stay below 3 points.
+
+\paragraph{HealthContradict (H37).} With real web pages, the oracle directional flag beats no flag (H37a) and the
+neutral flag (H37c) for all three generators, and the neutral flag changes accuracy by at most \ahcNeuMini\ points (H37b;
+within $\pm$3 for gpt-6-luna and Claude Haiku). Closed-book accuracy exceeds accuracy with the pages for every
+generator (gpt-4o-mini \hcCbMini\% against \hcPlainMini\%). The gpt-4o-mini detector names the false page on
+\hcLlmRightMini\% of items and marks the correct page on \hcLlmWrongMini\%, so the frozen account predicts harm; the
+observed effects are smaller (Table~\ref{tab:hc}). The judge audit of the labels (\hcLabN\ items) finds the correct page
+supporting the gold answer for \hcLabCorrect\%, the misinformation page the wrong answer for \hcLabMis\%, and both for
+\hcLabBoth\%; long, noisy pages make many stances unclear to it, so the dataset's oracle is a label transfer too.
 
 \section{Reproducibility}
 \label{app:repro}

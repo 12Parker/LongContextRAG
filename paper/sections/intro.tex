@@ -11,9 +11,9 @@ oracle, and synthetic detectors of chosen quality) and the \emph{format} passing
 neutral ``these passages may conflict'' flag, a flag saying one side is false, not which, a
 \emph{directional} flag naming the likely misinformation, or removal of the suspect passage. After pilots on
 RAMDocs \citep{wang2025madam}, we pre-registered hypotheses H1--H9 and tested them on 300 held-out questions.
-Eight addenda (H10--H31), each committed before its runs, extended the study to ConflictBank \citep{su2024conflictbank}
+Nine addenda (H10--H38), each committed before its runs, extended the study to ConflictBank \citep{su2024conflictbank}
 (including a majority-misinformation variant), to RAGuard \citep{zeng2025raguard}, whose
-misleading side is real Reddit posts, and to seven generators from OpenAI, Anthropic and Qwen. Controls separate what a
+misleading side is real Reddit posts, to real health web pages (HealthContradict), and to seven generators from OpenAI, Anthropic and Qwen. Controls separate what a
 flag conveys: forced choice, an answer key, randomised direction, the detector's verdict as an answer key and its model's own answer as
 a hint, and \hTwentyFourCells\ cells crossing six detectors with six generators. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
 
@@ -22,16 +22,15 @@ Our findings:
 \item \textbf{A correct neutral flag does not reliably help.} Asked for every valid answer, OpenAI and Qwen models also give the
 misinformation; asked for one answer, some generators abstain on misinformed and correct answers
 alike; under forced choice the effect is small. Claude models move less; the minimal prompt is most harmful.
-These policy and family splits were coded after seeing data.
 \item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one, but
-on average it is equivalent to an answer key naming the wrong answer (pooled over \PoolTwentyThreeK\
-comparisons, which vary individually).
+on average it is close to an answer key naming the wrong answer (pooled over \PoolTwentyThreeK\
+comparisons, which vary individually; equivalent within $\pm$3 under our string metric, not under an LLM judge).
 \item \textbf{A directional flag pays only above a break-even precision.} When direction is randomised (H31), a wrong
 flag costs more than a right one gains, because generators follow both at similar rates and an accurate generator has
 more correct answers to lose. The break-even direction precision, which calibrates flags on true pairs, rises from \beMin\ for gpt-4o-mini to
 \beMax\ for gpt-6.1-terra. For real detectors precision alone can mislead; the follow rates, with
-what each detector flags, account for the effects (retrospective; Figure~\ref{fig:reliability}). The detector's verdict as an answer key matches its flag in mean accuracy (H30); its model's
-own answer as a hint does worse (H27).
+what each detector flags, predict the effects on unseen questions when frozen in advance (H32), though not on real
+web pages.
 \item \textbf{Direction is unsafe on genuine conflicts and costly when conflicts are rare.} On WikiContradict the LLM
 directional flag and removal cut the share of answers giving both valid sides (H28); at a 5\% share of conflict
 questions the LLM detector's flag has a negative estimated effect in \prevNegFive\ of \prevN\ settings (exploratory).

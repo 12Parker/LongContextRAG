@@ -1,0 +1,37 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}llrrrrrrr@{}}
+\toprule
+& & \multicolumn{5}{c}{Conflict questions} & \multicolumn{2}{c}{Clean} \\
+\cmidrule(lr){3-7}\cmidrule(lr){8-9}
+Generator & Detector & Right & Wrong & Acc. & Pred. & Obs. & Pred. & Obs. \\
+\midrule
+Claude Haiku & Qwen2.5-7B & 59 & 32 & 59.6 & $+$3.2 & $+$6.2 & $-$16.4 & $-$8.3 \\
+Claude Haiku & Claude Haiku & 69 & 7 & 59.6 & $+$12.7 & $+$14.6 & 0.0 & 0.0 \\
+Claude Haiku & gpt-4o-mini & 72 & 27 & 59.6 & $+$7.9 & $+$7.8 & $-$5.8 & $-$2.3 \\
+Claude Haiku & gpt-6-luna & 43 & 9 & 59.6 & $+$4.2 & $+$7.4 & 0.0 & 0.0 \\
+Claude Haiku & gpt-6.1-terra & 33 & 2 & 59.6 & $+$5.8 & $+$8.1 & 0.0 & 0.0 \\
+gpt-4o-mini & Qwen2.5-7B & 59 & 32 & 47.4 & $+$9.7 & $+$9.2 & $-$12.2 & $-$5.3 \\
+gpt-4o-mini & Claude Haiku & 69 & 7 & 47.4 & $+$17.7 & $+$16.0 & 0.0 & 0.0 \\
+gpt-4o-mini & gpt-4o-mini & 72 & 27 & 47.4 & $+$14.2 & $+$11.4 & $-$4.1 & $-$3.7 \\
+gpt-4o-mini & gpt-6-luna & 43 & 9 & 47.4 & $+$8.0 & $+$9.1 & 0.0 & 0.0 \\
+gpt-4o-mini & gpt-6.1-terra & 33 & 2 & 47.4 & $+$9.2 & $+$10.2 & 0.0 & 0.0 \\
+gpt-6-luna & Qwen2.5-7B & 59 & 32 & 52.7 & $+$8.1 & $+$6.9 & $-$19.6 & $-$2.7 \\
+gpt-6-luna & Claude Haiku & 69 & 7 & 52.7 & $+$18.4 & $+$17.3 & 0.0 & 0.0 \\
+gpt-6-luna & gpt-4o-mini & 72 & 27 & 52.7 & $+$13.7 & $+$11.6 & $-$6.4 & $-$3.0 \\
+gpt-6-luna & gpt-6-luna & 43 & 9 & 52.7 & $+$7.4 & $+$6.1 & 0.0 & 0.0 \\
+gpt-6-luna & gpt-6.1-terra & 33 & 2 & 52.7 & $+$8.2 & $+$8.8 & 0.0 & 0.0 \\
+gpt-6.1-terra & Qwen2.5-7B & 59 & 32 & 71.7 & $-$10.1 & $-$8.3 & $-$25.6 & 0.0 \\
+gpt-6.1-terra & Claude Haiku & 69 & 7 & 71.7 & $+$7.4 & $+$7.0 & 0.0 & 0.0 \\
+gpt-6.1-terra & gpt-4o-mini & 72 & 27 & 71.7 & $-$3.1 & $-$4.0 & $-$8.5 & $-$2.0 \\
+gpt-6.1-terra & gpt-6-luna & 43 & 9 & 71.7 & $-$1.7 & $-$0.7 & 0.0 & 0.0 \\
+gpt-6.1-terra & gpt-6.1-terra & 33 & 2 & 71.7 & $+$3.0 & $+$2.3 & 0.0 & 0.0 \\
+\bottomrule
+\end{tabular}
+\caption{Prospective test on ConflictBank-fresh (\S19.1; 300 conflict and 100 clean questions no earlier run used).
+\emph{Right}/\emph{Wrong}: \% of questions on which the detector names exactly the false side of a gold pair / marks a
+correct passage. \emph{Acc.}: no-flag accuracy. \emph{Pred.}: the frozen prediction, committed before any flagged
+answer existed; \emph{Obs.}: observed directional-flag effect, in points.}
+\label{tab:fresh}
+\end{table*}

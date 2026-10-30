@@ -410,7 +410,7 @@ def judge8_stats(rev):
         for (g, c), v in w.items():
             wo[f"{g}|{c}"] = {"n": len(v), "both": float(np.mean([x[1] for x in v])), "original": float(np.mean([x[2] for x in v])),
                               "matcher": float(np.mean([x[3] for x in v]))}
-        for g in {g for g, _ in w}:
+        for g in sorted({g for g, _ in w}):   # fixed order: the bootstrap shares one rng
             a = {x[0]: x for x in w.get((g, "plain"), [])}; b = {x[0]: x for x in w.get((g, "llm_dir+flag_directional"), [])}
             ids = sorted(set(a) & set(b))
             if ids:

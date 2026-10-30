@@ -1,0 +1,400 @@
+{"id": "cb-100033", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-100301", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-100329", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-100435", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-100491", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-100592", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-101162", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10130", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-101384", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10173", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-102021", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10209", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-102136", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10215", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-102194", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-102546", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-102875", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-103155", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10344", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-103584", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10393", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-104003", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-104693", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-105443", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-105605", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-105740", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-105796", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-105841", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-105896", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-106552", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10668", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-107034", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-10723", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-108840", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-108891", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-109179", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-109276", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-109543", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-109599", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-109882", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-110147", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-110521", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-110748", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-110870", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-111183", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-111368", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-11257", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-112788", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-112826", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-113060", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-113127", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-113291", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-113320", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-113381", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-113659", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-113993", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-114313", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-114716", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-115154", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-115749", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-116190", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-11652", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-117053", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-117135", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-117379", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-118807", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-119028", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-119192", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-119221", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-119241", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-119464", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-119951", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-120100", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-120120", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-121010", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-121225", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-121798", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-121879", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-122079", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-122109", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-122445", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-122504", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-122805", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-122839", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-123162", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-123920", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-124151", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-124166", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-124232", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-124681", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-124765", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-12539", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-125411", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-12709", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-12903", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-12921", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-13294", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-13422", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-13487", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-13769", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-14323", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-144", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-14466", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-14498", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-14816", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-15017", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-15065", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-15283", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-15550", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-16270", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-16473", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17003", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17194", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17257", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17466", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17562", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17579", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17835", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-1791", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-17963", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-18227", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-19153", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-19414", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-1959", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-1996", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-20548", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-20706", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-2106", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-21695", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-21776", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-22165", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-22789", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-23037", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-23309", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-23329", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-2352", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-23890", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-2420", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-24283", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-24381", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-24686", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-24835", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-24974", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-25004", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-25865", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-25871", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-25899", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-26616", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-26989", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-27176", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-28422", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-28910", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-28994", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-29796", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-29825", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-30292", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-31578", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-31828", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-32120", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-32326", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-32634", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-33292", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-33454", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-33875", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-3476", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-349", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-3510", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-35176", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-35285", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-36642", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-36681", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-36715", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-36755", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-37498", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-37988", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-38063", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-38195", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-38284", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-38665", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-38888", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-38953", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-39054", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-39434", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-39792", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-39879", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-39892", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-40725", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-40740", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-41160", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-41608", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-41785", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-42147", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-42971", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-43077", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-4320", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-43410", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-43813", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-43972", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-44933", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-44978", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-45125", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-46024", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-46045", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-46125", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-46795", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-46865", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-47171", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-47809", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-47867", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-47981", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-48051", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-48371", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-48439", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-49236", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-49259", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-49564", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-49678", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-49733", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-50981", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-50983", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-51044", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-51905", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-53055", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-53169", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-53605", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-53968", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-53997", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-54114", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-54295", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-54369", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-54626", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-54729", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-55158", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-56289", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-56383", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-56393", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-56480", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-56591", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-56693", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-57089", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-57154", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-57271", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-57461", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-57848", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-57866", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-58160", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-5855", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-58674", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-59571", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-59614", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-59722", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-60818", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-61492", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-61854", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-62324", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-62543", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-62751", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-62875", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-63361", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-63604", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-63644", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-63786", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-63907", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-64174", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-64501", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-65112", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-65190", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-65528", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-65775", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66010", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66039", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66117", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66262", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66345", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66691", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66740", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-66816", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-67469", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-67793", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-67926", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-68927", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-69386", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-6953", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-69681", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-69684", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-7004", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-70410", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-70635", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-71085", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-71145", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-71218", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-71542", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-71606", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-71692", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-71800", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-72334", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-72898", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-72925", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-73255", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-73643", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-73941", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-7401", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-74349", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-74412", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-74623", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-74727", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-75317", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-75429", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-75927", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-75975", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-75990", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-76273", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-76339", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-76669", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-76860", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-77002", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-77090", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-77418", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-79075", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-79686", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-80892", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-81523", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-82217", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-82392", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-82484", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-82662", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-82673", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-82809", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-82918", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-83132", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-83403", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-8347", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-83557", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-83636", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-83897", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-83919", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-8398", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-84020", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-84452", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-84774", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-84850", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-85116", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-85121", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-85664", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-86268", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87050", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87056", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87170", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87178", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87462", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87667", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87895", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-87909", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-88032", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-88525", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-88593", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-88881", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-8923", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-89530", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-89586", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-89716", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-89943", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-90388", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-90702", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-91029", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-9121", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-91379", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-91524", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-91613", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-92023", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-92343", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-92418", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-92553", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-92731", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-9309", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-93887", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-94537", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-94983", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-95226", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-95522", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-95690", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-96255", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-96265", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-9678", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-96894", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-97133", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-97165", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-97246", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-97416", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-97474", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-97750", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-98281", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-9866", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-98727", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-9880", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-98821", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-98883", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-98929", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-99148", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}
+{"id": "cb-99288", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {"fp_rate": 0.0, "capped": false}}

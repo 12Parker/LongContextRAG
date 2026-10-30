@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrllll@{}}
+\toprule
+& & & \multicolumn{3}{c}{Effect against no flag (points)} & \\
+\cmidrule(lr){4-6}
+Generator & No flag & Closed-book & Oracle neutral & Oracle directional & LLM directional & Pred. \\
+\midrule
+gpt-4o-mini & 60.5 & 76.1 & $-$2.4 [$-$6.0, $+$1.1] & $+$5.5 [$+$1.1, $+$10.1] & $-$2.7 [$-$6.8, $+$1.3] & $-$8.2 \\
+gpt-6-luna & 68.0 & 91.0 & $-$0.1 [$-$2.2, $+$2.0] & $+$11.7 [$+$7.7, $+$15.9] & $-$8.6 [$-$14.9, $-$2.8] & $-$19.4 \\
+Claude Haiku & 69.6 & 91.2 & $-$0.4 [$-$2.7, $+$2.0] & $+$13.8 [$+$9.7, $+$18.5] & $+$1.1 [$-$3.0, $+$5.2] & $-$16.6 \\
+\bottomrule
+\end{tabular}
+\caption{HealthContradict (\S19.3): yes/no health questions with one real web page per side, accuracy in \% and
+effects in points with topic-cluster bootstrap 95\% CIs. \emph{Pred.}: the frozen follow-rate prediction for the LLM
+directional flag (gpt-4o-mini detector), committed before any flagged answer existed.}
+\label{tab:hc}
+\end{table*}

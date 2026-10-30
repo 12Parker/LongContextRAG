@@ -6,7 +6,7 @@
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H1: detection quality}} \\
-H1 & F1 llm\_dir $>$ nli & $+$2.6 [$-$2.4, $+$7.5] & 0.311 (0.415) & not supported & -- \\
+H1 & F1 llm\_dir $>$ nli & $+$2.6 [$-$2.4, $+$7.5] & 0.311 (0.414) & not supported & -- \\
 H1 & F1 nli $>$ caag & $+$12.2 [$+$7.5, $+$16.9] & $<$0.001 ($<$0.001) & supported & -- \\
 H1 & direction accuracy llm\_dir $>$ 50\% (cluster CI\textsuperscript{r}) & 88.3\% [83.3, 92.9] & $<$0.001 ($<$0.001) & supported & -- \\
 \multicolumn{6}{l}{\emph{H2: a correct neutral flag}} \\
@@ -21,15 +21,15 @@ H4a & false-flag cells below plain on clean q., removal\textsuperscript{r} & 6 o
 H4b & harm grows with clean-q.\ exposure, Spearman over 18 cells\textsuperscript{r} & $\rho=-0.39$ [$-0.74$, $-0.12$] & -- & supported & yes \\
 H4c & removal harms clean q.\ more than directional flag\textsuperscript{r} & 5 of 9 matched cells & Holm & count only & -- \\
 \multicolumn{6}{l}{\emph{H5: the heuristic detector vs random}} \\
-H5 & caag+flag vs random+flag (all) & $-$1.4 [$-$3.4, $+$0.3] & 0.178 (0.258) & n.s. & yes \\
+H5 & caag+flag vs random+flag (all) & $-$1.4 [$-$3.4, $+$0.3] & 0.178 (0.257) & n.s. & yes \\
 H5 & equivalence within $\pm$3 points (TOST)\textsuperscript{r} & 90\% CI [$-$3.1, $+$0.1] & -- & not equivalent & yes \\
 \multicolumn{6}{l}{\emph{H6: does the grid predict real detectors}} \\
 H6 & actual effect inside the 95\% interval of the document-level prediction\textsuperscript{r} & 7 of 8 (pair level: 6 of 8) & -- & descriptive & -- \\
 H6 & document-level error $<$ pair-level error (paired, exact sign-flip)\textsuperscript{r} & $-$1.2 [$-$3.6, $+$0.4] & 0.414 & not supported & yes \\
 \multicolumn{6}{l}{\emph{H7: prompt-only instructions}} \\
 H7 & instruct vs plain (conflict) & $-$1.2 [$-$4.3, $+$1.7] & 1.000 (0.636) & n.s. & yes \\
-H7 & instruct vs plain (clean) & $+$2.9 [0.0, $+$6.1] & 0.280 (0.146) & n.s. & yes \\
-H7 & instruct\_v2 vs plain (conflict) & $+$5.3 [$+$1.4, $+$9.6] & 0.059 (0.028) & n.s. & yes \\
+H7 & instruct vs plain (clean) & $+$2.9 [0.0, $+$6.1] & 0.280 (0.145) & n.s. & yes \\
+H7 & instruct\_v2 vs plain (conflict) & $+$5.3 [$+$1.4, $+$9.6] & 0.059 (0.027) & n.s. & yes \\
 H7 & instruct\_v2 vs plain (clean) & $-$1.1 [$-$5.0, $+$2.6] & 1.000 (0.787) & n.s. & yes \\
 \multicolumn{6}{l}{\emph{H9: gpt-4.1}} \\
 H9 & gpt-4.1: oracle+flag $<$ plain (conflict) & $-$8.6 [$-$13.2, $-$4.3] & $<$0.001 ($<$0.001) & supported & yes \\
@@ -40,8 +40,8 @@ H9 & gpt-4.1: oracle+remove\_suspect $>$ plain (conflict) & $+$30.2 [$+$22.5, $+
 H8 & WikiContradict: instruct vs plain & $+$8.7 [$+$5.4, $+$12.3] & $<$0.001 ($<$0.001) & significant & -- \\
 H8 & WikiContradict: instruct\_v2 vs plain & $-$6.7 [$-$10.0, $-$3.7] & $<$0.001 ($<$0.001) & significant & -- \\
 H8 & WikiContradict: oracle+flag vs plain & $+$6.5 [$+$3.0, $+$10.0] & $<$0.001 ($<$0.001) & supported & -- \\
-H8 & WikiContradict: caag+flag vs plain & $+$0.7 [0.0, $+$1.6] & 0.250 (0.347) & n.s. & -- \\
-H8 & WikiContradict: nli+flag vs plain & $+$3.2 [$+$0.3, $+$6.1] & 0.077 (0.067) & n.s. & -- \\
+H8 & WikiContradict: caag+flag vs plain & $+$0.7 [0.0, $+$1.6] & 0.250 (0.345) & n.s. & -- \\
+H8 & WikiContradict: nli+flag vs plain & $+$3.2 [$+$0.3, $+$6.1] & 0.077 (0.066) & n.s. & -- \\
 H8 & WikiContradict: llm\_dir+flag vs plain & $+$6.2 [$+$2.8, $+$9.6] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
 \end{tabular}
@@ -60,7 +60,7 @@ they were computed. Directional predictions are \emph{supported} or \emph{not su
 \midrule
 \multicolumn{6}{l}{\emph{H10: without the answer policy (minimal skeleton)}} \\
 H10 & gpt-4o-mini: oracle+flag vs plain (conflict) & $-$5.3 [$-$9.4, $-$1.4] & 0.042 (0.020) & significant & yes \\
-H10 & gpt-4o-mini: oracle+flag\_directional $>$ plain (conflict) & $+$5.0 [$-$1.7, $+$11.8] & 0.314 (0.232) & not supported & yes \\
+H10 & gpt-4o-mini: oracle+flag\_directional $>$ plain (conflict) & $+$5.0 [$-$1.7, $+$11.8] & 0.314 (0.231) & not supported & yes \\
 H10 & gpt-4o-mini: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$10.3 [$+$4.8, $+$16.1] & 0.005 (0.001) & supported & yes \\
 H10 & gpt-4o-mini: oracle+remove\_suspect $>$ plain (conflict) & $+$18.9 [$+$12.5, $+$25.9] & $<$0.001 ($<$0.001) & supported & yes \\
 H10 & gpt-4.1: oracle+flag vs plain (conflict) & $-$11.0 [$-$17.5, $-$4.6] & 0.010 (0.003) & significant & yes \\
@@ -68,12 +68,12 @@ H10 & gpt-4.1: oracle+flag\_directional $>$ plain (conflict) & $+$12.7 [$+$5.8, 
 H10 & gpt-4.1: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$23.7 [$+$17.0, $+$30.7] & $<$0.001 ($<$0.001) & supported & yes \\
 H10 & gpt-4.1: oracle+remove\_suspect $>$ plain (conflict) & $+$14.9 [$+$8.6, $+$21.6] & $<$0.001 ($<$0.001) & supported & yes \\
 H10 & Qwen2.5-7B: oracle+flag vs plain (conflict) & $-$5.8 [$-$10.8, $-$1.4] & 0.117 (0.067) & n.s. & yes \\
-H10 & Qwen2.5-7B: oracle+flag\_directional $>$ plain (conflict) & $+$2.9 [$-$3.6, $+$9.4] & 0.509 (0.614) & not supported & yes \\
+H10 & Qwen2.5-7B: oracle+flag\_directional $>$ plain (conflict) & $+$2.9 [$-$3.6, $+$9.4] & 0.509 (0.613) & not supported & yes \\
 H10 & Qwen2.5-7B: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$8.6 [$+$2.9, $+$14.4] & 0.041 (0.016) & supported & yes \\
 H10 & Qwen2.5-7B: oracle+remove\_suspect $>$ plain (conflict) & $+$10.8 [$+$4.3, $+$17.3] & 0.017 (0.006) & supported & yes \\
 \multicolumn{6}{l}{\emph{H11: an open-weights generator}} \\
 H11 & Qwen2.5-7B: oracle+flag $<$ plain (conflict) & $-$5.8 [$-$10.8, $-$0.7] & 0.114 (0.092) & not supported & yes \\
-H11 & Qwen2.5-7B: oracle+flag\_directional $>$ plain (conflict) & $+$3.6 [$-$0.7, $+$8.6] & 0.224 (0.320) & not supported & yes \\
+H11 & Qwen2.5-7B: oracle+flag\_directional $>$ plain (conflict) & $+$3.6 [$-$0.7, $+$8.6] & 0.224 (0.319) & not supported & yes \\
 H11 & Qwen2.5-7B: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$9.4 [$+$5.0, $+$14.4] & 0.001 (0.001) & supported & yes \\
 H11 & Qwen2.5-7B: oracle+remove\_suspect $>$ plain (conflict) & $+$18.0 [$+$10.8, $+$25.2] & $<$0.001 ($<$0.001) & supported & yes \\
 \bottomrule
@@ -106,19 +106,19 @@ H12 & Qwen2.5-7B: dir. flag $>$ plain (conflict) & $+$17.7 [$+$12.0, $+$23.3] & 
 H12 & Qwen2.5-7B: dir. flag $>$ neutral flag (conflict) & $+$26.0 [$+$20.7, $+$31.3] & $<$0.001 ($<$0.001) & supported & yes \\
 H12 & Qwen2.5-7B: removal $>$ plain (conflict) & $+$63.7 [$+$58.3, $+$69.0] & $<$0.001 ($<$0.001) & supported & yes \\
 \multicolumn{6}{l}{\emph{H13: neutral flag + resolution instruction}} \\
-H13 & RAMDocs, gpt-4o-mini: neutral flag + instruction vs plain (conflict) & $-$2.4 [$-$6.2, $+$1.2] & 0.743 (0.354) & n.s. & yes \\
+H13 & RAMDocs, gpt-4o-mini: neutral flag + instruction vs plain (conflict) & $-$2.4 [$-$6.2, $+$1.2] & 0.743 (0.352) & n.s. & yes \\
 H13 & RAMDocs, gpt-4o-mini: dir. flag + instruction $>$ neutral flag + instruction (conflict) & $+$15.6 [$+$9.6, $+$21.8] & $<$0.001 ($<$0.001) & supported & yes \\
-H13 & RAMDocs, gpt-4.1: neutral flag + instruction vs plain (conflict) & $+$5.8 [$-$2.9, $+$14.4] & 0.743 (0.346) & n.s. & yes \\
+H13 & RAMDocs, gpt-4.1: neutral flag + instruction vs plain (conflict) & $+$5.8 [$-$2.9, $+$14.4] & 0.743 (0.344) & n.s. & yes \\
 H13 & RAMDocs, gpt-4.1: dir. flag + instruction $>$ neutral flag + instruction (conflict) & $+$25.2 [$+$18.0, $+$32.4] & $<$0.001 ($<$0.001) & supported & yes \\
 H13 & ConflictBank, gpt-4o-mini: neutral flag + instruction vs plain (conflict) & $+$1.6 [$-$2.8, $+$6.0] & 0.743 (0.622) & n.s. & yes \\
 H13 & ConflictBank, gpt-4o-mini: dir. flag + instruction $>$ neutral flag + instruction (conflict) & $+$62.2 [$+$57.1, $+$67.2] & $<$0.001 ($<$0.001) & supported & yes \\
 \multicolumn{6}{l}{\emph{H14: published baselines}} \\
 H14 & RAMDocs, gpt-4o-mini: LLM dir. flag vs astute multi (labelled) & $+$10.8 [$+$5.9, $+$16.0] & $<$0.001 ($<$0.001) & significant & yes \\
 H14 & RAMDocs, gpt-4o-mini: LLM dir. flag vs trustrag multi (labelled) & $+$23.0 [$+$18.1, $+$28.3] & $<$0.001 ($<$0.001) & significant & yes \\
-H14 & RAMDocs, gpt-4.1: LLM dir. flag vs astute multi (labelled) & $+$6.4 [$+$0.4, $+$12.5] & 0.151 (0.083) & n.s. & no \\
+H14 & RAMDocs, gpt-4.1: LLM dir. flag vs astute multi (labelled) & $+$6.4 [$+$0.4, $+$12.5] & 0.151 (0.082) & n.s. & no \\
 H14 & RAMDocs, gpt-4.1: LLM dir. flag vs trustrag multi (labelled) & $+$19.6 [$+$13.6, $+$25.7] & $<$0.001 ($<$0.001) & significant & yes \\
-H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs astute (all questions) & $-$3.4 [$-$8.1, $+$1.3] & 0.324 (0.238) & n.s. & yes \\
-H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs trustrag (all questions) & $+$0.8 [$-$3.9, $+$5.6] & 0.761 (0.843) & n.s. & yes \\
+H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs astute (all questions) & $-$3.4 [$-$8.1, $+$1.3] & 0.324 (0.237) & n.s. & yes \\
+H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs trustrag (all questions) & $+$0.8 [$-$3.9, $+$5.6] & 0.761 (0.844) & n.s. & yes \\
 \bottomrule
 \end{tabular}
 \caption{Pre-registered tests added in the second (\S10; H12--H14), each committed before the runs it covers. Same conventions as
@@ -143,8 +143,8 @@ H15 & ConflictBank, gpt-4o-mini: LLM dir. flag $>$ plain (all q.) & $+$5.2 [$+$1
 H15 & ConflictBank, gpt-4.1: neutral flag vs plain (conflict) & $-$8.0 [$-$12.7, $-$3.7] & 0.006 (0.003) & significant & yes \\
 H15 & ConflictBank, gpt-4.1: dir. flag $>$ neutral flag (conflict) & $+$34.7 [$+$29.0, $+$40.3] & $<$0.001 ($<$0.001) & supported & yes \\
 H15 & ConflictBank, gpt-4.1: dir. flag $>$ plain (conflict) & $+$26.7 [$+$21.7, $+$31.7] & $<$0.001 ($<$0.001) & supported & yes \\
-H15 & ConflictBank, gpt-4.1: LLM dir. flag $>$ plain (all q.) & $-$2.5 [$-$6.5, $+$1.5] & 0.522 (0.359) & not supported & yes \\
-H15 & ConflictBank, Qwen2.5-7B: neutral flag vs plain (conflict) & $-$3.3 [$-$9.0, $+$2.0] & 0.522 (0.393) & n.s. & yes \\
+H15 & ConflictBank, gpt-4.1: LLM dir. flag $>$ plain (all q.) & $-$2.5 [$-$6.5, $+$1.5] & 0.522 (0.357) & not supported & yes \\
+H15 & ConflictBank, Qwen2.5-7B: neutral flag vs plain (conflict) & $-$3.3 [$-$9.0, $+$2.0] & 0.522 (0.392) & n.s. & yes \\
 H15 & ConflictBank, Qwen2.5-7B: dir. flag $>$ neutral flag (conflict) & $+$28.7 [$+$23.3, $+$34.0] & $<$0.001 ($<$0.001) & supported & yes \\
 H15 & ConflictBank, Qwen2.5-7B: dir. flag $>$ plain (conflict) & $+$25.3 [$+$19.7, $+$31.0] & $<$0.001 ($<$0.001) & supported & yes \\
 H15 & ConflictBank, Qwen2.5-7B: LLM dir. flag $>$ plain (all q.) & $+$5.2 [$+$0.5, $+$10.0] & 0.130 (0.073) & not supported & yes \\
@@ -160,9 +160,9 @@ H17 & CB majority, gpt-4o-mini: neutral flag vs plain (conflict) & $+$1.1 [$-$2.
 H17 & CB majority, gpt-4o-mini: dir. flag $>$ plain (conflict) & $+$32.7 [$+$27.3, $+$37.9] & $<$0.001 ($<$0.001) & supported & yes \\
 H17 & CB majority, gpt-4o-mini: LLM dir. flag vs plain (conflict) & $+$5.7 [$+$1.4, $+$9.9] & 0.017 (0.016) & significant & yes \\
 \multicolumn{6}{l}{\emph{H18: a single-call baseline}} \\
-H18 & RAMDocs, gpt-4o-mini: LLM dir. flag vs self-identify (labelled) & $-$1.3 [$-$4.8, $+$2.1] & 1.000 (0.627) & n.s. & yes \\
-H18 & ConflictBank, gpt-4o-mini: LLM dir. flag vs self-identify (all questions) & $-$0.2 [$-$4.2, $+$3.7] & 1.000 (0.995) & n.s. & yes \\
-H18 & CB majority, gpt-4o-mini: LLM dir. flag vs self-identify (all questions) & $-$1.8 [$-$4.6, $+$1.1] & 0.730 (0.341) & n.s. & yes \\
+H18 & RAMDocs, gpt-4o-mini: LLM dir. flag vs self-identify (labelled) & $-$1.3 [$-$4.8, $+$2.1] & 1.000 (0.626) & n.s. & yes \\
+H18 & ConflictBank, gpt-4o-mini: LLM dir. flag vs self-identify (all questions) & $-$0.2 [$-$4.2, $+$3.7] & 1.000 (0.996) & n.s. & yes \\
+H18 & CB majority, gpt-4o-mini: LLM dir. flag vs self-identify (all questions) & $-$1.8 [$-$4.6, $+$1.1] & 0.730 (0.339) & n.s. & yes \\
 \multicolumn{6}{l}{\emph{H19: current reasoning models}} \\
 H19 & ConflictBank, gpt-6-luna: neutral flag vs plain (conflict) & $-$9.4 [$-$12.9, $-$6.0] & $<$0.001 ($<$0.001) & significant & yes \\
 H19 & ConflictBank, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$45.9 [$+$40.8, $+$50.9] & $<$0.001 ($<$0.001) & supported & yes \\
@@ -185,7 +185,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \multicolumn{6}{l}{\emph{H19: current reasoning models}} \\
 H19 & ConflictBank, gpt-6-luna: dir. flag $>$ one-wrong flag (conflict) & $+$65.6 [$+$60.7, $+$70.1] & $<$0.001 ($<$0.001) & supported & yes \\
 H19 & ConflictBank, gpt-6-luna: LLM dir. flag $>$ plain (all q.) & $+$6.1 [$+$2.1, $+$10.0] & 0.019 (0.008) & supported & yes \\
-H19 & ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict) & $-$2.3 [$-$6.7, $+$2.0] & 0.717 (0.471) & n.s. & yes \\
+H19 & ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict) & $-$2.3 [$-$6.7, $+$2.0] & 0.717 (0.469) & n.s. & yes \\
 H19 & ConflictBank, gpt-6.1-terra: dir. flag $>$ neutral flag (conflict) & $+$19.3 [$+$14.7, $+$24.0] & $<$0.001 ($<$0.001) & supported & yes \\
 H19 & ConflictBank, gpt-6.1-terra: dir. flag $>$ one-wrong flag (conflict) & $+$22.3 [$+$17.7, $+$27.3] & $<$0.001 ($<$0.001) & supported & yes \\
 H19 & ConflictBank, gpt-6.1-terra: LLM dir. flag $>$ plain (all q.) & $-$8.8 [$-$13.2, $-$4.2] & 0.002 ($<$0.001) & not supported & yes \\
@@ -217,7 +217,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 H20 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain (conflict) & $-$0.2 [$-$4.1, $+$3.7] & 1.000 (1.000) & n.s. & yes \\
 H20 & ConflictBank forced, gpt-4o-mini: one-wrong flag vs plain (conflict) & $+$7.6 [$+$2.7, $+$12.3] & 0.024 (0.007) & significant & yes \\
 H20 & ConflictBank forced, gpt-4o-mini: dir. flag $>$ plain (conflict) & $+$24.2 [$+$19.7, $+$29.0] & $<$0.001 ($<$0.001) & supported & yes \\
-H20 & ConflictBank forced, gpt-6-luna: neutral flag vs plain (conflict) & $+$1.6 [$-$1.6, $+$4.8] & 1.000 (0.479) & n.s. & yes \\
+H20 & ConflictBank forced, gpt-6-luna: neutral flag vs plain (conflict) & $+$1.6 [$-$1.6, $+$4.8] & 1.000 (0.478) & n.s. & yes \\
 H20 & ConflictBank forced, gpt-6-luna: one-wrong flag vs plain (conflict) & $+$10.3 [$+$5.6, $+$15.1] & $<$0.001 ($<$0.001) & significant & yes \\
 H20 & ConflictBank forced, gpt-6-luna: dir. flag $>$ plain (conflict) & $+$26.4 [$+$21.9, $+$31.0] & $<$0.001 ($<$0.001) & supported & yes \\
 H20 & ConflictBank forced, gpt-6.1-terra: neutral flag vs plain (conflict) & $-$0.3 [$-$4.0, $+$3.3] & 1.000 (1.000) & n.s. & yes \\
@@ -235,11 +235,11 @@ H22 & CB majority, gpt-4o-mini: LLM dir. flag without pairs vs with pairs (confl
 H22 & CB majority, gpt-6-luna: neutral without pairs vs with pairs (conflict) & $-$6.1 [$-$9.1, $-$3.1] & 0.002 ($<$0.001) & significant & yes \\
 H22 & CB majority, gpt-6-luna: LLM dir. flag without pairs vs with pairs (conflict) & $+$0.8 [$-$1.7, $+$3.1] & 1.000 (0.683) & n.s. & yes \\
 H22 & CB majority, gpt-6.1-terra: neutral without pairs vs with pairs (conflict) & $+$10.0 [$+$5.7, $+$14.3] & 0.002 ($<$0.001) & significant & yes \\
-H22 & CB majority, gpt-6.1-terra: LLM dir. flag without pairs vs with pairs (conflict) & $+$1.7 [$-$1.3, $+$4.7] & 1.000 (0.475) & n.s. & yes \\
+H22 & CB majority, gpt-6.1-terra: LLM dir. flag without pairs vs with pairs (conflict) & $+$1.7 [$-$1.3, $+$4.7] & 1.000 (0.474) & n.s. & yes \\
 \multicolumn{6}{l}{\emph{H23: answer key}} \\
 H23 & RAMDocs, gpt-4o-mini: dir. flag vs answer key (conflict) & $-$1.7 [$-$6.2, $+$3.1] & 1.000 (0.656) & n.s. & yes \\
-H23 & RAMDocs, gpt-6-luna: dir. flag vs answer key (conflict) & $-$4.1 [$-$9.1, $+$0.7] & 0.808 (0.203) & n.s. & yes \\
-H23 & RAMDocs, gpt-6.1-terra: dir. flag vs answer key (conflict) & $-$5.0 [$-$10.8, $+$0.7] & 0.827 (0.242) & n.s. & yes \\
+H23 & RAMDocs, gpt-6-luna: dir. flag vs answer key (conflict) & $-$4.1 [$-$9.1, $+$0.7] & 0.808 (0.202) & n.s. & yes \\
+H23 & RAMDocs, gpt-6.1-terra: dir. flag vs answer key (conflict) & $-$5.0 [$-$10.8, $+$0.7] & 0.827 (0.241) & n.s. & yes \\
 H23 & ConflictBank, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$5.3 [$+$1.6, $+$9.1] & 0.059 (0.013) & n.s. & no \\
 H23 & ConflictBank, gpt-6-luna: dir. flag vs answer key (conflict) & $+$0.1 [$-$1.6, $+$1.8] & 1.000 (1.000) & n.s. & yes \\
 \bottomrule
@@ -260,18 +260,18 @@ question; RAGuard's misleading posts are real Reddit text.}
 \midrule
 \multicolumn{6}{l}{\emph{H23: answer key}} \\
 H23 & ConflictBank, gpt-6.1-terra: dir. flag vs answer key (conflict) & $-$1.7 [$-$3.3, $-$0.3] & 0.515 (0.104) & n.s. & yes \\
-H23 & CB majority, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$3.2 [$-$1.8, $+$8.2] & 0.905 (0.320) & n.s. & yes \\
+H23 & CB majority, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$3.2 [$-$1.8, $+$8.2] & 0.905 (0.319) & n.s. & yes \\
 H23 & CB majority, gpt-6-luna: dir. flag vs answer key (conflict) & $+$0.4 [$-$1.2, $+$2.2] & 1.000 (0.798) & n.s. & yes \\
-H23 & CB majority, gpt-6.1-terra: dir. flag vs answer key (conflict) & $+$2.3 [$+$0.3, $+$4.7] & 0.515 (0.115) & n.s. & yes \\
+H23 & CB majority, gpt-6.1-terra: dir. flag vs answer key (conflict) & $+$2.3 [$+$0.3, $+$4.7] & 0.515 (0.114) & n.s. & yes \\
 \multicolumn{6}{l}{\emph{H25: Claude}} \\
-H25 & ConflictBank, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$0.7 [$-$2.2, $+$3.4] & 1.000 (0.790) & n.s. & yes \\
+H25 & ConflictBank, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$0.7 [$-$2.2, $+$3.4] & 1.000 (0.791) & n.s. & yes \\
 H25 & ConflictBank, claude-haiku-5-5: dir. flag $>$ neutral flag (conflict) & $+$22.7 [$+$18.6, $+$26.9] & $<$0.001 ($<$0.001) & supported & yes \\
 H25 & ConflictBank, claude-haiku-5-5: dir. flag $>$ one-wrong flag (conflict) & $+$16.8 [$+$13.0, $+$20.8] & $<$0.001 ($<$0.001) & supported & yes \\
-H25 & ConflictBank, claude-haiku-5-5: LLM dir. flag $>$ plain (all q.) & $-$4.3 [$-$8.1, $-$0.7] & 0.145 (0.043) & not supported & yes \\
-H25 & ConflictBank, claude-sonnet-5-5: neutral flag vs plain (conflict) & $+$3.0 [$-$0.3, $+$6.3] & 0.634 (0.193) & n.s. & yes \\
+H25 & ConflictBank, claude-haiku-5-5: LLM dir. flag $>$ plain (all q.) & $-$4.3 [$-$8.1, $-$0.7] & 0.145 (0.042) & not supported & yes \\
+H25 & ConflictBank, claude-sonnet-5-5: neutral flag vs plain (conflict) & $+$3.0 [$-$0.3, $+$6.3] & 0.634 (0.192) & n.s. & yes \\
 H25 & ConflictBank, claude-sonnet-5-5: dir. flag $>$ neutral flag (conflict) & $+$13.3 [$+$9.7, $+$17.3] & $<$0.001 ($<$0.001) & supported & yes \\
 H25 & ConflictBank, claude-sonnet-5-5: dir. flag $>$ one-wrong flag (conflict) & $+$12.3 [$+$8.7, $+$16.3] & $<$0.001 ($<$0.001) & supported & yes \\
-H25 & ConflictBank, claude-sonnet-5-5: LLM dir. flag $>$ plain (all q.) & $-$2.2 [$-$5.8, $+$1.0] & 0.993 (0.346) & not supported & yes \\
+H25 & ConflictBank, claude-sonnet-5-5: LLM dir. flag $>$ plain (all q.) & $-$2.2 [$-$5.8, $+$1.0] & 0.993 (0.344) & not supported & yes \\
 H25 & RAMDocs, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$1.2 [$-$2.6, $+$5.3] & 1.000 (0.732) & n.s. & yes \\
 H25 & RAMDocs, claude-haiku-5-5: dir. flag $>$ neutral flag (conflict) & $+$27.1 [$+$20.1, $+$34.1] & $<$0.001 ($<$0.001) & supported & yes \\
 H25 & RAMDocs, claude-sonnet-5-5: neutral flag vs plain (conflict) & 0.0 [$-$4.3, $+$4.3] & 1.000 (1.000) & n.s. & yes \\
@@ -283,7 +283,7 @@ H26 & RAGuard, gpt-4o-mini: neutral flag vs plain (conflict) & $+$3.2 [$+$0.1, $
 H26 & RAGuard, gpt-4o-mini: dir. flag $>$ plain (conflict) & $+$9.9 [$+$5.6, $+$14.2] & $<$0.001 ($<$0.001) & supported & yes \\
 H26 & RAGuard, gpt-4o-mini: dir. flag $>$ neutral flag (conflict) & $+$6.7 [$+$2.9, $+$10.5] & 0.008 (0.001) & supported & yes \\
 H26 & RAGuard, gpt-4o-mini: one-wrong flag vs plain (conflict) & $-$5.7 [$-$10.2, $-$1.2] & 0.161 (0.030) & n.s. & yes \\
-H26 & RAGuard, gpt-4o-mini: LLM dir. flag vs plain (conflict) & $+$0.6 [$-$2.8, $+$4.0] & 1.000 (0.878) & n.s. & yes \\
+H26 & RAGuard, gpt-4o-mini: LLM dir. flag vs plain (conflict) & $+$0.6 [$-$2.8, $+$4.0] & 1.000 (0.879) & n.s. & yes \\
 H26 & RAGuard, gpt-6-luna: neutral flag vs plain (conflict) & 0.0 [$-$1.7, $+$1.7] & 1.000 (1.000) & n.s. & yes \\
 H26 & RAGuard, gpt-6-luna: dir. flag $>$ plain (conflict) & $+$8.8 [$+$5.7, $+$12.1] & $<$0.001 ($<$0.001) & supported & yes \\
 H26 & RAGuard, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$8.8 [$+$5.7, $+$12.2] & $<$0.001 ($<$0.001) & supported & yes \\
@@ -306,16 +306,16 @@ question; RAGuard's misleading posts are real Reddit text.}
 \multicolumn{6}{l}{\emph{H26: RAGuard (real misleading posts)}} \\
 H26 & RAGuard, gpt-6-luna: one-wrong flag vs plain (conflict) & $-$7.0 [$-$10.3, $-$3.9] & $<$0.001 ($<$0.001) & significant & yes \\
 H26 & RAGuard, gpt-6-luna: LLM dir. flag vs plain (conflict) & $+$3.1 [$-$0.1, $+$6.2] & 0.511 (0.117) & n.s. & yes \\
-H26 & RAGuard, gpt-6.1-terra: neutral flag vs plain (conflict) & $+$2.4 [0.0, $+$5.1] & 0.731 (0.189) & n.s. & yes \\
+H26 & RAGuard, gpt-6.1-terra: neutral flag vs plain (conflict) & $+$2.4 [0.0, $+$5.1] & 0.731 (0.188) & n.s. & yes \\
 H26 & RAGuard, gpt-6.1-terra: dir. flag $>$ plain (conflict) & $+$6.8 [$+$3.4, $+$10.5] & 0.005 ($<$0.001) & supported & yes \\
-H26 & RAGuard, gpt-6.1-terra: dir. flag $>$ neutral flag (conflict) & $+$4.4 [$+$1.4, $+$7.8] & 0.126 (0.022) & not supported & yes \\
+H26 & RAGuard, gpt-6.1-terra: dir. flag $>$ neutral flag (conflict) & $+$4.4 [$+$1.4, $+$7.8] & 0.126 (0.021) & not supported & yes \\
 H26 & RAGuard, gpt-6.1-terra: one-wrong flag vs plain (conflict) & $+$0.7 [$-$3.4, $+$4.8] & 1.000 (0.935) & n.s. & yes \\
-H26 & RAGuard, gpt-6.1-terra: LLM dir. flag vs plain (conflict) & $+$2.0 [$-$1.0, $+$5.1] & 1.000 (0.393) & n.s. & yes \\
-H26 & RAGuard, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$0.3 [$-$2.0, $+$2.7] & 1.000 (0.933) & n.s. & yes \\
+H26 & RAGuard, gpt-6.1-terra: LLM dir. flag vs plain (conflict) & $+$2.0 [$-$1.0, $+$5.1] & 1.000 (0.392) & n.s. & yes \\
+H26 & RAGuard, claude-haiku-5-5: neutral flag vs plain (conflict) & $+$0.3 [$-$2.0, $+$2.7] & 1.000 (0.932) & n.s. & yes \\
 H26 & RAGuard, claude-haiku-5-5: dir. flag $>$ plain (conflict) & $+$12.7 [$+$9.2, $+$16.3] & $<$0.001 ($<$0.001) & supported & yes \\
 H26 & RAGuard, claude-haiku-5-5: dir. flag $>$ neutral flag (conflict) & $+$12.4 [$+$9.0, $+$15.9] & $<$0.001 ($<$0.001) & supported & yes \\
 H26 & RAGuard, claude-haiku-5-5: one-wrong flag vs plain (conflict) & $+$5.9 [$+$2.9, $+$9.0] & 0.005 ($<$0.001) & significant & yes \\
-H26 & RAGuard, claude-haiku-5-5: LLM dir. flag vs plain (conflict) & $+$5.0 [$+$1.8, $+$8.2] & 0.025 (0.005) & significant & yes \\
+H26 & RAGuard, claude-haiku-5-5: LLM dir. flag vs plain (conflict) & $+$5.0 [$+$1.8, $+$8.2] & 0.025 (0.004) & significant & yes \\
 H26 & RAGuard, claude-sonnet-5-5: neutral flag vs plain (conflict) & $+$4.4 [$+$0.7, $+$8.2] & 0.321 (0.062) & n.s. & yes \\
 H26 & RAGuard, claude-sonnet-5-5: dir. flag $>$ plain (conflict) & $+$20.4 [$+$15.6, $+$25.2] & $<$0.001 ($<$0.001) & supported & yes \\
 H26 & RAGuard, claude-sonnet-5-5: dir. flag $>$ neutral flag (conflict) & $+$16.0 [$+$11.6, $+$20.4] & $<$0.001 ($<$0.001) & supported & yes \\
@@ -325,7 +325,7 @@ H21 & ConflictBank, gpt-4o-mini: neutral flag vs plain, misinformation rate (con
 H21 & ConflictBank, gpt-4o-mini: dir. flag vs plain, misinformation rate (conflict) & $-$26.8 [$-$31.6, $-$22.0] & $<$0.001 ($<$0.001) & significant & -- \\
 H21 & ConflictBank, gpt-6-luna: neutral flag vs plain, misinformation rate (conflict) & $-$6.9 [$-$9.9, $-$4.0] & $<$0.001 ($<$0.001) & significant & -- \\
 H21 & ConflictBank, gpt-6-luna: dir. flag vs plain, misinformation rate (conflict) & $-$24.3 [$-$28.6, $-$20.2] & $<$0.001 ($<$0.001) & significant & -- \\
-H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, misinformation rate (conflict) & $-$2.3 [$-$6.0, $+$1.3] & 1.000 (0.398) & n.s. & -- \\
+H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, misinformation rate (conflict) & $-$2.3 [$-$6.0, $+$1.3] & 1.000 (0.397) & n.s. & -- \\
 H21 & ConflictBank, gpt-6.1-terra: dir. flag vs plain, misinformation rate (conflict) & $-$17.3 [$-$21.7, $-$13.0] & $<$0.001 ($<$0.001) & significant & -- \\
 H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, misinformation rate (conflict) & $+$0.1 [$-$2.6, $+$2.8] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank, claude-haiku-5-5: dir. flag vs plain, misinformation rate (conflict) & $-$21.8 [$-$26.1, $-$17.6] & $<$0.001 ($<$0.001) & significant & -- \\
@@ -348,7 +348,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H21: risk and coverage}} \\
-H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, misinformation rate (conflict) & $-$3.8 [$-$6.8, $-$0.9] & 0.079 (0.030) & n.s. & -- \\
+H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, misinformation rate (conflict) & $-$3.8 [$-$6.8, $-$0.9] & 0.079 (0.029) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-6-luna: dir. flag vs plain, misinformation rate (conflict) & $-$25.7 [$-$30.0, $-$21.3] & $<$0.001 ($<$0.001) & significant & -- \\
 H21 & ConflictBank forced, gpt-6.1-terra: neutral flag vs plain, misinformation rate (conflict) & $-$1.3 [$-$5.0, $+$2.3] & 1.000 (0.695) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-6.1-terra: dir. flag vs plain, misinformation rate (conflict) & $-$14.3 [$-$18.3, $-$10.3] & $<$0.001 ($<$0.001) & significant & -- \\
@@ -358,11 +358,11 @@ H21 & ConflictBank, gpt-4o-mini: neutral flag vs plain, abstention rate (conflic
 H21 & ConflictBank, gpt-4o-mini: dir. flag vs plain, abstention rate (conflict) & $-$4.6 [$-$7.2, $-$2.0] & 0.013 (0.002) & significant & -- \\
 H21 & ConflictBank, gpt-6-luna: neutral flag vs plain, abstention rate (conflict) & $+$17.0 [$+$13.6, $+$20.6] & $<$0.001 ($<$0.001) & significant & -- \\
 H21 & ConflictBank, gpt-6-luna: dir. flag vs plain, abstention rate (conflict) & $-$11.1 [$-$14.1, $-$8.2] & $<$0.001 ($<$0.001) & significant & -- \\
-H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, abstention rate (conflict) & $+$3.0 [$+$0.7, $+$5.3] & 0.281 (0.042) & n.s. & -- \\
-H21 & ConflictBank, gpt-6.1-terra: dir. flag vs plain, abstention rate (conflict) & $-$1.3 [$-$2.7, $-$0.3] & 1.000 (0.189) & n.s. & -- \\
-H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, abstention rate (conflict) & $-$0.3 [$-$0.9, $+$0.1] & 1.000 (0.479) & n.s. & -- \\
+H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, abstention rate (conflict) & $+$3.0 [$+$0.7, $+$5.3] & 0.281 (0.041) & n.s. & -- \\
+H21 & ConflictBank, gpt-6.1-terra: dir. flag vs plain, abstention rate (conflict) & $-$1.3 [$-$2.7, $-$0.3] & 1.000 (0.188) & n.s. & -- \\
+H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, abstention rate (conflict) & $-$0.3 [$-$0.9, $+$0.1] & 1.000 (0.478) & n.s. & -- \\
 H21 & ConflictBank, claude-haiku-5-5: dir. flag vs plain, abstention rate (conflict) & $-$0.1 [$-$0.9, $+$0.8] & 1.000 (1.000) & n.s. & -- \\
-H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, abstention rate (conflict) & $+$0.3 [$-$0.1, $+$0.9] & 1.000 (0.479) & n.s. & -- \\
+H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, abstention rate (conflict) & $+$0.3 [$-$0.1, $+$0.9] & 1.000 (0.478) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, abstention rate (conflict) & $-$0.1 [$-$0.3, 0.0] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, abstention rate (conflict) & 0.0 [0.0, 0.0] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-6-luna: dir. flag vs plain, abstention rate (conflict) & 0.0 [0.0, 0.0] & 1.000 (1.000) & n.s. & -- \\
@@ -370,7 +370,7 @@ H21 & ConflictBank forced, gpt-6.1-terra: neutral flag vs plain, abstention rate
 H21 & ConflictBank forced, gpt-6.1-terra: dir. flag vs plain, abstention rate (conflict) & 0.0 [0.0, 0.0] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank forced, claude-haiku-5-5: neutral flag vs plain, abstention rate (conflict) & 0.0 [0.0, 0.0] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank forced, claude-haiku-5-5: dir. flag vs plain, abstention rate (conflict) & 0.0 [0.0, 0.0] & 1.000 (1.000) & n.s. & -- \\
-H21 & ConflictBank, gpt-4o-mini: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$0.2 [$-$4.8, $+$5.2] & 1.000 (0.995) & n.s. & -- \\
+H21 & ConflictBank, gpt-4o-mini: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$0.2 [$-$4.8, $+$5.2] & 1.000 (0.996) & n.s. & -- \\
 H21 & ConflictBank, gpt-4o-mini: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$28.2 [$+$22.8, $+$33.5] & 0.002 ($<$0.001) & significant & -- \\
 H21 & ConflictBank, gpt-6-luna: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$1.2 [$-$2.2, $+$4.8] & 1.000 (0.599) & n.s. & -- \\
 H21 & ConflictBank, gpt-6-luna: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$29.9 [$+$25.0, $+$34.7] & 0.002 ($<$0.001) & significant & -- \\
@@ -393,11 +393,11 @@ question; RAGuard's misleading posts are real Reddit text.}
 \multicolumn{6}{l}{\emph{H21: risk and coverage}} \\
 H21 & ConflictBank, gpt-6.1-terra: neutral flag vs plain, selective accuracy (ratio) (conflict) & $-$0.1 [$-$4.0, $+$3.7] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank, gpt-6.1-terra: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$16.1 [$+$11.5, $+$20.6] & 0.002 ($<$0.001) & significant & -- \\
-H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$0.4 [$-$2.3, $+$3.3] & 1.000 (0.860) & n.s. & -- \\
+H21 & ConflictBank, claude-haiku-5-5: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$0.4 [$-$2.3, $+$3.3] & 1.000 (0.861) & n.s. & -- \\
 H21 & ConflictBank, claude-haiku-5-5: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$23.5 [$+$19.2, $+$27.9] & 0.002 ($<$0.001) & significant & -- \\
 H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, selective accuracy (ratio) (conflict) & 0.0 [$-$3.9, $+$3.9] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$24.2 [$+$19.4, $+$28.9] & 0.002 ($<$0.001) & significant & -- \\
-H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$1.6 [$-$1.7, $+$4.7] & 1.000 (0.479) & n.s. & -- \\
+H21 & ConflictBank forced, gpt-6-luna: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$1.6 [$-$1.7, $+$4.7] & 1.000 (0.478) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-6-luna: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$26.4 [$+$21.9, $+$31.1] & 0.002 ($<$0.001) & significant & -- \\
 H21 & ConflictBank forced, gpt-6.1-terra: neutral flag vs plain, selective accuracy (ratio) (conflict) & $-$0.3 [$-$4.0, $+$3.3] & 1.000 (1.000) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-6.1-terra: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$14.7 [$+$10.3, $+$19.0] & 0.002 ($<$0.001) & significant & -- \\
@@ -424,9 +424,9 @@ question; RAGuard's misleading posts are real Reddit text.}
 \midrule
 \multicolumn{6}{l}{\emph{H27: the detector model's answer as a hint}} \\
 H27 & Qwen2.5-7B, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$8.7 [$+$2.7, $+$14.3] & 0.093 (0.011) & n.s. & no \\
-H27 & Qwen2.5-7B, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$4.3 [$-$1.7, $+$10.3] & 1.000 (0.288) & n.s. & yes \\
-H27 & Qwen2.5-7B, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$4.3 [$-$1.3, $+$10.0] & 1.000 (0.252) & n.s. & yes \\
-H27 & Qwen2.5-7B, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $-$4.0 [$-$9.7, $+$1.7] & 1.000 (0.288) & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$4.3 [$-$1.7, $+$10.3] & 1.000 (0.287) & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$4.3 [$-$1.3, $+$10.0] & 1.000 (0.251) & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $-$4.0 [$-$9.7, $+$1.7] & 1.000 (0.287) & n.s. & yes \\
 H27 & claude-haiku-5-5, detector claude-haiku-5-5: LLM dir. flag vs hint (conflict) & $+$11.1 [$+$7.2, $+$15.1] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$14.6 [$+$9.6, $+$19.7] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$14.1 [$+$9.8, $+$18.6] & $<$0.001 ($<$0.001) & significant & yes \\
@@ -438,15 +438,15 @@ H27 & gpt-4.1, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$0.7 [
 H27 & gpt-4.1, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$9.7 [$+$4.7, $+$14.7] & 0.006 ($<$0.001) & significant & yes \\
 H27 & gpt-4.1, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $+$1.7 [$-$3.0, $+$6.3] & 1.000 (0.688) & n.s. & yes \\
 H27 & gpt-4o-mini, detector claude-haiku-5-5: LLM dir. flag vs hint (conflict) & $+$6.2 [$+$1.1, $+$11.4] & 0.279 (0.038) & n.s. & yes \\
-H27 & gpt-4o-mini, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$5.8 [$+$0.2, $+$11.3] & 0.485 (0.076) & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$5.8 [$+$0.2, $+$11.3] & 0.485 (0.075) & n.s. & yes \\
 H27 & gpt-4o-mini, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$11.8 [$+$6.6, $+$17.0] & 0.005 ($<$0.001) & significant & yes \\
 H27 & gpt-4o-mini, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$7.1 [$+$1.8, $+$12.6] & 0.180 (0.022) & n.s. & yes \\
 H27 & gpt-4o-mini, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$8.1 [$+$2.9, $+$13.2] & 0.037 (0.005) & significant & yes \\
 H27 & gpt-4o-mini, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $+$0.1 [$-$4.9, $+$5.2] & 1.000 (1.000) & n.s. & yes \\
-H27 & gpt-6-luna, detector claude-haiku-5-5: LLM dir. flag vs hint (conflict) & $+$4.9 [$-$0.4, $+$10.3] & 0.785 (0.138) & n.s. & yes \\
-H27 & gpt-6-luna, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$3.9 [$-$0.8, $+$8.6] & 0.992 (0.189) & n.s. & yes \\
+H27 & gpt-6-luna, detector claude-haiku-5-5: LLM dir. flag vs hint (conflict) & $+$4.9 [$-$0.4, $+$10.3] & 0.785 (0.137) & n.s. & yes \\
+H27 & gpt-6-luna, detector claude-sonnet-5-5: LLM dir. flag vs hint (conflict) & $+$3.9 [$-$0.8, $+$8.6] & 0.992 (0.188) & n.s. & yes \\
 H27 & gpt-6-luna, detector gpt-4.1: LLM dir. flag vs hint (conflict) & $+$13.7 [$+$8.4, $+$18.9] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & gpt-6-luna, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$6.0 [$+$0.6, $+$11.7] & 0.485 (0.070) & n.s. & yes \\
+H27 & gpt-6-luna, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$6.0 [$+$0.6, $+$11.7] & 0.485 (0.069) & n.s. & yes \\
 H27 & gpt-6-luna, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$8.2 [$+$3.7, $+$12.8] & 0.005 ($<$0.001) & significant & yes \\
 H27 & gpt-6-luna, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $-$5.8 [$-$10.6, $-$1.0] & 0.279 (0.036) & n.s. & yes \\
 \bottomrule
@@ -471,23 +471,23 @@ H27 & gpt-6.1-terra, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $-
 H27 & gpt-6.1-terra, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$9.7 [$+$4.7, $+$14.7] & 0.005 ($<$0.001) & significant & yes \\
 H27 & gpt-6.1-terra, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $+$9.7 [$+$5.0, $+$14.3] & 0.008 ($<$0.001) & significant & yes \\
 H27 & Qwen2.5-7B, detector gpt-4.1: hint vs plain (conflict) & $+$7.3 [$+$2.3, $+$12.3] & 0.071 (0.011) & n.s. & yes \\
-H27 & Qwen2.5-7B, detector gpt-4o-mini: hint vs plain (conflict) & $+$3.0 [$-$2.0, $+$8.0] & 1.000 (0.402) & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-4o-mini: hint vs plain (conflict) & $+$3.0 [$-$2.0, $+$8.0] & 1.000 (0.400) & n.s. & yes \\
 H27 & Qwen2.5-7B, detector gpt-6-luna: hint vs plain (conflict) & $+$7.7 [$+$3.0, $+$12.7] & 0.038 (0.006) & significant & no \\
 H27 & Qwen2.5-7B, detector gpt-6.1-terra: hint vs plain (conflict) & $+$12.0 [$+$7.0, $+$17.0] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector claude-haiku-5-5: hint vs plain (conflict) & $-$5.4 [$-$8.8, $-$2.1] & 0.032 (0.004) & significant & yes \\
 H27 & claude-haiku-5-5, detector claude-sonnet-5-5: hint vs plain (conflict) & $-$6.3 [$-$9.4, $-$3.2] & 0.004 ($<$0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector gpt-4.1: hint vs plain (conflict) & $-$3.1 [$-$5.8, $-$0.4] & 0.341 (0.054) & n.s. & yes \\
-H27 & claude-haiku-5-5, detector gpt-4o-mini: hint vs plain (conflict) & $-$2.7 [$-$5.6, $+$0.1] & 0.681 (0.121) & n.s. & yes \\
+H27 & claude-haiku-5-5, detector gpt-4o-mini: hint vs plain (conflict) & $-$2.7 [$-$5.6, $+$0.1] & 0.681 (0.120) & n.s. & yes \\
 H27 & claude-haiku-5-5, detector gpt-6-luna: hint vs plain (conflict) & $-$5.3 [$-$8.2, $-$2.6] & 0.011 (0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector gpt-6.1-terra: hint vs plain (conflict) & $-$6.9 [$-$9.9, $-$4.0] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & gpt-4.1, detector gpt-4.1: hint vs plain (conflict) & $-$1.3 [$-$3.3, $+$0.3] & 1.000 (0.393) & n.s. & yes \\
-H27 & gpt-4.1, detector gpt-4o-mini: hint vs plain (conflict) & $-$3.0 [$-$6.7, $+$0.3] & 1.000 (0.207) & n.s. & yes \\
-H27 & gpt-4.1, detector gpt-6-luna: hint vs plain (conflict) & $-$3.3 [$-$7.3, $+$0.3] & 1.000 (0.200) & n.s. & yes \\
-H27 & gpt-4.1, detector gpt-6.1-terra: hint vs plain (conflict) & $+$3.3 [$-$0.7, $+$7.0] & 1.000 (0.198) & n.s. & yes \\
-H27 & gpt-4o-mini, detector claude-haiku-5-5: hint vs plain (conflict) & $+$6.8 [$+$2.8, $+$10.9] & 0.027 (0.004) & significant & yes \\
+H27 & gpt-4.1, detector gpt-4.1: hint vs plain (conflict) & $-$1.3 [$-$3.3, $+$0.3] & 1.000 (0.392) & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-4o-mini: hint vs plain (conflict) & $-$3.0 [$-$6.7, $+$0.3] & 1.000 (0.206) & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-6-luna: hint vs plain (conflict) & $-$3.3 [$-$7.3, $+$0.3] & 1.000 (0.199) & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-6.1-terra: hint vs plain (conflict) & $+$3.3 [$-$0.7, $+$7.0] & 1.000 (0.197) & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-haiku-5-5: hint vs plain (conflict) & $+$6.8 [$+$2.8, $+$10.9] & 0.027 (0.003) & significant & yes \\
 H27 & gpt-4o-mini, detector claude-sonnet-5-5: hint vs plain (conflict) & $+$10.1 [$+$6.4, $+$13.8] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & gpt-4o-mini, detector gpt-4.1: hint vs plain (conflict) & $+$6.8 [$+$3.7, $+$10.0] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & gpt-4o-mini, detector gpt-4o-mini: hint vs plain (conflict) & $+$1.3 [$-$0.4, $+$3.2] & 1.000 (0.294) & n.s. & yes \\
+H27 & gpt-4o-mini, detector gpt-4o-mini: hint vs plain (conflict) & $+$1.3 [$-$0.4, $+$3.2] & 1.000 (0.293) & n.s. & yes \\
 H27 & gpt-4o-mini, detector gpt-6-luna: hint vs plain (conflict) & $+$5.6 [$+$2.2, $+$9.0] & 0.036 (0.005) & significant & no \\
 H27 & gpt-4o-mini, detector gpt-6.1-terra: hint vs plain (conflict) & $+$9.4 [$+$5.9, $+$13.1] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & gpt-6-luna, detector claude-haiku-5-5: hint vs plain (conflict) & $+$9.4 [$+$5.7, $+$13.2] & $<$0.001 ($<$0.001) & significant & yes \\
@@ -510,31 +510,31 @@ question; RAGuard's misleading posts are real Reddit text.}
 \midrule
 \multicolumn{6}{l}{\emph{H27: the detector model's answer as a hint}} \\
 H27 & gpt-6-luna, detector gpt-4.1: hint vs plain (conflict) & $+$7.7 [$+$4.2, $+$11.2] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & gpt-6-luna, detector gpt-4o-mini: hint vs plain (conflict) & $+$2.6 [$-$1.3, $+$6.4] & 1.000 (0.327) & n.s. & yes \\
+H27 & gpt-6-luna, detector gpt-4o-mini: hint vs plain (conflict) & $+$2.6 [$-$1.3, $+$6.4] & 1.000 (0.325) & n.s. & yes \\
 H27 & gpt-6-luna, detector gpt-6-luna: hint vs plain (conflict) & $+$2.9 [$+$0.2, $+$5.6] & 0.462 (0.077) & n.s. & yes \\
 H27 & gpt-6-luna, detector gpt-6.1-terra: hint vs plain (conflict) & $+$13.1 [$+$9.4, $+$16.9] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & gpt-6.1-terra, detector gpt-4.1: hint vs plain (conflict) & $-$3.3 [$-$7.7, $+$1.0] & 1.000 (0.242) & n.s. & yes \\
+H27 & gpt-6.1-terra, detector gpt-4.1: hint vs plain (conflict) & $-$3.3 [$-$7.7, $+$1.0] & 1.000 (0.241) & n.s. & yes \\
 H27 & gpt-6.1-terra, detector gpt-4o-mini: hint vs plain (conflict) & $-$5.3 [$-$9.3, $-$1.3] & 0.194 (0.030) & n.s. & yes \\
 H27 & gpt-6.1-terra, detector gpt-6-luna: hint vs plain (conflict) & $-$7.0 [$-$11.0, $-$3.3] & 0.006 ($<$0.001) & significant & yes \\
 H27 & gpt-6.1-terra, detector gpt-6.1-terra: hint vs plain (conflict) & $-$7.0 [$-$11.0, $-$3.0] & 0.027 (0.003) & significant & yes \\
 H27 & Qwen2.5-7B, detector gpt-4.1: cell vs detector model alone (conflict) & $+$1.7 [$-$4.0, $+$7.3] & 1.000 (0.740) & n.s. & yes \\
-H27 & Qwen2.5-7B, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$6.6 [$+$0.8, $+$12.3] & 0.312 (0.055) & n.s. & yes \\
+H27 & Qwen2.5-7B, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$6.6 [$+$0.8, $+$12.3] & 0.312 (0.054) & n.s. & yes \\
 H27 & Qwen2.5-7B, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$8.8 [$+$3.6, $+$14.0] & 0.021 (0.004) & significant & yes \\
 H27 & Qwen2.5-7B, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$14.7 [$-$20.3, $-$9.0] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector claude-haiku-5-5: cell vs detector model alone (conflict) & $+$5.7 [$+$2.1, $+$9.3] & 0.027 (0.005) & significant & no \\
-H27 & claude-haiku-5-5, detector claude-sonnet-5-5: cell vs detector model alone (conflict) & $-$0.7 [$-$4.9, $+$3.6] & 1.000 (0.878) & n.s. & yes \\
+H27 & claude-haiku-5-5, detector claude-sonnet-5-5: cell vs detector model alone (conflict) & $-$0.7 [$-$4.9, $+$3.6] & 1.000 (0.879) & n.s. & yes \\
 H27 & claude-haiku-5-5, detector gpt-4.1: cell vs detector model alone (conflict) & $+$13.1 [$+$8.1, $+$18.0] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$11.6 [$+$5.4, $+$17.4] & 0.009 (0.001) & significant & yes \\
 H27 & claude-haiku-5-5, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$18.2 [$+$13.3, $+$23.1] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & claude-haiku-5-5, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$2.1 [$-$7.6, $+$3.3] & 1.000 (0.586) & n.s. & yes \\
+H27 & claude-haiku-5-5, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$2.1 [$-$7.6, $+$3.3] & 1.000 (0.585) & n.s. & yes \\
 H27 & gpt-4.1, detector gpt-4.1: cell vs detector model alone (conflict) & $+$11.7 [$+$6.7, $+$16.7] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & gpt-4.1, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$11.2 [$+$5.2, $+$17.1] & 0.006 ($<$0.001) & significant & yes \\
 H27 & gpt-4.1, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$17.4 [$+$12.4, $+$22.3] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & gpt-4.1, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$3.3 [$-$8.7, $+$2.0] & 1.000 (0.379) & n.s. & yes \\
-H27 & gpt-4o-mini, detector claude-haiku-5-5: cell vs detector model alone (conflict) & $-$2.7 [$-$7.7, $+$2.3] & 1.000 (0.433) & n.s. & yes \\
+H27 & gpt-4.1, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $-$3.3 [$-$8.7, $+$2.0] & 1.000 (0.377) & n.s. & yes \\
+H27 & gpt-4o-mini, detector claude-haiku-5-5: cell vs detector model alone (conflict) & $-$2.7 [$-$7.7, $+$2.3] & 1.000 (0.432) & n.s. & yes \\
 H27 & gpt-4o-mini, detector claude-sonnet-5-5: cell vs detector model alone (conflict) & $-$8.7 [$-$13.7, $-$3.7] & 0.018 (0.003) & significant & no \\
 H27 & gpt-4o-mini, detector gpt-4.1: cell vs detector model alone (conflict) & $+$5.0 [$-$0.2, $+$10.1] & 0.671 (0.119) & n.s. & yes \\
-H27 & gpt-4o-mini, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$8.4 [$+$3.2, $+$13.8] & 0.021 (0.004) & significant & yes \\
+H27 & gpt-4o-mini, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$8.4 [$+$3.2, $+$13.8] & 0.021 (0.003) & significant & yes \\
 \bottomrule
 \end{tabular}
 \caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 3 of 5), each committed before the runs it covers. Same conventions as
@@ -563,7 +563,7 @@ H27 & gpt-6-luna, detector gpt-6.1-terra: cell vs detector model alone (conflict
 H27 & gpt-6.1-terra, detector gpt-4.1: cell vs detector model alone (conflict) & $+$15.7 [$+$10.7, $+$20.7] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & gpt-6.1-terra, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$10.2 [$+$4.2, $+$16.2] & 0.018 (0.003) & significant & yes \\
 H27 & gpt-6.1-terra, detector gpt-6-luna: cell vs detector model alone (conflict) & $+$22.1 [$+$17.2, $+$27.0] & $<$0.001 ($<$0.001) & significant & yes \\
-H27 & gpt-6.1-terra, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $+$2.7 [$-$0.3, $+$5.7] & 0.925 (0.200) & n.s. & yes \\
+H27 & gpt-6.1-terra, detector gpt-6.1-terra: cell vs detector model alone (conflict) & $+$2.7 [$-$0.3, $+$5.7] & 0.925 (0.199) & n.s. & yes \\
 \multicolumn{6}{l}{\emph{H28: LLM flags on genuine conflicts}} \\
 H28 & WikiContradict, gpt-4o-mini: LLM dir. flag vs plain & $-$6.5 [$-$10.3, $-$2.8] & 0.001 (0.002) & significant & -- \\
 H28 & WikiContradict, gpt-4o-mini: LLM removal vs plain & $-$9.1 [$-$13.3, $-$5.1] & $<$0.001 ($<$0.001) & significant & -- \\
@@ -571,7 +571,7 @@ H28 & WikiContradict, gpt-6-luna: LLM dir. flag vs plain & $-$29.0 [$-$34.5, $-$
 H28 & WikiContradict, gpt-6-luna: LLM removal vs plain & $-$30.0 [$-$35.6, $-$24.5] & $<$0.001 ($<$0.001) & significant & -- \\
 H28 & WikiContradict, claude-haiku-5-5: LLM dir. flag vs plain & $-$27.7 [$-$33.2, $-$22.3] & $<$0.001 ($<$0.001) & significant & -- \\
 H28 & WikiContradict, claude-haiku-5-5: LLM removal vs plain & $-$28.2 [$-$33.6, $-$22.9] & $<$0.001 ($<$0.001) & significant & -- \\
-H28 & RAMDocs ambiguity, gpt-4o-mini: LLM dir. flag vs plain & $-$4.0 [$-$8.4, 0.0] & 0.100 (0.157) & n.s. & -- \\
+H28 & RAMDocs ambiguity, gpt-4o-mini: LLM dir. flag vs plain & $-$4.0 [$-$8.4, 0.0] & 0.100 (0.156) & n.s. & -- \\
 H28 & RAMDocs ambiguity, gpt-4o-mini: LLM removal vs plain & $-$21.2 [$-$29.6, $-$13.1] & $<$0.001 ($<$0.001) & significant & -- \\
 H28 & RAMDocs ambiguity, gpt-4o-mini: LLM dir. flag vs plain, gold recall & $-$3.6 [$-$6.8, $-$0.7] & 0.024 (0.042) & significant & -- \\
 H28 & RAMDocs ambiguity, gpt-4o-mini: LLM removal vs plain, gold recall & $-$17.4 [$-$22.4, $-$12.4] & $<$0.001 ($<$0.001) & significant & -- \\
@@ -596,21 +596,21 @@ question; RAGuard's misleading posts are real Reddit text.}
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H28: LLM flags on genuine conflicts}} \\
-H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM dir. flag vs plain & $-$5.1 [$-$10.1, $-$0.3] & 0.068 (0.110) & n.s. & -- \\
+H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM dir. flag vs plain & $-$5.1 [$-$10.1, $-$0.3] & 0.068 (0.109) & n.s. & -- \\
 H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM removal vs plain & $-$25.6 [$-$34.0, $-$17.8] & $<$0.001 ($<$0.001) & significant & -- \\
-H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM dir. flag vs plain, gold recall & $-$2.7 [$-$5.8, $+$0.2] & 0.089 (0.140) & n.s. & -- \\
+H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM dir. flag vs plain, gold recall & $-$2.7 [$-$5.8, $+$0.2] & 0.089 (0.139) & n.s. & -- \\
 H28 & RAMDocs ambiguity, claude-haiku-5-5: LLM removal vs plain, gold recall & $-$16.6 [$-$21.2, $-$12.0] & $<$0.001 ($<$0.001) & significant & -- \\
 H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM dir. flag vs plain & $-$1.0 [$-$6.1, $+$3.0] & 1.000 (1.000) & n.s. & -- \\
 H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM removal vs plain & $-$27.3 [$-$36.4, $-$18.2] & $<$0.001 ($<$0.001) & significant & -- \\
 H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM dir. flag vs plain, gold recall & 0.0 [$-$2.4, $+$2.2] & 1.000 (1.000) & n.s. & -- \\
 H28 & RAMDocs ambiguity, gpt-6.1-terra: LLM removal vs plain, gold recall & $-$18.5 [$-$23.6, $-$13.5] & $<$0.001 ($<$0.001) & significant & -- \\
 \multicolumn{6}{l}{\emph{H29: artefact probe of detector direction}} \\
-H29 & gpt-4o-mini detector, reversed order: direction accuracy vs original & $-$1.3 [$-$7.3, $+$4.7] & 1.000 (0.810) & n.s. & -- \\
-H29 & gpt-4o-mini detector, paraphrased: direction accuracy vs original & $+$1.0 [$-$2.7, $+$4.7] & 1.000 (0.805) & n.s. & -- \\
+H29 & gpt-4o-mini detector, reversed order: direction accuracy vs original & $-$1.3 [$-$7.3, $+$4.7] & 1.000 (0.811) & n.s. & -- \\
+H29 & gpt-4o-mini detector, paraphrased: direction accuracy vs original & $+$1.0 [$-$2.7, $+$4.7] & 1.000 (0.806) & n.s. & -- \\
 H29 & gpt-6-luna detector, reversed order: direction accuracy vs original & $-$1.7 [$-$6.0, $+$2.7] & 1.000 (0.644) & n.s. & -- \\
-H29 & gpt-6-luna detector, paraphrased: direction accuracy vs original & $-$1.3 [$-$5.7, $+$3.0] & 1.000 (0.746) & n.s. & -- \\
+H29 & gpt-6-luna detector, paraphrased: direction accuracy vs original & $-$1.3 [$-$5.7, $+$3.0] & 1.000 (0.747) & n.s. & -- \\
 H29 & gpt-4o-mini detector, reversed order: gpt-4o-mini's gain vs original & $-$1.9 [$-$8.4, $+$4.7] & 1.000 (0.699) & n.s. & -- \\
-H29 & gpt-4o-mini detector, paraphrased: gpt-4o-mini's gain vs original & $+$1.7 [$-$3.1, $+$6.3] & 1.000 (0.628) & n.s. & -- \\
+H29 & gpt-4o-mini detector, paraphrased: gpt-4o-mini's gain vs original & $+$1.7 [$-$3.1, $+$6.3] & 1.000 (0.627) & n.s. & -- \\
 H29 & gpt-6-luna detector, reversed order: gpt-4o-mini's gain vs original & $-$4.6 [$-$8.9, $-$0.2] & 0.196 (0.081) & n.s. & -- \\
 H29 & gpt-6-luna detector, paraphrased: gpt-4o-mini's gain vs original & $-$1.2 [$-$5.1, $+$2.7] & 1.000 (0.680) & n.s. & -- \\
 \bottomrule
@@ -630,30 +630,30 @@ question; RAGuard's misleading posts are real Reddit text.}
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H30: the detector's verdict as an answer key}} \\
-H30 & Qwen2.5-7B, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $+$3.0 [$-$2.0, $+$8.0] & 1.000 (0.398) & n.s. & yes \\
-H30 & Qwen2.5-7B, detector gpt-4o-mini: LLM dir. flag vs verdict key (conflict) & $+$3.0 [$-$1.7, $+$7.7] & 1.000 (0.355) & n.s. & yes \\
-H30 & Qwen2.5-7B, detector gpt-6-luna: LLM dir. flag vs verdict key (conflict) & $+$2.7 [$-$1.3, $+$7.0] & 1.000 (0.379) & n.s. & yes \\
-H30 & Qwen2.5-7B, detector gpt-6.1-terra: LLM dir. flag vs verdict key (conflict) & $+$3.3 [$+$0.3, $+$6.3] & 1.000 (0.083) & n.s. & yes \\
+H30 & Qwen2.5-7B, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $+$3.0 [$-$2.0, $+$8.0] & 1.000 (0.397) & n.s. & yes \\
+H30 & Qwen2.5-7B, detector gpt-4o-mini: LLM dir. flag vs verdict key (conflict) & $+$3.0 [$-$1.7, $+$7.7] & 1.000 (0.353) & n.s. & yes \\
+H30 & Qwen2.5-7B, detector gpt-6-luna: LLM dir. flag vs verdict key (conflict) & $+$2.7 [$-$1.3, $+$7.0] & 1.000 (0.377) & n.s. & yes \\
+H30 & Qwen2.5-7B, detector gpt-6.1-terra: LLM dir. flag vs verdict key (conflict) & $+$3.3 [$+$0.3, $+$6.3] & 1.000 (0.082) & n.s. & yes \\
 H30 & claude-haiku-5-5, detector claude-haiku-5-5: LLM dir. flag vs verdict key (conflict) & $+$0.9 [$-$1.3, $+$3.2] & 1.000 (0.605) & n.s. & yes \\
-H30 & claude-haiku-5-5, detector claude-sonnet-5-5: LLM dir. flag vs verdict key (conflict) & $+$1.2 [$-$1.4, $+$3.9] & 1.000 (0.504) & n.s. & yes \\
-H30 & claude-haiku-5-5, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $+$1.8 [$-$1.0, $+$4.6] & 1.000 (0.333) & n.s. & yes \\
-H30 & claude-haiku-5-5, detector gpt-4o-mini: LLM dir. flag vs verdict key (conflict) & $+$1.0 [$-$1.3, $+$3.4] & 1.000 (0.592) & n.s. & yes \\
-H30 & claude-haiku-5-5, detector gpt-6-luna: LLM dir. flag vs verdict key (conflict) & $+$2.1 [$-$0.4, $+$4.8] & 1.000 (0.209) & n.s. & yes \\
+H30 & claude-haiku-5-5, detector claude-sonnet-5-5: LLM dir. flag vs verdict key (conflict) & $+$1.2 [$-$1.4, $+$3.9] & 1.000 (0.503) & n.s. & yes \\
+H30 & claude-haiku-5-5, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $+$1.8 [$-$1.0, $+$4.6] & 1.000 (0.331) & n.s. & yes \\
+H30 & claude-haiku-5-5, detector gpt-4o-mini: LLM dir. flag vs verdict key (conflict) & $+$1.0 [$-$1.3, $+$3.4] & 1.000 (0.591) & n.s. & yes \\
+H30 & claude-haiku-5-5, detector gpt-6-luna: LLM dir. flag vs verdict key (conflict) & $+$2.1 [$-$0.4, $+$4.8] & 1.000 (0.208) & n.s. & yes \\
 H30 & claude-haiku-5-5, detector gpt-6.1-terra: LLM dir. flag vs verdict key (conflict) & $+$2.7 [$+$0.6, $+$4.9] & 0.425 (0.035) & n.s. & yes \\
-H30 & gpt-4o-mini, detector claude-haiku-5-5: LLM dir. flag vs verdict key (conflict) & $+$1.4 [$-$2.0, $+$4.9] & 1.000 (0.549) & n.s. & yes \\
+H30 & gpt-4o-mini, detector claude-haiku-5-5: LLM dir. flag vs verdict key (conflict) & $+$1.4 [$-$2.0, $+$4.9] & 1.000 (0.548) & n.s. & yes \\
 H30 & gpt-4o-mini, detector claude-sonnet-5-5: LLM dir. flag vs verdict key (conflict) & $-$2.0 [$-$6.3, $+$2.2] & 1.000 (0.486) & n.s. & yes \\
-H30 & gpt-4o-mini, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $+$2.1 [$-$1.7, $+$5.8] & 1.000 (0.398) & n.s. & yes \\
-H30 & gpt-4o-mini, detector gpt-4o-mini: LLM dir. flag vs verdict key (conflict) & $+$2.4 [$-$0.8, $+$5.8] & 1.000 (0.242) & n.s. & yes \\
-H30 & gpt-4o-mini, detector gpt-6-luna: LLM dir. flag vs verdict key (conflict) & $+$1.4 [$-$1.9, $+$4.8] & 1.000 (0.541) & n.s. & yes \\
-H30 & gpt-4o-mini, detector gpt-6.1-terra: LLM dir. flag vs verdict key (conflict) & $+$2.2 [$-$0.9, $+$5.3] & 1.000 (0.292) & n.s. & yes \\
-H30 & gpt-6-luna, detector claude-haiku-5-5: LLM dir. flag vs verdict key (conflict) & $-$0.8 [$-$3.0, $+$1.4] & 1.000 (0.655) & n.s. & yes \\
-H30 & gpt-6-luna, detector claude-sonnet-5-5: LLM dir. flag vs verdict key (conflict) & $-$1.2 [$-$3.1, $+$0.7] & 1.000 (0.354) & n.s. & yes \\
-H30 & gpt-6-luna, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $-$1.9 [$-$3.8, $-$0.2] & 1.000 (0.089) & n.s. & yes \\
+H30 & gpt-4o-mini, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $+$2.1 [$-$1.7, $+$5.8] & 1.000 (0.397) & n.s. & yes \\
+H30 & gpt-4o-mini, detector gpt-4o-mini: LLM dir. flag vs verdict key (conflict) & $+$2.4 [$-$0.8, $+$5.8] & 1.000 (0.241) & n.s. & yes \\
+H30 & gpt-4o-mini, detector gpt-6-luna: LLM dir. flag vs verdict key (conflict) & $+$1.4 [$-$1.9, $+$4.8] & 1.000 (0.540) & n.s. & yes \\
+H30 & gpt-4o-mini, detector gpt-6.1-terra: LLM dir. flag vs verdict key (conflict) & $+$2.2 [$-$0.9, $+$5.3] & 1.000 (0.291) & n.s. & yes \\
+H30 & gpt-6-luna, detector claude-haiku-5-5: LLM dir. flag vs verdict key (conflict) & $-$0.8 [$-$3.0, $+$1.4] & 1.000 (0.654) & n.s. & yes \\
+H30 & gpt-6-luna, detector claude-sonnet-5-5: LLM dir. flag vs verdict key (conflict) & $-$1.2 [$-$3.1, $+$0.7] & 1.000 (0.352) & n.s. & yes \\
+H30 & gpt-6-luna, detector gpt-4.1: LLM dir. flag vs verdict key (conflict) & $-$1.9 [$-$3.8, $-$0.2] & 1.000 (0.088) & n.s. & yes \\
 H30 & gpt-6-luna, detector gpt-4o-mini: LLM dir. flag vs verdict key (conflict) & $+$0.2 [$-$1.0, $+$1.7] & 1.000 (0.937) & n.s. & yes \\
 H30 & gpt-6-luna, detector gpt-6-luna: LLM dir. flag vs verdict key (conflict) & $-$0.7 [$-$2.7, $+$1.4] & 1.000 (0.699) & n.s. & yes \\
 H30 & gpt-6-luna, detector gpt-6.1-terra: LLM dir. flag vs verdict key (conflict) & $+$0.3 [$-$2.0, $+$2.8] & 1.000 (0.934) & n.s. & yes \\
 H30 & Qwen2.5-7B, detector gpt-4.1: verdict key vs hint (conflict) & $+$5.7 [$+$0.3, $+$10.7] & 0.393 (0.073) & n.s. & yes \\
-H30 & Qwen2.5-7B, detector gpt-4o-mini: verdict key vs hint (conflict) & $+$1.3 [$-$4.3, $+$6.7] & 1.000 (0.810) & n.s. & yes \\
+H30 & Qwen2.5-7B, detector gpt-4o-mini: verdict key vs hint (conflict) & $+$1.3 [$-$4.3, $+$6.7] & 1.000 (0.811) & n.s. & yes \\
 H30 & Qwen2.5-7B, detector gpt-6-luna: verdict key vs hint (conflict) & $+$1.7 [$-$3.7, $+$6.7] & 1.000 (0.709) & n.s. & yes \\
 H30 & Qwen2.5-7B, detector gpt-6.1-terra: verdict key vs hint (conflict) & $-$7.3 [$-$12.7, $-$2.3] & 0.095 (0.015) & n.s. & yes \\
 \bottomrule
@@ -676,21 +676,21 @@ question; RAGuard's misleading posts are real Reddit text.}
 H30 & claude-haiku-5-5, detector claude-haiku-5-5: verdict key vs hint (conflict) & $+$10.2 [$+$6.3, $+$14.2] & $<$0.001 ($<$0.001) & significant & yes \\
 H30 & claude-haiku-5-5, detector claude-sonnet-5-5: verdict key vs hint (conflict) & $+$13.3 [$+$8.8, $+$17.9] & $<$0.001 ($<$0.001) & significant & yes \\
 H30 & claude-haiku-5-5, detector gpt-4.1: verdict key vs hint (conflict) & $+$12.3 [$+$8.6, $+$16.2] & $<$0.001 ($<$0.001) & significant & yes \\
-H30 & claude-haiku-5-5, detector gpt-4o-mini: verdict key vs hint (conflict) & $-$2.4 [$-$6.8, $+$1.9] & 1.000 (0.402) & n.s. & yes \\
+H30 & claude-haiku-5-5, detector gpt-4o-mini: verdict key vs hint (conflict) & $-$2.4 [$-$6.8, $+$1.9] & 1.000 (0.400) & n.s. & yes \\
 H30 & claude-haiku-5-5, detector gpt-6-luna: verdict key vs hint (conflict) & $+$8.2 [$+$4.3, $+$12.1] & 0.001 ($<$0.001) & significant & yes \\
 H30 & claude-haiku-5-5, detector gpt-6.1-terra: verdict key vs hint (conflict) & $+$8.3 [$+$4.6, $+$12.2] & $<$0.001 ($<$0.001) & significant & yes \\
-H30 & gpt-4o-mini, detector claude-haiku-5-5: verdict key vs hint (conflict) & $+$4.8 [$+$0.1, $+$9.3] & 0.393 (0.083) & n.s. & yes \\
+H30 & gpt-4o-mini, detector claude-haiku-5-5: verdict key vs hint (conflict) & $+$4.8 [$+$0.1, $+$9.3] & 0.393 (0.082) & n.s. & yes \\
 H30 & gpt-4o-mini, detector claude-sonnet-5-5: verdict key vs hint (conflict) & $+$7.8 [$+$3.2, $+$12.3] & 0.025 (0.004) & significant & yes \\
 H30 & gpt-4o-mini, detector gpt-4.1: verdict key vs hint (conflict) & $+$9.7 [$+$5.1, $+$14.2] & 0.005 ($<$0.001) & significant & yes \\
-H30 & gpt-4o-mini, detector gpt-4o-mini: verdict key vs hint (conflict) & $+$4.7 [$-$0.7, $+$9.9] & 0.440 (0.139) & n.s. & yes \\
+H30 & gpt-4o-mini, detector gpt-4o-mini: verdict key vs hint (conflict) & $+$4.7 [$-$0.7, $+$9.9] & 0.440 (0.138) & n.s. & yes \\
 H30 & gpt-4o-mini, detector gpt-6-luna: verdict key vs hint (conflict) & $+$6.7 [$+$2.0, $+$11.3] & 0.075 (0.011) & n.s. & no \\
-H30 & gpt-4o-mini, detector gpt-6.1-terra: verdict key vs hint (conflict) & $-$2.1 [$-$6.7, $+$2.4] & 1.000 (0.502) & n.s. & yes \\
+H30 & gpt-4o-mini, detector gpt-6.1-terra: verdict key vs hint (conflict) & $-$2.1 [$-$6.7, $+$2.4] & 1.000 (0.501) & n.s. & yes \\
 H30 & gpt-6-luna, detector claude-haiku-5-5: verdict key vs hint (conflict) & $+$5.7 [$+$0.4, $+$10.9] & 0.388 (0.067) & n.s. & yes \\
 H30 & gpt-6-luna, detector claude-sonnet-5-5: verdict key vs hint (conflict) & $+$5.1 [$+$0.2, $+$10.0] & 0.393 (0.080) & n.s. & yes \\
 H30 & gpt-6-luna, detector gpt-4.1: verdict key vs hint (conflict) & $+$15.6 [$+$10.8, $+$20.3] & $<$0.001 ($<$0.001) & significant & yes \\
 H30 & gpt-6-luna, detector gpt-4o-mini: verdict key vs hint (conflict) & $+$5.8 [$+$0.2, $+$11.4] & 0.393 (0.083) & n.s. & yes \\
 H30 & gpt-6-luna, detector gpt-6-luna: verdict key vs hint (conflict) & $+$8.9 [$+$4.1, $+$13.7] & 0.006 ($<$0.001) & significant & yes \\
-H30 & gpt-6-luna, detector gpt-6.1-terra: verdict key vs hint (conflict) & $-$6.1 [$-$11.0, $-$1.2] & 0.209 (0.035) & n.s. & yes \\
+H30 & gpt-6-luna, detector gpt-6.1-terra: verdict key vs hint (conflict) & $-$6.1 [$-$11.0, $-$1.2] & 0.209 (0.034) & n.s. & yes \\
 \multicolumn{6}{l}{\emph{H31: randomised direction}} \\
 H31 & gpt-4o-mini: right-flag effect (conflict) & $+$29.4 [$+$22.6, $+$36.3] & $<$0.001 ($<$0.001) & supported & -- \\
 H31 & gpt-6-luna: right-flag effect (conflict) & $+$33.5 [$+$26.8, $+$40.3] & $<$0.001 ($<$0.001) & supported & -- \\
@@ -717,7 +717,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
 \midrule
 \multicolumn{6}{l}{\emph{H31: randomised direction}} \\
-H31 & gpt-4o-mini: right-flag effect + wrong-flag effect (conflict) & $-$1.9 [$-$12.2, $+$8.6] & 0.733 (0.814) & n.s. & -- \\
+H31 & gpt-4o-mini: right-flag effect + wrong-flag effect (conflict) & $-$1.9 [$-$12.2, $+$8.6] & 0.733 (0.815) & n.s. & -- \\
 H31 & gpt-6-luna: right-flag effect + wrong-flag effect (conflict) & $-$11.4 [$-$21.0, $-$1.8] & 0.049 (0.043) & significant & -- \\
 H31 & claude-haiku-5-5: right-flag effect + wrong-flag effect (conflict) & $-$25.1 [$-$34.3, $-$15.8] & $<$0.001 ($<$0.001) & significant & -- \\
 H31 & gpt-6.1-terra: right-flag effect + wrong-flag effect (conflict) & $-$46.9 [$-$57.1, $-$36.4] & $<$0.001 ($<$0.001) & significant & -- \\

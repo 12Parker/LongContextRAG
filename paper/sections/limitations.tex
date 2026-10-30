@@ -12,9 +12,9 @@ detector--generator cells on one benchmark with six detectors, so a test of a de
 power (an exact permutation has \hRedoNPerm\ arrangements). The generator's own accuracy dominated the
 registered H24 correlation. Concurrent runs gave a detector slightly different outputs across cells, but identical
 ones for at least \frozenShareMin\% of questions; restricting each cell to those moves no
-cell's gain by more than \frozenMaxShift\ points. The follow-rate account of the crossed cells was defined after seeing
-them, using follow rates from the same questions, so it is a retrospective decomposition; no outcome-blind
-question set tests it. The break-even precision is a calibration for randomised flags on true pairs, not a validated
+cell's gain by more than \frozenMaxShift\ points. The follow-rate account was defined after seeing the crossed cells. Its prospective
+test (H32) uses unseen questions but the same benchmark, prompt and generators, and the account overstated harm on
+clean questions and on HealthContradict. The break-even precision is a calibration for randomised flags on true pairs, not a validated
 rule for selective detectors.
 
 \paragraph{Data and power.} Confirmatory evidence comes from two benchmarks: RAMDocs (300 questions, 139
@@ -37,6 +37,8 @@ posts in context, generators abstain on \rgAbstMin--\rgAbstMax\% of conflict cla
 true/false task falls below chance; on the claims they answer it is \rgAnsMin--\rgAnsMax\%, against
 \rgCbMin--\rgCbMax\% closed-book. Every generator is more accurate closed-book than with RAGuard's posts
 (gpt-4o-mini \zcRgMiniConflict\% against \zpRgMiniConflict\%), so they make a weak retrieval setting.
+HealthContradict's pages are real, but its labels are as released: an LLM judge finds the correct page supporting
+the gold answer for \hcLabCorrect\% of items and the misinformation page the wrong one for \hcLabMis\%.
 WikiContradict has genuine conflicts but no misinformation side. CONFLICTS shows no significant effect for any
 condition; scored only on items with a reference answer, it can neither confirm nor refute our findings. Our
 comparisons detect effects of about \mdeMed\ points with 80\% power, so smaller effects, including small harms on clean
@@ -48,10 +50,11 @@ is not a reproduction. The metric is string matching: it misses paraphrases, and
 answer''. We report the more lenient bidirectional variant throughout and mark conclusions that depend on
 it. An outside-family LLM judge agrees with the matcher on \semAgree\% of \semN\ paired outputs. The matcher's
 misses depend on the condition (more under answer keys and directional flags) but move no contrast by more than
-\semDidMax\ points (Appendix~\ref{app:semantic}). That sample cannot confirm the $\pm$3-point equivalence claims, and
+\semDidMax\ points (Appendix~\ref{app:semantic}). Re-scored by that judge over all \jdN\ responses, neither pooled equivalence holds within
+$\pm$3 (the flag leads by \jdThirtyJ\ and \jdTwentyThreeJ; H38), so those claims hold under the matcher only, and
 no human labels check either scorer: the paired, blinded audit sheet we release is unlabelled.
 
-\paragraph{Direction and the grid.} Oracle direction is not distinguishable from an answer key (H23), so the
+\paragraph{Direction and the grid.} Oracle direction is close to an answer key (H23), so the
 oracle rows are ceilings, not findings about detectors. Direction precision is the share of a detector's flags on true
 contradictions that name the false side; pair precision, the share of its flagged pairs that are
 true contradictions. The gpt-4o-mini LLM detector's direction precision is
@@ -62,8 +65,8 @@ Synthetic false flags are spread uniformly with a random suspect side, whereas r
 errors. The grid predicts real detectors only roughly, and three detectors cannot show whether document- or pair-level
 summaries predict better.
 
-\paragraph{Pre-registration.} H1--H9 were registered before the confirmatory run. H10--H31
-were registered in eight addenda, after earlier results were known but before their own runs. The only
+\paragraph{Pre-registration.} H1--H9 were registered before the confirmatory run. H10--H38
+were registered in nine addenda, after earlier results were known but before their own runs. The only
 timestamp is the repository's commit history, not a third-party registry. Holm controls error within each family, not
 across the programme: of \fdrN\ registered tests, \fdrHolm\ are significant under Holm and \fdrBH\ under a
 Benjamini--Hochberg FDR over all of them (both in the hypothesis tables). Several analyses were chosen after

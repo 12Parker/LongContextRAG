@@ -1305,6 +1305,8 @@ def numbers(R, out: Path):
     numbers8(R, add)   # eighth-review re-analyses, corrected baselines, semantic re-score
     from .assets9 import numbers9
     numbers9(R, add)   # ninth-review re-analyses (§18)
+    from .assets10 import numbers10
+    numbers10(R, add)   # §19: prospective test, full judge, HealthContradict
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1332,6 +1334,8 @@ def write_all(R, out: Path):
     write8(R, out)   # eighth review: tab_selection, tab_semantic, tab_baselines8
     from .assets9 import write9
     write9(R, out)   # ninth review: tab_entity
+    from .assets10 import write10
+    write10(R, out)   # §19: tab_fresh, tab_hc
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():
