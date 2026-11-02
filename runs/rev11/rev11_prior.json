@@ -1,0 +1,1789 @@
+{
+ "R1": {
+  "fingerprint": {
+   "eval_ids": "419227db05f57e447831d0958e91065b0809afcb8c6b11bbf5b51f440e0e6284",
+   "fresh_ids": "98e25281d058286dd9c1408ecc7aa65a68fa49bdf3228216fd14c12587978e3b",
+   "params": {
+    "C": 1.0,
+    "lowercase": true,
+    "mask": "OBJSLOT",
+    "mask_match": "case-insensitive, word-bounded",
+    "max_iter": 2000,
+    "min_df": 2,
+    "ngram_range": [
+     1,
+     2
+    ],
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "sublinear_tf": true,
+    "version": 2
+   },
+   "qa_bytes": 1305507207,
+   "qa_sha256": "175fffb2775f14c2aa627bfbc466f700a089ae38a38163832c27310cd9f33f67"
+  },
+  "full": {
+   "eval": {
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "mean_p_false_correct": 0.07363826440326261,
+    "mean_p_false_misinfo": 0.937312797811755,
+    "n": 300,
+    "n_nn_cosine_ge_0.8": 0,
+    "n_ties": 0,
+    "nn_cosine_max": 0.7845765637340797,
+    "nn_cosine_median": 0.1953853774038385,
+    "pairwise_acc": 1.0,
+    "pointwise_acc": 0.9916666666666667
+   },
+   "fresh": {
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "mean_p_false_correct": 0.0722792444820451,
+    "mean_p_false_misinfo": 0.9483952206439208,
+    "n": 300,
+    "n_nn_cosine_ge_0.8": 1,
+    "n_ties": 0,
+    "nn_cosine_max": 0.8964945980729898,
+    "nn_cosine_median": 0.2160844112940459,
+    "pairwise_acc": 1.0,
+    "pointwise_acc": 0.9933333333333333
+   },
+   "n_features": 2001687,
+   "n_iter": 24,
+   "top_correct": [
+    [
+     "evidence",
+     -11.81120453585446
+    ],
+    [
+     "breaking news",
+     -8.83055493218368
+    ],
+    [
+     "title the",
+     -8.805920178249012
+    ],
+    [
+     "title",
+     -8.590803923825463
+    ],
+    [
+     "breaking",
+     -8.017584169308034
+    ],
+    [
+     "website",
+     -7.904845964908903
+    ],
+    [
+     "news",
+     -7.16031410269717
+    ],
+    [
+     "journey",
+     -7.050183086986502
+    ],
+    [
+     "sources",
+     -6.639100115345737
+    ],
+    [
+     "confirms",
+     -6.322092969177878
+    ],
+    [
+     "here is",
+     -6.173917086026245
+    ],
+    [
+     "statement",
+     -5.974185984701772
+    ],
+    [
+     "records",
+     -5.877979243263084
+    ],
+    [
+     "indeed",
+     -5.796314279640319
+    ],
+    [
+     "conclusion",
+     -5.766632996849431
+    ]
+   ],
+   "top_false": [
+    [
+     "studies",
+     10.540673171053838
+    ],
+    [
+     "study",
+     9.71424289586971
+    ],
+    [
+     "exclusive interview",
+     9.552778715884445
+    ],
+    [
+     "studies and",
+     9.49025652312942
+    ],
+    [
+     "exclusive",
+     9.425465977657328
+    ],
+    [
+     "to data",
+     9.35914864299839
+    ],
+    [
+     "an exclusive",
+     9.299379392489831
+    ],
+    [
+     "with our",
+     8.773116837594424
+    ],
+    [
+     "our publication",
+     8.754826967542325
+    ],
+    [
+     "12",
+     8.688349959019185
+    ],
+    [
+     "interview",
+     8.414883787021921
+    ],
+    [
+     "dr",
+     8.394802533096625
+    ],
+    [
+     "in an",
+     8.278979130970903
+    ],
+    [
+     "interview with",
+     7.914013591114293
+    ],
+    [
+     "journal of",
+     7.884490050609978
+    ]
+   ],
+   "train_acc": 0.9988218227284021
+  },
+  "masked": {
+   "eval": {
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "mean_p_false_correct": 0.08101069056181377,
+    "mean_p_false_misinfo": 0.9399877558128324,
+    "n": 300,
+    "n_nn_cosine_ge_0.8": 0,
+    "n_ties": 0,
+    "nn_cosine_max": 0.7683203074307977,
+    "nn_cosine_median": 0.187459825784657,
+    "pairwise_acc": 1.0,
+    "pointwise_acc": 0.9883333333333333
+   },
+   "fresh": {
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "mean_p_false_correct": 0.0792620986892962,
+    "mean_p_false_misinfo": 0.9486144325286064,
+    "n": 300,
+    "n_nn_cosine_ge_0.8": 1,
+    "n_ties": 0,
+    "nn_cosine_max": 0.8592969229951678,
+    "nn_cosine_median": 0.2007482394356384,
+    "pairwise_acc": 1.0,
+    "pointwise_acc": 0.9833333333333333
+   },
+   "n_features": 1882073,
+   "n_iter": 17,
+   "top_correct": [
+    [
+     "evidence",
+     -11.467838747337478
+    ],
+    [
+     "title the",
+     -8.172614387389201
+    ],
+    [
+     "breaking news",
+     -8.117087104118182
+    ],
+    [
+     "title",
+     -7.979052510863272
+    ],
+    [
+     "website",
+     -7.530322366704681
+    ],
+    [
+     "breaking",
+     -7.404330233944594
+    ],
+    [
+     "journey",
+     -6.858481267865946
+    ],
+    [
+     "news",
+     -6.681825227145171
+    ],
+    [
+     "sources",
+     -6.364278254322121
+    ],
+    [
+     "confirms",
+     -5.887233010605944
+    ],
+    [
+     "here is",
+     -5.826278044385358
+    ],
+    [
+     "objslot is",
+     -5.8124127907395025
+    ],
+    [
+     "statement",
+     -5.777759747804922
+    ],
+    [
+     "reveals",
+     -5.625934496624012
+    ],
+    [
+     "records",
+     -5.611432572663738
+    ]
+   ],
+   "top_false": [
+    [
+     "studies",
+     9.742268618411025
+    ],
+    [
+     "study",
+     9.398337913835523
+    ],
+    [
+     "exclusive interview",
+     9.119019176732793
+    ],
+    [
+     "exclusive",
+     8.986018299705929
+    ],
+    [
+     "an exclusive",
+     8.875328449035512
+    ],
+    [
+     "studies and",
+     8.633611185419637
+    ],
+    [
+     "to data",
+     8.616900241150047
+    ],
+    [
+     "with our",
+     8.466085878445504
+    ],
+    [
+     "interview",
+     8.451527587293393
+    ],
+    [
+     "our publication",
+     8.401727090531919
+    ],
+    [
+     "in an",
+     8.242238075153724
+    ],
+    [
+     "interview with",
+     8.107650987382842
+    ],
+    [
+     "12",
+     8.055986547572315
+    ],
+    [
+     "dr",
+     7.8523660328772955
+    ],
+    [
+     "journal of",
+     7.833859323795935
+    ]
+   ],
+   "train_acc": 0.9984571488110028
+  },
+  "n_excluded_subjects": 1400,
+  "n_qa_rows": 126184,
+  "n_train_passages": 249538,
+  "n_train_passages_identical_to_eval": 0,
+  "n_train_rows": 124769,
+  "n_usable": 126183
+ },
+ "R2": {
+  "claude-haiku-5-5": {
+   "closedbook_run": "cb_single_haiku",
+   "closedbook_seeds": [
+    0,
+    1,
+    2
+   ],
+   "detections": "cross_cb_mini_haiku",
+   "direction": {
+    "diff": 0.17616580310880825,
+    "diff_ci": [
+     0.12234042553191493,
+     0.23244172744172725
+    ],
+    "known": 1.0,
+    "known_ci": [
+     1.0,
+     1.0
+    ],
+    "n_known_flags": 26,
+    "n_unknown_flags": 193,
+    "unknown": 0.8238341968911918,
+    "unknown_ci": [
+     0.7675582725582726,
+     0.8776595744680851
+    ]
+   },
+   "max_gold_flags_per_question": 1,
+   "n_conflict": 300,
+   "n_known": 32,
+   "n_unknown": 268,
+   "single_side": {
+    "diff": 0.14054054054054055,
+    "diff_ci": [
+     0.09090909090909094,
+     0.1944481981981981
+    ],
+    "known": 1.0,
+    "known_ci": [
+     1.0,
+     1.0
+    ],
+    "n_known_flags": 26,
+    "n_unknown_flags": 185,
+    "unknown": 0.8594594594594595,
+    "unknown_ci": [
+     0.8055518018018019,
+     0.9090909090909091
+    ]
+   }
+  },
+  "gpt-4.1": {
+   "closedbook_run": "cb_single_gpt41",
+   "closedbook_seeds": [
+    0
+   ],
+   "detections": "cross_cb_mini_four",
+   "direction": {
+    "diff": 0.0943379790940766,
+    "diff_ci": [
+     0.035922240201366404,
+     0.1497584541062802
+    ],
+    "known": 0.9821428571428571,
+    "known_ci": [
+     0.9387755102040817,
+     1.0
+    ],
+    "n_known_flags": 56,
+    "n_unknown_flags": 205,
+    "unknown": 0.8878048780487805,
+    "unknown_ci": [
+     0.8426395939086294,
+     0.9310344827586207
+    ]
+   },
+   "max_gold_flags_per_question": 1,
+   "n_conflict": 300,
+   "n_known": 60,
+   "n_unknown": 240,
+   "single_side": {
+    "diff": 0.0943379790940766,
+    "diff_ci": [
+     0.035922240201366404,
+     0.1497584541062802
+    ],
+    "known": 0.9821428571428571,
+    "known_ci": [
+     0.9387755102040817,
+     1.0
+    ],
+    "n_known_flags": 56,
+    "n_unknown_flags": 205,
+    "unknown": 0.8878048780487805,
+    "unknown_ci": [
+     0.8426395939086294,
+     0.9310344827586207
+    ]
+   }
+  },
+  "gpt-4o-mini": {
+   "closedbook_run": "cb_single",
+   "closedbook_seeds": [
+    0,
+    1,
+    2
+   ],
+   "detections": "cb_main",
+   "direction": {
+    "diff": 0.18668831168831168,
+    "diff_ci": [
+     0.03318022017578069,
+     0.3186324180835125
+    ],
+    "known": 0.8571428571428571,
+    "known_ci": [
+     0.7142857142857143,
+     0.967741935483871
+    ],
+    "n_known_flags": 28,
+    "n_unknown_flags": 264,
+    "unknown": 0.6704545454545454,
+    "unknown_ci": [
+     0.6124031007751938,
+     0.7262357414448669
+    ]
+   },
+   "max_gold_flags_per_question": 1,
+   "n_conflict": 300,
+   "n_known": 28,
+   "n_unknown": 272,
+   "registered_11_3": {
+    "known": {
+     "direction": 0.8571428571428571,
+     "n": 28
+    },
+    "unknown": {
+     "direction": 0.6704545454545454,
+     "n": 272
+    }
+   },
+   "single_side": {
+    "diff": 0.18668831168831168,
+    "diff_ci": [
+     0.03318022017578069,
+     0.3186324180835125
+    ],
+    "known": 0.8571428571428571,
+    "known_ci": [
+     0.7142857142857143,
+     0.967741935483871
+    ],
+    "n_known_flags": 28,
+    "n_unknown_flags": 264,
+    "unknown": 0.6704545454545454,
+    "unknown_ci": [
+     0.6124031007751938,
+     0.7262357414448669
+    ]
+   }
+  },
+  "gpt-6-luna": {
+   "closedbook_run": "cb_single_luna",
+   "closedbook_seeds": [
+    0,
+    1,
+    2
+   ],
+   "detections": "cross_cb_mini_luna",
+   "direction": {
+    "diff": 0.15503875968992253,
+    "diff_ci": [
+     0.09482758620689657,
+     0.217749514916323
+    ],
+    "known": 1.0,
+    "known_ci": [
+     1.0,
+     1.0
+    ],
+    "n_known_flags": 28,
+    "n_unknown_flags": 129,
+    "unknown": 0.8449612403100775,
+    "unknown_ci": [
+     0.7822504850836769,
+     0.9051724137931034
+    ]
+   },
+   "max_gold_flags_per_question": 1,
+   "n_conflict": 300,
+   "n_known": 47,
+   "n_unknown": 253,
+   "single_side": {
+    "diff": 0.06034482758620685,
+    "diff_ci": [
+     0.01851851851851849,
+     0.10810810810810811
+    ],
+    "known": 1.0,
+    "known_ci": [
+     1.0,
+     1.0
+    ],
+    "n_known_flags": 28,
+    "n_unknown_flags": 116,
+    "unknown": 0.9396551724137931,
+    "unknown_ci": [
+     0.8918918918918919,
+     0.9814814814814815
+    ]
+   }
+  },
+  "gpt-6.1-terra": {
+   "closedbook_run": "cb_single_terra",
+   "closedbook_seeds": [
+    0
+   ],
+   "detections": "cross_cb_mini_terra",
+   "direction": {
+    "diff": 0.12336601307189543,
+    "diff_ci": [
+     0.020287659200702746,
+     0.22368421052631582
+    ],
+    "known": 0.9705882352941176,
+    "known_ci": [
+     0.9023780487804879,
+     1.0
+    ],
+    "n_known_flags": 34,
+    "n_unknown_flags": 72,
+    "unknown": 0.8472222222222222,
+    "unknown_ci": [
+     0.7605633802816901,
+     0.9242424242424242
+    ]
+   },
+   "max_gold_flags_per_question": 1,
+   "n_conflict": 300,
+   "n_known": 60,
+   "n_unknown": 240,
+   "single_side": {
+    "diff": 0.031746031746031744,
+    "diff_ci": [
+     0.0,
+     0.0821917808219178
+    ],
+    "known": 1.0,
+    "known_ci": [
+     1.0,
+     1.0
+    ],
+    "n_known_flags": 33,
+    "n_unknown_flags": 63,
+    "unknown": 0.9682539682539683,
+    "unknown_ci": [
+     0.9178082191780822,
+     1.0
+    ]
+   }
+  },
+  "note": "single_side is PR\u00a720.2's R2 estimand (questions whose flag on the gold pair names one side; at most one such flag per question, so flag and question counts agree); direction = metrics.direction_accuracy as \u00a711.3 coded it ('both' a miss, 'unclear' skipped), reported beside it. The two coincide for gpt-4o-mini, which never answers 'both'. Sonnet: no closed-book run. The HealthContradict part waits for the PR\u00a720.3 human labels.",
+  "registered": "single_side"
+ },
+ "R3": {
+  "claude-haiku-5-5": {
+   "current": 0.7805907172995781,
+   "current_ci": [
+    0.7254076373742349,
+    0.8326364102126206
+   ],
+   "current_k": 555,
+   "current_n": 711,
+   "current_wilson": [
+    0.7487071177607929,
+    0.8094584954323956
+   ],
+   "matches_detector_precision7": true,
+   "max_gold_flags_per_question": 1,
+   "n_cells": 3,
+   "single_ci": [
+    0.8297824635053906,
+    0.9205607476635514
+   ],
+   "single_k": 555,
+   "single_n": 633,
+   "single_side": 0.8767772511848341,
+   "single_wilson": [
+    0.8488746523168486,
+    0.9001342064009236
+   ],
+   "verdict_mix": {
+    "both": 24,
+    "correct": 78,
+    "misinfo": 555,
+    "unclear": 54
+   }
+  },
+  "claude-sonnet-5-5": {
+   "current": 0.7768924302788844,
+   "current_ci": [
+    0.7261904761904762,
+    0.8266129032258065
+   ],
+   "current_k": 585,
+   "current_n": 753,
+   "current_wilson": [
+    0.7457923243879987,
+    0.8051816178477347
+   ],
+   "matches_detector_precision7": true,
+   "max_gold_flags_per_question": 1,
+   "n_cells": 3,
+   "single_ci": [
+    0.9023255813953488,
+    0.9686133688340807
+   ],
+   "single_k": 585,
+   "single_n": 624,
+   "single_side": 0.9375,
+   "single_wilson": [
+    0.91570013209769,
+    0.9539459697216225
+   ],
+   "verdict_mix": {
+    "both": 42,
+    "correct": 39,
+    "misinfo": 585,
+    "unclear": 87
+   }
+  },
+  "gpt-4.1": {
+   "current": 0.8178160919540229,
+   "current_ci": [
+    0.7722588420944526,
+    0.8618725452629562
+   ],
+   "current_k": 1423,
+   "current_n": 1740,
+   "current_wilson": [
+    0.7989854722979031,
+    0.8352464441789145
+   ],
+   "matches_detector_precision7": true,
+   "max_gold_flags_per_question": 1,
+   "n_cells": 6,
+   "single_ci": [
+    0.8726002919669399,
+    0.9433481858688734
+   ],
+   "single_k": 1423,
+   "single_n": 1566,
+   "single_side": 0.9086845466155811,
+   "single_wilson": [
+    0.8933996540865448,
+    0.9219692340866312
+   ],
+   "verdict_mix": {
+    "both": 0,
+    "correct": 143,
+    "misinfo": 1423,
+    "unclear": 174
+   }
+  },
+  "gpt-4o-mini": {
+   "current": 0.6883561643835616,
+   "current_ci": [
+    0.6332038697832074,
+    0.740487676700875
+   ],
+   "current_k": 1206,
+   "current_n": 1752,
+   "current_wilson": [
+    0.6662756110849312,
+    0.709612510030322
+   ],
+   "matches_detector_precision7": true,
+   "max_gold_flags_per_question": 1,
+   "n_cells": 6,
+   "single_ci": [
+    0.6332038697832074,
+    0.740487676700875
+   ],
+   "single_k": 1206,
+   "single_n": 1752,
+   "single_side": 0.6883561643835616,
+   "single_wilson": [
+    0.6662756110849312,
+    0.709612510030322
+   ],
+   "verdict_mix": {
+    "both": 0,
+    "correct": 546,
+    "misinfo": 1206,
+    "unclear": 0
+   }
+  },
+  "gpt-6-luna": {
+   "current": 0.821605550049554,
+   "current_ci": [
+    0.7640342283658172,
+    0.8773900123105487
+   ],
+   "current_k": 829,
+   "current_n": 1009,
+   "current_wilson": [
+    0.7967761642191269,
+    0.8439953048832483
+   ],
+   "matches_detector_precision7": true,
+   "max_gold_flags_per_question": 1,
+   "n_cells": 6,
+   "single_ci": [
+    0.9110003987399816,
+    0.9799794520547945
+   ],
+   "single_k": 829,
+   "single_n": 874,
+   "single_side": 0.948512585812357,
+   "single_wilson": [
+    0.9317995552285693,
+    0.9613000654774898
+   ],
+   "verdict_mix": {
+    "both": 75,
+    "correct": 45,
+    "misinfo": 829,
+    "unclear": 60
+   }
+  },
+  "gpt-6.1-terra": {
+   "current": 0.8264840182648402,
+   "current_ci": [
+    0.7551296346813976,
+    0.8938562738040247
+   ],
+   "current_k": 543,
+   "current_n": 657,
+   "current_wilson": [
+    0.795650630609214,
+    0.853521576467338
+   ],
+   "matches_detector_precision7": true,
+   "max_gold_flags_per_question": 1,
+   "n_cells": 6,
+   "single_ci": [
+    0.931388944943329,
+    1.0
+   ],
+   "single_k": 543,
+   "single_n": 560,
+   "single_side": 0.9696428571428571,
+   "single_wilson": [
+    0.9519244127876678,
+    0.9809617027454889
+   ],
+   "verdict_mix": {
+    "both": 59,
+    "correct": 17,
+    "misinfo": 543,
+    "unclear": 38
+   }
+  },
+  "note": "single-side precision first tabulated on 2026-11-02 while writing the triage (disclosed in PR\u00a720.2)"
+ },
+ "R4": {
+  "claude-haiku-5-5": {
+   "closedbook_run": "cb_single_haiku",
+   "closedbook_seeds": [
+    0,
+    1,
+    2
+   ],
+   "f_R": {
+    "all": {
+     "ci": [
+      0.4924242424242424,
+      0.7651515151515151
+     ],
+     "n": 44,
+     "rate": 0.6287878787878788
+    },
+    "diff": 0.3798449612403101,
+    "diff_ci": [
+     0.24603174603174605,
+     0.5193798449612403
+    ],
+    "known": {
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 1,
+     "rate": 1.0
+    },
+    "unknown": {
+     "ci": [
+      0.48837209302325574,
+      0.7596899224806201
+     ],
+     "n": 43,
+     "rate": 0.6201550387596899
+    }
+   },
+   "f_W": {
+    "all": {
+     "ci": [
+      0.5450980392156862,
+      0.7294117647058823
+     ],
+     "n": 85,
+     "rate": 0.6392156862745098
+    },
+    "diff": -0.30888888888888894,
+    "diff_ci": [
+     -0.6032380952380951,
+     0.019032978136239078
+    ],
+    "known": {
+     "ci": [
+      0.1,
+      0.6666666666666666
+     ],
+     "n": 10,
+     "rate": 0.36666666666666664
+    },
+    "unknown": {
+     "ci": [
+      0.5822222222222222,
+      0.7688888888888888
+     ],
+     "n": 75,
+     "rate": 0.6755555555555556
+    }
+   },
+   "matches_H31x": true,
+   "n_conflict": 300,
+   "n_known": 32,
+   "run": "randdir_cb_haiku"
+  },
+  "gpt-4o-mini": {
+   "closedbook_run": "cb_single",
+   "closedbook_seeds": [
+    0,
+    1,
+    2
+   ],
+   "f_R": {
+    "all": {
+     "ci": [
+      0.45614035087719307,
+      0.6710526315789473
+     ],
+     "n": 76,
+     "rate": 0.5657894736842105
+    },
+    "diff": 0.32206572769953035,
+    "diff_ci": [
+     -0.0005724200274108693,
+     0.54337899543379
+    ],
+    "known": {
+     "ci": [
+      0.6,
+      1.0
+     ],
+     "n": 5,
+     "rate": 0.8666666666666666
+    },
+    "unknown": {
+     "ci": [
+      0.4272300469483568,
+      0.6619718309859155
+     ],
+     "n": 71,
+     "rate": 0.5446009389671362
+    }
+   },
+   "f_W": {
+    "all": {
+     "ci": [
+      0.40476190476190477,
+      0.6238095238095238
+     ],
+     "n": 70,
+     "rate": 0.5142857142857142
+    },
+    "diff": 0.16410256410256407,
+    "diff_ci": [
+     -0.23334087140057289,
+     0.5
+    ],
+    "known": {
+     "ci": [
+      0.3333333333333333,
+      0.9333333333333332
+     ],
+     "n": 5,
+     "rate": 0.6666666666666666
+    },
+    "unknown": {
+     "ci": [
+      0.38461538461538464,
+      0.6153846153846154
+     ],
+     "n": 65,
+     "rate": 0.5025641025641026
+    }
+   },
+   "matches_H31x": true,
+   "n_conflict": 300,
+   "n_known": 28,
+   "run": "randdir_cb_mini"
+  },
+  "gpt-6-luna": {
+   "closedbook_run": "cb_single_luna",
+   "closedbook_seeds": [
+    0,
+    1,
+    2
+   ],
+   "f_R": {
+    "all": {
+     "ci": [
+      0.6071428571428571,
+      0.8273809523809523
+     ],
+     "n": 56,
+     "rate": 0.7202380952380951
+    },
+    "diff": 0.2901234567901235,
+    "diff_ci": [
+     0.17901234567901247,
+     0.40849056603773537
+    ],
+    "known": {
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 2,
+     "rate": 1.0
+    },
+    "unknown": {
+     "ci": [
+      0.5925925925925926,
+      0.8209876543209875
+     ],
+     "n": 54,
+     "rate": 0.7098765432098765
+    }
+   },
+   "f_W": {
+    "all": {
+     "ci": [
+      0.6783625730994152,
+      0.8596491228070176
+     ],
+     "n": 57,
+     "rate": 0.7719298245614035
+    },
+    "diff": -0.017786561264822254,
+    "diff_ci": [
+     -0.3028458188153309,
+     0.2386575670197873
+    ],
+    "known": {
+     "ci": [
+      0.5151515151515151,
+      1.0
+     ],
+     "n": 11,
+     "rate": 0.7575757575757575
+    },
+    "unknown": {
+     "ci": [
+      0.6739130434782609,
+      0.8695652173913043
+     ],
+     "n": 46,
+     "rate": 0.7753623188405797
+    }
+   },
+   "matches_H31x": true,
+   "n_conflict": 300,
+   "n_known": 47,
+   "run": "randdir_cb_luna"
+  },
+  "gpt-6.1-terra": {
+   "closedbook_run": "cb_single_terra",
+   "closedbook_seeds": [
+    0
+   ],
+   "f_R": {
+    "all": {
+     "ci": [
+      0.5333333333333333,
+      0.8
+     ],
+     "n": 45,
+     "rate": 0.6666666666666666
+    },
+    "diff": 0.36585365853658536,
+    "diff_ci": [
+     0.22499999999999998,
+     0.5121951219512195
+    ],
+    "known": {
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "rate": 1.0
+    },
+    "unknown": {
+     "ci": [
+      0.4878048780487805,
+      0.7804878048780488
+     ],
+     "n": 41,
+     "rate": 0.6341463414634146
+    }
+   },
+   "f_W": {
+    "all": {
+     "ci": [
+      0.8947368421052632,
+      0.9894736842105263
+     ],
+     "n": 95,
+     "rate": 0.9473684210526315
+    },
+    "diff": 0.06849315068493156,
+    "diff_ci": [
+     0.014079616588419388,
+     0.13157894736842102
+    ],
+    "known": {
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 22,
+     "rate": 1.0
+    },
+    "unknown": {
+     "ci": [
+      0.863013698630137,
+      0.9863013698630136
+     ],
+     "n": 73,
+     "rate": 0.9315068493150684
+    }
+   },
+   "matches_H31x": true,
+   "n_conflict": 300,
+   "n_known": 60,
+   "run": "randdir_cb_terra"
+  },
+  "note": "followed = per-question share of flagged seeds following the flag (revision10._follow); logistic with fractional outcomes, one observation per question and generator, generator fixed effects",
+  "pooled_logit": {
+   "f_R": {
+    "ci_unbounded": [
+     false,
+     true
+    ],
+    "converged": true,
+    "log_or": 2.416391884792833,
+    "n_boot_separated": 1793,
+    "n_boot_undefined": 1,
+    "n_known_obs": 12,
+    "n_obs": 221,
+    "n_questions": 95,
+    "or": 11.205356072992592,
+    "or_ci": [
+     2.283088436289465,
+     null
+    ]
+   },
+   "f_W": {
+    "ci_unbounded": [
+     false,
+     false
+    ],
+    "converged": true,
+    "log_or": -0.16873338146579808,
+    "n_boot_separated": 0,
+    "n_boot_undefined": 0,
+    "n_known_obs": 48,
+    "n_obs": 307,
+    "n_questions": 116,
+    "or": 0.844734095130788,
+    "or_ci": [
+     0.3781442136281694,
+     1.8512112928487536
+    ]
+   }
+  }
+ },
+ "R5": {
+  "cells": [
+   {
+    "det": "gpt-4.1",
+    "gen": "Qwen2.5-7B",
+    "kind": "transfer",
+    "known_share": 0.043333333333333335,
+    "obs": 16.0,
+    "pred": 23.420821438623296,
+    "pred_conditioned": 23.249417853882814,
+    "pred_unconditioned": 23.420821438623296
+   },
+   {
+    "det": "gpt-4o-mini",
+    "gen": "Qwen2.5-7B",
+    "kind": "transfer",
+    "known_share": 0.043333333333333335,
+    "obs": 7.333333333333333,
+    "pred": 10.215364056308326,
+    "pred_conditioned": 10.077811103519247,
+    "pred_unconditioned": 10.215364056308326
+   },
+   {
+    "det": "gpt-6-luna",
+    "gen": "Qwen2.5-7B",
+    "kind": "transfer",
+    "known_share": 0.043333333333333335,
+    "obs": 12.0,
+    "pred": 12.376693069572326,
+    "pred_conditioned": 12.040425929624664,
+    "pred_unconditioned": 12.376693069572326
+   },
+   {
+    "det": "gpt-6.1-terra",
+    "gen": "Qwen2.5-7B",
+    "kind": "transfer",
+    "known_share": 0.043333333333333335,
+    "obs": 8.0,
+    "pred": 7.335111145734211,
+    "pred_conditioned": 7.179622356439094,
+    "pred_unconditioned": 7.335111145734211
+   },
+   {
+    "det": "claude-haiku-5-5",
+    "gen": "claude-haiku-5-5",
+    "kind": "own",
+    "known_share": 0.10666666666666667,
+    "obs": 5.666666666666666,
+    "pred": 6.114547435135671,
+    "pred_conditioned": 6.433890324432961,
+    "pred_unconditioned": 6.114547435135671
+   },
+   {
+    "det": "claude-sonnet-5-5",
+    "gen": "claude-haiku-5-5",
+    "kind": "own",
+    "known_share": 0.10666666666666667,
+    "obs": 8.222222222222223,
+    "pred": 7.282560903149138,
+    "pred_conditioned": 7.603611828883147,
+    "pred_unconditioned": 7.282560903149138
+   },
+   {
+    "det": "gpt-4.1",
+    "gen": "claude-haiku-5-5",
+    "kind": "own",
+    "known_share": 0.10666666666666667,
+    "obs": 11.0,
+    "pred": 12.701584472172708,
+    "pred_conditioned": 13.203083548664946,
+    "pred_unconditioned": 12.701584472172708
+   },
+   {
+    "det": "gpt-4o-mini",
+    "gen": "claude-haiku-5-5",
+    "kind": "own",
+    "known_share": 0.10666666666666667,
+    "obs": -4.111111111111111,
+    "pred": 1.0509902951079433,
+    "pred_conditioned": 1.3661383864484642,
+    "pred_unconditioned": 1.0509902951079433
+   },
+   {
+    "det": "gpt-6-luna",
+    "gen": "claude-haiku-5-5",
+    "kind": "own",
+    "known_share": 0.10666666666666667,
+    "obs": 5.0,
+    "pred": 4.440097048920578,
+    "pred_conditioned": 4.412609819121447,
+    "pred_unconditioned": 4.440097048920578
+   },
+   {
+    "det": "gpt-6.1-terra",
+    "gen": "claude-haiku-5-5",
+    "kind": "own",
+    "known_share": 0.10666666666666667,
+    "obs": 4.111111111111112,
+    "pred": 2.6946226975638745,
+    "pred_conditioned": 2.6961125466551827,
+    "pred_unconditioned": 2.6946226975638745
+   },
+   {
+    "det": "gpt-4.1",
+    "gen": "gpt-4.1",
+    "kind": "transfer",
+    "known_share": 0.2,
+    "obs": 11.666666666666666,
+    "pred": 13.216275286031475,
+    "pred_conditioned": 13.710528506963643,
+    "pred_unconditioned": 13.216275286031475
+   },
+   {
+    "det": "gpt-4o-mini",
+    "gen": "gpt-4.1",
+    "kind": "transfer",
+    "known_share": 0.2,
+    "obs": -2.3333333333333335,
+    "pred": 1.7318059799677437,
+    "pred_conditioned": 1.911168936869441,
+    "pred_unconditioned": 1.7318059799677437
+   },
+   {
+    "det": "gpt-6-luna",
+    "gen": "gpt-4.1",
+    "kind": "transfer",
+    "known_share": 0.2,
+    "obs": 6.333333333333334,
+    "pred": 4.680799648408007,
+    "pred_conditioned": 4.916262954136819,
+    "pred_unconditioned": 4.680799648408007
+   },
+   {
+    "det": "gpt-6.1-terra",
+    "gen": "gpt-4.1",
+    "kind": "transfer",
+    "known_share": 0.2,
+    "obs": 5.0,
+    "pred": 2.793240984591603,
+    "pred_conditioned": 2.9842231509603825,
+    "pred_unconditioned": 2.793240984591603
+   },
+   {
+    "det": "claude-haiku-5-5",
+    "gen": "gpt-4o-mini",
+    "kind": "own",
+    "known_share": 0.09333333333333334,
+    "obs": 13.0,
+    "pred": 12.316248955722637,
+    "pred_conditioned": 12.856763372256333,
+    "pred_unconditioned": 12.316248955722637
+   },
+   {
+    "det": "claude-sonnet-5-5",
+    "gen": "gpt-4o-mini",
+    "kind": "own",
+    "known_share": 0.09333333333333334,
+    "obs": 15.88888888888889,
+    "pred": 16.105263157894736,
+    "pred_conditioned": 16.311375947995664,
+    "pred_unconditioned": 16.105263157894736
+   },
+   {
+    "det": "gpt-4.1",
+    "gen": "gpt-4o-mini",
+    "kind": "own",
+    "known_share": 0.09333333333333334,
+    "obs": 18.555555555555557,
+    "pred": 19.214118629908103,
+    "pred_conditioned": 19.51725051161671,
+    "pred_unconditioned": 19.214118629908103
+   },
+   {
+    "det": "gpt-4o-mini",
+    "gen": "gpt-4o-mini",
+    "kind": "own",
+    "known_share": 0.09333333333333334,
+    "obs": 8.444444444444445,
+    "pred": 10.396282372598161,
+    "pred_conditioned": 10.652758717547451,
+    "pred_unconditioned": 10.396282372598161
+   },
+   {
+    "det": "gpt-6-luna",
+    "gen": "gpt-4o-mini",
+    "kind": "own",
+    "known_share": 0.09333333333333334,
+    "obs": 13.666666666666666,
+    "pred": 11.007435254803678,
+    "pred_conditioned": 11.389791741904421,
+    "pred_unconditioned": 11.007435254803678
+   },
+   {
+    "det": "gpt-6.1-terra",
+    "gen": "gpt-4o-mini",
+    "kind": "own",
+    "known_share": 0.09333333333333334,
+    "obs": 9.555555555555557,
+    "pred": 7.355430242272348,
+    "pred_conditioned": 7.669892861442157,
+    "pred_unconditioned": 7.355430242272348
+   },
+   {
+    "det": "claude-haiku-5-5",
+    "gen": "gpt-6-luna",
+    "kind": "own",
+    "known_share": 0.15666666666666668,
+    "obs": 14.333333333333334,
+    "pred": 13.500348092453354,
+    "pred_conditioned": 14.231138545953362,
+    "pred_unconditioned": 13.500348092453354
+   },
+   {
+    "det": "claude-sonnet-5-5",
+    "gen": "gpt-6-luna",
+    "kind": "own",
+    "known_share": 0.15666666666666668,
+    "obs": 18.11111111111111,
+    "pred": 16.19865636313004,
+    "pred_conditioned": 16.848238151780823,
+    "pred_unconditioned": 16.19865636313004
+   },
+   {
+    "det": "gpt-4.1",
+    "gen": "gpt-6-luna",
+    "kind": "own",
+    "known_share": 0.15666666666666668,
+    "obs": 21.333333333333336,
+    "pred": 21.601016429963796,
+    "pred_conditioned": 22.265342637323315,
+    "pred_unconditioned": 21.601016429963796
+   },
+   {
+    "det": "gpt-4o-mini",
+    "gen": "gpt-6-luna",
+    "kind": "own",
+    "known_share": 0.15666666666666668,
+    "obs": 8.555555555555557,
+    "pred": 10.046574770258978,
+    "pred_conditioned": 10.451406171212934,
+    "pred_unconditioned": 10.046574770258978
+   },
+   {
+    "det": "gpt-6-luna",
+    "gen": "gpt-6-luna",
+    "kind": "own",
+    "known_share": 0.15666666666666668,
+    "obs": 11.111111111111112,
+    "pred": 9.7854358117516,
+    "pred_conditioned": 10.153903500924434,
+    "pred_unconditioned": 9.7854358117516
+   },
+   {
+    "det": "gpt-6.1-terra",
+    "gen": "gpt-6-luna",
+    "kind": "own",
+    "known_share": 0.15666666666666668,
+    "obs": 7.333333333333333,
+    "pred": 5.39546783625731,
+    "pred_conditioned": 5.733613645851971,
+    "pred_unconditioned": 5.39546783625731
+   },
+   {
+    "det": "gpt-4.1",
+    "gen": "gpt-6.1-terra",
+    "kind": "own",
+    "known_share": 0.2,
+    "obs": 7.333333333333333,
+    "pred": 9.040935672514621,
+    "pred_conditioned": 9.622006905000559,
+    "pred_unconditioned": 9.040935672514621
+   },
+   {
+    "det": "gpt-4o-mini",
+    "gen": "gpt-6.1-terra",
+    "kind": "own",
+    "known_share": 0.2,
+    "obs": -11.666666666666666,
+    "pred": -8.350877192982455,
+    "pred_conditioned": -8.006682258603409,
+    "pred_unconditioned": -8.350877192982455
+   },
+   {
+    "det": "gpt-6-luna",
+    "gen": "gpt-6.1-terra",
+    "kind": "own",
+    "known_share": 0.2,
+    "obs": 2.666666666666667,
+    "pred": 2.0584795321637426,
+    "pred_conditioned": 2.6498496491814234,
+    "pred_unconditioned": 2.0584795321637426
+   },
+   {
+    "det": "gpt-6.1-terra",
+    "gen": "gpt-6.1-terra",
+    "kind": "own",
+    "known_share": 0.2,
+    "obs": 2.666666666666667,
+    "pred": 0.8421052631578947,
+    "pred_conditioned": 1.3096113152912354,
+    "pred_unconditioned": 0.8421052631578947
+   }
+  ],
+  "conditioned": {
+   "all": {
+    "harm_called": 1,
+    "harm_obs": 3,
+    "harm_pred": 1,
+    "intercept": -0.3374386032919106,
+    "mae": 1.7871707408720539,
+    "n": 30,
+    "r": 0.9426698239382248,
+    "r_ci": [
+     0.8998229155641364,
+     0.9752815323909167
+    ],
+    "r_within": 0.9052349717443146,
+    "sign_agree": 28,
+    "slope": 0.9617332701647388
+   },
+   "own": {
+    "harm_called": 1,
+    "harm_obs": 2,
+    "harm_pred": 1,
+    "intercept": -0.8489644638235804,
+    "mae": 1.5017823495532467,
+    "n": 22,
+    "r": 0.9669154030288664,
+    "r_ci": [
+     0.9295575295025136,
+     0.985443579843373
+    ],
+    "r_within": 0.9336840034479648,
+    "sign_agree": 21,
+    "slope": 1.0505753209354105
+   },
+   "transfer": {
+    "harm_called": 0,
+    "harm_obs": 1,
+    "harm_pred": 0,
+    "intercept": 1.265239616200255,
+    "mae": 2.571988816998773,
+    "n": 8,
+    "r": 0.8960251685739311,
+    "r_ci": [
+     0.8076865637851584,
+     0.9949060508699028
+    ],
+    "r_within": 0.8502222070237541,
+    "sign_agree": 7,
+    "slope": 0.7082748123775795
+   }
+  },
+  "fallback_to_overall": [],
+  "mae_change": {
+   "all": -0.03415594370927488,
+   "own": -0.03555064221965498,
+   "transfer": -0.030320522805729055
+  },
+  "max_abs_pred_change": 0.730790453500008,
+  "max_drift_vs_predict7": 0.0,
+  "n_cells": 30,
+  "rates": {
+   "claude-haiku-5-5": {
+    "fR_known": 1.0,
+    "fR_unknown": 0.6201550387596899,
+    "fW_known": 0.36666666666666664,
+    "fW_unknown": 0.6755555555555556
+   },
+   "gpt-4o-mini": {
+    "fR_known": 0.8666666666666666,
+    "fR_unknown": 0.5446009389671362,
+    "fW_known": 0.6666666666666666,
+    "fW_unknown": 0.5025641025641026
+   },
+   "gpt-6-luna": {
+    "fR_known": 1.0,
+    "fR_unknown": 0.7098765432098765,
+    "fW_known": 0.7575757575757575,
+    "fW_unknown": 0.7753623188405797
+   },
+   "gpt-6.1-terra": {
+    "fR_known": 1.0,
+    "fR_unknown": 0.6341463414634146,
+    "fW_known": 1.0,
+    "fW_unknown": 0.9315068493150684
+   }
+  },
+  "transfer_rates": {
+   "fR_known": 0.9666666666666667,
+   "fR_unknown": 0.6271947156000293,
+   "fW_known": 0.6977272727272728,
+   "fW_unknown": 0.7212472065688265
+  },
+  "unconditioned": {
+   "all": {
+    "harm_called": 1,
+    "harm_obs": 3,
+    "harm_pred": 1,
+    "intercept": -0.052714149543039615,
+    "mae": 1.8213266845813287,
+    "n": 30,
+    "r": 0.9398130068415506,
+    "r_ci": [
+     0.8934071973455128,
+     0.9755304322440032
+    ],
+    "r_within": 0.905401971279879,
+    "sign_agree": 28,
+    "slope": 0.9617048745505098
+   },
+   "own": {
+    "harm_called": 1,
+    "harm_obs": 2,
+    "harm_pred": 1,
+    "intercept": -0.5387487494920599,
+    "mae": 1.5373329917729017,
+    "n": 22,
+    "r": 0.9675288224842178,
+    "r_ci": [
+     0.9307527167419174,
+     0.9857407535460448
+    ],
+    "r_within": 0.9349457899676602,
+    "sign_agree": 21,
+    "slope": 1.0620183028351118
+   },
+   "transfer": {
+    "harm_called": 0,
+    "harm_obs": 1,
+    "harm_pred": 0,
+    "intercept": 1.377856643128679,
+    "mae": 2.602309339804502,
+    "n": 8,
+    "r": 0.8969421772070109,
+    "r_ci": [
+     0.8056824508315424,
+     0.995249391208757
+    ],
+    "r_within": 0.8492332014867638,
+    "sign_agree": 7,
+    "slope": 0.699182642467063
+   }
+  }
+ },
+ "R8": {
+  "claude-haiku-5-5": {
+   "all": {
+    "diff": -47.18888888888889,
+    "diff_ci": [
+     -75.27005555555556,
+     -19.355250000000016
+    ],
+    "flagged": 507.8677777777777,
+    "n": 300,
+    "plain": 555.0566666666666
+   },
+   "right_arm": {
+    "diff": -120.99161425576519,
+    "diff_ci": [
+     -151.3590670859539,
+     -89.08018867924531
+    ],
+    "flagged": 429.02935010482173,
+    "n": 159,
+    "plain": 550.020964360587
+   },
+   "right_followed": {
+    "diff": 54.5989672977625,
+    "diff_ci": [
+     -53.58484734678865,
+     148.99439885581813
+    ],
+    "followed": 557.3132530120482,
+    "n_questions": 44,
+    "n_rows_followed": 83,
+    "n_rows_not": 49,
+    "not_followed": 502.7142857142857,
+    "plain_same_questions": 544.3484848484849
+   },
+   "run": "randdir_cb_haiku",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "wrong_arm": {
+    "diff": 36.03546099290781,
+    "diff_ci": [
+     -7.007387706855786,
+     80.59899527186761
+    ],
+    "flagged": 596.7706855791962,
+    "n": 141,
+    "plain": 560.7352245862885
+   },
+   "wrong_followed": {
+    "diff": -121.04974659909317,
+    "diff_ci": [
+     -189.16820783196783,
+     -54.17561100007466
+    ],
+    "followed": 613.7546012269938,
+    "n_questions": 85,
+    "n_rows_followed": 163,
+    "n_rows_not": 92,
+    "not_followed": 734.804347826087,
+    "plain_same_questions": 539.843137254902
+   }
+  },
+  "gpt-6-luna": {
+   "all": {
+    "diff": -120.71444444444442,
+    "diff_ci": [
+     -139.35011111111112,
+     -101.55477777777779
+    ],
+    "flagged": 133.8588888888889,
+    "n": 300,
+    "plain": 254.57333333333332
+   },
+   "right_arm": {
+    "diff": -142.28301886792454,
+    "diff_ci": [
+     -165.57704402515725,
+     -119.96189727463313
+    ],
+    "flagged": 108.1488469601677,
+    "n": 159,
+    "plain": 250.43186582809227
+   },
+   "right_followed": {
+    "diff": -26.877088095656745,
+    "diff_ci": [
+     -96.39148454004224,
+     17.46537722016267
+    ],
+    "followed": 117.01652892561984,
+    "n_questions": 56,
+    "n_rows_followed": 121,
+    "n_rows_not": 47,
+    "not_followed": 143.89361702127658,
+    "plain_same_questions": 273.92857142857144
+   },
+   "run": "randdir_cb_luna",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "wrong_arm": {
+    "diff": -96.39243498817967,
+    "diff_ci": [
+     -125.77039007092199,
+     -65.01081560283689
+    ],
+    "flagged": 162.85106382978722,
+    "n": 141,
+    "plain": 259.2434988179669
+   },
+   "wrong_followed": {
+    "diff": -94.37296037296039,
+    "diff_ci": [
+     -182.07488711288713,
+     -22.254348691290183
+    ],
+    "followed": 183.24242424242425,
+    "n_questions": 57,
+    "n_rows_followed": 132,
+    "n_rows_not": 39,
+    "not_followed": 277.61538461538464,
+    "plain_same_questions": 184.83625730994154
+   }
+  },
+  "gpt-6.1-terra": {
+   "all": {
+    "diff": -53.54333333333334,
+    "diff_ci": [
+     -60.9705,
+     -46.056666666666665
+    ],
+    "flagged": 51.31666666666667,
+    "n": 300,
+    "plain": 104.86
+   },
+   "right_arm": {
+    "diff": -55.37106918238994,
+    "diff_ci": [
+     -66.33977987421383,
+     -45.13191823899371
+    ],
+    "flagged": 48.0440251572327,
+    "n": 159,
+    "plain": 103.41509433962264
+   },
+   "right_followed": {
+    "diff": -68.6,
+    "diff_ci": [
+     -135.9457181795132,
+     -12.495000000000072
+    ],
+    "followed": 47.6,
+    "n_questions": 45,
+    "n_rows_followed": 30,
+    "n_rows_not": 15,
+    "not_followed": 116.2,
+    "plain_same_questions": 120.04444444444445
+   },
+   "run": "randdir_cb_terra",
+   "seeds": [
+    0
+   ],
+   "wrong_arm": {
+    "diff": -51.4822695035461,
+    "diff_ci": [
+     -62.5959219858156,
+     -40.99290780141844
+    ],
+    "flagged": 55.00709219858156,
+    "n": 141,
+    "plain": 106.48936170212765
+   },
+   "wrong_followed": {
+    "diff": -47.39999999999999,
+    "diff_ci": [
+     -95.94493922393642,
+     1.160650183150178
+    ],
+    "followed": 49.2,
+    "n_questions": 95,
+    "n_rows_followed": 90,
+    "n_rows_not": 5,
+    "not_followed": 96.6,
+    "plain_same_questions": 98.83157894736843
+   }
+  },
+  "note": "API completion_tokens, conflict questions, seed means within questions; for luna, terra and Claude they include hidden reasoning tokens"
+ }
+}

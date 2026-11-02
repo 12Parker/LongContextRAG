@@ -1,0 +1,138 @@
+[
+ {
+  "commit": "a6f71246364e9b2d3d35d554ed745ba6c654a7e3",
+  "section": "base (H1--H9)",
+  "committed": "2026-10-27T02:48:02Z",
+  "pushed": "2026-10-27T05:14:35Z",
+  "first_run_file": "2026-10-27T02:48:16Z",
+  "first_run_path": "runs/holdout_detect/detections.caag.jsonl"
+ },
+ {
+  "commit": "ad5535d9d7ad4dc182a79826a5f6ba97d36f60fc",
+  "section": "9 (H10--H11)",
+  "committed": "2026-10-27T15:12:23Z",
+  "pushed": "2026-10-27T17:18:53Z",
+  "first_run_file": "2026-10-27T15:13:10Z",
+  "first_run_path": "runs/holdout_minimal/config.json"
+ },
+ {
+  "commit": "b2ca800ec40bc36a37d9bc19746e6da35508f9d8",
+  "section": "9.4 (Qwen seed)",
+  "committed": "2026-10-27T15:18:21Z",
+  "pushed": "2026-10-27T17:18:53Z",
+  "first_run_file": "2026-10-27T15:13:10Z",
+  "first_run_path": "runs/holdout_qwen/config.json"
+ },
+ {
+  "commit": "222d52fcff23ba307c9dcdb1a9495d2024f0ba7f",
+  "section": "9.5 (inverted oracle)",
+  "committed": "2026-10-27T15:24:33Z",
+  "pushed": "2026-10-27T17:18:53Z",
+  "first_run_file": "2026-10-27T15:24:37Z",
+  "first_run_path": "runs/holdout_adversarial/config.json"
+ },
+ {
+  "commit": "f248eeae20249c6d0efec417648854a65b94cd3e",
+  "section": "9.6 (Qwen aborts)",
+  "committed": "2026-10-27T16:27:25Z",
+  "pushed": "2026-10-27T17:18:53Z",
+  "first_run_file": "2026-10-27T15:13:10Z",
+  "first_run_path": "runs/holdout_qwen/config.json"
+ },
+ {
+  "commit": "a76ff8431a58110735efd0ff684d19e9d51bd540",
+  "section": "10 (H12--H14)",
+  "committed": "2026-10-27T18:34:06Z",
+  "pushed": "2026-10-27T21:48:12Z",
+  "first_run_file": "2026-10-27T18:34:37Z",
+  "first_run_path": "runs/holdout_round2/config.json"
+ },
+ {
+  "commit": "e58249ffa43dba0350784270d6d0d6bb852ff320",
+  "section": "11 (H15--H18)",
+  "committed": "2026-10-27T22:09:51Z",
+  "pushed": "2026-10-27T22:09:52Z",
+  "first_run_file": "2026-10-27T22:10:40Z",
+  "first_run_path": "runs/cb_single/config.json"
+ },
+ {
+  "commit": "886e5c1d75be77567a29e8a807f81ab8193ced74",
+  "section": "12 (H19)",
+  "committed": "2026-10-27T23:29:23Z",
+  "pushed": "2026-10-27T23:29:24Z",
+  "first_run_file": "2026-10-27T23:37:21Z",
+  "first_run_path": "runs/cb_single_luna/config.json"
+ },
+ {
+  "commit": "108e41dd794322596a9682463efa488e4f9879ee",
+  "section": "13 (H20--H24)",
+  "committed": "2026-10-28T01:48:38Z",
+  "pushed": "2026-10-28T01:48:40Z",
+  "first_run_file": "2026-10-28T01:49:22Z",
+  "first_run_path": "runs/cb_forced_terra/config.json"
+ },
+ {
+  "commit": "eca911bbee99748ba77adbaecb7277e883871726",
+  "section": "14 (H25--H26)",
+  "committed": "2026-10-28T01:54:59Z",
+  "pushed": "2026-10-28T01:55:00Z",
+  "first_run_file": "2026-10-28T01:55:21Z",
+  "first_run_path": "runs/rg_mini/config.json"
+ },
+ {
+  "commit": "89f672897fc55576f06a6d8dd584bd314cbcb4af",
+  "section": "15 (H27--H29)",
+  "committed": "2026-10-28T14:43:46Z",
+  "pushed": "2026-10-28T14:43:47Z",
+  "first_run_file": "2026-10-28T14:49:56Z",
+  "first_run_path": "runs/probe_rev_mini/config.json"
+ },
+ {
+  "commit": "13602c784b00020c3850a36457430b0c8f3fe3ad",
+  "section": "16 (H30--H31)",
+  "committed": "2026-10-28T18:12:39Z",
+  "pushed": "2026-10-28T18:12:42Z",
+  "first_run_file": "2026-10-28T18:13:54Z",
+  "first_run_path": "runs/randdir_cb_terra/config.json"
+ },
+ {
+  "commit": "88b5f7d465e5de15b44c10b263999d46368cda97",
+  "section": "17 (re-analyses, baselines, judge)",
+  "committed": "2026-10-29T13:38:37Z",
+  "pushed": "2026-10-29T14:52:15Z",
+  "first_run_file": "2026-10-29T13:40:03Z",
+  "first_run_path": "runs/rev8_detect_cb_nli/detections.nli.jsonl"
+ },
+ {
+  "commit": "21d916c1959cf0ad54501cbac16113912513ec0d",
+  "section": "17.6 (deviations)",
+  "committed": "2026-10-29T14:04:42Z",
+  "pushed": "2026-10-29T14:52:15Z",
+  "first_run_file": "2026-10-29T13:45:12Z",
+  "first_run_path": "runs/judge8/dry/contrasts.jsonl"
+ },
+ {
+  "commit": "85c3c85e974be2137ac8d6d72e977e49dd65667f",
+  "section": "18 (re-analyses)",
+  "committed": "2026-10-29T21:09:58Z",
+  "pushed": "2026-10-29T21:35:39Z",
+  "first_run_file": null,
+  "first_run_path": null
+ },
+ {
+  "commit": "d6185dfd24a1ce1f517d91a279d0f54c27c7ad3c",
+  "section": "19 (H32--H38)",
+  "committed": "2026-10-29T22:57:06Z",
+  "pushed": "2026-10-29T22:57:31Z",
+  "first_run_file": "2026-10-29T22:57:44Z",
+  "first_run_path": "runs/hc_mini/config.json"
+ },
+ {
+  "commit": "d7e8d76e71af8e304e1e9c89284b6d3dfeec453c",
+  "section": "20 (re-analyses)",
+  "committed": "2026-11-02T18:00:05Z",
+  "pushed": "2026-11-02T18:00:07Z",
+  "first_run_file": null,
+  "first_run_path": null
+ }
+]

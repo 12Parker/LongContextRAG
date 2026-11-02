@@ -1,0 +1,1829 @@
+{
+ "R6": {
+  "a": {
+   "diff": 0.3692751611111089,
+   "diff_ci": [
+    -0.2511593194444502,
+    1.2188212787499983
+   ],
+   "mae_account": 1.4354888888888908,
+   "mae_marginal": 1.8047640499999997,
+   "mae_marginal_ci": [
+    1.4981819530555556,
+    3.127927229212962
+   ]
+  },
+  "b": {
+   "cells": {
+    "fresh_cb_haiku_haiku": {
+     "obs": 14.55555555555556,
+     "pred": 12.921450000000018
+    },
+    "fresh_cb_haiku_luna": {
+     "obs": 7.444444444444441,
+     "pred": 4.050541666666669
+    },
+    "fresh_cb_haiku_mini": {
+     "obs": 7.777777777777772,
+     "pred": 7.574850000000012
+    },
+    "fresh_cb_haiku_qwen": {
+     "obs": 6.22222222222222,
+     "pred": 2.2282500000000036
+    },
+    "fresh_cb_haiku_terra": {
+     "obs": 8.111111111111107,
+     "pred": 5.822325000000003
+    },
+    "fresh_cb_luna_haiku": {
+     "obs": 17.333333333333336,
+     "pred": 16.418975000000025
+    },
+    "fresh_cb_luna_luna": {
+     "obs": 6.111111111111112,
+     "pred": 6.545266666666672
+    },
+    "fresh_cb_luna_mini": {
+     "obs": 11.555555555555555,
+     "pred": 12.070433333333352
+    },
+    "fresh_cb_luna_qwen": {
+     "obs": 6.888888888888889,
+     "pred": 6.817583333333349
+    },
+    "fresh_cb_luna_terra": {
+     "obs": 8.77777777777778,
+     "pred": 7.329316666666672
+    },
+    "fresh_cb_mini_haiku": {
+     "obs": 15.999999999999998,
+     "pred": 19.956958333333365
+    },
+    "fresh_cb_mini_luna": {
+     "obs": 9.11111111111111,
+     "pred": 8.745066666666673
+    },
+    "fresh_cb_mini_mini": {
+     "obs": 11.444444444444443,
+     "pred": 15.434866666666691
+    },
+    "fresh_cb_mini_qwen": {
+     "obs": 9.222222222222221,
+     "pred": 9.355000000000015
+    },
+    "fresh_cb_mini_terra": {
+     "obs": 10.222222222222221,
+     "pred": 10.349158333333342
+    },
+    "fresh_cb_terra_haiku": {
+     "obs": 7.000000000000001,
+     "pred": 8.050025000000005
+    },
+    "fresh_cb_terra_luna": {
+     "obs": -0.6666666666666667,
+     "pred": -0.2946499999999994
+    },
+    "fresh_cb_terra_mini": {
+     "obs": -4.0,
+     "pred": -0.1833249999999989
+    },
+    "fresh_cb_terra_qwen": {
+     "obs": -8.333333333333332,
+     "pred": -5.141249999999997
+    },
+    "fresh_cb_terra_terra": {
+     "obs": 2.3333333333333335,
+     "pred": 3.129774999999999
+    }
+   },
+   "diff": 0.19937277777777673,
+   "diff_ci": [
+    -0.1504626423611085,
+    0.6968887430555533
+   ],
+   "f_right": 0.645375,
+   "f_wrong": 0.7182,
+   "mae": 1.6348616666666675,
+   "mae_ci": [
+    1.5292360104166656,
+    2.6549786180555657
+   ],
+   "r": 0.9339236811194667,
+   "sign_agree": 20,
+   "slope": 0.9613663122932672
+  },
+  "c": {
+   "cells": {
+    "fresh_cb_haiku_haiku": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_haiku_luna": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_haiku_mini": {
+     "n": 100,
+     "n_flagged": 68,
+     "n_wrong": 9,
+     "obs": -2.3333333333333335,
+     "pred": -5.7528
+    },
+    "fresh_cb_haiku_qwen": {
+     "n": 100,
+     "n_flagged": 87,
+     "n_wrong": 28,
+     "obs": -8.333333333333332,
+     "pred": -16.406133333333333
+    },
+    "fresh_cb_haiku_terra": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_luna_haiku": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_luna_luna": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_luna_mini": {
+     "n": 100,
+     "n_flagged": 68,
+     "n_wrong": 9,
+     "obs": -3.0,
+     "pred": -6.432500000000001
+    },
+    "fresh_cb_luna_qwen": {
+     "n": 100,
+     "n_flagged": 87,
+     "n_wrong": 28,
+     "obs": -2.666666666666667,
+     "pred": -19.554799999999997
+    },
+    "fresh_cb_luna_terra": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_mini_haiku": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_mini_luna": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_mini_mini": {
+     "n": 100,
+     "n_flagged": 68,
+     "n_wrong": 9,
+     "obs": -3.6666666666666665,
+     "pred": -4.1144
+    },
+    "fresh_cb_mini_qwen": {
+     "n": 100,
+     "n_flagged": 87,
+     "n_wrong": 28,
+     "obs": -5.333333333333333,
+     "pred": -12.171766666666667
+    },
+    "fresh_cb_mini_terra": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_terra_haiku": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_terra_luna": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    },
+    "fresh_cb_terra_mini": {
+     "n": 100,
+     "n_flagged": 68,
+     "n_wrong": 9,
+     "obs": -2.0,
+     "pred": -8.5266
+    },
+    "fresh_cb_terra_qwen": {
+     "n": 100,
+     "n_flagged": 87,
+     "n_wrong": 28,
+     "obs": 0.0,
+     "pred": -25.5798
+    },
+    "fresh_cb_terra_terra": {
+     "n": 100,
+     "n_flagged": 0,
+     "n_wrong": 0,
+     "obs": 0.0,
+     "pred": 0.0
+    }
+   },
+   "flagging_cells": [
+    "fresh_cb_haiku_mini",
+    "fresh_cb_haiku_qwen",
+    "fresh_cb_luna_mini",
+    "fresh_cb_luna_qwen",
+    "fresh_cb_mini_mini",
+    "fresh_cb_mini_qwen",
+    "fresh_cb_terra_mini",
+    "fresh_cb_terra_qwen"
+   ],
+   "mae_20": 3.5602733333333347,
+   "mae_20_ci": [
+    2.502852625000001,
+    4.755531583333334
+   ],
+   "mae_flagging": 8.900683333333337,
+   "mae_flagging_ci": [
+    6.257131562500002,
+    11.888828958333336
+   ],
+   "n_flagging": 8,
+   "negative_cells": {
+    "fresh_cb_terra_mini": {
+     "n": 300,
+     "obs": -4.0,
+     "obs_ci": [
+      -9.666666666666666,
+      1.3333333333333335
+     ],
+     "obs_minus_pred_ci": [
+      -3.508769166666669,
+      1.579041666666668
+     ],
+     "pred": -3.13443333333333,
+     "pred_ci": [
+      -8.105690833333355,
+      1.5909333333333306
+     ]
+    },
+    "fresh_cb_terra_qwen": {
+     "n": 300,
+     "obs": -8.333333333333332,
+     "obs_ci": [
+      -15.0,
+      -1.6666666666666667
+     ],
+     "obs_minus_pred_ci": [
+      -1.5673916666666468,
+      5.234278333333361
+     ],
+     "pred": -10.105400000000039,
+     "pred_ci": [
+      -16.21090000000004,
+      -4.187033333333334
+     ]
+    }
+   }
+  },
+  "d": {
+   "cells": {
+    "fresh_cb_haiku_haiku": {
+     "clean": 0.0,
+     "conflict": -1.3937333333333353,
+     "det": "claude-haiku-5-5",
+     "err": -1.3937333333333353,
+     "gen": "claude-haiku-5-5",
+     "obs": 10.91666666666667,
+     "pred": 9.522933333333334
+    },
+    "fresh_cb_haiku_luna": {
+     "clean": 0.0,
+     "conflict": -2.421599999999998,
+     "det": "gpt-6-luna",
+     "err": -2.421599999999998,
+     "gen": "claude-haiku-5-5",
+     "obs": 5.58333333333333,
+     "pred": 3.161733333333333
+    },
+    "fresh_cb_haiku_mini": {
+     "clean": -0.8548666666666666,
+     "conflict": 0.12073333333334091,
+     "det": "gpt-4o-mini",
+     "err": -0.7341333333333256,
+     "gen": "claude-haiku-5-5",
+     "obs": 5.249999999999996,
+     "pred": 4.51586666666667
+    },
+    "fresh_cb_haiku_qwen": {
+     "clean": -2.0182,
+     "conflict": -2.281466666666664,
+     "det": "Qwen2.5-7B",
+     "err": -4.299666666666664,
+     "gen": "claude-haiku-5-5",
+     "obs": 2.5833333333333313,
+     "pred": -1.7163333333333326
+    },
+    "fresh_cb_haiku_terra": {
+     "clean": 0.0,
+     "conflict": -1.747999999999998,
+     "det": "gpt-6.1-terra",
+     "err": -1.747999999999998,
+     "gen": "claude-haiku-5-5",
+     "obs": 6.08333333333333,
+     "pred": 4.335333333333333
+    },
+    "fresh_cb_luna_haiku": {
+     "clean": 0.0,
+     "conflict": 0.786299999999974,
+     "det": "claude-haiku-5-5",
+     "err": 0.786299999999974,
+     "gen": "gpt-6-luna",
+     "obs": 13.000000000000002,
+     "pred": 13.786299999999976
+    },
+    "fresh_cb_luna_luna": {
+     "clean": 0.0,
+     "conflict": 0.9760749999999969,
+     "det": "gpt-6-luna",
+     "err": 0.9760749999999969,
+     "gen": "gpt-6-luna",
+     "obs": 4.583333333333334,
+     "pred": 5.559408333333331
+    },
+    "fresh_cb_luna_mini": {
+     "clean": -0.8581250000000002,
+     "conflict": 1.6032999999999853,
+     "det": "gpt-4o-mini",
+     "err": 0.745174999999985,
+     "gen": "gpt-6-luna",
+     "obs": 7.916666666666666,
+     "pred": 8.661841666666652
+    },
+    "fresh_cb_luna_qwen": {
+     "clean": -4.222033333333332,
+     "conflict": 0.9089499999999942,
+     "det": "Qwen2.5-7B",
+     "err": -3.313083333333338,
+     "gen": "gpt-6-luna",
+     "obs": 4.500000000000001,
+     "pred": 1.1869166666666626
+    },
+    "fresh_cb_luna_terra": {
+     "clean": 0.0,
+     "conflict": -0.4317750000000036,
+     "det": "gpt-6.1-terra",
+     "err": -0.4317750000000036,
+     "gen": "gpt-6-luna",
+     "obs": 6.583333333333335,
+     "pred": 6.151558333333331
+    },
+    "fresh_cb_mini_haiku": {
+     "clean": 0.0,
+     "conflict": 1.2663750000000262,
+     "det": "claude-haiku-5-5",
+     "err": 1.2663750000000262,
+     "gen": "gpt-4o-mini",
+     "obs": 11.999999999999998,
+     "pred": 13.266375000000025
+    },
+    "fresh_cb_mini_luna": {
+     "clean": 0.0,
+     "conflict": -0.8237083333333359,
+     "det": "gpt-6-luna",
+     "err": -0.8237083333333359,
+     "gen": "gpt-4o-mini",
+     "obs": 6.833333333333332,
+     "pred": 6.009624999999997
+    },
+    "fresh_cb_mini_mini": {
+     "clean": -0.11193333333333333,
+     "conflict": 2.05569166666668,
+     "det": "gpt-4o-mini",
+     "err": 1.9437583333333466,
+     "gen": "gpt-4o-mini",
+     "obs": 7.666666666666666,
+     "pred": 9.610425000000014
+    },
+    "fresh_cb_mini_qwen": {
+     "clean": -1.7096083333333334,
+     "conflict": 0.38793333333333013,
+     "det": "Qwen2.5-7B",
+     "err": -1.3216750000000033,
+     "gen": "gpt-4o-mini",
+     "obs": 5.583333333333332,
+     "pred": 4.261658333333329
+    },
+    "fresh_cb_mini_terra": {
+     "clean": 0.0,
+     "conflict": -0.8041666666666698,
+     "det": "gpt-6.1-terra",
+     "err": -0.8041666666666698,
+     "gen": "gpt-4o-mini",
+     "obs": 7.666666666666666,
+     "pred": 6.862499999999996
+    },
+    "fresh_cb_terra_haiku": {
+     "clean": 0.0,
+     "conflict": 0.26787499999999964,
+     "det": "claude-haiku-5-5",
+     "err": 0.26787499999999964,
+     "gen": "gpt-6.1-terra",
+     "obs": 5.250000000000001,
+     "pred": 5.517875
+    },
+    "fresh_cb_terra_luna": {
+     "clean": 0.0,
+     "conflict": -0.8070000000000007,
+     "det": "gpt-6-luna",
+     "err": -0.8070000000000007,
+     "gen": "gpt-6.1-terra",
+     "obs": -0.5000000000000001,
+     "pred": -1.3070000000000008
+    },
+    "fresh_cb_terra_mini": {
+     "clean": -1.63165,
+     "conflict": 0.6491750000000026,
+     "det": "gpt-4o-mini",
+     "err": -0.9824749999999974,
+     "gen": "gpt-6.1-terra",
+     "obs": -3.5,
+     "pred": -4.482474999999997
+    },
+    "fresh_cb_terra_qwen": {
+     "clean": -6.39495,
+     "conflict": -1.3290500000000298,
+     "det": "Qwen2.5-7B",
+     "err": -7.7240000000000295,
+     "gen": "gpt-6.1-terra",
+     "obs": -6.249999999999999,
+     "pred": -13.974000000000029
+    },
+    "fresh_cb_terra_terra": {
+     "clean": 0.0,
+     "conflict": 0.46942499999999976,
+     "det": "gpt-6.1-terra",
+     "err": 0.46942499999999976,
+     "gen": "gpt-6.1-terra",
+     "obs": 1.75,
+     "pred": 2.2194249999999998
+    }
+   },
+   "chosen": {
+    "claude-haiku-5-5": {
+     "chosen": "claude-haiku-5-5",
+     "clean": 0.0,
+     "conflict": -1.3937333333333353,
+     "err": -1.3937333333333353,
+     "obs": 10.91666666666667,
+     "pred": 9.522933333333334
+    },
+    "gpt-4o-mini": {
+     "chosen": "claude-haiku-5-5",
+     "clean": 0.0,
+     "conflict": 1.2663750000000262,
+     "err": 1.2663750000000262,
+     "obs": 11.999999999999998,
+     "pred": 13.266375000000025
+    },
+    "gpt-6-luna": {
+     "chosen": "claude-haiku-5-5",
+     "clean": 0.0,
+     "conflict": 0.786299999999974,
+     "err": 0.786299999999974,
+     "obs": 13.000000000000002,
+     "pred": 13.786299999999976
+    },
+    "gpt-6.1-terra": {
+     "chosen": "claude-haiku-5-5",
+     "clean": 0.0,
+     "conflict": 0.26787499999999964,
+     "err": 0.26787499999999964,
+     "obs": 5.250000000000001,
+     "pred": 5.517875
+    }
+   },
+   "summary": {
+    "mae": 1.6630000000000016,
+    "mae_flagging": 2.6329958333333363,
+    "mae_not_flagging": 1.0163361111111113,
+    "mean_abs_clean": 0.8900683333333334,
+    "mean_abs_conflict": 1.0766166666666683,
+    "mean_clean": -0.8900683333333334,
+    "mean_conflict": -0.12743333333333526
+   }
+  },
+  "draws": {
+   "mae_ci": [
+    1.2380037222222247,
+    2.360869694444445
+   ],
+   "max_abs_diff_vs_fresh19": 3.907985046680551e-14,
+   "ones_gain_ci": [
+    1.9443804583333315,
+    5.268390944444443
+   ],
+   "same_draws_as_H32": true,
+   "slope_ci": [
+    0.7650904406415373,
+    1.0032687176465194
+   ]
+  },
+  "n_boot": 5000,
+  "n_cells": 20,
+  "n_q": 300
+ },
+ "R7": {
+  "H19": {
+   "changed_status": {
+    "ramdocs_strict": [],
+    "ramdocs_strict_oneway": []
+   },
+   "other_draw": {
+    "ramdocs_strict": {
+     "CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.12222222222222222,
+      "ci_low": 0.027777777777777787,
+      "diff": 0.07444444444444445,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.372222222222,
+      "n": 300,
+      "p": 0.0036996300369963003,
+      "p_holm": 0.012798720127987202,
+      "supported": true
+     },
+     "CB majority, gpt-6-luna: dir. flag > plain (conflict)": {
+      "ci_high": 0.658888888888889,
+      "ci_low": 0.5577777777777778,
+      "diff": 0.6088888888888889,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.906666666667,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.16,
+      "ci_low": 0.043333333333333335,
+      "diff": 0.1,
+      "mean_a": 0.26,
+      "mean_b": 0.36,
+      "n": 300,
+      "p": 0.0017998200179982,
+      "p_holm": 0.010798920107989201,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: dir. flag > plain (conflict)": {
+      "ci_high": 0.7266666666666667,
+      "ci_low": 0.62,
+      "diff": 0.6733333333333333,
+      "mean_a": 0.26,
+      "mean_b": 0.933333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: LLM dir. flag > plain (all q.)": {
+      "ci_high": 0.10083333333333336,
+      "ci_low": 0.020833333333333343,
+      "diff": 0.06166666666666667,
+      "mean_a": 0.636666666667,
+      "mean_b": 0.698333333333,
+      "n": 400,
+      "p": 0.0031996800319968005,
+      "p_holm": 0.012798720127987202,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.508888888888889,
+      "ci_low": 0.4066666666666667,
+      "diff": 0.4577777777777778,
+      "mean_a": 0.446666666667,
+      "mean_b": 0.904444444444,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.7011111111111111,
+      "ci_low": 0.6066666666666667,
+      "diff": 0.6555555555555557,
+      "mean_a": 0.248888888889,
+      "mean_b": 0.904444444444,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.05888888888888889,
+      "ci_low": -0.12888888888888891,
+      "diff": -0.09333333333333334,
+      "mean_a": 0.54,
+      "mean_b": 0.446666666667,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: LLM dir. flag > plain (all q.)": {
+      "ci_high": -0.0375,
+      "ci_low": -0.1275,
+      "diff": -0.0825,
+      "mean_a": 0.79,
+      "mean_b": 0.7075,
+      "n": 400,
+      "p": 0.0005999400059994001,
+      "p_holm": 0.004199580041995801,
+      "supported": false
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.24666666666666667,
+      "ci_low": 0.15333333333333332,
+      "diff": 0.2,
+      "mean_a": 0.713333333333,
+      "mean_b": 0.913333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.27666666666666667,
+      "ci_low": 0.18,
+      "diff": 0.22666666666666666,
+      "mean_a": 0.686666666667,
+      "mean_b": 0.913333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.02,
+      "ci_low": -0.06666666666666667,
+      "diff": -0.023333333333333334,
+      "mean_a": 0.736666666667,
+      "mean_b": 0.713333333333,
+      "n": 300,
+      "p": 0.35826417358264173,
+      "p_holm": 0.7165283471652835,
+      "supported": false
+     },
+     "RAMDocs, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.5467625899280576,
+      "ci_low": 0.3908872901678657,
+      "diff": 0.4700239808153478,
+      "mean_a": 0.115107913669,
+      "mean_b": 0.585131894484,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.014388489208633093,
+      "ci_low": -0.052757793764988015,
+      "diff": -0.031175059952038366,
+      "mean_a": 0.146282973621,
+      "mean_b": 0.115107913669,
+      "n": 139,
+      "p": 0.0020997900209979003,
+      "p_holm": 0.010798920107989201,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.5179856115107914,
+      "ci_low": 0.3597122302158273,
+      "diff": 0.43884892086330934,
+      "mean_a": 0.10071942446,
+      "mean_b": 0.539568345324,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.014388489208633094,
+      "ci_low": -0.02877697841726619,
+      "diff": -0.007194244604316547,
+      "mean_a": 0.107913669065,
+      "mean_b": 0.10071942446,
+      "n": 139,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "supported": false
+     }
+    },
+    "ramdocs_strict_oneway": {
+     "CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.11777777777777779,
+      "ci_low": 0.024444444444444453,
+      "diff": 0.07111111111111112,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.368888888889,
+      "n": 300,
+      "p": 0.003999600039996,
+      "p_holm": 0.018998100189981004,
+      "supported": true
+     },
+     "CB majority, gpt-6-luna: dir. flag > plain (conflict)": {
+      "ci_high": 0.6544444444444445,
+      "ci_low": 0.5533055555555556,
+      "diff": 0.6044444444444445,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.902222222222,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.14666666666666667,
+      "ci_low": 0.03333333333333333,
+      "diff": 0.09,
+      "mean_a": 0.26,
+      "mean_b": 0.35,
+      "n": 300,
+      "p": 0.0037996200379962005,
+      "p_holm": 0.018998100189981004,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: dir. flag > plain (conflict)": {
+      "ci_high": 0.7166666666666667,
+      "ci_low": 0.61,
+      "diff": 0.6633333333333333,
+      "mean_a": 0.26,
+      "mean_b": 0.923333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: LLM dir. flag > plain (all q.)": {
+      "ci_high": 0.10000000000000002,
+      "ci_low": 0.02083333333333334,
+      "diff": 0.060833333333333336,
+      "mean_a": 0.633333333333,
+      "mean_b": 0.694166666667,
+      "n": 400,
+      "p": 0.0037996200379962005,
+      "p_holm": 0.018998100189981004,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.508888888888889,
+      "ci_low": 0.4077777777777778,
+      "diff": 0.45888888888888896,
+      "mean_a": 0.441111111111,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.7011111111111111,
+      "ci_low": 0.6066666666666667,
+      "diff": 0.6555555555555557,
+      "mean_a": 0.244444444444,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.06,
+      "ci_low": -0.12891666666666668,
+      "diff": -0.09444444444444446,
+      "mean_a": 0.535555555556,
+      "mean_b": 0.441111111111,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: LLM dir. flag > plain (all q.)": {
+      "ci_high": -0.0425,
+      "ci_low": -0.1325,
+      "diff": -0.0875,
+      "mean_a": 0.785,
+      "mean_b": 0.6975,
+      "n": 400,
+      "p": 0.00029997000299970003,
+      "p_holm": 0.0020997900209979003,
+      "supported": false
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.24,
+      "ci_low": 0.14666666666666667,
+      "diff": 0.19333333333333333,
+      "mean_a": 0.706666666667,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.2733333333333333,
+      "ci_low": 0.17666666666666667,
+      "diff": 0.22333333333333333,
+      "mean_a": 0.676666666667,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.02,
+      "ci_low": -0.06666666666666667,
+      "diff": -0.023333333333333334,
+      "mean_a": 0.73,
+      "mean_b": 0.706666666667,
+      "n": 300,
+      "p": 0.35826417358264173,
+      "p_holm": 0.7165283471652835,
+      "supported": false
+     },
+     "RAMDocs, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.49880095923261397,
+      "ci_low": 0.34532374100719426,
+      "diff": 0.4220623501199041,
+      "mean_a": 0.112709832134,
+      "mean_b": 0.534772182254,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.014388489208633094,
+      "ci_low": -0.05275779376498801,
+      "diff": -0.031175059952038366,
+      "mean_a": 0.143884892086,
+      "mean_b": 0.112709832134,
+      "n": 139,
+      "p": 0.0011998800119988001,
+      "p_holm": 0.007199280071992801,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.48201438848920863,
+      "ci_low": 0.3237410071942446,
+      "diff": 0.4028776978417266,
+      "mean_a": 0.10071942446,
+      "mean_b": 0.503597122302,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.014388489208633094,
+      "ci_low": -0.02877697841726619,
+      "diff": -0.007194244604316547,
+      "mean_a": 0.107913669065,
+      "mean_b": 0.10071942446,
+      "n": 139,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "supported": false
+     }
+    }
+   },
+   "registered": {
+    "ramdocs_strict": {
+     "CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.12222222222222222,
+      "ci_low": 0.027777777777777787,
+      "diff": 0.07444444444444445,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.372222222222,
+      "n": 300,
+      "p": 0.0036996300369963003,
+      "p_holm": 0.012798720127987202,
+      "supported": true
+     },
+     "CB majority, gpt-6-luna: dir. flag > plain (conflict)": {
+      "ci_high": 0.658888888888889,
+      "ci_low": 0.5577777777777778,
+      "diff": 0.6088888888888889,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.906666666667,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.16,
+      "ci_low": 0.043333333333333335,
+      "diff": 0.1,
+      "mean_a": 0.26,
+      "mean_b": 0.36,
+      "n": 300,
+      "p": 0.0017998200179982,
+      "p_holm": 0.010798920107989201,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: dir. flag > plain (conflict)": {
+      "ci_high": 0.7266666666666667,
+      "ci_low": 0.62,
+      "diff": 0.6733333333333333,
+      "mean_a": 0.26,
+      "mean_b": 0.933333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: LLM dir. flag > plain (all q.)": {
+      "ci_high": 0.10083333333333336,
+      "ci_low": 0.020833333333333343,
+      "diff": 0.06166666666666667,
+      "mean_a": 0.636666666667,
+      "mean_b": 0.698333333333,
+      "n": 400,
+      "p": 0.0031996800319968005,
+      "p_holm": 0.012798720127987202,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.508888888888889,
+      "ci_low": 0.4066666666666667,
+      "diff": 0.4577777777777778,
+      "mean_a": 0.446666666667,
+      "mean_b": 0.904444444444,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.7011111111111111,
+      "ci_low": 0.6066666666666667,
+      "diff": 0.6555555555555557,
+      "mean_a": 0.248888888889,
+      "mean_b": 0.904444444444,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.05888888888888889,
+      "ci_low": -0.12888888888888891,
+      "diff": -0.09333333333333334,
+      "mean_a": 0.54,
+      "mean_b": 0.446666666667,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: LLM dir. flag > plain (all q.)": {
+      "ci_high": -0.0375,
+      "ci_low": -0.1275,
+      "diff": -0.0825,
+      "mean_a": 0.79,
+      "mean_b": 0.7075,
+      "n": 400,
+      "p": 0.0005999400059994001,
+      "p_holm": 0.004199580041995801,
+      "supported": false
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.24666666666666667,
+      "ci_low": 0.15333333333333332,
+      "diff": 0.2,
+      "mean_a": 0.713333333333,
+      "mean_b": 0.913333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.27666666666666667,
+      "ci_low": 0.18,
+      "diff": 0.22666666666666666,
+      "mean_a": 0.686666666667,
+      "mean_b": 0.913333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.02,
+      "ci_low": -0.06666666666666667,
+      "diff": -0.023333333333333334,
+      "mean_a": 0.736666666667,
+      "mean_b": 0.713333333333,
+      "n": 300,
+      "p": 0.35826417358264173,
+      "p_holm": 0.7165283471652835,
+      "supported": false
+     },
+     "RAMDocs, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.5467625899280576,
+      "ci_low": 0.3908872901678657,
+      "diff": 0.4700239808153478,
+      "mean_a": 0.115107913669,
+      "mean_b": 0.585131894484,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.014388489208633093,
+      "ci_low": -0.052757793764988015,
+      "diff": -0.031175059952038366,
+      "mean_a": 0.146282973621,
+      "mean_b": 0.115107913669,
+      "n": 139,
+      "p": 0.0020997900209979003,
+      "p_holm": 0.010798920107989201,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.5179856115107914,
+      "ci_low": 0.3597122302158273,
+      "diff": 0.43884892086330934,
+      "mean_a": 0.10071942446,
+      "mean_b": 0.539568345324,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.014388489208633094,
+      "ci_low": -0.02877697841726619,
+      "diff": -0.007194244604316547,
+      "mean_a": 0.107913669065,
+      "mean_b": 0.10071942446,
+      "n": 139,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "supported": false
+     }
+    },
+    "ramdocs_strict_oneway": {
+     "CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.11777777777777779,
+      "ci_low": 0.024444444444444453,
+      "diff": 0.07111111111111112,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.368888888889,
+      "n": 300,
+      "p": 0.003999600039996,
+      "p_holm": 0.018998100189981004,
+      "supported": true
+     },
+     "CB majority, gpt-6-luna: dir. flag > plain (conflict)": {
+      "ci_high": 0.6544444444444445,
+      "ci_low": 0.5533055555555556,
+      "diff": 0.6044444444444445,
+      "mean_a": 0.297777777778,
+      "mean_b": 0.902222222222,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict)": {
+      "ci_high": 0.14666666666666667,
+      "ci_low": 0.03333333333333333,
+      "diff": 0.09,
+      "mean_a": 0.26,
+      "mean_b": 0.35,
+      "n": 300,
+      "p": 0.0037996200379962005,
+      "p_holm": 0.018998100189981004,
+      "supported": true
+     },
+     "CB majority, gpt-6.1-terra: dir. flag > plain (conflict)": {
+      "ci_high": 0.7166666666666667,
+      "ci_low": 0.61,
+      "diff": 0.6633333333333333,
+      "mean_a": 0.26,
+      "mean_b": 0.923333333333,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: LLM dir. flag > plain (all q.)": {
+      "ci_high": 0.10000000000000002,
+      "ci_low": 0.02083333333333334,
+      "diff": 0.060833333333333336,
+      "mean_a": 0.633333333333,
+      "mean_b": 0.694166666667,
+      "n": 400,
+      "p": 0.0037996200379962005,
+      "p_holm": 0.018998100189981004,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.508888888888889,
+      "ci_low": 0.4077777777777778,
+      "diff": 0.45888888888888896,
+      "mean_a": 0.441111111111,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.7011111111111111,
+      "ci_low": 0.6066666666666667,
+      "diff": 0.6555555555555557,
+      "mean_a": 0.244444444444,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.06,
+      "ci_low": -0.12891666666666668,
+      "diff": -0.09444444444444446,
+      "mean_a": 0.535555555556,
+      "mean_b": 0.441111111111,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: LLM dir. flag > plain (all q.)": {
+      "ci_high": -0.0425,
+      "ci_low": -0.1325,
+      "diff": -0.0875,
+      "mean_a": 0.785,
+      "mean_b": 0.6975,
+      "n": 400,
+      "p": 0.00029997000299970003,
+      "p_holm": 0.0020997900209979003,
+      "supported": false
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.24,
+      "ci_low": 0.14666666666666667,
+      "diff": 0.19333333333333333,
+      "mean_a": 0.706666666667,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: dir. flag > one-wrong flag (conflict)": {
+      "ci_high": 0.2733333333333333,
+      "ci_low": 0.17666666666666667,
+      "diff": 0.22333333333333333,
+      "mean_a": 0.676666666667,
+      "mean_b": 0.9,
+      "n": 300,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.02,
+      "ci_low": -0.06666666666666667,
+      "diff": -0.023333333333333334,
+      "mean_a": 0.73,
+      "mean_b": 0.706666666667,
+      "n": 300,
+      "p": 0.35826417358264173,
+      "p_holm": 0.7165283471652835,
+      "supported": false
+     },
+     "RAMDocs, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.49880095923261397,
+      "ci_low": 0.34532374100719426,
+      "diff": 0.4220623501199041,
+      "mean_a": 0.112709832134,
+      "mean_b": 0.534772182254,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6-luna: neutral flag vs plain (conflict)": {
+      "ci_high": -0.014388489208633094,
+      "ci_low": -0.05275779376498801,
+      "diff": -0.031175059952038366,
+      "mean_a": 0.143884892086,
+      "mean_b": 0.112709832134,
+      "n": 139,
+      "p": 0.0011998800119988001,
+      "p_holm": 0.007199280071992801,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+      "ci_high": 0.48201438848920863,
+      "ci_low": 0.3237410071942446,
+      "diff": 0.4028776978417266,
+      "mean_a": 0.10071942446,
+      "mean_b": 0.503597122302,
+      "n": 139,
+      "p": 4.9999750001249995e-06,
+      "p_holm": 7.999960000199999e-05,
+      "supported": true
+     },
+     "RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+      "ci_high": 0.014388489208633094,
+      "ci_low": -0.02877697841726619,
+      "diff": -0.007194244604316547,
+      "mean_a": 0.107913669065,
+      "mean_b": 0.10071942446,
+      "n": 139,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "supported": false
+     }
+    }
+   },
+   "reproduces_stored": true,
+   "supplementary_cb_too": {
+    "changed_status": {
+     "ramdocs_strict": [],
+     "ramdocs_strict_oneway": []
+    },
+    "note": "not registered in PR\u00a720: H19's ConflictBank terra plain also swapped, to randdir_cb_terra's draw",
+    "results": {
+     "ramdocs_strict": {
+      "CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict)": {
+       "ci_high": 0.12222222222222222,
+       "ci_low": 0.027777777777777787,
+       "diff": 0.07444444444444445,
+       "mean_a": 0.297777777778,
+       "mean_b": 0.372222222222,
+       "n": 300,
+       "p": 0.0036996300369963003,
+       "p_holm": 0.015998400159984,
+       "supported": true
+      },
+      "CB majority, gpt-6-luna: dir. flag > plain (conflict)": {
+       "ci_high": 0.658888888888889,
+       "ci_low": 0.5577777777777778,
+       "diff": 0.6088888888888889,
+       "mean_a": 0.297777777778,
+       "mean_b": 0.906666666667,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict)": {
+       "ci_high": 0.16,
+       "ci_low": 0.043333333333333335,
+       "diff": 0.1,
+       "mean_a": 0.26,
+       "mean_b": 0.36,
+       "n": 300,
+       "p": 0.0017998200179982,
+       "p_holm": 0.0125987401259874,
+       "supported": true
+      },
+      "CB majority, gpt-6.1-terra: dir. flag > plain (conflict)": {
+       "ci_high": 0.7266666666666667,
+       "ci_low": 0.62,
+       "diff": 0.6733333333333333,
+       "mean_a": 0.26,
+       "mean_b": 0.933333333333,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: LLM dir. flag > plain (all q.)": {
+       "ci_high": 0.10083333333333336,
+       "ci_low": 0.020833333333333343,
+       "diff": 0.06166666666666667,
+       "mean_a": 0.636666666667,
+       "mean_b": 0.698333333333,
+       "n": 400,
+       "p": 0.0031996800319968005,
+       "p_holm": 0.015998400159984,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.508888888888889,
+       "ci_low": 0.4066666666666667,
+       "diff": 0.4577777777777778,
+       "mean_a": 0.446666666667,
+       "mean_b": 0.904444444444,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: dir. flag > one-wrong flag (conflict)": {
+       "ci_high": 0.7011111111111111,
+       "ci_low": 0.6066666666666667,
+       "diff": 0.6555555555555557,
+       "mean_a": 0.248888888889,
+       "mean_b": 0.904444444444,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: neutral flag vs plain (conflict)": {
+       "ci_high": -0.05888888888888889,
+       "ci_low": -0.12888888888888891,
+       "diff": -0.09333333333333334,
+       "mean_a": 0.54,
+       "mean_b": 0.446666666667,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6.1-terra: LLM dir. flag > plain (all q.)": {
+       "ci_high": -0.015,
+       "ci_low": -0.1075,
+       "diff": -0.06,
+       "mean_a": 0.7675,
+       "mean_b": 0.7075,
+       "n": 400,
+       "p": 0.0156984301569843,
+       "p_holm": 0.0470952904709529,
+       "supported": false
+      },
+      "ConflictBank, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.24666666666666667,
+       "ci_low": 0.15333333333333332,
+       "diff": 0.2,
+       "mean_a": 0.713333333333,
+       "mean_b": 0.913333333333,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6.1-terra: dir. flag > one-wrong flag (conflict)": {
+       "ci_high": 0.27666666666666667,
+       "ci_low": 0.18,
+       "diff": 0.22666666666666666,
+       "mean_a": 0.686666666667,
+       "mean_b": 0.913333333333,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+       "ci_high": 0.05333333333333334,
+       "ci_low": -0.02666666666666667,
+       "diff": 0.013333333333333334,
+       "mean_a": 0.7,
+       "mean_b": 0.713333333333,
+       "n": 300,
+       "p": 0.6361363863613638,
+       "p_holm": 1.0,
+       "supported": false
+      },
+      "RAMDocs, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.5467625899280576,
+       "ci_low": 0.3908872901678657,
+       "diff": 0.4700239808153478,
+       "mean_a": 0.115107913669,
+       "mean_b": 0.585131894484,
+       "n": 139,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "RAMDocs, gpt-6-luna: neutral flag vs plain (conflict)": {
+       "ci_high": -0.014388489208633093,
+       "ci_low": -0.052757793764988015,
+       "diff": -0.031175059952038366,
+       "mean_a": 0.146282973621,
+       "mean_b": 0.115107913669,
+       "n": 139,
+       "p": 0.0020997900209979003,
+       "p_holm": 0.012598740125987402,
+       "supported": true
+      },
+      "RAMDocs, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.5179856115107914,
+       "ci_low": 0.3597122302158273,
+       "diff": 0.43884892086330934,
+       "mean_a": 0.10071942446,
+       "mean_b": 0.539568345324,
+       "n": 139,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+       "ci_high": 0.014388489208633094,
+       "ci_low": -0.02877697841726619,
+       "diff": -0.007194244604316547,
+       "mean_a": 0.107913669065,
+       "mean_b": 0.10071942446,
+       "n": 139,
+       "p": 1.0,
+       "p_holm": 1.0,
+       "supported": false
+      }
+     },
+     "ramdocs_strict_oneway": {
+      "CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict)": {
+       "ci_high": 0.11777777777777779,
+       "ci_low": 0.024444444444444453,
+       "diff": 0.07111111111111112,
+       "mean_a": 0.297777777778,
+       "mean_b": 0.368888888889,
+       "n": 300,
+       "p": 0.003999600039996,
+       "p_holm": 0.022797720227977204,
+       "supported": true
+      },
+      "CB majority, gpt-6-luna: dir. flag > plain (conflict)": {
+       "ci_high": 0.6544444444444445,
+       "ci_low": 0.5533055555555556,
+       "diff": 0.6044444444444445,
+       "mean_a": 0.297777777778,
+       "mean_b": 0.902222222222,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict)": {
+       "ci_high": 0.14666666666666667,
+       "ci_low": 0.03333333333333333,
+       "diff": 0.09,
+       "mean_a": 0.26,
+       "mean_b": 0.35,
+       "n": 300,
+       "p": 0.0037996200379962005,
+       "p_holm": 0.022797720227977204,
+       "supported": true
+      },
+      "CB majority, gpt-6.1-terra: dir. flag > plain (conflict)": {
+       "ci_high": 0.7166666666666667,
+       "ci_low": 0.61,
+       "diff": 0.6633333333333333,
+       "mean_a": 0.26,
+       "mean_b": 0.923333333333,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: LLM dir. flag > plain (all q.)": {
+       "ci_high": 0.10000000000000002,
+       "ci_low": 0.02083333333333334,
+       "diff": 0.060833333333333336,
+       "mean_a": 0.633333333333,
+       "mean_b": 0.694166666667,
+       "n": 400,
+       "p": 0.0037996200379962005,
+       "p_holm": 0.022797720227977204,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.508888888888889,
+       "ci_low": 0.4077777777777778,
+       "diff": 0.45888888888888896,
+       "mean_a": 0.441111111111,
+       "mean_b": 0.9,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: dir. flag > one-wrong flag (conflict)": {
+       "ci_high": 0.7011111111111111,
+       "ci_low": 0.6066666666666667,
+       "diff": 0.6555555555555557,
+       "mean_a": 0.244444444444,
+       "mean_b": 0.9,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6-luna: neutral flag vs plain (conflict)": {
+       "ci_high": -0.06,
+       "ci_low": -0.12891666666666668,
+       "diff": -0.09444444444444446,
+       "mean_a": 0.535555555556,
+       "mean_b": 0.441111111111,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6.1-terra: LLM dir. flag > plain (all q.)": {
+       "ci_high": -0.0225,
+       "ci_low": -0.115,
+       "diff": -0.0675,
+       "mean_a": 0.765,
+       "mean_b": 0.6975,
+       "n": 400,
+       "p": 0.0053994600539946005,
+       "p_holm": 0.022797720227977204,
+       "supported": false
+      },
+      "ConflictBank, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.24,
+       "ci_low": 0.14666666666666667,
+       "diff": 0.19333333333333333,
+       "mean_a": 0.706666666667,
+       "mean_b": 0.9,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6.1-terra: dir. flag > one-wrong flag (conflict)": {
+       "ci_high": 0.2733333333333333,
+       "ci_low": 0.17666666666666667,
+       "diff": 0.22333333333333333,
+       "mean_a": 0.676666666667,
+       "mean_b": 0.9,
+       "n": 300,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "ConflictBank, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+       "ci_high": 0.05,
+       "ci_low": -0.03,
+       "diff": 0.01,
+       "mean_a": 0.696666666667,
+       "mean_b": 0.706666666667,
+       "n": 300,
+       "p": 0.7510248975102489,
+       "p_holm": 1.0,
+       "supported": false
+      },
+      "RAMDocs, gpt-6-luna: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.49880095923261397,
+       "ci_low": 0.34532374100719426,
+       "diff": 0.4220623501199041,
+       "mean_a": 0.112709832134,
+       "mean_b": 0.534772182254,
+       "n": 139,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "RAMDocs, gpt-6-luna: neutral flag vs plain (conflict)": {
+       "ci_high": -0.014388489208633094,
+       "ci_low": -0.05275779376498801,
+       "diff": -0.031175059952038366,
+       "mean_a": 0.143884892086,
+       "mean_b": 0.112709832134,
+       "n": 139,
+       "p": 0.0011998800119988001,
+       "p_holm": 0.008399160083991601,
+       "supported": true
+      },
+      "RAMDocs, gpt-6.1-terra: dir. flag > neutral flag (conflict)": {
+       "ci_high": 0.48201438848920863,
+       "ci_low": 0.3237410071942446,
+       "diff": 0.4028776978417266,
+       "mean_a": 0.10071942446,
+       "mean_b": 0.503597122302,
+       "n": 139,
+       "p": 4.9999750001249995e-06,
+       "p_holm": 7.999960000199999e-05,
+       "supported": true
+      },
+      "RAMDocs, gpt-6.1-terra: neutral flag vs plain (conflict)": {
+       "ci_high": 0.014388489208633094,
+       "ci_low": -0.02877697841726619,
+       "diff": -0.007194244604316547,
+       "mean_a": 0.107913669065,
+       "mean_b": 0.10071942446,
+       "n": 139,
+       "p": 1.0,
+       "p_holm": 1.0,
+       "supported": false
+      }
+     }
+    }
+   }
+  },
+  "H31": {
+   "other_draw": {
+    "be_high": 0.8744549249984991,
+    "be_low": 0.7479537115438893,
+    "breakeven": 0.8068199117065002,
+    "d_obs": 0.53,
+    "follow_right": 0.6818181818181818,
+    "follow_right_ci": [
+     0.5454545454545454,
+     0.8181818181818182
+    ],
+    "follow_wrong": 0.9326923076923077,
+    "follow_wrong_ci": [
+     0.8846153846153846,
+     0.9807692307692307
+    ],
+    "headroom_right": 0.6136363636363635,
+    "headroom_wrong": 0.9615384615384617,
+    "n_fr": 44,
+    "n_fw": 104,
+    "net": {
+     "0.50": -26.970426870065573,
+     "0.53": -24.333333333333332,
+     "0.70": -9.389803291850667,
+     "0.80": -0.5994915027432074,
+     "0.90": 8.190820286364245,
+     "at claude-haiku-5-5 (0.781)": -2.3056279681395924,
+     "at claude-sonnet-5-5 (0.777)": -2.630718928114656,
+     "at gpt-4.1 (0.818)": 0.9665985286494927,
+     "at gpt-4o-mini (0.688)": -10.41333274674674,
+     "at gpt-6-luna (0.822)": 1.2997037103642501,
+     "at gpt-6.1-terra (0.826)": 1.7285362770204094
+    },
+    "plain_right_arm": 72.32704402515722,
+    "plain_wrong_arm": 73.75886524822694,
+    "right": 16.9811320754717,
+    "wrong": -70.92198581560284
+   },
+   "other_generators_unchanged": true,
+   "registered": {
+    "be_high": 0.8520053032814054,
+    "be_low": 0.7207983570516606,
+    "breakeven": 0.7856328392246295,
+    "d_obs": 0.53,
+    "follow_right": 0.6666666666666666,
+    "follow_right_ci": [
+     0.5333333333333333,
+     0.8
+    ],
+    "follow_wrong": 0.9473684210526315,
+    "follow_wrong_ci": [
+     0.8947368421052632,
+     0.9894736842105263
+    ],
+    "headroom_right": 0.6222222222222221,
+    "headroom_wrong": 0.9578947368421054,
+    "n_fr": 45,
+    "n_fw": 95,
+    "net": {
+     "0.50": -23.464472099558414,
+     "0.53": -21.000000000000004,
+     "0.70": -7.0346581025023465,
+     "0.80": 1.180248896025693,
+     "0.90": 9.395155894553726,
+     "at claude-haiku-5-5 (0.781)": -0.41420562689536145,
+     "at claude-sonnet-5-5 (0.777)": -0.7180164661839766,
+     "at gpt-4.1 (0.818)": 2.6438242808209127,
+     "at gpt-4o-mini (0.688)": -7.99118836945424,
+     "at gpt-6-luna (0.822)": 2.9551247391169824,
+     "at gpt-6.1-terra (0.826)": 3.355886365955489
+    },
+    "plain_right_arm": 71.69811320754717,
+    "plain_wrong_arm": 67.37588652482269,
+    "right": 17.61006289308176,
+    "wrong": -64.53900709219859
+   },
+   "reproduces_stored": true,
+   "same_arms": true
+  },
+  "draw_used": {
+   "H19 ConflictBank tests (and Table 2)": "cb_single_terra",
+   "H19 RAMDocs tests (and Table 2)": "holdout_terra",
+   "H31 (H31a-c, H31_follow, H31x; frozen FOLLOW19)": "randdir_cb_terra"
+  },
+  "other_draw": {
+   "H19 RAMDocs": "holdout_rem_terra",
+   "H31": "cb_single_terra"
+  },
+  "plain": {
+   "ConflictBank": {
+    "identical_texts": 80,
+    "n_rows": 400,
+    "ramdocs_strict_oneway|clean": {
+     "mean": [
+      97.0,
+      95.0
+     ],
+     "n": 100,
+     "score_differs": 2
+    },
+    "ramdocs_strict_oneway|conflict": {
+     "mean": [
+      69.66666666666667,
+      73.0
+     ],
+     "n": 300,
+     "score_differs": 28
+    },
+    "ramdocs_strict|clean": {
+     "mean": [
+      97.0,
+      95.0
+     ],
+     "n": 100,
+     "score_differs": 2
+    },
+    "ramdocs_strict|conflict": {
+     "mean": [
+      70.0,
+      73.66666666666667
+     ],
+     "n": 300,
+     "score_differs": 29
+    },
+    "runs": [
+     "randdir_cb_terra",
+     "cb_single_terra"
+    ]
+   },
+   "RAMDocs": {
+    "identical_texts": 40,
+    "n_rows": 300,
+    "ramdocs_strict_oneway|clean": {
+     "mean": [
+      51.587301587301596,
+      51.587301587301596
+     ],
+     "n": 126,
+     "score_differs": 4
+    },
+    "ramdocs_strict_oneway|conflict": {
+     "mean": [
+      10.79136690647482,
+      10.79136690647482
+     ],
+     "n": 139,
+     "score_differs": 0
+    },
+    "ramdocs_strict|clean": {
+     "mean": [
+      60.317460317460316,
+      59.523809523809526
+     ],
+     "n": 126,
+     "score_differs": 3
+    },
+    "ramdocs_strict|conflict": {
+     "mean": [
+      10.79136690647482,
+      10.79136690647482
+     ],
+     "n": 139,
+     "score_differs": 0
+    },
+    "runs": [
+     "holdout_terra",
+     "holdout_rem_terra"
+    ]
+   }
+  },
+  "requested_temperature": {
+   "cb_single_terra": 1.0,
+   "holdout_rem_terra": 0.1,
+   "holdout_terra": 1.0,
+   "randdir_cb_terra": 0.1
+  }
+ }
+}

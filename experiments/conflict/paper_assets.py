@@ -389,9 +389,8 @@ def tab_hypotheses(R, out: Path):
               ("H20", "H21", "H22", "H23", "H24", "H25", "H26"), ("H27", "H28", "H29"), ("H30", "H31")]
     stage_rows = [[r for r in rows[n_first:] if r[0].rstrip("abc") in st] for st in stages]
     body1 = body(rows[:n_first])
-    stage_txt = ["the first addendum (\\S9; H10--H11)", "the second (\\S10; H12--H14)",
-                 "the third and fourth (\\S11--\\S12; H15--H19)", "the fifth and sixth (\\S13--\\S14; H20--H26)",
-                 "the seventh (\\S15; H27--H29)", "the eighth (\\S16; H30--H31)"]
+    stage_txt = ["PR\\S9 (H10--H11)", "PR\\S10 (H12--H14)", "PR\\S11--PR\\S12 (H15--H19)",
+                 "PR\\S13--PR\\S14 (H20--H26)", "PR\\S15 (H27--H29)", "PR\\S16 (H30--H31)"]
     parts = [head % "p" + body1 + "\n" + rf"""\bottomrule
 \end{{tabular}}
 \caption{{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
@@ -410,7 +409,8 @@ they were computed. {legend}}}
         lab = f"tab:hypotheses{n_ + 2}"
         parts.append(head % "p" + body(rs) + "\n" + rf"""\bottomrule
 \end{{tabular}}
-\caption{{Pre-registered tests added in {st}, each committed before the runs it covers. Same conventions as
+\caption{{Pre-registered tests added in {st}, registered before the runs they cover (times and exceptions in
+Table~\ref{{tab:timeline}}). Same conventions as
 Table~\ref{{tab:hypotheses}}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{{forced}}; \emph{{CB majority}} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}}

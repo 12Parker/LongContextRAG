@@ -287,7 +287,7 @@ Generator & Follows a needed & Follows a wrong- \\
 """ + crow + r"""
 \bottomrule
 \end{tabular}
-\caption{H24 without the shared $-G$ term (\S15.4, re-analysis of existing cells). $D$: the detector's direction
+\caption{H24 without the shared $-G$ term (PR\S15.4, re-analysis of existing cells). $D$: the detector's direction
 accuracy; $G$: the generator's no-flag accuracy. CIs: 2,000 question resamples, shared across cells. The question-level
 model is a linear probability model with detector and generator fixed effects and a random intercept per question.
 Lower table: share of questions the generator gets right when the detector is right and the generator alone is wrong
@@ -328,9 +328,9 @@ Setting & Neutral flag & Setting & Neutral flag \\
 \bottomrule
 \end{tabular}
 \caption{The """ + str(np5["k"]) + r""" settings pooled for the oracle neutral flag (conflict questions, change in points).
-The pooled estimate was registered as exploratory in \S13.4. Pooled: \neuPooled\ (DerSimonian--Laird); 95\% CI from a
+The pooled estimate was registered as exploratory in PR\S13.4. Pooled: \neuPooled\ (DerSimonian--Laird); 95\% CI from a
 bootstrap that resamples questions within each benchmark jointly across the settings that share them \neuBootCI;
-prediction interval for a new setting \neuPI. Moderators (\S15.4): model family (reference OpenAI), no ``unknown'' allowed
+prediction interval for a new setting \neuPI. Moderators (PR\S15.4): model family (reference OpenAI), no ``unknown'' allowed
 (forced prompt) and natural (RAMDocs, RAGuard) rather than generated data (ConflictBank).}
 \label{tab:pooled}
 \end{table*}
@@ -368,7 +368,7 @@ Setting & $c=0$ & $c=1$ & $c=2$ & $c=4$ & $c=2$ & misinfo$\to$abstain & misinfo$
 """ + "\n".join(rows) + r"""
 \bottomrule
 \end{tabular}}
-\caption{Abstention-aware view of the oracle flags (conflict questions; \S15.4, re-analysis). Utility per answer: $+1$
+\caption{Abstention-aware view of the oracle flags (conflict questions; PR\S15.4, re-analysis). Utility per answer: $+1$
 correct, $-c$ if it contains the misinformation, 0 for abstaining or any other wrong answer; $c=0$ is strict accuracy.
 Bold: significant in one exploratory Holm family per $c$ over all """ + r"""\nUtilSettings\ settings. Right: of the
 question--seed pairs whose plain answer contained the misinformation (or was correct), the share whose flagged answer

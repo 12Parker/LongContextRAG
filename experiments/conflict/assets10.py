@@ -117,7 +117,7 @@ Generator & Detector & Right & Wrong & Acc. & Pred. & Obs. & Pred. & Obs. \\
 """ + "\n".join(rows) + r"""
 \bottomrule
 \end{tabular}
-\caption{Prospective test on ConflictBank-fresh (\S19.1; 300 conflict and 100 clean questions no earlier run used).
+\caption{Prospective test on ConflictBank-fresh (PR\S19.1; 300 conflict and 100 clean questions no earlier run used).
 \emph{Right}/\emph{Wrong}: \% of questions on which the detector names exactly the false side of a gold pair / marks a
 correct passage. \emph{Acc.}: no-flag accuracy. \emph{Pred.}: the frozen prediction, committed before any flagged
 answer existed; \emph{Obs.}: observed directional-flag effect, in points.}
@@ -149,7 +149,7 @@ Generator & No flag & Closed-book & Oracle neutral & Oracle directional & LLM di
 """ + "\n".join(rows) + r"""
 \bottomrule
 \end{tabular}
-\caption{HealthContradict (\S19.3): yes/no health questions with one real web page per side, accuracy in \% and
+\caption{HealthContradict (PR\S19.3): yes/no health questions with one real web page per side, accuracy in \% and
 effects in points with topic-cluster bootstrap 95\% CIs. \emph{Pred.}: the frozen follow-rate prediction for the LLM
 directional flag (gpt-4o-mini detector), committed before any flagged answer existed.}
 \label{tab:hc}

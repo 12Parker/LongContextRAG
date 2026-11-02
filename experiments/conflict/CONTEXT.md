@@ -668,3 +668,15 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   $7.9 only if human labels favour the judge (headroom $40.82).
 - **Open (authors):** decisions in TRIAGE_REVIEW10.md §5; human labelling (A1 first, about 3.5-4 h per annotator).
 
+
+## Round 17: PR§20 re-analyses (2026-11-02, in progress, no API calls)
+
+- PR§20 registered and pushed first (d7e8d76; GitHub push 18:00:07Z). Modules `rev11_{prior,account,scoring,policy}.py`
+  compute R1–R19 into `runs/rev11/*.json` (each reviewed independently against PR§20); `export_audit11.py` wrote the
+  blind A1 sheet `runs/labelling/audit11_*` (unlabelled). `timeline.py --record` wrote `runs/registration_timeline.json`
+  (commit, GitHub push, first run file) and `tab_timeline`. Appendix F rewritten (PR§ numbers, no process jargon, timing
+  exceptions); generated captions use PR§.
+- Key result: R1 text classifier separates ConflictBank's sides perfectly (1.000 on eval and fresh, also with objects
+  masked): the side is readable from surface genre cues. R2: every detector is more accurate on facts it knows.
+- **Not done yet:** wire `rev11_*` into paper_stats/assets (macros `numbers11`), the three-claim restructure of the body
+  (TRIAGE_REVIEW10.md §3), remaining D writing fixes, page fit, PDF.

@@ -159,13 +159,13 @@ Policy & Setting & Neutral flag & Policy & Setting & Neutral flag \\
 \caption{The """ + str(m["k"]) + r""" settings on misinformation benchmarks (RAMDocs, ConflictBank and its one-answer, minimal,
 forced-choice and majority variants, RAGuard) in which the oracle neutral flag was run; WikiContradict (genuine
 conflicts) and CONFLICTS are not pooled (conflict questions, change in
-points), grouped by answer policy. The pooled estimate was registered as exploratory (\S13.4) and the multilevel model,
-the policy split and the moderators in \S16.4; they use data already seen. The prediction interval describes this
+points), grouped by answer policy. The pooled estimate was registered as exploratory (PR\S13.4) and the multilevel model,
+the policy split and the moderators in PR\S16.4; they use data already seen. The prediction interval describes this
 design space (our generators, benchmarks and prompts), not deployments in general. \emph{Natural misinformation} is
 RAGuard only; RAMDocs' misinformation is synthetic. The moderator \emph{several answers allowed} codes the
 multi-answer and minimal prompts together, against one-answer prompts; the policy rows above separate them. Settings
 share questions, so the model is fitted with their sampling covariance, estimated by a joint question bootstrap
-(\S17.1: each replicate resamples each benchmark's questions once for every setting that uses them). Treating the
+(PR\S17.1: each replicate resamples each benchmark's questions once for every setting that uses them). Treating the
 settings as independent gives """ + _mci(m) + r"""; conditional on these settings (question sampling only) the pooled
 effect is \neuMlCIDesign.}
 \label{tab:pooled}
@@ -202,7 +202,7 @@ Setting & $c=0$ & $c=1$ & $c=2$ & $c=4$ & $c=2$ & mis.$\to$abst. & mis.$\to$corr
 """ + "\n".join(rows) + r"""
 \bottomrule
 \end{tabular}}
-\caption{Abstention-aware view of the oracle flags (conflict questions; \S15.4 and \S16.4, re-analyses of data already
+\caption{Abstention-aware view of the oracle flags (conflict questions; PR\S15.4 and PR\S16.4, re-analyses of data already
 seen). Utility per answer: $+1$ correct, $-c$ if it contains the misinformation, 0 for abstaining or any other wrong
 answer; $c=0$ is strict accuracy. Bold: significant in one Holm family per $c$ over all \nUtilSixSettings\ settings of
 Table~\ref{tab:pooled} (a selection is shown). Right: of the question--seed pairs whose plain answer contained the
@@ -262,7 +262,7 @@ Generator & right & wrong & wrong, abst. & right & wrong \\
 """ + crow + r"""
 \bottomrule
 \end{tabular}}
-\caption{H24 re-analysed (\S15.4, \S16.4; data already seen). $D$: hit rate (the detector flags the gold pair and names
+\caption{H24 re-analysed (PR\S15.4, PR\S16.4; data already seen). $D$: hit rate (the detector flags the gold pair and names
 exactly its misinformation passage); $P$: direction precision (of those gold-pair flags, the share naming it); $R$: recall (the
 share of questions whose gold pair is flagged); $G$: the generator's no-flag accuracy. CIs: 2,000 question resamples
 shared across cells (300 with question fixed effects; the leave-one-detector-out range of the question-level

@@ -10,7 +10,7 @@ The prompts are verbatim from the code that produced the results. The examples u
 on RAMDocs (H14). On ConflictBank, the registered H14 compared our pipeline's multi-answer prompt with the
 baselines' own one-answer prompts. Under the matched one-answer prompt (our principal comparison), our pipeline beats them by
 \hFourteenMatchedAst\ and \hFourteenMatchedTr\ points (exploratory). Our TrustRAG port
-first omitted the repository's system message; sending it (\S17.2) changes TrustRAG's accuracy by \blTrustSysCb\
+first omitted the repository's system message; sending it (\prs{17.2}) changes TrustRAG's accuracy by \blTrustSysCb\
 points on ConflictBank, \blTrustSysMj\ under majority misinformation and \blTrustSysRd\ on RAMDocs (\blTrustSysRdMulti\
 for its multi-answer variant). Against the corrected TrustRAG, with policies matched (Holm over the four), the LLM
 directional flag changes accuracy by \blHFourteenCbs\ on ConflictBank (one-answer), \blHFourteenRd\ on RAMDocs (multi-answer),
@@ -18,7 +18,7 @@ directional flag changes accuracy by \blHFourteenCbs\ on ConflictBank (one-answe
 On ConflictBank, NLI first saw passage prefixes that usually omit the changed fact. Cutting each passage to the
 sentences closest to the question, up to the registered 1,500 characters, keeps both answers, but the
 pair still exceeds the cross-encoder's 512 tokens and NLI flags no pair (pair recall \detNliWinRecall\%). With
-300 characters, about one sentence (a disclosed deviation, \S17.6), NLI finds \detNliSentRecall\% of the gold pairs at
+300 characters, about one sentence (a disclosed deviation, \prs{17.6}), NLI finds \detNliSentRecall\% of the gold pairs at
 \detNliSentPrec\% pair precision and flags \detNliSentCleanFpr\% of clean questions. Its flag changes conflict
 accuracy by \blNliSentFlag\ points (removal: \blNliSentRem). A single call that names suspect passages before
 answering does not differ significantly from the pipeline (H18; Table~\ref{tab:baselines}).
@@ -37,25 +37,25 @@ Claim (section) & Evidence & Status \\
 \midrule
 A correct neutral flag lowers RAMDocs accuracy (\S\ref{sec:neutral}) & H2, H9 & registered before any confirmatory data \\
 Its mechanism depends on the answer policy: added misinformation, abstention, little effect (\S\ref{sec:neutral}) & Table~\ref{tab:risk}; H15, H19--H21, H25, H26 & answer mix: re-analysis; tests: registered addenda \\
-Pooled effect, policy split, moderators, utility, transitions (\S\ref{sec:neutral}) & Tables~\ref{tab:pooled}, \ref{tab:utility} & re-analysis of data already seen; dependence: \S17 \\
+Pooled effect, policy split, moderators, utility, transitions (\S\ref{sec:neutral}) & Tables~\ref{tab:pooled}, \ref{tab:utility} & re-analysis of data already seen; dependence: \prs{17} \\
 The directional flag beats the neutral one (\S\ref{sec:direction}) & H3, H9--H12, H15, H16, H19, H25, H26 & H3: before any confirmatory data; rest: addenda \\
-Oracle direction is close to an answer key (\S\ref{sec:direction}) & H23 and its TOST & registered addendum; TOST registered in \S13.4 \\
-Pooled, oracle direction is equivalent to an answer key on average, under the matcher (\S\ref{sec:direction}) & pooled H23; per-comparison TOST & unregistered re-analysis; heterogeneity: \S17 \\
-Under the judge, neither pooled equivalence holds (\S\ref{sec:direction}, \S\ref{sec:real}) & H38 & registered (\S19), LLM judge \\
-Direction helps and a neutral flag does not on real web pages (\S\ref{sec:direction}) & H37 & registered (\S19); labels as released \\
+Oracle direction is close to an answer key (\S\ref{sec:direction}) & H23 and its TOST & registered addendum; TOST registered in \prs{13.4} \\
+Pooled, oracle direction is equivalent to an answer key on average, under the matcher (\S\ref{sec:direction}) & pooled H23; per-comparison TOST & unregistered re-analysis; heterogeneity: \prs{17} \\
+Under the judge, neither pooled equivalence holds (\S\ref{sec:direction}, \S\ref{sec:real}) & H38 & registered (\prs{19}), LLM judge \\
+Direction helps and a neutral flag does not on real web pages (\S\ref{sec:direction}) & H37 & registered (\prs{19}); labels as released \\
 Real-detector gains depend on the generator (\S\ref{sec:real}) & H15, H17, H19, H25, H26 & registered addenda \\
-Right flags gain less than wrong flags cost; similar follow rates (\S\ref{sec:real}) & H31 & registered addendum (\S16) \\
+Right flags gain less than wrong flags cost; similar follow rates (\S\ref{sec:real}) & H31 & registered addendum (\prs{16}) \\
 Break-even direction precision rises with generator accuracy (\S\ref{sec:real}) & Table~\ref{tab:breakeven} & unregistered re-analysis \\
-Break-even is a calibration, not a rule for selective detectors (\S\ref{sec:real}) & Table~\ref{tab:selection} & re-analysis (\S17) \\
+Break-even is a calibration, not a rule for selective detectors (\S\ref{sec:real}) & Table~\ref{tab:selection} & re-analysis (\prs{17}) \\
 Follow rates and coverage account for the crossed cells (\S\ref{sec:real}) & Figure~\ref{fig:reliability} & unregistered; retrospective \\
-Frozen, the account predicts unseen ConflictBank cells; it overstates harm on clean questions and HealthContradict (\S\ref{sec:real}) & H32--H36, Table~\ref{tab:fresh} & registered (\S19), predictions committed first \\
-Registered reliability gap correlates with the gain (\S\ref{sec:real}) & H24 & registered addendum (\S13), 5 of 30 cells existed \\
+Frozen, the account predicts unseen ConflictBank cells; it overstates harm on clean questions and HealthContradict (\S\ref{sec:real}) & H32--H36, Table~\ref{tab:fresh} & registered (\prs{19}), predictions committed first \\
+Registered reliability gap correlates with the gain (\S\ref{sec:real}) & H24 & registered addendum (\prs{13}), 5 of 30 cells existed \\
 The gap is dominated by generator accuracy; precision and recall matter within generators (\S\ref{sec:real}) & Table~\ref{tab:h24redo} & re-analysis of data already seen \\
-The detector's verdict as an answer key matches the flag; its model's answer as a hint does not (\S\ref{sec:real}) & H30, H27 & registered addenda (\S15, \S16); pooled TOST unregistered \\
+The detector's verdict as an answer key matches the flag; its model's answer as a hint does not (\S\ref{sec:real}) & H30, H27 & registered addenda (\prs{15}, \prs{16}); pooled TOST unregistered \\
 A real detector's flag hurts when conflicts are rare (\S\ref{sec:real}) & Table~\ref{tab:prevalence} & unregistered re-analysis \\
 Direction survives reordering and paraphrase (\S\ref{sec:real}) & H29 & registered addendum; equivalence not shown \\
 Direction and removal harm genuine conflicts (\S\ref{sec:real}) & H28 & registered addendum \\
-The matcher's errors do not overturn the directional conclusions (App.~\ref{app:semantic}) & Table~\ref{tab:semantic} & registered re-score (\S17), LLM judge \\
+The matcher's errors do not overturn the directional conclusions (App.~\ref{app:semantic}) & Table~\ref{tab:semantic} & registered re-score (\prs{17}), LLM judge \\
 Recommendations (\S\ref{sec:discussion}) & -- & not tested end to end \\
 \bottomrule
 \end{tabular}
@@ -77,7 +77,7 @@ RAMDocs, removal & \advRemConf\ \advRemConfCI & \advRemClean \\
 ConflictBank (multi-answer), directional flag & \zCbMiniOracleInvFlagDirectionalConflict & \zCbMiniOracleInvFlagDirectionalClean \\
 \bottomrule
 \end{tabular}
-\caption{Adversarial control, gpt-4o-mini: change from no flags, in points (exploratory; \S9.5). On clean
+\caption{Adversarial control, gpt-4o-mini: change from no flags, in points (exploratory; \prs{9.5}). On clean
 questions the inverted oracle flags nothing (prompt unchanged).}
 \label{tab:inverted}
 \end{table}
@@ -201,10 +201,10 @@ moves accuracy significantly (Table~\ref{tab:conflicts}).
 \section{Semantic Re-score, Label Audits and Selection}
 \label{app:semantic}
 \input{generated/tab_semantic}
-\paragraph{An outside-family judge leaves the directional conclusions intact (\S17.3).} To
+\paragraph{An outside-family judge leaves the directional conclusions intact (\prs{17.3}).} To
 check whether the matcher's errors differ by condition, an outside-family LLM re-scored both
 arms of \semK\ contrasts on the same \semNq\ conflict questions each (gemini-3.5-flash-lite; Table~\ref{tab:semantic}).
-\S17.3 named Gemini 2.5 Flash, closed to new users. Given the gold and wrong answers, the judge tests the
+\prs{17.3} named Gemini 2.5 Flash, closed to new users. Given the gold and wrong answers, the judge tests the
 scorer, not the benchmark labels. Judge and matcher agree on \semAgree\% of \semN\ outputs. Almost all
 disagreements are answers the judge accepts and the matcher rejects (aliases, paraphrases, partial forms).
 Their share depends on condition: \semJudgeOnlyKey\% of answer-key outputs and \semJudgeOnlyDir\% of oracle-directional ones,
@@ -218,7 +218,7 @@ intervals are too wide to test the $\pm$3-point equivalence claims; re-scored in
 150 of these pairs and 50 RAGuard post pairs is released unlabelled (\texttt{runs/labelling/audit8\_*}).
 
 \input{generated/tab_entity}
-\paragraph{The neutral-flag cost holds without cross-entity pairs (\S18).} RAMDocs' pair rule labels a pair a
+\paragraph{The neutral-flag cost holds without cross-entity pairs (\prs{18}).} RAMDocs' pair rule labels a pair a
 contradiction whenever one side is misinformation and the answers differ, without aligning entities. Assuming each
 misinformation passage targets one entity, at least \pairCrossLb\ of the \pairContraN\ oracle contradiction pairs on the
 hold-out join it to a correct passage about another entity, in the \pairMultiN\ questions whose correct passages give
@@ -253,13 +253,13 @@ per-question effect. The marginal break-even calculation (precision times $R$ pl
 coverage) has mean error \selMargMae\ points against the observed gains (\selMargCovMae\ when scaled by recall); the
 follow-rate account, using each cell's coverage and no-flag accuracy, has \predEightMae\ \predEightMaeCI.
 
-\section{Prospective Test, Full Re-score and HealthContradict (\S19)}
+\section{Prospective Test, Full Re-score and HealthContradict (\prs{19})}
 \label{app:fresh}
 \input{generated/tab_fresh}
 \input{generated/tab_hc}
 \paragraph{Frozen, the account predicts unseen cells (H32--H36).} ConflictBank-fresh has 400 questions
 built like our ConflictBank sample, with no shared subject. After detections and no-flag answers, we
-committed the follow-rate account's predictions, from H31's follow rates fixed in \S19.1,
+committed the follow-rate account's predictions, from H31's follow rates fixed in \prs{19.1},
 (\texttt{splits/predictions19.json}) before running the flagged condition; the analysis reproduces them exactly (maximum
 drift \frDrift\ points). All three H32 criteria hold: the slope's CI \frSlopeCI\ excludes 0 and includes 1 (intercept
 \frIntercept); the mean error is \frMae\ $\le$ 3, and the account beats the generator-mean (\frMaeGen) and
@@ -274,7 +274,7 @@ intervals (H36). For every generator, the Claude Haiku detector has the highest 
 (effects over all 400 questions, against the gpt-4o-mini detector: gpt-4o-mini generator \frSelMiniObs\ vs \frMiniDetMiniObs\ points; gpt-6.1-terra
 \frSelTerraObs\ vs \frMiniDetTerraObs).
 
-\paragraph{Under the judge, neither pooled equivalence holds (H38).} The \S17.3 judge scored every response in the
+\paragraph{Under the judge, neither pooled equivalence holds (H38).} The \prs{17.3} judge scored every response in the
 pooled H30 and H23 tests (\jdN\ rows; agreement with the matcher \jdAgree\%). On the same cells and pooling,
 the LLM flag minus the verdict key is \jdThirtyM\ \jdThirtyMNinetyCI\ (90\% CI) under the matcher and
 \jdThirtyJ\ \jdThirtyJNinetyCI\ under the judge; the oracle flag minus the answer key is \jdTwentyThreeM\
@@ -295,17 +295,27 @@ dataset's oracle, like RAGuard's, is a label transfer.
 \section{Reproducibility}
 \label{app:repro}
 \paragraph{Runs.} One script produces every number from the committed per-call responses,
-token counts, detector outputs and configurations. The pre-registration was committed before any confirmatory run;
-deviations follow.
+token counts, detector outputs and configurations. Table~\ref{tab:timeline} gives, for every registration, its local
+commit time, the time the public remote first held it (GitHub's activity log, a third-party record) and the earliest
+file of the runs it registered. The base registration (H1--H9) was committed before any confirmatory run but reached
+the remote only after they had started; PR\S9 and PR\S10 likewise; PR\S11--PR\S16 and PR\S19 were on the remote before
+their first run. Three items changed runs already under way (PR\S20.1): PR\S9.4 set the Qwen runs to one seed after
+they had started (none of their output had been read), PR\S9.6 decided how to score Qwen's aborted generations during
+the run, and PR\S17.6 replaced the named judge after its outputs had been written. Each addendum after the base
+followed a review of the results so far, so these registrations fix how an analysis is run, not which analyses are
+chosen. We used no third-party registry; the remote's push times are the only outside record
+\citep{vanmiltenburg2021preregistering}.
+
+\input{generated/tab_timeline}
 
 \paragraph{Deviations from the pre-registration.}
 \begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \emph{Primary metric.} The first draft named the bidirectional metric primary. Before
+\item \emph{Primary metric.} The draft registration named the bidirectional metric primary. Before
 the confirmatory run we switched to one-way matching, because it is closer to MADAM-RAG's published score on the pilot
 split (Section~\ref{sec:setup}); bidirectional became the robustness metric. Every table reports both.
 \item \emph{Second generator.} The plan named an open-weights model. None was available before the confirmatory run, so
-we used gpt-4.1 (H9). We later added Qwen2.5-7B-Instruct, registered before its run. At about 3\,s per local
-call, its runs use one seed, a change made before inspecting any Qwen result.
+we used gpt-4.1 (H9). We later added Qwen2.5-7B-Instruct (PR\S9). At about 3\,s per local call, its runs use one seed
+(PR\S9.4, committed after the run had started, before any Qwen output was read).
 \item \emph{CONFLICTS judge.} The plan called for an outside-family judge validated on about 100 human
 labels. Neither was available, so CONFLICTS is scored, as exploratory, only on items with a reference answer
 (three seeds).
@@ -314,66 +324,61 @@ direction accuracy render identical prompts (their scores differ by exactly 0), 
 all, 9 per format. We report H4a per format. The cell-permutation $p$-value for the dose-response correlation assumed
 exchangeable cells, but they are nested, so we use a question-level bootstrap CI. H4c had no threshold,
 so we report a count.
-\item \emph{H5.} A non-significant difference is not equivalence. We add a TOST with a $\pm$3-point margin, chosen in
-the addendum after the confirmatory run, so it is post hoc.
-\item \emph{H6.} The first draft's test (grid prediction inside the actual effect's CI) was
-lenient. We now report the pre-registered test (actual effect inside a bootstrap prediction interval) and a paired test
-of the two spaces' errors.
+\item \emph{H5 and the equivalence margin.} A non-significant difference is not equivalence. We add a TOST with a
+$\pm$3-point margin, chosen in PR\S9.3 after the confirmatory run (half the observed H2 effect), so it is post hoc; it
+was fixed before every later run that uses it.
+\item \emph{H6.} We report the pre-registered test (actual effect inside a bootstrap prediction interval) and, as an
+addition, a paired test of the two spaces' errors.
 \item \emph{Placement modes.} For H6, detectors without direction ran under both
 \texttt{remove\_suspect} and \texttt{remove}; as the labels render identical prompts, the response cache served every
 duplicate.
-\item \emph{Significance.} Earlier drafts corrected different tables differently; one scheme now applies
-throughout (Section~\ref{sec:setup}), so some exploratory differences once bold are
-not significant.
+\item \emph{Significance.} One scheme applies throughout (Section~\ref{sec:setup}): a registered test takes its
+family's Holm adjustment, every other comparison joins one exploratory Holm family per metric.
 \item \emph{Single- and multi-answer split.} The split of conflict questions by number of gold answers
 (Appendix~\ref{app:single}) was chosen after seeing the minimal-skeleton run and is exploratory.
-\item \emph{Second registration.} We later registered H12--H14 (ConflictBank, the neutral flag with a
-resolution instruction, and the published baselines), the Qwen2.5-7B detector and the ConflictBank sampling rule.
-Its gpt-4.1 runs use seed 0 only, to save budget. One ConflictBank gpt-4o-mini run was resumed from the
-response cache after a transient API error.
-\item \emph{Third and fourth registrations.} H15--H18 (\S11) and H19 (\S12) were committed before their runs. To save
-budget, \S12 dropped two \S11 runs before they started: gpt-4.1 under majority misinformation (replaced by
-gpt-6.1-terra in H17) and gpt-4.1 seeds 1--2, so H14 with gpt-4.1 stays on seed 0 as first registered, and every
-gpt-4.1 baseline comparison is seed-0 matched.
-\item \emph{Reasoning models.} gpt-6-luna and gpt-6.1-terra accept only their default temperature and require
+\item \emph{PR\S10.} H12--H14 (ConflictBank, the neutral flag with a resolution instruction, and the published
+baselines), the Qwen2.5-7B detector and the ConflictBank sampling rule. Its gpt-4.1 runs use seed 0 only. One
+ConflictBank gpt-4o-mini run was resumed from the response cache after a transient API error.
+\item \emph{PR\S11 and PR\S12.} H15--H18 and H19. PR\S12 dropped two PR\S11 runs before they started: gpt-4.1 under
+majority misinformation (replaced by gpt-6.1-terra in H17) and gpt-4.1 seeds 1--2, so H14 with gpt-4.1 stays on
+seed 0 as first registered, and every gpt-4.1 baseline comparison is seed-0 matched.
+\item \emph{Reasoning models and Claude.} gpt-6-luna and gpt-6.1-terra accept only their default temperature and require
 \texttt{max\_completion\_tokens}; we used their defaults with a 4,096-token budget. They returned
-\Nempty\ empty responses (almost all closed-book) because reasoning used the whole budget; we score them wrong.
-\item \emph{Fifth and sixth registrations.} H20--H24 (\S13) and H25--H26 with Claude and RAGuard (\S14) were
-committed before their runs. The planned \texttt{cross\_mj} runs completed within budget. Gemini, planned
-as a generator, was not run: no API key was available then. On our endpoint, Claude rejects a temperature and JSON mode; it
-ran at its default, and as a detector its JSON goes to the regex fallback. The answer
-parser unwraps paired tags (\texttt{<answer>X</answer>}), a format no earlier result contained.
+\Nempty\ empty responses (almost all closed-book) because reasoning used the whole budget; we score them wrong. On our
+endpoint Claude takes no temperature and no JSON mode: it ran at its default (run configurations record the requested
+0.1), and as a detector its JSON goes to the regex fallback. For gpt-6-luna and gpt-6.1-terra the no-flag condition was
+sampled twice in some run families, because the response cache keys on the requested temperature; Appendix~\ref{app:fresh}
+reports how much this moves their estimates.
+\item \emph{PR\S13 and PR\S14.} H20--H24 and H25--H26 (Claude and RAGuard). Gemini, planned as a generator, was not run:
+no API key was available then. The answer parser unwraps paired tags (\texttt{<answer>X</answer>}), a format no
+earlier result contained.
 \item \emph{Permutation resolution.} With 10,000 permutations the smallest $p$-value is $10^{-4}$, which cannot
-survive Holm over \nExploratory\ exploratory comparisons. After the \S14 runs, before writing them up, we
+survive Holm over \nExploratory\ exploratory comparisons. After the PR\S14 runs, before analysing them, we
 extended to 200,000 permutations whenever none of the first 10,000 reached the observed statistic. Only
 $p$-values at their floor change, and only downward.
 \item \emph{H24 additions.} The cross-cell break-even point, the count of positive cells and the mechanism score
 (credit for naming the false side where the generator errs, charge for marking a correct passage where it is right)
 were defined after seeing the H24 cells and are exploratory.
-\item \emph{Seventh registration.} H27--H29 and the re-analyses of \S15 were committed before their runs. To finish
-within the session, the \S15 runs ran in parallel tracks, not strictly in priority order; spend never
-approached the \$195 limit, so no run was dropped. The question-level model adds statsmodels 0.14.5.
-H21(c) is now a ratio, correct over answered. The registered per-question mean averaged the two conditions
-over different questions (those not abstained in every seed), so an earlier draft's selective accuracies did
-not match Table~\ref{tab:risk}. Both measures are in the released statistics.
-\item \emph{Eighth registration.} H30--H31 and the re-analyses of \S16 were committed before their runs, which
-ran in parallel tracks within budget. The pooled estimate now uses a multilevel model, not the
-DerSimonian--Laird bootstrap. The moderators were recoded (answer policy; natural misinformation is RAGuard only).
-The utility analysis uses the pooled estimate's settings. ``Following'' a flag now has one definition for
-right and wrong flags (\S16.3); an earlier draft compared correct answers with any wrong answer.
-\item \emph{Ninth registration.} The re-analyses, corrected baselines and semantic re-score of \S17 were committed
-before their runs, as were its two deviations (\S17.6). The judge is
-gemini-3.5-flash-lite, because the named Gemini 2.5 Flash was closed to new users. The registered
-1,500-character NLI window flags no ConflictBank pair, so we add a 300-character window, chosen after seeing
-detection output only, and report the registered window's results unchanged.
-\item \emph{Tenth and eleventh registrations.} The \S18 pair-rule counts were computed during review triage, before
-\S18 was written (\S18.5); its other analyses were not. \S19 (H32--H38) records no deviation.
+\item \emph{PR\S15.} H27--H29 and re-analyses. Its runs did not follow the registered priority order; no run was dropped.
+The question-level model adds statsmodels 0.14.5. H21(c) is reported as a ratio, correct over answered; the
+registered per-question mean averaged the two conditions over different questions (those not abstained in every
+seed). Both measures are in the released statistics.
+\item \emph{PR\S16.} H30--H31 and re-analyses. The pooled estimate uses a multilevel model, not the
+DerSimonian--Laird bootstrap. The moderators were recoded (answer policy; natural misinformation is RAGuard only)
+with the per-setting effects already known. ``Following'' a flag has one definition for right and wrong flags
+(PR\S16.3).
+\item \emph{PR\S17.} Re-analyses, corrected baselines and the semantic re-score. Its deviations (PR\S17.6) were
+committed after the judge outputs existed: the judge is gemini-3.5-flash-lite, because the named Gemini 2.5 Flash was
+closed to new users, and the registered 1,500-character NLI window flags no ConflictBank pair, so we add a 300-character
+window, chosen after seeing detection output only, and report the registered window's results unchanged.
+\item \emph{PR\S18 and PR\S19.} The PR\S18 pair-rule counts were first tabulated on 2026-10-29, before PR\S18 was
+written (PR\S18.5); its other analyses were not. PR\S19 (H32--H38) records no deviation.
+\item \emph{PR\S20.} Re-analyses registered after an external review; every number it adds is exploratory. A few
+counts were first tabulated on 2026-11-02, before PR\S20 was written, and are marked where they appear. The human-audit
+sheet of PR\S15.4.7 is superseded by a blind disagreement sheet (PR\S20.3).
 \item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; a reordered run
 queue), keeping completed rows and re-requesting only missing ones; no row was re-sampled.
 \end{enumerate}
-The addenda (H10--H38 and the re-analyses above) and the Qwen seed change were each committed before
-their runs. The commit history is the only timestamp; we used no third-party registry
-\citep{vanmiltenburg2021preregistering}.
 
 \paragraph{RAMDocs document types are imperfect.} In the release, 163 documents typed \emph{correct} contain a
 wrong answer, some as injected misinformation, others incidentally. Pairs touching them are excluded from pair-level
@@ -399,7 +404,7 @@ per call. Astute RAG has no official code; we use its appendix prompts verbatim 
 passage that says ``I don't know''; the answer is the text in its \texttt{<ANSWER>} tag. We port
 TrustRAG from its repository (commit \texttt{11dcea0}, MIT licence): SimCSE CLS embeddings
 (\texttt{sup-simcse-bert-base-uncased}), a ROUGE-L gate of 0.25, 2-means clustering and a cosine threshold of 0.88,
-then its three prompts verbatim at temperature 0.1. The registered runs omit its system message (our client then sent only user messages); the \S17 rerun restores it (Appendix~\ref{app:extra}). The \emph{multi} variants change one sentence of the final step to ask for every valid answer
+then its three prompts verbatim at temperature 0.1. The registered runs omit its system message (our client then sent only user messages); the \prs{17} rerun restores it (Appendix~\ref{app:extra}). The \emph{multi} variants change one sentence of the final step to ask for every valid answer
 (Astute RAG) or append our final-answer line (TrustRAG); we also report the unmodified variants.
 
 \paragraph{ConflictBank.} We use the QA file of the Hugging Face release (revision \texttt{92866a0}). We sample questions round-robin over relations with seed 0; distractors are other subjects' correct passages. The
@@ -423,5 +428,5 @@ responses are empty or aborted; the share with no final-answer line has median \
 \truncMaxNoFinal\% (\truncMaxAt). Per-condition counts are in the released statistics.
 
 \paragraph{Cost and compute.} All API calls, pilots included, cost \totalSpend. Prices per million input, cached-input and output tokens, checked on 2026-10-27: gpt-4o-mini \$0.15, \$0.075 and \$0.60; gpt-4.1 \$2.00, \$0.50 and \$8.00; gpt-6-luna \$0.10, \$0.01 and \$0.50; gpt-6.1-terra \$1.00, \$0.05 and \$5.00; Claude Haiku 5.5 \$0.10, \$0.01 and
-\$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00. The \S17.3 judge, gemini-3.5-flash-lite, cost \$0.30 input and \$2.50 output (checked on 2026-10-29). CAAG and NLI ran on a
+\$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00. The \prs{17.3} judge, gemini-3.5-flash-lite, cost \$0.30 input and \$2.50 output (checked on 2026-10-29). CAAG and NLI ran on a
 laptop CPU (0.2\,s and 1.2\,s per question).
