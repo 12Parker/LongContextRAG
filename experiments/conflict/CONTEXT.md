@@ -620,7 +620,7 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   (fresh mini follow rates 50/50 inside frozen CIs). Selection picks the Haiku detector for every generator (= best).
 - **H38 full judge re-score (23,204 rows): equivalence fails under the judge.** H30a flag − verdict key +2.4
   [90%: 1.3, 3.5] (matcher +1.2); H23 +2.5 [90%: 1.1, 3.9] (matcher −0.1). The matcher understates the flag by 1.2
-  and 2.6 points (misses more correct answers under keys). Paper now says equivalence holds under the matcher only.
+  and 2.6 points (corrected 2026-11-02: it misses more correct answers under the flags, judge-only 8.7% vs 6.7% key, 2.9% LLM flag vs 2.4% verdict key; Appendix E states it the wrong way round). Paper now says equivalence holds under the matcher only.
 - **H37 HealthContradict (real health pages, 3 generators):** oracle directional +5.5 to +13.8 (all significant,
   also vs neutral); neutral −2.4 to −0.1 (n.s.). Closed-book beats pages for every generator. Frozen prediction for the
   LLM flag overstates harm (luna −19.4 pred vs −8.6; Haiku −16.6 vs +1.1). Judge label audit: correct page supports
@@ -646,3 +646,25 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   §18/§19 deviations item; H38 shift CIs signed; selection effects said to be over all 400 questions; intro's release
   sentence and research question restored. `\clearpage` before Limitations keeps it at the top of page 9.
 - **Open:** human audit sheet unlabelled; data-configuration details for ConflictBank-fresh and HealthContradict.
+
+## Round 16: professor's review and triage (2026-11-02, no new runs)
+
+- **Review** (the professor's, on the 2026-10-30 draft; not committed, the repo is public): restructure, not edit. Five
+  reasons: catalogue of 38 hypotheses rather than an argument; quantitative core rests on ConflictBank, whose direction
+  signal may be a generation artefact; scorer validity open and no human labels; real-document evidence (HealthContradict,
+  RAGuard) uninterpretable; pre-registration overweighted. Plus moderate points and ten inconsistencies.
+- **Triage:** `TRIAGE_REVIEW10.md`, checked point by point against paper, runs and git history (multi-agent workflow,
+  each group challenged, then a completeness critic and per-section fact-checks; no API calls, no new analysis outcomes).
+  Counts first tabulated while writing it are listed in its Section 4B.3 and stay out of the paper unless PR§20 covers
+  them.
+- **Main findings:** the reviewer is right on all five reasons. Our own errors found: Appendix E reverses the matcher
+  miss direction; "committed before its runs" is false for PR§9.4, §9.6 and §17.6; "up to 51 points" should be 61.0
+  (luna); six registered or run results are absent from the draft (PR§11.3 closed-book split, both halves; majority
+  direction accuracy 49.4 vs 68.8; PR§19.2 per-condition agreement; RAGuard answer-key arm; H18 TOSTs; PR§17.1.1
+  equal-weight mean).
+- **Plan:** rebuild around three claims (neutral flag as policy shift; deference and break-even; frozen account and its
+  failures), demote key equivalence, family claims, pooled estimates and real-document results; PR§20 registered (OSF
+  recommended) before any re-analysis or run. API package about $22 now, $2.8 after HealthContradict human labels,
+  $7.9 only if human labels favour the judge (headroom $40.82).
+- **Open (authors):** decisions in TRIAGE_REVIEW10.md §5; human labelling (A1 first, about 3.5-4 h per annotator).
+
