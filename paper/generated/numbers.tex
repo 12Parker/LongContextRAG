@@ -9517,6 +9517,804 @@
 \newcommand{\jdTwentyThreeShiftCI}{[$-$3.9, $-$1.4]}
 \newcommand{\jdN}{23,204}
 \newcommand{\jdAgree}{94.3}
+\newcommand{\clfFullEval}{1.000}
+\newcommand{\clfFullEvalCI}{[1.000, 1.000]}
+\newcommand{\clfFullEvalPoint}{0.992}
+\newcommand{\clfFullEvalPMis}{0.94}
+\newcommand{\clfFullEvalPCor}{0.07}
+\newcommand{\clfFullEvalNnMax}{0.78}
+\newcommand{\clfFullEvalNnHigh}{0}
+\newcommand{\clfFullFresh}{1.000}
+\newcommand{\clfFullFreshCI}{[1.000, 1.000]}
+\newcommand{\clfFullFreshPoint}{0.993}
+\newcommand{\clfFullFreshPMis}{0.95}
+\newcommand{\clfFullFreshPCor}{0.07}
+\newcommand{\clfFullFreshNnMax}{0.90}
+\newcommand{\clfFullFreshNnHigh}{1}
+\newcommand{\clfFullTrainAcc}{0.999}
+\newcommand{\clfMaskEval}{1.000}
+\newcommand{\clfMaskEvalCI}{[1.000, 1.000]}
+\newcommand{\clfMaskEvalPoint}{0.988}
+\newcommand{\clfMaskEvalPMis}{0.94}
+\newcommand{\clfMaskEvalPCor}{0.08}
+\newcommand{\clfMaskEvalNnMax}{0.77}
+\newcommand{\clfMaskEvalNnHigh}{0}
+\newcommand{\clfMaskFresh}{1.000}
+\newcommand{\clfMaskFreshCI}{[1.000, 1.000]}
+\newcommand{\clfMaskFreshPoint}{0.983}
+\newcommand{\clfMaskFreshPMis}{0.95}
+\newcommand{\clfMaskFreshPCor}{0.08}
+\newcommand{\clfMaskFreshNnMax}{0.86}
+\newcommand{\clfMaskFreshNnHigh}{1}
+\newcommand{\clfMaskTrainAcc}{0.998}
+\newcommand{\clfN}{300}
+\newcommand{\clfNFresh}{300}
+\newcommand{\clfTrainRows}{124,769}
+\newcommand{\clfTrainPassages}{249,538}
+\newcommand{\clfExclSubjects}{1,400}
+\newcommand{\clfIdentical}{0}
+\newcommand{\clfTopFalse}{``studies'', ``study'', ``exclusive interview''}
+\newcommand{\clfTopCorrect}{``evidence'', ``breaking news'', ``title the''}
+\newcommand{\priorKnownQMini}{28}
+\newcommand{\priorUnknownQMini}{272}
+\newcommand{\priorSeedsMini}{3}
+\newcommand{\priorSsMiniKnownN}{28}
+\newcommand{\priorSsMiniUnknownN}{264}
+\newcommand{\priorSsMiniKnown}{85.7}
+\newcommand{\priorSsMiniKnownCI}{[71.4, 96.8]}
+\newcommand{\priorSsMiniUnknown}{67.0}
+\newcommand{\priorSsMiniUnknownCI}{[61.2, 72.6]}
+\newcommand{\priorSsMiniDiff}{$+$18.7}
+\newcommand{\priorSsMiniDiffCI}{[$+$3.3, $+$31.9]}
+\newcommand{\priorDirMiniKnownN}{28}
+\newcommand{\priorDirMiniUnknownN}{264}
+\newcommand{\priorDirMiniKnown}{85.7}
+\newcommand{\priorDirMiniKnownCI}{[71.4, 96.8]}
+\newcommand{\priorDirMiniUnknown}{67.0}
+\newcommand{\priorDirMiniUnknownCI}{[61.2, 72.6]}
+\newcommand{\priorDirMiniDiff}{$+$18.7}
+\newcommand{\priorDirMiniDiffCI}{[$+$3.3, $+$31.9]}
+\newcommand{\priorKnownQFour}{60}
+\newcommand{\priorUnknownQFour}{240}
+\newcommand{\priorSeedsFour}{1}
+\newcommand{\priorSsFourKnownN}{56}
+\newcommand{\priorSsFourUnknownN}{205}
+\newcommand{\priorSsFourKnown}{98.2}
+\newcommand{\priorSsFourKnownCI}{[93.9, 100.0]}
+\newcommand{\priorSsFourUnknown}{88.8}
+\newcommand{\priorSsFourUnknownCI}{[84.3, 93.1]}
+\newcommand{\priorSsFourDiff}{$+$9.4}
+\newcommand{\priorSsFourDiffCI}{[$+$3.6, $+$15.0]}
+\newcommand{\priorDirFourKnownN}{56}
+\newcommand{\priorDirFourUnknownN}{205}
+\newcommand{\priorDirFourKnown}{98.2}
+\newcommand{\priorDirFourKnownCI}{[93.9, 100.0]}
+\newcommand{\priorDirFourUnknown}{88.8}
+\newcommand{\priorDirFourUnknownCI}{[84.3, 93.1]}
+\newcommand{\priorDirFourDiff}{$+$9.4}
+\newcommand{\priorDirFourDiffCI}{[$+$3.6, $+$15.0]}
+\newcommand{\priorKnownQLuna}{47}
+\newcommand{\priorUnknownQLuna}{253}
+\newcommand{\priorSeedsLuna}{3}
+\newcommand{\priorSsLunaKnownN}{28}
+\newcommand{\priorSsLunaUnknownN}{116}
+\newcommand{\priorSsLunaKnown}{100.0}
+\newcommand{\priorSsLunaKnownCI}{[100.0, 100.0]}
+\newcommand{\priorSsLunaUnknown}{94.0}
+\newcommand{\priorSsLunaUnknownCI}{[89.2, 98.1]}
+\newcommand{\priorSsLunaDiff}{$+$6.0}
+\newcommand{\priorSsLunaDiffCI}{[$+$1.9, $+$10.8]}
+\newcommand{\priorDirLunaKnownN}{28}
+\newcommand{\priorDirLunaUnknownN}{129}
+\newcommand{\priorDirLunaKnown}{100.0}
+\newcommand{\priorDirLunaKnownCI}{[100.0, 100.0]}
+\newcommand{\priorDirLunaUnknown}{84.5}
+\newcommand{\priorDirLunaUnknownCI}{[78.2, 90.5]}
+\newcommand{\priorDirLunaDiff}{$+$15.5}
+\newcommand{\priorDirLunaDiffCI}{[$+$9.5, $+$21.8]}
+\newcommand{\priorKnownQTerra}{60}
+\newcommand{\priorUnknownQTerra}{240}
+\newcommand{\priorSeedsTerra}{1}
+\newcommand{\priorSsTerraKnownN}{33}
+\newcommand{\priorSsTerraUnknownN}{63}
+\newcommand{\priorSsTerraKnown}{100.0}
+\newcommand{\priorSsTerraKnownCI}{[100.0, 100.0]}
+\newcommand{\priorSsTerraUnknown}{96.8}
+\newcommand{\priorSsTerraUnknownCI}{[91.8, 100.0]}
+\newcommand{\priorSsTerraDiff}{$+$3.2}
+\newcommand{\priorSsTerraDiffCI}{[0.0, $+$8.2]}
+\newcommand{\priorDirTerraKnownN}{34}
+\newcommand{\priorDirTerraUnknownN}{72}
+\newcommand{\priorDirTerraKnown}{97.1}
+\newcommand{\priorDirTerraKnownCI}{[90.2, 100.0]}
+\newcommand{\priorDirTerraUnknown}{84.7}
+\newcommand{\priorDirTerraUnknownCI}{[76.1, 92.4]}
+\newcommand{\priorDirTerraDiff}{$+$12.3}
+\newcommand{\priorDirTerraDiffCI}{[$+$2.0, $+$22.4]}
+\newcommand{\priorKnownQHaiku}{32}
+\newcommand{\priorUnknownQHaiku}{268}
+\newcommand{\priorSeedsHaiku}{3}
+\newcommand{\priorSsHaikuKnownN}{26}
+\newcommand{\priorSsHaikuUnknownN}{185}
+\newcommand{\priorSsHaikuKnown}{100.0}
+\newcommand{\priorSsHaikuKnownCI}{[100.0, 100.0]}
+\newcommand{\priorSsHaikuUnknown}{85.9}
+\newcommand{\priorSsHaikuUnknownCI}{[80.6, 90.9]}
+\newcommand{\priorSsHaikuDiff}{$+$14.1}
+\newcommand{\priorSsHaikuDiffCI}{[$+$9.1, $+$19.4]}
+\newcommand{\priorDirHaikuKnownN}{26}
+\newcommand{\priorDirHaikuUnknownN}{193}
+\newcommand{\priorDirHaikuKnown}{100.0}
+\newcommand{\priorDirHaikuKnownCI}{[100.0, 100.0]}
+\newcommand{\priorDirHaikuUnknown}{82.4}
+\newcommand{\priorDirHaikuUnknownCI}{[76.8, 87.8]}
+\newcommand{\priorDirHaikuDiff}{$+$17.6}
+\newcommand{\priorDirHaikuDiffCI}{[$+$12.2, $+$23.2]}
+\newcommand{\priorSsDiffMin}{$+$3.2}
+\newcommand{\priorSsDiffMinDet}{gpt-6.1-terra}
+\newcommand{\priorSsDiffMax}{$+$18.7}
+\newcommand{\priorSsDiffMaxDet}{gpt-4o-mini}
+\newcommand{\priorSsDiffPos}{4}
+\newcommand{\priorDirDiffMin}{$+$9.4}
+\newcommand{\priorDirDiffMinDet}{gpt-4.1}
+\newcommand{\priorDirDiffMax}{$+$18.7}
+\newcommand{\priorDirDiffMaxDet}{gpt-4o-mini}
+\newcommand{\priorDirDiffPos}{5}
+\newcommand{\priorN}{5}
+\newcommand{\ssPrecMini}{68.8}
+\newcommand{\ssPrecMiniCI}{[63.3, 74.0]}
+\newcommand{\ssPrecMiniN}{1,752}
+\newcommand{\ssPrecAllMini}{68.8}
+\newcommand{\ssPrecAllMiniCI}{[63.3, 74.0]}
+\newcommand{\ssPrecAllMiniN}{1,752}
+\newcommand{\ssBothMini}{0}
+\newcommand{\ssUnclearMini}{0}
+\newcommand{\ssPrecFour}{90.9}
+\newcommand{\ssPrecFourCI}{[87.3, 94.3]}
+\newcommand{\ssPrecFourN}{1,566}
+\newcommand{\ssPrecAllFour}{81.8}
+\newcommand{\ssPrecAllFourCI}{[77.2, 86.2]}
+\newcommand{\ssPrecAllFourN}{1,740}
+\newcommand{\ssBothFour}{0}
+\newcommand{\ssUnclearFour}{174}
+\newcommand{\ssPrecLuna}{94.9}
+\newcommand{\ssPrecLunaCI}{[91.1, 98.0]}
+\newcommand{\ssPrecLunaN}{874}
+\newcommand{\ssPrecAllLuna}{82.2}
+\newcommand{\ssPrecAllLunaCI}{[76.4, 87.7]}
+\newcommand{\ssPrecAllLunaN}{1,009}
+\newcommand{\ssBothLuna}{75}
+\newcommand{\ssUnclearLuna}{60}
+\newcommand{\ssPrecTerra}{97.0}
+\newcommand{\ssPrecTerraCI}{[93.1, 100.0]}
+\newcommand{\ssPrecTerraN}{560}
+\newcommand{\ssPrecAllTerra}{82.6}
+\newcommand{\ssPrecAllTerraCI}{[75.5, 89.4]}
+\newcommand{\ssPrecAllTerraN}{657}
+\newcommand{\ssBothTerra}{59}
+\newcommand{\ssUnclearTerra}{38}
+\newcommand{\ssPrecHaiku}{87.7}
+\newcommand{\ssPrecHaikuCI}{[83.0, 92.1]}
+\newcommand{\ssPrecHaikuN}{633}
+\newcommand{\ssPrecAllHaiku}{78.1}
+\newcommand{\ssPrecAllHaikuCI}{[72.5, 83.3]}
+\newcommand{\ssPrecAllHaikuN}{711}
+\newcommand{\ssBothHaiku}{24}
+\newcommand{\ssUnclearHaiku}{54}
+\newcommand{\ssPrecSonnet}{93.8}
+\newcommand{\ssPrecSonnetCI}{[90.2, 96.9]}
+\newcommand{\ssPrecSonnetN}{624}
+\newcommand{\ssPrecAllSonnet}{77.7}
+\newcommand{\ssPrecAllSonnetCI}{[72.6, 82.7]}
+\newcommand{\ssPrecAllSonnetN}{753}
+\newcommand{\ssBothSonnet}{42}
+\newcommand{\ssUnclearSonnet}{87}
+\newcommand{\ssPrecMin}{68.8}
+\newcommand{\ssPrecMinDet}{gpt-4o-mini}
+\newcommand{\ssPrecMax}{97.0}
+\newcommand{\ssPrecMaxDet}{gpt-6.1-terra}
+\newcommand{\ssPrecOtherMin}{87.7}
+\newcommand{\ssPrecOtherMax}{97.0}
+\newcommand{\ssPrecN}{6}
+\newcommand{\prFolKnownQMini}{28}
+\newcommand{\prFolRKnownMini}{87}
+\newcommand{\prFolRKnownMiniN}{5}
+\newcommand{\prFolRKnownMiniCI}{[60, 100]}
+\newcommand{\prFolRUnknownMini}{54}
+\newcommand{\prFolRUnknownMiniN}{71}
+\newcommand{\prFolRUnknownMiniCI}{[43, 66]}
+\newcommand{\prFolRAllMiniN}{76}
+\newcommand{\prFolRDiffMini}{$+$32}
+\newcommand{\prFolRDiffMiniCI}{[0, $+$54]}
+\newcommand{\prFolWKnownMini}{67}
+\newcommand{\prFolWKnownMiniN}{5}
+\newcommand{\prFolWKnownMiniCI}{[33, 93]}
+\newcommand{\prFolWUnknownMini}{50}
+\newcommand{\prFolWUnknownMiniN}{65}
+\newcommand{\prFolWUnknownMiniCI}{[38, 62]}
+\newcommand{\prFolWAllMiniN}{70}
+\newcommand{\prFolWDiffMini}{$+$16}
+\newcommand{\prFolWDiffMiniCI}{[$-$23, $+$50]}
+\newcommand{\prFolKnownQLuna}{47}
+\newcommand{\prFolRKnownLuna}{100}
+\newcommand{\prFolRKnownLunaN}{2}
+\newcommand{\prFolRKnownLunaCI}{[100, 100]}
+\newcommand{\prFolRUnknownLuna}{71}
+\newcommand{\prFolRUnknownLunaN}{54}
+\newcommand{\prFolRUnknownLunaCI}{[59, 82]}
+\newcommand{\prFolRAllLunaN}{56}
+\newcommand{\prFolRDiffLuna}{$+$29}
+\newcommand{\prFolRDiffLunaCI}{[$+$18, $+$41]}
+\newcommand{\prFolWKnownLuna}{76}
+\newcommand{\prFolWKnownLunaN}{11}
+\newcommand{\prFolWKnownLunaCI}{[52, 100]}
+\newcommand{\prFolWUnknownLuna}{78}
+\newcommand{\prFolWUnknownLunaN}{46}
+\newcommand{\prFolWUnknownLunaCI}{[67, 87]}
+\newcommand{\prFolWAllLunaN}{57}
+\newcommand{\prFolWDiffLuna}{$-$2}
+\newcommand{\prFolWDiffLunaCI}{[$-$30, $+$24]}
+\newcommand{\prFolKnownQHaiku}{32}
+\newcommand{\prFolRKnownHaiku}{100}
+\newcommand{\prFolRKnownHaikuN}{1}
+\newcommand{\prFolRKnownHaikuCI}{[100, 100]}
+\newcommand{\prFolRUnknownHaiku}{62}
+\newcommand{\prFolRUnknownHaikuN}{43}
+\newcommand{\prFolRUnknownHaikuCI}{[49, 76]}
+\newcommand{\prFolRAllHaikuN}{44}
+\newcommand{\prFolRDiffHaiku}{$+$38}
+\newcommand{\prFolRDiffHaikuCI}{[$+$25, $+$52]}
+\newcommand{\prFolWKnownHaiku}{37}
+\newcommand{\prFolWKnownHaikuN}{10}
+\newcommand{\prFolWKnownHaikuCI}{[10, 67]}
+\newcommand{\prFolWUnknownHaiku}{68}
+\newcommand{\prFolWUnknownHaikuN}{75}
+\newcommand{\prFolWUnknownHaikuCI}{[58, 77]}
+\newcommand{\prFolWAllHaikuN}{85}
+\newcommand{\prFolWDiffHaiku}{$-$31}
+\newcommand{\prFolWDiffHaikuCI}{[$-$60, $+$2]}
+\newcommand{\prFolKnownQTerra}{60}
+\newcommand{\prFolRKnownTerra}{100}
+\newcommand{\prFolRKnownTerraN}{4}
+\newcommand{\prFolRKnownTerraCI}{[100, 100]}
+\newcommand{\prFolRUnknownTerra}{63}
+\newcommand{\prFolRUnknownTerraN}{41}
+\newcommand{\prFolRUnknownTerraCI}{[49, 78]}
+\newcommand{\prFolRAllTerraN}{45}
+\newcommand{\prFolRDiffTerra}{$+$37}
+\newcommand{\prFolRDiffTerraCI}{[$+$22, $+$51]}
+\newcommand{\prFolWKnownTerra}{100}
+\newcommand{\prFolWKnownTerraN}{22}
+\newcommand{\prFolWKnownTerraCI}{[100, 100]}
+\newcommand{\prFolWUnknownTerra}{93}
+\newcommand{\prFolWUnknownTerraN}{73}
+\newcommand{\prFolWUnknownTerraCI}{[86, 99]}
+\newcommand{\prFolWAllTerraN}{95}
+\newcommand{\prFolWDiffTerra}{$+$7}
+\newcommand{\prFolWDiffTerraCI}{[$+$1, $+$13]}
+\newcommand{\prFolKnownShareMin}{9}
+\newcommand{\prFolKnownShareMax}{20}
+\newcommand{\prFolOrW}{0.84}
+\newcommand{\prFolOrWCI}{[0.38, 1.85]}
+\newcommand{\prFolOrWN}{307}
+\newcommand{\prFolOrWQ}{116}
+\newcommand{\prFolOrWKnownN}{48}
+\newcommand{\prFolOrRUnbounded}{yes}
+\newcommand{\prFolOrRSeparated}{1,793}
+\newcommand{\prFolOrRKnownN}{12}
+\newcommand{\condMaeAll}{1.79}
+\newcommand{\uncondMaeAll}{1.82}
+\newcommand{\condMaeChangeAll}{$-$0.03}
+\newcommand{\condNAll}{30}
+\newcommand{\condRAll}{0.94}
+\newcommand{\uncondRAll}{0.94}
+\newcommand{\condSlopeAll}{0.96}
+\newcommand{\uncondSlopeAll}{0.96}
+\newcommand{\condMaeOwn}{1.50}
+\newcommand{\uncondMaeOwn}{1.54}
+\newcommand{\condMaeChangeOwn}{$-$0.04}
+\newcommand{\condNOwn}{22}
+\newcommand{\condROwn}{0.97}
+\newcommand{\uncondROwn}{0.97}
+\newcommand{\condSlopeOwn}{1.05}
+\newcommand{\uncondSlopeOwn}{1.06}
+\newcommand{\condMaeTransfer}{2.57}
+\newcommand{\uncondMaeTransfer}{2.60}
+\newcommand{\condMaeChangeTransfer}{$-$0.03}
+\newcommand{\condNTransfer}{8}
+\newcommand{\condRTransfer}{0.90}
+\newcommand{\uncondRTransfer}{0.90}
+\newcommand{\condSlopeTransfer}{0.71}
+\newcommand{\uncondSlopeTransfer}{0.70}
+\newcommand{\condMaxShift}{0.7}
+\newcommand{\acctN}{20}
+\newcommand{\acctMae}{1.4}
+\newcommand{\acctMaeMarg}{1.8}
+\newcommand{\acctMaeMargCI}{[1.5, 3.1]}
+\newcommand{\acctMargDiff}{$+$0.4}
+\newcommand{\acctMargDiffCI}{[$-$0.3, $+$1.2]}
+\newcommand{\acctCommonMae}{1.6}
+\newcommand{\acctCommonMaeCI}{[1.5, 2.7]}
+\newcommand{\acctCommonDiff}{$+$0.2}
+\newcommand{\acctCommonDiffCI}{[$-$0.2, $+$0.7]}
+\newcommand{\acctCommonFR}{64.5}
+\newcommand{\acctCommonFW}{71.8}
+\newcommand{\acctCommonR}{0.93}
+\newcommand{\acctCommonSlope}{0.96}
+\newcommand{\acctCommonSign}{20}
+\newcommand{\acctCleanMaeAll}{3.6}
+\newcommand{\acctCleanMaeAllCI}{[2.5, 4.8]}
+\newcommand{\acctCleanMaeFlag}{8.9}
+\newcommand{\acctCleanMaeFlagCI}{[6.3, 11.9]}
+\newcommand{\acctCleanNFlag}{8}
+\newcommand{\acctCleanNAll}{20}
+\newcommand{\acctHarmN}{2}
+\newcommand{\acctHarmTerraMini}{gpt-6.1-terra with the gpt-4o-mini detector}
+\newcommand{\acctHarmTerraMiniPred}{$-$3.1}
+\newcommand{\acctHarmTerraMiniPredCI}{[$-$8.1, $+$1.6]}
+\newcommand{\acctHarmTerraMiniObs}{$-$4.0}
+\newcommand{\acctHarmTerraMiniObsCI}{[$-$9.7, $+$1.3]}
+\newcommand{\acctHarmTerraMiniErrCI}{[$-$3.5, $+$1.6]}
+\newcommand{\acctHarmTerraQwen}{gpt-6.1-terra with the Qwen2.5-7B detector}
+\newcommand{\acctHarmTerraQwenPred}{$-$10.1}
+\newcommand{\acctHarmTerraQwenPredCI}{[$-$16.2, $-$4.2]}
+\newcommand{\acctHarmTerraQwenObs}{$-$8.3}
+\newcommand{\acctHarmTerraQwenObsCI}{[$-$15.0, $-$1.7]}
+\newcommand{\acctHarmTerraQwenErrCI}{[$-$1.6, $+$5.2]}
+\newcommand{\acctSelMae}{1.7}
+\newcommand{\acctSelMaeFlag}{2.6}
+\newcommand{\acctSelMaeNoFlag}{1.0}
+\newcommand{\acctSelConflict}{$-$0.1}
+\newcommand{\acctSelClean}{$-$0.9}
+\newcommand{\acctSelAbsConflict}{1.1}
+\newcommand{\acctSelAbsClean}{0.9}
+\newcommand{\acctSelMaxErr}{$-$7.7}
+\newcommand{\acctSelMaxErrClean}{$-$6.4}
+\newcommand{\acctSelMaxErrCell}{gpt-6.1-terra with the Qwen2.5-7B detector}
+\newcommand{\terraDrawRegBe}{0.79}
+\newcommand{\terraDrawRegBeCI}{[0.72, 0.85]}
+\newcommand{\terraDrawRegFR}{67}
+\newcommand{\terraDrawRegFRCI}{[53, 80]}
+\newcommand{\terraDrawRegFW}{95}
+\newcommand{\terraDrawRegFWCI}{[89, 99]}
+\newcommand{\terraDrawRegRight}{$+$17.6}
+\newcommand{\terraDrawRegWrong}{$-$64.5}
+\newcommand{\terraDrawAltBe}{0.81}
+\newcommand{\terraDrawAltBeCI}{[0.75, 0.87]}
+\newcommand{\terraDrawAltFR}{68}
+\newcommand{\terraDrawAltFRCI}{[55, 82]}
+\newcommand{\terraDrawAltFW}{93}
+\newcommand{\terraDrawAltFWCI}{[88, 98]}
+\newcommand{\terraDrawAltRight}{$+$17.0}
+\newcommand{\terraDrawAltWrong}{$-$70.9}
+\newcommand{\terraDrawPlainConfA}{69.7}
+\newcommand{\terraDrawPlainConfB}{73.0}
+\newcommand{\terraDrawDifferConf}{28}
+\newcommand{\terraDrawPlainCleanA}{97.0}
+\newcommand{\terraDrawPlainCleanB}{95.0}
+\newcommand{\terraDrawDifferClean}{2}
+\newcommand{\terraDrawDiffer}{30}
+\newcommand{\terraDrawIdentical}{80}
+\newcommand{\terraDrawRows}{400}
+\newcommand{\terraDrawRdPlainConfA}{10.8}
+\newcommand{\terraDrawRdPlainConfB}{10.8}
+\newcommand{\terraDrawRdDifferConf}{0}
+\newcommand{\terraDrawRdPlainCleanA}{51.6}
+\newcommand{\terraDrawRdPlainCleanB}{51.6}
+\newcommand{\terraDrawRdDifferClean}{4}
+\newcommand{\terraDrawRdDiffer}{4}
+\newcommand{\terraDrawRdIdentical}{40}
+\newcommand{\terraDrawRdRows}{300}
+\newcommand{\terraDrawHNineteenChanged}{0}
+\newcommand{\terraDrawHNineteenChangedCb}{0}
+\newcommand{\tokTerraPlain}{105}
+\newcommand{\tokTerraFlag}{51}
+\newcommand{\tokTerraDiff}{$-$54}
+\newcommand{\tokTerraDiffCI}{[$-$61, $-$46]}
+\newcommand{\tokTerraRightPlain}{103}
+\newcommand{\tokTerraRightFlag}{48}
+\newcommand{\tokTerraRightDiff}{$-$55}
+\newcommand{\tokTerraRightDiffCI}{[$-$66, $-$45]}
+\newcommand{\tokTerraWrongPlain}{106}
+\newcommand{\tokTerraWrongFlag}{55}
+\newcommand{\tokTerraWrongDiff}{$-$51}
+\newcommand{\tokTerraWrongDiffCI}{[$-$63, $-$41]}
+\newcommand{\tokTerraRightFol}{48}
+\newcommand{\tokTerraRightNotFol}{116}
+\newcommand{\tokTerraRightFolDiff}{$-$69}
+\newcommand{\tokTerraRightFolDiffCI}{[$-$136, $-$12]}
+\newcommand{\tokTerraRightFolRows}{30}
+\newcommand{\tokTerraRightNotFolRows}{15}
+\newcommand{\tokTerraRightFolQ}{45}
+\newcommand{\tokTerraWrongFol}{49}
+\newcommand{\tokTerraWrongNotFol}{97}
+\newcommand{\tokTerraWrongFolDiff}{$-$47}
+\newcommand{\tokTerraWrongFolDiffCI}{[$-$96, $+$1]}
+\newcommand{\tokTerraWrongFolRows}{90}
+\newcommand{\tokTerraWrongNotFolRows}{5}
+\newcommand{\tokTerraWrongFolQ}{95}
+\newcommand{\tokLunaPlain}{255}
+\newcommand{\tokLunaFlag}{134}
+\newcommand{\tokLunaDiff}{$-$121}
+\newcommand{\tokLunaDiffCI}{[$-$139, $-$102]}
+\newcommand{\tokLunaRightPlain}{250}
+\newcommand{\tokLunaRightFlag}{108}
+\newcommand{\tokLunaRightDiff}{$-$142}
+\newcommand{\tokLunaRightDiffCI}{[$-$166, $-$120]}
+\newcommand{\tokLunaWrongPlain}{259}
+\newcommand{\tokLunaWrongFlag}{163}
+\newcommand{\tokLunaWrongDiff}{$-$96}
+\newcommand{\tokLunaWrongDiffCI}{[$-$126, $-$65]}
+\newcommand{\tokLunaRightFol}{117}
+\newcommand{\tokLunaRightNotFol}{144}
+\newcommand{\tokLunaRightFolDiff}{$-$27}
+\newcommand{\tokLunaRightFolDiffCI}{[$-$96, $+$17]}
+\newcommand{\tokLunaRightFolRows}{121}
+\newcommand{\tokLunaRightNotFolRows}{47}
+\newcommand{\tokLunaRightFolQ}{56}
+\newcommand{\tokLunaWrongFol}{183}
+\newcommand{\tokLunaWrongNotFol}{278}
+\newcommand{\tokLunaWrongFolDiff}{$-$94}
+\newcommand{\tokLunaWrongFolDiffCI}{[$-$182, $-$22]}
+\newcommand{\tokLunaWrongFolRows}{132}
+\newcommand{\tokLunaWrongNotFolRows}{39}
+\newcommand{\tokLunaWrongFolQ}{57}
+\newcommand{\tokHaikuPlain}{555}
+\newcommand{\tokHaikuFlag}{508}
+\newcommand{\tokHaikuDiff}{$-$47}
+\newcommand{\tokHaikuDiffCI}{[$-$75, $-$19]}
+\newcommand{\tokHaikuRightPlain}{550}
+\newcommand{\tokHaikuRightFlag}{429}
+\newcommand{\tokHaikuRightDiff}{$-$121}
+\newcommand{\tokHaikuRightDiffCI}{[$-$151, $-$89]}
+\newcommand{\tokHaikuWrongPlain}{561}
+\newcommand{\tokHaikuWrongFlag}{597}
+\newcommand{\tokHaikuWrongDiff}{$+$36}
+\newcommand{\tokHaikuWrongDiffCI}{[$-$7, $+$81]}
+\newcommand{\tokHaikuRightFol}{557}
+\newcommand{\tokHaikuRightNotFol}{503}
+\newcommand{\tokHaikuRightFolDiff}{$+$55}
+\newcommand{\tokHaikuRightFolDiffCI}{[$-$54, $+$149]}
+\newcommand{\tokHaikuRightFolRows}{83}
+\newcommand{\tokHaikuRightNotFolRows}{49}
+\newcommand{\tokHaikuRightFolQ}{44}
+\newcommand{\tokHaikuWrongFol}{614}
+\newcommand{\tokHaikuWrongNotFol}{735}
+\newcommand{\tokHaikuWrongFolDiff}{$-$121}
+\newcommand{\tokHaikuWrongFolDiffCI}{[$-$189, $-$54]}
+\newcommand{\tokHaikuWrongFolRows}{163}
+\newcommand{\tokHaikuWrongNotFolRows}{92}
+\newcommand{\tokHaikuWrongFolQ}{85}
+\newcommand{\missRuns}{202}
+\newcommand{\missRows}{753,760}
+\newcommand{\missN}{1,130}
+\newcommand{\missShare}{0.15}
+\newcommand{\missCapShare}{65.7}
+\newcommand{\missCells}{939}
+\newcommand{\missCellsAbove}{49}
+\newcommand{\missTopRun}{\texttt{holdout\_gpt41\_round2}}
+\newcommand{\missTopModel}{gpt-4.1}
+\newcommand{\missTopCond}{oracle neutral flag + instr.\ (v2)}
+\newcommand{\missTopShare}{20.3}
+\newcommand{\missTopCap}{25.3}
+\newcommand{\missTopN}{300}
+\newcommand{\missAboveFour}{32}
+\newcommand{\missAboveQwen}{16}
+\newcommand{\missAboveLuna}{1}
+\newcommand{\missShareHaiku}{0.00}
+\newcommand{\missNHaiku}{1}
+\newcommand{\missRowsHaiku}{103,517}
+\newcommand{\missShareLuna}{0.02}
+\newcommand{\missNLuna}{26}
+\newcommand{\missRowsLuna}{131,397}
+\newcommand{\missShareMini}{0.01}
+\newcommand{\missNMini}{36}
+\newcommand{\missRowsMini}{434,300}
+\newcommand{\missShareTerra}{0.00}
+\newcommand{\missNTerra}{0}
+\newcommand{\missRowsTerra}{33,552}
+\newcommand{\missShareFour}{2.44}
+\newcommand{\missNFour}{685}
+\newcommand{\missRowsFour}{28,118}
+\newcommand{\missShareQwen}{2.11}
+\newcommand{\missNQwen}{382}
+\newcommand{\missRowsQwen}{18,100}
+\newcommand{\missShareSonnet}{0.00}
+\newcommand{\missNSonnet}{0}
+\newcommand{\missRowsSonnet}{4,776}
+\newcommand{\sensNeuReg}{$+$5.8}
+\newcommand{\sensNeuRegCI}{[$-$2.9, $+$14.4]}
+\newcommand{\sensNeuRegP}{0.743}
+\newcommand{\sensNeuRegN}{139}
+\newcommand{\sensNeuRegSupported}{no}
+\newcommand{\sensNeu}{$+$17.2}
+\newcommand{\sensNeuCI}{[$+$6.9, $+$27.6]}
+\newcommand{\sensNeuP}{0.007}
+\newcommand{\sensNeuN}{87}
+\newcommand{\sensNeuDropped}{52}
+\newcommand{\sensNeuSupported}{yes}
+\newcommand{\sensDirReg}{$+$25.2}
+\newcommand{\sensDirRegCI}{[$+$18.0, $+$32.4]}
+\newcommand{\sensDirRegP}{$<$0.001}
+\newcommand{\sensDirRegN}{139}
+\newcommand{\sensDirRegSupported}{yes}
+\newcommand{\sensDir}{$+$17.4}
+\newcommand{\sensDirCI}{[$+$9.3, $+$26.7]}
+\newcommand{\sensDirP}{0.001}
+\newcommand{\sensDirN}{86}
+\newcommand{\sensDirDropped}{53}
+\newcommand{\sensDirSupported}{yes}
+\newcommand{\seedTwentyThreeAll}{$-$0.1}
+\newcommand{\seedTwentyThreeK}{9}
+\newcommand{\seedTwentyThreeLo}{$-$0.4}
+\newcommand{\seedTwentyThreeHi}{$+$1.1}
+\newcommand{\seedTwentyThreeFixedLo}{$-$0.4}
+\newcommand{\seedTwentyThreeFixedHi}{$+$0.3}
+\newcommand{\seedTwentyThreeSingle}{3}
+\newcommand{\seedThirtyAAll}{$+$1.2}
+\newcommand{\seedThirtyAK}{22}
+\newcommand{\seedThirtyALo}{$+$0.5}
+\newcommand{\seedThirtyAHi}{$+$1.4}
+\newcommand{\seedThirtyAFixedLo}{$+$1.0}
+\newcommand{\seedThirtyAFixedHi}{$+$1.4}
+\newcommand{\seedThirtyASingle}{4}
+\newcommand{\seedTabSettings}{19}
+\newcommand{\seedTabSingle}{9}
+\newcommand{\seedTabCorrectSpread}{6.3}
+\newcommand{\seedTabCorrectSpreadSet}{CB one-answer, gpt-6-luna}
+\newcommand{\seedTabMisinfoSpread}{5.0}
+\newcommand{\seedTabMisinfoSpreadSet}{RAMDocs, Claude Haiku}
+\newcommand{\seedTabAbstainSpread}{2.3}
+\newcommand{\seedTabAbstainSpreadSet}{CB one-answer, gpt-6-luna}
+\newcommand{\oneWayExploN}{210}
+\newcommand{\oneWayExploChanged}{6}
+\newcommand{\oneWayExploLost}{5}
+\newcommand{\oneWayExploGained}{1}
+\newcommand{\oneWayHTwentyOneN}{16}
+\newcommand{\oneWayHTwentyOneChanged}{0}
+\newcommand{\oneWayBoldLost}{1}
+\newcommand{\oneWayBoldGained}{0}
+\newcommand{\oneWayBoldLostCell}{RAMDocs, Claude Haiku, oracle neutral flag}
+\newcommand{\oneWayBoldLostDiff}{$-$7.4}
+\newcommand{\oneWayBoldLostDiffBidir}{$-$7.9}
+\newcommand{\oneWayBoldLostP}{0.061}
+\newcommand{\oneWayBoldLostPBidir}{0.024}
+\newcommand{\stanceN}{247}
+\newcommand{\stanceCorrectYes}{68}
+\newcommand{\stanceCorrectNo}{7}
+\newcommand{\stanceCorrectUnclear}{25}
+\newcommand{\stanceMisYes}{55}
+\newcommand{\stanceMisNo}{17}
+\newcommand{\stanceMisUnclear}{28}
+\newcommand{\stanceBothN}{92}
+\newcommand{\stanceBoth}{37}
+\newcommand{\stanceNotBoth}{63}
+\newcommand{\stancePages}{494}
+\newcommand{\stanceReversedN}{60}
+\newcommand{\stanceReversed}{12}
+\newcommand{\stanceCutN}{357}
+\newcommand{\stanceCut}{72}
+\newcommand{\stanceCutChars}{4,000}
+\newcommand{\stanceTruncSrc}{356}
+\newcommand{\rgKeyKeyFlagMini}{$-$8.5}
+\newcommand{\rgKeyKeyFlagMiniCI}{[$-$13.0, $-$4.2]}
+\newcommand{\rgKeyKeyFlagLuna}{$+$33.2}
+\newcommand{\rgKeyKeyFlagLunaCI}{[$+$28.7, $+$37.8]}
+\newcommand{\rgKeyKeyFlagTerra}{$+$12.2}
+\newcommand{\rgKeyKeyFlagTerraCI}{[$+$7.8, $+$16.7]}
+\newcommand{\rgKeyKeyFlagHaiku}{$+$7.1}
+\newcommand{\rgKeyKeyFlagHaikuCI}{[$+$3.6, $+$10.8]}
+\newcommand{\rgKeyN}{294}
+\newcommand{\rgKeyGens}{4}
+\newcommand{\rgKeyAbove}{3}
+\newcommand{\rgKeyBelow}{1}
+\newcommand{\rgKeyNotRun}{Claude Sonnet}
+\newcommand{\seLooNeuK}{10}
+\newcommand{\seLooNeuLo}{$-$5.5}
+\newcommand{\seLooNeuHi}{$-$3.4}
+\newcommand{\seLooNeuLoDrop}{RAMDocs, Claude Haiku}
+\newcommand{\seLooNeuHiDrop}{RAMDocs, gpt-4.1 (minimal)}
+\newcommand{\seLooNeuExcl}{10}
+\newcommand{\seLooDirK}{10}
+\newcommand{\seLooDirLo}{$+$26.7}
+\newcommand{\seLooDirHi}{$+$31.3}
+\newcommand{\seLooDirLoDrop}{RAMDocs, gpt-6-luna}
+\newcommand{\seLooDirHiDrop}{RAMDocs, Qwen2.5-7B (multi-answer)}
+\newcommand{\seLooDirExcl}{10}
+\newcommand{\rcMultiN}{10}
+\newcommand{\rcMultiSelUp}{0}
+\newcommand{\rcMultiSelDown}{7}
+\newcommand{\rcMultiSel}{7}
+\newcommand{\rcMultiAbstUp}{0}
+\newcommand{\rcMultiAbstDown}{0}
+\newcommand{\rcMultiAbst}{0}
+\newcommand{\rcMultiMisUp}{7}
+\newcommand{\rcMultiMisDown}{1}
+\newcommand{\rcMultiMis}{8}
+\newcommand{\rcMultiStrictUp}{0}
+\newcommand{\rcMultiStrictDown}{7}
+\newcommand{\rcMultiStrict}{7}
+\newcommand{\rcMinimalN}{4}
+\newcommand{\rcMinimalSelUp}{0}
+\newcommand{\rcMinimalSelDown}{2}
+\newcommand{\rcMinimalSel}{2}
+\newcommand{\rcMinimalAbstUp}{4}
+\newcommand{\rcMinimalAbstDown}{0}
+\newcommand{\rcMinimalAbst}{4}
+\newcommand{\rcMinimalMisUp}{1}
+\newcommand{\rcMinimalMisDown}{1}
+\newcommand{\rcMinimalMis}{2}
+\newcommand{\rcMinimalStrictUp}{0}
+\newcommand{\rcMinimalStrictDown}{4}
+\newcommand{\rcMinimalStrict}{4}
+\newcommand{\rcSingleN}{16}
+\newcommand{\rcSingleSelUp}{5}
+\newcommand{\rcSingleSelDown}{0}
+\newcommand{\rcSingleSel}{5}
+\newcommand{\rcSingleAbstUp}{7}
+\newcommand{\rcSingleAbstDown}{2}
+\newcommand{\rcSingleAbst}{9}
+\newcommand{\rcSingleMisUp}{2}
+\newcommand{\rcSingleMisDown}{9}
+\newcommand{\rcSingleMis}{11}
+\newcommand{\rcSingleStrictUp}{4}
+\newcommand{\rcSingleStrictDown}{3}
+\newcommand{\rcSingleStrict}{7}
+\newcommand{\rcForcedN}{4}
+\newcommand{\rcForcedSelUp}{1}
+\newcommand{\rcForcedSelDown}{0}
+\newcommand{\rcForcedSel}{1}
+\newcommand{\rcForcedAbstUp}{0}
+\newcommand{\rcForcedAbstDown}{0}
+\newcommand{\rcForcedAbst}{0}
+\newcommand{\rcForcedMisUp}{0}
+\newcommand{\rcForcedMisDown}{2}
+\newcommand{\rcForcedMis}{2}
+\newcommand{\rcForcedStrictUp}{1}
+\newcommand{\rcForcedStrictDown}{0}
+\newcommand{\rcForcedStrict}{1}
+\newcommand{\rcAllN}{34}
+\newcommand{\rcAllSelUp}{6}
+\newcommand{\rcAllSelDown}{9}
+\newcommand{\rcAllSel}{15}
+\newcommand{\rcAllAbstUp}{11}
+\newcommand{\rcAllAbstDown}{2}
+\newcommand{\rcAllAbst}{13}
+\newcommand{\rcAllMisUp}{10}
+\newcommand{\rcAllMisDown}{13}
+\newcommand{\rcAllMis}{23}
+\newcommand{\rcAllStrictUp}{5}
+\newcommand{\rcAllStrictDown}{14}
+\newcommand{\rcAllStrict}{19}
+\newcommand{\mixMinMiniPlainCorrect}{20.4}
+\newcommand{\mixMinMiniPlainMisinfo}{29.3}
+\newcommand{\mixMinMiniPlainAbstain}{7.2}
+\newcommand{\mixMinMiniPlainOther}{43.2}
+\newcommand{\mixMinMiniFlagCorrect}{15.1}
+\newcommand{\mixMinMiniFlagMisinfo}{28.5}
+\newcommand{\mixMinMiniFlagAbstain}{23.0}
+\newcommand{\mixMinMiniFlagOther}{33.3}
+\newcommand{\mixMinMiniMisinfoDiff}{$-$0.7}
+\newcommand{\mixMinMiniMisinfoDiffCI}{[$-$7.2, $+$5.5]}
+\newcommand{\mixMinMiniAbstainDiff}{$+$16.1}
+\newcommand{\mixMinMiniAbstainDiffCI}{[$+$11.0, $+$21.6]}
+\newcommand{\mixMinFourPlainCorrect}{33.6}
+\newcommand{\mixMinFourPlainMisinfo}{29.0}
+\newcommand{\mixMinFourPlainAbstain}{2.4}
+\newcommand{\mixMinFourPlainOther}{35.0}
+\newcommand{\mixMinFourFlagCorrect}{22.5}
+\newcommand{\mixMinFourFlagMisinfo}{41.2}
+\newcommand{\mixMinFourFlagAbstain}{6.5}
+\newcommand{\mixMinFourFlagOther}{29.7}
+\newcommand{\mixMinFourMisinfoDiff}{$+$12.2}
+\newcommand{\mixMinFourMisinfoDiffCI}{[$+$5.5, $+$19.2]}
+\newcommand{\mixMinFourAbstainDiff}{$+$4.1}
+\newcommand{\mixMinFourAbstainDiffCI}{[$+$0.7, $+$7.9]}
+\newcommand{\mixMinQwenPlainCorrect}{17.3}
+\newcommand{\mixMinQwenPlainMisinfo}{38.1}
+\newcommand{\mixMinQwenPlainAbstain}{8.6}
+\newcommand{\mixMinQwenPlainOther}{36.0}
+\newcommand{\mixMinQwenFlagCorrect}{11.5}
+\newcommand{\mixMinQwenFlagMisinfo}{42.4}
+\newcommand{\mixMinQwenFlagAbstain}{19.4}
+\newcommand{\mixMinQwenFlagOther}{26.6}
+\newcommand{\mixMinQwenMisinfoDiff}{$+$4.3}
+\newcommand{\mixMinQwenMisinfoDiffCI}{[$-$2.9, $+$11.5]}
+\newcommand{\mixMinQwenAbstainDiff}{$+$10.1}
+\newcommand{\mixMinQwenAbstainDiffCI}{[$+$4.3, $+$16.5]}
+\newcommand{\cleanTypeDet}{gpt-4o-mini}
+\newcommand{\cleanTypeK}{6}
+\newcommand{\cleanTypeRateSeveral}{81.7}
+\newcommand{\cleanTypeRateSeveralCI}{[74.0, 88.5]}
+\newcommand{\cleanTypeNSeveral}{104}
+\newcommand{\cleanTypeFlagsSeveral}{1.27}
+\newcommand{\cleanTypeEffSeveral}{$+$1.1}
+\newcommand{\cleanTypeEffSeveralCI}{[$-$1.0, $+$3.2]}
+\newcommand{\cleanTypeRateOne}{50.0}
+\newcommand{\cleanTypeRateOneCI}{[31.8, 68.2]}
+\newcommand{\cleanTypeNOne}{22}
+\newcommand{\cleanTypeFlagsOne}{0.59}
+\newcommand{\cleanTypeEffOne}{$+$1.0}
+\newcommand{\cleanTypeEffOneCI}{[$-$1.5, $+$4.0]}
+\newcommand{\pvN}{31}
+\newcommand{\pvOneNeg}{24}
+\newcommand{\pvOneSigNeg}{12}
+\newcommand{\pvOneSigPos}{3}
+\newcommand{\pvFiveNeg}{22}
+\newcommand{\pvFiveSigNeg}{11}
+\newcommand{\pvFiveSigPos}{3}
+\newcommand{\pvTwentyNeg}{17}
+\newcommand{\pvTwentySigNeg}{6}
+\newcommand{\pvTwentySigPos}{5}
+\newcommand{\pvFiftyNeg}{9}
+\newcommand{\pvFiftySigNeg}{4}
+\newcommand{\pvFiftySigPos}{13}
+\newcommand{\pvFiveCbN}{18}
+\newcommand{\pvFiveCbNeg}{15}
+\newcommand{\pvFiveCbSigNeg}{8}
+\newcommand{\pvFiveCbSigPos}{2}
+\newcommand{\pvFiveRdN}{8}
+\newcommand{\pvFiveRdNeg}{6}
+\newcommand{\pvFiveRdSigNeg}{3}
+\newcommand{\pvFiveRdSigPos}{0}
+\newcommand{\pvFiveRgN}{5}
+\newcommand{\pvFiveRgNeg}{1}
+\newcommand{\pvFiveRgSigNeg}{0}
+\newcommand{\pvFiveRgSigPos}{1}
+\newcommand{\pvBeN}{17}
+\newcommand{\pvHelpsAll}{7}
+\newcommand{\pvHurtsAll}{7}
+\newcommand{\pvBeMin}{2}
+\newcommand{\pvBeMinSet}{RAMDocs, gpt-6.1-terra}
+\newcommand{\pvBeMedian}{22}
+\newcommand{\pvBeMax}{74}
+\newcommand{\pvBeMaxSet}{RAMDocs, gpt-4o-mini (minimal)}
+\newcommand{\pvBeCapped}{4}
+\newcommand{\pvBeCbN}{9}
+\newcommand{\pvBeCbMin}{5}
+\newcommand{\pvBeCbMax}{45}
+\newcommand{\pvBeRdN}{7}
+\newcommand{\pvBeRdMin}{2}
+\newcommand{\pvBeRdMax}{74}
+\newcommand{\pvBeRgN}{1}
+\newcommand{\pvBeRgMin}{30}
+\newcommand{\pvBeRgMax}{30}
+\newcommand{\hFourBRho}{$-$0.08}
+\newcommand{\hFourBP}{0.75}
+\newcommand{\hFourBPOne}{0.38}
+\newcommand{\hFourBPerm}{10,000}
+\newcommand{\hFourBBcaCI}{[$-$0.32, $+$0.01]}
+\newcommand{\hFourBPctCI}{[$-$0.56, $-$0.02]}
+\newcommand{\hFourBPctSameCI}{[$-$0.57, $-$0.02]}
+\newcommand{\hFourBZ}{0.52}
+\newcommand{\hFourBBelow}{70}
+\newcommand{\hFourBN}{18}
+\newcommand{\hFourBQ}{127}
+\newcommand{\scJudgeOnlyOracleDir}{8.7}
+\newcommand{\scMatcherOnlyOracleDir}{0.9}
+\newcommand{\scAgreeOracleDir}{90.4}
+\newcommand{\scNOracleDir}{5,133}
+\newcommand{\scJudgeOnlyAnswerKey}{6.7}
+\newcommand{\scMatcherOnlyAnswerKey}{1.4}
+\newcommand{\scAgreeAnswerKey}{92.0}
+\newcommand{\scNAnswerKey}{5,059}
+\newcommand{\scJudgeOnlyLlmDir}{2.9}
+\newcommand{\scMatcherOnlyLlmDir}{0.5}
+\newcommand{\scAgreeLlmDir}{96.5}
+\newcommand{\scNLlmDir}{6,821}
+\newcommand{\scJudgeOnlyVerdictKey}{2.4}
+\newcommand{\scMatcherOnlyVerdictKey}{0.8}
+\newcommand{\scAgreeVerdictKey}{96.9}
+\newcommand{\scNVerdictKey}{6,191}
+\newcommand{\cbClosedMin}{4.3}
+\newcommand{\cbClosedMinGen}{Qwen2.5-7B}
+\newcommand{\cbClosedMax}{20.0}
+\newcommand{\cbClosedMaxGen}{gpt-4.1 and gpt-6.1-terra}
+\newcommand{\cbClosedN}{6}
+\newcommand{\deferPlainMini}{51.1}
+\newcommand{\deferPlainLuna}{53.8}
+\newcommand{\deferPlainHaiku}{66.8}
+\newcommand{\deferPlainTerra}{69.7}
 \newcommand{\adOracleFlagAll}{3.1}
 \newcommand{\adOracleFlagConf}{6.7}
 \newcommand{\adOracleDirAll}{6.2}
@@ -12042,3 +12840,90 @@
 \newcommand{\ajdTwentyThreeJ}{2.5}
 \newcommand{\ajdTwentyThreeM}{0.1}
 \newcommand{\ajdTwentyThreeShift}{2.6}
+\newcommand{\apriorSsMiniDiff}{18.7}
+\newcommand{\apriorDirMiniDiff}{18.7}
+\newcommand{\apriorSsFourDiff}{9.4}
+\newcommand{\apriorDirFourDiff}{9.4}
+\newcommand{\apriorSsLunaDiff}{6.0}
+\newcommand{\apriorDirLunaDiff}{15.5}
+\newcommand{\apriorSsTerraDiff}{3.2}
+\newcommand{\apriorDirTerraDiff}{12.3}
+\newcommand{\apriorSsHaikuDiff}{14.1}
+\newcommand{\apriorDirHaikuDiff}{17.6}
+\newcommand{\apriorSsDiffMin}{3.2}
+\newcommand{\apriorSsDiffMax}{18.7}
+\newcommand{\apriorDirDiffMin}{9.4}
+\newcommand{\apriorDirDiffMax}{18.7}
+\newcommand{\aprFolRDiffMini}{32}
+\newcommand{\aprFolWDiffMini}{16}
+\newcommand{\aprFolRDiffLuna}{29}
+\newcommand{\aprFolWDiffLuna}{2}
+\newcommand{\aprFolRDiffHaiku}{38}
+\newcommand{\aprFolWDiffHaiku}{31}
+\newcommand{\aprFolRDiffTerra}{37}
+\newcommand{\aprFolWDiffTerra}{7}
+\newcommand{\acondMaeChangeAll}{0.03}
+\newcommand{\acondMaeChangeOwn}{0.04}
+\newcommand{\acondMaeChangeTransfer}{0.03}
+\newcommand{\aacctMargDiff}{0.4}
+\newcommand{\aacctCommonDiff}{0.2}
+\newcommand{\aacctHarmTerraMiniPred}{3.1}
+\newcommand{\aacctHarmTerraMiniObs}{4.0}
+\newcommand{\aacctHarmTerraQwenPred}{10.1}
+\newcommand{\aacctHarmTerraQwenObs}{8.3}
+\newcommand{\aacctSelConflict}{0.1}
+\newcommand{\aacctSelClean}{0.9}
+\newcommand{\aacctSelMaxErr}{7.7}
+\newcommand{\aacctSelMaxErrClean}{6.4}
+\newcommand{\aterraDrawRegRight}{17.6}
+\newcommand{\aterraDrawRegWrong}{64.5}
+\newcommand{\aterraDrawAltRight}{17.0}
+\newcommand{\aterraDrawAltWrong}{70.9}
+\newcommand{\atokTerraDiff}{54}
+\newcommand{\atokTerraRightDiff}{55}
+\newcommand{\atokTerraWrongDiff}{51}
+\newcommand{\atokTerraRightFolDiff}{69}
+\newcommand{\atokTerraWrongFolDiff}{47}
+\newcommand{\atokLunaDiff}{121}
+\newcommand{\atokLunaRightDiff}{142}
+\newcommand{\atokLunaWrongDiff}{96}
+\newcommand{\atokLunaRightFolDiff}{27}
+\newcommand{\atokLunaWrongFolDiff}{94}
+\newcommand{\atokHaikuDiff}{47}
+\newcommand{\atokHaikuRightDiff}{121}
+\newcommand{\atokHaikuWrongDiff}{36}
+\newcommand{\atokHaikuRightFolDiff}{55}
+\newcommand{\atokHaikuWrongFolDiff}{121}
+\newcommand{\asensNeuReg}{5.8}
+\newcommand{\asensNeu}{17.2}
+\newcommand{\asensDirReg}{25.2}
+\newcommand{\asensDir}{17.4}
+\newcommand{\aseedTwentyThreeAll}{0.1}
+\newcommand{\aseedTwentyThreeLo}{0.4}
+\newcommand{\aseedTwentyThreeHi}{1.1}
+\newcommand{\aseedTwentyThreeFixedLo}{0.4}
+\newcommand{\aseedTwentyThreeFixedHi}{0.3}
+\newcommand{\aseedThirtyAAll}{1.2}
+\newcommand{\aseedThirtyALo}{0.5}
+\newcommand{\aseedThirtyAHi}{1.4}
+\newcommand{\aseedThirtyAFixedLo}{1.0}
+\newcommand{\aseedThirtyAFixedHi}{1.4}
+\newcommand{\aoneWayBoldLostDiff}{7.4}
+\newcommand{\aoneWayBoldLostDiffBidir}{7.9}
+\newcommand{\argKeyKeyFlagMini}{8.5}
+\newcommand{\argKeyKeyFlagLuna}{33.2}
+\newcommand{\argKeyKeyFlagTerra}{12.2}
+\newcommand{\argKeyKeyFlagHaiku}{7.1}
+\newcommand{\aseLooNeuLo}{5.5}
+\newcommand{\aseLooNeuHi}{3.4}
+\newcommand{\aseLooDirLo}{26.7}
+\newcommand{\aseLooDirHi}{31.3}
+\newcommand{\amixMinMiniMisinfoDiff}{0.7}
+\newcommand{\amixMinMiniAbstainDiff}{16.1}
+\newcommand{\amixMinFourMisinfoDiff}{12.2}
+\newcommand{\amixMinFourAbstainDiff}{4.1}
+\newcommand{\amixMinQwenMisinfoDiff}{4.3}
+\newcommand{\amixMinQwenAbstainDiff}{10.1}
+\newcommand{\acleanTypeEffSeveral}{1.1}
+\newcommand{\acleanTypeEffOne}{1.0}
+\newcommand{\ahFourBRho}{0.08}

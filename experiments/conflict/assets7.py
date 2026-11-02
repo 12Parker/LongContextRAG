@@ -83,7 +83,7 @@ def numbers7(R, add):
         if t:
             add(f"prev{nm}Five", _pt(t["pi0.05"], True)); add(f"prev{nm}Twenty", _pt(t["pi0.20"], True))
             add(f"prev{nm}Clean", _pt(t["clean"], True)); add(f"prev{nm}Conf", _pt(t["conflict"], True))
-            add(f"prev{nm}Be", "--" if not t["breakeven_pi"] or t["breakeven_pi"] > 1 else pct(t["breakeven_pi"], nd=0))
+            add(f"prev{nm}Be", "--" if t["breakeven_pi"] is None or t["breakeven_pi"] > 1 else pct(t["breakeven_pi"], nd=0))
     llm = [t for k, t in pv.items() if k.endswith("|llm_dir+flag_directional")]
     if llm:
         add("prevN", len(llm)); add("prevNegFive", sum(t["pi0.05"] < 0 for t in llm)); add("prevPosFive", sum(t["pi0.05"] > 0 for t in llm))
@@ -154,7 +154,7 @@ def tab_prevalence7(R, out: Path):
     for key in sorted(k for k in pv if k.endswith("|llm_dir+flag_directional")):
         set_, cond = key.rsplit("|", 1)
         t = pv[key]
-        be = "--" if not t["breakeven_pi"] or t["breakeven_pi"] > 1 else pct(t["breakeven_pi"], nd=0)
+        be = "--" if t["breakeven_pi"] is None or t["breakeven_pi"] > 1 else pct(t["breakeven_pi"], nd=0)
         lines.append(f"{_lab(set_)} & {_pt(t['conflict'], True)} & {_pt(t['clean'], True)} & "
                      f"{_pt(t['pi0.05'], True)} & {_pt(t['pi0.20'], True)} & {be} \\\\")
     (out / "tab_prevalence.tex").write_text(r"""\begin{table}[t]

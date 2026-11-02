@@ -1,0 +1,60 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrrrrr@{}}
+\toprule
+& \multicolumn{2}{c}{Coverage} & \multicolumn{2}{c}{Selective accuracy} & \multicolumn{2}{c}{Misinformation} & \multicolumn{2}{c}{Strict accuracy} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+Setting & No flag & Flag & No flag & Flag & No flag & Flag & No flag & Flag \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Answer policy: multi-answer}} \\
+ConflictBank, gpt-4o-mini & 99.7 & 99.1\phantom{$^\dagger$} & 21.4 & 12.8$^\dagger$ & 69.0 & 78.1$^\dagger$ & 21.6 & 12.8$^\dagger$ \\
+ConflictBank, gpt-4.1 & 99.3 & 99.7\phantom{$^\dagger$} & 13.1 & 6.7$^\dagger$ & 79.7 & 88.3$^\dagger$ & 13.0 & 6.7$^\dagger$ \\
+ConflictBank, Qwen2.5-7B & 94.0 & 95.0\phantom{$^\dagger$} & 24.1 & 14.0$^\dagger$ & 66.3 & 77.7$^\dagger$ & 23.7 & 15.3$^\dagger$ \\
+RAMDocs, gpt-4o-mini & 96.6 & 95.0\phantom{$^\dagger$} & 22.8 & 16.2$^\dagger$ & 43.9 & 57.6$^\dagger$ & 22.1 & 15.3$^\dagger$ \\
+RAMDocs, gpt-4.1 & 98.3 & 98.3\phantom{$^\dagger$} & 22.2 & 13.4$^\dagger$ & 55.4 & 69.8$^\dagger$ & 21.8 & 13.2$^\dagger$ \\
+RAMDocs, Qwen2.5-7B & 84.2 & 82.0\phantom{$^\dagger$} & 21.4 & 14.0$^\dagger$ & 45.3 & 65.5$^\dagger$ & 19.4 & 13.7$^\dagger$ \\
+RAMDocs, gpt-6-luna & 98.8 & 99.3\phantom{$^\dagger$} & 14.6 & 11.4$^\dagger$ & 68.6 & 73.4$^\dagger$ & 14.4 & 11.3$^\dagger$ \\
+RAMDocs, gpt-6.1-terra & 97.8 & 98.6\phantom{$^\dagger$} & 11.0 & 10.2\phantom{$^\dagger$} & 73.4 & 77.0\phantom{$^\dagger$} & 10.8 & 10.1\phantom{$^\dagger$} \\
+RAMDocs, Claude Haiku & 97.8 & 97.8\phantom{$^\dagger$} & 25.7 & 27.0\phantom{$^\dagger$} & 53.5 & 46.0$^\dagger$ & 25.2 & 26.4\phantom{$^\dagger$} \\
+RAMDocs, Claude Sonnet & 97.8 & 97.8\phantom{$^\dagger$} & 46.3 & 46.3\phantom{$^\dagger$} & 23.7 & 21.6\phantom{$^\dagger$} & 45.3 & 45.3\phantom{$^\dagger$} \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Answer policy: minimal skeleton (no stated policy)}} \\
+ConflictBank, gpt-4o-mini & 96.8 & 67.6$^\dagger$ & 36.2 & 25.0$^\dagger$ & 49.6 & 43.4$^\dagger$ & 35.0 & 16.9$^\dagger$ \\
+RAMDocs, gpt-4o-mini & 92.6 & 76.5$^\dagger$ & 22.0 & 19.7\phantom{$^\dagger$} & 29.3 & 28.5\phantom{$^\dagger$} & 20.4 & 15.1$^\dagger$ \\
+RAMDocs, gpt-4.1 & 97.6 & 93.5$^\dagger$ & 34.4 & 24.1$^\dagger$ & 29.0 & 41.2$^\dagger$ & 33.6 & 22.5$^\dagger$ \\
+RAMDocs, Qwen2.5-7B & 89.9 & 79.9$^\dagger$ & 18.4 & 14.4\phantom{$^\dagger$} & 38.1 & 42.4\phantom{$^\dagger$} & 17.3 & 11.5$^\dagger$ \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Answer policy: one answer, ``unknown'' allowed}} \\
+ConflictBank, gpt-4o-mini & 93.3 & 59.0$^\dagger$ & 54.8 & 55.0\phantom{$^\dagger$} & 30.9 & 17.2$^\dagger$ & 51.1 & 32.4$^\dagger$ \\
+ConflictBank, gpt-4.1 & 98.3 & 86.0$^\dagger$ & 65.8 & 65.9\phantom{$^\dagger$} & 27.3 & 21.3$^\dagger$ & 64.7 & 56.7$^\dagger$ \\
+ConflictBank, Qwen2.5-7B & 95.0 & 85.0$^\dagger$ & 53.0 & 55.3\phantom{$^\dagger$} & 35.0 & 28.7$^\dagger$ & 50.3 & 47.0\phantom{$^\dagger$} \\
+ConflictBank, gpt-6-luna & 88.1 & 71.1$^\dagger$ & 60.8 & 62.0\phantom{$^\dagger$} & 23.7 & 17.0$^\dagger$ & 53.6 & 44.1$^\dagger$ \\
+ConflictBank, gpt-6.1-terra & 98.3 & 95.3$^\dagger$ & 74.2 & 74.1\phantom{$^\dagger$} & 17.7 & 15.3\phantom{$^\dagger$} & 73.0 & 70.7\phantom{$^\dagger$} \\
+ConflictBank, Claude Haiku & 98.8 & 99.1\phantom{$^\dagger$} & 67.6 & 68.0\phantom{$^\dagger$} & 21.8 & 21.6\phantom{$^\dagger$} & 66.8 & 67.4\phantom{$^\dagger$} \\
+ConflictBank, Claude Sonnet & 99.0 & 98.3\phantom{$^\dagger$} & 76.4 & 80.0$^\dagger$ & 15.7 & 11.7$^\dagger$ & 75.7 & 78.7\phantom{$^\dagger$} \\
+CB majority, gpt-4o-mini & 96.8 & 73.2$^\dagger$ & 22.3 & 31.0$^\dagger$ & 63.1 & 39.6$^\dagger$ & 21.6 & 22.7\phantom{$^\dagger$} \\
+CB majority, gpt-6-luna & 95.8 & 88.3$^\dagger$ & 31.1 & 41.1$^\dagger$ & 58.3 & 43.1$^\dagger$ & 29.8 & 36.3$^\dagger$ \\
+CB majority, gpt-6.1-terra & 99.0 & 99.3\phantom{$^\dagger$} & 26.3 & 22.5\phantom{$^\dagger$} & 65.0 & 70.7$^\dagger$ & 26.0 & 22.3\phantom{$^\dagger$} \\
+CB majority, Claude Haiku & 98.9 & 99.1\phantom{$^\dagger$} & 31.3 & 35.7$^\dagger$ & 57.8 & 54.1$^\dagger$ & 31.0 & 35.3$^\dagger$ \\
+RAGuard, gpt-4o-mini & 67.9 & 67.7\phantom{$^\dagger$} & 54.1 & 59.0$^\dagger$ & 31.2 & 27.8$^\dagger$ & 36.7 & 39.9$^\dagger$ \\
+RAGuard, gpt-6-luna & 43.2 & 44.3\phantom{$^\dagger$} & 53.8 & 52.4\phantom{$^\dagger$} & 20.0 & 21.1\phantom{$^\dagger$} & 23.2 & 23.2\phantom{$^\dagger$} \\
+RAGuard, gpt-6.1-terra & 39.1 & 43.9$^\dagger$ & 63.5 & 62.0\phantom{$^\dagger$} & 14.3 & 16.7\phantom{$^\dagger$} & 24.8 & 27.2\phantom{$^\dagger$} \\
+RAGuard, Claude Haiku & 42.4 & 44.9\phantom{$^\dagger$} & 57.8 & 55.3\phantom{$^\dagger$} & 17.9 & 20.1$^\dagger$ & 24.5 & 24.8\phantom{$^\dagger$} \\
+RAGuard, Claude Sonnet & 39.8 & 46.3$^\dagger$ & 68.4 & 68.4\phantom{$^\dagger$} & 12.6 & 14.6\phantom{$^\dagger$} & 27.2 & 31.6$^\dagger$ \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Answer policy: one answer, forced}} \\
+ConflictBank, gpt-4o-mini & 99.9 & 99.6\phantom{$^\dagger$} & 55.5 & 55.5\phantom{$^\dagger$} & 31.6 & 31.2\phantom{$^\dagger$} & 55.4 & 55.2\phantom{$^\dagger$} \\
+ConflictBank, gpt-6-luna & 100.0 & 100.0\phantom{$^\dagger$} & 64.6 & 66.1\phantom{$^\dagger$} & 25.3 & 21.4$^\dagger$ & 64.6 & 66.1\phantom{$^\dagger$} \\
+ConflictBank, gpt-6.1-terra & 100.0 & 100.0\phantom{$^\dagger$} & 77.7 & 77.3\phantom{$^\dagger$} & 14.0 & 12.7\phantom{$^\dagger$} & 77.7 & 77.3\phantom{$^\dagger$} \\
+ConflictBank, Claude Haiku & 100.0 & 100.0\phantom{$^\dagger$} & 69.3 & 73.2$^\dagger$ & 20.6 & 16.4$^\dagger$ & 69.3 & 73.2$^\dagger$ \\
+\bottomrule
+\end{tabular}
+\caption{Risk--coverage operating points on conflict questions (PR\S20.4 R16, exploratory; 34 settings):
+no flag against the oracle neutral flag, in \%. \emph{Coverage}: 1 $-$ abstention; \emph{Selective accuracy}: correct
+responses over answered (non-abstaining) responses, summed over questions and seeds; \emph{Misinformation}: share of responses containing
+a wrong answer as a whole-word span; \emph{Strict accuracy}: one-way strict. All four use the one-way matcher (PR\S20.3
+R12). $^\dagger$: the paired question-bootstrap 95\% CI of the change excludes zero (unadjusted). The minimal skeleton
+states no answer policy. Figure~\ref{fig:riskcov} plots the coverage and selective-accuracy columns.}
+\label{tab:riskcov}
+\end{table*}

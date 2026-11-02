@@ -78,7 +78,8 @@ H11 & Qwen2.5-7B: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$9.4 [
 H11 & Qwen2.5-7B: oracle+remove\_suspect $>$ plain (conflict) & $+$18.0 [$+$10.8, $+$25.2] & $<$0.001 ($<$0.001) & supported & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the first addendum (\S9; H10--H11), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S9 (H10--H11), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -121,7 +122,8 @@ H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs astute (all questions) & $-$3.
 H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs trustrag (all questions) & $+$0.8 [$-$3.9, $+$5.6] & 0.761 (0.844) & n.s. & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the second (\S10; H12--H14), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S10 (H12--H14), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -168,7 +170,8 @@ H19 & ConflictBank, gpt-6-luna: neutral flag vs plain (conflict) & $-$9.4 [$-$12
 H19 & ConflictBank, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$45.9 [$+$40.8, $+$50.9] & $<$0.001 ($<$0.001) & supported & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the third and fourth (\S11--\S12; H15--H19) (part 1 of 2), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S11--PR\S12 (H15--H19) (part 1 of 2), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -199,7 +202,8 @@ H19 & CB majority, gpt-6.1-terra: dir. flag $>$ plain (conflict) & $+$66.3 [$+$6
 H19 & CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict) & $+$9.0 [$+$3.3, $+$14.7] & 0.019 (0.008) & significant & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the third and fourth (\S11--\S12; H15--H19) (part 2 of 2), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S11--PR\S12 (H15--H19) (part 2 of 2), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -244,7 +248,8 @@ H23 & ConflictBank, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$5.3 [$+
 H23 & ConflictBank, gpt-6-luna: dir. flag vs answer key (conflict) & $+$0.1 [$-$1.6, $+$1.8] & 1.000 (1.000) & n.s. & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 1 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 1 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -289,7 +294,8 @@ H26 & RAGuard, gpt-6-luna: dir. flag $>$ plain (conflict) & $+$8.8 [$+$5.7, $+$1
 H26 & RAGuard, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$8.8 [$+$5.7, $+$12.2] & $<$0.001 ($<$0.001) & supported & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 2 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 2 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -333,7 +339,8 @@ H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, misinformation ra
 H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, misinformation rate (conflict) & $-$24.9 [$-$29.7, $-$20.1] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 3 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 3 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -376,7 +383,8 @@ H21 & ConflictBank, gpt-6-luna: neutral flag vs plain, selective accuracy (ratio
 H21 & ConflictBank, gpt-6-luna: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$29.9 [$+$25.0, $+$34.7] & 0.002 ($<$0.001) & significant & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 4 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 4 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -408,7 +416,8 @@ H24 & gain rises with detector-minus-generator reliability, Spearman over 30 cel
 H24 & per-question slope of gain on reliability gap, within cells & $+$47.6 [$+$43.2, $+$51.9] & $<$0.001 & supported & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the fifth and sixth (\S13--\S14; H20--H26) (part 5 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 5 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -451,7 +460,8 @@ H27 & gpt-6-luna, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$8.2
 H27 & gpt-6-luna, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $-$5.8 [$-$10.6, $-$1.0] & 0.279 (0.036) & n.s. & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 1 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S15 (H27--H29) (part 1 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -494,7 +504,8 @@ H27 & gpt-6-luna, detector claude-haiku-5-5: hint vs plain (conflict) & $+$9.4 [
 H27 & gpt-6-luna, detector claude-sonnet-5-5: hint vs plain (conflict) & $+$14.2 [$+$10.4, $+$18.2] & $<$0.001 ($<$0.001) & significant & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 2 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S15 (H27--H29) (part 2 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -537,7 +548,8 @@ H27 & gpt-4o-mini, detector gpt-4.1: cell vs detector model alone (conflict) & $
 H27 & gpt-4o-mini, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$8.4 [$+$3.2, $+$13.8] & 0.021 (0.003) & significant & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 3 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S15 (H27--H29) (part 3 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -581,7 +593,8 @@ H28 & RAMDocs ambiguity, gpt-6-luna: LLM dir. flag vs plain, gold recall & $-$8.
 H28 & RAMDocs ambiguity, gpt-6-luna: LLM removal vs plain, gold recall & $-$20.3 [$-$25.0, $-$15.7] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 4 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S15 (H27--H29) (part 4 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -615,7 +628,8 @@ H29 & gpt-6-luna detector, reversed order: gpt-4o-mini's gain vs original & $-$4
 H29 & gpt-6-luna detector, paraphrased: gpt-4o-mini's gain vs original & $-$1.2 [$-$5.1, $+$2.7] & 1.000 (0.680) & n.s. & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the seventh (\S15; H27--H29) (part 5 of 5), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S15 (H27--H29) (part 5 of 5), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -658,7 +672,8 @@ H30 & Qwen2.5-7B, detector gpt-6-luna: verdict key vs hint (conflict) & $+$1.7 [
 H30 & Qwen2.5-7B, detector gpt-6.1-terra: verdict key vs hint (conflict) & $-$7.3 [$-$12.7, $-$2.3] & 0.095 (0.015) & n.s. & yes \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the eighth (\S16; H30--H31) (part 1 of 3), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S16 (H30--H31) (part 1 of 3), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -702,7 +717,8 @@ H31 & claude-haiku-5-5: wrong-flag effect (conflict) & $-$49.2 [$-$56.5, $-$42.1
 H31 & gpt-6.1-terra: wrong-flag effect (conflict) & $-$64.5 [$-$72.3, $-$56.0] & $<$0.001 ($<$0.001) & supported & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the eighth (\S16; H30--H31) (part 2 of 3), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S16 (H30--H31) (part 2 of 3), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}
@@ -723,7 +739,8 @@ H31 & claude-haiku-5-5: right-flag effect + wrong-flag effect (conflict) & $-$25
 H31 & gpt-6.1-terra: right-flag effect + wrong-flag effect (conflict) & $-$46.9 [$-$57.1, $-$36.4] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
 \end{tabular}
-\caption{Pre-registered tests added in the eighth (\S16; H30--H31) (part 3 of 3), each committed before the runs it covers. Same conventions as
+\caption{Pre-registered tests added in PR\S16 (H30--H31) (part 3 of 3), registered before the runs they cover (times and exceptions in
+Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
 single-answer prompt unless marked \emph{forced}; \emph{CB majority} has three wrong-side passages per conflict
 question; RAGuard's misleading posts are real Reddit text.}

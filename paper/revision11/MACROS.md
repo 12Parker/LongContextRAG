@@ -1,0 +1,867 @@
+# PR§20 macros (numbers11, experiments/conflict/assets11.py)
+
+Generated from R["rev"]["r11"] (rev11_* modules) and stored R["rev"] results; every R-number is exploratory (PR§20). Values are as generated into numbers.tex. Signed values carry a real minus/plus (`$-$`, `$+$`); paper_assets.numbers also emits an unsigned twin `\a<name>` for every signed macro whose name does not end in CI. Percentages are written without the % sign. "Significant" in the paper means Holm-adjusted; counts below that use a 95% CI are labelled as such.
+
+## R1 passage-only text classifier (ConflictBank)
+
+- `\clfFullEval` = `1.000` — pairwise accuracy (full passages, eval set conflict items): share where the misinformation passage gets the higher P(false)
+- `\clfFullEvalCI` = `[1.000, 1.000]` — 95% item-bootstrap CI of clfFullEval
+- `\clfFullEvalPoint` = `0.992` — pointwise accuracy (each passage classified alone; full passages, eval set)
+- `\clfFullEvalPMis` = `0.94` — mean P(false) on misinformation passages (full passages, eval set)
+- `\clfFullEvalPCor` = `0.07` — mean P(false) on correct passages (full passages, eval set)
+- `\clfFullEvalNnMax` = `0.78` — max TF-IDF cosine of a eval set passage to its nearest training passage (full passages)
+- `\clfFullEvalNnHigh` = `0` — eval set items with a nearest-training cosine >= 0.8 (full passages)
+- `\clfFullFresh` = `1.000` — pairwise accuracy (full passages, ConflictBank-fresh conflict items): share where the misinformation passage gets the higher P(false)
+- `\clfFullFreshCI` = `[1.000, 1.000]` — 95% item-bootstrap CI of clfFullFresh
+- `\clfFullFreshPoint` = `0.993` — pointwise accuracy (each passage classified alone; full passages, ConflictBank-fresh)
+- `\clfFullFreshPMis` = `0.95` — mean P(false) on misinformation passages (full passages, ConflictBank-fresh)
+- `\clfFullFreshPCor` = `0.07` — mean P(false) on correct passages (full passages, ConflictBank-fresh)
+- `\clfFullFreshNnMax` = `0.90` — max TF-IDF cosine of a ConflictBank-fresh passage to its nearest training passage (full passages)
+- `\clfFullFreshNnHigh` = `1` — ConflictBank-fresh items with a nearest-training cosine >= 0.8 (full passages)
+- `\clfFullTrainAcc` = `0.999` — training accuracy (full passages)
+- `\clfMaskEval` = `1.000` — pairwise accuracy (each passage's own object masked, eval set conflict items): share where the misinformation passage gets the higher P(false)
+- `\clfMaskEvalCI` = `[1.000, 1.000]` — 95% item-bootstrap CI of clfMaskEval
+- `\clfMaskEvalPoint` = `0.988` — pointwise accuracy (each passage classified alone; each passage's own object masked, eval set)
+- `\clfMaskEvalPMis` = `0.94` — mean P(false) on misinformation passages (each passage's own object masked, eval set)
+- `\clfMaskEvalPCor` = `0.08` — mean P(false) on correct passages (each passage's own object masked, eval set)
+- `\clfMaskEvalNnMax` = `0.77` — max TF-IDF cosine of a eval set passage to its nearest training passage (each passage's own object masked)
+- `\clfMaskEvalNnHigh` = `0` — eval set items with a nearest-training cosine >= 0.8 (each passage's own object masked)
+- `\clfMaskFresh` = `1.000` — pairwise accuracy (each passage's own object masked, ConflictBank-fresh conflict items): share where the misinformation passage gets the higher P(false)
+- `\clfMaskFreshCI` = `[1.000, 1.000]` — 95% item-bootstrap CI of clfMaskFresh
+- `\clfMaskFreshPoint` = `0.983` — pointwise accuracy (each passage classified alone; each passage's own object masked, ConflictBank-fresh)
+- `\clfMaskFreshPMis` = `0.95` — mean P(false) on misinformation passages (each passage's own object masked, ConflictBank-fresh)
+- `\clfMaskFreshPCor` = `0.08` — mean P(false) on correct passages (each passage's own object masked, ConflictBank-fresh)
+- `\clfMaskFreshNnMax` = `0.86` — max TF-IDF cosine of a ConflictBank-fresh passage to its nearest training passage (each passage's own object masked)
+- `\clfMaskFreshNnHigh` = `1` — ConflictBank-fresh items with a nearest-training cosine >= 0.8 (each passage's own object masked)
+- `\clfMaskTrainAcc` = `0.998` — training accuracy (each passage's own object masked)
+- `\clfN` = `300` — eval conflict items scored (pairs)
+- `\clfNFresh` = `300` — ConflictBank-fresh conflict items scored (pairs)
+- `\clfTrainRows` = `124,769` — QA_dataset rows used for training (subjects used by neither eval nor fresh)
+- `\clfTrainPassages` = `249,538` — training passages (two per row)
+- `\clfExclSubjects` = `1,400` — subjects excluded from training (used by eval or fresh)
+- `\clfIdentical` = `0` — training passages identical to an eval passage
+- `\clfTopFalse` = ```studies'', ``study'', ``exclusive interview''` — the three n-grams with the largest weight towards 'false' (full model)
+- `\clfTopCorrect` = ```evidence'', ``breaking news'', ``title the''` — the three n-grams with the largest weight towards 'correct' (full model)
+
+## R2 direction precision by the detector's own closed-book knowledge (ConflictBank eval; PR§20.2 calls it direction accuracy, as §11.3)
+
+- `\priorKnownQMini` = `28` — gpt-4o-mini: conflict questions it knows closed-book (PR§11.3 rule)
+- `\priorUnknownQMini` = `272` — gpt-4o-mini: conflict questions it does not know
+- `\priorSeedsMini` = `3` — gpt-4o-mini: closed-book seeds behind the known rule
+- `\priorSsMiniKnownN` = `28` — gpt-4o-mini, registered single-side estimand (flags naming exactly one side): flags on known questions (denominator)
+- `\priorSsMiniUnknownN` = `264` — gpt-4o-mini, registered single-side estimand (flags naming exactly one side): flags on unknown questions
+- `\priorSsMiniKnown` = `85.7` — gpt-4o-mini, registered single-side estimand (flags naming exactly one side): direction precision on known questions (%)
+- `\priorSsMiniKnownCI` = `[71.4, 96.8]` — 95% question-bootstrap CI
+- `\priorSsMiniUnknown` = `67.0` — gpt-4o-mini, registered single-side estimand (flags naming exactly one side): direction precision on unknown questions (%)
+- `\priorSsMiniUnknownCI` = `[61.2, 72.6]` — 95% question-bootstrap CI
+- `\priorSsMiniDiff` = `$+$18.7` — gpt-4o-mini, registered single-side estimand (flags naming exactly one side): known minus unknown (points)
+- `\priorSsMiniDiffCI` = `[$+$3.3, $+$31.9]` — 95% question-bootstrap CI
+- `\priorDirMiniKnownN` = `28` — gpt-4o-mini, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on known questions (denominator)
+- `\priorDirMiniUnknownN` = `264` — gpt-4o-mini, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on unknown questions
+- `\priorDirMiniKnown` = `85.7` — gpt-4o-mini, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on known questions (%)
+- `\priorDirMiniKnownCI` = `[71.4, 96.8]` — 95% question-bootstrap CI
+- `\priorDirMiniUnknown` = `67.0` — gpt-4o-mini, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on unknown questions (%)
+- `\priorDirMiniUnknownCI` = `[61.2, 72.6]` — 95% question-bootstrap CI
+- `\priorDirMiniDiff` = `$+$18.7` — gpt-4o-mini, PR§11.3 coding ('both' a miss, 'unclear' skipped): known minus unknown (points)
+- `\priorDirMiniDiffCI` = `[$+$3.3, $+$31.9]` — 95% question-bootstrap CI
+- `\priorKnownQFour` = `60` — gpt-4.1: conflict questions it knows closed-book (PR§11.3 rule)
+- `\priorUnknownQFour` = `240` — gpt-4.1: conflict questions it does not know
+- `\priorSeedsFour` = `1` — gpt-4.1: closed-book seeds behind the known rule
+- `\priorSsFourKnownN` = `56` — gpt-4.1, registered single-side estimand (flags naming exactly one side): flags on known questions (denominator)
+- `\priorSsFourUnknownN` = `205` — gpt-4.1, registered single-side estimand (flags naming exactly one side): flags on unknown questions
+- `\priorSsFourKnown` = `98.2` — gpt-4.1, registered single-side estimand (flags naming exactly one side): direction precision on known questions (%)
+- `\priorSsFourKnownCI` = `[93.9, 100.0]` — 95% question-bootstrap CI
+- `\priorSsFourUnknown` = `88.8` — gpt-4.1, registered single-side estimand (flags naming exactly one side): direction precision on unknown questions (%)
+- `\priorSsFourUnknownCI` = `[84.3, 93.1]` — 95% question-bootstrap CI
+- `\priorSsFourDiff` = `$+$9.4` — gpt-4.1, registered single-side estimand (flags naming exactly one side): known minus unknown (points)
+- `\priorSsFourDiffCI` = `[$+$3.6, $+$15.0]` — 95% question-bootstrap CI
+- `\priorDirFourKnownN` = `56` — gpt-4.1, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on known questions (denominator)
+- `\priorDirFourUnknownN` = `205` — gpt-4.1, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on unknown questions
+- `\priorDirFourKnown` = `98.2` — gpt-4.1, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on known questions (%)
+- `\priorDirFourKnownCI` = `[93.9, 100.0]` — 95% question-bootstrap CI
+- `\priorDirFourUnknown` = `88.8` — gpt-4.1, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on unknown questions (%)
+- `\priorDirFourUnknownCI` = `[84.3, 93.1]` — 95% question-bootstrap CI
+- `\priorDirFourDiff` = `$+$9.4` — gpt-4.1, PR§11.3 coding ('both' a miss, 'unclear' skipped): known minus unknown (points)
+- `\priorDirFourDiffCI` = `[$+$3.6, $+$15.0]` — 95% question-bootstrap CI
+- `\priorKnownQLuna` = `47` — gpt-6-luna: conflict questions it knows closed-book (PR§11.3 rule)
+- `\priorUnknownQLuna` = `253` — gpt-6-luna: conflict questions it does not know
+- `\priorSeedsLuna` = `3` — gpt-6-luna: closed-book seeds behind the known rule
+- `\priorSsLunaKnownN` = `28` — gpt-6-luna, registered single-side estimand (flags naming exactly one side): flags on known questions (denominator)
+- `\priorSsLunaUnknownN` = `116` — gpt-6-luna, registered single-side estimand (flags naming exactly one side): flags on unknown questions
+- `\priorSsLunaKnown` = `100.0` — gpt-6-luna, registered single-side estimand (flags naming exactly one side): direction precision on known questions (%)
+- `\priorSsLunaKnownCI` = `[100.0, 100.0]` — 95% question-bootstrap CI
+- `\priorSsLunaUnknown` = `94.0` — gpt-6-luna, registered single-side estimand (flags naming exactly one side): direction precision on unknown questions (%)
+- `\priorSsLunaUnknownCI` = `[89.2, 98.1]` — 95% question-bootstrap CI
+- `\priorSsLunaDiff` = `$+$6.0` — gpt-6-luna, registered single-side estimand (flags naming exactly one side): known minus unknown (points)
+- `\priorSsLunaDiffCI` = `[$+$1.9, $+$10.8]` — 95% question-bootstrap CI
+- `\priorDirLunaKnownN` = `28` — gpt-6-luna, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on known questions (denominator)
+- `\priorDirLunaUnknownN` = `129` — gpt-6-luna, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on unknown questions
+- `\priorDirLunaKnown` = `100.0` — gpt-6-luna, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on known questions (%)
+- `\priorDirLunaKnownCI` = `[100.0, 100.0]` — 95% question-bootstrap CI
+- `\priorDirLunaUnknown` = `84.5` — gpt-6-luna, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on unknown questions (%)
+- `\priorDirLunaUnknownCI` = `[78.2, 90.5]` — 95% question-bootstrap CI
+- `\priorDirLunaDiff` = `$+$15.5` — gpt-6-luna, PR§11.3 coding ('both' a miss, 'unclear' skipped): known minus unknown (points)
+- `\priorDirLunaDiffCI` = `[$+$9.5, $+$21.8]` — 95% question-bootstrap CI
+- `\priorKnownQTerra` = `60` — gpt-6.1-terra: conflict questions it knows closed-book (PR§11.3 rule)
+- `\priorUnknownQTerra` = `240` — gpt-6.1-terra: conflict questions it does not know
+- `\priorSeedsTerra` = `1` — gpt-6.1-terra: closed-book seeds behind the known rule
+- `\priorSsTerraKnownN` = `33` — gpt-6.1-terra, registered single-side estimand (flags naming exactly one side): flags on known questions (denominator)
+- `\priorSsTerraUnknownN` = `63` — gpt-6.1-terra, registered single-side estimand (flags naming exactly one side): flags on unknown questions
+- `\priorSsTerraKnown` = `100.0` — gpt-6.1-terra, registered single-side estimand (flags naming exactly one side): direction precision on known questions (%)
+- `\priorSsTerraKnownCI` = `[100.0, 100.0]` — 95% question-bootstrap CI
+- `\priorSsTerraUnknown` = `96.8` — gpt-6.1-terra, registered single-side estimand (flags naming exactly one side): direction precision on unknown questions (%)
+- `\priorSsTerraUnknownCI` = `[91.8, 100.0]` — 95% question-bootstrap CI
+- `\priorSsTerraDiff` = `$+$3.2` — gpt-6.1-terra, registered single-side estimand (flags naming exactly one side): known minus unknown (points)
+- `\priorSsTerraDiffCI` = `[0.0, $+$8.2]` — 95% question-bootstrap CI
+- `\priorDirTerraKnownN` = `34` — gpt-6.1-terra, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on known questions (denominator)
+- `\priorDirTerraUnknownN` = `72` — gpt-6.1-terra, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on unknown questions
+- `\priorDirTerraKnown` = `97.1` — gpt-6.1-terra, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on known questions (%)
+- `\priorDirTerraKnownCI` = `[90.2, 100.0]` — 95% question-bootstrap CI
+- `\priorDirTerraUnknown` = `84.7` — gpt-6.1-terra, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on unknown questions (%)
+- `\priorDirTerraUnknownCI` = `[76.1, 92.4]` — 95% question-bootstrap CI
+- `\priorDirTerraDiff` = `$+$12.3` — gpt-6.1-terra, PR§11.3 coding ('both' a miss, 'unclear' skipped): known minus unknown (points)
+- `\priorDirTerraDiffCI` = `[$+$2.0, $+$22.4]` — 95% question-bootstrap CI
+- `\priorKnownQHaiku` = `32` — Claude Haiku: conflict questions it knows closed-book (PR§11.3 rule)
+- `\priorUnknownQHaiku` = `268` — Claude Haiku: conflict questions it does not know
+- `\priorSeedsHaiku` = `3` — Claude Haiku: closed-book seeds behind the known rule
+- `\priorSsHaikuKnownN` = `26` — Claude Haiku, registered single-side estimand (flags naming exactly one side): flags on known questions (denominator)
+- `\priorSsHaikuUnknownN` = `185` — Claude Haiku, registered single-side estimand (flags naming exactly one side): flags on unknown questions
+- `\priorSsHaikuKnown` = `100.0` — Claude Haiku, registered single-side estimand (flags naming exactly one side): direction precision on known questions (%)
+- `\priorSsHaikuKnownCI` = `[100.0, 100.0]` — 95% question-bootstrap CI
+- `\priorSsHaikuUnknown` = `85.9` — Claude Haiku, registered single-side estimand (flags naming exactly one side): direction precision on unknown questions (%)
+- `\priorSsHaikuUnknownCI` = `[80.6, 90.9]` — 95% question-bootstrap CI
+- `\priorSsHaikuDiff` = `$+$14.1` — Claude Haiku, registered single-side estimand (flags naming exactly one side): known minus unknown (points)
+- `\priorSsHaikuDiffCI` = `[$+$9.1, $+$19.4]` — 95% question-bootstrap CI
+- `\priorDirHaikuKnownN` = `26` — Claude Haiku, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on known questions (denominator)
+- `\priorDirHaikuUnknownN` = `193` — Claude Haiku, PR§11.3 coding ('both' a miss, 'unclear' skipped): flags on unknown questions
+- `\priorDirHaikuKnown` = `100.0` — Claude Haiku, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on known questions (%)
+- `\priorDirHaikuKnownCI` = `[100.0, 100.0]` — 95% question-bootstrap CI
+- `\priorDirHaikuUnknown` = `82.4` — Claude Haiku, PR§11.3 coding ('both' a miss, 'unclear' skipped): direction precision on unknown questions (%)
+- `\priorDirHaikuUnknownCI` = `[76.8, 87.8]` — 95% question-bootstrap CI
+- `\priorDirHaikuDiff` = `$+$17.6` — Claude Haiku, PR§11.3 coding ('both' a miss, 'unclear' skipped): known minus unknown (points)
+- `\priorDirHaikuDiffCI` = `[$+$12.2, $+$23.2]` — 95% question-bootstrap CI
+- `\priorSsDiffMin` = `$+$3.2` — smallest single-side known-minus-unknown difference over the 5 detectors (points)
+- `\priorSsDiffMinDet` = `gpt-6.1-terra` — detector with that smallest difference
+- `\priorSsDiffMax` = `$+$18.7` — largest single-side known-minus-unknown difference (points)
+- `\priorSsDiffMaxDet` = `gpt-4o-mini` — detector with that largest difference
+- `\priorSsDiffPos` = `4` — detectors whose single-side difference has a 95% CI above zero
+- `\priorDirDiffMin` = `$+$9.4` — smallest PR§11.3-coded known-minus-unknown difference over the 5 detectors (points)
+- `\priorDirDiffMinDet` = `gpt-4.1` — detector with that smallest difference
+- `\priorDirDiffMax` = `$+$18.7` — largest PR§11.3-coded known-minus-unknown difference (points)
+- `\priorDirDiffMaxDet` = `gpt-4o-mini` — detector with that largest difference
+- `\priorDirDiffPos` = `5` — detectors whose PR§11.3-coded difference has a 95% CI above zero
+- `\priorN` = `5` — detectors with a closed-book run (R2)
+
+## R3 single-side direction precision (ConflictBank eval, every detector)
+
+- `\ssPrecMini` = `68.8` — gpt-4o-mini: share of its gold-pair flags naming exactly one side that name the misinformation passage (%)
+- `\ssPrecMiniCI` = `[63.3, 74.0]` — 95% question-cluster bootstrap CI (not Wilson)
+- `\ssPrecMiniN` = `1,752` — gpt-4o-mini: single-side flags (denominator)
+- `\ssPrecAllMini` = `68.8` — gpt-4o-mini: the earlier definition ('both'/'unclear' count as misses, %; equals \dirPrecMini)
+- `\ssPrecAllMiniCI` = `[63.3, 74.0]` — 95% question-cluster bootstrap CI (wider than \dirPrecMiniCI, a Wilson interval over flags; use this one beside ssPrec)
+- `\ssPrecAllMiniN` = `1,752` — gpt-4o-mini: all gold-pair flags (denominator)
+- `\ssBothMini` = `0` — gpt-4o-mini: gold-pair flags naming both sides
+- `\ssUnclearMini` = `0` — gpt-4o-mini: gold-pair flags with an unclear side
+- `\ssPrecFour` = `90.9` — gpt-4.1: share of its gold-pair flags naming exactly one side that name the misinformation passage (%)
+- `\ssPrecFourCI` = `[87.3, 94.3]` — 95% question-cluster bootstrap CI (not Wilson)
+- `\ssPrecFourN` = `1,566` — gpt-4.1: single-side flags (denominator)
+- `\ssPrecAllFour` = `81.8` — gpt-4.1: the earlier definition ('both'/'unclear' count as misses, %; equals \dirPrecFour)
+- `\ssPrecAllFourCI` = `[77.2, 86.2]` — 95% question-cluster bootstrap CI (wider than \dirPrecFourCI, a Wilson interval over flags; use this one beside ssPrec)
+- `\ssPrecAllFourN` = `1,740` — gpt-4.1: all gold-pair flags (denominator)
+- `\ssBothFour` = `0` — gpt-4.1: gold-pair flags naming both sides
+- `\ssUnclearFour` = `174` — gpt-4.1: gold-pair flags with an unclear side
+- `\ssPrecLuna` = `94.9` — gpt-6-luna: share of its gold-pair flags naming exactly one side that name the misinformation passage (%)
+- `\ssPrecLunaCI` = `[91.1, 98.0]` — 95% question-cluster bootstrap CI (not Wilson)
+- `\ssPrecLunaN` = `874` — gpt-6-luna: single-side flags (denominator)
+- `\ssPrecAllLuna` = `82.2` — gpt-6-luna: the earlier definition ('both'/'unclear' count as misses, %; equals \dirPrecLuna)
+- `\ssPrecAllLunaCI` = `[76.4, 87.7]` — 95% question-cluster bootstrap CI (wider than \dirPrecLunaCI, a Wilson interval over flags; use this one beside ssPrec)
+- `\ssPrecAllLunaN` = `1,009` — gpt-6-luna: all gold-pair flags (denominator)
+- `\ssBothLuna` = `75` — gpt-6-luna: gold-pair flags naming both sides
+- `\ssUnclearLuna` = `60` — gpt-6-luna: gold-pair flags with an unclear side
+- `\ssPrecTerra` = `97.0` — gpt-6.1-terra: share of its gold-pair flags naming exactly one side that name the misinformation passage (%)
+- `\ssPrecTerraCI` = `[93.1, 100.0]` — 95% question-cluster bootstrap CI (not Wilson)
+- `\ssPrecTerraN` = `560` — gpt-6.1-terra: single-side flags (denominator)
+- `\ssPrecAllTerra` = `82.6` — gpt-6.1-terra: the earlier definition ('both'/'unclear' count as misses, %; equals \dirPrecTerra)
+- `\ssPrecAllTerraCI` = `[75.5, 89.4]` — 95% question-cluster bootstrap CI (wider than \dirPrecTerraCI, a Wilson interval over flags; use this one beside ssPrec)
+- `\ssPrecAllTerraN` = `657` — gpt-6.1-terra: all gold-pair flags (denominator)
+- `\ssBothTerra` = `59` — gpt-6.1-terra: gold-pair flags naming both sides
+- `\ssUnclearTerra` = `38` — gpt-6.1-terra: gold-pair flags with an unclear side
+- `\ssPrecHaiku` = `87.7` — Claude Haiku: share of its gold-pair flags naming exactly one side that name the misinformation passage (%)
+- `\ssPrecHaikuCI` = `[83.0, 92.1]` — 95% question-cluster bootstrap CI (not Wilson)
+- `\ssPrecHaikuN` = `633` — Claude Haiku: single-side flags (denominator)
+- `\ssPrecAllHaiku` = `78.1` — Claude Haiku: the earlier definition ('both'/'unclear' count as misses, %; equals \dirPrecHaiku)
+- `\ssPrecAllHaikuCI` = `[72.5, 83.3]` — 95% question-cluster bootstrap CI (wider than \dirPrecHaikuCI, a Wilson interval over flags; use this one beside ssPrec)
+- `\ssPrecAllHaikuN` = `711` — Claude Haiku: all gold-pair flags (denominator)
+- `\ssBothHaiku` = `24` — Claude Haiku: gold-pair flags naming both sides
+- `\ssUnclearHaiku` = `54` — Claude Haiku: gold-pair flags with an unclear side
+- `\ssPrecSonnet` = `93.8` — Claude Sonnet: share of its gold-pair flags naming exactly one side that name the misinformation passage (%)
+- `\ssPrecSonnetCI` = `[90.2, 96.9]` — 95% question-cluster bootstrap CI (not Wilson)
+- `\ssPrecSonnetN` = `624` — Claude Sonnet: single-side flags (denominator)
+- `\ssPrecAllSonnet` = `77.7` — Claude Sonnet: the earlier definition ('both'/'unclear' count as misses, %; equals \dirPrecSonnet)
+- `\ssPrecAllSonnetCI` = `[72.6, 82.7]` — 95% question-cluster bootstrap CI (wider than \dirPrecSonnetCI, a Wilson interval over flags; use this one beside ssPrec)
+- `\ssPrecAllSonnetN` = `753` — Claude Sonnet: all gold-pair flags (denominator)
+- `\ssBothSonnet` = `42` — Claude Sonnet: gold-pair flags naming both sides
+- `\ssUnclearSonnet` = `87` — Claude Sonnet: gold-pair flags with an unclear side
+- `\ssPrecMin` = `68.8` — lowest single-side precision over the 6 detectors (%)
+- `\ssPrecMinDet` = `gpt-4o-mini` — detector with the lowest
+- `\ssPrecMax` = `97.0` — highest single-side precision (%)
+- `\ssPrecMaxDet` = `gpt-6.1-terra` — detector with the highest
+- `\ssPrecOtherMin` = `87.7` — lowest single-side precision excluding gpt-4o-mini (%)
+- `\ssPrecOtherMax` = `97.0` — highest single-side precision excluding gpt-4o-mini (%)
+- `\ssPrecN` = `6` — detectors in R3
+
+## R4 follow rates by the generator's own closed-book knowledge (H31 runs). The all-question rates and CIs are the paper's existing \rfolRight<G> / \rfolWrong<G> (R4 reproduces the rates; its own bootstrap CI for them would differ by a point, so it is not emitted)
+
+- `\prFolKnownQMini` = `28` — gpt-4o-mini: conflict questions it knows closed-book
+- `\prFolRKnownMini` = `87` — gpt-4o-mini: f_R (right flag followed) on known questions (%)
+- `\prFolRKnownMiniN` = `5` — gpt-4o-mini: questions behind f_R known
+- `\prFolRKnownMiniCI` = `[60, 100]` — 95% question-bootstrap CI
+- `\prFolRUnknownMini` = `54` — gpt-4o-mini: f_R (right flag followed) on unknown questions (%)
+- `\prFolRUnknownMiniN` = `71` — gpt-4o-mini: questions behind f_R unknown
+- `\prFolRUnknownMiniCI` = `[43, 66]` — 95% question-bootstrap CI
+- `\prFolRAllMiniN` = `76` — gpt-4o-mini: questions behind f_R on all questions (the rate is \rfolRightMini)
+- `\prFolRDiffMini` = `$+$32` — gpt-4o-mini: f_R known minus unknown (points)
+- `\prFolRDiffMiniCI` = `[0, $+$54]` — 95% question-bootstrap CI
+- `\prFolWKnownMini` = `67` — gpt-4o-mini: f_W (wrong flag followed) on known questions (%)
+- `\prFolWKnownMiniN` = `5` — gpt-4o-mini: questions behind f_W known
+- `\prFolWKnownMiniCI` = `[33, 93]` — 95% question-bootstrap CI
+- `\prFolWUnknownMini` = `50` — gpt-4o-mini: f_W (wrong flag followed) on unknown questions (%)
+- `\prFolWUnknownMiniN` = `65` — gpt-4o-mini: questions behind f_W unknown
+- `\prFolWUnknownMiniCI` = `[38, 62]` — 95% question-bootstrap CI
+- `\prFolWAllMiniN` = `70` — gpt-4o-mini: questions behind f_W on all questions (the rate is \rfolWrongMini)
+- `\prFolWDiffMini` = `$+$16` — gpt-4o-mini: f_W known minus unknown (points)
+- `\prFolWDiffMiniCI` = `[$-$23, $+$50]` — 95% question-bootstrap CI
+- `\prFolKnownQLuna` = `47` — gpt-6-luna: conflict questions it knows closed-book
+- `\prFolRKnownLuna` = `100` — gpt-6-luna: f_R (right flag followed) on known questions (%)
+- `\prFolRKnownLunaN` = `2` — gpt-6-luna: questions behind f_R known
+- `\prFolRKnownLunaCI` = `[100, 100]` — 95% question-bootstrap CI
+- `\prFolRUnknownLuna` = `71` — gpt-6-luna: f_R (right flag followed) on unknown questions (%)
+- `\prFolRUnknownLunaN` = `54` — gpt-6-luna: questions behind f_R unknown
+- `\prFolRUnknownLunaCI` = `[59, 82]` — 95% question-bootstrap CI
+- `\prFolRAllLunaN` = `56` — gpt-6-luna: questions behind f_R on all questions (the rate is \rfolRightLuna)
+- `\prFolRDiffLuna` = `$+$29` — gpt-6-luna: f_R known minus unknown (points)
+- `\prFolRDiffLunaCI` = `[$+$18, $+$41]` — 95% question-bootstrap CI
+- `\prFolWKnownLuna` = `76` — gpt-6-luna: f_W (wrong flag followed) on known questions (%)
+- `\prFolWKnownLunaN` = `11` — gpt-6-luna: questions behind f_W known
+- `\prFolWKnownLunaCI` = `[52, 100]` — 95% question-bootstrap CI
+- `\prFolWUnknownLuna` = `78` — gpt-6-luna: f_W (wrong flag followed) on unknown questions (%)
+- `\prFolWUnknownLunaN` = `46` — gpt-6-luna: questions behind f_W unknown
+- `\prFolWUnknownLunaCI` = `[67, 87]` — 95% question-bootstrap CI
+- `\prFolWAllLunaN` = `57` — gpt-6-luna: questions behind f_W on all questions (the rate is \rfolWrongLuna)
+- `\prFolWDiffLuna` = `$-$2` — gpt-6-luna: f_W known minus unknown (points)
+- `\prFolWDiffLunaCI` = `[$-$30, $+$24]` — 95% question-bootstrap CI
+- `\prFolKnownQHaiku` = `32` — Claude Haiku: conflict questions it knows closed-book
+- `\prFolRKnownHaiku` = `100` — Claude Haiku: f_R (right flag followed) on known questions (%)
+- `\prFolRKnownHaikuN` = `1` — Claude Haiku: questions behind f_R known
+- `\prFolRKnownHaikuCI` = `[100, 100]` — 95% question-bootstrap CI
+- `\prFolRUnknownHaiku` = `62` — Claude Haiku: f_R (right flag followed) on unknown questions (%)
+- `\prFolRUnknownHaikuN` = `43` — Claude Haiku: questions behind f_R unknown
+- `\prFolRUnknownHaikuCI` = `[49, 76]` — 95% question-bootstrap CI
+- `\prFolRAllHaikuN` = `44` — Claude Haiku: questions behind f_R on all questions (the rate is \rfolRightHaiku)
+- `\prFolRDiffHaiku` = `$+$38` — Claude Haiku: f_R known minus unknown (points)
+- `\prFolRDiffHaikuCI` = `[$+$25, $+$52]` — 95% question-bootstrap CI
+- `\prFolWKnownHaiku` = `37` — Claude Haiku: f_W (wrong flag followed) on known questions (%)
+- `\prFolWKnownHaikuN` = `10` — Claude Haiku: questions behind f_W known
+- `\prFolWKnownHaikuCI` = `[10, 67]` — 95% question-bootstrap CI
+- `\prFolWUnknownHaiku` = `68` — Claude Haiku: f_W (wrong flag followed) on unknown questions (%)
+- `\prFolWUnknownHaikuN` = `75` — Claude Haiku: questions behind f_W unknown
+- `\prFolWUnknownHaikuCI` = `[58, 77]` — 95% question-bootstrap CI
+- `\prFolWAllHaikuN` = `85` — Claude Haiku: questions behind f_W on all questions (the rate is \rfolWrongHaiku)
+- `\prFolWDiffHaiku` = `$-$31` — Claude Haiku: f_W known minus unknown (points)
+- `\prFolWDiffHaikuCI` = `[$-$60, $+$2]` — 95% question-bootstrap CI
+- `\prFolKnownQTerra` = `60` — gpt-6.1-terra: conflict questions it knows closed-book
+- `\prFolRKnownTerra` = `100` — gpt-6.1-terra: f_R (right flag followed) on known questions (%)
+- `\prFolRKnownTerraN` = `4` — gpt-6.1-terra: questions behind f_R known
+- `\prFolRKnownTerraCI` = `[100, 100]` — 95% question-bootstrap CI
+- `\prFolRUnknownTerra` = `63` — gpt-6.1-terra: f_R (right flag followed) on unknown questions (%)
+- `\prFolRUnknownTerraN` = `41` — gpt-6.1-terra: questions behind f_R unknown
+- `\prFolRUnknownTerraCI` = `[49, 78]` — 95% question-bootstrap CI
+- `\prFolRAllTerraN` = `45` — gpt-6.1-terra: questions behind f_R on all questions (the rate is \rfolRightTerra)
+- `\prFolRDiffTerra` = `$+$37` — gpt-6.1-terra: f_R known minus unknown (points)
+- `\prFolRDiffTerraCI` = `[$+$22, $+$51]` — 95% question-bootstrap CI
+- `\prFolWKnownTerra` = `100` — gpt-6.1-terra: f_W (wrong flag followed) on known questions (%)
+- `\prFolWKnownTerraN` = `22` — gpt-6.1-terra: questions behind f_W known
+- `\prFolWKnownTerraCI` = `[100, 100]` — 95% question-bootstrap CI
+- `\prFolWUnknownTerra` = `93` — gpt-6.1-terra: f_W (wrong flag followed) on unknown questions (%)
+- `\prFolWUnknownTerraN` = `73` — gpt-6.1-terra: questions behind f_W unknown
+- `\prFolWUnknownTerraCI` = `[86, 99]` — 95% question-bootstrap CI
+- `\prFolWAllTerraN` = `95` — gpt-6.1-terra: questions behind f_W on all questions (the rate is \rfolWrongTerra)
+- `\prFolWDiffTerra` = `$+$7` — gpt-6.1-terra: f_W known minus unknown (points)
+- `\prFolWDiffTerraCI` = `[$+$1, $+$13]` — 95% question-bootstrap CI
+- `\prFolKnownShareMin` = `9` — smallest share of known conflict questions over H31 generators (%)
+- `\prFolKnownShareMax` = `20` — largest share of known conflict questions (%)
+- `\prFolOrW` = `0.84` — pooled f_W odds ratio, known vs unknown (logit, generator fixed effects)
+- `\prFolOrWCI` = `[0.38, 1.85]` — 95% question-bootstrap CI of prFolOrW
+- `\prFolOrWN` = `307` — question x generator observations behind prFolOrW
+- `\prFolOrWQ` = `116` — distinct questions behind prFolOrW
+- `\prFolOrWKnownN` = `48` — known observations behind prFolOrW
+- `\prFolOrRUnbounded` = `yes` — whether the f_R odds ratio's bootstrap upper bound is infinite (separation); its OR is not reported
+- `\prFolOrRSeparated` = `1,793` — bootstrap resamples with complete separation (f_R)
+- `\prFolOrRKnownN` = `12` — known observations behind the f_R logit
+
+## R5 follow-rate account on the 30 crossed cells, conditioned on the generator's prior. MAEs and the MAE change in 2 decimals because the change is below 0.05; the unconditioned MAEs are \predAllMae, \predMae and \predTrMae in 1 decimal
+
+- `\condMaeAll` = `1.79` — MAE (points) of the conditioned account, all crossed cells
+- `\uncondMaeAll` = `1.82` — MAE (points) of the unconditioned account on the same cells, all crossed cells
+- `\condMaeChangeAll` = `$-$0.03` — conditioned minus unconditioned MAE, all crossed cells
+- `\condNAll` = `30` — cells, all crossed cells
+- `\condRAll` = `0.94` — r, conditioned, all crossed cells
+- `\uncondRAll` = `0.94` — r, unconditioned, all crossed cells
+- `\condSlopeAll` = `0.96` — slope, conditioned, all crossed cells
+- `\uncondSlopeAll` = `0.96` — slope, unconditioned, all crossed cells
+- `\condMaeOwn` = `1.50` — MAE (points) of the conditioned account, cells with the generator's own H31 rates
+- `\uncondMaeOwn` = `1.54` — MAE (points) of the unconditioned account on the same cells, cells with the generator's own H31 rates
+- `\condMaeChangeOwn` = `$-$0.04` — conditioned minus unconditioned MAE, cells with the generator's own H31 rates
+- `\condNOwn` = `22` — cells, cells with the generator's own H31 rates
+- `\condROwn` = `0.97` — r, conditioned, cells with the generator's own H31 rates
+- `\uncondROwn` = `0.97` — r, unconditioned, cells with the generator's own H31 rates
+- `\condSlopeOwn` = `1.05` — slope, conditioned, cells with the generator's own H31 rates
+- `\uncondSlopeOwn` = `1.06` — slope, unconditioned, cells with the generator's own H31 rates
+- `\condMaeTransfer` = `2.57` — MAE (points) of the conditioned account, transfer cells (generators without an H31 run)
+- `\uncondMaeTransfer` = `2.60` — MAE (points) of the unconditioned account on the same cells, transfer cells (generators without an H31 run)
+- `\condMaeChangeTransfer` = `$-$0.03` — conditioned minus unconditioned MAE, transfer cells (generators without an H31 run)
+- `\condNTransfer` = `8` — cells, transfer cells (generators without an H31 run)
+- `\condRTransfer` = `0.90` — r, conditioned, transfer cells (generators without an H31 run)
+- `\uncondRTransfer` = `0.90` — r, unconditioned, transfer cells (generators without an H31 run)
+- `\condSlopeTransfer` = `0.71` — slope, conditioned, transfer cells (generators without an H31 run)
+- `\uncondSlopeTransfer` = `0.70` — slope, unconditioned, transfer cells (generators without an H31 run)
+- `\condMaxShift` = `0.7` — largest change in any cell's prediction from conditioning (points)
+
+## R6 prospective-test summaries (ConflictBank-fresh, 20 cells)
+
+- `\acctN` = `20` — fresh cells
+- `\acctMae` = `1.4` — MAE of the frozen account (points; equals frMae)
+- `\acctMaeMarg` = `1.8` — MAE of the cell-level marginal baseline (points; equals frMaeMarg)
+- `\acctMaeMargCI` = `[1.5, 3.1]` — 95% CI of acctMaeMarg (H32's draws)
+- `\acctMargDiff` = `$+$0.4` — (a) MAE(marginal) minus MAE(account), points
+- `\acctMargDiffCI` = `[$-$0.3, $+$1.2]` — paired 95% bootstrap CI (H32's draws)
+- `\acctCommonMae` = `1.6` — (b) MAE of the common-rate baseline (one f_R, f_W for every generator)
+- `\acctCommonMaeCI` = `[1.5, 2.7]` — 95% CI of acctCommonMae
+- `\acctCommonDiff` = `$+$0.2` — MAE(common rates) minus MAE(account), points
+- `\acctCommonDiffCI` = `[$-$0.2, $+$0.7]` — paired 95% CI
+- `\acctCommonFR` = `64.5` — common f_R: equal-weight mean of the four frozen generators' f_R (%)
+- `\acctCommonFW` = `71.8` — common f_W (%)
+- `\acctCommonR` = `0.93` — r of the common-rate predictions
+- `\acctCommonSlope` = `0.96` — slope
+- `\acctCommonSign` = `20` — cells whose common-rate prediction has the observed sign
+- `\acctCleanMaeAll` = `3.6` — (c) clean-question MAE over all cells (points)
+- `\acctCleanMaeAllCI` = `[2.5, 4.8]` — 95% CI
+- `\acctCleanMaeFlag` = `8.9` — clean-question MAE over the cells whose detector flags a clean question
+- `\acctCleanMaeFlagCI` = `[6.3, 11.9]` — 95% CI
+- `\acctCleanNFlag` = `8` — cells whose detector flags at least one clean question
+- `\acctCleanNAll` = `20` — cells in the clean-question MAE
+- `\acctHarmN` = `2` — cells with a predicted conflict effect <= -3 (the predicted harms)
+- `\acctHarmTerraMini` = `gpt-6.1-terra with the gpt-4o-mini detector` — a predicted-harm cell (generator, detector)
+- `\acctHarmTerraMiniPred` = `$-$3.1` — gpt-6.1-terra x gpt-4o-mini: predicted conflict effect (points)
+- `\acctHarmTerraMiniPredCI` = `[$-$8.1, $+$1.6]` — 95% CI of the prediction
+- `\acctHarmTerraMiniObs` = `$-$4.0` — gpt-6.1-terra x gpt-4o-mini: observed conflict effect (points)
+- `\acctHarmTerraMiniObsCI` = `[$-$9.7, $+$1.3]` — 95% CI of the observed effect
+- `\acctHarmTerraMiniErrCI` = `[$-$3.5, $+$1.6]` — 95% CI of observed minus predicted
+- `\acctHarmTerraQwen` = `gpt-6.1-terra with the Qwen2.5-7B detector` — a predicted-harm cell (generator, detector)
+- `\acctHarmTerraQwenPred` = `$-$10.1` — gpt-6.1-terra x Qwen2.5-7B: predicted conflict effect (points)
+- `\acctHarmTerraQwenPredCI` = `[$-$16.2, $-$4.2]` — 95% CI of the prediction
+- `\acctHarmTerraQwenObs` = `$-$8.3` — gpt-6.1-terra x Qwen2.5-7B: observed conflict effect (points)
+- `\acctHarmTerraQwenObsCI` = `[$-$15.0, $-$1.7]` — 95% CI of the observed effect
+- `\acctHarmTerraQwenErrCI` = `[$-$1.6, $+$5.2]` — 95% CI of observed minus predicted
+- `\acctSelMae` = `1.7` — (d) selection analysis: MAE of the all-question prediction over the 20 cells (points)
+- `\acctSelMaeFlag` = `2.6` — the same over cells whose detector flags clean questions
+- `\acctSelMaeNoFlag` = `1.0` — the same over the other cells
+- `\acctSelConflict` = `$-$0.1` — mean signed error from the conflict part (points)
+- `\acctSelClean` = `$-$0.9` — mean signed error from the clean part (points)
+- `\acctSelAbsConflict` = `1.1` — mean absolute conflict part
+- `\acctSelAbsClean` = `0.9` — mean absolute clean part
+- `\acctSelMaxErr` = `$-$7.7` — largest selection-prediction error (points)
+- `\acctSelMaxErrClean` = `$-$6.4` — its clean part
+- `\acctSelMaxErrCell` = `gpt-6.1-terra with the Qwen2.5-7B detector` — the cell with that error
+
+## R7 gpt-6.1-terra's two plain draws
+
+- `\terraDrawRegBe` = `0.79` — terra break-even p*, plain draw the paper uses (the H31 run's own)
+- `\terraDrawRegBeCI` = `[0.72, 0.85]` — bootstrap 95% CI
+- `\terraDrawRegFR` = `67` — terra f_R, plain draw the paper uses (the H31 run's own) (%)
+- `\terraDrawRegFRCI` = `[53, 80]` — 95% CI
+- `\terraDrawRegFW` = `95` — terra f_W, plain draw the paper uses (the H31 run's own) (%)
+- `\terraDrawRegFWCI` = `[89, 99]` — 95% CI
+- `\terraDrawRegRight` = `$+$17.6` — terra right-flag effect, plain draw the paper uses (the H31 run's own) (points)
+- `\terraDrawRegWrong` = `$-$64.5` — terra wrong-flag effect, plain draw the paper uses (the H31 run's own) (points)
+- `\terraDrawAltBe` = `0.81` — terra break-even p*, the other plain draw (the one-answer run's)
+- `\terraDrawAltBeCI` = `[0.75, 0.87]` — bootstrap 95% CI
+- `\terraDrawAltFR` = `68` — terra f_R, the other plain draw (the one-answer run's) (%)
+- `\terraDrawAltFRCI` = `[55, 82]` — 95% CI
+- `\terraDrawAltFW` = `93` — terra f_W, the other plain draw (the one-answer run's) (%)
+- `\terraDrawAltFWCI` = `[88, 98]` — 95% CI
+- `\terraDrawAltRight` = `$+$17.0` — terra right-flag effect, the other plain draw (the one-answer run's) (points)
+- `\terraDrawAltWrong` = `$-$70.9` — terra wrong-flag effect, the other plain draw (the one-answer run's) (points)
+- `\terraDrawPlainConfA` = `69.7` — ConflictBank, terra plain accuracy on conflict questions, draw randdir_cb_terra (%)
+- `\terraDrawPlainConfB` = `73.0` — the same, draw cb_single_terra (%)
+- `\terraDrawDifferConf` = `28` — ConflictBank conflict questions whose one-way score differs between the two draws
+- `\terraDrawPlainCleanA` = `97.0` — ConflictBank, terra plain accuracy on clean questions, draw randdir_cb_terra (%)
+- `\terraDrawPlainCleanB` = `95.0` — the same, draw cb_single_terra (%)
+- `\terraDrawDifferClean` = `2` — ConflictBank clean questions whose one-way score differs between the two draws
+- `\terraDrawDiffer` = `30` — ConflictBank questions whose one-way score differs between the draws (conflict + clean)
+- `\terraDrawIdentical` = `80` — ConflictBank responses with identical text in both draws
+- `\terraDrawRows` = `400` — ConflictBank responses compared
+- `\terraDrawRdPlainConfA` = `10.8` — RAMDocs, terra plain accuracy on conflict questions, draw holdout_terra (%)
+- `\terraDrawRdPlainConfB` = `10.8` — the same, draw holdout_rem_terra (%)
+- `\terraDrawRdDifferConf` = `0` — RAMDocs conflict questions whose one-way score differs between the two draws
+- `\terraDrawRdPlainCleanA` = `51.6` — RAMDocs, terra plain accuracy on clean questions, draw holdout_terra (%)
+- `\terraDrawRdPlainCleanB` = `51.6` — the same, draw holdout_rem_terra (%)
+- `\terraDrawRdDifferClean` = `4` — RAMDocs clean questions whose one-way score differs between the two draws
+- `\terraDrawRdDiffer` = `4` — RAMDocs questions whose one-way score differs between the draws (conflict + clean)
+- `\terraDrawRdIdentical` = `40` — RAMDocs responses with identical text in both draws
+- `\terraDrawRdRows` = `300` — RAMDocs responses compared
+- `\terraDrawHNineteenChanged` = `0` — H19 tests whose status changes with the other RAMDocs draw (registered swap)
+- `\terraDrawHNineteenChangedCb` = `0` — the same with the ConflictBank draw swapped too (supplementary, not registered)
+
+## R8 completion tokens under the flag (H31 runs; include hidden reasoning tokens)
+
+- `\tokTerraPlain` = `105` — gpt-6.1-terra: mean completion tokens without flags, all conflict questions
+- `\tokTerraFlag` = `51` — gpt-6.1-terra: mean completion tokens with the flag, all conflict questions
+- `\tokTerraDiff` = `$-$54` — gpt-6.1-terra: flagged minus plain, all conflict questions
+- `\tokTerraDiffCI` = `[$-$61, $-$46]` — 95% question-bootstrap CI
+- `\tokTerraRightPlain` = `103` — gpt-6.1-terra: mean completion tokens without flags, right-flag arm
+- `\tokTerraRightFlag` = `48` — gpt-6.1-terra: mean completion tokens with the flag, right-flag arm
+- `\tokTerraRightDiff` = `$-$55` — gpt-6.1-terra: flagged minus plain, right-flag arm
+- `\tokTerraRightDiffCI` = `[$-$66, $-$45]` — 95% question-bootstrap CI
+- `\tokTerraWrongPlain` = `106` — gpt-6.1-terra: mean completion tokens without flags, wrong-flag arm
+- `\tokTerraWrongFlag` = `55` — gpt-6.1-terra: mean completion tokens with the flag, wrong-flag arm
+- `\tokTerraWrongDiff` = `$-$51` — gpt-6.1-terra: flagged minus plain, wrong-flag arm
+- `\tokTerraWrongDiffCI` = `[$-$63, $-$41]` — 95% question-bootstrap CI
+- `\tokTerraRightFol` = `48` — gpt-6.1-terra: mean completion tokens of flagged responses that follow the flag (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokTerraRightNotFol` = `116` — gpt-6.1-terra: the same for responses that do not follow it
+- `\tokTerraRightFolDiff` = `$-$69` — gpt-6.1-terra: followed minus not followed (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokTerraRightFolDiffCI` = `[$-$136, $-$12]` — 95% question-bootstrap CI
+- `\tokTerraRightFolRows` = `30` — gpt-6.1-terra: flagged responses that follow (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokTerraRightNotFolRows` = `15` — gpt-6.1-terra: flagged responses that do not follow (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokTerraRightFolQ` = `45` — gpt-6.1-terra: questions behind the split (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokTerraWrongFol` = `49` — gpt-6.1-terra: mean completion tokens of flagged responses that follow the flag (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokTerraWrongNotFol` = `97` — gpt-6.1-terra: the same for responses that do not follow it
+- `\tokTerraWrongFolDiff` = `$-$47` — gpt-6.1-terra: followed minus not followed (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokTerraWrongFolDiffCI` = `[$-$96, $+$1]` — 95% question-bootstrap CI
+- `\tokTerraWrongFolRows` = `90` — gpt-6.1-terra: flagged responses that follow (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokTerraWrongNotFolRows` = `5` — gpt-6.1-terra: flagged responses that do not follow (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokTerraWrongFolQ` = `95` — gpt-6.1-terra: questions behind the split (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokLunaPlain` = `255` — gpt-6-luna: mean completion tokens without flags, all conflict questions
+- `\tokLunaFlag` = `134` — gpt-6-luna: mean completion tokens with the flag, all conflict questions
+- `\tokLunaDiff` = `$-$121` — gpt-6-luna: flagged minus plain, all conflict questions
+- `\tokLunaDiffCI` = `[$-$139, $-$102]` — 95% question-bootstrap CI
+- `\tokLunaRightPlain` = `250` — gpt-6-luna: mean completion tokens without flags, right-flag arm
+- `\tokLunaRightFlag` = `108` — gpt-6-luna: mean completion tokens with the flag, right-flag arm
+- `\tokLunaRightDiff` = `$-$142` — gpt-6-luna: flagged minus plain, right-flag arm
+- `\tokLunaRightDiffCI` = `[$-$166, $-$120]` — 95% question-bootstrap CI
+- `\tokLunaWrongPlain` = `259` — gpt-6-luna: mean completion tokens without flags, wrong-flag arm
+- `\tokLunaWrongFlag` = `163` — gpt-6-luna: mean completion tokens with the flag, wrong-flag arm
+- `\tokLunaWrongDiff` = `$-$96` — gpt-6-luna: flagged minus plain, wrong-flag arm
+- `\tokLunaWrongDiffCI` = `[$-$126, $-$65]` — 95% question-bootstrap CI
+- `\tokLunaRightFol` = `117` — gpt-6-luna: mean completion tokens of flagged responses that follow the flag (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokLunaRightNotFol` = `144` — gpt-6-luna: the same for responses that do not follow it
+- `\tokLunaRightFolDiff` = `$-$27` — gpt-6-luna: followed minus not followed (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokLunaRightFolDiffCI` = `[$-$96, $+$17]` — 95% question-bootstrap CI
+- `\tokLunaRightFolRows` = `121` — gpt-6-luna: flagged responses that follow (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokLunaRightNotFolRows` = `47` — gpt-6-luna: flagged responses that do not follow (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokLunaRightFolQ` = `56` — gpt-6-luna: questions behind the split (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokLunaWrongFol` = `183` — gpt-6-luna: mean completion tokens of flagged responses that follow the flag (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokLunaWrongNotFol` = `278` — gpt-6-luna: the same for responses that do not follow it
+- `\tokLunaWrongFolDiff` = `$-$94` — gpt-6-luna: followed minus not followed (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokLunaWrongFolDiffCI` = `[$-$182, $-$22]` — 95% question-bootstrap CI
+- `\tokLunaWrongFolRows` = `132` — gpt-6-luna: flagged responses that follow (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokLunaWrongNotFolRows` = `39` — gpt-6-luna: flagged responses that do not follow (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokLunaWrongFolQ` = `57` — gpt-6-luna: questions behind the split (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokHaikuPlain` = `555` — Claude Haiku: mean completion tokens without flags, all conflict questions
+- `\tokHaikuFlag` = `508` — Claude Haiku: mean completion tokens with the flag, all conflict questions
+- `\tokHaikuDiff` = `$-$47` — Claude Haiku: flagged minus plain, all conflict questions
+- `\tokHaikuDiffCI` = `[$-$75, $-$19]` — 95% question-bootstrap CI
+- `\tokHaikuRightPlain` = `550` — Claude Haiku: mean completion tokens without flags, right-flag arm
+- `\tokHaikuRightFlag` = `429` — Claude Haiku: mean completion tokens with the flag, right-flag arm
+- `\tokHaikuRightDiff` = `$-$121` — Claude Haiku: flagged minus plain, right-flag arm
+- `\tokHaikuRightDiffCI` = `[$-$151, $-$89]` — 95% question-bootstrap CI
+- `\tokHaikuWrongPlain` = `561` — Claude Haiku: mean completion tokens without flags, wrong-flag arm
+- `\tokHaikuWrongFlag` = `597` — Claude Haiku: mean completion tokens with the flag, wrong-flag arm
+- `\tokHaikuWrongDiff` = `$+$36` — Claude Haiku: flagged minus plain, wrong-flag arm
+- `\tokHaikuWrongDiffCI` = `[$-$7, $+$81]` — 95% question-bootstrap CI
+- `\tokHaikuRightFol` = `557` — Claude Haiku: mean completion tokens of flagged responses that follow the flag (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokHaikuRightNotFol` = `503` — Claude Haiku: the same for responses that do not follow it
+- `\tokHaikuRightFolDiff` = `$+$55` — Claude Haiku: followed minus not followed (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokHaikuRightFolDiffCI` = `[$-$54, $+$149]` — 95% question-bootstrap CI
+- `\tokHaikuRightFolRows` = `83` — Claude Haiku: flagged responses that follow (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokHaikuRightNotFolRows` = `49` — Claude Haiku: flagged responses that do not follow (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokHaikuRightFolQ` = `44` — Claude Haiku: questions behind the split (right flag, on the f_R questions; follows = one-way strict correct)
+- `\tokHaikuWrongFol` = `614` — Claude Haiku: mean completion tokens of flagged responses that follow the flag (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokHaikuWrongNotFol` = `735` — Claude Haiku: the same for responses that do not follow it
+- `\tokHaikuWrongFolDiff` = `$-$121` — Claude Haiku: followed minus not followed (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokHaikuWrongFolDiffCI` = `[$-$189, $-$54]` — 95% question-bootstrap CI
+- `\tokHaikuWrongFolRows` = `163` — Claude Haiku: flagged responses that follow (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokHaikuWrongNotFolRows` = `92` — Claude Haiku: flagged responses that do not follow (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+- `\tokHaikuWrongFolQ` = `85` — Claude Haiku: questions behind the split (wrong flag, on the f_W questions; follows = the response contains the wrong answer)
+
+## R9 missing final answers (every run)
+
+- `\missRuns` = `202` — runs with results
+- `\missRows` = `753,760` — responses checked
+- `\missN` = `1,130` — responses with no final-answer line
+- `\missShare` = `0.15` — share of responses with no final-answer line (%)
+- `\missCapShare` = `65.7` — share of the single-call missing responses that stopped at the completion cap (%)
+- `\missCells` = `939` — run x condition cells
+- `\missCellsAbove` = `49` — cells with more than 1% missing
+- `\missTopRun` = `\texttt{holdout\_gpt41\_round2}` — run of the worst cell
+- `\missTopModel` = `gpt-4.1` — generator of the worst cell
+- `\missTopCond` = `oracle neutral flag + instr.\ (v2)` — condition of the worst cell
+- `\missTopShare` = `20.3` — missing share of the worst cell (%)
+- `\missTopCap` = `25.3` — share of the worst cell's responses at the cap (%)
+- `\missTopN` = `300` — responses in the worst cell
+- `\missAboveFour` = `32` — cells above 1% with gpt-4.1
+- `\missAboveQwen` = `16` — cells above 1% with Qwen2.5-7B
+- `\missAboveLuna` = `1` — cells above 1% with gpt-6-luna
+- `\missShareHaiku` = `0.00` — Claude Haiku: share of responses missing a final answer (%; 0.00 can hide a few, see the count)
+- `\missNHaiku` = `1` — Claude Haiku: responses missing a final answer
+- `\missRowsHaiku` = `103,517` — Claude Haiku: responses checked
+- `\missShareSonnet` = `0.00` — Claude Sonnet: share of responses missing a final answer (%; 0.00 can hide a few, see the count)
+- `\missNSonnet` = `0` — Claude Sonnet: responses missing a final answer
+- `\missRowsSonnet` = `4,776` — Claude Sonnet: responses checked
+- `\missShareFour` = `2.44` — gpt-4.1: share of responses missing a final answer (%; 0.00 can hide a few, see the count)
+- `\missNFour` = `685` — gpt-4.1: responses missing a final answer
+- `\missRowsFour` = `28,118` — gpt-4.1: responses checked
+- `\missShareMini` = `0.01` — gpt-4o-mini: share of responses missing a final answer (%; 0.00 can hide a few, see the count)
+- `\missNMini` = `36` — gpt-4o-mini: responses missing a final answer
+- `\missRowsMini` = `434,300` — gpt-4o-mini: responses checked
+- `\missShareLuna` = `0.02` — gpt-6-luna: share of responses missing a final answer (%; 0.00 can hide a few, see the count)
+- `\missNLuna` = `26` — gpt-6-luna: responses missing a final answer
+- `\missRowsLuna` = `131,397` — gpt-6-luna: responses checked
+- `\missShareTerra` = `0.00` — gpt-6.1-terra: share of responses missing a final answer (%; 0.00 can hide a few, see the count)
+- `\missNTerra` = `0` — gpt-6.1-terra: responses missing a final answer
+- `\missRowsTerra` = `33,552` — gpt-6.1-terra: responses checked
+- `\missShareQwen` = `2.11` — Qwen2.5-7B: share of responses missing a final answer (%; 0.00 can hide a few, see the count)
+- `\missNQwen` = `382` — Qwen2.5-7B: responses missing a final answer
+- `\missRowsQwen` = `18,100` — Qwen2.5-7B: responses checked
+
+## R10 H13 with gpt-4.1 without questions missing a final answer
+
+- `\sensDirReg` = `$+$25.2` — registered H13 (directional flag + instruction vs neutral flag + instruction, RAMDocs gpt-4.1, conflict; points)
+- `\sensDirRegCI` = `[$+$18.0, $+$32.4]` — 95% CI
+- `\sensDirRegP` = `$<$0.001` — Holm p (registered family)
+- `\sensDirRegN` = `139` — questions (registered)
+- `\sensDirRegSupported` = `yes` — registered status
+- `\sensDir` = `$+$17.4` — the same without the dropped questions (directional flag + instruction vs neutral flag + instruction; points)
+- `\sensDirCI` = `[$+$9.3, $+$26.7]` — 95% CI
+- `\sensDirP` = `0.001` — Holm p
+- `\sensDirN` = `86` — questions kept
+- `\sensDirDropped` = `53` — conflict questions dropped (any seed of either arm lacks a final answer)
+- `\sensDirSupported` = `yes` — status without the dropped questions (sensitivity only)
+- `\sensNeuReg` = `$+$5.8` — registered H13 (neutral flag + instruction vs plain, RAMDocs gpt-4.1, conflict; points)
+- `\sensNeuRegCI` = `[$-$2.9, $+$14.4]` — 95% CI
+- `\sensNeuRegP` = `0.743` — Holm p (registered family)
+- `\sensNeuRegN` = `139` — questions (registered)
+- `\sensNeuRegSupported` = `no` — registered status
+- `\sensNeu` = `$+$17.2` — the same without the dropped questions (neutral flag + instruction vs plain; points)
+- `\sensNeuCI` = `[$+$6.9, $+$27.6]` — 95% CI
+- `\sensNeuP` = `0.007` — Holm p
+- `\sensNeuN` = `87` — questions kept
+- `\sensNeuDropped` = `52` — conflict questions dropped (any seed of either arm lacks a final answer)
+- `\sensNeuSupported` = `yes` — status without the dropped questions (sensitivity only)
+
+## R11 seed dependence
+
+- `\seedTwentyThreeAll` = `$-$0.1` — pooled H23 (matcher), all seeds (points)
+- `\seedTwentyThreeK` = `9` — cells in pooled H23
+- `\seedTwentyThreeLo` = `$-$0.4` — pooled H23: lowest estimate from one seed alone (points)
+- `\seedTwentyThreeHi` = `$+$1.1` — pooled H23: highest estimate from one seed alone (points)
+- `\seedTwentyThreeFixedLo` = `$-$0.4` — H23: lowest, single-seed cells kept in every seed
+- `\seedTwentyThreeFixedHi` = `$+$0.3` — H23: highest, single-seed cells kept in every seed
+- `\seedTwentyThreeSingle` = `3` — single-seed cells in pooled H23
+- `\seedThirtyAAll` = `$+$1.2` — pooled H30a (matcher), all seeds (points)
+- `\seedThirtyAK` = `22` — cells in pooled H30a
+- `\seedThirtyALo` = `$+$0.5` — pooled H30a: lowest estimate from one seed alone (points)
+- `\seedThirtyAHi` = `$+$1.4` — pooled H30a: highest estimate from one seed alone (points)
+- `\seedThirtyAFixedLo` = `$+$1.0` — H30a: lowest, single-seed cells kept in every seed
+- `\seedThirtyAFixedHi` = `$+$1.4` — H30a: highest, single-seed cells kept in every seed
+- `\seedThirtyASingle` = `4` — single-seed cells in pooled H30a
+- `\seedTabSettings` = `19` — Table 2 settings
+- `\seedTabSingle` = `9` — Table 2 settings with one seed
+- `\seedTabCorrectSpread` = `6.3` — largest seed-to-seed spread of a neutral-flag accuracy contrast over multi-seed Table 2 settings (points)
+- `\seedTabCorrectSpreadSet` = `CB one-answer, gpt-6-luna` — setting with that spread
+- `\seedTabMisinfoSpread` = `5.0` — largest seed-to-seed spread of a neutral-flag misinformation share contrast over multi-seed Table 2 settings (points)
+- `\seedTabMisinfoSpreadSet` = `RAMDocs, Claude Haiku` — setting with that spread
+- `\seedTabAbstainSpread` = `2.3` — largest seed-to-seed spread of a neutral-flag abstention contrast over multi-seed Table 2 settings (points)
+- `\seedTabAbstainSpreadSet` = `CB one-answer, gpt-6-luna` — setting with that spread
+
+## R12 one matcher per table (one-way misinformation)
+
+- `\oneWayExploN` = `210` — exploratory misinformation decisions (one Holm family)
+- `\oneWayExploChanged` = `6` — decisions that change with the one-way matcher
+- `\oneWayExploLost` = `5` — of these, significant -> not
+- `\oneWayExploGained` = `1` — of these, not -> significant
+- `\oneWayHTwentyOneN` = `16` — registered H21(a) tests recomputed
+- `\oneWayHTwentyOneChanged` = `0` — H21(a) tests whose status would change
+- `\oneWayBoldLost` = `1` — Table 2 misinformation bold marks lost under one-way matching
+- `\oneWayBoldGained` = `0` — Table 2 misinformation bold marks gained
+- `\oneWayBoldLostCell` = `RAMDocs, Claude Haiku, oracle neutral flag` — the Table 2 cell(s) that lose bold
+- `\oneWayBoldLostDiff` = `$-$7.4` — its misinformation change, one-way (points)
+- `\oneWayBoldLostDiffBidir` = `$-$7.9` — its misinformation change, bidirectional
+- `\oneWayBoldLostP` = `0.061` — its Holm p, one-way
+- `\oneWayBoldLostPBidir` = `0.024` — its Holm p, bidirectional
+
+## R13 HealthContradict page stance (judge verdicts, §19.3 audit; stanceCorrectYes, stanceMisYes and stanceBoth equal \hcLabCorrect, \hcLabMis and \hcLabBoth)
+
+- `\stanceN` = `247` — items with a parsed judge verdict
+- `\stanceCorrectYes` = `68` — share of items: correct-typed page supports the gold answer = yes (%)
+- `\stanceCorrectNo` = `7` — share of items: correct-typed page supports the gold answer = no (%)
+- `\stanceCorrectUnclear` = `25` — share of items: correct-typed page supports the gold answer = unclear (%)
+- `\stanceMisYes` = `55` — share of items: misinformation-typed page supports the wrong answer = yes (%)
+- `\stanceMisNo` = `17` — share of items: misinformation-typed page supports the wrong answer = no (%)
+- `\stanceMisUnclear` = `28` — share of items: misinformation-typed page supports the wrong answer = unclear (%)
+- `\stanceBothN` = `92` — items whose two pages both support their labelled answer
+- `\stanceBoth` = `37` — the same as % of items
+- `\stanceNotBoth` = `63` — items without a confirmed pair (%)
+- `\stancePages` = `494` — pages judged
+- `\stanceReversedN` = `60` — pages the judge says do NOT support their labelled side ('no')
+- `\stanceReversed` = `12` — the same as % of pages
+- `\stanceCutN` = `357` — pages at the character cut
+- `\stanceCut` = `72` — pages at the cut (%)
+- `\stanceCutChars` = `4,000` — the cut (characters)
+- `\stanceTruncSrc` = `356` — pages longer than the cut in the source (truncated)
+
+## R14 RAGuard answer key against the oracle directional flag (conflict claims). Each arm against no flag is already in the paper: \zRg<G>AnswerKeyConflict and \zRg<G>OracleFlagDirectionalConflict (R14's own CIs for them would differ by 0.1, so they are not emitted)
+
+- `\rgKeyKeyFlagHaiku` = `$+$7.1` — Claude Haiku: answer key minus oracle directional flag (points)
+- `\rgKeyKeyFlagHaikuCI` = `[$+$3.6, $+$10.8]` — 95% question-bootstrap CI
+- `\rgKeyKeyFlagMini` = `$-$8.5` — gpt-4o-mini: answer key minus oracle directional flag (points)
+- `\rgKeyKeyFlagMiniCI` = `[$-$13.0, $-$4.2]` — 95% question-bootstrap CI
+- `\rgKeyKeyFlagLuna` = `$+$33.2` — gpt-6-luna: answer key minus oracle directional flag (points)
+- `\rgKeyKeyFlagLunaCI` = `[$+$28.7, $+$37.8]` — 95% question-bootstrap CI
+- `\rgKeyKeyFlagTerra` = `$+$12.2` — gpt-6.1-terra: answer key minus oracle directional flag (points)
+- `\rgKeyKeyFlagTerraCI` = `[$+$7.8, $+$16.7]` — 95% question-bootstrap CI
+- `\rgKeyN` = `294` — conflict claims
+- `\rgKeyGens` = `4` — generators with an answer-key arm
+- `\rgKeyAbove` = `3` — generators whose key beats the flag (CI > 0)
+- `\rgKeyBelow` = `1` — generators whose flag beats the key (CI < 0)
+- `\rgKeyNotRun` = `Claude Sonnet` — generators without an answer-key arm
+
+## R15 single-entity RAMDocs questions, leave one setting out. The pooled row (all settings) is the paper's \entNeuSingle / \entDirSingle with their CIs and \entNeuSingleN questions (R15's own CI for it would differ by 0.1, so it is not emitted)
+
+- `\seLooNeuK` = `10` — settings
+- `\seLooNeuLo` = `$-$5.5` — oracle neutral flag: lowest leave-one-out mean
+- `\seLooNeuHi` = `$-$3.4` — oracle neutral flag: highest leave-one-out mean
+- `\seLooNeuLoDrop` = `RAMDocs, Claude Haiku` — the setting whose removal gives the lowest
+- `\seLooNeuHiDrop` = `RAMDocs, gpt-4.1 (minimal)` — the setting whose removal gives the highest
+- `\seLooNeuExcl` = `10` — leave-one-out means whose 95% CI excludes zero
+- `\seLooDirK` = `10` — settings
+- `\seLooDirLo` = `$+$26.7` — oracle directional flag: lowest leave-one-out mean
+- `\seLooDirHi` = `$+$31.3` — oracle directional flag: highest leave-one-out mean
+- `\seLooDirLoDrop` = `RAMDocs, gpt-6-luna` — the setting whose removal gives the lowest
+- `\seLooDirHiDrop` = `RAMDocs, Qwen2.5-7B (multi-answer)` — the setting whose removal gives the highest
+- `\seLooDirExcl` = `10` — leave-one-out means whose 95% CI excludes zero
+
+## R16 risk-coverage: settings whose oracle neutral flag changes a conflict-question metric (paired 95% CI excludes zero; unadjusted, not Holm)
+
+- `\rcMultiN` = `10` — settings, multi-answer
+- `\rcMultiSelUp` = `0` — multi-answer: neutral flag raises selective accuracy
+- `\rcMultiSelDown` = `7` — multi-answer: neutral flag lowers selective accuracy
+- `\rcMultiSel` = `7` — multi-answer: neutral flag changes selective accuracy (either way)
+- `\rcMultiAbstUp` = `0` — multi-answer: neutral flag raises abstention
+- `\rcMultiAbstDown` = `0` — multi-answer: neutral flag lowers abstention
+- `\rcMultiAbst` = `0` — multi-answer: neutral flag changes abstention (either way)
+- `\rcMultiMisUp` = `7` — multi-answer: neutral flag raises misinformation share
+- `\rcMultiMisDown` = `1` — multi-answer: neutral flag lowers misinformation share
+- `\rcMultiMis` = `8` — multi-answer: neutral flag changes misinformation share (either way)
+- `\rcMultiStrictUp` = `0` — multi-answer: neutral flag raises strict accuracy
+- `\rcMultiStrictDown` = `7` — multi-answer: neutral flag lowers strict accuracy
+- `\rcMultiStrict` = `7` — multi-answer: neutral flag changes strict accuracy (either way)
+- `\rcMinimalN` = `4` — settings, minimal skeleton (no stated policy)
+- `\rcMinimalSelUp` = `0` — minimal skeleton (no stated policy): neutral flag raises selective accuracy
+- `\rcMinimalSelDown` = `2` — minimal skeleton (no stated policy): neutral flag lowers selective accuracy
+- `\rcMinimalSel` = `2` — minimal skeleton (no stated policy): neutral flag changes selective accuracy (either way)
+- `\rcMinimalAbstUp` = `4` — minimal skeleton (no stated policy): neutral flag raises abstention
+- `\rcMinimalAbstDown` = `0` — minimal skeleton (no stated policy): neutral flag lowers abstention
+- `\rcMinimalAbst` = `4` — minimal skeleton (no stated policy): neutral flag changes abstention (either way)
+- `\rcMinimalMisUp` = `1` — minimal skeleton (no stated policy): neutral flag raises misinformation share
+- `\rcMinimalMisDown` = `1` — minimal skeleton (no stated policy): neutral flag lowers misinformation share
+- `\rcMinimalMis` = `2` — minimal skeleton (no stated policy): neutral flag changes misinformation share (either way)
+- `\rcMinimalStrictUp` = `0` — minimal skeleton (no stated policy): neutral flag raises strict accuracy
+- `\rcMinimalStrictDown` = `4` — minimal skeleton (no stated policy): neutral flag lowers strict accuracy
+- `\rcMinimalStrict` = `4` — minimal skeleton (no stated policy): neutral flag changes strict accuracy (either way)
+- `\rcSingleN` = `16` — settings, one answer, ``unknown'' allowed
+- `\rcSingleSelUp` = `5` — one answer, ``unknown'' allowed: neutral flag raises selective accuracy
+- `\rcSingleSelDown` = `0` — one answer, ``unknown'' allowed: neutral flag lowers selective accuracy
+- `\rcSingleSel` = `5` — one answer, ``unknown'' allowed: neutral flag changes selective accuracy (either way)
+- `\rcSingleAbstUp` = `7` — one answer, ``unknown'' allowed: neutral flag raises abstention
+- `\rcSingleAbstDown` = `2` — one answer, ``unknown'' allowed: neutral flag lowers abstention
+- `\rcSingleAbst` = `9` — one answer, ``unknown'' allowed: neutral flag changes abstention (either way)
+- `\rcSingleMisUp` = `2` — one answer, ``unknown'' allowed: neutral flag raises misinformation share
+- `\rcSingleMisDown` = `9` — one answer, ``unknown'' allowed: neutral flag lowers misinformation share
+- `\rcSingleMis` = `11` — one answer, ``unknown'' allowed: neutral flag changes misinformation share (either way)
+- `\rcSingleStrictUp` = `4` — one answer, ``unknown'' allowed: neutral flag raises strict accuracy
+- `\rcSingleStrictDown` = `3` — one answer, ``unknown'' allowed: neutral flag lowers strict accuracy
+- `\rcSingleStrict` = `7` — one answer, ``unknown'' allowed: neutral flag changes strict accuracy (either way)
+- `\rcForcedN` = `4` — settings, one answer, forced
+- `\rcForcedSelUp` = `1` — one answer, forced: neutral flag raises selective accuracy
+- `\rcForcedSelDown` = `0` — one answer, forced: neutral flag lowers selective accuracy
+- `\rcForcedSel` = `1` — one answer, forced: neutral flag changes selective accuracy (either way)
+- `\rcForcedAbstUp` = `0` — one answer, forced: neutral flag raises abstention
+- `\rcForcedAbstDown` = `0` — one answer, forced: neutral flag lowers abstention
+- `\rcForcedAbst` = `0` — one answer, forced: neutral flag changes abstention (either way)
+- `\rcForcedMisUp` = `0` — one answer, forced: neutral flag raises misinformation share
+- `\rcForcedMisDown` = `2` — one answer, forced: neutral flag lowers misinformation share
+- `\rcForcedMis` = `2` — one answer, forced: neutral flag changes misinformation share (either way)
+- `\rcForcedStrictUp` = `1` — one answer, forced: neutral flag raises strict accuracy
+- `\rcForcedStrictDown` = `0` — one answer, forced: neutral flag lowers strict accuracy
+- `\rcForcedStrict` = `1` — one answer, forced: neutral flag changes strict accuracy (either way)
+- `\rcAllN` = `34` — settings, all settings
+- `\rcAllSelUp` = `6` — all settings: neutral flag raises selective accuracy
+- `\rcAllSelDown` = `9` — all settings: neutral flag lowers selective accuracy
+- `\rcAllSel` = `15` — all settings: neutral flag changes selective accuracy (either way)
+- `\rcAllAbstUp` = `11` — all settings: neutral flag raises abstention
+- `\rcAllAbstDown` = `2` — all settings: neutral flag lowers abstention
+- `\rcAllAbst` = `13` — all settings: neutral flag changes abstention (either way)
+- `\rcAllMisUp` = `10` — all settings: neutral flag raises misinformation share
+- `\rcAllMisDown` = `13` — all settings: neutral flag lowers misinformation share
+- `\rcAllMis` = `23` — all settings: neutral flag changes misinformation share (either way)
+- `\rcAllStrictUp` = `5` — all settings: neutral flag raises strict accuracy
+- `\rcAllStrictDown` = `14` — all settings: neutral flag lowers strict accuracy
+- `\rcAllStrict` = `19` — all settings: neutral flag changes strict accuracy (either way)
+
+## R17 RAMDocs answer mix (minimal skeleton) and clean questions by type. The neutral flag's strict-accuracy change is the paper's \x<G>MinOracleFlagConf (G = Mini, Four, Qwen)
+
+- `\mixMinQwenPlainCorrect` = `17.3` — Qwen2.5-7B, minimal skeleton, conflict questions, no flag: correct share (%; exclusive outcomes)
+- `\mixMinQwenPlainMisinfo` = `38.1` — Qwen2.5-7B, minimal skeleton, conflict questions, no flag: misinfo share (%; exclusive outcomes)
+- `\mixMinQwenPlainAbstain` = `8.6` — Qwen2.5-7B, minimal skeleton, conflict questions, no flag: abstain share (%; exclusive outcomes)
+- `\mixMinQwenPlainOther` = `36.0` — Qwen2.5-7B, minimal skeleton, conflict questions, no flag: other share (%; exclusive outcomes)
+- `\mixMinQwenFlagCorrect` = `11.5` — Qwen2.5-7B, minimal skeleton, conflict questions, oracle neutral flag: correct share (%; exclusive outcomes)
+- `\mixMinQwenFlagMisinfo` = `42.4` — Qwen2.5-7B, minimal skeleton, conflict questions, oracle neutral flag: misinfo share (%; exclusive outcomes)
+- `\mixMinQwenFlagAbstain` = `19.4` — Qwen2.5-7B, minimal skeleton, conflict questions, oracle neutral flag: abstain share (%; exclusive outcomes)
+- `\mixMinQwenFlagOther` = `26.6` — Qwen2.5-7B, minimal skeleton, conflict questions, oracle neutral flag: other share (%; exclusive outcomes)
+- `\mixMinQwenMisinfoDiff` = `$+$4.3` — Qwen2.5-7B, minimal: neutral flag minus no flag, misinfo (points)
+- `\mixMinQwenMisinfoDiffCI` = `[$-$2.9, $+$11.5]` — 95% CI
+- `\mixMinQwenAbstainDiff` = `$+$10.1` — Qwen2.5-7B, minimal: neutral flag minus no flag, abstain (points)
+- `\mixMinQwenAbstainDiffCI` = `[$+$4.3, $+$16.5]` — 95% CI
+- `\mixMinFourPlainCorrect` = `33.6` — gpt-4.1, minimal skeleton, conflict questions, no flag: correct share (%; exclusive outcomes)
+- `\mixMinFourPlainMisinfo` = `29.0` — gpt-4.1, minimal skeleton, conflict questions, no flag: misinfo share (%; exclusive outcomes)
+- `\mixMinFourPlainAbstain` = `2.4` — gpt-4.1, minimal skeleton, conflict questions, no flag: abstain share (%; exclusive outcomes)
+- `\mixMinFourPlainOther` = `35.0` — gpt-4.1, minimal skeleton, conflict questions, no flag: other share (%; exclusive outcomes)
+- `\mixMinFourFlagCorrect` = `22.5` — gpt-4.1, minimal skeleton, conflict questions, oracle neutral flag: correct share (%; exclusive outcomes)
+- `\mixMinFourFlagMisinfo` = `41.2` — gpt-4.1, minimal skeleton, conflict questions, oracle neutral flag: misinfo share (%; exclusive outcomes)
+- `\mixMinFourFlagAbstain` = `6.5` — gpt-4.1, minimal skeleton, conflict questions, oracle neutral flag: abstain share (%; exclusive outcomes)
+- `\mixMinFourFlagOther` = `29.7` — gpt-4.1, minimal skeleton, conflict questions, oracle neutral flag: other share (%; exclusive outcomes)
+- `\mixMinFourMisinfoDiff` = `$+$12.2` — gpt-4.1, minimal: neutral flag minus no flag, misinfo (points)
+- `\mixMinFourMisinfoDiffCI` = `[$+$5.5, $+$19.2]` — 95% CI
+- `\mixMinFourAbstainDiff` = `$+$4.1` — gpt-4.1, minimal: neutral flag minus no flag, abstain (points)
+- `\mixMinFourAbstainDiffCI` = `[$+$0.7, $+$7.9]` — 95% CI
+- `\mixMinMiniPlainCorrect` = `20.4` — gpt-4o-mini, minimal skeleton, conflict questions, no flag: correct share (%; exclusive outcomes)
+- `\mixMinMiniPlainMisinfo` = `29.3` — gpt-4o-mini, minimal skeleton, conflict questions, no flag: misinfo share (%; exclusive outcomes)
+- `\mixMinMiniPlainAbstain` = `7.2` — gpt-4o-mini, minimal skeleton, conflict questions, no flag: abstain share (%; exclusive outcomes)
+- `\mixMinMiniPlainOther` = `43.2` — gpt-4o-mini, minimal skeleton, conflict questions, no flag: other share (%; exclusive outcomes)
+- `\mixMinMiniFlagCorrect` = `15.1` — gpt-4o-mini, minimal skeleton, conflict questions, oracle neutral flag: correct share (%; exclusive outcomes)
+- `\mixMinMiniFlagMisinfo` = `28.5` — gpt-4o-mini, minimal skeleton, conflict questions, oracle neutral flag: misinfo share (%; exclusive outcomes)
+- `\mixMinMiniFlagAbstain` = `23.0` — gpt-4o-mini, minimal skeleton, conflict questions, oracle neutral flag: abstain share (%; exclusive outcomes)
+- `\mixMinMiniFlagOther` = `33.3` — gpt-4o-mini, minimal skeleton, conflict questions, oracle neutral flag: other share (%; exclusive outcomes)
+- `\mixMinMiniMisinfoDiff` = `$-$0.7` — gpt-4o-mini, minimal: neutral flag minus no flag, misinfo (points)
+- `\mixMinMiniMisinfoDiffCI` = `[$-$7.2, $+$5.5]` — 95% CI
+- `\mixMinMiniAbstainDiff` = `$+$16.1` — gpt-4o-mini, minimal: neutral flag minus no flag, abstain (points)
+- `\mixMinMiniAbstainDiffCI` = `[$+$11.0, $+$21.6]` — 95% CI
+- `\cleanTypeDet` = `gpt-4o-mini` — the LLM detector behind R17(b)
+- `\cleanTypeK` = `6` — settings pooled
+- `\cleanTypeRateSeveral` = `81.7` — clean questions with several gold answers: share the detector flags (%)
+- `\cleanTypeRateSeveralCI` = `[74.0, 88.5]` — 95% CI
+- `\cleanTypeNSeveral` = `104` — clean questions with several gold answers
+- `\cleanTypeFlagsSeveral` = `1.27` — mean flags per clean question with several gold answers
+- `\cleanTypeEffSeveral` = `$+$1.1` — llm_dir+flag effect on clean questions with several gold answers, equal-weight mean over settings (points)
+- `\cleanTypeEffSeveralCI` = `[$-$1.0, $+$3.2]` — 95% CI
+- `\cleanTypeRateOne` = `50.0` — clean questions with one gold answer: share the detector flags (%)
+- `\cleanTypeRateOneCI` = `[31.8, 68.2]` — 95% CI
+- `\cleanTypeNOne` = `22` — clean questions with one gold answer
+- `\cleanTypeFlagsOne` = `0.59` — mean flags per clean question with one gold answer
+- `\cleanTypeEffOne` = `$+$1.0` — llm_dir+flag effect on clean questions with one gold answer, equal-weight mean over settings (points)
+- `\cleanTypeEffOneCI` = `[$-$1.5, $+$4.0]` — 95% CI
+
+## R18 prevalence (gpt-4o-mini LLM directional flag): effect at conflict share pi; 'significantly' = joint-bootstrap 95% band excludes zero
+
+- `\pvN` = `31` — settings
+- `\pvOneNeg` = `24` — settings with a negative point estimate at pi = 0.01
+- `\pvOneSigNeg` = `12` — settings significantly below zero at pi = 0.01
+- `\pvOneSigPos` = `3` — settings significantly above zero at pi = 0.01
+- `\pvFiveNeg` = `22` — settings with a negative point estimate at pi = 0.05
+- `\pvFiveSigNeg` = `11` — settings significantly below zero at pi = 0.05
+- `\pvFiveSigPos` = `3` — settings significantly above zero at pi = 0.05
+- `\pvTwentyNeg` = `17` — settings with a negative point estimate at pi = 0.20
+- `\pvTwentySigNeg` = `6` — settings significantly below zero at pi = 0.20
+- `\pvTwentySigPos` = `5` — settings significantly above zero at pi = 0.20
+- `\pvFiftyNeg` = `9` — settings with a negative point estimate at pi = 0.50
+- `\pvFiftySigNeg` = `4` — settings significantly below zero at pi = 0.50
+- `\pvFiftySigPos` = `13` — settings significantly above zero at pi = 0.50
+- `\pvFiveCbN` = `18` — settings in group ConflictBank: correct passage plus three off-subject distractors
+- `\pvFiveCbNeg` = `15` — ConflictBank: correct passage plus three off-subject distractors: negative at 5%
+- `\pvFiveCbSigNeg` = `8` — ConflictBank: correct passage plus three off-subject distractors: significantly negative at 5%
+- `\pvFiveCbSigPos` = `2` — ConflictBank: correct passage plus three off-subject distractors: significantly positive at 5%
+- `\pvFiveRdN` = `8` — settings in group RAMDocs: questions without misinformation, mostly several valid answers
+- `\pvFiveRdNeg` = `6` — RAMDocs: questions without misinformation, mostly several valid answers: negative at 5%
+- `\pvFiveRdSigNeg` = `3` — RAMDocs: questions without misinformation, mostly several valid answers: significantly negative at 5%
+- `\pvFiveRdSigPos` = `0` — RAMDocs: questions without misinformation, mostly several valid answers: significantly positive at 5%
+- `\pvFiveRgN` = `5` — settings in group RAGuard: claims with supporting posts and no misleading post
+- `\pvFiveRgNeg` = `1` — RAGuard: claims with supporting posts and no misleading post: negative at 5%
+- `\pvFiveRgSigNeg` = `0` — RAGuard: claims with supporting posts and no misleading post: significantly negative at 5%
+- `\pvFiveRgSigPos` = `1` — RAGuard: claims with supporting posts and no misleading post: significantly positive at 5%
+- `\pvBeN` = `17` — settings with a break-even share (K > 0 > C)
+- `\pvHelpsAll` = `7` — settings whose flag helps at every share (K >= 0 and C >= 0, not both zero)
+- `\pvHurtsAll` = `7` — settings whose flag hurts at every share (K <= 0 and C <= 0, not both zero)
+- `\pvBeMin` = `2` — smallest break-even share (%)
+- `\pvBeMinSet` = `RAMDocs, gpt-6.1-terra` — setting with the smallest
+- `\pvBeMedian` = `22` — median break-even share (%)
+- `\pvBeMax` = `74` — largest break-even share (%)
+- `\pvBeMaxSet` = `RAMDocs, gpt-4o-mini (minimal)` — setting with the largest
+- `\pvBeCapped` = `4` — break-even CIs whose upper limit is 100% (>= 2.5% of replicates help at no share)
+- `\pvBeCbN` = `9` — ConflictBank: correct passage plus three off-subject distractors: settings with a break-even share
+- `\pvBeCbMin` = `5` — ConflictBank: correct passage plus three off-subject distractors: smallest break-even share (%)
+- `\pvBeCbMax` = `45` — ConflictBank: correct passage plus three off-subject distractors: largest break-even share (%)
+- `\pvBeRdN` = `7` — RAMDocs: questions without misinformation, mostly several valid answers: settings with a break-even share
+- `\pvBeRdMin` = `2` — RAMDocs: questions without misinformation, mostly several valid answers: smallest break-even share (%)
+- `\pvBeRdMax` = `74` — RAMDocs: questions without misinformation, mostly several valid answers: largest break-even share (%)
+- `\pvBeRgN` = `1` — RAGuard: claims with supporting posts and no misleading post: settings with a break-even share
+- `\pvBeRgMin` = `30` — RAGuard: claims with supporting posts and no misleading post: smallest break-even share (%)
+- `\pvBeRgMax` = `30` — RAGuard: claims with supporting posts and no misleading post: largest break-even share (%)
+
+## R19 H4b second form (label-robust, holdout_contains)
+
+- `\hFourBRho` = `$-$0.08` — Spearman rho over cells
+- `\hFourBP` = `0.75` — two-sided permutation p
+- `\hFourBPOne` = `0.38` — one-sided permutation p (rho < 0)
+- `\hFourBPerm` = `10,000` — permutations
+- `\hFourBBcaCI` = `[$-$0.32, $+$0.01]` — BCa 95% interval (5,000 question resamples)
+- `\hFourBPctCI` = `[$-$0.56, $-$0.02]` — percentile 95% interval as in tab:contains (2,000 question resamples)
+- `\hFourBPctSameCI` = `[$-$0.57, $-$0.02]` — percentile 95% interval from the 5,000 resamples behind the BCa interval
+- `\hFourBZ` = `0.52` — BCa bias correction z0 (share of replicates below rho = Phi(z0))
+- `\hFourBBelow` = `70` — share of bootstrap replicates below rho (%), Phi(z0)
+- `\hFourBN` = `18` — cells
+- `\hFourBQ` = `127` — questions
+
+## Already computed, now cited: PR§19.2 matcher-judge agreement per condition (conflict responses)
+
+- `\scJudgeOnlyOracleDir` = `8.7` — oracle directional flag: judge says correct, matcher says not (% of responses)
+- `\scMatcherOnlyOracleDir` = `0.9` — oracle directional flag: matcher says correct, judge says not (%)
+- `\scAgreeOracleDir` = `90.4` — oracle directional flag: agreement (%)
+- `\scNOracleDir` = `5,133` — oracle directional flag: responses
+- `\scJudgeOnlyAnswerKey` = `6.7` — answer key: judge says correct, matcher says not (% of responses)
+- `\scMatcherOnlyAnswerKey` = `1.4` — answer key: matcher says correct, judge says not (%)
+- `\scAgreeAnswerKey` = `92.0` — answer key: agreement (%)
+- `\scNAnswerKey` = `5,059` — answer key: responses
+- `\scJudgeOnlyLlmDir` = `2.9` — LLM directional flag: judge says correct, matcher says not (% of responses)
+- `\scMatcherOnlyLlmDir` = `0.5` — LLM directional flag: matcher says correct, judge says not (%)
+- `\scAgreeLlmDir` = `96.5` — LLM directional flag: agreement (%)
+- `\scNLlmDir` = `6,821` — LLM directional flag: responses
+- `\scJudgeOnlyVerdictKey` = `2.4` — verdict key: judge says correct, matcher says not (% of responses)
+- `\scMatcherOnlyVerdictKey` = `0.8` — verdict key: matcher says correct, judge says not (%)
+- `\scAgreeVerdictKey` = `96.9` — verdict key: agreement (%)
+- `\scNVerdictKey` = `6,191` — verdict key: responses
+
+## Already computed, now cited: ConflictBank closed-book accuracy (conflict questions, one-way strict)
+
+- `\cbClosedMin` = `4.3` — lowest closed-book accuracy over the 6 generators with a closed-book run (%)
+- `\cbClosedMinGen` = `Qwen2.5-7B` — generator(s) at the minimum
+- `\cbClosedMax` = `20.0` — highest closed-book accuracy (%)
+- `\cbClosedMaxGen` = `gpt-4.1 and gpt-6.1-terra` — generator(s) at the maximum (ties joined)
+- `\cbClosedN` = `6` — generators with a ConflictBank closed-book run
+
+## Deference table (tab_deference): the no-flag column. The other columns already have macros: closed-book \zcSg<G>Conflict, f_R \rfolRight<G> (\rfolRight<G>CI), f_W \rfolWrong<G> (\rfolWrong<G>CI), right/wrong effects \hThirtyOneA<G> / \hThirtyOneB<G>, p* \be<G> (\be<G>CI); G = Mini, Luna, Haiku, Terra. deferPlain is the H31 run's own no-flag draw; where it differs from \zpSg<G>Conflict (the one-answer run's, PR§20.1): gpt-6-luna, gpt-6.1-terra
+
+- `\deferPlainMini` = `51.1` — gpt-4o-mini: no-flag accuracy on the H31 run's conflict questions (%; question-weighted over the right and wrong arms)
+- `\deferPlainLuna` = `53.8` — gpt-6-luna: no-flag accuracy on the H31 run's conflict questions (%; question-weighted over the right and wrong arms)
+- `\deferPlainHaiku` = `66.8` — Claude Haiku: no-flag accuracy on the H31 run's conflict questions (%; question-weighted over the right and wrong arms)
+- `\deferPlainTerra` = `69.7` — gpt-6.1-terra: no-flag accuracy on the H31 run's conflict questions (%; question-weighted over the right and wrong arms)

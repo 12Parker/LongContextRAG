@@ -320,13 +320,15 @@ def prevalence(rev, S, PRIMARY):
                 continue
             dc = _diff(rows, "plain", cond, PRIMARY)
             ra = per_question(rows, "plain", False, PRIMARY); rb = per_question(rows, cond, False, PRIMARY)
-            dn = [rb[i] - ra[i] for i in set(ra) & set(rb)]
+            dn = [rb[i] - ra[i] for i in sorted(set(ra) & set(rb))]
             if not dc or not dn:
                 continue
-            c, n = float(np.mean(list(dc.values()))), float(np.mean(dn))
+            # exact sums: a clean effect of exactly zero must not come out as +-1e-17 (set order changed the last bit)
+            c, n = math.fsum(dc.values()) / len(dc), math.fsum(dn) / len(dn)
             out[f"{s['name']}|{cond}"] = {"conflict": 100 * c, "clean": 100 * n,
                                           **{f"pi{p:.2f}": 100 * (p * c + (1 - p) * n) for p in PREV},
-                                          "breakeven_pi": (-n / (c - n)) if (c - n) and -n / (c - n) > 0 else None}
+                                          "breakeven_pi": 0.0 if n == 0 and c > 0 else
+                                          (-n / (c - n)) if (c - n) and -n / (c - n) > 0 else None}
     rev["prevalence7"] = out
 
 

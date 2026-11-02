@@ -1307,6 +1307,8 @@ def numbers(R, out: Path):
     numbers9(R, add)   # ninth-review re-analyses (§18)
     from .assets10 import numbers10
     numbers10(R, add)   # §19: prospective test, full judge, HealthContradict
+    from .assets11 import numbers11
+    numbers11(R, add)   # §20: re-analyses R1-R19 (revision11), uncited §19.2 agreement, closed-book range
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1336,6 +1338,8 @@ def write_all(R, out: Path):
     write9(R, out)   # ninth review: tab_entity
     from .assets10 import write10
     write10(R, out)   # §19: tab_fresh, tab_hc
+    from .assets11 import write11
+    write11(R, out)   # §20: fig_riskcov, tab_deference, tab_prior, tab_missing, tab_riskcov, tab_prev11
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():
@@ -1423,8 +1427,9 @@ def tab_appendix(R, out: Path):
 \end{{tabular}}
 \caption{{Label robustness: pre-registered tests with every suspect document treated as misinformation
 ({c['n']['conflict']} conflict and {c['n']['clean']} clean hold-out questions; this rule assigns the 35 questions the
-main analysis excludes). The bootstrap distribution of the H4 correlation is skewed, so its point estimate lies near the
-end of its percentile interval.}}
+main analysis excludes). The bootstrap distribution of the H4 correlation is skewed: its percentile interval excludes
+the point estimate, so it cannot be read as support; a permutation test and a bias-corrected interval are in
+Appendix~\ref{{app:rev11}} (PR\S20, R19).}}
 \label{{tab:contains}}
 \end{{table*}}
 """)
