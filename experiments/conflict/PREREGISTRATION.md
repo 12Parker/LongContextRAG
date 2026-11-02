@@ -1152,3 +1152,179 @@ Estimated: 19.1 about $14, 19.2 about $6, 19.3 about $9, label audit under $0.5;
 Order: 19.1 stage 1; 19.3 stage 1 and its label audit; commit `predictions19.json`; 19.1 stage 2; 19.3 stage 2;
 `randdir_fresh_mini`; 19.2. A run that would start at or above the $245 gate is skipped and every hypothesis that needs
 it is reported as not run. §19 tests join the programme-wide BH count.
+
+## 20. Tenth revision addendum (frozen 2026-11-02, after an external review, before any analysis below)
+
+An external review (a faculty member's, on the draft of 2026-10-30) asks for a paper built around two or three claims;
+evidence on whether ConflictBank's direction signal is a generation artefact and whether follow rates depend on the
+generator's prior knowledge; human labels for the scorer question; an honest reading of the natural-document
+benchmarks; the neutral flag reported as a policy shift; and less weight on this pre-registration. The triage that
+checked every point against the paper and the runs is `TRIAGE_REVIEW10.md` (committed 3b9e80d).
+
+Everything in 20.2–20.4 is exploratory: re-analyses of outputs already seen, run after this section is committed and
+pushed, outside the FDR count, and reported as such. No API call is made under this section. New model runs proposed
+in the triage (its C list) are **not** registered here; any the authors approve will be registered in full, in a later
+section, before it runs. Conventions unless stated: primary metric one-way strict (`ramdocs_strict_oneway`), seed means
+within questions, question-bootstrap 95% CIs with 5,000 resamples (seed 0), conflict and clean questions reported
+separately.
+
+### 20.1 Corrections to earlier sections (appended, nothing above is edited)
+
+- **Timing.** "Committed before its runs" does not hold for three items. §9.4 (b2ca800, 2026-10-27 11:18:21 local) was
+  committed after the Qwen run had started (its config and log date from 11:13:10; §9.4 itself says 113 plain rows
+  existed, none inspected). §9.6 (f248eea, 12:27:25) was written during the Qwen run, as its heading says. §17.6
+  (21d916c, 2026-10-29 10:04:42) was committed after the §17.3 judge outputs had been written (09:51–09:54). All
+  timestamps in this file's history are local commit times; pushes to the remote are the only third-party times.
+- **Claude temperature.** §19.1 lists claude-haiku-5-5 at "T 0.1". On our endpoint Claude takes no temperature, so it
+  ran at its default; `config.json` records the requested 0.1. The same holds for every Claude run since §14, and the
+  reasoning models (gpt-6-luna, gpt-6.1-terra) also ignore it.
+- **Double plain draw.** For gpt-6-luna and gpt-6.1-terra the `plain` condition was sampled twice in some families,
+  because the cache key holds the command-line temperature (e.g. `cb_single_terra` and `randdir_cb_terra`). §15's
+  statement that the hint-run plain "is a cache hit" is true for gpt-4o-mini, not for these two.
+- **Human audit sheet.** §15.4.7's `runs/labelling/audit_200.csv` is superseded by the 20.3 sheets: it holds no
+  answer-key or verdict-key outputs and shows the condition and the matcher score, so it cannot settle H23/H30. It
+  stays released, unlabelled.
+
+### 20.2 Artefacts, prior knowledge and the follow-rate account
+
+**R1. Passage-only text classifier (ConflictBank).** Training data: every row of the pinned `QA_dataset.json` whose
+subject is used by neither the §10 eval set nor ConflictBank-fresh (as an item or a distractor source). Each row gives
+two training passages, `default_evidence` (label correct) and `misinformation_conflict_evidence` (label false).
+Features: TF-IDF of word 1–2-grams (lower-cased, min_df 2, sublinear tf); model: L2 logistic regression (C = 1,
+max_iter 2,000). Two variants: (a) full passages; (b) every occurrence of the passage's own object string (gold object
+in the correct passage, substituted object in the other) replaced by one placeholder token. Evaluation on the 300
+conflict items of the eval set and of fresh: pairwise accuracy, the share where the misinformation passage gets the
+higher "false" probability, with a 95% bootstrap CI over items. Read as a lower bound on how readable the side is from
+surface text: accuracy well above 0.5 means surface cues exist; accuracy near 0.5 does not rule out content cues an LLM
+can use.
+
+**R2. Direction accuracy by the detector's own prior (ConflictBank eval).** For each detector model with closed-book
+runs on the eval set (gpt-4.1, gpt-6-luna, gpt-6.1-terra, claude-haiku-5-5; detections from `cross_cb_mini_{det}`,
+gpt-4.1 = `four`): a question is *known* to the model if its closed-book answer (`cb_single_*`, `closedbook`) is
+one-way strict correct on at least 2 of 3 seeds, or on its one seed where only one exists (the §11.3 rule). Direction
+accuracy as in §11.3 (among conflict questions where the detector flags the gold pair and names one side, the share
+naming the misinformation passage), split known / unknown, with counts, bootstrap CIs and the known-minus-unknown
+difference. gpt-4o-mini's split (§11.3, already computed) is reported beside them. Sonnet has no closed-book run and is
+left out. The HealthContradict version runs only after the 20.3 human labels exist, on human-confirmed items.
+
+**R3. Single-side direction precision.** For each ConflictBank eval detector (gpt-4o-mini, gpt-4.1, luna, terra, Haiku,
+Sonnet): among its flags on a gold pair that name exactly one side, the share naming the misinformation passage, beside
+the current definition that counts "both" and "unclear" verdicts as misses. First tabulated on 2026-11-02 while
+writing the triage; disclosed as such.
+
+**R4. Follow rates by the generator's prior (H31 runs).** For each H31 generator G (`randdir_cb_{mini,luna,haiku,terra}`),
+the follow rates as `revision10._follow` defines them (right flag followed: flagged answer correct, among right-assigned
+questions with plain wrong; wrong flag followed: flagged answer wrong under the metric, among wrong-assigned questions
+with plain correct), split by whether G knows the fact (G's own `cb_single*` closed-book, the R2 rule). Per generator:
+f_W known / unknown and f_R known / unknown with counts and bootstrap CIs; pooled over generators, a logistic regression
+of "followed" on known with generator fixed effects (odds ratio, 95% CI by question bootstrap). Stated in advance:
+known questions are 4–20% of the set, so the known-question rates rest on few questions and any conditioned account
+(R5) can change little.
+
+**R5. Conditioned account on the 30 crossed cells.** The round-10 retrospective prediction of the `cross_cb_*` cells,
+recomputed with each question's f_R and f_W taken from R4's known or unknown rate for its generator. MAE, slope and r
+against the unconditioned account on the same cells. Descriptive; the fresh cells have no closed-book run and are not
+re-scored.
+
+**R6. Prospective-test summaries (fresh cells, H32–H35 outputs).**
+- (a) Paired bootstrap 95% CI of MAE(cell-level marginal) − MAE(account), same draws as H32.
+- (b) A common-rate baseline: the frozen formula with one f_R and one f_W for every generator (the equal-weight mean of
+  the four frozen pairs); MAE and the paired MAE difference against the account.
+- (c) Clean questions: MAE over the cells in which the detector flags at least one clean question, beside the 20-cell
+  MAE; each cell with a predicted conflict effect ≤ −3 listed with pred, obs and CI.
+- (d) For the selection analysis, prediction error split into conflict and clean parts.
+
+**R7. gpt-6.1-terra's two plain draws.** The H31 follow rates and break-even for terra recomputed with the plain draw
+from `cb_single_terra` in place of `randdir_cb_terra`'s, and H19 recomputed with `holdout_rem_terra`'s plain in place
+of `holdout_terra`'s (or the reverse, whichever the paper does not use). Both reported.
+
+**R8. Response length under the flag.** API `completion_tokens`, plain vs flagged, by arm (right, wrong) and by
+followed or not, for terra, luna and Haiku in the H31 runs. Descriptive; for luna, terra and Claude these counts include
+hidden reasoning tokens.
+
+### 20.3 Scoring and the human audit
+
+**R9. Missing final answers.** For every run under `runs/` with results: per condition, the share of responses with
+no `Final answer(s):` line (no match for `metrics._FINAL`, and no MADAM list), the share at the completion cap
+(`completion_tokens` ≥ the run's `max_tokens`), and both together. Full table in the appendix; main-text tables mark any
+cell above 1%.
+
+**R10. H13 with gpt-4.1, sensitivity.** H13's two gpt-4.1 tests (`holdout_gpt41_round2`) recomputed without the
+questions on which any seed of either arm lacks a final-answer line. The registered result keeps its status.
+
+**R11. Seed dependence.** For pooled H23 and H30a (matcher) and the Table 2 neutral-flag contrasts: the estimate from
+each seed alone (seed s in every cell that has it), reported as the range over seeds 0–2, and the list of single-seed
+cells.
+
+**R12. One matcher per table.** The misinformation share recomputed with the one-way matcher from the stored
+`pred_answers` (an answer contains a wrong answer as a whole-word span, as `metrics._contains` on the joined
+prediction), so Table 2's correct, misinformation, abstention and selective columns all use one-way matching; H21(a)
+recomputed on it. Reported as a sensitivity analysis; the registered H21(a) keeps its status.
+
+**Human audit (authors only; no model labels).**
+- **A1, targeted disagreement sheet.** From the §19.2 re-score (`runs/judge10/pooled.jsonl` joined to the runs): for
+  each of the four arms `oracle+flag_directional`, `answer_key`, `llm_dir+flag_directional`, `llm_dir+verdict_key`, 50
+  conflict responses on which the matcher and the judge-strict score disagree and 25 on which they agree, drawn with
+  seed 0, at most one response per (dataset, question) per arm; 300 rows, shuffled. The sheet shows the question, the
+  gold and wrong answers and the response; it hides the condition, the run and both scores. Labels per row:
+  gives_gold, asserts_wrong, abstains (yes/no); *human strict* = gives_gold and not asserts_wrong and not abstains.
+  Two annotators label independently; disagreements are adjudicated into a consensus.
+- **A2/A3.** `audit8_pairs.csv` (§17.4) and `audit8_raguard.csv`, as released; same two-annotator procedure.
+- **A4 (optional).** A HealthContradict stance sheet: 100 items, seed 0, at most 2 per topic, each page as the
+  generators saw it (cut at 4,000 characters), released labels hidden; per page "supports yes / no / unclear".
+- **Analysis.** Agreement: Cohen's κ per label and for human strict, PABAK, with bootstrap CIs; each scorer's agreement
+  with the consensus; McNemar on the items where matcher and judge disagree. *Calibrated shift* per arm k: with m_k and
+  j_k the matcher-only and judge-only correct rates on the full sample, and h_k^J and h_k^M the shares of the sampled
+  judge-only and matcher-only items that the consensus calls strict-correct, the matcher's accuracy is corrected by
+  j_k h_k^J − m_k (1 − h_k^M); the H23 and H30a contrasts are re-estimated with the corrected arms (bootstrap over the
+  sampled items and the questions). **Scorer rule:** the matcher stays primary; a claim whose estimate is within ±3 of
+  zero is stated only if it holds under both scorers; for H23 and H30a, the reference scorer is the one whose
+  human-estimated error differs less between the two arms of the contrast; if the CI of that comparison includes zero,
+  both are reported and the claim is called unresolved. A4, if labelled: agreement with the released labels and the
+  judge, H37a–c and H37d on the items whose two pages both support their labelled answers by consensus, and then the
+  HealthContradict parts of R2 and R4.
+
+### 20.4 Real documents, answer policy and prevalence
+
+**R13. HealthContradict page stance (judge, §19.3 audit).** The joint table of the judge's verdicts for the correct-typed
+and misinformation-typed pages, and the share of pages at the 4,000-character cut. First tabulated on 2026-11-02;
+disclosed as such. Descriptive; it does not test label noise.
+
+**R14. RAGuard answer key against the flag.** Per generator, `answer_key` minus `oracle+flag_directional` on conflict
+claims, with a question-bootstrap CI. Descriptive.
+
+**R15. Single-entity RAMDocs sensitivity.** The §18.2 equal-weight mean on single-entity questions recomputed leaving
+out one setting at a time (range), beside the pooled row.
+
+**R16. Risk–coverage operating points.** For every setting in the §16.4.1 set plus the ConflictBank minimal setting and
+the RAMDocs generality settings: coverage (1 − abstention), selective accuracy, misinformation share and strict
+accuracy for `plain`, the oracle neutral flag and (where run) the oracle directional flag, under the one-way matcher
+(R12). One figure; numbers in an appendix table.
+
+**R17. RAMDocs answer mix.** (a) The minimal-skeleton settings (`holdout_minimal`, `holdout_gpt41_minimal`,
+`holdout_qwen_minimal`): correct, misinformation and abstention shares, plain vs oracle neutral flag. (b) Clean
+questions split by type (several gold answers vs one): the LLM detector's flag rate and the `llm_dir+flag` effect.
+
+**R18. Prevalence.** For each setting of the round-10 prevalence table: the effect as a function of the conflict share
+π from 0.01 to 0.5, with bootstrap bands, and the break-even share −C/(K − C) where K > 0 > C, with a CI. Replaces the
+single 5% count in the main text; settings are grouped by how their clean questions were built.
+
+**R19. H4b, second form.** The label-robust H4b correlation (`holdout_contains`) with a permutation p-value (10,000
+permutations of the cell values) and a BCa interval. Sensitivity only.
+
+### 20.5 Reporting changes (no analysis)
+
+- The paper is rebuilt around three claims: (1) a neutral flag shifts the answer policy rather than accuracy, with the
+  generators that do not move stated; (2) generators defer to directional flags, so a wrong flag can cost more than a
+  right one gains (H31; follow rates and break-even exploratory); (3) the frozen account predicts unseen ConflictBank
+  cells and fails on clean questions and HealthContradict.
+- Registration is described in three tiers: H1–H9 (frozen before any confirmatory data); H10–H31 and H37–H38
+  (registered before their runs but after earlier results, with the 20.1 exceptions); H32–H36 (predictions frozen
+  before the outcomes existed). "Confirmatory" is used for the first and third only.
+- Pooled neutral-flag summaries (REML mean, design-conditional CI, prediction interval, moderators, §17.1.1
+  equal-weight mean) leave the body and go to one appendix table described as summarising these 34 settings only.
+- RAGuard and HealthContradict are described as label-transfer stress tests; claims about model families are dropped.
+- Already-computed results absent from the reviewed draft are reported: the §11.3 closed-book split (ConflictBank and
+  RAMDocs) and majority-variant direction accuracy, the §19.2 per-condition agreement, the RAGuard answer-key arm, the
+  H18 TOSTs, and the §17.1.1 equal-weight mean (appendix).
+- References to this file use "PR§N" in the paper.
