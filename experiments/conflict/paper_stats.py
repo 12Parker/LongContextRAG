@@ -1046,6 +1046,8 @@ def main(argv=None):
         eff = np_.pop("_effects")
         np_["n_harm"] = int(sum(t["sig"] and t["diff"] < 0 for t in eff))
         np_["n_help"] = int(sum(t["sig"] and t["diff"] > 0 for t in eff))
+    from .revision11 import revision11
+    revision11(R)   # §20 re-analyses (exploratory, outside the FDR count)
     (out / "hypotheses.json").write_text(json.dumps(R, indent=1, default=float))
     from . import paper_assets
     paper_assets.write_all(R, out)

@@ -89,7 +89,8 @@ def tab_timeline(out: Path):
                    for x in (r["committed"], r["pushed"], r["first_run_file"]))
         fmt = lambda t: t.strftime("%m-%d %H:%M") if t else "--"
         mark = lambda t: "--" if not (t and f) else ("yes" if t <= f else "no")
-        rows.append(f"PR\\S{r['section']} & {fmt(c)} & {fmt(p)} & {fmt(f)} & {mark(c)} & {mark(p)} \\\\")
+        name = f"PR\\S{r['section']}" if r["section"][0].isdigit() else r["section"].capitalize()
+        rows.append(f"{name} & {fmt(c)} & {fmt(p)} & {fmt(f)} & {mark(c)} & {mark(p)} \\\\")
     (out / "tab_timeline.tex").write_text(r"""\begin{table}[t]
 \centering\small
 \setlength{\tabcolsep}{3pt}
