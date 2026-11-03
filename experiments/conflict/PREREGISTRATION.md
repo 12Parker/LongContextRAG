@@ -1573,3 +1573,6 @@ and the token budget. Two conditions that render the same prompt therefore share
   `predictions21.json` was frozen. The predictions read only stage-1 files and FOLLOW19, which §19 froze before the
   fresh cells ran, so nothing was fitted to these answers. H40c tests the frozen rates on reused and new answers
   alike, and the paper says so.
+
+**Correction to the 21.11 heading** (appended 2026-11-02). 21.11 was appended *after* preliminary C3–C6, C8 and C11
+results had been computed and read, not before. It discloses the reuse and changes no analysis or criterion.
