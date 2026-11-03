@@ -1541,3 +1541,35 @@ exists, so C3, C6, C7, C8 and C9 begin before C4 stage 1. The 21.9 order decides
 binds. The projected total is $204.18 + $22.3 = $226.5, or $230.2 with a Sonnet cache miss, both below $245. No input
 to the C4 predictions (plain answers, synthetic detections, FOLLOW19) comes from any other run here. Qwen runs through
 the local Ollama server (digest 845dbda0ea48, as `cb_single_qwen`), which ignores the API key.
+
+### 21.11 Shared responses (appended 2026-11-02, after the C4, C6 and C8 flagged runs, before any PR§21 analysis was read)
+
+**How the cache works.** The response cache keys on the model, the full prompt, the requested temperature, the seed
+and the token budget. Two conditions that render the same prompt therefore share one sampled answer.
+
+**Which prompts coincide.**
+- A randomised flag that names the misinformation passage renders the same prompt as `oracle+flag_directional`.
+- A randomised flag that names the correct passage renders the same prompt as any real detector that flagged exactly
+  the gold pair and named the correct side.
+
+**Where answers were reused.**
+- In this section's flagged runs:
+  - C4: `randdir_fresh_luna` 603 of 900 conflict rows, `randdir_fresh_terra` 201 of 300, and `randdir_fresh_haiku`
+    likewise, all from the §19 `fresh_cb_*` cells;
+  - C6 (`randdir_cb_sonnet`): 199 of 300, from `cb_single_sonnet`;
+  - C8 (`randdir_cb_qwen`): 201 of 300, from `cb_single_qwen`.
+- In earlier runs:
+  - `randdir_cb_mini` and `randdir_cb_haiku` (§16): 618 of 900 each;
+  - `randdir_fresh_mini` (§19): 603 of 900.
+- No reuse:
+  - `randdir_cb_luna` and `randdir_cb_terra` share nothing, because they requested a different temperature (§20.1);
+  - the C5 confidence prompts are new.
+
+**What this means.**
+- **Not a bias.** Each reused answer is a real sample for that exact prompt.
+- **The reported effects are not independent.** Δ_R shares answers with the oracle directional rows, so the two
+  results are not independent evidence.
+- **C4's flagged answers were partly in the cache before the freeze.** About two thirds of them already existed when
+  `predictions21.json` was frozen. The predictions read only stage-1 files and FOLLOW19, which §19 froze before the
+  fresh cells ran, so nothing was fitted to these answers. H40c tests the frozen rates on reused and new answers
+  alike, and the paper says so.
