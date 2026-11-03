@@ -72,7 +72,7 @@ bookkeeping & R6 & expl. \\
 Only one of the two predicted harms is significant & H33 & (iii); not supported \\
 It overstates harm on clean questions and on HealthContradict & H35, H37; Tables~\ref{tab:fresh}, \ref{tab:hc} &
 H35: (iii); H37: (ii), labels as released \\
-Conditioning follow rates on the generator's prior is uninformative on ConflictBank & R4, R5;
+Conditioning follow rates on the generator's prior barely changes the account on ConflictBank & R4, R5;
 Table~\ref{tab:prior} & expl. \\
 \midrule
 \multicolumn{3}{@{}l}{\emph{What does not hold, or is not settled (\S\ref{sec:open})}} \\
@@ -83,7 +83,8 @@ Stress tests (label transfer): HealthContradict's oracle flag acts as an answer 
 gpt-4o-mini; CONFLICTS is underpowered & H26, H37; R13, R14; Table~\ref{tab:conflicts} & H26, H37: (ii); R13 (first
 tabulated on 2026-11-02), R14, CONFLICTS: expl. \\
 On genuine conflicts, direction and removal discard valid answers & H28 & (ii) \\
-A real detector's flag pays only above a break-even conflict share & Table~\ref{tab:prev11}; R18 & expl.
+In \pvBeN\ of \pvN\ settings a real detector's flag pays only above a break-even conflict share &
+Table~\ref{tab:prev11}; R18 & expl.
 (\prs{17.1}, \prs{20}) \\
 \midrule
 \multicolumn{3}{@{}l}{\emph{Decision rule (\S\ref{sec:discussion})}} \\
@@ -437,8 +438,8 @@ rates that do not transfer. We cannot separate these until humans label the page
 \label{app:rev11}
 After an external review we registered re-analyses R1--R19 in \prs{20} (Table~\ref{tab:timeline}). All are
 exploratory: they re-analyse outputs already seen, make no API call and sit outside the FDR count. R3 and R13 were
-first tabulated on 2026-11-02, before \prs{20} was written. R16 and R18 count settings whose 95\% CI excludes zero,
-unadjusted. Conventions follow \prs{20}: one-way strict matching, seed means within questions and question-bootstrap
+first tabulated on 2026-11-02, before \prs{20} was written. R16 counts settings whose 95\% CI excludes zero,
+unadjusted; R18 classifies settings by the signs of the point estimates of $K$ and $C$. Conventions follow \prs{20}: one-way strict matching, seed means within questions and question-bootstrap
 95\% CIs. Results the body states in full are summarised here only briefly.
 
 \paragraph{R1: ConflictBank's false side is readable from style.} We trained a passage-only classifier, an L2 logistic
@@ -479,8 +480,9 @@ followed more often on known questions by every generator (differences \prFolRDi
 but over at most \prFolRKnownMiniN\ known questions per generator. Wrong-flag follow rates show no consistent
 direction: gpt-6.1-terra \prFolWDiffTerra\ \prFolWDiffTerraCI, Claude Haiku \prFolWDiffHaiku\ \prFolWDiffHaikuCI.
 Pooled over generators, the odds ratio for following a wrong flag on a known question is \prFolOrW\ \prFolOrWCI\
-(\prFolOrWN\ question--generator observations, \prFolOrWKnownN\ of them known); the right-flag odds ratio is not
-estimable (complete separation in most resamples). Conditioning each question's follow rates on whether the generator
+(\prFolOrWN\ question--generator observations, \prFolOrWKnownN\ of them known); the right-flag odds ratio has no
+finite upper confidence limit (complete separation in \prFolOrRSeparated\ of 5,000 bootstrap resamples, with only
+\prFolOrRKnownN\ known observations), so we do not report it. Conditioning each question's follow rates on whether the generator
 knows the fact moves the crossed-cell account's mean error from \uncondMaeAll\ to \condMaeAll\ points over
 \condNAll\ cells (R5), and no cell's prediction by more than \condMaxShift\ points.
 
@@ -517,7 +519,9 @@ cannot show why a generator defers.
 
 \input{generated/tab_missing}
 \paragraph{R9, R10: missing final answers.} Of \missRows\ responses in \missRuns\ runs, \missN\ (\missShare\%) have no
-final-answer line; as registered (\prs{5}) they are scored as they are, which counts them wrong. Of \missCells\ run--condition cells,
+final-answer line (no \texttt{Final answer(s):} line and no MADAM answer list); as registered (\prs{5}) they are
+scored as they are: the matcher then reads the whole response, so a missing line does not by itself make a response
+wrong. Of \missCells\ run--condition cells,
 \missCellsAbove\ exceed 1\% (\missAboveFour\ with gpt-4.1, \missAboveQwen\ with Qwen2.5-7B,
 \missAboveLuna\ with gpt-6-luna; Table~\ref{tab:missing}). The worst cell is \missTopModel\ with the \missTopCond\ condition
 (\missTopShare\%; \missTopCap\% of that cell's responses stop at the 256-token cap). Among missing responses from
@@ -592,10 +596,11 @@ them by \cleanTypeEffSeveral\ \cleanTypeEffSeveralCI\ and \cleanTypeEffOne\ \cle
 \paragraph{R18: prevalence.} Table~\ref{tab:prev11} gives, for the gpt-4o-mini LLM detector's directional flag, the
 conflict share above which it helps. Of \pvN\ settings, \pvBeN\ have such a break-even share (median \pvBeMedian\%,
 from \pvBeMin\% for \pvBeMinSet\ to \pvBeMax\% for \pvBeMaxSet); the flag helps at every share in \pvHelpsAll\ and
-hurts at every share in \pvHurtsAll. The break-even depends on how a benchmark's clean questions were built: it runs
+hurts at every share in \pvHurtsAll. Grouped by how a benchmark's clean questions were built, the break-even runs
 from \pvBeCbMin\% to \pvBeCbMax\% over \pvBeCbN\ ConflictBank settings, whose clean questions add only off-subject
 passages, and from \pvBeRdMin\% to \pvBeRdMax\% over \pvBeRdN\ RAMDocs settings, whose clean questions mostly have
-several valid answers. RAGuard has \pvBeRgN\ such setting (\pvBeRgMin\%).
+several valid answers. RAGuard has \pvBeRgN\ such setting (\pvBeRgMin\%). The RAMDocs range contains the ConflictBank range, so the clean-question build does not
+explain the spread.
 
 \paragraph{R19: H4b, second form.} With every suspect document treated as misinformation, the H4b correlation over
 \hFourBN\ cells is $\rho$ = \hFourBRho. A permutation test over \hFourBPerm\ permutations gives two-sided $p=\hFourBP$,
@@ -614,7 +619,9 @@ file of the runs it registered. The base registration (H1--H9) was committed bef
 the remote only after they had started; \prs{9} and \prs{10} likewise; \prs{11}--\prs{16} and \prs{19} were on the
 remote before their first run. Three items changed runs already under way (\prs{20.1}): \prs{9.4} set the Qwen runs to
 one seed after they had started (none of their output had been read), \prs{9.6} decided how to score Qwen's aborted
-generations during the run, and \prs{17.6} replaced the named judge after its outputs had been written. Each addendum
+generations during the run, and \prs{17.6} replaced the named judge after its outputs had been written. Parts of
+three tests reuse runs that predate their registration: 5 of the \hTwentyFourCells\ H24 cells (\prs{13.3}), every H27
+comparison of a cell with the detector model alone, and H28's gpt-4o-mini RAMDocs rows (\prs{15.3}). Each addendum
 after the base followed a review of the results so far, so these registrations fix how an analysis is run, not which
 analyses are chosen. We used no third-party registry; the remote's push times are the only outside record
 \citep{vanmiltenburg2021preregistering}.

@@ -696,6 +696,16 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   not: −0.08 in [−0.56, −0.02]; the interval excludes zero while the permutation p is 0.75); H4b is "supported
   (label-sensitive)" and H24 "supported (mechanical)" in `tab_hypotheses`; `fig_grid` axis is direction precision d;
   bare §17.1/§17.3/§18.2 captions now PR§; timeline base row "Base (H1--H9)".
+- Independent verification (4 section verifiers + one skeptic per finding; 22 of 25 findings confirmed and fixed):
+  responses without a `Final answer(s):` line are scored on their whole text as PR§5 registers (about a third score
+  correct), not "wrong" (setup, Limitations, R9); H31c is Δ_R+Δ_W, twice the even-mix effect; tab:evidence RAMDocs row
+  is H1–H7, H9–H11 (H8 is WikiContradict, H12 ConflictBank); parts of H24 (5 of 30 cells), H27 (cell vs detector model
+  alone) and H28 (gpt-4o-mini RAMDocs rows) reuse runs that predate their registration (now disclosed in setup and
+  app:repro); tier (ii) is registered but not confirmatory; synthetic direction is drawn per pair; utility counts
+  misinformation bidirectionally; R4's right-flag odds ratio has no finite upper limit (separation in 1,793 of 5,000
+  resamples), not "not estimable"; R18 classifies by point-estimate signs; the clean-question build does not explain
+  break-even spread; H28 and single-call references corrected; seeds sentence corrected; tab_cells names its two-sided
+  direction definition. Body re-fitted to end on page 8.
 - **Still open (authors):** API runs C1–C13 held for approval; human audit A1 (`runs/labelling/audit11_disagreements.csv`)
   then A2/A3 (audit8 sheets) decide H23/H30 and the HealthContradict labels; OSF deposit (paper says no registry was
   used); AI-assistance/process disclosure sentence; fixed-seed ConflictBank example pair (needs a registration).

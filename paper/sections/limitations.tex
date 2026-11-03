@@ -22,10 +22,10 @@ H30 are unresolved. The follow rates, $p^*$ and the prospective test have no ful
 gpt-6.1-terra's follow rates have none at all. No human has labelled any output: the blind disagreement sheet that
 could settle the scorer question and the paired audit sheets are released unlabelled (Appendix~\ref{app:semantic}).
 On a \semNq-question sample the outside-family judge makes Claude Haiku's ConflictBank neutral-flag effect
-\semNeuCBsHaikuJ\ (matcher: \semNeuCBsHaikuM). Responses with no final-answer line are scored wrong, as registered;
+\semNeuCBsHaikuJ\ (matcher: \semNeuCBsHaikuM). Responses with no final-answer line are scored on their whole text, as registered;
 they exceed 1\% in \missCellsAbove\ of \missCells\ run--condition cells (R9). In the body these are the four settings
-named under Figure~\ref{fig:riskcov} and gpt-6-luna's closed-book cell in Table~\ref{tab:deference}; \prs{20.3}
-asked main-text tables to mark such cells, and Table~\ref{tab:deference} does not.
+named under Figure~\ref{fig:riskcov} and gpt-6-luna's closed-book cell in Table~\ref{tab:deference}, both marked
+as \prs{20.3} asks.
 
 \paragraph{Real documents and other benchmarks.} HealthContradict's labels are as released, and an LLM judge confirms
 both pages of an item for only \stanceBoth\% of items (R13). Label noise could therefore explain why the account
@@ -49,7 +49,8 @@ Holm controls error within each family, not across the programme: of \fdrN\ regi
 significant under Holm and \fdrBH\ under a Benjamini--Hochberg FDR over all tests.
 
 \paragraph{Models and runs.} We recorded the model names we called between 2026-10-26 and 2026-10-29, not the served
-snapshots. gpt-6.1-terra, Claude Sonnet, Qwen2.5-7B, and gpt-4.1 outside RAMDocs ran one seed. gpt-6.1-terra's follow
+snapshots. gpt-6.1-terra, Claude Sonnet and Qwen2.5-7B ran one seed, as did gpt-4.1 on ConflictBank and in its second RAMDocs run
+(H13, H14). gpt-6.1-terra's follow
 rates and $p^*$ rest on one default-temperature draw; its other no-flag draw moves $p^*$ from \terraDrawRegBe\
 to \terraDrawAltBe\ (R7). The reasoning and Claude models ran only at default temperature, Claude through an
 OpenAI-compatible endpoint without JSON mode. We draw no conclusion about model families: two Claude models and one

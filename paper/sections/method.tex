@@ -4,7 +4,7 @@
 A question comes with retrieved passages. A \emph{detector} returns flagged pairs of passages and, if it is
 directional, a \emph{suspect} side for each pair: the passage it judges false. A \emph{format} turns
 the passages and the detector's output into the generator's prompt. Every prompt ends with an instruction to give a
-\texttt{Final answer(s):} line, and states an answer policy. The \emph{multi-answer} skeleton asks for every valid
+\texttt{Final answer(s):} line; all but the minimal skeleton state an answer policy. The \emph{multi-answer} skeleton asks for every valid
 answer when the passages support several; the \emph{one-answer} skeleton says the question has exactly one; the
 \emph{minimal} skeleton states no policy. All three allow ``unknown''; the \emph{forced} skeleton is one-answer
 without it (Appendix~\ref{app:prompts}).
@@ -25,7 +25,7 @@ runs on gpt-4o-mini (temperature 0) unless stated, and on other models in the cr
 flags exactly the gold contradiction pairs, as the benchmark's labels define them, and names the labelled
 misinformation side. A \emph{synthetic detector} is built from gold labels with a chosen pair precision, recall and
 direction precision $d$: each flag on a true pair names the false side with probability $d$, independently per
-question. The randomised test (H31) uses $d=0.5$ on every true pair. The heuristic CAAG detector, NLI, a random
+pair. The randomised test (H31) uses $d=0.5$ on every true pair (one per ConflictBank question). The heuristic CAAG detector, NLI, a random
 placebo and a 36-cell synthetic grid are in Appendices~\ref{app:extra} and \ref{app:grid}.
 
 \begin{table}[t]

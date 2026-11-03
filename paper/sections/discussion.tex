@@ -1,9 +1,8 @@
 \section{Discussion and a Decision Rule}
 \label{sec:discussion}
 
-A neutral flag is not a weak directional flag: it says that passages disagree and leaves the response to the
-answer policy, so for four of seven generators it triggers abstention under a one-answer prompt and both-sides
-answers under a multi-answer prompt. Whether either helps depends on what a wrong answer costs
+A neutral flag is not a weak directional flag: it says only that passages disagree and leaves the response to the
+answer policy. Whether abstaining or listing both sides helps depends on what a wrong answer costs
 \citep{wen2025abstention}. A directional flag is advice, and generators take it whether it is right or wrong, much
 as models defer to asserted views \citep{sharma2024sycophancy}. As in human--AI teams, advice pays only when its
 errors fall where the receiver is weaker \citep{bansal2021accurate,mozannar2020defer}: an accurate generator has
@@ -33,10 +32,9 @@ this, so it is an illustration, not a test.
 only above a conflict share of $-C/(K-C)$.
 \item \emph{Neutral flag.} Use it only under a one-answer prompt where a misinformed answer costs well more than a
 correct one gains (\S\ref{sec:neutral}), and not with generators that barely move; under a multi-answer prompt it
-mostly adds misinformation (not for Claude Haiku on RAMDocs, Table~\ref{tab:utility}) unless both sides are valid
+mostly adds misinformation (Table~\ref{tab:utility}; Claude Haiku on RAMDocs excepted) unless both sides are valid
 (H8).
 \item \emph{Single call.} Naming suspects and answering in one call halves the calls; for gpt-4o-mini it does not
-differ significantly from the pipeline (H18; no TOST shows equivalence), but the reasoning models and Claude Haiku
-lose \azSgHaikuSelfIdentifyClean\ to \azSgLunaSelfIdentifyClean\ points on clean questions
-(Appendix~\ref{app:extra}).
+differ significantly from the pipeline (H18; not shown equivalent), but the reasoning models and Claude Haiku lose \azSgHaikuSelfIdentifyClean\ to \azSgLunaSelfIdentifyClean\ points on clean questions
+(Appendix~\ref{app:more}).
 \end{enumerate}

@@ -229,7 +229,8 @@ Detector & Generator & Right & Wrong & Gen.\ acc. & Score & Gain & flag & hint &
 \caption{Every detector--generator cell of H24 and H27 (ConflictBank, one-answer prompt, 300 conflict questions; \%),
 sorted by the exploratory score. \emph{Right}: the detector's hit rate, the share of questions on which it flags the true
 contradiction and names exactly its misinformation passage (computed on the detections that cell's generator saw;
-its direction precision, the same share among questions where it flags the true pair, pooled over its cells, is
+its direction precision with `both' and `unclear' verdicts counted as misses, unlike Table~\ref{tab:terms}, i.e.\ the
+same share among questions where it flags the true pair, pooled over its cells, is
 gpt-4o-mini \dirPrecMini\%, gpt-4.1 \dirPrecFour\%, gpt-6-luna \dirPrecLuna\%, gpt-6.1-terra \dirPrecTerra\%, Claude Haiku
 \dirPrecHaiku\% and Claude Sonnet \dirPrecSonnet\%); \emph{Wrong}: share on which it marks a correct passage as suspect;
 \emph{Gen.\ acc.}: the generator's accuracy with no flags; \emph{Score}: the mean over the 300 questions of [right direction and the generator errs] minus [a
