@@ -53,6 +53,11 @@ class LLMResult:
     latency_s: float
     cached: bool
     cached_prompt_tokens: int = 0     # of prompt_tokens, served from OpenAI's prompt cache
+    # §21: what the API says it served (absent for calls cached before §21)
+    served_model: str | None = None
+    system_fingerprint: str | None = None
+    response_id: str | None = None
+    created: int | None = None
 
 
 def price(model: str, pt: int, ct: int, cached_pt: int = 0) -> float:
@@ -152,7 +157,9 @@ class OpenAILLM:
         res = dict(text=resp.choices[0].message.content or "",
                    prompt_tokens=u.prompt_tokens, completion_tokens=u.completion_tokens,
                    cost_usd=price(self.model, u.prompt_tokens, u.completion_tokens, cpt),
-                   latency_s=dt, cached_prompt_tokens=cpt)
+                   latency_s=dt, cached_prompt_tokens=cpt,
+                   served_model=getattr(resp, "model", None), system_fingerprint=getattr(resp, "system_fingerprint", None),
+                   response_id=getattr(resp, "id", None), created=getattr(resp, "created", None))
         self.cache.put(key, res)
         return LLMResult(**res, cached=False)
 

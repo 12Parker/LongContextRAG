@@ -319,7 +319,7 @@ def main(argv=None):
             text = r.text
             usage = {"prompt_tokens": r.prompt_tokens, "completion_tokens": r.completion_tokens,
                      "cost_usd": r.cost_usd, "calls": 1, "cached": r.cached, "latency_s": r.latency_s,
-                     "cached_prompt_tokens": r.cached_prompt_tokens}
+                     "cached_prompt_tokens": r.cached_prompt_tokens, "served_model": r.served_model}
         wall_s = time.perf_counter() - t0
         # generate_s is the API latency of the original call(s), also on cache hits; wall_s is
         # this process's wall clock (near 0 when cached, inflated by thread contention otherwise)

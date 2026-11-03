@@ -1328,3 +1328,208 @@ permutations of the cell values) and a BCa interval. Sensitivity only.
   RAMDocs) and majority-variant direction accuracy, the §19.2 per-condition agreement, the RAGuard answer-key arm, the
   H18 TOSTs, and the §17.1.1 equal-weight mean (appendix).
 - References to this file use "PR§N" in the paper.
+
+## 21. Funded API package (frozen 2026-11-02, after the authors approved it, before any run below)
+
+The authors approved the funded runs of `TRIAGE_REVIEW10.md` §C: C1, C3–C9 and C11. As §20 requires, each is
+registered here in full before it runs. C2 and C10 wait for the A4 HealthContradict labels, and C12 and C13 for the A1
+result (§20.3); none of the four runs under this section. Spend before this section is $204.18 (`costs.total_spend()`).
+The gate before every run is $245.
+
+Conventions unless stated. Conflict and clean questions are reported separately. The primary metric is one-way strict
+(`ramdocs_strict_oneway`), averaged over seeds within each question. CIs are 95% question-bootstrap CIs with 5,000
+resamples (seed 0). Follow rates, Δ_R and Δ_W are as in §16.3 (`revision10._follow`). Temperatures repeat the run each
+cell reuses, so its `plain` rows are cache hits. Claude, gpt-6-luna and gpt-6.1-terra run at their default
+temperature whatever is requested (§20.1). From this section on, each result row also records the served model name
+the API returns (`resp.model`), and the cache stores it with `system_fingerprint`, the response id and `created`.
+Everything here is exploratory and is reported as such. The exceptions are the H40 and H41 tests, which join the
+programme-wide BH count.
+
+### 21.1 Artefact probes on ConflictBank (C1; H39, descriptive with reading rules fixed here)
+
+Models: gpt-4o-mini, claude-haiku-5-5, gpt-6-luna, gpt-6.1-terra, as detectors. Data: the §10 eval set. One call per
+prompt, seed 0, requested temperature 0. Code: `probe21.py`, plus `prepare_cb_swap.py` and the
+`conflictbank_swap` loader. Outputs go to `runs/probe21/` and `runs/swap_cb_<det>/`.
+
+- **(a) Answer only.** No passage is shown. For each of the 300 conflict questions the prompt gives the question and
+  the two candidate answers (gold and substituted object) as A and B, in both orders. It asks which one is correct and
+  wants a final line `Answer: A` or `Answer: B`. That makes 600 calls per model. A reply with no parsable letter scores
+  ½ for that order, and the unparsed share is reported. Reported: accuracy (the mean over both orders), the share of
+  questions answered the same way in both orders, and the share choosing A.
+- **(b) Single passage.** One passage alone, cut to its first 1,500 characters (as the detector sees it), with the
+  question. The prompt asks for the probability, 0–100, that what the passage says about the question is false, on a
+  final line `Probability false: <n>`. It is run on the correct and misinformation passages of the 300 conflict
+  questions and the correct passage of the 100 clean ones, 700 calls per model. An unparsed reply scores 50.
+  Reported: pairwise accuracy over the conflict questions, P(score of the misinformation passage > score of the
+  correct one) + ½ P(tie), and the share scored ≥ 50 by passage type (clean correct, conflict correct, misinformation).
+- **(c) Object swap.** In each conflict item, every whole-word, case-insensitive mention of the gold answer in the
+  correct passage becomes the substituted answer, and every mention of the substituted answer in the misinformation
+  passage becomes the gold answer. Each passage keeps its own style but now argues the other side.
+  - An item is usable only if each answer occurs, as a whole word, in its own passage; neither occurs in the other
+    passage; and neither occurs in either passage as the prefix of a longer word (e.g. "India" in "Indian"). This
+    leaves 249 of the 300 items, ids in `splits/conflictbank_swap.txt`.
+  - Passage types are re-labelled by content: the passage that now states the gold answer is `correct`.
+  - The unchanged `llm_dir` detector (greedy, seed 0, 1,500 characters per passage) is run with
+    `run.py --dataset conflictbank_swap --detect-only`.
+  - Primary measure (content precision): among flags on the gold pair that name exactly one side, the share naming the
+    passage that now states the substituted answer.
+  - Reported beside it: the §11.3 direction accuracy, and both measures on the same 249 items before the swap
+    (`cross_cb_mini_{haiku,luna,terra}` detections; gpt-4o-mini's from `cb_single`).
+- **Reading rules.**
+  - (c), per detector, from the CI of content precision: *survives* if the CI lies above 0.5, so the detector follows
+    the stated answer (content or knowledge); *inverts* if it lies below 0.5, so the detector follows the passage's
+    style; *chance* if it includes 0.5.
+  - (a): if answer-only accuracy is at least the detector's direction accuracy minus 5 points, the direction signal
+    needs no passage text.
+  - (b): pairwise accuracy of at least 0.9 means the misinformation passage is recognisable on its own.
+
+### 21.2 Randomised direction on ConflictBank-fresh (C4; H40)
+
+**Runs.** `runs/randdir_fresh_{luna,haiku,terra}`: ConflictBank-fresh, skeleton `single`, conditions `plain` and
+`synth-p1-r1-all-d0.5+flag_directional` (synthetic seed 0, as `randdir_fresh_mini`). gpt-6-luna runs seeds 0–2 with
+`--temperature 1.0`, claude-haiku-5-5 seeds 0–2 with 0.1, and gpt-6.1-terra seed 0 with 1.0, as their `fresh_cb_*`
+cells, whose `plain` rows these reuse.
+
+**Freeze.** Stage 1 is the synthetic detections plus the `plain` answers. `predict21.py` then writes
+`splits/predictions21.json` from stage-1 files only, and that file is committed and pushed before stage 2 (the
+flagged condition). The predictor is the §19.1 formula with the frozen round-10 rates (FOLLOW19), applied to the
+synthetic detections: pred = mean_i [right_i (1 − g_i) fR − wrong_i g_i fW] over the 300 conflict questions.
+
+**H40a (follow-rate stability, §19.1 H36 extended).** For each of the three generators, the fresh fR and fW each lie
+inside that generator's frozen eval 95% CI:
+- gpt-6-luna: fR [0.607, 0.827], fW [0.673, 0.860];
+- claude-haiku-5-5: fR [0.492, 0.758], fW [0.545, 0.729];
+- gpt-6.1-terra: fR [0.533, 0.800], fW [0.895, 0.990].
+
+Reported per generator, with no adjustment.
+
+**H40b (H31 on new questions).** Per generator:
+- Δ_R > 0 and Δ_W < 0, one-sided;
+- Δ_R + Δ_W two-sided.
+
+Inference is as §16.3: a permutation of arm labels (10,000) and a bootstrap within arms. Holm runs over the three
+generators within each estimand. gpt-4o-mini's `randdir_fresh_mini` values are reported beside them, untested,
+because its outcome is already known.
+
+**H40c (prospective, descriptive).** Per generator, the observed flag effect over the 300 conflict questions against
+its frozen prediction: error, and whether the prediction lies in the observed effect's CI. The MAE over the three is
+reported beside the MAE of zero and of the formula with fR = fW = 1. H40c holds if that MAE is at most 3 points.
+
+### 21.3 Stated confidence on the H31 design (C5; H41)
+
+**Runs.** `runs/conf_cb_{mini,haiku,luna,terra}`: ConflictBank eval, skeleton `single`, conditions `plain`,
+`synth-p1-r1-all-d0.5+flag_directional_c55` and `synth-p1-r1-all-d0.5+flag_directional_c95`. They use the same
+synthetic seed as `randdir_cb_*`, so every question has the same direction draw. gpt-4o-mini, claude-haiku-5-5 and
+gpt-6-luna run seeds 0–2, gpt-6.1-terra seed 0, all with `--temperature 0.1` (as `randdir_cb_*`).
+
+**Rendering** (`prompts.py`, mode `flag_directional_c<NN>`). The text is `flag_directional` with the confidence added
+in two places:
+- the suspect passage's header becomes `[LIKELY MISINFORMATION (detector confidence: NN%); conflicts with
+  passage(s): j]`;
+- the conflict line ends `; passage k likely contains misinformation (detector confidence: NN%)`.
+
+Nothing else changes. Clean questions get no flag, so their prompt equals `plain`.
+
+**Tests.** Per generator, over the same questions in both arms; one-sided sign-flip permutation over questions
+(10,000); Holm over the four generators within each estimand:
+- **H41a.** A wrong flag harms less at 55% than at 95%: Δ_W(c55) − Δ_W(c95) > 0, over wrong-assigned questions.
+- **H41b.** A right flag helps more at 95% than at 55%: Δ_R(c95) − Δ_R(c55) > 0, over right-assigned questions.
+
+**Reported.** Follow rates per arm, beside the H31 arm without a confidence (`randdir_cb_*`). The break-even p* per arm
+is exploratory. If neither test holds, the paper says that a stated confidence did not change deference in this
+design.
+
+### 21.4 Sonnet and Qwen on the H31 design (C6, C8; descriptive)
+
+**Runs.**
+- `runs/randdir_cb_sonnet`: claude-sonnet-5-5, seed 0, `--temperature 0.1` (as `cb_single_sonnet`).
+- `runs/randdir_cb_qwen`: qwen2.5:7b-instruct, local Ollama, seed 0, `--temperature 0.1` (as `cb_single_qwen`).
+
+Both use ConflictBank eval, skeleton `single`, and conditions `plain` and `synth-p1-r1-all-d0.5+flag_directional`.
+
+**Reported.** fR, fW, Δ_R, Δ_W and Δ_R + Δ_W with CIs, and p*. A one-seed rate is called one draw. Whether the most
+capable generator is the most deferential is judged descriptively: Sonnet's fW against terra's, with both CIs. Sonnet
+is in no test family.
+
+### 21.5 Closed-book on ConflictBank-fresh and for Sonnet (C9; R2 and R4 extended, descriptive)
+
+**Runs.** Condition `closedbook`, skeleton `single`:
+- `runs/fresh_closed_{mini,luna,haiku,terra,qwen}` on ConflictBank-fresh, with the seeds and temperatures of the
+  generators' fresh cells (Qwen local, seed 0);
+- `runs/cb_closed_sonnet` on the eval set, seed 0, `--temperature 0.1`.
+
+**Analyses.** The §20.2 rules: known = closed-book one-way strict correct on at least 2 of 3 seeds, or on its one seed.
+- R2 on fresh: each fresh `llm_dir` detector's direction accuracy (from its `fresh_cb_mini_<det>` detections), split
+  by its own fresh closed-book.
+- R2 for Sonnet on eval: the `cross_cb_mini_sonnet` detections, split by `cb_closed_sonnet`.
+- R4 on fresh: `randdir_fresh_*` follow rates split by the generator's own fresh closed-book.
+- R4 for Sonnet (§21.4) and for Qwen: Qwen's prior comes from `cb_single_qwen`'s `closedbook`.
+- Closed-book accuracy for every model.
+
+Known questions may again be few. Counts are reported with every rate.
+
+### 21.6 HealthContradict answer key (C3; descriptive)
+
+**Runs.** `runs/hckey_{mini,luna,haiku}`: HealthContradict, skeleton `single`, conditions `plain` and `answer_key`
+(the released wrong answer, "yes" or "no"). Seeds 0–2 at the temperatures of `hc_{gen}`.
+
+**Reported.** Per generator, `answer_key` − `plain` and `answer_key` − `oracle+flag_directional` (from `hc_{gen}`),
+with topic-cluster bootstrap CIs (§19.3). Labels are as released and unverified (§20.3 A4), so this is a
+label-transfer stress test.
+
+### 21.7 Haiku detector on the RAMDocs hold-out (C7; descriptive)
+
+**Run.** `runs/holdout_haikudet`: RAMDocs hold-out (300), gpt-4o-mini generator at T 0.1, seeds 0–2, skeleton
+`default`, detector claude-haiku-5-5 (`llm_dir`, greedy). Conditions: `plain`, `llm_dir+flag_directional`,
+`llm_dir+remove_suspect`.
+
+**Reported.**
+- K (conflict) and C (clean) per condition, with CIs.
+- The detector's pair-level precision and recall, direction accuracy, and clean-question flag rate.
+- The same quantities for the gpt-4o-mini detector on the same questions, beside them.
+- The prevalence break-even −C/(K − C) where K > 0 > C.
+
+### 21.8 Sentence-pair NLI on ConflictBank (C11; descriptive)
+
+**Detector** (`nli_sent`, `detectors.NLISentenceDetector`).
+- Each passage is split into sentences (at `.`, `!` or `?` followed by whitespace, and at line breaks).
+- The 3 sentences sharing most non-stopword words with the question are kept (ties: earlier first), each cut to 400
+  characters.
+- Every pair of kept sentences across two passages is scored in both orders by `cross-encoder/nli-deberta-v3-base`
+  (local, cached).
+- The passage pair's score is the largest contradiction probability, and the pair is flagged at ≥ 0.5 (the registered
+  `--nli-threshold`). The detector names no side.
+
+**Run.** `runs/nlisent_cb`: ConflictBank eval, gpt-4o-mini at T 0.1, seeds 0–2, skeleton `default` (as
+`rev8_cb_main`). Conditions: `plain`, `nli_sent+flag`, `nli_sent+remove`.
+
+**Reported.**
+- Pair-level precision and recall, and question-level flag rates on conflict and clean questions.
+- The flag and remove effects on conflict and clean questions.
+- Beside these, `nli` and `nli_win300` (`rev8_cb_main`; `nli_win300` was chosen after seeing output, §17.6).
+
+### 21.9 Budget and order
+
+The triage estimates, with their stated contingencies, are:
+
+| Run | Estimate |
+|---|---|
+| C1 | $7.8 |
+| C3 | $0.7 |
+| C4 | $2.1 |
+| C5 | $2.9 |
+| C6 | $3.0 (up to $6.75 if the plain rows miss the cache) |
+| C7 | $0.4 |
+| C8 | $0, local |
+| C9 | $4.9 |
+| C11 | $0.5 |
+| **Total** | **about $22.3** |
+
+**Order.** C8 runs locally whenever the machine is free.
+1. C4 stage 1, then `predictions21.json` committed and pushed.
+2. C1, C3, C4 stage 2.
+3. C9, C5, C6, C7, C11.
+
+**Gate.** Before each run starts, `costs.total_spend()` plus that run's estimate must stay below $245; otherwise the
+run is skipped and the analyses that need it are reported as not run. If the budget is tight, the cut order is
+TRIAGE §C's: C9's Sonnet part, then C11, C6 and C5. C1, C3 and C4 are never cut.

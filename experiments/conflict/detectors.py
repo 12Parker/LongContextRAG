@@ -240,7 +240,8 @@ class LLMDetector:
                 # neutral type: it is rendered into the prompt as "<type> conflict"
                 pairs.append(Detection(i, j, 1.0, "contradiction", suspects))
                 scores[(i, j)] = 1.0
-        return DetectorOutput(pairs, scores, r.latency_s, r.cost_usd, {"raw": r.text, "relations": items})
+        return DetectorOutput(pairs, scores, r.latency_s, r.cost_usd, {"raw": r.text, "relations": items,
+                                                                       "served_model": r.served_model})
 
 
 # --------------------------------------------------------------------------- controls
