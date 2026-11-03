@@ -67,7 +67,7 @@ Generator & Oracle flag & Single-entity & Multi-entity & Gap \\
 \caption{RAMDocs hold-out, oracle flag minus no flag on conflict questions, in points, split by whether the correct
 passages give one answer (""" + str(a.get("n_single", "")) + r""" \emph{single-entity} questions, where no oracle pair
 can join passages about different entities) or several (""" + str(a.get("n_multi", "")) + r"""), with question-bootstrap
-95\% CIs (\S18.2; exploratory).}
+95\% CIs (PR\S18.2; exploratory).}
 \label{tab:entity}
 \end{table*}
 """)

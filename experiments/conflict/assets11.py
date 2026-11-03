@@ -930,10 +930,16 @@ def tab_deference11(R, out: Path):
     other = _own_draw(rows, R["rev"])
     draw = (f" For {' and '.join(other)} the H31 run drew its own no-flag answers, so Plain differs from their "
             r"one-answer no-flag accuracy elsewhere in the paper (\mbox{PR\S20.1})." if other else "")
+    # R9 (PR§20.3): main-text tables mark any cell whose run-condition has more than 1% missing final answers
+    from .rev11_prior import CLOSED, H31
+    miss = {(a[0], a[1]) for a in R["rev"].get("r11", {}).get("R9", {}).get("above_1pct", [])}
+    dag = lambda run, cond: r"$^\ddagger$" if (run, cond) in miss else ""
     lines = []
     for r in rows:
         fr, fw = r["follow_right"], r["follow_wrong"]
-        lines.append(f"{NICE[r['gen']]} & {_p(r['closed'])} & {_p(r['plain'])} & {_fr(fr, 0)} & {_fr(fw, 0)} & "
+        g, h = r["gen"], H31.get(r["gen"])
+        lines.append(f"{NICE[g]} & {_p(r['closed'])}{dag(CLOSED.get(g), 'closedbook')} & {_p(r['plain'])}{dag(h, 'plain')}"
+                     f" & {_fr(fr, 0)} & {_fr(fw, 0)} & "
                      f"{_p(r['right'], sign=True)} & {_p(r['wrong'], sign=True)} & {r['breakeven']:.2f} \\\\")
         lines.append(rf"& & & {{\scriptsize {_frci(r['follow_right_ci'], 0)}}} & {{\scriptsize {_frci(r['follow_wrong_ci'], 0)}}}"
                      rf" & & & {{\scriptsize [{r['be_low']:.2f}, {r['be_high']:.2f}]}} \\[1pt]")
@@ -955,9 +961,11 @@ Generator & Closed & Plain & $f_R$ & $f_W$ & Right & Wrong & $p^*$ \\
 prompt, one-way matcher). \emph{Closed}: closed-book accuracy (\%). \emph{Plain}: accuracy with the passages and no
 flag in the H31 run (\%).""" + draw + r""" \emph{Right}, \emph{Wrong}: the registered H31 effects $\Delta_R$ and $\Delta_W$
 (points) of a flag that names the false passage (right) or the true one (wrong). $f_R$, $f_W$: follow rates (\%,
-exploratory; question-bootstrap 95\% CIs below): among questions answered wrongly without a flag, the share a right flag
-makes correct; among questions answered correctly, the share a wrong flag makes wrong. $p^*$: break-even direction
-precision $-\Delta_W/(\Delta_R-\Delta_W)$ (exploratory; bootstrap 95\% CI below).}
+registered descriptives without a test, PR\S16.3; question-bootstrap 95\% CIs below): among questions answered wrongly
+without a flag, the share of right-flag responses that are correct; among questions answered correctly, the share of
+wrong-flag responses that contain the misinformation answer (bidirectional match); abstentions count as neither.
+$p^*$: break-even direction precision $-\Delta_W/(\Delta_R-\Delta_W)$ (exploratory; bootstrap 95\% CI below).""" + (
+    r" $^\ddagger$: more than 1\% of responses lack a final answer (R9)." if any("ddagger" in l for l in lines) else "") + r"""}
 \label{tab:deference}
 \end{table}
 """)

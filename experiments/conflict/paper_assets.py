@@ -267,7 +267,9 @@ def tab_hypotheses(R, out: Path):
         dr, drr = h4p["dose_response"], h4r["dose_response"]
         rows.append(("H4b", f"harm grows with clean-q.\\ exposure, Spearman over {dr['n_cells']} cells\\textsuperscript{{r}}",
                      f"$\\rho={dr['spearman_rho']:+.2f}$ [${dr['ci_low']:+.2f}$, ${dr['ci_high']:+.2f}$]", "--",
-                     "supported" if dr["ci_high"] < 0 else "not supported", "yes" if (drr["ci_high"] < 0) == (dr["ci_high"] < 0) else "no"))
+                     # label-sensitive under the contains rule (tab:contains, PR§20 R19)
+                     r"supported\textsuperscript{L}" if dr["ci_high"] < 0 else "not supported",
+                     "yes" if (drr["ci_high"] < 0) == (dr["ci_high"] < 0) else "no"))
         rv = h4p["remove_vs_flag"]
         rows.append(("H4c", "removal harms clean q.\\ more than directional flag\\textsuperscript{r}",
                      f"{rv['n_remove_worse']} of {rv['n']} matched cells", "Holm", "count only", "--"))
@@ -309,6 +311,7 @@ def tab_hypotheses(R, out: Path):
     head = r"""\begin{table*}[%s]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\%% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -317,6 +320,9 @@ def tab_hypotheses(R, out: Path):
     legend = (r"Directional predictions are \emph{supported} or \emph{not supported}; tests with no predicted sign are "
               r"\emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric (robustness "
               r"to the RAMDocs label rule is in Table~\ref{tab:contains}, where H4b's correlation weakens). "
+              r"\textsuperscript{L}: supported but label-sensitive (Table~\ref{tab:contains}; PR\S20, R19). "
+              r"\textsuperscript{M}: supported only mechanically, because generator accuracy enters both sides of the "
+              r"H24 tests (Appendix~\ref{app:hyp}). "
               r"$p$-values come from 10,000 sign-flip permutations, extended to 200,000 when none reaches the observed "
               r"statistic, Holm-adjusted within the family; this is the significance used everywhere in the paper. "
               r"In brackets: the Benjamini--Hochberg $q$ over all registered tests of the programme (primary metric).")
@@ -354,12 +360,14 @@ def tab_hypotheses(R, out: Path):
     if "a" in h24:
         a = h24["a"]
         rows.append(("H24", f"gain rises with detector-minus-generator reliability, Spearman over {a['n_cells']} cells",
-                     f"$\\rho={a['rho']:+.2f}$", _p(a["p_one_sided"]), "supported" if a["p_one_sided"] < 0.05 else "not supported", "--"))
+                     # generator accuracy enters both sides of the H24 tests, so their support is mechanical
+                     f"$\\rho={a['rho']:+.2f}$", _p(a["p_one_sided"]),
+                     r"supported\textsuperscript{M}" if a["p_one_sided"] < 0.05 else "not supported", "--"))
     if "b" in h24:
         b = h24["b"]
         rows.append(("H24", "per-question slope of gain on reliability gap, within cells",
                      f"{pct(b['slope'], True)} [{pct(b['ci_low'], True)}, {pct(b['ci_high'], True)}]", _p(b["p_one_sided"]),
-                     "supported" if b["p_one_sided"] < 0.05 else "not supported", "--"))
+                     r"supported\textsuperscript{M}" if b["p_one_sided"] < 0.05 else "not supported", "--"))
     # §15: H27 (three families), H28 (per generator and benchmark), H29 (direction and gain)
     for f_ in ("H27a", "H27b", "H27c"):
         for k, v in rev.get(f_, {}).get(PRIMARY, {}).items():
@@ -392,7 +400,7 @@ def tab_hypotheses(R, out: Path):
     stage_txt = ["PR\\S9 (H10--H11)", "PR\\S10 (H12--H14)", "PR\\S11--PR\\S12 (H15--H19)",
                  "PR\\S13--PR\\S14 (H20--H26)", "PR\\S15 (H27--H29)", "PR\\S16 (H30--H31)"]
     parts = [head % "p" + body1 + "\n" + rf"""\bottomrule
-\end{{tabular}}
+\end{{tabular}}}}
 \caption{{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
 strict accuracy; differences in points). Rows marked \textsuperscript{{r}} are re-analyses registered later, before
 they were computed. {legend}}}
@@ -408,7 +416,7 @@ they were computed. {legend}}}
     for n_, (st, rs) in enumerate(chunks):
         lab = f"tab:hypotheses{n_ + 2}"
         parts.append(head % "p" + body(rs) + "\n" + rf"""\bottomrule
-\end{{tabular}}
+\end{{tabular}}}}
 \caption{{Pre-registered tests added in {st}, registered before the runs they cover (times and exceptions in
 Table~\ref{{tab:timeline}}). Same conventions as
 Table~\ref{{tab:hypotheses}}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -913,7 +921,7 @@ def fig_grid(R, out: Path, grid: dict):
             if j == 0:
                 ax.set_ylabel(f"{mname}\nprecision")
             if i == 1:
-                ax.set_xlabel("direction accuracy")
+                ax.set_xlabel("direction precision $d$")
     fig.tight_layout()
     fig.savefig(out / "fig_grid.pdf"); plt.close(fig)
 
@@ -1340,6 +1348,8 @@ def write_all(R, out: Path):
     write10(R, out)   # §19: tab_fresh, tab_hc
     from .assets11 import write11
     write11(R, out)   # §20: fig_riskcov, tab_deference, tab_prior, tab_missing, tab_riskcov, tab_prev11
+    from .timeline import tab_timeline
+    tab_timeline(out)   # from runs/registration_timeline.json (recorded once; see timeline.py)
     grid = {}
     if "grid_cells" in R:
         for key, v in R["grid_cells"].items():
@@ -1416,6 +1426,14 @@ def tab_appendix(R, out: Path):
                         f"{bm['flag_directional']['n_harmful']}/{bm['flag_directional']['n']}; "
                         f"{bm['remove_suspect']['n_harmful']}/{bm['remove_suspect']['n']}; "
                         f"$\\rho={dr['spearman_rho']:+.2f}$ [{dr['ci_low']:+.2f}, {dr['ci_high']:+.2f}] & & & \\\\")
+        # R19 (PR§20.4): the H4 bootstrap is skewed; the estimate sits near the top of a percentile interval that
+        # excludes zero while the permutation test does not reject
+        r19 = R.get("rev", {}).get("r11", {}).get("R19")
+        h4note = ("" if not r19 or "H4" not in c else
+                  " The bootstrap distribution of the H4 correlation is skewed: the estimate lies near the top of its"
+                  f" percentile interval, which excludes zero although a permutation test gives $p={r19['p_perm']:.2f}$;"
+                  f" the bias-corrected interval [{r19['bca_ci'][0]:+.2f}, {r19['bca_ci'][1]:+.2f}] includes zero, so the"
+                  r" correlation is not read as support (Appendix~\ref{app:rev11}, PR\S20, R19).")
         parts.append(rf"""\begin{{table*}}[t]
 \centering\small
 \begin{{tabular}}{{llrlrl}}
@@ -1427,9 +1445,7 @@ def tab_appendix(R, out: Path):
 \end{{tabular}}
 \caption{{Label robustness: pre-registered tests with every suspect document treated as misinformation
 ({c['n']['conflict']} conflict and {c['n']['clean']} clean hold-out questions; this rule assigns the 35 questions the
-main analysis excludes). The bootstrap distribution of the H4 correlation is skewed: its percentile interval excludes
-the point estimate, so it cannot be read as support; a permutation test and a bias-corrected interval are in
-Appendix~\ref{{app:rev11}} (PR\S20, R19).}}
+main analysis excludes).{h4note}}}
 \label{{tab:contains}}
 \end{{table*}}
 """)

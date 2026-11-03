@@ -202,7 +202,7 @@ Condition & Outputs & Matcher (\%) & Judge (\%) & Judge only (\%) & Matcher only
 """ + "\n".join(cond) + r"""
 \bottomrule
 \end{tabular}
-\caption{Semantic re-score (\S17.3; exploratory). An outside-family judge (gemini-3.5-flash-lite, temperature 0) reads
+\caption{Semantic re-score (PR\S17.3; exploratory). An outside-family judge (gemini-3.5-flash-lite, temperature 0) reads
 the question, the reference and known wrong answers and the response, and classifies the final answer; judge-strict
 means it gives the reference answer, asserts no wrong one and does not abstain. Top: each contrast on the same
 """ + str(next(iter(j["contrasts"].values()))["n"]) + r""" conflict questions (seed 0) under the matcher and the judge, and their difference, with question-bootstrap
@@ -242,7 +242,7 @@ Generator & Detector & Prec. & Rec. & Share & Acc. & Gain & Share & Acc. & Gain 
 \bottomrule
 \end{tabular}
 \caption{The crossed cells (ConflictBank, one-answer prompt, conflict questions) split by what the flag does on each
-question (exploratory, \S17.1). \emph{Prec.}, \emph{Rec.}: direction precision and recall of the gold pair (\%).
+question (exploratory, PR\S17.1). \emph{Prec.}, \emph{Rec.}: direction precision and recall of the gold pair (\%).
 \emph{Share}: share of the cell's questions; \emph{Acc.}: the generator's no-flag accuracy on them (\%); \emph{Gain}:
 the flag's mean effect on them (points). \emph{Rest}: the remaining questions' contribution to the gain.
 \emph{Marginal}: the break-even calculation, $pR+(1-p)W$ with H31's $R$ and $W$ at the cell's precision $p$, which assumes

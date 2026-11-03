@@ -1,37 +1,43 @@
 \section{Introduction}
 
 Retrieval-augmented generation (RAG) \citep{lewis2020rag} hands a language model passages that may disagree. Some
-disagreements are genuine; others are planted or stale misinformation \citep{zou2025poisonedrag,wang2025madam}. Prompting a model about conflicts can help \citep{cattan2025conflicts}. Recent systems pair contradiction
-detectors with flagging prompts \citep{wang2026conflictrag} and report detection F1 and end-to-end accuracy, but not how they connect. What should the flag say, and what must the
-detector get right for it to help?
+disagreements are genuine; others are planted or stale misinformation \citep{zou2025poisonedrag,wang2025madam}.
+Prompting a model about conflicts can help \citep{cattan2025conflicts}, and recent systems pair contradiction
+detectors with prompts that flag the conflict to the generator \citep{wang2026conflictrag}. They report detection F1
+and end-to-end accuracy, but not how one leads to the other. We ask what a flag must say, and what its detector must
+get right, for the flag to help against misinformation.
 
-We fix the passages and independently vary the \emph{detector} (heuristic, NLI, LLM, random placebo,
-oracle, and synthetic detectors of chosen quality) and the \emph{format} passing its output to the generator: a
-neutral ``these passages may conflict'' flag; a flag saying one side is false but not which; a
-\emph{directional} flag naming the likely misinformation; or removal of the suspect passage. After pilots on
-RAMDocs \citep{wang2025madam}, we pre-registered H1--H9 and tested them on 300 held-out questions.
-Nine addenda (H10--H38), each committed before its runs, added ConflictBank \citep{su2024conflictbank}
-(including a majority-misinformation variant); RAGuard \citep{zeng2025raguard}, whose
-misleading passages are real Reddit posts; real health web pages (HealthContradict); and seven generators from OpenAI, Anthropic and Qwen. Controls separate what a
-flag conveys: forced choice, an answer key, randomised direction, the detector's verdict as an answer key and its model's own answer as
-a hint. A further \hTwentyFourCells\ cells cross six detectors with six generators. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
+We fix the passages and vary two things independently: the \emph{detector} (an LLM, an oracle built from benchmark
+labels, or a synthetic detector of chosen quality) and the \emph{format} that passes its output to the
+generator, from a neutral ``these passages may conflict'' flag to a \emph{directional} flag naming the likely
+misinformation. Answer keys that state a wrong answer without marking any passage control for what a flag conveys.
+We run seven generators on six benchmarks, chiefly RAMDocs \citep{wang2025madam} and ConflictBank
+\citep{su2024conflictbank}, and registered hypotheses in stages, most after earlier results were known
+(\S\ref{sec:setup}).
 
-Our findings:
+The paper makes three claims, each scored by string matching:
 \begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{A correct neutral flag does not reliably help.} Asked for every valid answer, OpenAI and Qwen models also give the
-misinformation; asked for one answer, some generators abstain on misinformed and correct answers
-alike; under forced choice the effect is small. Claude models move less; the minimal prompt is most harmful.
-\item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one, but
-on average it is close to an answer key naming the wrong answer (pooled over \PoolTwentyThreeK\
-comparisons, which vary individually; equivalent within $\pm$3 under our string metric, not under an outside-family judge).
-\item \textbf{A directional flag pays only above a break-even direction precision.} When direction is randomised (H31), a wrong
-flag costs more than a right one gains, because generators follow both at similar rates and an accurate generator has
-more correct answers to lose. The break-even direction precision, which calibrates flags on true pairs, rises from \beMin\ for gpt-4o-mini to
-\beMax\ for gpt-6.1-terra. For real detectors, precision alone can mislead. These follow rates and
-each detector's flags, frozen in advance, predict the flag's effect on unseen questions (H32), though not on HealthContradict.
-\item \textbf{Direction is unsafe on genuine conflicts and costly when conflicts are rare.} On WikiContradict the LLM
-directional flag and removal cut the share of answers giving both sides (H28). At a 5\% share of conflict
-questions, the LLM detector's flag has a negative estimated effect in \prevNegFive\ of \prevN\ settings (exploratory).
+\item \textbf{A neutral flag mainly shifts the answer policy} (\S\ref{sec:neutral}). Asked for one answer, four
+of seven generators abstain more (gpt-4o-mini on misinformed and correct answers alike); asked for every valid
+answer, they add the misinformation. The other three barely move or move the other way, and where misinformation
+passages outnumber the correct one the flag can raise selective accuracy. H2 and H8 were registered before any
+confirmatory data, H15 and H21 after earlier results; risk--coverage counts are exploratory.
+\item \textbf{Generators defer to directional flags, so a wrong flag can cost more than a right one gains}
+(\S\ref{sec:direction}). With direction randomised on true contradictions (H31, registered before its runs but
+after earlier results), three of four generators follow wrong flags about as often as right ones, and the most
+accurate of the four follows nearly all of them; the implied break-even direction precision is exploratory.
+\item \textbf{A frozen account of these follow rates predicts within a benchmark and shows where it fails}
+(\S\ref{sec:real}). Predictions committed before any flagged answer existed came close on unseen ConflictBank
+questions (H32, prospective), though a baseline that ignores which questions are flagged was nearly as close. They
+overstated harm on clean questions and on HealthContradict, whose labels are unverified.
 \end{itemize}
-On CONFLICTS, the one benchmark of real search results, no condition changes accuracy significantly. We release the harness, pre-registrations and every run.\footnote{Code, the pre-registration and
-all run outputs are in the anonymised supplementary material and will be released publicly on acceptance.}
+
+The numbers behind claims 2 and 3 come from ConflictBank, whose misinformation is
+LLM-written about facts the generators rarely know, and whose false side a bag-of-words classifier picks from
+passage style alone (\S\ref{sec:setup}). Detectors and generators may therefore find the false side from style, not
+from knowledge or reasoning about the contradiction. HealthContradict and RAGuard use real documents but serve only
+as label-transfer stress tests, because their labels, not verified facts, decide which side counts as false.
+Whether a detector's verdict passed as an answer key conveys as much as its flag depends on the scorer and is
+unresolved (\S\ref{sec:open}). We make no claims about model families. We release the harness, the
+pre-registration and every run.\footnote{Code, the pre-registration and all run outputs are in the anonymised
+supplementary material and will be released publicly on acceptance.}

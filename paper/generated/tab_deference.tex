@@ -10,7 +10,7 @@ Generator & Closed & Plain & $f_R$ & $f_W$ & Right & Wrong & $p^*$ \\
 \midrule
 gpt-4o-mini & 10.0 & 51.1 & 57 & 51 & $+$29.4 & $-$31.2 & 0.52 \\
 & & & {\scriptsize [46, 67]} & {\scriptsize [40, 62]} & & & {\scriptsize [0.43, 0.60]} \\[1pt]
-gpt-6-luna & 16.9 & 53.8 & 72 & 77 & $+$33.5 & $-$44.9 & 0.57 \\
+gpt-6-luna & 16.9$^\ddagger$ & 53.8 & 72 & 77 & $+$33.5 & $-$44.9 & 0.57 \\
 & & & {\scriptsize [60, 83]} & {\scriptsize [67, 86]} & & & {\scriptsize [0.51, 0.64]} \\[1pt]
 Claude Haiku & 11.8 & 66.8 & 63 & 64 & $+$24.1 & $-$49.2 & 0.67 \\
 & & & {\scriptsize [49, 76]} & {\scriptsize [55, 73]} & & & {\scriptsize [0.61, 0.74]} \\[1pt]
@@ -22,8 +22,9 @@ gpt-6.1-terra & 20.0 & 69.7 & 67 & 95 & $+$17.6 & $-$64.5 & 0.79 \\
 prompt, one-way matcher). \emph{Closed}: closed-book accuracy (\%). \emph{Plain}: accuracy with the passages and no
 flag in the H31 run (\%). For gpt-6-luna and gpt-6.1-terra the H31 run drew its own no-flag answers, so Plain differs from their one-answer no-flag accuracy elsewhere in the paper (\mbox{PR\S20.1}). \emph{Right}, \emph{Wrong}: the registered H31 effects $\Delta_R$ and $\Delta_W$
 (points) of a flag that names the false passage (right) or the true one (wrong). $f_R$, $f_W$: follow rates (\%,
-exploratory; question-bootstrap 95\% CIs below): among questions answered wrongly without a flag, the share a right flag
-makes correct; among questions answered correctly, the share a wrong flag makes wrong. $p^*$: break-even direction
-precision $-\Delta_W/(\Delta_R-\Delta_W)$ (exploratory; bootstrap 95\% CI below).}
+registered descriptives without a test, PR\S16.3; question-bootstrap 95\% CIs below): among questions answered wrongly
+without a flag, the share of right-flag responses that are correct; among questions answered correctly, the share of
+wrong-flag responses that contain the misinformation answer (bidirectional match); abstentions count as neither.
+$p^*$: break-even direction precision $-\Delta_W/(\Delta_R-\Delta_W)$ (exploratory; bootstrap 95\% CI below). $^\ddagger$: more than 1\% of responses lack a final answer (R9).}
 \label{tab:deference}
 \end{table}

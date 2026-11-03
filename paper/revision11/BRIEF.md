@@ -58,7 +58,8 @@ stress tests, family claims dropped, registration described in three tiers. Read
 - Terms (define once in §3, then use only these): *hit rate*, *direction precision* (counting one-side verdicts;
   say which definition when a number uses the other), *pair precision/recall*, *follow rates* f_R and f_W (adoption:
   a right flag is followed when the flagged answer is correct where the no-flag answer was wrong; a wrong flag when
-  the flagged answer is wrong where the no-flag answer was right), *break-even direction precision* p*, *answer key*,
+  the flagged answer contains the misinformation answer (bidirectional match) where the no-flag answer was right;
+  abstentions count as neither, PR§16.3), *break-even direction precision* p*, *answer key*,
   *verdict key*. Never bare "precision". Drop "share of headroom". Rename the H31 effects Δ_R and Δ_W.
 - Style: plain, direct sentences; one idea per sentence; no hype; no process jargon (session, triage, draft, budget,
   tracks). Match the existing LaTeX conventions (`\citep`, `\emph`, `\paragraph{...}`).

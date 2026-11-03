@@ -1,6 +1,7 @@
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -18,7 +19,7 @@ H3 & oracle+remove\_suspect $>$ plain (conflict) & $+$27.6 [$+$20.6, $+$35.0] & 
 \multicolumn{6}{l}{\emph{H4: false flags}} \\
 H4a & false-flag cells below plain on clean q., directional flag\textsuperscript{r} & 0 of 9 cells & Holm & not supported & yes \\
 H4a & false-flag cells below plain on clean q., removal\textsuperscript{r} & 6 of 9 cells & Holm & supported & yes \\
-H4b & harm grows with clean-q.\ exposure, Spearman over 18 cells\textsuperscript{r} & $\rho=-0.39$ [$-0.74$, $-0.12$] & -- & supported & yes \\
+H4b & harm grows with clean-q.\ exposure, Spearman over 18 cells\textsuperscript{r} & $\rho=-0.39$ [$-0.74$, $-0.12$] & -- & supported\textsuperscript{L} & yes \\
 H4c & removal harms clean q.\ more than directional flag\textsuperscript{r} & 5 of 9 matched cells & Holm & count only & -- \\
 \multicolumn{6}{l}{\emph{H5: the heuristic detector vs random}} \\
 H5 & caag+flag vs random+flag (all) & $-$1.4 [$-$3.4, $+$0.3] & 0.178 (0.257) & n.s. & yes \\
@@ -44,16 +45,17 @@ H8 & WikiContradict: caag+flag vs plain & $+$0.7 [0.0, $+$1.6] & 0.250 (0.345) &
 H8 & WikiContradict: nli+flag vs plain & $+$3.2 [$+$0.3, $+$6.1] & 0.077 (0.066) & n.s. & -- \\
 H8 & WikiContradict: llm\_dir+flag vs plain & $+$6.2 [$+$2.8, $+$9.6] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
 strict accuracy; differences in points). Rows marked \textsuperscript{r} are re-analyses registered later, before
-they were computed. Directional predictions are \emph{supported} or \emph{not supported}; tests with no predicted sign are \emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric (robustness to the RAMDocs label rule is in Table~\ref{tab:contains}, where H4b's correlation weakens). $p$-values come from 10,000 sign-flip permutations, extended to 200,000 when none reaches the observed statistic, Holm-adjusted within the family; this is the significance used everywhere in the paper. In brackets: the Benjamini--Hochberg $q$ over all registered tests of the programme (primary metric).}
+they were computed. Directional predictions are \emph{supported} or \emph{not supported}; tests with no predicted sign are \emph{significant} or \emph{n.s.} \emph{Robust}: the same outcome under the bidirectional metric (robustness to the RAMDocs label rule is in Table~\ref{tab:contains}, where H4b's correlation weakens). \textsuperscript{L}: supported but label-sensitive (Table~\ref{tab:contains}; PR\S20, R19). \textsuperscript{M}: supported only mechanically, because generator accuracy enters both sides of the H24 tests (Appendix~\ref{app:hyp}). $p$-values come from 10,000 sign-flip permutations, extended to 200,000 when none reaches the observed statistic, Holm-adjusted within the family; this is the significance used everywhere in the paper. In brackets: the Benjamini--Hochberg $q$ over all registered tests of the programme (primary metric).}
 \label{tab:hypotheses}
 \end{table*}
 
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -77,7 +79,7 @@ H11 & Qwen2.5-7B: oracle+flag\_directional $>$ plain (conflict) & $+$3.6 [$-$0.7
 H11 & Qwen2.5-7B: oracle+flag\_directional $>$ oracle+flag (conflict) & $+$9.4 [$+$5.0, $+$14.4] & 0.001 (0.001) & supported & yes \\
 H11 & Qwen2.5-7B: oracle+remove\_suspect $>$ plain (conflict) & $+$18.0 [$+$10.8, $+$25.2] & $<$0.001 ($<$0.001) & supported & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S9 (H10--H11), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -89,6 +91,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -121,7 +124,7 @@ H14 & RAMDocs, gpt-4.1: LLM dir. flag vs trustrag multi (labelled) & $+$19.6 [$+
 H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs astute (all questions) & $-$3.4 [$-$8.1, $+$1.3] & 0.324 (0.237) & n.s. & yes \\
 H14 & ConflictBank, gpt-4o-mini: LLM dir. flag vs trustrag (all questions) & $+$0.8 [$-$3.9, $+$5.6] & 0.761 (0.844) & n.s. & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S10 (H12--H14), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -133,6 +136,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -169,7 +173,7 @@ H18 & CB majority, gpt-4o-mini: LLM dir. flag vs self-identify (all questions) &
 H19 & ConflictBank, gpt-6-luna: neutral flag vs plain (conflict) & $-$9.4 [$-$12.9, $-$6.0] & $<$0.001 ($<$0.001) & significant & yes \\
 H19 & ConflictBank, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$45.9 [$+$40.8, $+$50.9] & $<$0.001 ($<$0.001) & supported & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S11--PR\S12 (H15--H19) (part 1 of 2), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -181,6 +185,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -201,7 +206,7 @@ H19 & CB majority, gpt-6-luna: LLM dir. flag vs plain (conflict) & $+$7.1 [$+$2.
 H19 & CB majority, gpt-6.1-terra: dir. flag $>$ plain (conflict) & $+$66.3 [$+$61.0, $+$71.7] & $<$0.001 ($<$0.001) & supported & yes \\
 H19 & CB majority, gpt-6.1-terra: LLM dir. flag vs plain (conflict) & $+$9.0 [$+$3.3, $+$14.7] & 0.019 (0.008) & significant & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S11--PR\S12 (H15--H19) (part 2 of 2), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -213,6 +218,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -247,7 +253,7 @@ H23 & RAMDocs, gpt-6.1-terra: dir. flag vs answer key (conflict) & $-$5.0 [$-$10
 H23 & ConflictBank, gpt-4o-mini: dir. flag vs answer key (conflict) & $+$5.3 [$+$1.6, $+$9.1] & 0.059 (0.013) & n.s. & no \\
 H23 & ConflictBank, gpt-6-luna: dir. flag vs answer key (conflict) & $+$0.1 [$-$1.6, $+$1.8] & 1.000 (1.000) & n.s. & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 1 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -259,6 +265,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -293,7 +300,7 @@ H26 & RAGuard, gpt-6-luna: neutral flag vs plain (conflict) & 0.0 [$-$1.7, $+$1.
 H26 & RAGuard, gpt-6-luna: dir. flag $>$ plain (conflict) & $+$8.8 [$+$5.7, $+$12.1] & $<$0.001 ($<$0.001) & supported & yes \\
 H26 & RAGuard, gpt-6-luna: dir. flag $>$ neutral flag (conflict) & $+$8.8 [$+$5.7, $+$12.2] & $<$0.001 ($<$0.001) & supported & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 2 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -305,6 +312,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -338,7 +346,7 @@ H21 & ConflictBank, claude-haiku-5-5: dir. flag vs plain, misinformation rate (c
 H21 & ConflictBank forced, gpt-4o-mini: neutral flag vs plain, misinformation rate (conflict) & $+$0.3 [$-$3.4, $+$4.2] & 1.000 (0.975) & n.s. & -- \\
 H21 & ConflictBank forced, gpt-4o-mini: dir. flag vs plain, misinformation rate (conflict) & $-$24.9 [$-$29.7, $-$20.1] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 3 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -350,6 +358,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -382,7 +391,7 @@ H21 & ConflictBank, gpt-4o-mini: dir. flag vs plain, selective accuracy (ratio) 
 H21 & ConflictBank, gpt-6-luna: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$1.2 [$-$2.2, $+$4.8] & 1.000 (0.599) & n.s. & -- \\
 H21 & ConflictBank, gpt-6-luna: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$29.9 [$+$25.0, $+$34.7] & 0.002 ($<$0.001) & significant & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 4 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -394,6 +403,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -412,10 +422,10 @@ H21 & ConflictBank forced, gpt-6.1-terra: dir. flag vs plain, selective accuracy
 H21 & ConflictBank forced, claude-haiku-5-5: neutral flag vs plain, selective accuracy (ratio) (conflict) & $+$3.9 [$+$1.2, $+$6.7] & 0.046 (0.011) & significant & -- \\
 H21 & ConflictBank forced, claude-haiku-5-5: dir. flag vs plain, selective accuracy (ratio) (conflict) & $+$21.1 [$+$17.0, $+$25.4] & 0.002 ($<$0.001) & significant & -- \\
 \multicolumn{6}{l}{\emph{H24: detector versus generator reliability (crossed)}} \\
-H24 & gain rises with detector-minus-generator reliability, Spearman over 30 cells & $\rho=+0.64$ & $<$0.001 & supported & -- \\
-H24 & per-question slope of gain on reliability gap, within cells & $+$47.6 [$+$43.2, $+$51.9] & $<$0.001 & supported & -- \\
+H24 & gain rises with detector-minus-generator reliability, Spearman over 30 cells & $\rho=+0.64$ & $<$0.001 & supported\textsuperscript{M} & -- \\
+H24 & per-question slope of gain on reliability gap, within cells & $+$47.6 [$+$43.2, $+$51.9] & $<$0.001 & supported\textsuperscript{M} & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S13--PR\S14 (H20--H26) (part 5 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -427,6 +437,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -459,7 +470,7 @@ H27 & gpt-6-luna, detector gpt-4o-mini: LLM dir. flag vs hint (conflict) & $+$6.
 H27 & gpt-6-luna, detector gpt-6-luna: LLM dir. flag vs hint (conflict) & $+$8.2 [$+$3.7, $+$12.8] & 0.005 ($<$0.001) & significant & yes \\
 H27 & gpt-6-luna, detector gpt-6.1-terra: LLM dir. flag vs hint (conflict) & $-$5.8 [$-$10.6, $-$1.0] & 0.279 (0.036) & n.s. & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S15 (H27--H29) (part 1 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -471,6 +482,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -503,7 +515,7 @@ H27 & gpt-4o-mini, detector gpt-6.1-terra: hint vs plain (conflict) & $+$9.4 [$+
 H27 & gpt-6-luna, detector claude-haiku-5-5: hint vs plain (conflict) & $+$9.4 [$+$5.7, $+$13.2] & $<$0.001 ($<$0.001) & significant & yes \\
 H27 & gpt-6-luna, detector claude-sonnet-5-5: hint vs plain (conflict) & $+$14.2 [$+$10.4, $+$18.2] & $<$0.001 ($<$0.001) & significant & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S15 (H27--H29) (part 2 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -515,6 +527,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -547,7 +560,7 @@ H27 & gpt-4o-mini, detector claude-sonnet-5-5: cell vs detector model alone (con
 H27 & gpt-4o-mini, detector gpt-4.1: cell vs detector model alone (conflict) & $+$5.0 [$-$0.2, $+$10.1] & 0.671 (0.119) & n.s. & yes \\
 H27 & gpt-4o-mini, detector gpt-4o-mini: cell vs detector model alone (conflict) & $+$8.4 [$+$3.2, $+$13.8] & 0.021 (0.003) & significant & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S15 (H27--H29) (part 3 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -559,6 +572,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -592,7 +606,7 @@ H28 & RAMDocs ambiguity, gpt-6-luna: LLM removal vs plain & $-$29.3 [$-$38.0, $-
 H28 & RAMDocs ambiguity, gpt-6-luna: LLM dir. flag vs plain, gold recall & $-$8.9 [$-$12.4, $-$5.7] & $<$0.001 ($<$0.001) & significant & -- \\
 H28 & RAMDocs ambiguity, gpt-6-luna: LLM removal vs plain, gold recall & $-$20.3 [$-$25.0, $-$15.7] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S15 (H27--H29) (part 4 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -604,6 +618,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -627,7 +642,7 @@ H29 & gpt-4o-mini detector, paraphrased: gpt-4o-mini's gain vs original & $+$1.7
 H29 & gpt-6-luna detector, reversed order: gpt-4o-mini's gain vs original & $-$4.6 [$-$8.9, $-$0.2] & 0.196 (0.081) & n.s. & -- \\
 H29 & gpt-6-luna detector, paraphrased: gpt-4o-mini's gain vs original & $-$1.2 [$-$5.1, $+$2.7] & 1.000 (0.680) & n.s. & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S15 (H27--H29) (part 5 of 5), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -639,6 +654,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -671,7 +687,7 @@ H30 & Qwen2.5-7B, detector gpt-4o-mini: verdict key vs hint (conflict) & $+$1.3 
 H30 & Qwen2.5-7B, detector gpt-6-luna: verdict key vs hint (conflict) & $+$1.7 [$-$3.7, $+$6.7] & 1.000 (0.709) & n.s. & yes \\
 H30 & Qwen2.5-7B, detector gpt-6.1-terra: verdict key vs hint (conflict) & $-$7.3 [$-$12.7, $-$2.3] & 0.095 (0.015) & n.s. & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S16 (H30--H31) (part 1 of 3), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -683,6 +699,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -716,7 +733,7 @@ H31 & gpt-6-luna: wrong-flag effect (conflict) & $-$44.9 [$-$52.0, $-$37.8] & $<
 H31 & claude-haiku-5-5: wrong-flag effect (conflict) & $-$49.2 [$-$56.5, $-$42.1] & $<$0.001 ($<$0.001) & supported & -- \\
 H31 & gpt-6.1-terra: wrong-flag effect (conflict) & $-$64.5 [$-$72.3, $-$56.0] & $<$0.001 ($<$0.001) & supported & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S16 (H30--H31) (part 2 of 3), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the
@@ -728,6 +745,7 @@ question; RAGuard's misleading posts are real Reddit text.}
 \begin{table*}[p]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
 \begin{tabular}{lp{6.6cm}llll}
 \toprule
 & Pre-registered test & Estimate [95\% CI] & $p_{\text{Holm}}$ ($q_{\text{BH}}$) & Outcome & Robust \\
@@ -738,7 +756,7 @@ H31 & gpt-6-luna: right-flag effect + wrong-flag effect (conflict) & $-$11.4 [$-
 H31 & claude-haiku-5-5: right-flag effect + wrong-flag effect (conflict) & $-$25.1 [$-$34.3, $-$15.8] & $<$0.001 ($<$0.001) & significant & -- \\
 H31 & gpt-6.1-terra: right-flag effect + wrong-flag effect (conflict) & $-$46.9 [$-$57.1, $-$36.4] & $<$0.001 ($<$0.001) & significant & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Pre-registered tests added in PR\S16 (H30--H31) (part 3 of 3), registered before the runs they cover (times and exceptions in
 Table~\ref{tab:timeline}). Same conventions as
 Table~\ref{tab:hypotheses}. Settings name the benchmark and generator. ConflictBank rows from H15 on use the

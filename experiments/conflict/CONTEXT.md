@@ -669,7 +669,7 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
 - **Open (authors):** decisions in TRIAGE_REVIEW10.md §5; human labelling (A1 first, about 3.5-4 h per annotator).
 
 
-## Round 17: PR§20 re-analyses (2026-11-02, in progress, no API calls)
+## Round 17: PR§20 re-analyses and the three-claim restructure (2026-11-02, no API calls)
 
 - PR§20 registered and pushed first (d7e8d76; GitHub push 18:00:07Z). Modules `rev11_{prior,account,scoring,policy}.py`
   compute R1–R19 into `runs/rev11/*.json` (each reviewed independently against PR§20); `export_audit11.py` wrote the
@@ -678,5 +678,26 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   exceptions); generated captions use PR§.
 - Key result: R1 text classifier separates ConflictBank's sides perfectly (1.000 on eval and fresh, also with objects
   masked): the side is readable from surface genre cues. R2: every detector is more accurate on facts it knows.
-- **Not done yet:** wire `rev11_*` into paper_stats/assets (macros `numbers11`), the three-claim restructure of the body
-  (TRIAGE_REVIEW10.md §3), remaining D writing fixes, page fit, PDF.
+- Wired in: `revision11.py` runs the four modules inside paper_stats (`R["rev"]["r11"]`); `assets11.py` writes about 800
+  macros, `fig_riskcov` and `tab_deference/prior/missing/riskcov/prev11`. revision7's prevalence break-even now uses
+  exact sums over sorted ids (a set-order float flip had made one `tab_prevalence` cell nondeterministic).
+- Restructure (brief: `paper/revision11/BRIEF.md`; macros: `paper/revision11/MACROS.md`): the body now makes three
+  claims: (1) a neutral flag shifts the answer policy (abstain under one answer, list both under multi-answer;
+  Haiku/Sonnet/terra barely move); (2) generators defer to directional flags (H31 randomised direction, `tab_deference`
+  in the body, p* exploratory); (3) the frozen account predicts conflict-question effects on ConflictBank-fresh, but
+  cell-level baselines come close and it overstates clean-question and HealthContradict harm. §5.4 `sec:open` holds
+  what does not hold (answer keys under the judge, stress tests, genuine conflicts, prevalence). Abstract has five
+  numbers. New labels: `tab:terms`, `eq:account`, `fig:riskcov`, `sec:open`, `app:rev11` (Appendix F, R1–R19),
+  `app:hyp` (registered tests), `tab:claimsb`. `tab_risk`, `tab_hypotheses` and `fig:reliability` left the body;
+  `tab_breakeven`/`tab_prevalence` replaced by `tab_deference`/`tab_prev11`. Limitations rewritten (six paragraphs).
+- Generated-caption fixes: `tab_deference` gives the registered f_W definition (contains the misinformation answer,
+  bidirectional; abstentions neither; PR§16.3 descriptives) and marks cells above 1% missing final answers (R9:
+  luna's closed-book cell, 2.1%); `tab:contains` no longer says the percentile interval excludes the estimate (it does
+  not: −0.08 in [−0.56, −0.02]; the interval excludes zero while the permutation p is 0.75); H4b is "supported
+  (label-sensitive)" and H24 "supported (mechanical)" in `tab_hypotheses`; `fig_grid` axis is direction precision d;
+  bare §17.1/§17.3/§18.2 captions now PR§; timeline base row "Base (H1--H9)".
+- **Still open (authors):** API runs C1–C13 held for approval; human audit A1 (`runs/labelling/audit11_disagreements.csv`)
+  then A2/A3 (audit8 sheets) decide H23/H30 and the HealthContradict labels; OSF deposit (paper says no registry was
+  used); AI-assistance/process disclosure sentence; fixed-seed ConflictBank example pair (needs a registration).
+  Generated tables not changed: `tab_pooled` (τ), `tab_hc` (majority-class rate), `tab_cb` (single-call clean column),
+  `tab_entity` (pooled row); `tab_risk`'s per-column matcher is stated in the appendix prose instead.

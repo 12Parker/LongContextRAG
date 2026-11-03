@@ -14,44 +14,49 @@ each pair.}
 \centering
 \includegraphics[width=\textwidth]{generated/fig_grid.pdf}
 \caption{Synthetic detectors at recall 1: change in one-way strict accuracy (points) against no flags, by pair
-precision (rows) and direction accuracy (columns), for the directional flag (top) and removal (bottom). $^*$:
-significant after Holm correction over the 36 cells of that format and subset. Clean questions only see false flags,
-so their rows do not vary with direction accuracy.}
+precision (rows) and direction precision $d$ (columns, labelled direction accuracy in the plot), for the directional
+flag (top) and removal (bottom). $^*$: significant after Holm correction over the 36 cells of that format and subset.
+Clean questions only see false flags, so their rows do not vary with direction precision.}
 \label{fig:grid}
 \end{figure*}
 
 \paragraph{Construction.}
-We build each synthetic detector (Section~\ref{sec:synthetic}) from the gold labels. Each gold contradiction pair is
+We build each synthetic detector (\S\ref{sec:method}) from the gold labels. Each gold contradiction pair is
 flagged with probability $r$. False flags are drawn from non-contradicting pairs at a single per-pair rate, set over
-the whole split so that expected precision is $p$; clean questions therefore
-receive false flags too. A true flag names the gold misinformation side with probability $d$, and otherwise the other side.
-A false flag has no misinformation side, so its suspect is picked uniformly. Each pair gets one uniform draw for
-flagging and one for direction, and every cell reuses them. Cells are therefore nested: raising $r$ or $d$, or
-lowering $p$, only adds flags or corrections, which keeps comparisons across cells paired.
+the whole split so that expected pair precision is $p$; clean questions therefore
+receive false flags too. A true flag names the gold misinformation side with probability $d$, its direction
+precision, and otherwise the other side. A false flag has no misinformation side, so its suspect is picked uniformly.
+Each pair gets one uniform draw for flagging and one for direction, and every cell reuses them. Cells are therefore
+nested: raising $r$ or $d$, or lowering $p$, only adds flags or corrections, which keeps comparisons across cells
+paired. H31 applies this detector to ConflictBank with every true pair flagged, no false flags and $d=0.5$.
 
-\paragraph{Gains rise with direction accuracy; precision matters mainly for removal.}
+\paragraph{Gains rise with direction precision; pair precision matters mainly for removal.}
 Figure~\ref{fig:grid} replaces the oracle with synthetic detectors of known quality. Gains rise with direction
-accuracy in both formats. Only the cells with perfect direction are significant on all questions (directional flag
-\gDirOneDOneAll, removal \gRemOneDOneAll\ points at perfect precision). Neighbouring cells at direction accuracy
+precision in both formats. Only the cells with perfect direction are significant on all questions (directional flag
+\gDirOneDOneAll, removal \gRemOneDOneAll\ points at perfect pair precision). Neighbouring cells at direction precision
 0.75 have similar point estimates on conflict questions, so the pattern is a dose-response, not a threshold. With 36 cells
 under Holm, the grid has little power to separate adjacent levels.
 
-Precision matters mainly for removal. On clean questions a cell's prompt does not depend
-on direction accuracy, so the false-flag cells reduce to \hFourRemN\ distinct comparisons per format. Removal is
+Pair precision matters mainly for removal. On clean questions a cell's prompt does not depend
+on direction precision, so the false-flag cells reduce to \hFourRemN\ distinct comparisons per format. Removal is
 significantly harmful in \hFourRemHarm\ of them, the directional flag in \hFourDirHarm\ (H4a). Under removal, false flags
-delete correct passages, which costs clean questions \agRemHalfDOneClean\ points at precision 0.5 and
+delete correct passages, which costs clean questions \agRemHalfDOneClean\ points at pair precision 0.5 and
 \agRemQuDOneClean\ at 0.25, while synthetic false directional flags cost at most two points. The harm tracks the
-share of clean questions that lose a correct document (Spearman $\rho=\hFourRho$ over \hFourRhoCells\ distinct
-cells, 95\% CI \hFourRhoCI\ from a question-level bootstrap; H4b). Removal hurts clean questions significantly more
-than the directional flag in \hFourRemWorse\ of \hFourMatched\ matched cells (H4c; we set no threshold, so we report
-the count). Removal is both more powerful and more fragile: its best cell gains twice the directional
-flag's on all questions, but below precision 0.75 it is the only format that does net harm.
+share of clean questions that lose a correct document (Spearman $\rho$ = \hFourRho\ over \hFourRhoCells\ distinct
+cells, 95\% CI \hFourRhoCI\ from a question-level bootstrap; H4b). This support is label-sensitive. Treating every
+suspect document as misinformation, $\rho$ is \hFourBRho\ (Table~\ref{tab:contains}): a permutation test gives
+two-sided $p=\hFourBP$, and a bias-corrected (BCa) interval, \hFourBBcaCI, includes zero. The percentile interval
+printed there lies mostly below the point estimate, because the bootstrap distribution is skewed, so it cannot be
+read as support (R19, Appendix~\ref{app:rev11}). We therefore record H4b as \emph{supported (label-sensitive)}.
+Removal hurts clean questions significantly more than the directional flag in \hFourRemWorse\ of \hFourMatched\
+matched cells (H4c; we set no threshold, so we report the count). Removal is both more powerful and more fragile:
+its best cell gains twice the directional flag's on all questions, but below pair precision 0.75 it is the only
+format that does net harm.
 
 
 \paragraph{Placing real detectors on the grid.}
-\label{sec:placement}
 We compare two ways of summarising a real
-detector. \emph{Pair-level}: its pair precision, recall and direction accuracy. \emph{Document-level}: what it does
+detector. \emph{Pair-level}: its pair precision, recall and direction precision. \emph{Document-level}: what it does
 to each subset's documents in a given format. For conflict questions, that is the share whose misinformation documents
 are all marked and the share that have a correct document marked; for clean questions, only the latter. Here ``marked'' means removed (remove) or headed as misinformation (directional flag). The prediction
 for a subset is the inverse-distance-weighted mean effect of the four nearest grid cells in that space.
@@ -69,3 +74,10 @@ detector removes the misinformation on \misGoneLlm\% of conflict questions despi
 document-level axes after seeing the LLM detector on the pilot split. The grid is a useful first estimate of a
 detector's effect, but with three detectors we cannot claim that one summary predicts better than the other.
 
+\section{Registered Tests}
+\label{app:hyp}
+The tables below list every registered test, grouped by the registration that added it (times in
+Table~\ref{tab:timeline}). Their status column is the registered outcome. Two statuses need a qualifier: H4b is
+\emph{supported (label-sensitive)} (Appendix~\ref{app:grid}), and H24 is \emph{supported (mechanical)}, because the
+generator's accuracy enters both sides of its tests (Appendix~\ref{app:more}).
+\input{generated/tab_hypotheses}
