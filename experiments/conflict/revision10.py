@@ -47,15 +47,16 @@ def _examples(run: Path):
     return {e.id: e for e in data.filter_ids(data.load(cfg["dataset"]), cfg.get("ids_file"))}
 
 
-def _dets(run: Path) -> dict:
-    return {r["id"]: r["pairs"] for r in map(json.loads, open(run / "detections.llm_dir.jsonl"))}
+def _dets(run: Path, det: str = "llm_dir") -> dict:
+    return {r["id"]: r["pairs"] for r in map(json.loads, open(run / f"detections.{det}.jsonl"))}
 
 
-def vectors19(run: Path, ds: str, flagged: bool = True, metric: str = PRIMARY19, flag_cond: str = FLAG19) -> dict:
+def vectors19(run: Path, ds: str, flagged: bool = True, metric: str = PRIMARY19, flag_cond: str = FLAG19,
+              det_name: str = "llm_dir") -> dict:
     """{"conflict"|"clean": {"ids", "g", "right", "wrong"[, "y"]}}: plain score (seed mean), whether the detector names
     exactly the misinformation side of a gold contradiction pair (as H24's d_q), whether its suspects include a correct
     passage, and (flagged) the flagged score. With flagged=False no flagged row is read."""
-    ex, det = _examples(run), _dets(run)
+    ex, det = _examples(run), _dets(run, det_name)
     rows = [r for r in read_results(run) if r["condition"] == "plain" or (flagged and r["condition"] == flag_cond)]
     out = {}
     for part, sub in (("conflict", True), ("clean", False)):

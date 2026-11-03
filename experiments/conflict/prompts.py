@@ -19,6 +19,8 @@ Modes
   flag_directional  flag, but passages the detector marks as `suspects` are headed
                  "LIKELY MISINFORMATION" and the conflict list says which side is suspect.
                  Needs a detector that knows direction (oracle; an LLM detector could).
+  flag_directional_c<NN>  flag_directional with a stated detector confidence of NN% on each suspect (§21.3:
+                 does a stated confidence change how far generators defer?), e.g. flag_directional_c55
   flag_directional_instruct_v2  flag_directional + the v2 reliability instruction (does direction
                  add anything once the model is told to resolve the conflict?)
   remove_suspect drop the suspect passage(s) of each flagged pair; falls back to doc_idx_2
@@ -65,6 +67,8 @@ Flag styles (`style`, run.py --flag-style)
              reproduce the original CAAG format (C2).
 """
 from __future__ import annotations
+
+import re
 
 from .detectors import Detection
 
@@ -159,7 +163,7 @@ PROMPT_ONLY_MODES = ("plain", "instruct", "instruct_v2", "self_identify", "close
 
 
 def _flag_context(passages: list[str], dets: list[Detection], directional: bool = False,
-                  onewrong: bool = False) -> str:
+                  onewrong: bool = False, conf: int | None = None) -> str:
     partners: dict[int, list[int]] = {}
     for d in dets:
         partners.setdefault(d.i, []).append(d.j)
@@ -171,7 +175,8 @@ def _flag_context(passages: list[str], dets: list[Detection], directional: bool 
         if k in partners:
             with_ = ", ".join(map(str, sorted(partners[k])))
             if k in suspects:
-                header += f" [LIKELY MISINFORMATION; conflicts with passage(s): {with_}]"
+                stated = f" (detector confidence: {conf}%)" if conf is not None else ""
+                header += f" [LIKELY MISINFORMATION{stated}; conflicts with passage(s): {with_}]"
             elif onewrong:
                 header += f" [CONFLICT with passage(s): {with_}; one side contains misinformation]"
             else:
@@ -184,7 +189,7 @@ FLAG_STYLES = ("uniform", "original")
 
 
 def _conflict_list(dets: list[Detection], heading: str, directional: bool = False,
-                   style: str = "uniform", onewrong: bool = False) -> str:
+                   style: str = "uniform", onewrong: bool = False, conf: int | None = None) -> str:
     if not dets:
         return ""
     lines = []
@@ -193,6 +198,8 @@ def _conflict_list(dets: list[Detection], heading: str, directional: bool = Fals
                 else f"- Passages {d.i} and {d.j}: possible contradiction")
         if directional and d.suspects:
             line += f"; passage {' and '.join(map(str, d.suspects))} likely contains misinformation"
+            if conf is not None:
+                line += f" (detector confidence: {conf}%)"
         elif onewrong:
             line += "; exactly one of the two contains misinformation (it is not known which)"
         lines.append(line)
@@ -269,6 +276,10 @@ def build_prompt(question: str, passages: list[str], mode: str,
         context = _flag_context(passages, dets, directional=True)
         conflicts = _conflict_list(dets, "POTENTIAL CONFLICTS DETECTED:", directional=True, style=style)
         instruction = INSTRUCTIONS.get(mode, "")
+    elif m := re.fullmatch(r"flag_directional_c(\d{1,2})", mode):
+        conf = int(m.group(1))
+        context = _flag_context(passages, dets, directional=True, conf=conf)
+        conflicts = _conflict_list(dets, "POTENTIAL CONFLICTS DETECTED:", directional=True, style=style, conf=conf)
     elif mode in ("remove", "remove_suspect"):
         drop = ({k for d in dets for k in (d.suspects or [d.j])} if mode == "remove_suspect"
                 else {d.j for d in dets})

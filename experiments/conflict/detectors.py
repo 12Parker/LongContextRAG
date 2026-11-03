@@ -158,6 +158,39 @@ class NLIWindowDetector(NLIDetector):
         return " ".join(sents[k] for k in sorted(keep))[: self.max_chars]
 
 
+class NLISentenceDetector(NLIDetector):
+    """Sentence-pair NLI (§21.8). Each passage keeps the `k` sentences sharing most non-stopword words with the
+    question (ties: earlier first), each cut to `sent_chars`; every pair of kept sentences across two passages is
+    scored in both orders, and the passage pair's score is the largest contradiction probability. Names no side."""
+    def __init__(self, *a, k: int = 3, sent_chars: int = 400, name: str = "nli_sent", **kw):
+        super().__init__(*a, name=name, **kw)
+        self.k, self.sent_chars = k, sent_chars
+
+    def _sentences(self, passage: str, question: str) -> list[str]:
+        sents = [x.strip() for x in re.split(r"(?<=[.!?])\s+|\n+", passage.strip()) if x.strip()]
+        q = set(re.findall(r"\w+", question.lower())) - _STOP
+        score = [len(q & set(re.findall(r"\w+", x.lower()))) for x in sents]
+        keep = sorted(sorted(range(len(sents)), key=lambda k: (-score[k], k))[: self.k])
+        return [sents[k][: self.sent_chars] for k in keep]
+
+    def detect(self, ex: Example) -> DetectorOutput:
+        ss = [self._sentences(p, ex.question) for p in ex.passages]
+        idx = [(i, j) for i in range(len(ss)) for j in range(i + 1, len(ss))]
+        t0 = time.perf_counter()
+        inputs, owner = [], []
+        for i, j in idx:
+            for a in ss[i]:
+                for b in ss[j]:
+                    inputs += [(a, b), (b, a)]
+                    owner += [(i, j), (i, j)]
+        probs = self.ce.predict(inputs, apply_softmax=True, batch_size=self.bs, show_progress_bar=False) if inputs else []
+        scores = {p: 0.0 for p in idx}
+        for (i, j), pr in zip(owner, probs):
+            scores[(i, j)] = max(scores[(i, j)], float(pr[self.c_idx]))
+        pairs = [Detection(i, j, s, "nli") for (i, j), s in scores.items() if s >= self.threshold]
+        return DetectorOutput(pairs, scores, time.perf_counter() - t0)
+
+
 _STOP = {"the", "a", "an", "of", "in", "on", "at", "to", "is", "was", "who", "what", "which", "when", "where", "did",
          "does", "do", "for", "by", "with", "and", "or", "as", "from", "that", "this", "it", "its", "be", "are", "were"}
 

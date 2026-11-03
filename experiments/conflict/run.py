@@ -6,7 +6,7 @@ Run the condition matrix (Phase 2).
         --seeds 0,1,2 --out runs/ramdocs_pilot
 
 A condition is "<detector>+<mode>" or one of: plain, instruct, instruct_v2, madam, grid.
-Detectors: caag, nli, llm, llm_dir (also says which side is misinformation), agree (llm_dir gated on a second
+Detectors: caag, nli, nli_sent (sentence pairs, §21.8), llm, llm_dir (also says which side is misinformation), agree (llm_dir gated on a second
 detector, --detector2-model; §17), random, oracle, oracle_inv,
 synth-p<P>-r<R>-<pool>[-d<D>]. Modes: see prompts.py.
 
@@ -36,7 +36,7 @@ from tqdm import tqdm
 
 from . import data
 from .detectors import (AgreeDetector, CAAGDetector, LLMAnswerJudge, DetectorOutput, Detection, InvertedOracleDetector, LLMDetector,
-                        NLIDetector, NLIWindowDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
+                        NLIDetector, NLISentenceDetector, NLIWindowDetector, NoDetector, OracleDetector, RandomDetector, STEmbedder, SyntheticDetector,
                         parse_synth_name, synth_name)
 from .jsonl import ensure_plain
 from .baselines import BASELINE_MODES, TRUST_SYSTEM, SimCSE, astute_rag, trustrag
@@ -81,6 +81,8 @@ def make_detector(name: str, args, llm, examples=None, llm2=None):
         return CAAGDetector(STEmbedder(args.embedder), theta_s=args.theta_s, theta_c=args.theta_c)
     if name == "nli":
         return NLIDetector(args.nli_model, threshold=args.nli_threshold)
+    if name == "nli_sent":   # sentence-pair NLI (§21.8)
+        return NLISentenceDetector(args.nli_model, threshold=args.nli_threshold)
     if name.startswith("nli_win"):   # nli_win: 1,500 characters (§17.2); nli_win300: 300 (§17.6 deviation)
         mc = int(name[len("nli_win"):] or 1500)
         return NLIWindowDetector(args.nli_model, threshold=args.nli_threshold, max_chars=mc, name=name)

@@ -322,6 +322,12 @@ def load_conflictbank_rev(path: Path | None = None, **kw) -> list[Example]:
     return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_rev.jsonl", **kw)
 
 
+def load_conflictbank_swap(path: Path | None = None, **kw) -> list[Example]:
+    """§21.1(c) artefact probe: usable conflict items with the two answers swapped between the correct and the
+    misinformation passage, types re-labelled by content (prepare_cb_swap.py)."""
+    return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_swap.jsonl", **kw)
+
+
 def load_conflictbank_fresh(path: Path | None = None, **kw) -> list[Example]:
     """§17: 400 new items built like the §10 set, sharing no subject with it (prepare_cb_fresh.py)."""
     return load_conflictbank(path or DATA_DIR / "conflictbank" / "conflictbank_fresh.jsonl", **kw)
@@ -398,7 +404,7 @@ def load_hoh_full_dated(path: Path | None = None, **kw) -> list[Example]:
 
 
 LOADERS = {"hoh": load_hoh, "hoh_dated": load_hoh_dated, "hoh_full": load_hoh_full, "hoh_full_dated": load_hoh_full_dated, "poisonedrag": load_poisonedrag, "conflictbank_fresh": load_conflictbank_fresh, "healthcontradict": load_healthcontradict,
-           "conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev,
+           "conflictbank_para": load_conflictbank_para, "conflictbank_rev": load_conflictbank_rev, "conflictbank_swap": load_conflictbank_swap,
            "raguard": load_raguard, "conflictbank": load_conflictbank, "conflictbank_majority": load_conflictbank_majority, "ramdocs": load_ramdocs, "conflicts": load_conflicts, "wikicontradict": load_wikicontradict}
 
 
