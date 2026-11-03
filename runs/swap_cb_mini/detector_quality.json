@@ -1,0 +1,48 @@
+{
+ "llm_dir": {
+  "pair_level": {
+   "precision": 0.9800796812749004,
+   "recall": 0.9879518072289156,
+   "f1": 0.984,
+   "tp": 246,
+   "fp": 5,
+   "fn": 3
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 0.9959839357429718,
+   "f1": 0.9979879275653923,
+   "tp": 248,
+   "fp": 0,
+   "fn": 1,
+   "tn": 0,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": 0.524390243902439,
+  "direction_coverage": 1.0,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.46586345381526106,
+    "correct_marked": 0.5261044176706827,
+    "conflict_q_all_misinfo_marked": 0.46586345381526106,
+    "conflict_q_any_correct_marked": 0.5261044176706827,
+    "clean_q_any_correct_marked": null
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.5220883534136547,
+    "correct_marked": 0.46987951807228917,
+    "conflict_q_all_misinfo_marked": 0.5220883534136547,
+    "conflict_q_any_correct_marked": 0.46987951807228917,
+    "clean_q_any_correct_marked": null
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.5220883534136547,
+    "correct_marked": 0.46987951807228917,
+    "conflict_q_all_misinfo_marked": 0.5220883534136547,
+    "conflict_q_any_correct_marked": 0.46987951807228917,
+    "clean_q_any_correct_marked": null
+   }
+  },
+  "total_cost_usd": 0.05871015
+ }
+}

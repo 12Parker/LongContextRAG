@@ -1,0 +1,48 @@
+{
+ "nli_sent": {
+  "pair_level": {
+   "precision": 0.11583011583011583,
+   "recall": 0.9,
+   "f1": 0.20524515393386542,
+   "tp": 270,
+   "fp": 2061,
+   "fn": 30
+  },
+  "question_level": {
+   "precision": 0.75,
+   "recall": 1.0,
+   "f1": 0.8571428571428571,
+   "tp": 300,
+   "fp": 100,
+   "fn": 0,
+   "tn": 0,
+   "false_positive_rate": 1.0
+  },
+  "direction_accuracy": null,
+  "direction_coverage": 0.0,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.7766666666666666,
+    "correct_marked": 0.7375,
+    "conflict_q_all_misinfo_marked": 0.7766666666666666,
+    "conflict_q_any_correct_marked": 0.7433333333333333,
+    "clean_q_any_correct_marked": 0.72
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.7766666666666666,
+    "correct_marked": 0.7375,
+    "conflict_q_all_misinfo_marked": 0.7766666666666666,
+    "conflict_q_any_correct_marked": 0.7433333333333333,
+    "clean_q_any_correct_marked": 0.72
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 0.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": 0.0
+   }
+  },
+  "total_cost_usd": 0.0
+ }
+}
