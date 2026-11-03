@@ -1317,6 +1317,8 @@ def numbers(R, out: Path):
     numbers10(R, add)   # §19: prospective test, full judge, HealthContradict
     from .assets11 import numbers11
     numbers11(R, add)   # §20: re-analyses R1-R19 (revision11), uncited §19.2 agreement, closed-book range
+    from .assets21 import numbers21
+    numbers21(R, add)   # §21: the funded API package (C1, C3-C9, C11)
     # unsigned variants (\\a<name>) for use after verbs: "lowers accuracy by 6.7 points"
     import re as _re
     extra = []
@@ -1348,6 +1350,8 @@ def write_all(R, out: Path):
     write10(R, out)   # §19: tab_fresh, tab_hc
     from .assets11 import write11
     write11(R, out)   # §20: fig_riskcov, tab_deference, tab_prior, tab_missing, tab_riskcov, tab_prev11
+    from .assets21 import write21
+    write21(R, out)   # §21: tab_probe21, tab_defer21
     from .timeline import tab_timeline
     tab_timeline(out)   # from runs/registration_timeline.json (recorded once; see timeline.py)
     grid = {}
