@@ -68,6 +68,10 @@ def _c1(A, c1):
         if _d(o.get("eval_direction_11_3")):
             A(f"cxDirEval{S}", _fr(o["eval_direction_11_3"]["est"], 0), f"{nice}: eval direction accuracy (§11.3, %)")
             dr.append(o["eval_direction_11_3"]["est"])
+    nv = [c1[s]["swap"]["content_precision"]["n"] for s, *_ in GEN if _d(c1.get(s)) and "swap" in c1[s]]
+    if nv:
+        A("cxSwapVerdictsMin", min(nv), "fewest single-side verdicts on the true pair after the swap (one detector)")
+        A("cxSwapVerdictsMax", max(nv), "most single-side verdicts on the true pair after the swap (one detector)")
     any_swap = next((c1[s]["swap"] for s, *_ in GEN if _d(c1.get(s)) and "swap" in c1[s]), None)
     if any_swap:
         A("cxSwapN", any_swap["n_items"], "usable object-swap items")
@@ -94,6 +98,9 @@ def _h31_macros(A, pre, s, nice):
     A(f"{pre}DW", _p(s["dW"], 1, True), f"{nice}: wrong-flag effect (points)")
     A(f"{pre}Sum", _p(s["sum"], 1, True), f"{nice}: Δ_R + Δ_W (points)")
     A(f"{pre}SumCI", _pci(s["sum_ci"]), f"95% CI of {pre}Sum")
+    n = s["n_R"] + s["n_W"]
+    A(f"{pre}Plain", _p((s["plain_R"] * s["n_R"] + s["plain_W"] * s["n_W"]) / n, 1),
+      f"{nice}: no-flag accuracy over the randomised conflict questions (%)")
     A(f"{pre}Be", _num(s["breakeven"], 2), f"{nice}: break-even p*")
     A(f"{pre}BeCI", _numci(s["breakeven_ci"], 2), f"95% CI of {pre}Be")
 
@@ -151,7 +158,7 @@ def _c5(A, c5):
 
 def _c6(A, c6):
     A.section = "C6, C8 Sonnet and Qwen on the H31 design (PR§21.4)"
-    for s, S, nice in (("sonnet", "Sonnet", "Claude Sonnet"), ("qwen", "Qwen", "Qwen2.5-7B")):
+    for s, S, nice in (("sonnet", "Sonnet", "Claude Sonnet"), ("qwen", "Qwen", "Qwen2.5-7B"), ("terra", "Terra", "gpt-6.1-terra")):
         if _d(c6.get(s)):
             _h31_macros(A, f"cxRd{S}", c6[s], f"{nice} (eval, one seed)")
 
@@ -164,11 +171,12 @@ def _c9(A, c9):
                  ("sonnet_eval", "SonnetEval")):
         o = cb.get(s)
         if _d(o):
-            A(f"cxClosed{S}", _fr(o["accuracy"]["est"], 1), f"{s}: closed-book accuracy (%)")
+            A(f"cxClosed{S}", _fr(o["accuracy"]["est"], 1), f"{s}: closed-book accuracy on conflict questions (%)")
+            A(f"cxClosedClean{S}", _fr(o["accuracy_clean"]["est"], 1), f"{s}: closed-book accuracy on clean questions (%)")
             A(f"cxClosedKnown{S}", o["n_known_conflict"], f"{s}: known conflict questions")
             if s != "sonnet_eval":
                 vals.append(o["accuracy"]["est"])
-    _rng(A, "cxClosedFresh", vals, lambda v: _fr(v, 1), "fresh closed-book accuracy (%)")
+    _rng(A, "cxClosedFresh", vals, lambda v: _fr(v, 1), "fresh closed-book accuracy on conflict questions (%)")
     diffs, pos = [], 0
     for s, S in (("mini", "Mini"), ("luna", "Luna"), ("haiku", "Haiku"), ("terra", "Terra"), ("qwen", "Qwen")):
         o = c9.get("R2_fresh", {}).get(s)
@@ -189,6 +197,17 @@ def _c9(A, c9):
         A("cxPriorSonnetKnown", _fr(ss["known"], 0), "Sonnet detector: eval precision on known facts (%)")
         A("cxPriorSonnetUnknown", _fr(ss["unknown"], 0), "on unknown facts (%)")
         A("cxPriorSonnetKnownN", o["n_known"], "known eval conflict questions for Sonnet")
+    for s, S in (("mini", "Mini"), ("luna", "Luna"), ("haiku", "Haiku"), ("terra", "Terra")):
+        o = c9.get("R4_fresh", {}).get(s)
+        if _d(o):
+            A(f"cxFolFr{S}WKnown", _fr(o["f_W"]["known"]["rate"], 0), f"{s}: fresh f_W on facts it knows closed-book (%)")
+            A(f"cxFolFr{S}WKnownN", o["f_W"]["known"]["n"], f"{s}: known questions in the fresh f_W pool")
+            A(f"cxFolFr{S}WUnknown", _fr(o["f_W"]["unknown"]["rate"], 0), f"{s}: fresh f_W on unknown facts (%)")
+    o = c9.get("R4_sonnet")
+    if _d(o):
+        A("cxFolSonnetWKnown", _fr(o["f_W"]["known"]["rate"], 0), "Sonnet: f_W on facts it knows closed-book (%)")
+        A("cxFolSonnetWKnownN", o["f_W"]["known"]["n"], "Sonnet: known questions in the f_W pool")
+        A("cxFolSonnetWUnknown", _fr(o["f_W"]["unknown"]["rate"], 0), "Sonnet: f_W on unknown facts (%)")
     kn = [v["n_known"] for v in c9.get("R4_fresh", {}).values() if _d(v)]
     if kn:
         A("cxFolFreshKnownMax", max(kn), "largest number of known questions among the fresh H31 arms")
@@ -219,6 +238,16 @@ def _c7(A, c7):
                 if _d(e):
                     A(f"cxHd{W}{C}{P}", _p(e["effect"], 1, True), f"{who} {c} effect on {part} questions (points)")
                     A(f"cxHd{W}{C}{P}CI", _pci(e["ci"]), "95% CI")
+    for who, W in (("haiku_detector", "Haiku"), ("mini_detector", "Mini")):
+        for c, C in (("llm_dir+flag_directional", "Dir"), ("llm_dir+remove_suspect", "Rem")):
+            be = c7[who].get(f"{c}|breakeven")
+            A(f"cxHd{W}{C}Be", _num(be, 2) if _ok(be) else "none", f"{who} {c}: prevalence break-even -C/(K-C)")
+    for who, W in (("haiku", "Haiku"), ("mini", "Mini")):
+        q = c7.get("quality", {}).get(who, {})
+        if _d(q.get("pair_level")):
+            A(f"cxHd{W}PairP", _fr(q["pair_level"]["precision"], 0), f"{who} detector pair-level precision on the hold-out (%)")
+            A(f"cxHd{W}PairR", _fr(q["pair_level"]["recall"], 0), f"{who} detector pair-level recall (%)")
+            A(f"cxHd{W}DirAcc", _fr(q["direction_accuracy"], 0), f"{who} detector direction accuracy on the hold-out (%)")
     for who, W in (("haiku", "Haiku"), ("mini", "Mini")):
         f = c7["flags"][who]
         A(f"cxHd{W}FlagClean", _fr(f["flag_rate_clean"], 0), f"{who} detector: clean questions flagged (%)")

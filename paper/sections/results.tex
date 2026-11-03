@@ -83,32 +83,30 @@ measure deference to the flag, whatever cues the passages carry. A right flag ra
 Table~\ref{tab:deference}). Their sum $\Delta_R+\Delta_W$, twice the net effect at an even mix, is significantly
 negative for \nHThirtyOneCSig\ of \nHThirtyOneCTests\ generators; for gpt-4o-mini it is \hThirtyOneCMini\ \hThirtyOneCMiniCI\ (H31c). Three of the four
 follow wrong flags about as often as right ones; gpt-6.1-terra, the most accurate of the four, follows
-\rfolWrongTerra\% of wrong flags against \rfolRightTerra\% of right ones. They follow wrong flags although the flagged
-passage has the style a simple classifier reads as correct, a cue their no-flag accuracy shows they underuse.
+\rfolWrongTerra\% of wrong flags against \rfolRightTerra\% of right ones. Claude Sonnet, more accurate still (one
+seed), follows only \cxRdSonnetFolW\% (Table~\ref{tab:defer21}), so deference does not simply grow with accuracy. On
+300 new questions the other three again lose more from a wrong flag than they gain from a right one (H40b), and
+stating 55\% rather than 95\% confidence lowers wrong-flag following for \cxCfWSigN\ of \cxCfN\ generators
+(H41).
 
 \paragraph{Break-even direction precision.}
 Randomised flags on true pairs with direction precision $p$ change accuracy by $p\Delta_R+(1-p)\Delta_W$, positive
-only above $p^*$ (Table~\ref{tab:terms}). $p^*$ rises with generator accuracy, from \beMin\ for gpt-4o-mini to
-\beMax\ for gpt-6.1-terra (exploratory; \terraDrawAltBe\ with terra's other no-flag draw, R7): an accurate generator
-has more correct answers for a wrong flag to overturn, and terra also follows wrong flags more often. Randomisation
-keeps the detector's cues out of $\Delta_R$ and $\Delta_W$, but not the generator's: its no-flag accuracy, which sets
-how much a wrong flag can cost, is itself reached on passages whose false side is legible from style. A RAMDocs
-grid registered before any confirmatory data is consistent with this: at perfect pair precision and recall,
-synthetic detectors change gpt-4o-mini's conflict accuracy by \gDirOneDHalfConf, \gDirOneDTquConf\ and
-\gDirOneDOneConf\ points at $d=0.5$, 0.75 and 1, significantly only at $d=1$ (Appendix~\ref{app:grid}).
+only above $p^*$ (Table~\ref{tab:terms}). Across the four H31 generators $p^*$ rises with accuracy, from \beMin\ for
+gpt-4o-mini to \beMax\ for gpt-6.1-terra (exploratory; \terraDrawAltBe\ with terra's other no-flag draw, R7): an accurate generator
+has more correct answers for a wrong flag to overturn, and terra also follows wrong flags more often; Claude
+Sonnet's is \cxRdSonnetBe. A RAMDocs grid registered before any confirmatory data agrees: synthetic detectors with
+perfect pair precision and recall help gpt-4o-mini significantly only at direction precision 1
+(Appendix~\ref{app:grid}).
 
 \paragraph{Scope.}
-On ConflictBank the real detectors' direction precision is \ssPrecMin--\ssPrecMax\% (R3). In the \prs{11.3} split
-(registered as exploratory), the gpt-4o-mini detector names the false side
-more often on facts its model knows closed-book (\cbkCbKnownDir\% on \cbkCbKnownN) than on the \cbkCbUnknownN\ it
-does not (\cbkCbUnknownDir\% on the \priorSsMiniUnknownN\ it flags). Every detector with a closed-book run shows this
-gap, by \priorSsDiffMin\ to \priorSsDiffMax\ points, with a CI above zero for \priorSsDiffPos\ of \priorN\ (R2). On
-RAMDocs, where several documents can agree, no gap is visible, on only \cbkRdKnownN\ known facts
-(Appendix~\ref{app:rev11}). With three misinformation passages per question, the gpt-4o-mini detector's direction
-precision falls from \cbDirAccLlm\% to \cbmajDirAccLlm\% (\prs{11.3}; `both' counted as a miss), so its verdict moves
-with passage counts. Known facts are too rare here to condition follow rates on the generator's prior: right flags are followed more
-often on them, but over at most \prFolRKnownMiniN\ per generator, and the pooled odds ratio for wrong flags is
-\prFolOrW\ \prFolOrWCI\ (R4). \emph{Status:} the H31 effects are registered (tier ii); follow rates are
+On ConflictBank the real detectors' direction precision is \ssPrecMin--\ssPrecMax\% (R3), higher on facts their
+model knows closed-book, by \priorSsDiffMin\ to \priorSsDiffMax\ points (R2; Table~\ref{tab:prior}), and in the same
+direction on new questions (C9). Yet they
+barely need the passages: given only the question and the two candidate answers, they pick the true one
+\cxAoMin--\cxAoMax\% of the time, and when the answers are swapped between the passages, \cxSwapSurviveN\ of
+\cxProbeN\ still follow the answer more than the passage's style (C1; Table~\ref{tab:probe21}). With three
+misinformation passages per question, the gpt-4o-mini detector's direction precision falls from \cbDirAccLlm\% to
+\cbmajDirAccLlm\% (\prs{11.3}). \emph{Status:} the H31 effects are registered (tier ii); follow rates are
 registered descriptives without a test (\prs{16.3}); $p^*$ is exploratory.
 
 \subsection{Claim 3: a frozen account predicts}
@@ -125,16 +123,17 @@ Table~\ref{tab:fresh}).
 H32 required a mean absolute error of at most 3 points, a calibration slope whose CI excludes 0 and includes 1, and
 a lower error than each generator's mean crossed-cell effect (\frMaeGen) and follow rates of 1 (\frMaeOnes). All
 hold: the error is \frMae\ points \frMaeCI\ (predicting zero: \frMaeZero), the slope \frSlope\ \frSlopeCI. The criteria were set knowing the retrospective fit, and two baselines without a criterion come
-close (R6, exploratory): replacing each per-question term by its cell mean scores \frMaeMarg\ (difference \acctMargDiff\
-\acctMargDiffCI), and one pair of rates for all four generators scores \acctCommonMae\ (difference \acctCommonDiff\
-\acctCommonDiffCI). Neither is detectably worse, so most of the predictive power comes from cell-level bookkeeping
+close (R6, exploratory): replacing each per-question term by its cell mean scores \frMaeMarg, and one pair of rates
+for all four generators scores \acctCommonMae\ (paired CIs in Appendix~\ref{app:rev11}). Neither is detectably worse, so most of the predictive power comes from cell-level bookkeeping
 and follow rates of the right size, not from which questions are flagged or from each generator's own rates. Within
 generators, predicted and observed effects correlate at \frRWithin\ (H34). The sign is right in all \frBigN\ cells
 predicted at least 3 points from zero, but only \acctHarmN\ of them are predicted harms, both with gpt-6.1-terra
 generating: with the Qwen2.5-7B detector it was predicted to lose \aacctHarmTerraQwenPred\ points and lost
 \aacctHarmTerraQwenObs; with the gpt-4o-mini detector, \aacctHarmTerraMiniPred\ and \aacctHarmTerraMiniObs. H33 also
 required each predicted harm to be significant; only the first is, so H33 fails. A fresh randomised run gives
-gpt-4o-mini follow rates of \frFollowR\% and \frFollowW\%, inside the frozen intervals (H36).
+gpt-4o-mini follow rates of \frFollowR\% and \frFollowW\%, inside the frozen intervals (H36); for the other three
+(H40) they stay inside except gpt-6.1-terra's $f_W$ (\cxFrTerraFolW\%), and the formula predicts their net effects
+within \cxFrMae\ points, though most of those flagged answers existed before the freeze (Appendix~\ref{app:rev21}).
 
 \paragraph{Where it fails.}
 On clean questions (H35) the account predicts \frCleanPred\ points on average against \frCleanObs\ observed. Cells
@@ -156,7 +155,7 @@ by \jdTwentyThreeJ\ \jdTwentyThreeJCI\ points over the answer key and \jdThirtyJ
 (H38), so neither equivalence holds within $\pm$3. Under the string matcher no registered comparison finds the
 oracle flag significantly better than an answer key (H23) or the LLM flag better than its verdict key (H30), but only
 \hTwentyThreeEqN\ of the \hTwentyThreeK\ H23 TOSTs show equivalence; pooled (unregistered), the flag's advantage is
-\PoolTwentyThree\ \PoolTwentyThreeCI\ and \PoolThirtyA\ \PoolThirtyACI\ (seed by seed: R11), equivalent within
+\PoolTwentyThree\ \PoolTwentyThreeCI\ and \PoolThirtyA\ \PoolThirtyACI, equivalent within
 $\pm$3 under the matcher only (\prs{19.2}). Whether a key conveys what the flag conveys stays unresolved until humans
 decide between the scorers.
 

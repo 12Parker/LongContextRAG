@@ -70,7 +70,7 @@ string. \emph{Misinformation share} is the share of answers containing a wrong a
 (gemini-3.5-flash-lite) re-scored all \jdN\ responses of the pooled key comparisons and agrees with the matcher on
 \jdAgree\%. The matcher's misses are one-sided and depend on the condition: the judge alone calls correct
 \scJudgeOnlyOracleDir\% of oracle directional-flag responses, against \scJudgeOnlyAnswerKey\% of answer-key
-responses (\scJudgeOnlyLlmDir\% and \scJudgeOnlyVerdictKey\% for the LLM directional flag and the verdict key). The
+responses (Appendix~\ref{app:semantic}). The
 matcher thus misses more correct answers under the flags than under the keys, so a contrast near zero must hold under
 both scorers. Responses without a final-answer line are scored on their whole text, as registered (\prs{5}), so some count as
 correct; they are \missShare\% of all responses, but
@@ -80,12 +80,13 @@ check are described in Appendix~\ref{app:semantic}.
 
 \paragraph{Registration.}
 ``\prs{N}'' is section N of our pre-registration. We registered in three tiers. (i) H1--H9 were frozen
-before any confirmatory data, after pilots on 200 RAMDocs questions. Twelve addenda followed (\prs{9}--\prs{20}); nine
-carry hypotheses, and \prs{20} registers only re-analyses (R1--R19). (ii) H10--H31 and H37--H38 were registered before their runs but after earlier results were
+before any confirmatory data, after pilots on 200 RAMDocs questions. Thirteen addenda followed (\prs{9}--\prs{21}); ten
+carry hypotheses, and \prs{20} registers only re-analyses (R1--R19). (ii) H10--H31, H37--H38 and H40--H41 were registered before their runs but after earlier results were
 known; three items were committed after their runs had begun (\prs{20.1}), and parts of H24, H27 and H28 reuse runs that
 predate them (Appendix~\ref{app:repro}). (iii) H32--H36 are prospective: their
 predictions were committed before any flagged answer existed. We call only tiers (i) and (iii) confirmatory (commit times: Table~\ref{tab:timeline}); tier (ii) is registered but
-not confirmatory. Everything else is exploratory, including R1--R19, run on data already seen (Appendix~\ref{app:rev11}).
+not confirmatory. Everything else is exploratory, including R1--R19 and the descriptive \prs{21} runs C1--C11
+(Appendices~\ref{app:rev11}, \ref{app:rev21}).
 
 \paragraph{Statistics.}
 We average each question's score over seeds and report paired differences with question-bootstrap 95\% CIs and

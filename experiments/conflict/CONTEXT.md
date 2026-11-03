@@ -711,3 +711,59 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
   used); AI-assistance/process disclosure sentence; fixed-seed ConflictBank example pair (needs a registration).
   Generated tables not changed: `tab_pooled` (τ), `tab_hc` (majority-class rate), `tab_cb` (single-call clean column),
   `tab_entity` (pooled row); `tab_risk`'s per-column matcher is stated in the appendix prose instead.
+
+## Round 18: PR§21 funded API runs and the labelling dashboard (2026-11-02/03)
+
+- **Approved by the authors** ("Run the API now"). PR§21 registered in full before any run (f12faab, pushed 03:59:11Z;
+  first run file 04:00:46Z). 21.10 notes the parallel provider lanes. 21.11 discloses answers shared through the
+  response cache, with a correction that it was written after preliminary results had been read.
+- **Ran:** C1 (answer-only, single-passage and object-swap probes; 4 detectors), C3 (HealthContradict answer key), C4
+  (randomised direction on fresh for luna, haiku and terra; predictions frozen in `splits/predictions21.json`,
+  d8f0320, before stage 2), C5 (stated confidence 55/95%), C6 (Sonnet H31 arm), C7 (Haiku detector on the RAMDocs
+  hold-out), C8 (Qwen H31 arm, local), C9 (closed-book on fresh plus Sonnet on eval) and C11 (sentence-pair NLI).
+- **Not run (by registration):** C2 and C10 wait for the A4 human HealthContradict labels; C12 and C13 wait for the A1
+  result.
+- **Spend:** $218.39 after the package ($14.21 for it, against the $22.3 estimate). Gate $245; headroom $26.61.
+- **Code:**
+  - `probe21.py`, `prepare_cb_swap.py` (249 usable swap items, `splits/conflictbank_swap.txt`), the
+    `conflictbank_swap` loader;
+  - `flag_directional_c<NN>` in prompts.py, `NLISentenceDetector` (`nli_sent`), `predict21.py`;
+  - `rev21.py` (analyses into `runs/rev21/rev21.json`; `registered21` runs in revision7 before `fdr`, so H40b and H41
+    join the BH count), `assets21.py` (cx* macros, `tab_probe21`, `tab_defer21`);
+  - served model, fingerprint, id and created are recorded in LLMResult and the cache value, not the key; rows carry
+    `served_model`;
+  - timeline.py has a §21 row.
+- **Results:**
+  - **C1.** Shown only the two candidate answers, detectors pick the true one about as often as their direction
+    accuracy (80/84/88/90% for mini/haiku/luna/terra). Under the object swap, haiku, luna and terra survive (61–78%)
+    and mini falls to chance (52%). Single-passage pairwise accuracy is 73–90%. The reasoning models and Haiku give
+    about half of the correct passages P(false) ≥ 50.
+  - **C4 / H40.** H40a holds for luna and haiku but not terra (fresh f_W 86% vs frozen CI [89.5, 99]). H40b: all
+    effects significant. H40c: MAE 2.2 ≤ 3, so it holds, but about two thirds of the flagged answers were shared with
+    the §19 cells.
+  - **C5 / H41.** H41a holds for haiku, luna and terra but not mini; H41b holds for none.
+  - **C6.** Sonnet, the most accurate generator on these questions (75.7% plain), follows 23% of wrong flags; p* 0.56.
+  - **C8.** Qwen f_R 56%, f_W 52%.
+  - **C9.** Fresh closed-book accuracy is 6.5–26.2%; the R2 gap recurs on fresh; R4 on fresh: mini and haiku follow
+    wrong flags less on facts they know.
+  - **C3.** The answer key beats the oracle directional flag by 16.3 (luna) and 4.9 (haiku) points; mini is not
+    significant.
+  - **C7.** The Haiku detector flags 2% of clean RAMDocs questions (gpt-4o-mini detector: 76%); clean cost −0.3, and
+    0.0 with removal.
+  - **C11.** Sentence-pair NLI flags every question; removal costs 67 points on clean questions.
+- **Paper:**
+  - New Appendix `app:rev21` with two tables.
+  - Body: claim 2 adds Sonnet, H40b and H41, and the probes in Scope; claim 3 adds H40; the stress-test section adds
+    C3.
+  - Abstract, intro, discussion, Limitations, setup tiers (H40–H41 are tier ii), claims tables and app:repro updated.
+  - "p* rises with accuracy" is now scoped to the four H31 generators.
+- **Labelling dashboard:** https://claude.ai/artifact/RBVNyH4ChZDf2ANELW1GyL (private; the owner shares it with the
+  second annotator at Contributor level).
+  - db rules: `labels` read admin / write self; `labels/{self}` read view / write interact; `consensus` read view /
+    write admin.
+  - Docs: `labels/<uid>` (index), `labels/<uid>/meta/profile`, `labels/<uid>/rows/<sheet>-<row>`,
+    `consensus/<sheet>-<row>`.
+  - Source and build: scratchpad `labelling/src` (template plus build.py); it embeds only the three sheets and two
+    instruction files, never the keys.
+  - To import labels: ArtifactData list with out_dir, then convert to `runs/labelling/audit11_disagreements_<initials>.csv`
+    and the consensus CSVs.

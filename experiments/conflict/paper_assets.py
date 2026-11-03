@@ -338,7 +338,8 @@ def tab_hypotheses(R, out: Path):
               "H24": "detector versus generator reliability (crossed)", "H25": "Claude", "H26": "RAGuard (real misleading posts)",
               "H27": "the detector model's answer as a hint", "H28": "LLM flags on genuine conflicts",
               "H29": "artefact probe of detector direction", "H30": "the detector's verdict as an answer key",
-              "H31": "randomised direction"}
+              "H31": "randomised direction", **{h: "randomised direction on new questions" for h in ("H40a", "H40b", "H40c")},
+              **{h: "a stated confidence" for h in ("H41a", "H41b")}}
 
     def body(rs):
         out, last = [], None
@@ -385,6 +386,7 @@ def tab_hypotheses(R, out: Path):
         for m_, lab in (("both_answers", ""), (PRIMARY, ""), ("gold_recall", ", gold recall")):
             for k, v in fam_.get(m_, {}).items():
                 rows.append(("H28", _esc(k + lab), _est(v), _pq(v), "significant" if v["supported"] else "n.s.", "--"))
+    rows += _rows21(rev)
     h29 = rev.get("H29", {})
     for k, v in h29.get("a", {}).items():
         rows.append(("H29", _esc(f"{k}: direction accuracy vs original"), _est(v), _pq(v),
@@ -394,11 +396,11 @@ def tab_hypotheses(R, out: Path):
                      "significant" if v["supported"] else "n.s.", "--"))
     # one table per registration stage, so no table outgrows a page
     stages = [("H10", "H11"), ("H12", "H13", "H14"), ("H15", "H16", "H17", "H18", "H19"),
-              ("H20", "H21", "H22", "H23", "H24", "H25", "H26"), ("H27", "H28", "H29"), ("H30", "H31")]
+              ("H20", "H21", "H22", "H23", "H24", "H25", "H26"), ("H27", "H28", "H29"), ("H30", "H31"), ("H40", "H41")]
     stage_rows = [[r for r in rows[n_first:] if r[0].rstrip("abc") in st] for st in stages]
     body1 = body(rows[:n_first])
     stage_txt = ["PR\\S9 (H10--H11)", "PR\\S10 (H12--H14)", "PR\\S11--PR\\S12 (H15--H19)",
-                 "PR\\S13--PR\\S14 (H20--H26)", "PR\\S15 (H27--H29)", "PR\\S16 (H30--H31)"]
+                 "PR\\S13--PR\\S14 (H20--H26)", "PR\\S15 (H27--H29)", "PR\\S16 (H30--H31)", "PR\\S21 (H40--H41)"]
     parts = [head % "p" + body1 + "\n" + rf"""\bottomrule
 \end{{tabular}}}}
 \caption{{Pre-registered tests registered before the confirmatory run (RAMDocs hold-out unless stated; one-way
@@ -772,6 +774,46 @@ def _p(p):
     if _nan(p):
         return "--"
     return "$<$0.001" if p < 0.001 else f"{p:.3f}"
+
+
+def _rows21(rev):
+    """PR§21 rows (H40, H41) from rev["r21"] (rev21.py), with the Holm p and the BH q that revision7.fdr attached to
+    rev["H40b"] and rev["H41"]. Fresh randomised runs and stated-confidence runs on ConflictBank, one-answer prompt."""
+    r = rev.get("r21", {})
+    c4, c5 = r.get("c4", {}), r.get("c5", {})
+    nice = {"luna": "gpt-6-luna", "haiku": "Claude Haiku", "terra": "gpt-6.1-terra", "mini": "gpt-4o-mini"}
+    pts = lambda d, lo, hi: f"{pct(d / 100, True)} [{pct(lo / 100, True)}, {pct(hi / 100, True)}]"
+    rows = []
+    for g in ("luna", "haiku", "terra"):
+        o = c4.get(g)
+        if not isinstance(o, dict) or "H40a" not in o:
+            continue
+        a = o["H40a"]
+        rows.append(("H40a", f"fresh $f_R$, $f_W$ inside the frozen eval CIs, {nice[g]}",
+                     f"{pct(o['f_R']['est'], nd=0)}, {pct(o['f_W']['est'], nd=0)}", "--",
+                     "holds" if a["holds"] else ("fails ($f_W$)" if a["f_R_inside"] else "fails"), "--"))
+    tests = rev.get("H40b", {})
+    for key, est, what, word in (("a", "dR", "right-flag effect $>$ 0", True), ("b", "dW", "wrong-flag effect $<$ 0", True),
+                                 ("c", "sum", "right + wrong effect (two-sided)", False)):
+        for g, t in tests.get(key, {}).items():
+            o = c4[g]
+            ci = o[f"{est}_ci"]
+            sup = c4["H40b"][key][g]["supported"]
+            rows.append(("H40b", f"fresh, {nice[g]}: {what}", pts(o[est], *ci), _pq(t),
+                         ("supported" if sup else "not supported") if word else ("significant" if sup else "n.s."), "--"))
+    if isinstance(c4.get("H40c"), dict):
+        c = c4["H40c"]
+        rows.append(("H40c", "MAE of the frozen predictions $\\le$ 3 points (3 generators)", f"{c['mae']:.1f}", "--",
+                     "holds" if c["holds"] else "fails", "--"))
+    for key, what in (("H41a", "wrong flag at 55\\% minus at 95\\% $>$ 0"), ("H41b", "right flag at 95\\% minus at 55\\% $>$ 0")):
+        for g in ("mini", "haiku", "luna", "terra"):
+            o = c5.get(g)
+            t = rev.get("H41", {}).get(f"{g}|{key}")
+            if not isinstance(o, dict) or not t:
+                continue
+            rows.append((key, f"{nice[g]}: {what}", pts(o[key]["diff"], *o[key]["ci"]), _pq(t),
+                         "supported" if o[key]["supported"] else "not supported", "--"))
+    return rows
 
 
 def _pq(v):

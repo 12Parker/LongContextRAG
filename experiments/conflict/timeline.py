@@ -46,6 +46,9 @@ SECTIONS = {
     "85c3c85": ("18 (re-analyses)", []),
     "d6185df": ("19 (H32--H38)", ["fresh_cb_*", "hc_*", "randdir_fresh_mini", "judge10"]),
     "d7e8d76": ("20 (re-analyses)", []),
+    "f12faab": ("21 (H40--H41)", ["probe21", "swap_cb_*", "hckey_*", "randdir_fresh_luna", "randdir_fresh_haiku",
+                                  "randdir_fresh_terra", "conf_cb_*", "randdir_cb_sonnet", "randdir_cb_qwen",
+                                  "holdout_haikudet", "fresh_closed_*", "cb_closed_sonnet", "nlisent_cb"]),
 }
 
 
@@ -106,7 +109,8 @@ Registration & Commit & Push & file & Commit & Push \\
 \end{tabular}}
 \caption{Registration timeline (UTC, 2026). \emph{Commit}: local git time; \emph{Push}: when the remote first held
 the commit (GitHub's activity log, a third-party record); \emph{First run file}: the earliest file in the runs that
-section registered (local file metadata). Sections without runs (PR\S18, PR\S20) register analyses only. PR\S9.4 and
+section registered (local file metadata). Sections without runs (PR\S18, PR\S20) register analyses only; PR\S21's C4
+predictions were committed after its no-flag files and before its flagged runs. PR\S9.4 and
 PR\S9.6 changed the Qwen runs already under way, and PR\S17.6 followed the judge outputs (PR\S20.1).}
 \label{tab:timeline}
 \end{table}

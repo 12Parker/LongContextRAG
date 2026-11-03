@@ -275,9 +275,9 @@ def c6_c8() -> dict:
 
 
 # --------------------------------------------------------------------------- C9
-def _closed(run):
+def _closed(run, subset=None):
     rows = [r for r in read_results(RUNS / run) if r["condition"] == "closedbook"]
-    acc = per_question(rows, "closedbook", None, PRIMARY) if rows else {}
+    acc = per_question(rows, "closedbook", subset, PRIMARY) if rows else {}
     return rows, acc
 
 
@@ -297,10 +297,12 @@ def c9() -> dict:
     for g, run in runs.items():
         if not _have(run, "closedbook"):
             out["closedbook"][g] = "not run"; continue
-        rows, acc = _closed(run)
+        rows, acc = _closed(run, True)
+        clean = _closed(run, False)[1]
         known[g] = known_ids(rows)
         conflict = {r["id"] for r in rows if r["has_conflict"]}
         out["closedbook"][g] = {"run": run, "accuracy": _boot_mean([acc[i] for i in sorted(acc)]),
+                                "accuracy_clean": _boot_mean([clean[i] for i in sorted(clean)]),
                                 "n_known_conflict": len(known[g] & conflict), "n_conflict": len(conflict),
                                 "seeds": sorted({r["seed"] for r in rows})}
     for d in ("mini", "luna", "haiku", "terra", "qwen"):
@@ -380,6 +382,18 @@ def _flag_rates(run, det):
     return {"flag_rate_conflict": rate(True), "flag_rate_clean": rate(False)}
 
 
+def _quality(run, det):
+    """Pair- and question-level detection quality and direction accuracy (metrics.py) from a run's detections."""
+    from .detectors import Detection, DetectorOutput
+    from .metrics import direction_accuracy, pair_level, question_level
+    ex = list(_examples(RUNS / run).values())
+    d = _dets(run, det)
+    fl = {e.id: {(x["i"], x["j"]) for x in d.get(e.id, [])} for e in ex}
+    outs = {e.id: DetectorOutput([Detection(**x) for x in d.get(e.id, [])], {}) for e in ex}
+    return {"pair_level": pair_level(ex, fl), "question_level": question_level(ex, fl),
+            "direction_accuracy": direction_accuracy(ex, outs)}
+
+
 def _breakeven(K, C):
     return -C / (K - C) if K is not None and C is not None and K > 0 > C else None
 
@@ -389,10 +403,9 @@ def c7() -> dict:
         return {"status": "not run"}
     conds = ["llm_dir+flag_directional", "llm_dir+remove_suspect"]
     out = {"haiku_detector": _effects("holdout_haikudet", conds), "mini_detector": _effects("holdout_main", conds)}
-    q = json.loads((RUNS / "holdout_haikudet/detector_quality.json").read_text())["llm_dir"]
-    qm = json.loads((RUNS / "holdout_main/detector_quality.json").read_text()).get("llm_dir", {})
-    out["quality"] = {"haiku": {k: q.get(k) for k in ("pair_level", "question_level", "direction_accuracy", "total_cost_usd")},
-                      "mini": {k: qm.get(k) for k in ("pair_level", "question_level", "direction_accuracy")}}
+    # computed from the detections themselves: holdout_main's detector_quality.json was rewritten by a later
+    # invocation that ran only caag and nli, so it no longer holds the llm_dir entry
+    out["quality"] = {"haiku": _quality("holdout_haikudet", "llm_dir"), "mini": _quality("holdout_main", "llm_dir")}
     out["flags"] = {"haiku": _flag_rates("holdout_haikudet", "llm_dir"), "mini": _flag_rates("holdout_main", "llm_dir")}
     for k in ("haiku_detector", "mini_detector"):
         for c in conds:

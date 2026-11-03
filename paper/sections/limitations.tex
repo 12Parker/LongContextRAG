@@ -1,6 +1,6 @@
 \section*{Limitations}
 
-\paragraph{ConflictBank's false side is readable from style.} The randomised-direction test, the follow rates,
+\paragraph{ConflictBank's false side is legible without the contradiction.} The randomised-direction test, the follow rates,
 $p^*$, the crossed cells and the prospective test all use ConflictBank, whose two on-topic passages are both
 LLM-written around a substituted object. A bag-of-words classifier trained on other ConflictBank facts picks the
 misinformation passage on every conflict question of our eval set and of ConflictBank-fresh, also with the answer
@@ -10,9 +10,10 @@ their own model knows closed-book (R2), and the generators know few of these fac
 \cbClosedMin--\cbClosedMax\% for the \cbClosedN\ generators run closed-book). A detector's direction and a generator's no-flag accuracy can therefore come from
 style rather than from knowledge or from reasoning about the contradiction. H31 assigns direction by coin flip, so its
 follow rates still measure deference to the flag; but the no-flag accuracies, the real detectors' direction precision,
-$p^*$ and the account were all measured where the truth is legible from style. Whether they hold for real
-misinformation is untested, and we did not run the single-passage and answer-only probes that would separate a style
-cue from reasoning about the contradiction; R1 shows only that the cue exists. ConflictBank's clean questions add only off-subject passages, so they test off-topic false
+$p^*$ and the account were all measured where the truth is legible from style and from the answers themselves:
+given only the two candidate answers, the detectors pick the true one about as often as they name the false passage,
+and when the answers are swapped between the passages the stronger detectors follow the answer more than the style
+(C1, Appendix~\ref{app:rev21}). Whether these numbers hold for plausible real misinformation is untested. ConflictBank's clean questions add only off-subject passages, so they test off-topic false
 flags only.
 
 \paragraph{Scorer and human audit.} Every claim in the body is scored by string matching. The matcher's misses are one-sided and
@@ -29,7 +30,8 @@ as \prs{20.3} asks.
 
 \paragraph{Real documents and other benchmarks.} HealthContradict's labels are as released, and an LLM judge confirms
 both pages of an item for only \stanceBoth\% of items (R13). Label noise could therefore explain why the account
-overstated harm there, and with one page per side its oracle flag works close to an answer key. RAGuard's labels are
+overstated harm there, and with one page per side its oracle flag nearly states the answer, though an explicit key
+still adds up to \cxHcKeyDirLuna\ points (C3). RAGuard's labels are
 behavioural: a judge finds only \rgAudContradict\% of sampled supporting--misleading pairs to contradict, and all four
 generators run closed-book are more accurate without the posts. We treat both as label-transfer stress tests.
 CONFLICTS has few misinformation conflicts and no passage labels, so it can neither confirm nor refute our findings.
@@ -41,15 +43,15 @@ harms on clean questions, may be missed.
 in addenda committed before their runs but after earlier results were known; three items were committed after runs
 had started (\prs{20.1}). H32--H36 froze numeric predictions before their outcomes existed. Commit times are local;
 push times to the public remote are the only third-party record (Table~\ref{tab:timeline}), and we used no registry.
-Each addendum followed a review of earlier results, so registration fixes how an analysis is run more than which
+H40--H41 were registered in \prs{21} before their runs, but about two thirds of H40's flagged answers had been sampled
+in earlier cells (\prs{21.11}). Each addendum followed a review of earlier results, so registration fixes how an analysis is run more than which
 analyses are chosen. The $\pm$3 TOST margin was set after the confirmatory run, and the pooled TOSTs were added after
 the per-comparison ones. The account's form was chosen after the crossed cells were seen; only its frozen predictions (H32--H36) are
 confirmatory. $p^*$, prevalence and every \prs{20} re-analysis are exploratory. H24 is mis-specified: generator accuracy enters both sides of its tests, so its support is mechanical.
 Holm controls error within each family, not across the programme: of \fdrN\ registered tests, \fdrHolm\ are
 significant under Holm and \fdrBH\ under a Benjamini--Hochberg FDR over all tests.
 
-\paragraph{Models and runs.} We recorded the model names we called between 2026-10-26 and 2026-10-29, not the served
-snapshots. gpt-6.1-terra, Claude Sonnet and Qwen2.5-7B ran one seed, as did gpt-4.1 on ConflictBank and in its second RAMDocs run
+\paragraph{Models and runs.} Before \prs{21} we recorded the model names we called, not the served snapshots. gpt-6.1-terra, Claude Sonnet and Qwen2.5-7B ran one seed, as did gpt-4.1 on ConflictBank and in its second RAMDocs run
 (H13, H14). gpt-6.1-terra's follow
 rates and $p^*$ rest on one default-temperature draw; its other no-flag draw moves $p^*$ from \terraDrawRegBe\
 to \terraDrawAltBe\ (R7). The reasoning and Claude models ran only at default temperature, Claude through an
@@ -59,14 +61,14 @@ OpenAI-compatible endpoint without JSON mode. We draw no conclusion about model 
 \paragraph{Detectors and scope.} Detector claims cover the detectors we tested: one LLM-detector prompt run on
 several models, CAAG, an NLI cross-encoder and synthetic detectors. We test no trained detector such as ConflictRAG's
 \citep{wang2026conflictrag}. Under its registered window NLI flags no ConflictBank pair; the 300-character window that
-does was chosen after seeing detection output (\prs{17.6}). The published baselines are reimplementations (Appendix~\ref{app:extra}). We study
+does was chosen after seeing detection output (\prs{17.6}), and sentence-pair NLI flags every pair (C11). The published baselines are reimplementations (Appendix~\ref{app:extra}). We study
 flags passed to the generator as text; learned interfaces such as soft prompts or credibility fine-tuning
-\citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may trade off differently. Flags that state the detector's confidence are untested (only CAAG's
-original format, Appendix~\ref{app:extra}), so whether stated confidence changes $f_R$ and $f_W$ is open. We test one
+\citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may trade off differently. A stated confidence is tested only with synthetic flags, where 55\% lowers $f_W$ for \cxCfWSigN\ of \cxCfN\
+generators (H41); real detectors' confidences are untested. We test one
 adversarial case, a detector that always names the wrong side, not an attacker who chooses the flagged pairs.
 
 \paragraph{What would test these claims.} Claims 2 and 3 need a benchmark whose false side is not legible from
-style and whose facts the generators know; ConflictBank offers neither, so we do not know how far the follow rates
+style or from the candidate answers and whose facts the generators know; ConflictBank offers neither, so we do not know how far the follow rates
 carry beyond it. The answer-key question needs human labels on the outputs where the two scorers disagree. The
 account has met only \acctHarmN\ predicted harms; more cells where a real detector is expected to hurt would show
 whether it predicts the case that matters most. The decision rule (\S\ref{sec:discussion}), derived from these runs, has not

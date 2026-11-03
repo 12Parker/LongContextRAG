@@ -5845,7 +5845,7 @@
 \newcommand{\prevQwenDir}{71}
 \newcommand{\prevQwenRem}{70}
 \newcommand{\nExploratory}{636}
-\newcommand{\totalSpend}{\$204.18}
+\newcommand{\totalSpend}{\$218.39}
 \newcommand{\nRealSgTests}{7}
 \newcommand{\nRealSgPos}{1}
 \newcommand{\nRealSgNeg}{1}
@@ -9121,9 +9121,9 @@
 \newcommand{\frozenShareMin}{90}
 \newcommand{\frozenMaxShift}{1.3}
 \newcommand{\frozenR}{0.999}
-\newcommand{\fdrN}{532}
-\newcommand{\fdrHolm}{276}
-\newcommand{\fdrBH}{304}
+\newcommand{\fdrN}{549}
+\newcommand{\fdrHolm}{288}
+\newcommand{\fdrBH}{316}
 \newcommand{\fdrBhNotHolm}{28}
 \newcommand{\fdrHolmNotBh}{0}
 \newcommand{\prevSgMiniLlmFive}{$-$4.0}
@@ -9985,13 +9985,13 @@
 \newcommand{\tokHaikuWrongFolRows}{163}
 \newcommand{\tokHaikuWrongNotFolRows}{92}
 \newcommand{\tokHaikuWrongFolQ}{85}
-\newcommand{\missRuns}{202}
-\newcommand{\missRows}{753,760}
-\newcommand{\missN}{1,130}
+\newcommand{\missRuns}{222}
+\newcommand{\missRows}{788,506}
+\newcommand{\missN}{1,168}
 \newcommand{\missShare}{0.15}
-\newcommand{\missCapShare}{65.7}
-\newcommand{\missCells}{939}
-\newcommand{\missCellsAbove}{49}
+\newcommand{\missCapShare}{65.5}
+\newcommand{\missCells}{979}
+\newcommand{\missCellsAbove}{51}
 \newcommand{\missTopRun}{\texttt{holdout\_gpt41\_round2}}
 \newcommand{\missTopModel}{gpt-4.1}
 \newcommand{\missTopCond}{oracle neutral flag + instr.\ (v2)}
@@ -10000,28 +10000,29 @@
 \newcommand{\missTopN}{300}
 \newcommand{\missAboveFour}{32}
 \newcommand{\missAboveQwen}{16}
-\newcommand{\missAboveLuna}{1}
+\newcommand{\missAboveLuna}{2}
+\newcommand{\missAboveMini}{1}
+\newcommand{\missShareSonnet}{0.00}
+\newcommand{\missNSonnet}{0}
+\newcommand{\missRowsSonnet}{5,976}
 \newcommand{\missShareHaiku}{0.00}
 \newcommand{\missNHaiku}{1}
-\newcommand{\missRowsHaiku}{103,517}
-\newcommand{\missShareLuna}{0.02}
-\newcommand{\missNLuna}{26}
-\newcommand{\missRowsLuna}{131,397}
+\newcommand{\missRowsHaiku}{112,199}
+\newcommand{\missShareLuna}{0.03}
+\newcommand{\missNLuna}{47}
+\newcommand{\missRowsLuna}{140,079}
 \newcommand{\missShareMini}{0.01}
-\newcommand{\missNMini}{36}
-\newcommand{\missRowsMini}{434,300}
+\newcommand{\missNMini}{53}
+\newcommand{\missRowsMini}{446,882}
 \newcommand{\missShareTerra}{0.00}
 \newcommand{\missNTerra}{0}
-\newcommand{\missRowsTerra}{33,552}
+\newcommand{\missRowsTerra}{35,952}
 \newcommand{\missShareFour}{2.44}
 \newcommand{\missNFour}{685}
 \newcommand{\missRowsFour}{28,118}
-\newcommand{\missShareQwen}{2.11}
+\newcommand{\missShareQwen}{1.98}
 \newcommand{\missNQwen}{382}
-\newcommand{\missRowsQwen}{18,100}
-\newcommand{\missShareSonnet}{0.00}
-\newcommand{\missNSonnet}{0}
-\newcommand{\missRowsSonnet}{4,776}
+\newcommand{\missRowsQwen}{19,300}
 \newcommand{\sensNeuReg}{$+$5.8}
 \newcommand{\sensNeuRegCI}{[$-$2.9, $+$14.4]}
 \newcommand{\sensNeuRegP}{0.743}
@@ -10315,6 +10316,313 @@
 \newcommand{\deferPlainLuna}{53.8}
 \newcommand{\deferPlainHaiku}{66.8}
 \newcommand{\deferPlainTerra}{69.7}
+\newcommand{\cxAoMini}{80}
+\newcommand{\cxAoMiniCI}{[76, 83]}
+\newcommand{\cxAoSameMini}{78}
+\newcommand{\cxSpMini}{73}
+\newcommand{\cxSpMiniCI}{[69, 76]}
+\newcommand{\cxSpMisMini}{39}
+\newcommand{\cxSpCorMini}{6}
+\newcommand{\cxSwapMini}{52}
+\newcommand{\cxSwapMiniCI}{[46, 59]}
+\newcommand{\cxSwapBeforeMini}{68}
+\newcommand{\cxSwapOutMini}{chance}
+\newcommand{\cxDirEvalMini}{69}
+\newcommand{\cxAoHaiku}{84}
+\newcommand{\cxAoHaikuCI}{[81, 88]}
+\newcommand{\cxAoSameHaiku}{86}
+\newcommand{\cxSpHaiku}{84}
+\newcommand{\cxSpHaikuCI}{[79, 88]}
+\newcommand{\cxSpMisHaiku}{91}
+\newcommand{\cxSpCorHaiku}{54}
+\newcommand{\cxSwapHaiku}{61}
+\newcommand{\cxSwapHaikuCI}{[54, 69]}
+\newcommand{\cxSwapBeforeHaiku}{88}
+\newcommand{\cxSwapOutHaiku}{survives}
+\newcommand{\cxDirEvalHaiku}{84}
+\newcommand{\cxAoLuna}{88}
+\newcommand{\cxAoLunaCI}{[84, 90]}
+\newcommand{\cxAoSameLuna}{89}
+\newcommand{\cxSpLuna}{87}
+\newcommand{\cxSpLunaCI}{[84, 91]}
+\newcommand{\cxSpMisLuna}{95}
+\newcommand{\cxSpCorLuna}{51}
+\newcommand{\cxSwapLuna}{78}
+\newcommand{\cxSwapLunaCI}{[70, 85]}
+\newcommand{\cxSwapBeforeLuna}{96}
+\newcommand{\cxSwapOutLuna}{survives}
+\newcommand{\cxDirEvalLuna}{87}
+\newcommand{\cxAoTerra}{90}
+\newcommand{\cxAoTerraCI}{[86, 93]}
+\newcommand{\cxAoSameTerra}{93}
+\newcommand{\cxSpTerra}{90}
+\newcommand{\cxSpTerraCI}{[86, 93]}
+\newcommand{\cxSpMisTerra}{97}
+\newcommand{\cxSpCorTerra}{46}
+\newcommand{\cxSwapTerra}{78}
+\newcommand{\cxSwapTerraCI}{[68, 87]}
+\newcommand{\cxSwapBeforeTerra}{97}
+\newcommand{\cxSwapOutTerra}{survives}
+\newcommand{\cxDirEvalTerra}{89}
+\newcommand{\cxSwapVerdictsMin}{72}
+\newcommand{\cxSwapVerdictsMax}{246}
+\newcommand{\cxSwapN}{249}
+\newcommand{\cxAoMin}{80}
+\newcommand{\cxAoMax}{90}
+\newcommand{\cxSpMin}{73}
+\newcommand{\cxSpMax}{90}
+\newcommand{\cxSwapMin}{52}
+\newcommand{\cxSwapMax}{78}
+\newcommand{\cxSwapBeforeMin}{68}
+\newcommand{\cxSwapBeforeMax}{97}
+\newcommand{\cxDirEvalMin}{69}
+\newcommand{\cxDirEvalMax}{89}
+\newcommand{\cxSwapSurviveN}{3}
+\newcommand{\cxSwapInvertN}{0}
+\newcommand{\cxSwapChanceN}{1}
+\newcommand{\cxProbeN}{4}
+\newcommand{\cxAoAboveDirN}{4}
+\newcommand{\cxFrLunaFolR}{65}
+\newcommand{\cxFrLunaFolRCI}{[53, 75]}
+\newcommand{\cxFrLunaFolW}{75}
+\newcommand{\cxFrLunaFolWCI}{[65, 84]}
+\newcommand{\cxFrLunaDR}{$+$33.1}
+\newcommand{\cxFrLunaDW}{$-$49.1}
+\newcommand{\cxFrLunaSum}{$-$16.0}
+\newcommand{\cxFrLunaSumCI}{[$-$25.8, $-$6.0]}
+\newcommand{\cxFrLunaPlain}{52.7}
+\newcommand{\cxFrLunaBe}{0.60}
+\newcommand{\cxFrLunaBeCI}{[0.54, 0.66]}
+\newcommand{\cxFrLunaPred}{$-$3.8}
+\newcommand{\cxFrLunaObs}{$-$8.6}
+\newcommand{\cxFrHaikuFolR}{69}
+\newcommand{\cxFrHaikuFolRCI}{[57, 80]}
+\newcommand{\cxFrHaikuFolW}{63}
+\newcommand{\cxFrHaikuFolWCI}{[54, 72]}
+\newcommand{\cxFrHaikuDR}{$+$33.1}
+\newcommand{\cxFrHaikuDW}{$-$48.0}
+\newcommand{\cxFrHaikuSum}{$-$14.9}
+\newcommand{\cxFrHaikuSumCI}{[$-$24.9, $-$4.8]}
+\newcommand{\cxFrHaikuPlain}{59.6}
+\newcommand{\cxFrHaikuBe}{0.59}
+\newcommand{\cxFrHaikuBeCI}{[0.53, 0.66]}
+\newcommand{\cxFrHaikuPred}{$-$6.8}
+\newcommand{\cxFrHaikuObs}{$-$8.0}
+\newcommand{\cxFrTerraFolR}{67}
+\newcommand{\cxFrTerraFolRCI}{[54, 80]}
+\newcommand{\cxFrTerraFolW}{86}
+\newcommand{\cxFrTerraFolWCI}{[79, 92]}
+\newcommand{\cxFrTerraDR}{$+$18.9}
+\newcommand{\cxFrTerraDW}{$-$69.7}
+\newcommand{\cxFrTerraSum}{$-$50.8}
+\newcommand{\cxFrTerraSumCI}{[$-$60.9, $-$40.2]}
+\newcommand{\cxFrTerraPlain}{71.7}
+\newcommand{\cxFrTerraBe}{0.79}
+\newcommand{\cxFrTerraBeCI}{[0.72, 0.86]}
+\newcommand{\cxFrTerraPred}{$-$25.5}
+\newcommand{\cxFrTerraObs}{$-$26.0}
+\newcommand{\cxFrMiniFolR}{50}
+\newcommand{\cxFrMiniFolRCI}{[40, 61]}
+\newcommand{\cxFrMiniFolW}{50}
+\newcommand{\cxFrMiniFolWCI}{[39, 60]}
+\newcommand{\cxFrMiniDR}{$+$28.6}
+\newcommand{\cxFrMiniDW}{$-$29.4}
+\newcommand{\cxFrMiniSum}{$-$0.8}
+\newcommand{\cxFrMiniSumCI}{[$-$11.1, $+$9.7]}
+\newcommand{\cxFrMiniPlain}{47.4}
+\newcommand{\cxFrMiniBe}{0.51}
+\newcommand{\cxFrMiniBeCI}{[0.41, 0.60]}
+\newcommand{\cxFrHoldN}{2}
+\newcommand{\cxFrN}{3}
+\newcommand{\cxFrRSigN}{3}
+\newcommand{\cxFrWSigN}{3}
+\newcommand{\cxFrSumSigN}{3}
+\newcommand{\cxFrMae}{2.2}
+\newcommand{\cxFrMaeZero}{14.2}
+\newcommand{\cxFrMaeOnes}{3.7}
+\newcommand{\cxFrHolds}{holds}
+\newcommand{\cxCfMiniFolWLow}{50}
+\newcommand{\cxCfMiniFolRLow}{57}
+\newcommand{\cxCfMiniFolWHigh}{60}
+\newcommand{\cxCfMiniFolRHigh}{58}
+\newcommand{\cxCfMiniWDiff}{$+$1.2}
+\newcommand{\cxCfMiniWDiffCI}{[$-$1.9, $+$4.5]}
+\newcommand{\cxCfMiniRDiff}{$+$1.0}
+\newcommand{\cxCfMiniRDiffCI}{[$-$1.0, $+$2.9]}
+\newcommand{\cxCfHaikuFolWLow}{44}
+\newcommand{\cxCfHaikuFolRLow}{56}
+\newcommand{\cxCfHaikuFolWHigh}{61}
+\newcommand{\cxCfHaikuFolRHigh}{64}
+\newcommand{\cxCfHaikuWDiff}{$+$12.3}
+\newcommand{\cxCfHaikuWDiffCI}{[$+$8.0, $+$16.8]}
+\newcommand{\cxCfHaikuRDiff}{$+$1.5}
+\newcommand{\cxCfHaikuRDiffCI}{[$-$0.4, $+$3.6]}
+\newcommand{\cxCfLunaFolWLow}{56}
+\newcommand{\cxCfLunaFolRLow}{70}
+\newcommand{\cxCfLunaFolWHigh}{65}
+\newcommand{\cxCfLunaFolRHigh}{69}
+\newcommand{\cxCfLunaWDiff}{$+$9.9}
+\newcommand{\cxCfLunaWDiffCI}{[$+$6.1, $+$14.2]}
+\newcommand{\cxCfLunaRDiff}{$-$0.2}
+\newcommand{\cxCfLunaRDiffCI}{[$-$2.9, $+$2.5]}
+\newcommand{\cxCfTerraFolWLow}{84}
+\newcommand{\cxCfTerraFolRLow}{64}
+\newcommand{\cxCfTerraFolWHigh}{92}
+\newcommand{\cxCfTerraFolRHigh}{69}
+\newcommand{\cxCfTerraWDiff}{$+$5.7}
+\newcommand{\cxCfTerraWDiffCI}{[$+$1.4, $+$9.9]}
+\newcommand{\cxCfTerraRDiff}{$+$1.9}
+\newcommand{\cxCfTerraRDiffCI}{[$-$0.6, $+$5.0]}
+\newcommand{\cxCfN}{4}
+\newcommand{\cxCfWSigN}{3}
+\newcommand{\cxCfRSigN}{0}
+\newcommand{\cxCfWDiffMin}{$+$1.2}
+\newcommand{\cxCfWDiffMax}{$+$12.3}
+\newcommand{\cxRdSonnetFolR}{65}
+\newcommand{\cxRdSonnetFolRCI}{[50, 80]}
+\newcommand{\cxRdSonnetFolW}{23}
+\newcommand{\cxRdSonnetFolWCI}{[16, 31]}
+\newcommand{\cxRdSonnetDR}{$+$16.4}
+\newcommand{\cxRdSonnetDW}{$-$20.6}
+\newcommand{\cxRdSonnetSum}{$-$4.2}
+\newcommand{\cxRdSonnetSumCI}{[$-$13.0, $+$4.4]}
+\newcommand{\cxRdSonnetPlain}{75.7}
+\newcommand{\cxRdSonnetBe}{0.56}
+\newcommand{\cxRdSonnetBeCI}{[0.44, 0.68]}
+\newcommand{\cxRdQwenFolR}{56}
+\newcommand{\cxRdQwenFolRCI}{[44, 66]}
+\newcommand{\cxRdQwenFolW}{52}
+\newcommand{\cxRdQwenFolWCI}{[41, 64]}
+\newcommand{\cxRdQwenDR}{$+$25.8}
+\newcommand{\cxRdQwenDW}{$-$22.0}
+\newcommand{\cxRdQwenSum}{$+$3.8}
+\newcommand{\cxRdQwenSumCI}{[$-$7.9, $+$14.7]}
+\newcommand{\cxRdQwenPlain}{50.3}
+\newcommand{\cxRdQwenBe}{0.46}
+\newcommand{\cxRdQwenBeCI}{[0.33, 0.58]}
+\newcommand{\cxRdTerraFolR}{67}
+\newcommand{\cxRdTerraFolRCI}{[53, 80]}
+\newcommand{\cxRdTerraFolW}{95}
+\newcommand{\cxRdTerraFolWCI}{[89, 99]}
+\newcommand{\cxRdTerraDR}{$+$17.6}
+\newcommand{\cxRdTerraDW}{$-$64.5}
+\newcommand{\cxRdTerraSum}{$-$46.9}
+\newcommand{\cxRdTerraSumCI}{[$-$57.2, $-$36.4]}
+\newcommand{\cxRdTerraPlain}{69.7}
+\newcommand{\cxRdTerraBe}{0.79}
+\newcommand{\cxRdTerraBeCI}{[0.72, 0.85]}
+\newcommand{\cxClosedMini}{12.3}
+\newcommand{\cxClosedCleanMini}{12.0}
+\newcommand{\cxClosedKnownMini}{38}
+\newcommand{\cxClosedLuna}{22.0}
+\newcommand{\cxClosedCleanLuna}{22.0}
+\newcommand{\cxClosedKnownLuna}{63}
+\newcommand{\cxClosedHaiku}{15.7}
+\newcommand{\cxClosedCleanHaiku}{13.7}
+\newcommand{\cxClosedKnownHaiku}{47}
+\newcommand{\cxClosedTerra}{26.3}
+\newcommand{\cxClosedCleanTerra}{26.0}
+\newcommand{\cxClosedKnownTerra}{79}
+\newcommand{\cxClosedQwen}{7.0}
+\newcommand{\cxClosedCleanQwen}{5.0}
+\newcommand{\cxClosedKnownQwen}{21}
+\newcommand{\cxClosedSonnetEval}{16.3}
+\newcommand{\cxClosedCleanSonnetEval}{28.0}
+\newcommand{\cxClosedKnownSonnetEval}{49}
+\newcommand{\cxClosedFreshMin}{7.0}
+\newcommand{\cxClosedFreshMax}{26.3}
+\newcommand{\cxPriorFrMiniKnown}{87}
+\newcommand{\cxPriorFrMiniUnknown}{71}
+\newcommand{\cxPriorFrMiniKnownN}{38}
+\newcommand{\cxPriorFrLunaKnown}{98}
+\newcommand{\cxPriorFrLunaUnknown}{89}
+\newcommand{\cxPriorFrLunaKnownN}{63}
+\newcommand{\cxPriorFrHaikuKnown}{98}
+\newcommand{\cxPriorFrHaikuUnknown}{92}
+\newcommand{\cxPriorFrHaikuKnownN}{47}
+\newcommand{\cxPriorFrTerraKnown}{100}
+\newcommand{\cxPriorFrTerraUnknown}{95}
+\newcommand{\cxPriorFrTerraKnownN}{79}
+\newcommand{\cxPriorFrQwenKnown}{70}
+\newcommand{\cxPriorFrQwenUnknown}{69}
+\newcommand{\cxPriorFrQwenKnownN}{21}
+\newcommand{\cxPriorFrDiffMin}{$+$1}
+\newcommand{\cxPriorFrDiffMax}{$+$16}
+\newcommand{\cxPriorFrDiffPos}{2}
+\newcommand{\cxPriorFrN}{5}
+\newcommand{\cxPriorSonnetKnown}{98}
+\newcommand{\cxPriorSonnetUnknown}{93}
+\newcommand{\cxPriorSonnetKnownN}{49}
+\newcommand{\cxFolFrMiniWKnown}{33}
+\newcommand{\cxFolFrMiniWKnownN}{13}
+\newcommand{\cxFolFrMiniWUnknown}{53}
+\newcommand{\cxFolFrLunaWKnown}{65}
+\newcommand{\cxFolFrLunaWKnownN}{22}
+\newcommand{\cxFolFrLunaWUnknown}{80}
+\newcommand{\cxFolFrHaikuWKnown}{38}
+\newcommand{\cxFolFrHaikuWKnownN}{15}
+\newcommand{\cxFolFrHaikuWUnknown}{69}
+\newcommand{\cxFolFrTerraWKnown}{85}
+\newcommand{\cxFolFrTerraWKnownN}{34}
+\newcommand{\cxFolFrTerraWUnknown}{86}
+\newcommand{\cxFolSonnetWKnown}{4}
+\newcommand{\cxFolSonnetWKnownN}{23}
+\newcommand{\cxFolSonnetWUnknown}{28}
+\newcommand{\cxFolFreshKnownMax}{79}
+\newcommand{\cxHcKeyMini}{68.0}
+\newcommand{\cxHcKeyDirMini}{$+$2.0}
+\newcommand{\cxHcKeyDirMiniCI}{[$-$2.1, $+$6.2]}
+\newcommand{\cxHcKeyPlainMini}{$+$7.6}
+\newcommand{\cxHcKeyHaiku}{88.3}
+\newcommand{\cxHcKeyDirHaiku}{$+$4.9}
+\newcommand{\cxHcKeyDirHaikuCI}{[$+$1.4, $+$8.6]}
+\newcommand{\cxHcKeyPlainHaiku}{$+$18.6}
+\newcommand{\cxHcKeyLuna}{96.1}
+\newcommand{\cxHcKeyDirLuna}{$+$16.3}
+\newcommand{\cxHcKeyDirLunaCI}{[$+$11.8, $+$21.3]}
+\newcommand{\cxHcKeyPlainLuna}{$+$28.1}
+\newcommand{\cxHdHaikuDirK}{$+$12.7}
+\newcommand{\cxHdHaikuDirKCI}{[$+$6.7, $+$18.7]}
+\newcommand{\cxHdHaikuDirC}{$-$0.3}
+\newcommand{\cxHdHaikuDirCCI}{[$-$0.8, 0.0]}
+\newcommand{\cxHdHaikuRemK}{$+$23.5}
+\newcommand{\cxHdHaikuRemKCI}{[$+$17.0, $+$30.5]}
+\newcommand{\cxHdHaikuRemC}{0.0}
+\newcommand{\cxHdHaikuRemCCI}{[0.0, 0.0]}
+\newcommand{\cxHdMiniDirK}{$+$12.5}
+\newcommand{\cxHdMiniDirKCI}{[$+$5.5, $+$19.7]}
+\newcommand{\cxHdMiniDirC}{$-$3.4}
+\newcommand{\cxHdMiniDirCCI}{[$-$7.1, 0.0]}
+\newcommand{\cxHdMiniRemK}{$+$18.7}
+\newcommand{\cxHdMiniRemKCI}{[$+$10.3, $+$27.3]}
+\newcommand{\cxHdMiniRemC}{$-$20.6}
+\newcommand{\cxHdMiniRemCCI}{[$-$27.8, $-$13.8]}
+\newcommand{\cxHdHaikuDirBe}{0.02}
+\newcommand{\cxHdHaikuRemBe}{none}
+\newcommand{\cxHdMiniDirBe}{0.22}
+\newcommand{\cxHdMiniRemBe}{0.52}
+\newcommand{\cxHdHaikuPairP}{94}
+\newcommand{\cxHdHaikuPairR}{32}
+\newcommand{\cxHdHaikuDirAcc}{94}
+\newcommand{\cxHdMiniPairP}{37}
+\newcommand{\cxHdMiniPairR}{20}
+\newcommand{\cxHdMiniDirAcc}{88}
+\newcommand{\cxHdHaikuFlagClean}{2}
+\newcommand{\cxHdHaikuFlagConf}{82}
+\newcommand{\cxHdMiniFlagClean}{76}
+\newcommand{\cxHdMiniFlagConf}{96}
+\newcommand{\cxNsFlagConf}{100}
+\newcommand{\cxNsFlagClean}{100}
+\newcommand{\cxNsPairP}{12}
+\newcommand{\cxNsPairR}{90}
+\newcommand{\cxNsFlagK}{$-$3.3}
+\newcommand{\cxNsFlagKCI}{[$-$6.3, $-$0.4]}
+\newcommand{\cxNsFlagC}{$-$0.7}
+\newcommand{\cxNsFlagCCI}{[$-$2.7, $+$1.0]}
+\newcommand{\cxNsRemK}{$+$0.4}
+\newcommand{\cxNsRemKCI}{[$-$5.8, $+$6.7]}
+\newcommand{\cxNsRemC}{$-$67.0}
+\newcommand{\cxNsRemCCI}{[$-$75.7, $-$57.7]}
 \newcommand{\adOracleFlagAll}{3.1}
 \newcommand{\adOracleFlagConf}{6.7}
 \newcommand{\adOracleDirAll}{6.2}
@@ -12927,3 +13235,59 @@
 \newcommand{\acleanTypeEffSeveral}{1.1}
 \newcommand{\acleanTypeEffOne}{1.0}
 \newcommand{\ahFourBRho}{0.08}
+\newcommand{\acxFrLunaDR}{33.1}
+\newcommand{\acxFrLunaDW}{49.1}
+\newcommand{\acxFrLunaSum}{16.0}
+\newcommand{\acxFrLunaPred}{3.8}
+\newcommand{\acxFrLunaObs}{8.6}
+\newcommand{\acxFrHaikuDR}{33.1}
+\newcommand{\acxFrHaikuDW}{48.0}
+\newcommand{\acxFrHaikuSum}{14.9}
+\newcommand{\acxFrHaikuPred}{6.8}
+\newcommand{\acxFrHaikuObs}{8.0}
+\newcommand{\acxFrTerraDR}{18.9}
+\newcommand{\acxFrTerraDW}{69.7}
+\newcommand{\acxFrTerraSum}{50.8}
+\newcommand{\acxFrTerraPred}{25.5}
+\newcommand{\acxFrTerraObs}{26.0}
+\newcommand{\acxFrMiniDR}{28.6}
+\newcommand{\acxFrMiniDW}{29.4}
+\newcommand{\acxFrMiniSum}{0.8}
+\newcommand{\acxCfMiniWDiff}{1.2}
+\newcommand{\acxCfMiniRDiff}{1.0}
+\newcommand{\acxCfHaikuWDiff}{12.3}
+\newcommand{\acxCfHaikuRDiff}{1.5}
+\newcommand{\acxCfLunaWDiff}{9.9}
+\newcommand{\acxCfLunaRDiff}{0.2}
+\newcommand{\acxCfTerraWDiff}{5.7}
+\newcommand{\acxCfTerraRDiff}{1.9}
+\newcommand{\acxCfWDiffMin}{1.2}
+\newcommand{\acxCfWDiffMax}{12.3}
+\newcommand{\acxRdSonnetDR}{16.4}
+\newcommand{\acxRdSonnetDW}{20.6}
+\newcommand{\acxRdSonnetSum}{4.2}
+\newcommand{\acxRdQwenDR}{25.8}
+\newcommand{\acxRdQwenDW}{22.0}
+\newcommand{\acxRdQwenSum}{3.8}
+\newcommand{\acxRdTerraDR}{17.6}
+\newcommand{\acxRdTerraDW}{64.5}
+\newcommand{\acxRdTerraSum}{46.9}
+\newcommand{\acxPriorFrDiffMin}{1}
+\newcommand{\acxPriorFrDiffMax}{16}
+\newcommand{\acxHcKeyDirMini}{2.0}
+\newcommand{\acxHcKeyPlainMini}{7.6}
+\newcommand{\acxHcKeyDirHaiku}{4.9}
+\newcommand{\acxHcKeyPlainHaiku}{18.6}
+\newcommand{\acxHcKeyDirLuna}{16.3}
+\newcommand{\acxHcKeyPlainLuna}{28.1}
+\newcommand{\acxHdHaikuDirK}{12.7}
+\newcommand{\acxHdHaikuDirC}{0.3}
+\newcommand{\acxHdHaikuRemK}{23.5}
+\newcommand{\acxHdMiniDirK}{12.5}
+\newcommand{\acxHdMiniDirC}{3.4}
+\newcommand{\acxHdMiniRemK}{18.7}
+\newcommand{\acxHdMiniRemC}{20.6}
+\newcommand{\acxNsFlagK}{3.3}
+\newcommand{\acxNsFlagC}{0.7}
+\newcommand{\acxNsRemK}{0.4}
+\newcommand{\acxNsRemC}{67.0}

@@ -24,8 +24,9 @@ passages outnumber the correct one the flag can raise selective accuracy. H2 and
 confirmatory data, H15 and H21 after earlier results; risk--coverage counts are exploratory.
 \item \textbf{Generators defer to directional flags, so a wrong flag can cost more than a right one gains}
 (\S\ref{sec:direction}). With direction randomised on true contradictions (H31, registered before its runs but
-after earlier results), three of four generators follow wrong flags about as often as right ones, and the most
-accurate of the four follows nearly all of them; the implied break-even direction precision is exploratory.
+after earlier results), three of four generators follow wrong flags about as often as right ones, also on new
+questions; the most accurate of the four follows nearly all, Claude Sonnet few. The implied break-even direction
+precision is exploratory.
 \item \textbf{A frozen account of these follow rates predicts within a benchmark and shows where it fails}
 (\S\ref{sec:real}). Predictions committed before any flagged answer existed came close on unseen ConflictBank
 questions (H32, prospective), though a baseline that ignores which questions are flagged was nearly as close. They
@@ -34,8 +35,9 @@ overstated harm on clean questions and on HealthContradict, whose labels are unv
 
 The numbers behind claims 2 and 3 come from ConflictBank, whose misinformation is
 LLM-written about facts the generators rarely know, and whose false side a bag-of-words classifier picks from
-passage style alone (\S\ref{sec:setup}). Detectors and generators may therefore find the false side from style, not
-from knowledge or reasoning about the contradiction. HealthContradict and RAGuard use real documents but serve only
+passage style alone (\S\ref{sec:setup}), and detectors pick its true answer from the two candidates without any
+passage (\S\ref{sec:direction}). Detectors and generators may therefore find the false side without reasoning about
+the contradiction. HealthContradict and RAGuard use real documents but serve only
 as label-transfer stress tests, because their labels, not verified facts, decide which side counts as false.
 Whether a detector's verdict passed as an answer key conveys as much as its flag depends on the scorer and is
 unresolved (\S\ref{sec:open}). We make no claims about model families. We release the harness, the

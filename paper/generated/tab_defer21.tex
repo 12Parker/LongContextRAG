@@ -1,0 +1,49 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\resizebox{\ifdim\width>\columnwidth\columnwidth\else\width\fi}{!}{%
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Generator & $f_R$ & $f_W$ & Right & Wrong & $p^*$ \\
+\midrule
+\multicolumn{6}{@{}l}{\emph{ConflictBank-fresh, randomised direction (H40)}} \\
+gpt-6-luna & 65 & 75 & $+$33.1 & $-$49.1 & 0.60 \\
+ & {\scriptsize [53, 75]} & {\scriptsize [65, 84]} & & & {\scriptsize [0.54, 0.66]} \\[1pt]
+Claude Haiku & 69 & 63 & $+$33.1 & $-$48.0 & 0.59 \\
+ & {\scriptsize [57, 80]} & {\scriptsize [54, 72]} & & & {\scriptsize [0.53, 0.66]} \\[1pt]
+gpt-6.1-terra & 67 & 86 & $+$18.9 & $-$69.7 & 0.79 \\
+ & {\scriptsize [54, 80]} & {\scriptsize [79, 92]} & & & {\scriptsize [0.72, 0.86]} \\[1pt]
+gpt-4o-mini$^\dagger$ & 50 & 50 & $+$28.6 & $-$29.4 & 0.51 \\
+ & {\scriptsize [40, 61]} & {\scriptsize [39, 60]} & & & {\scriptsize [0.41, 0.60]} \\[1pt]
+\midrule
+\multicolumn{6}{@{}l}{\emph{Eval set, one seed (C6, C8)}} \\
+Claude Sonnet & 65 & 23 & $+$16.4 & $-$20.6 & 0.56 \\
+ & {\scriptsize [50, 80]} & {\scriptsize [16, 31]} & & & {\scriptsize [0.44, 0.68]} \\[1pt]
+Qwen2.5-7B & 56 & 52 & $+$25.8 & $-$22.0 & 0.46 \\
+ & {\scriptsize [44, 66]} & {\scriptsize [41, 64]} & & & {\scriptsize [0.33, 0.58]} \\[1pt]
+\midrule
+\multicolumn{6}{@{}l}{\emph{Eval set, stated confidence 55\% / 95\% (H41)}} \\
+gpt-4o-mini, 55\% & 57 & 50 & $+$28.9 & $-$31.2 & 0.52 \\
+ & {\scriptsize [46, 67]} & {\scriptsize [39, 61]} & & & {\scriptsize [0.43, 0.60]} \\[1pt]
+gpt-4o-mini, 95\% & 58 & 60 & $+$30.0 & $-$32.4 & 0.52 \\
+ & {\scriptsize [47, 68]} & {\scriptsize [49, 70]} & & & {\scriptsize [0.43, 0.60]} \\[1pt]
+Claude Haiku, 55\% & 56 & 44 & $+$22.4 & $-$33.8 & 0.60 \\
+ & {\scriptsize [43, 69]} & {\scriptsize [35, 53]} & & & {\scriptsize [0.52, 0.68]} \\[1pt]
+Claude Haiku, 95\% & 64 & 61 & $+$23.9 & $-$46.1 & 0.66 \\
+ & {\scriptsize [50, 77]} & {\scriptsize [51, 69]} & & & {\scriptsize [0.59, 0.73]} \\[1pt]
+gpt-6-luna, 55\% & 70 & 56 & $+$32.3 & $-$32.4 & 0.50 \\
+ & {\scriptsize [59, 81]} & {\scriptsize [44, 67]} & & & {\scriptsize [0.43, 0.58]} \\[1pt]
+gpt-6-luna, 95\% & 69 & 65 & $+$32.1 & $-$42.3 & 0.57 \\
+ & {\scriptsize [57, 80]} & {\scriptsize [56, 75]} & & & {\scriptsize [0.51, 0.63]} \\[1pt]
+gpt-6.1-terra, 55\% & 64 & 84 & $+$17.6 & $-$57.4 & 0.77 \\
+ & {\scriptsize [51, 78]} & {\scriptsize [77, 91]} & & & {\scriptsize [0.70, 0.83]} \\[1pt]
+gpt-6.1-terra, 95\% & 69 & 92 & $+$19.5 & $-$63.1 & 0.76 \\
+ & {\scriptsize [56, 82]} & {\scriptsize [85, 97]} & & & {\scriptsize [0.70, 0.82]} \\[1pt]
+\bottomrule
+\end{tabular}}
+\caption{Deference to randomised directional flags in the \mbox{PR\S21} runs (one-answer prompt, one-way matcher;
+columns as Table~\ref{tab:deference}). Fresh: 300 new conflict questions, predictions frozen before the flagged runs.
+$^\dagger$: gpt-4o-mini's fresh run predates \mbox{PR\S21} (H36). Stated confidence: the same flags, each suspect
+labelled with a detector confidence of 55\% or 95\%.}
+\label{tab:defer21}
+\end{table}

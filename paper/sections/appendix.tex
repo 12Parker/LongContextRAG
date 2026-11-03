@@ -41,18 +41,27 @@ Randomised direction: for three of four generators a wrong flag costs more than 
 Table~\ref{tab:deference} & (ii) (\prs{16}) \\
 Three generators follow wrong flags about as often as right ones; gpt-6.1-terra follows them more often &
 Table~\ref{tab:deference}; R4, R7, R8 & registered descriptives without a test (\prs{16.3}); R4, R7, R8 expl. \\
-The break-even direction precision $p^*$ rises with generator accuracy & Table~\ref{tab:deference} & expl.;
-not registered \\
-Scope: ConflictBank's false side is readable from style; detectors do better on facts their model knows; with more
-false than correct passages, direction falls & R1--R3; Table~\ref{tab:prior}; \prs{11.3} & R1--R3 expl. (R3 first
-tabulated on 2026-11-02); \prs{11.3}: registered as exploratory \\
+On new questions randomised flags again cost more than they gain; follow rates stay in their eval intervals except
+gpt-6.1-terra's for wrong flags & H40a, H40b; Table~\ref{tab:defer21} & (ii) (\prs{21}); most flagged answers shared
+with earlier cells (\prs{21.11}) \\
+Claude Sonnet, the most accurate generator on these questions, rarely follows wrong flags & C6;
+Table~\ref{tab:defer21} & expl. (\prs{21}, one seed) \\
+A stated 55\% confidence lowers wrong-flag following for some generators; right-flag effects do not change & H41;
+Table~\ref{tab:defer21} & (ii) (\prs{21}); synthetic confidences \\
+The break-even direction precision $p^*$ rises with accuracy across the four H31 generators (not for Claude Sonnet) &
+Tables~\ref{tab:deference}, \ref{tab:defer21} & expl.; not registered \\
+Scope: ConflictBank's false side is readable from style and from the two candidate answers alone; detectors do
+better on facts their model knows, also on new questions; with more false than correct passages, direction falls &
+R1--R3; C1, C9; Tables~\ref{tab:prior}, \ref{tab:probe21}; \prs{11.3} & R1--R3 expl. (R3 first tabulated on
+2026-11-02); C1, C9 expl. (\prs{21}); \prs{11.3}: registered as exploratory \\
 \bottomrule
 \end{tabular}
 \caption{Status of each claim the body makes: claims 1 and 2 (continued in Table~\ref{tab:claimsb}). \emph{(i)}: registered before any confirmatory data (H1--H9).
 \emph{(ii)}: registered in an addendum committed before the runs it covers but after earlier results were known
-(H10--H31, H37--H38; three items were committed after their runs had started, \prs{20.1}). \emph{(iii)}: a numeric
-prediction frozen before the outcome existed (H32--H36). \emph{Expl.}: exploratory, a re-analysis of data already
-seen, registered or not, including every R-number (\prs{20}; Appendix~\ref{app:rev11}). Commit, push and first-run
+(H10--H31, H37--H38, H40--H41; three items were committed after their runs had started, \prs{20.1}). \emph{(iii)}: a numeric
+prediction frozen before the outcome existed (H32--H36). \emph{Expl.}: exploratory: a re-analysis of data already
+seen, registered or not, including every R-number (\prs{20}; Appendix~\ref{app:rev11}), or a descriptive \prs{21}
+run (C-numbers; Appendix~\ref{app:rev21}). Commit, push and first-run
 times of every registration are in Table~\ref{tab:timeline}.}
 \label{tab:claims}
 \end{table*}
@@ -72,6 +81,8 @@ bookkeeping & R6 & expl. \\
 Only one of the two predicted harms is significant & H33 & (iii); not supported \\
 It overstates harm on clean questions and on HealthContradict & H35, H37; Tables~\ref{tab:fresh}, \ref{tab:hc} &
 H35: (iii); H37: (ii), labels as released \\
+Frozen predictions for three more randomised runs on fresh questions are within 3 points on average & H40c;
+Table~\ref{tab:defer21} & (ii); not prospective: most answers shared with earlier cells (\prs{21.11}) \\
 Conditioning follow rates on the generator's prior barely changes the account on ConflictBank & R4, R5;
 Table~\ref{tab:prior} & expl. \\
 \midrule
@@ -79,17 +90,19 @@ Table~\ref{tab:prior} & expl. \\
 Key equivalence is unresolved: under the judge the flag is ahead (H38); under the matcher only
 \hTwentyThreeEqN\ of \hTwentyThreeK\ registered H23 TOSTs and the unregistered pooled TOSTs pass & H23, H30, H38; R11 &
 (ii); pooled TOSTs added after the per-comparison ones; H38 re-scores outputs already seen \\
-Stress tests (label transfer): HealthContradict's oracle flag acts as an answer key; on RAGuard the key beats the flag except for
-gpt-4o-mini; CONFLICTS is underpowered & H26, H37; R13, R14; Table~\ref{tab:conflicts} & H26, H37: (ii); R13 (first
-tabulated on 2026-11-02), R14, CONFLICTS: expl. \\
+Stress tests (label transfer): HealthContradict's oracle flag nearly states the answer, yet an explicit key adds
+to it for two generators; on RAGuard the key beats the flag except for gpt-4o-mini; CONFLICTS is underpowered & H26,
+H37; R13, R14; C3; Table~\ref{tab:conflicts} & H26, H37: (ii); R13 (first tabulated on 2026-11-02), R14, C3,
+CONFLICTS: expl. \\
 On genuine conflicts, direction and removal discard valid answers & H28 & (ii) \\
 In \pvBeN\ of \pvN\ settings a real detector's flag pays only above a break-even conflict share &
 Table~\ref{tab:prev11}; R18 & expl.
 (\prs{17.1}, \prs{20}) \\
 \midrule
 \multicolumn{3}{@{}l}{\emph{Decision rule (\S\ref{sec:discussion})}} \\
-Choosing a detector by the frozen account, checked over all fresh questions (clean included) & \prs{19.1};
-Table~\ref{tab:fresh} & registered, descriptive; in sample \\
+Choosing a detector by the frozen account, checked over all fresh questions (clean included); the detector it picks
+flags few clean RAMDocs questions & \prs{19.1}; C7; Table~\ref{tab:fresh} & registered, descriptive; in sample; C7
+expl. (\prs{21}) \\
 Single call: no significant difference from the pipeline for gpt-4o-mini; it costs the reasoning models and Claude
 Haiku on clean questions & H18; Table~\ref{tab:baselines} & (ii); its TOSTs show no equivalence; clean-question
 losses expl. \\
@@ -610,6 +623,107 @@ replicates fall below it), so it cannot be read as support. H4b is supported und
 label-sensitive (Appendix~\ref{app:grid}).
 
 \clearpage
+\section{Runs after the External Review (\prs{21})}
+\label{app:rev21}
+After the review we ran the API package of \prs{21}, registered in full and pushed before any of its runs
+(Table~\ref{tab:timeline}). H40 and H41 are registered tests (tier ii) and join the FDR count; everything else here
+is descriptive, with reading rules fixed in \prs{21}, and so exploratory. Conventions follow \prs{21}: one-answer
+prompt, one-way strict matching, seed means within questions and question-bootstrap 95\% CIs. From \prs{21} on, each
+result row records the model name the API reports serving.
+
+\input{generated/tab_probe21}
+\paragraph{C1: what the detectors read.} Four detector models took three probes on the 300 ConflictBank conflict
+questions, one seed each (Table~\ref{tab:probe21}). \emph{Answer only:} shown the question and the two candidate
+answers, with no passage, they pick the true one \cxAoMin--\cxAoMax\% of the time, averaged over both orders. For
+\cxAoAboveDirN\ of the \cxProbeN\ this is within five points of their direction accuracy as detectors or above it,
+the registered reading for ``the direction signal needs no passage text'', although closed-book they answer only
+\cbClosedMin--\cbClosedMax\% of these questions (Table~\ref{tab:deference}): recognising the true answer among two is
+far easier than recalling it. \emph{Single passage:} scoring one passage at a time, they give the
+misinformation passage the higher probability of being false on \cxSpMin--\cxSpMax\% of questions; the reasoning
+models and Claude Haiku also give about half of the correct passages a probability of at least 50 (gpt-6-luna
+\cxSpCorLuna\%, Claude Haiku \cxSpCorHaiku\%). \emph{Object swap:} on \cxSwapN\ items whose two answers can be
+exchanged cleanly between the passages, each passage keeps its style but argues the other side. The share of
+single-side verdicts naming the passage that states the wrong answer falls from \cxSwapBeforeMin--\cxSwapBeforeMax\%
+to \cxSwapMin--\cxSwapMax\% (\cxSwapVerdictsMin\ to \cxSwapVerdictsMax\ verdicts per detector; the reasoning models flag
+the true pair less often). It stays above chance for \cxSwapSurviveN\ detectors (the registered ``survives'') and
+falls to chance for gpt-4o-mini (\cxSwapMini\% \cxSwapMiniCI). So the stronger detectors mostly follow which answer
+is plausible, and passage style accounts for part of their direction; gpt-4o-mini's direction rests as much on
+style as on the answer. In both cases the direction can come without reasoning about the contradiction. These probes do not tell recognition of
+the fact from inference from the question's wording (a bishop's name suggesting his nationality); either way,
+ConflictBank's false side is legible without the passages.
+
+\input{generated/tab_defer21}
+\paragraph{C4: randomised direction on new questions (H40).} The H31 design was repeated on the 300 conflict questions
+of ConflictBank-fresh for gpt-6-luna, Claude Haiku and gpt-6.1-terra, with each generator's prediction frozen from
+its no-flag answers and the round-10 follow rates before any flagged run (Table~\ref{tab:defer21}). H40a: the fresh
+$f_R$ and $f_W$ lie inside the frozen eval intervals for gpt-6-luna and Claude Haiku; gpt-6.1-terra's $f_R$ does too,
+but it follows \cxFrTerraFolW\% \cxFrTerraFolWCI\ of wrong flags, below its eval interval, so H40a holds for
+\cxFrHoldN\ of \cxFrN. H40b: for all three, a right flag helps, a wrong flag hurts and their sum is negative
+(\cxFrHaikuSum\ to \cxFrTerraSum\ points; all significant after Holm). H40c: the frozen predictions miss the observed
+effects over all 300 questions by \cxFrMae\ points on average (predicting zero: \cxFrMaeZero; follow rates of 1:
+\cxFrMaeOnes), within the registered 3 points. About two thirds of the flagged answers were not new samples (see
+\emph{Shared responses} below), so H40c is not prospective in the sense of H32: the predictions read none of them and
+fit nothing to them, but the answers existed when the predictions were frozen.
+
+\paragraph{C5: a stated confidence (H41).} The same randomised flags were re-run with each suspect labelled ``detector
+confidence: 55\%'' or ``95\%''. A wrong flag stated at 55\% costs less than one stated at 95\% for \cxCfWSigN\ of the
+\cxCfN\ generators (H41a; differences \cxCfWDiffMin\ to \cxCfWDiffMax\ points): gpt-6-luna follows \cxCfLunaFolWLow\% of
+wrong flags at 55\% and \cxCfLunaFolWHigh\% at 95\%, against \rfolWrongLuna\% with no confidence stated, and
+gpt-6.1-terra \cxCfTerraFolWLow\% and \cxCfTerraFolWHigh\%, against \rfolWrongTerra\%. A right flag stated at 95\%
+is not detectably more helpful than one at 55\% (H41b: \cxCfRSigN\ of \cxCfN). A stated confidence thus lowers
+deference to wrong flags in some generators without raising the gain from right ones; these confidences are
+synthetic, and whether real detectors' confidences are calibrated enough to use is untested.
+
+\paragraph{C6, C8: Claude Sonnet and Qwen2.5-7B (one seed).} On the eval questions Claude Sonnet, the most accurate
+generator in our runs (\cxRdSonnetPlain\% without a flag on these questions, against \cxRdTerraPlain\% for
+gpt-6.1-terra), follows \cxRdSonnetFolR\% \cxRdSonnetFolRCI\ of right flags and only \cxRdSonnetFolW\%
+\cxRdSonnetFolWCI\ of wrong ones; its $p^*$ is \cxRdSonnetBe\ \cxRdSonnetBeCI. On this one draw, deference does not
+rise with accuracy beyond the four H31 generators, and neither does $p^*$. Qwen2.5-7B follows right and wrong flags at similar
+rates (\cxRdQwenFolR\% and \cxRdQwenFolW\%), like gpt-4o-mini, with $p^*$ \cxRdQwenBe.
+
+\paragraph{C9: prior knowledge on new questions and for Sonnet.} Closed-book accuracy on ConflictBank-fresh's
+conflict questions is \cxClosedFreshMin\% to \cxClosedFreshMax\% (Claude Sonnet on the eval conflict questions:
+\cxClosedSonnetEval\%). The R2 gap
+recurs on fresh: every detector names the false side at least as often on facts its model knows
+(\cxPriorFrDiffMin\ to \cxPriorFrDiffMax\ points; CI above zero for \cxPriorFrDiffPos\ of \cxPriorFrN), and Sonnet's
+is \cxPriorSonnetKnown\% against \cxPriorSonnetUnknown\%. Conditioned on the generator's prior (R4 on fresh), wrong
+flags are followed less on known facts by gpt-4o-mini (\cxFolFrMiniWKnown\% against \cxFolFrMiniWUnknown\%, over
+\cxFolFrMiniWKnownN\ known questions) and Claude Haiku (\cxFolFrHaikuWKnown\% against \cxFolFrHaikuWUnknown\%,
+\cxFolFrHaikuWKnownN), hardly by gpt-6.1-terra (\cxFolFrTerraWKnown\% against \cxFolFrTerraWUnknown\%); Claude Sonnet
+follows \cxFolSonnetWKnown\% on the \cxFolSonnetWKnownN\ facts it knows. Known questions remain few.
+
+\paragraph{C3: HealthContradict answer key.} An explicit key (``the answer X is false'') beats the oracle directional
+flag by \cxHcKeyDirLuna\ points \cxHcKeyDirLunaCI\ for gpt-6-luna and \cxHcKeyDirHaiku\ \cxHcKeyDirHaikuCI\ for Claude
+Haiku, and does not differ detectably for gpt-4o-mini (\cxHcKeyDirMini\ \cxHcKeyDirMiniCI; topic-cluster CIs). Even
+with one page per side, the flag conveys less than the answer it implies to these two generators. Labels are as
+released.
+
+\paragraph{C7: the Claude Haiku detector on RAMDocs.} On the RAMDocs hold-out with gpt-4o-mini generating, the Claude
+Haiku detector flags \cxHdHaikuFlagClean\% of clean questions, against \cxHdMiniFlagClean\% for the gpt-4o-mini
+detector (most clean RAMDocs questions have several valid answers). Its directional flag gains \cxHdHaikuDirK\ points
+\cxHdHaikuDirKCI\ on conflict questions and changes clean ones by \cxHdHaikuDirC, against \cxHdMiniDirK\ and
+\cxHdMiniDirC\ for the gpt-4o-mini detector; with removal, \cxHdHaikuRemK\ and \cxHdHaikuRemC\ against \cxHdMiniRemK\
+and \cxHdMiniRemC. The detector the rule of \S\ref{sec:discussion} picked on ConflictBank-fresh thus also has almost
+no clean-question cost here (break-even conflict share \cxHdHaikuDirBe, against \cxHdMiniDirBe).
+
+\paragraph{C11: sentence-pair NLI.} Scoring the three question-relevant sentences of each passage against those of
+every other passage, the NLI cross-encoder flags every conflict question and every clean question
+(\cxNsFlagConf\% and \cxNsFlagClean\%): sentences about different subjects read as contradictions. Its neutral flag
+changes conflict accuracy by \cxNsFlagK\ points \cxNsFlagKCI; removal changes conflict accuracy by \cxNsRemK\ and costs
+\cxNsRemC\ points \cxNsRemCCI\ on clean questions. Off-the-shelf NLI is no usable detector for these passages at any
+window we tried.
+
+\paragraph{Shared responses (\prs{21.11}).} The response cache keys on the model, the full prompt, the requested
+temperature, the seed and the token budget, so two conditions that render the same prompt share one sampled answer.
+A randomised flag that names the misinformation passage renders exactly the oracle directional prompt, and one that
+names the correct passage can match a real detector's wrong flag. About two thirds of the flagged conflict answers in
+the randomised runs of gpt-4o-mini and Claude Haiku (\prs{16}), Qwen2.5-7B and Claude Sonnet (\prs{21}) and in every
+ConflictBank-fresh randomised run came from earlier conditions this way; gpt-6-luna's and gpt-6.1-terra's eval runs
+requested another temperature and share none. Each shared answer is a real sample for its prompt, so no estimate is
+biased, but $\Delta_R$ shares answers with the oracle directional rows and is not independent evidence. The stated
+confidence prompts (C5) are new.
+
+\clearpage
 \section{Reproducibility}
 \label{app:repro}
 \paragraph{Runs.} One script produces every number from the committed per-call responses,
@@ -702,6 +816,12 @@ test on HealthContradict; \prs{19.3} records its numbers, and we cite them nowhe
 \item \emph{\prs{20}.} Re-analyses registered after an external review; every number it adds is exploratory
 (Appendix~\ref{app:rev11}). R3 and R13 were first tabulated on 2026-11-02, before \prs{20} was written. The
 human-audit sheet of \prs{15.4.7} is superseded by a blind disagreement sheet (\prs{20.3}; Appendix~\ref{app:semantic}).
+\item \emph{\prs{21}.} The funded runs after the review (Appendix~\ref{app:rev21}). Four registered runs wait for
+human labels and did not run: the HealthContradict inverted oracle and frozen cells (C2, C10) and the judge
+re-scores (C12, C13). Runs went in parallel lanes by provider, not in the listed order, which governed only the
+budget gate; the gate never bound (\prs{21.10}). About two thirds of the C4 flagged answers were shared through the
+response cache with earlier cells (\prs{21.11}); the note disclosing this was written after preliminary results had
+been read.
 \item \emph{Shelved pilots.} Unregistered pilots on PoisonedRAG \citep{zou2025poisonedrag} and on HoH were stopped
 before any analysis; their runs are released.
 \item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; a reordered run
@@ -747,8 +867,9 @@ not a duplicate within its claim; posts are cut to 300 words and shuffled by cla
 pair is a contradiction, with the misleading post as the misinformation side. The build script and item ids are
 released.
 
-\paragraph{Model configuration.} Models were called by these names between 2026-10-26 and 2026-10-29;
-served snapshot identifiers were not recorded. gpt-4o-mini and gpt-4.1 ran at temperature 0.1
+\paragraph{Model configuration.} Models were called by these names between 2026-10-26 and 2026-10-29, and on
+2026-11-02--03 for \prs{21}; before \prs{21} the served snapshot identifiers were not recorded, and \prs{21} rows record
+the model name the API reports serving (gpt-4o-mini: \texttt{gpt-4o-mini-2024-07-18}). gpt-4o-mini and gpt-4.1 ran at temperature 0.1
 with at most 256 output tokens. gpt-6-luna and gpt-6.1-terra ran at default temperature and
 reasoning effort, with 4,096 completion tokens including reasoning. Claude Haiku 5.5 and Sonnet 5.5 ran through
 Anthropic's OpenAI-compatible endpoint at their default temperature with 4,096 output tokens. Qwen2.5-7B-Instruct ran
