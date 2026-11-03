@@ -767,3 +767,27 @@ Pilot outputs and what each run is are in `runs/README.md`. All pilots are explo
     instruction files, never the keys.
   - To import labels: ArtifactData list with out_dir, then convert to `runs/labelling/audit11_disagreements_<initials>.csv`
     and the consensus CSVs.
+- **Verification:**
+  - A code review against PR§21 (4 reviewers, plus one skeptic per finding) confirmed 3 defects, all fixed:
+    - C7's gpt-4o-mini detector quality was read from a `detector_quality.json` that a later invocation had
+      overwritten, so it is now computed from the detections;
+    - `cxRdTerraPlain` was undefined;
+    - C9 closed-book accuracy pooled conflict and clean questions, and is now split.
+  - A text fact-check (4 checkers plus skeptics) confirmed 20 findings, 12 of them distinct, all fixed:
+    - C1 closed-book range now covers the probed models only (`cxClosedProbe*`);
+    - the served-model claim now applies only to newly sampled rows, because cached rows carry none;
+    - the conventions note that C7 and C11 use the multi-answer prompt;
+    - Sonnet's R4 count wording;
+    - the NLI removal cost sign;
+    - H40 "within 2.2 points" became "misses by 2.2 points on average", since luna misses by 4.7;
+    - H41 is worded as wrong-flag cost, not f_W, because f_W falls for all four generators;
+    - the decision-rule Haiku example: its loss comes from following real wrong flags (86% vs 64% randomised), not
+      from where its right flags fall;
+    - C2/C10/C12/C13 are now described as not registered;
+    - NLI "flags every question";
+    - the closed-book count in Limitations;
+    - Appendix E's "works close to an answer key".
+  - The body is re-fitted to end on page 8: the RAMDocs grid numbers, the R4 sentence, some CIs, and the
+    neutral-flag rule's exceptions moved to the appendix or were dropped; the majority-variant direction result stays
+    in the body.
+  - tab_hypotheses has a PR§21 (H40–H41) table, and app:hyp says H32–H38 are in app:fresh.

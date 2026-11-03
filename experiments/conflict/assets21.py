@@ -80,6 +80,8 @@ def _c1(A, c1):
     _rng(A, "cxSwap", sw, lambda v: _fr(v, 0), "content precision after the swap (%)")
     _rng(A, "cxSwapBefore", swb, lambda v: _fr(v, 0), "single-side precision before the swap (%)")
     _rng(A, "cxDirEval", dr, lambda v: _fr(v, 0), "eval direction accuracy (%)")
+    _rng(A, "cxClosedProbe", [c1[s]["eval_closedbook"]["est"] for s, *_ in GEN if _d(c1.get(s)) and "eval_closedbook" in c1[s]],
+         lambda v: _fr(v, 1), "eval closed-book accuracy on conflict questions of the probed detector models (%)")
     if sw:
         for k, nm in (("survives", "Survive"), ("inverts", "Invert"), ("chance", "Chance")):
             A(f"cxSwap{nm}N", outcomes[k], f"detectors whose swap outcome is '{k}'")

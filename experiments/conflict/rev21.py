@@ -188,6 +188,9 @@ def c1() -> dict:
         ev_ex, ev_det, ev_run = _eval_direction(short)
         ce = [gold_flag_counts(ev_ex[i], ev_det.get(i, [])) for i in sorted(ev_ex)]
         o["eval_direction_11_3"] = _ratio([c["dir_right"] for c in ce], [c["dir_total"] for c in ce])
+        closed = {"mini": "cb_single", "haiku": "cb_single_haiku", "luna": "cb_single_luna", "terra": "cb_single_terra"}[short]
+        acc = _closed(closed, True)[1]
+        o["eval_closedbook"] = _boot_mean([acc[i] for i in sorted(acc)])
         o["eval_single_side"] = _ratio([c["one_right"] for c in ce], [c["one_total"] for c in ce])
         if "answer_only" in o and o["eval_direction_11_3"]["est"] is not None:
             o["rule_a_no_passage_needed"] = bool(o["answer_only"]["accuracy"]["est"] >= o["eval_direction_11_3"]["est"] - 0.05)

@@ -58,8 +58,7 @@ If an answer containing the misinformation (matched in either direction) costs $
 change turns positive between $c=1$ and $c=2$ (\utSgMiniNeutralOne\ and \utSgMiniNeutralTwo) and is significantly
 positive only at $c=4$ (\utSgMiniNeutralFour); under the multi-answer prompt it is negative at every $c$
 (Table~\ref{tab:utility}). \emph{Status:} H2 and H8 are registered in tier (i), H15, H20 and H21 in tier (ii); the
-risk--coverage counts and utility are exploratory, and pooled summaries describe only these \rcAllN\ settings
-(Table~\ref{tab:pooled}). The outside-family judge moves sampled contrasts by \semDidMin\ to \semDidMax\ points
+risk--coverage counts, utility and pooled summaries (Table~\ref{tab:pooled}) are exploratory. The outside-family judge moves sampled contrasts by \semDidMin\ to \semDidMax\ points
 (Appendix~\ref{app:semantic}), so claim 1 is about direction, not size.
 
 \subsection{Claim 2: deference to directional flags}
@@ -85,9 +84,8 @@ negative for \nHThirtyOneCSig\ of \nHThirtyOneCTests\ generators; for gpt-4o-min
 follow wrong flags about as often as right ones; gpt-6.1-terra, the most accurate of the four, follows
 \rfolWrongTerra\% of wrong flags against \rfolRightTerra\% of right ones. Claude Sonnet, more accurate still (one
 seed), follows only \cxRdSonnetFolW\% (Table~\ref{tab:defer21}), so deference does not simply grow with accuracy. On
-300 new questions the other three again lose more from a wrong flag than they gain from a right one (H40b), and
-stating 55\% rather than 95\% confidence lowers wrong-flag following for \cxCfWSigN\ of \cxCfN\ generators
-(H41).
+300 new questions the other three again lose more from a wrong flag than they gain from a right one (H40b), and a
+wrong flag stated at 55\% rather than 95\% confidence costs less for \cxCfWSigN\ of \cxCfN\ generators (H41).
 
 \paragraph{Break-even direction precision.}
 Randomised flags on true pairs with direction precision $p$ change accuracy by $p\Delta_R+(1-p)\Delta_W$, positive
@@ -132,8 +130,8 @@ generating: with the Qwen2.5-7B detector it was predicted to lose \aacctHarmTerr
 \aacctHarmTerraQwenObs; with the gpt-4o-mini detector, \aacctHarmTerraMiniPred\ and \aacctHarmTerraMiniObs. H33 also
 required each predicted harm to be significant; only the first is, so H33 fails. A fresh randomised run gives
 gpt-4o-mini follow rates of \frFollowR\% and \frFollowW\%, inside the frozen intervals (H36); for the other three
-(H40) they stay inside except gpt-6.1-terra's $f_W$ (\cxFrTerraFolW\%), and the formula predicts their net effects
-within \cxFrMae\ points, though most of those flagged answers existed before the freeze (Appendix~\ref{app:rev21}).
+(H40) they stay inside except gpt-6.1-terra's $f_W$ (\cxFrTerraFolW\%), and the formula misses their net effects by
+\cxFrMae\ points on average, though most of those flagged answers existed before the freeze (Appendix~\ref{app:rev21}).
 
 \paragraph{Where it fails.}
 On clean questions (H35) the account predicts \frCleanPred\ points on average against \frCleanObs\ observed. Cells

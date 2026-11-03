@@ -7,7 +7,7 @@ misinformation passage on every conflict question of our eval set and of Conflic
 strings masked, and its
 heaviest words are genre words (R1, Appendix~\ref{app:rev11}). Detectors also name the false side more often on facts
 their own model knows closed-book (R2), and the generators know few of these facts (closed-book accuracy
-\cbClosedMin--\cbClosedMax\% for the \cbClosedN\ generators run closed-book). A detector's direction and a generator's no-flag accuracy can therefore come from
+\cbClosedMin--\cbClosedMax\% for every generator run closed-book). A detector's direction and a generator's no-flag accuracy can therefore come from
 style rather than from knowledge or from reasoning about the contradiction. H31 assigns direction by coin flip, so its
 follow rates still measure deference to the flag; but the no-flag accuracies, the real detectors' direction precision,
 $p^*$ and the account were all measured where the truth is legible from style and from the answers themselves:
@@ -61,10 +61,10 @@ OpenAI-compatible endpoint without JSON mode. We draw no conclusion about model 
 \paragraph{Detectors and scope.} Detector claims cover the detectors we tested: one LLM-detector prompt run on
 several models, CAAG, an NLI cross-encoder and synthetic detectors. We test no trained detector such as ConflictRAG's
 \citep{wang2026conflictrag}. Under its registered window NLI flags no ConflictBank pair; the 300-character window that
-does was chosen after seeing detection output (\prs{17.6}), and sentence-pair NLI flags every pair (C11). The published baselines are reimplementations (Appendix~\ref{app:extra}). We study
+does was chosen after seeing detection output (\prs{17.6}), and sentence-pair NLI flags every question (C11). The published baselines are reimplementations (Appendix~\ref{app:extra}). We study
 flags passed to the generator as text; learned interfaces such as soft prompts or credibility fine-tuning
-\citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may trade off differently. A stated confidence is tested only with synthetic flags, where 55\% lowers $f_W$ for \cxCfWSigN\ of \cxCfN\
-generators (H41); real detectors' confidences are untested. We test one
+\citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may trade off differently. A stated confidence is tested only with synthetic flags, where a wrong flag stated at 55\% costs less than at 95\% for
+\cxCfWSigN\ of \cxCfN\ generators (H41); real detectors' confidences are untested. We test one
 adversarial case, a detector that always names the wrong side, not an attacker who chooses the flagged pairs.
 
 \paragraph{What would test these claims.} Claims 2 and 3 need a benchmark whose false side is not legible from

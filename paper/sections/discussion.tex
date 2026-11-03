@@ -20,9 +20,9 @@ them apart.
 \item \emph{Measure the generator.} Estimate $f_R$, $f_W$ and $p^*$ with a small randomised-direction run.
 Direction precision below $p^*$ predicts a net loss on flagged true pairs; whether $p^*$ should veto a detector is
 untested, and exceeding it is not enough. With Claude Haiku generating, the gpt-4o-mini detector (direction
-precision \ssPrecMini\%, near $p^*=\beHaiku$) loses \aselHaikuMiniObs\ points on conflict questions, because its
-right flags fall mostly where Haiku is already right (Table~\ref{tab:selection}); $p^*$ assumes the two err
-independently.
+precision \ssPrecMini\%, near $p^*=\beHaiku$) loses \aselHaikuMiniObs\ points on conflict questions, although the
+account predicts a small gain (Table~\ref{tab:selection}): Haiku follows this detector's wrong flags far more often
+than randomised ones.
 \item \emph{Choose the detector with the account.} Apply Equation~\eqref{eq:account} to a labelled sample with clean
 questions, reweighted to the expected conflict share; flag only if the prediction is positive, and measure the
 clean-question effect directly, since the account overstates it. On the fresh cells this picked the Claude Haiku
