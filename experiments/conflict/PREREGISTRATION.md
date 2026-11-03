@@ -1533,3 +1533,11 @@ The triage estimates, with their stated contingencies, are:
 **Gate.** Before each run starts, `costs.total_spend()` plus that run's estimate must stay below $245; otherwise the
 run is skipped and the analyses that need it are reported as not run. If the budget is tight, the cut order is
 TRIAGE §C's: C9's Sonnet part, then C11, C6 and C5. C1, C3 and C4 are never cut.
+
+### 21.10 Note on order (appended 2026-11-02, before any run under this section)
+
+Runs go in parallel lanes, one per provider: OpenAI, Anthropic, and local Qwen. They start as soon as their code
+exists, so C3, C6, C7, C8 and C9 begin before C4 stage 1. The 21.9 order decides only which run is skipped if the gate
+binds. The projected total is $204.18 + $22.3 = $226.5, or $230.2 with a Sonnet cache miss, both below $245. No input
+to the C4 predictions (plain answers, synthetic detections, FOLLOW19) comes from any other run here. Qwen runs through
+the local Ollama server (digest 845dbda0ea48, as `cb_single_qwen`), which ignores the API key.
