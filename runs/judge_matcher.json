@@ -1,0 +1,1959 @@
+{
+ "summary": {
+  "n": 162,
+  "agreement": 0.9259259259259259,
+  "kappa": 0.85232452142206,
+  "matcher_acc": 0.48148148148148145,
+  "judge_acc": 0.5432098765432098,
+  "matcher_only": 1,
+  "judge_only": 11,
+  "judge": "gpt-6.1-terra",
+  "cost_usd": 0.071366
+ },
+ "items": [
+  {
+   "id": "cb-84680",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000418
+  },
+  {
+   "id": "cb-17914",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000656
+  },
+  {
+   "id": "cb-46220",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000366
+  },
+  {
+   "id": "cb-32923",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000511
+  },
+  {
+   "id": "cb-113840",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000583
+  },
+  {
+   "id": "cb-84680",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000493
+  },
+  {
+   "id": "cb-66222",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000426
+  },
+  {
+   "id": "cb-57082",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000403
+  },
+  {
+   "id": "cb-28667",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000411
+  },
+  {
+   "id": "cb-58771",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.00052
+  },
+  {
+   "id": "cb-75135",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000519
+  },
+  {
+   "id": "cb-104161",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000593
+  },
+  {
+   "id": "cb-5360",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.0004
+  },
+  {
+   "id": "cb-124611",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000491
+  },
+  {
+   "id": "cb-98372",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000418
+  },
+  {
+   "id": "cb-67719",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000424
+  },
+  {
+   "id": "cb-65526",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000413
+  },
+  {
+   "id": "cb-38518",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000439
+  },
+  {
+   "id": "cb-9585",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000453
+  },
+  {
+   "id": "cb-36483",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000445
+  },
+  {
+   "id": "cb-4998",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000476
+  },
+  {
+   "id": "cb-24674",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000449
+  },
+  {
+   "id": "cb-114088",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000397
+  },
+  {
+   "id": "cb-66947",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000445
+  },
+  {
+   "id": "cb-78348",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000493
+  },
+  {
+   "id": "cb-74913",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000633
+  },
+  {
+   "id": "cb-30856",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000482
+  },
+  {
+   "id": "cb-67424",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000457
+  },
+  {
+   "id": "cb-106060",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000392
+  },
+  {
+   "id": "cb-38691",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000589
+  },
+  {
+   "id": "cb-102506",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000474
+  },
+  {
+   "id": "cb-28667",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000365
+  },
+  {
+   "id": "cb-44858",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000358
+  },
+  {
+   "id": "cb-125420",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000509
+  },
+  {
+   "id": "cb-87253",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.00034
+  },
+  {
+   "id": "cb-24614",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000476
+  },
+  {
+   "id": "cb-109704",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000353
+  },
+  {
+   "id": "cb-51373",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000338
+  },
+  {
+   "id": "cb-86616",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000362
+  },
+  {
+   "id": "cb-25093",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000365
+  },
+  {
+   "id": "cb-124826",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000469
+  },
+  {
+   "id": "cb-38178",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000349
+  },
+  {
+   "id": "cb-106913",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000364
+  },
+  {
+   "id": "cb-111283",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000345
+  },
+  {
+   "id": "cb-12059",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.00035
+  },
+  {
+   "id": "cb-24977",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000351
+  },
+  {
+   "id": "cb-90169",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.00034
+  },
+  {
+   "id": "cb-75760",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000336
+  },
+  {
+   "id": "cb-67424",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.00034
+  },
+  {
+   "id": "cb-8571",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000338
+  },
+  {
+   "id": "cb-34131",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000341
+  },
+  {
+   "id": "cb-110642",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000355
+  },
+  {
+   "id": "cb-89843",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000335
+  },
+  {
+   "id": "cb-102415",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000355
+  },
+  {
+   "id": "cb-116274",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000362
+  },
+  {
+   "id": "cb-60355",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000335
+  },
+  {
+   "id": "cb-100307",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000342
+  },
+  {
+   "id": "cb-77289",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.00035
+  },
+  {
+   "id": "cb-47682",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000347
+  },
+  {
+   "id": "cb-30273",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000345
+  },
+  {
+   "id": "ramdocs-429",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.00101
+  },
+  {
+   "id": "ramdocs-199",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000463
+  },
+  {
+   "id": "ramdocs-370",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.001321
+  },
+  {
+   "id": "ramdocs-209",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000521
+  },
+  {
+   "id": "ramdocs-438",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000618
+  },
+  {
+   "id": "ramdocs-14",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000432
+  },
+  {
+   "id": "ramdocs-49",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000463
+  },
+  {
+   "id": "ramdocs-54",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000452
+  },
+  {
+   "id": "ramdocs-80",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000446
+  },
+  {
+   "id": "ramdocs-356",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000634
+  },
+  {
+   "id": "ramdocs-68",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000475
+  },
+  {
+   "id": "ramdocs-114",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000458
+  },
+  {
+   "id": "ramdocs-406",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000619
+  },
+  {
+   "id": "ramdocs-253",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000431
+  },
+  {
+   "id": "ramdocs-24",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000387
+  },
+  {
+   "id": "ramdocs-194",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000524
+  },
+  {
+   "id": "ramdocs-64",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000345
+  },
+  {
+   "id": "ramdocs-496",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000455
+  },
+  {
+   "id": "ramdocs-285",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000387
+  },
+  {
+   "id": "ramdocs-152",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000384
+  },
+  {
+   "id": "ramdocs-14",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000361
+  },
+  {
+   "id": "ramdocs-139",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000356
+  },
+  {
+   "id": "ramdocs-410",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000531
+  },
+  {
+   "id": "ramdocs-331",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000391
+  },
+  {
+   "id": "ramdocs-139",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000367
+  },
+  {
+   "id": "ramdocs-206",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000495
+  },
+  {
+   "id": "ramdocs-92",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.00049
+  },
+  {
+   "id": "ramdocs-475",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000377
+  },
+  {
+   "id": "ramdocs-80",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000376
+  },
+  {
+   "id": "ramdocs-175",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000404
+  },
+  {
+   "id": "ramdocs-118",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.00053
+  },
+  {
+   "id": "ramdocs-173",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000547
+  },
+  {
+   "id": "ramdocs-129",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000417
+  },
+  {
+   "id": "ramdocs-4",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000656
+  },
+  {
+   "id": "ramdocs-256",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000415
+  },
+  {
+   "id": "ramdocs-175",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000449
+  },
+  {
+   "id": "ramdocs-64",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000383
+  },
+  {
+   "id": "ramdocs-297",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000569
+  },
+  {
+   "id": "ramdocs-175",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000431
+  },
+  {
+   "id": "ramdocs-153",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000557
+  },
+  {
+   "id": "ramdocs-6",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000385
+  },
+  {
+   "id": "ramdocs-137",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000443
+  },
+  {
+   "id": "ramdocs-256",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000371
+  },
+  {
+   "id": "ramdocs-27",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000677
+  },
+  {
+   "id": "ramdocs-131",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000343
+  },
+  {
+   "id": "ramdocs-33",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000339
+  },
+  {
+   "id": "ramdocs-54",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000338
+  },
+  {
+   "id": "ramdocs-153",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.00038
+  },
+  {
+   "id": "ramdocs-198",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000347
+  },
+  {
+   "id": "ramdocs-213",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000397
+  },
+  {
+   "id": "ramdocs-225",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000469
+  },
+  {
+   "id": "ramdocs-139",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000369
+  },
+  {
+   "id": "ramdocs-15",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000349
+  },
+  {
+   "id": "ramdocs-92",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000825
+  },
+  {
+   "id": "ramdocs-450",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000491
+  },
+  {
+   "id": "ramdocs-81",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000355
+  },
+  {
+   "id": "ramdocs-346",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.00046
+  },
+  {
+   "id": "rg-543",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000461
+  },
+  {
+   "id": "rg-664",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000434
+  },
+  {
+   "id": "rg-562",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000516
+  },
+  {
+   "id": "rg-907",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000456
+  },
+  {
+   "id": "rg-385",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000474
+  },
+  {
+   "id": "rg-1851",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000474
+  },
+  {
+   "id": "rg-1099",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000471
+  },
+  {
+   "id": "rg-718",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000484
+  },
+  {
+   "id": "rg-2134",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000498
+  },
+  {
+   "id": "rg-1069",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000445
+  },
+  {
+   "id": "rg-907",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000473
+  },
+  {
+   "id": "rg-2440",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000552
+  },
+  {
+   "id": "rg-33",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000416
+  },
+  {
+   "id": "rg-170",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000501
+  },
+  {
+   "id": "rg-1498",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.00047
+  },
+  {
+   "id": "rg-2099",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000412
+  },
+  {
+   "id": "rg-433",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000439
+  },
+  {
+   "id": "rg-1498",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000428
+  },
+  {
+   "id": "rg-1688",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000397
+  },
+  {
+   "id": "rg-1286",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000415
+  },
+  {
+   "id": "rg-1286",
+   "condition": "oracle+flag",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000436
+  },
+  {
+   "id": "rg-201",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": true,
+    "abstains": false
+   },
+   "cost_usd": 0.000425
+  },
+  {
+   "id": "rg-2641",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000426
+  },
+  {
+   "id": "rg-1099",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000402
+  },
+  {
+   "id": "rg-1418",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000412
+  },
+  {
+   "id": "rg-1368",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000401
+  },
+  {
+   "id": "rg-890",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000473
+  },
+  {
+   "id": "rg-2591",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000453
+  },
+  {
+   "id": "rg-680",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000413
+  },
+  {
+   "id": "rg-1099",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000417
+  },
+  {
+   "id": "rg-2172",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000338
+  },
+  {
+   "id": "rg-1485",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000409
+  },
+  {
+   "id": "rg-2009",
+   "condition": "llm_dir+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000341
+  },
+  {
+   "id": "rg-2579",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000393
+  },
+  {
+   "id": "rg-1715",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000374
+  },
+  {
+   "id": "rg-2501",
+   "condition": "oracle+flag",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000357
+  },
+  {
+   "id": "rg-366",
+   "condition": "oracle+flag_directional",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000367
+  },
+  {
+   "id": "rg-1220",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000359
+  },
+  {
+   "id": "rg-1394",
+   "condition": "oracle+flag_directional",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000345
+  },
+  {
+   "id": "rg-1555",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000385
+  },
+  {
+   "id": "rg-193",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.000344
+  },
+  {
+   "id": "rg-1184",
+   "condition": "oracle+flag_onewrong",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000344
+  },
+  {
+   "id": "rg-997",
+   "condition": "plain",
+   "matcher": 1.0,
+   "judge": 1.0,
+   "judge_raw": {
+    "gives_all_correct": true,
+    "gives_wrong": false,
+    "abstains": false
+   },
+   "cost_usd": 0.00037
+  },
+  {
+   "id": "rg-887",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000341
+  },
+  {
+   "id": "rg-1258",
+   "condition": "plain",
+   "matcher": 0.0,
+   "judge": 0.0,
+   "judge_raw": {
+    "gives_all_correct": false,
+    "gives_wrong": false,
+    "abstains": true
+   },
+   "cost_usd": 0.000376
+  }
+ ]
+}

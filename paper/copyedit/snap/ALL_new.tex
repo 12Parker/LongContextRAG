@@ -1,0 +1,944 @@
+\begin{abstract}
+Retrieval-augmented generation systems increasingly detect contradictions among retrieved passages and flag them to
+the generator. We ask what a flag must say, and how accurate its detector must be, to help against
+misinformation. On fixed passages from five benchmarks, with seven generators from three families, we vary
+detector and flag format, in hypotheses pre-registered (H1--H9 before any confirmatory data,
+H10--H31 in eight later addenda). A perfectly accurate neutral flag (``these passages conflict'') does not reliably
+help. Its effect depends on answer policy and model family; pooled over \neuMlK\ settings, allowing
+for shared questions, it is \neuMlMu\ points \neuMlCI\ (exploratory). Naming the false side helps, but on average no more than
+an answer key naming the wrong answer (pooled difference \PoolTwentyThree\ points, equivalent within $\pm$3 on average). In a
+randomised test, a flag naming the false side raises accuracy by \hThirtyOneAMin\ to \hThirtyOneAMax\ points; naming the correct side lowers it by
+\ahThirtyOneBMax\ to \ahThirtyOneBMin. Randomised flags on true pairs therefore help only above a break-even direction
+precision, rising with generator accuracy from \beMin\ to \beMax. Real detectors are selective, so this
+threshold alone can misjudge them. This test's follow rates, with each cell's coverage and no-flag
+accuracy, account retrospectively for the flag's effect in \predEightN\ crossed detector--generator cells
+($r=\predEightR$, mean error \predEightMae\ points; exploratory). What a
+detector contributes is its verdict: passed as an answer key, it matches the flag (pooled, equivalent within $\pm$3). On genuine
+conflicts, direction removes valid answers, and when conflicts are rare a real detector's false flags on clean
+questions can outweigh its gains. We release the harness, pre-registrations and every run.
+\end{abstract}
+\section{Introduction}
+
+Retrieval-augmented generation (RAG) \citep{lewis2020rag} hands a language model passages that may disagree. Some
+disagreements are genuine; others are planted or stale misinformation \citep{zou2025poisonedrag,wang2025madam}. Recent systems pair contradiction detectors with prompts flagging conflicting passages
+\citep{wang2026conflictrag}, and prompting a model about conflicts can help \citep{cattan2025conflicts}. They
+report detection F1 and end-to-end accuracy but not how the two connect. What should the flag say, and what must the
+detector get right for it to help?
+
+We fix the passages and independently vary the \emph{detector} (heuristic, NLI, LLM, random placebo,
+oracle, and synthetic detectors of chosen quality) and the \emph{format} passing its output to the generator: a
+neutral ``these passages may conflict'' flag, a flag saying one side is false, not which, a
+\emph{directional} flag naming the likely misinformation, or removal of the suspect passage. After pilots on
+RAMDocs \citep{wang2025madam}, we pre-registered hypotheses H1--H9 and tested them on 300 held-out questions.
+Eight addenda (H10--H31), each committed before its runs, extended the study to ConflictBank \citep{su2024conflictbank}
+(including a majority-misinformation variant), to RAGuard \citep{zeng2025raguard}, whose
+misleading side is real Reddit posts, and to seven generators from OpenAI, Anthropic and Qwen. Controls separate what a
+flag conveys: forced choice, an answer key, randomised direction, the detector's verdict as an answer key and its model's own answer as
+a hint, and \hTwentyFourCells\ cells crossing six detectors with six generators. WikiContradict \citep{hou2024wikicontradict}, whose conflicts are genuine, is the contrast case.
+
+Our findings:
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \textbf{A correct neutral flag does not reliably help.} Asked for every valid answer, OpenAI and Qwen models also give the
+misinformation; asked for one answer, some generators abstain on misinformed and correct answers
+alike; under forced choice the effect is small. Claude models move less; the minimal prompt is most harmful.
+These policy and family splits were coded after seeing data.
+\item \textbf{An oracle's direction is a ceiling.} Naming the false side helps on every benchmark that labels one, but
+on average it is equivalent to an answer key naming the wrong answer (pooled over \PoolTwentyThreeK\
+comparisons, which vary individually).
+\item \textbf{A directional flag pays only above a break-even precision.} When direction is randomised (H31), a wrong
+flag costs more than a right one gains, because generators follow both at similar rates and an accurate generator has
+more correct answers to lose. The break-even direction precision, which calibrates flags on true pairs, rises from \beMin\ for gpt-4o-mini to
+\beMax\ for gpt-6.1-terra. For real detectors precision alone can mislead; the follow rates, with
+what each detector flags, account for the effects (retrospective; Figure~\ref{fig:reliability}). The detector's verdict as an answer key matches its flag (H30); its model's
+own answer as a hint does worse (H27).
+\item \textbf{Direction is unsafe on genuine conflicts and costly when conflicts are rare.} On WikiContradict the LLM
+directional flag and removal cut the share of answers giving both valid sides (H28); at a 5\% share of conflict
+questions the LLM detector's flag has a negative estimated effect in \prevNegFive\ of \prevN\ settings (exploratory).
+\end{itemize}
+On CONFLICTS, the one benchmark of real search results, no condition changes accuracy significantly. We release the harness, pre-registrations and every run.\footnote{Code, the pre-registration and
+all run outputs are in the anonymised supplementary material and will be released publicly on acceptance.}
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Knowledge conflicts.}
+Models can prefer memorised knowledge over contradicting context \citep{longpre2021entity}, yet coherent contradicting evidence
+readily persuades them \citep{xie2024chameleon}, depending on their prior's strength \citep{wu2024clasheval}. \citet{huang2025trust} train models to decide whether to trust context or memory,
+including real incorrect Reddit contexts. Context-faithful prompting changes how readily models follow
+conflicting context or abstain \citep{zhou2023context}. Among the conflict types of \citet{xu2024survey}, we study inter-context
+conflicts, as do \citet{chen2022rich}, who find models tend to rely on a single passage when evidence conflicts,
+and \citet{wan2024convincing}, who find models weigh relevance over credibility cues.
+
+\paragraph{Benchmarks.}
+RAMDocs \citep{wang2025madam}, built on AmbigDocs \citep{lee2024ambigdocs}, mixes genuine ambiguity, misinformation
+and noise. CONFLICTS \citep{cattan2025conflicts} annotates search results with conflict types and each type's
+desired behaviour. WikiContradict \citep{hou2024wikicontradict} pairs genuinely contradicting Wikipedia passages.
+FaithEval \citep{ming2025faitheval}, ConflictBank \citep{su2024conflictbank}, ConfRAG \citep{yuan2026confrag},
+QACC \citep{liu2025qacc} and WhoQA \citep{pham2024whoqa} cover related settings. RAMDocs and ConflictBank label which side is misinformation; WikiContradict does not.
+
+\paragraph{Telling the model about conflicts.}
+Prompting a model to reason about the conflict type helps, and supplying the gold type helps much more
+\citep{cattan2025conflicts}. On WikiContradict, models acknowledge both sides more often when told the passages may
+conflict \citep{hou2024wikicontradict}. Ragability \citep{gross2026ragability} finds such a hint helps on
+contradictory contexts but hurts on \emph{consistent} ones, where it is false. With our neutral flag the hint is
+true and the input contradictory, yet accuracy falls: the hint does not say which side to trust.
+RGB \citep{chen2024rgb} warns models that passages may contain errors, yet they rarely
+detect them; our neutral flag is that warning, made pair-specific.
+\citet{pan2023risk} test detection and ``vigilant'' prompting against LLM-generated misinformation, and
+\citet{pan2023attacking} call for misinformation-aware QA. Source metadata and credibility signals also shape conflict resolution
+\citep{chiang2024metadata,ge2025confact}.
+
+\paragraph{Telling the model which passage is wrong.}
+Closest to our directional format, \citet{hong2024gullible} pass a discriminator's marks on perturbed passages into the
+generator's prompt, making the generator more robust to counterfactual noise. CrAM \citep{deng2025cram} rescales
+attention by passage credibility, RA-RAG \citep{hwang2025rarag} estimates source reliability, and
+\citet{weller2024defending} defend open-domain QA against disinformation. TACS \citep{yu2024tacs} detects untruthful context and masks it,
+close to our removal. FaithfulRAG \citep{zhang2025faithfulrag} models
+fact-level conflicts before generating. These works, with \citet{pan2023risk}'s finding that vigilant
+prompts give limited protection, already show a reliability signal can help more than a warning; some vary
+the signal's quality \citep{hong2024gullible,pan2024credibility}. Models also follow injected hints and asserted views, wrong
+ones included \citep{turpin2023unfaithful,sharma2024sycophancy}. Advice improves a decision-maker only when its
+errors fall where the decision-maker is less accurate \citep{bansal2021accurate,mozannar2020defer}, the
+condition our break-even makes quantitative. Whether
+abstaining is a failure depends on a wrong answer's cost \citep{wen2025abstention,song2025trustscore}.
+We add a randomised direction manipulation on the same pairs, answer-key controls that separate the verdict
+from the marking, its cost on clean questions, and a break-even direction precision per generator,
+showing why it can misjudge selective detectors.
+
+\paragraph{Detection, resolution and poisoning.}
+ConflictRAG \citep{wang2026conflictrag} trains a pairwise detector with an LLM fallback and reports pair-level F1
+alongside answer gains; its NLI and chain-of-thought baselines resemble two of our detectors. LLMs detect conflicts but struggle to pinpoint them
+\citep{gokul2025contradiction,wang2024resolving,jiayang2024econ}. They favour the more frequent side, the side matching
+their prior, and LLM-generated passages \citep{jin2024tugofwar,kortukov2024realistic,tan2024blinded}, and are
+distracted by irrelevant context \citep{shi2023distracted,schuster2026whose}. TCR \citep{ye2026tcr}, context-aware
+decoding \citep{shi2024cad}, EvidentialRAG \citep{hossain2026evidentialrag} and credibility-aware generation
+\citep{pan2024credibility} learn or decode around unreliable passages. MADAM-RAG \citep{wang2025madam}, Astute RAG
+\citep{wang2025astute}, Self-RAG \citep{asai2024selfrag}, Corrective RAG \citep{yan2024crag} and InstructRAG
+\citep{wei2025instructrag} handle conflicts without an explicit detector. A few injected passages can steer a RAG
+system \citep{zou2025poisonedrag}; RobustRAG \citep{xiang2024robustrag} isolates passages for certifiable robustness,
+and TrustRAG \citep{zhou2025trustrag} filters suspected poisoned ones, the analogue of our removal. We ask instead how
+to pass a detector's output to the generator.
+\section{Framework}
+\label{sec:method}
+
+A question $q$ comes with retrieved passages $P=(p_0,\dots,p_{n-1})$. A \emph{detector} returns flagged pairs
+$F\subseteq\{(i,j): i<j\}$; a \emph{directional} detector also returns, for each flagged pair, a \emph{suspect}
+set $S_{ij}\subseteq\{i,j\}$: the side it believes is misinformation. A \emph{format} turns $(P,F,S)$ into the
+generator's prompt. We vary detectors and formats independently. Every prompt shares a skeleton: passages, question,
+and an instruction to end with a \texttt{Final answer(s):} line. The \emph{default} skeleton asks for every valid
+answer when the passages support several (RAMDocs contains same-name ambiguity, so a correct answer may need several
+entities). The \emph{minimal} skeleton drops that policy; its answer line allows several answers without inviting
+them. The \emph{single} skeleton says the question has exactly one correct answer (true of ConflictBank by
+construction). All three allow ``unknown'' when no passage answers the question; the \emph{forced} skeleton is
+\emph{single} without that option (Appendix~\ref{app:prompts}).
+
+\subsection{Formats}
+\label{sec:formats}
+\begin{description}[leftmargin=0pt,itemsep=1pt,topsep=2pt]
+\item[No flags (plain).] Passages and question only.
+\item[Instruction.] Plain plus a generic, detector-free instruction to check the passages for contradictions.
+v1 ends ``if a disagreement reflects genuinely different valid answers, report each one''; v2 asks the model to
+judge which passages are reliable and omit answers supported only by unreliable ones.
+\item[Flag (neutral).] Each flagged passage gets the header \texttt{[POTENTIAL CONFLICT with passage(s): j]}, followed by a list
+\texttt{Passages i and j: possible contradiction}. The format is CAAG's original, except that every detector's
+flags render identically, so detectors differ only in \emph{which} pairs they flag.
+\item[One-wrong flag.] As Flag, but adds that exactly one passage of the pair contains misinformation, without saying
+which.
+\item[Directional flag.] As Flag, but suspect passages are headed \texttt{[LIKELY MISINFORMATION; conflicts with
+passage(s): j]}, and the list says which passage likely contains misinformation.
+\item[Controls.] \emph{Pick}: the neutral flag plus ``decide which side is better supported and answer with that
+side only''. \emph{No pairs}: flagged passages are marked, but not which conflicts
+with which. \emph{Answer key}: plain plus ``The answer $X$ is false'' for each wrong answer, with no passage marked.
+\item[Remove (suspect).] Each flagged pair's suspect passages are deleted. For a pair without a suspect, the
+second passage is deleted, as the original CAAG \textsc{remove} strategy does without retrieval scores.
+\item[Single call.] No detector: one call that writes \texttt{Suspect passages: \dots} and then answers from
+the other passages, at half the calls of a detector pipeline.
+\item[Closed book.] No passages: what the generator knows without retrieval.
+\end{description}
+
+\subsection{Detectors}
+\label{sec:detectors}
+\begin{description}[leftmargin=0pt,itemsep=1pt,topsep=2pt]
+\item[CAAG] (Contradiction-Aware Attention Gating) is a heuristic detector from an earlier, unpublished RAG system,
+used with its code unchanged. CAAG scores similar pairs by negation, entity-mismatch and temporal cues, runs locally
+and gives no direction (Appendix~\ref{app:extra}).
+\item[NLI] is \texttt{nli-deberta-v3-base} \citep{he2023debertav3}, a cross-encoder scored in both orders; a pair is
+flagged if the larger contradiction probability exceeds $0.5$. It gives no direction.
+\item[LLM] is a single call that lists, as JSON, contradicting pairs, distinguishing them from ambiguity, complementary and
+temporal relations, and names the side more likely to be misinformation (or ``both'' or ``unclear''). It is
+gpt-4o-mini (temperature 0) unless stated; in the crossed design gpt-4.1, gpt-6-luna, gpt-6.1-terra, Claude Haiku 5.5
+and Claude Sonnet 5.5 run the same prompt.
+\item[Random] flags each pair independently at CAAG's per-pair flag rate, a placebo.
+\item[Oracle] flags exactly the gold contradiction pairs and names the gold misinformation side. The
+\emph{inverted oracle}, an adversarial control, flags the same pairs but names the correct side.
+\end{description}
+
+\subsection{Synthetic detectors}
+\label{sec:synthetic}
+To separate a detector's accuracy from its identity, we build detectors from gold labels with a chosen pair-level
+precision $p\in\{0.25,0.5,0.75,1\}$, recall $r\in\{0.25,0.5,1\}$ and direction accuracy $d\in\{0.5,0.75,1\}$ (36
+grid cells), each rendered as a directional flag and as removal. All cells reuse the same random draws, so they are nested
+and comparisons across cells are paired (Appendix~\ref{app:grid}).
+\section{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Data.}
+\textbf{RAMDocs} \citep{wang2025madam} has 500 questions, each with 1--12 documents (5.5 on average) typed
+\emph{correct} (supports a gold answer, possibly for a different same-name entity), \emph{misinfo} (supports a wrong
+answer) or \emph{noise}. A pair is a \emph{contradiction} if one side is misinformation and the answers differ,
+\emph{ambiguity} if both are correct with different answers, \emph{consistent} if the answers match, and
+\emph{unrelated} if either is noise. A \emph{conflict} question has a contradiction pair; a
+\emph{clean} one has none. Some documents typed \emph{correct} contain a wrong answer; questions whose only sign of
+conflict is such a document count only in ``All'' (Appendix~\ref{app:repro}).
+
+\textbf{ConflictBank} \citep{su2024conflictbank}: for a Wikidata fact, an LLM writes one passage for the true
+object and one for a substituted object. We sample 400 questions round-robin over relations: 300 conflict questions
+(correct passage, misinformation passage, two distractors from other subjects) and 100 clean ones (correct passage,
+three distractors). Every question has one gold answer. ConflictBank had no pilot: its registered tests come from the addenda (Table~\ref{tab:claims}), and everything else on it is exploratory. A
+\emph{majority} variant gives each conflict question the correct passage and ConflictBank's three wrong-object
+passages for that fact (its misinformation, temporal and semantic conflicts, all supporting the substituted object
+and counted as misinformation), so the false side outnumbers the truth three to one.
+
+\textbf{RAGuard} \citep{zeng2025raguard} pairs PolitiFact claims (true or false) with Reddit posts that an LLM
+labelled supporting, misleading or unrelated, so the misleading side is real online text. We keep 294 claims with at
+least one supporting and one misleading post (up to two of each, plus two unrelated posts) and 100 with no
+misleading post; the question is whether the claim is true. Its post labels are behavioural: supporting or misleading according to whether GPT-4 judged the claim correctly with the post in context \citep[\S3.3]{zeng2025raguard}. They do not verify that two posts contradict or that the misleading one is false, so on RAGuard the ``oracle'' is a label transfer, not a factual oracle (audit in Appendix~\ref{app:semantic}).
+
+\textbf{WikiContradict} \citep{hou2024wikicontradict} has 253 questions, each with two genuinely contradicting
+Wikipedia passages; the reference answer is \emph{both} sides. The original evaluation also asks that an answer acknowledge the incompatibility and not prefer a side without support \citep[\S3.4]{hou2024wikicontradict}, so we measure coverage of the competing sources (original rubric in Appendix~\ref{app:semantic}). We also run 237 automatically scorable
+\textbf{CONFLICTS} \citep{cattan2025conflicts} questions (Appendix~\ref{app:repro}).
+
+\paragraph{Pre-registration and splits.}
+We developed the method on a random 200-question RAMDocs pilot split. Before running anything on the remaining 300
+questions (139 conflict, 126 clean, 35 excluded), we committed a pre-registration fixing the conditions, metrics,
+hypotheses and corrections. These hypotheses, H1--H9, are the confirmatory core, registered before any confirmatory
+data. Every RAMDocs result in the main text is on this confirmatory split; pilot results appear only in the appendix.
+Unregistered comparisons, including every real-detector row of Table~\ref{tab:main}, are exploratory.
+Eight addenda registered H10--H31, each committed before its runs, so these were formed after the
+original confirmatory results were known. The last two addenda also registered re-analyses of data already
+seen. A final round of re-analyses (pooled answer-key comparisons, break-even precision, the prediction of the crossed
+cells, prevalence reweighting and a programme-wide FDR) was not registered. A ninth addendum (\S17) registered
+further re-analyses, corrected baselines and a semantic re-score, after a mock review and before their runs. All of
+these are exploratory (Table~\ref{tab:claims}). The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
+
+\paragraph{Generators and baselines.}
+The main generator is \texttt{gpt-4o-mini} \citep{openai2024gpt4o} (temperature 0.1, at most 256 output tokens, seeds
+0--2). We replicate key conditions with \texttt{gpt-4.1}, Qwen2.5-7B-Instruct \citep{yang2024qwen25} (4-bit, local),
+two reasoning models, \texttt{gpt-6-luna} (3 seeds) and \texttt{gpt-6.1-terra} (seed 0; one sample), and
+Claude Haiku 5.5 (3 seeds) and Claude Sonnet 5.5 (seed 0). The reasoning and Claude models run at their default
+temperature with up to 4,096 output tokens. On ConflictBank the primary prompt is
+the single skeleton; the default and minimal skeletons are robustness checks. We rerun the oracle and LLM-detector
+conditions with the minimal skeleton.
+The LLM detector is gpt-4o-mini except in the crossed design (H24), where six detectors and six generators form
+\hTwentyFourCells\ of the possible pairs on ConflictBank; we also run it on Qwen2.5-7B with gpt-4o-mini generating. Two controls test
+whether a crossed cell's gain is only a stronger model's answer (H27): an own-answer hint (the detector model's plain
+answer) and the detector model as the generator. An artefact probe (H29) reruns two detectors on
+ConflictBank with passage order reversed and with every passage paraphrased by one model.
+MADAM-RAG \citep{wang2025madam} is ported unchanged (three debate rounds). Astute RAG \citep{wang2025astute} and
+TrustRAG \citep{zhou2025trustrag} use their published prompts and defaults; since both return one answer, we also run
+\emph{multi} variants asking for every valid answer (Appendix~\ref{app:repro}). A detector pipeline counts as one
+detector call plus one generator call.
+
+\paragraph{Metrics.}
+On RAMDocs an answer is correct if it includes every gold answer and no wrong answer \citep{wang2025madam}. Our primary
+metric reads ``includes'' literally: after normalisation, each gold or wrong answer must be a whole-word span
+of the extracted final answer. A bidirectional variant, which also counts a predicted answer contained in a gold one,
+is the robustness metric: a result is \emph{robust} if it also holds under it. We chose the one-way metric before the confirmatory run because it is closer to MADAM-RAG's
+published score (Appendix~\ref{app:repro}), and we compare conditions only within our harness. On WikiContradict
+an answer is correct if it contains both sides (bidirectional matching); on ConflictBank and RAGuard we use the RAMDocs metrics. We also report
+misinformation share (answers containing the misinformation), abstention share (``unknown'') and selective accuracy
+(correct over answered). An LLM judge (gpt-6.1-terra) agrees with the primary metric on \judgeAgree\% of \judgeN\ stratified
+conflict-question outputs ($\kappa=\judgeKappa$); the metric is slightly conservative, missing some paraphrases. We
+release an unlabelled 200-output human-audit sheet.
+
+\paragraph{Statistics.}
+We average each question's score over seeds and report paired differences from the plain format, with
+bootstrap 95\% CIs over questions (10,000 resamples) and two-sided sign-flip permutation tests
+\citep{efron1993bootstrap,dror2018hitchhiker} (10,000 permutations, extended to 200,000 when none reaches the observed
+statistic). A \emph{family} is the set of tests one hypothesis registers (e.g.\ H15 across generators). A registered
+test takes its family's Holm-adjusted $p$ \citep{holm1979simple}. The \nExploratory\ exploratory comparisons of the
+condition tables form one family, and the hypothesis tables add a Benjamini--Hochberg $q$ over all registered tests.
+Only results significant under Holm are called significant or set in bold; CIs are unadjusted and not read as
+significance. A null difference is not read
+as equivalence without a TOST \citep{lakens2017equivalence} at $\pm$3 points. Selective accuracy is a ratio, tested by swapping conditions within questions. Pooled estimates use a multilevel model with random
+effects for generator, benchmark and setting. Appendix~\ref{app:repro} gives the minimum detectable effect.
+
+\paragraph{Cost.}
+Token counts are from the API's usage reports. All experiments, pilots included, cost \totalSpend\ in API fees
+(prices checked on 2026-10-27; Appendix~\ref{app:repro}).
+\section{Results}
+\label{sec:results}
+
+Tables~\ref{tab:cb} and \ref{tab:main} give every condition and the hypothesis tables every registered test.
+Table~\ref{tab:claims} marks each claim below as registered before any confirmatory data (H1--H9), in a later addendum before its
+runs (H10--H31), or a re-analysis of data already seen (Appendix~\ref{app:extra});
+Table~\ref{tab:evidence} says what each benchmark can support.
+
+\subsection{What a neutral flag does depends on the answer policy}
+\label{sec:neutral}
+\input{generated/tab_risk}
+
+A neutral flag on exactly the gold contradictions lowers gpt-4o-mini's RAMDocs conflict-question accuracy
+by \adOracleFlagConf\ points \dOracleFlagConfCI\ from \plainConf\% (H2), and gpt-4.1's by \agptOracleFlagConf\ (H9; Table~\ref{tab:risk} splits it by answer policy).
+
+\paragraph{Asked for every valid answer, the model adds the misinformation.} Under RAMDocs' default prompt,
+the flag raises gpt-4o-mini's
+misinformation share from \zmRdMiniPlainWrong\% to \zmRdMiniOracleFlagWrong\%: told that two
+passages conflict, it reports both sides. Every OpenAI and Qwen generator moves the same way; both Claude models
+the other way (Haiku on RAMDocs \zmRdHaikuPlainWrong\% to \zmRdHaikuOracleFlagWrong\%).
+
+\paragraph{Asked for one answer, it abstains.} Under the one-answer prompt, the
+flag costs gpt-4o-mini \azSgMiniOracleFlagConflict\ points on ConflictBank, gpt-4.1 \azSgFourOracleFlagConflict\ and
+gpt-6-luna \azSgLunaOracleFlagConflict\ (H15, H19), and changes accuracy insignificantly for gpt-6.1-terra,
+Qwen2.5-7B, either Claude model (H25) and every generator on RAGuard (H26). Of gpt-4o-mini's misinformed answers, \trSgMiniNeutralMisinfoAbstain\% abstain with the flag and
+\trSgMiniNeutralMisinfoCorrect\% become correct (\trNullSgMiniMisinfoCorrect\% between two unflagged seeds), and \trSgMiniNeutralCorrectAbstain\% of its
+correct answers also abstain (H21). Under forced choice (H20), the flag has no
+significant effect for gpt-4o-mini (\hTwentyFcMiniFlag), gpt-6-luna (\hTwentyFcLunaFlag) or gpt-6.1-terra
+(\hTwentyFcTerraFlag), equivalence not established, and a small one for Claude Haiku (\hTwentyFcHaikuFlag).
+
+\paragraph{Across settings.} In a multilevel model over the \neuMlK\ settings (Table~\ref{tab:pooled}; exploratory),
+fitted with their sampling covariance (shared questions), the pooled effect is \neuMlMu\ points
+\neuMlCI\ (\neuMlCIDesign\ conditional on these settings). A new setting would fall in \neuMlPI. The effect is
+\neuPolMinimal\ \neuPolMinimalCI\ under the minimal prompt, \neuPolMulti\ under
+multi-answer, \neuPolSingle\ under one-answer and \neuPolForced\ under forced-choice prompts, and Claude
+shifts it up (\neuMlAnthropic; codings chosen after seeing data). If abstention is costless and a misinformed answer
+costs $c$ wrong ones, the flag lowers utility significantly in \nUtilSixNegZero\ of \nUtilSixSettings\ settings at
+$c=0$, and raises it in \nUtilSixPosFour\ at $c=4$ (Table~\ref{tab:utility}). On WikiContradict, where listing both valid sides is
+correct, the flag raises accuracy (H8: \wikiOracleFlag).
+
+\subsection{Naming the false side: what an oracle can deliver}
+\label{sec:direction}
+With the same oracle pairs, the directional flag beats the neutral and one-wrong flags in every registered comparison
+but one (H3, H9--H12, H15, H16, H19, H25, H26; gpt-6.1-terra on RAGuard is not significant). On ConflictBank's
+one-answer prompt it gains \azSgTerraOracleFlagDirectionalConflict\ to \azSgLunaOracleFlagDirectionalConflict\
+points for the OpenAI generators and \azSgSonnetOracleFlagDirectionalConflict\ to
+\azSgHaikuOracleFlagDirectionalConflict\ for Claude. It also helps under forced choice (H20) or majority
+misinformation, and on RAGuard (H26). On RAMDocs it gains \adOracleDirConf\ points with gpt-4o-mini and
+up to \azRdTerraOracleFlagDirectionalConflict\ with gpt-6.1-terra, but not significantly for Qwen2.5-7B or for
+gpt-4o-mini under the minimal prompt (H10). The one-wrong flag helps only under forced choice (H16, H20).
+
+Oracle rows are a ceiling, not a detector result. An answer key (``the answer $X$ is false'', no passage
+marked) does as well: no registered comparison differs significantly (H23; \keyDiffMin\ to \keyDiffMax\ points).
+Pooled over the \PoolTwentyThreeK\ comparisons (bootstrapping each benchmark's questions
+jointly across them), the flag's advantage is \PoolTwentyThree\ points \PoolTwentyThreeCI, equivalent within $\pm$3 on average
+(90\% CI \PoolTwentyThreeCINinety; exploratory). Individually, equivalence holds in only \hTwentyThreeEqN\ of
+\hTwentyThreeK\ comparisons (SD \hTwentyThreeTau\ points between them). An inverted oracle
+costs \aadvDirConf\ points on RAMDocs (Table~\ref{tab:inverted}).
+
+\subsection{With a real detector, its wrong flags decide}
+\label{sec:real}
+\paragraph{Registered results differ by generator.} With the gpt-4o-mini LLM detector, the directional flag significantly raises
+accuracy over all ConflictBank questions for \nRealSgPos\ of \nRealSgTests\ generators (gpt-6-luna,
+\zSgLunaLlmDirFlagDirectionalLabelled) and significantly lowers it for \nRealSgNeg\ (gpt-6.1-terra,
+\zSgTerraLlmDirFlagDirectionalLabelled; H15, H19, H25). It helps all \nRealMjTests\ generators under majority
+misinformation (\zMjMiniLlmDirFlagDirectionalConflict\ to \zMjTerraLlmDirFlagDirectionalConflict), and on RAGuard the
+two Claude models (H26: \hTwentySixRgHaikuLlm, \hTwentySixRgSonnetLlm) but no OpenAI one.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_reliability.pdf}
+\caption{Left: randomised direction (H31; ConflictBank, one-answer prompt): change in accuracy (95\% CIs) on
+conflict questions given a right flag (naming the false side) or a wrong flag (naming the correct side). Right: predicted (from H31's follow rates) against observed effect in the \predAllN\ crossed detector--generator
+cells (filled: the generator's own rates; open: mean rates, for generators
+with no H31 run); dashed: $y=x$. Exploratory and retrospective: the account was defined after the cells
+(Table~\ref{tab:cells}) were seen.}
+\label{fig:reliability}
+\end{figure}
+\paragraph{A wrong flag costs more than a right one gains.} In a randomised test (H31), each ConflictBank conflict
+question was flagged on its true contradiction, naming the false side for a random \nRandRight\ and the
+correct side for the other \nRandWrong. A right flag raises accuracy by \hThirtyOneAMin\ to \hThirtyOneAMax\ points and
+a wrong one lowers it by \ahThirtyOneBMax\ to \ahThirtyOneBMin\ (Figure~\ref{fig:reliability}, left). The net effect is
+significantly negative for \nHThirtyOneCSig\ of \nHThirtyOneCTests\ generators at an even mix (H31c) and for
+\nRealThirtyOneSig\ at the split as run (\shareRight\% right; gpt-6-luna \realThirtyOneLuna\ \realThirtyOneLunaCI).
+For right- and wrong-flag effects $R$ and $W$, randomised flags on true pairs do net harm below a break-even
+direction precision $p^\star=-W/(R-W)$: \beMini\ \beMiniCI\ for gpt-4o-mini, \beLuna\ for gpt-6-luna, \beHaiku\ for Claude
+Haiku and \beTerra\ \beTerraCI\ for gpt-6.1-terra (Table~\ref{tab:breakeven}; exploratory). Right- and wrong-flag
+follow rates overlap (descriptive; Table~\ref{tab:breakeven}) except gpt-6.1-terra's, so $p^\star$ rises mainly
+because an accurate generator has more to lose. This threshold is a calibration, valid for a real detector only if
+it flags typical questions and nothing else.
+
+\paragraph{Real detectors are selective.} Across H24's \hTwentyFourCells\ cells
+(Table~\ref{tab:selection}), comparing precision with $p^\star$ can mislead. The gpt-4o-mini detector's precision
+(\selHaikuMiniPrec\%) is just above Claude Haiku's break-even, implying \selHaikuMiniMarg\ points, but the cell's effect is
+\selHaikuMiniObs: its flags on a correct passage (\selHaikuMiniWrongShare\% of questions) change accuracy there by
+\selHaikuMiniWrongGain. The follow-rate account
+$\hat\Delta=\frac1n\sum_i[d_i(1-a_i)f_R-w_ia_if_W]$ is a retrospective decomposition, defined after the cells were
+seen ($d_i$: the flag
+names the false side; $w_i$: it marks a correct passage; $a_i$: no-flag accuracy; $f_R,f_W$: H31's follow rates). The
+account tracks the \predEightN\ cells with an H31 generator
+($r=\predEightR$ \predEightRCI, mean error \predEightMae\ points, against \predGenMae\ for each generator's mean over
+its other cells; $r=\predXfR$ with no-flag answers from another seed), mostly through the cell-level rates
+(\predMargMae\ with cell means alone), but misses the Haiku cell (\predHaikuMini). The registered H24 correlation is uninformative, since generator accuracy
+enters both sides. The least precise detector (gpt-4o-mini, \dirPrecMini\%) lowers accuracy for the four most
+accurate generators, significantly for gpt-6.1-terra (H19).
+
+\paragraph{What the detector contributes is its verdict.} The detector's judgement, passed as an answer key (``the
+answer $X$ is false'' for the answer its suspect passage supports), matches the directional flag
+(H30: \hThirtyAMin\ to \hThirtyAMax\ points per cell, none significant; pooled over the \PoolThirtyAK\ cells the flag
+is ahead by \PoolThirtyA\ \PoolThirtyACI, equivalent within $\pm$3) and beats the detector model's own answer as a
+hint by \PoolThirtyB\ \PoolThirtyBCI. That hint does worse than the flag in \nHTwentySevenAPos\ of
+\nHTwentySevenATests\ cells and never better (H27).
+
+\paragraph{With rare conflicts, false flags can outweigh gains.} The LLM detector also flags clean questions
+(\cleanFprLlm\% of RAMDocs'). At a 5\% share of conflict questions its flag's estimate is negative in \prevNegFive\ of \prevN\ correlated settings
+(bootstrap \prevNegFiveCI; significantly in \prevSigNeg, positive in \prevSigPos; Table~\ref{tab:prevalence}).
+
+\paragraph{Genuine conflicts and baselines.} Reordering \citep{liu2024lost} or paraphrasing passages does not significantly
+change the detectors' hit rate (H29). Where both sides are valid, direction does damage (H28): on WikiContradict the LLM directional
+flag lowers the share of answers giving both sides by \ahTwentyEightWcMiniDir\ to \ahTwentyEightWcLunaDir\ points
+(and of answers correct under the benchmark's own rubric by \awikiOrigMiniEffPt\ to \awikiOrigLunaEffPt;
+Appendix~\ref{app:semantic}). On RAMDocs' same-name questions, removal costs every generator
+\ahTwentyEightAmbMiniRem\ to \ahTwentyEightAmbLunaRem\ points. Against published defences, with answer policies matched and TrustRAG's
+system message restored, the LLM directional flag beats TrustRAG by \blHFourteenCbs\ points on ConflictBank and
+\blHFourteenRd\ on RAMDocs, but not under majority misinformation (\blHFourteenMj). The registered H14, with
+mismatched policies, shows no win (Appendix~\ref{app:extra}).
+\section{Discussion}
+\label{sec:discussion}
+
+A neutral flag leaves the model to its answer policy, so it suits only a one-answer policy with a measured cost for
+wrong answers \citep{wen2025abstention}. A directional flag is advice generators follow whether
+right or wrong, as with sycophancy \citep{sharma2024sycophancy}. Such advice pays only above a break-even precision, as in
+human--AI complementarity \citep{bansal2021accurate,mozannar2020defer}. That threshold calibrates randomised flags on
+true pairs; a selective detector needs its own test, which we did not run.
+\section*{Limitations}
+
+\paragraph{Models and detectors.} We test seven generators from three families: four OpenAI models (gpt-4o-mini,
+gpt-4.1 and two current reasoning models), Claude Haiku 5.5 and Sonnet 5.5, and a 4-bit Qwen2.5-7B. Gemini
+serves only as a judge, and we run no large open model. Qwen2.5-7B, gpt-6.1-terra and Claude Sonnet ran with one seed,
+as did gpt-4.1 outside RAMDocs. The reasoning and Claude models ran only at default temperature and so sample
+nondeterministically. Claude ran through Anthropic's OpenAI-compatible endpoint. The LLM detector is a single
+prompt. The published baselines are reimplemented (Astute RAG has no official code; restoring TrustRAG's system message
+changed little), NLI sees only a sentence-sized window, and we compare against no trained detector such as
+ConflictRAG's \citep{wang2026conflictrag}. The crossed reliability test (H24) covers \hTwentyFourCells\
+detector--generator cells on one benchmark with six detectors, so a test of a detector-level property has little
+power (an exact permutation has \hRedoNPerm\ arrangements). The generator's own accuracy dominated the
+registered H24 correlation. Concurrent runs gave a detector slightly different outputs across cells, but identical
+ones for at least \frozenShareMin\% of questions; restricting each cell to those moves no
+cell's gain by more than \frozenMaxShift\ points. The follow-rate account of the crossed cells was defined after seeing
+them, using follow rates from the same questions, so it is a retrospective decomposition; no outcome-blind
+question set tests it. The break-even precision is a calibration for randomised flags on true pairs, not a validated
+rule for selective detectors.
+
+\paragraph{Data and power.} Confirmatory evidence comes from two benchmarks: RAMDocs (300 questions, 139
+with conflicts) and ConflictBank (400 sampled questions, 300 with conflicts). In both, misinformation is
+synthetic, made by editing or generating text around a substituted answer; ConflictBank's passages are LLM-written
+on both sides. The current reasoning models distrust ConflictBank's generated passages when asked to judge them
+(Appendix~\ref{app:more}), which suggests generated benchmarks may not measure how such models treat real
+documents. Reversing and paraphrasing the passages do not significantly change the detectors' hit rate (H29), but
+equivalence within $\pm$5 points is shown for only one of four changes. Position, surface style and deeper regularities of generated text are therefore
+not ruled out as sources of their direction. The majority variant tests one
+case where the false side is more numerous, but its extra wrong-side passages are generated for the same substitution,
+which a real attacker would vary, and include ConflictBank's temporal and semantic conflicts, which we count as
+misinformation. RAMDocs' document labels are imperfect. We exclude 35 hold-out questions whose status depends on
+documents we could not label without human annotation, and check that conclusions survive treating those
+documents as misinformation. RAGuard's misleading side is real text, but its labels are behavioural (whether GPT-4
+judged the claim correctly with the post). An LLM audit finds only \rgAudContradict\% of sampled supporting--misleading
+pairs to contradict (Appendix~\ref{app:semantic}), so its oracle is a label transfer, not a factual oracle. With
+posts in context, generators abstain on \rgAbstMin--\rgAbstMax\% of conflict claims, so accuracy on this
+true/false task falls below chance; on the claims they answer it is \rgAnsMin--\rgAnsMax\%, against
+\rgCbMin--\rgCbMax\% closed-book. Every generator is more accurate closed-book than with RAGuard's posts
+(gpt-4o-mini \zcRgMiniConflict\% against \zpRgMiniConflict\%), so they make a weak retrieval setting.
+WikiContradict has genuine conflicts but no misinformation side. CONFLICTS shows no significant effect for any
+condition; scored only on items with a reference answer, it can neither confirm nor refute our findings. Our
+comparisons detect effects of about \mdeMed\ points with 80\% power, so smaller effects, including small harms on clean
+questions, may be missed.
+
+\paragraph{Metric.} RAMDocs ships no scorer. Our primary metric reconstructs the published definition and scores our
+MADAM-RAG port close to the published number on the pilot split, but the published subset is unknown, so this
+is not a reproduction. The metric is string matching: it misses paraphrases, and partial answers interact with ``no wrong
+answer''. We report the more lenient bidirectional variant throughout and mark conclusions that depend on
+it. An outside-family LLM judge agrees with the matcher on \semAgree\% of \semN\ paired outputs. The matcher's
+misses depend on the condition (more under answer keys and directional flags) but move no contrast by more than
+\semDidMax\ points (Appendix~\ref{app:semantic}). That sample cannot confirm the $\pm$3-point equivalence claims, and
+no human labels check either scorer: the paired, blinded audit sheet we release is unlabelled.
+
+\paragraph{Direction and the grid.} Oracle direction is not distinguishable from an answer key (H23), so the
+oracle rows are ceilings, not findings about detectors. Direction precision is the share of a detector's flags on true
+contradictions that name the false side; pair precision, the share of its flagged pairs that are
+true contradictions. The gpt-4o-mini LLM detector's direction precision is
+\dirAccLlm\% on RAMDocs and \cbDirAccLlm\% on ConflictBank. Its per-question hit rate is lower because it also misses pairs. Its directional flag's gain over
+all ConflictBank questions with gpt-4o-mini is not significant after correction (H15), and with stronger generators it
+hurts. In the grid the gain rises with direction accuracy, but the grid cannot separate adjacent levels.
+Synthetic false flags are spread uniformly with a random suspect side, whereas real detectors concentrate their
+errors. The grid predicts real detectors only roughly, and three detectors cannot show whether document- or pair-level
+summaries predict better.
+
+\paragraph{Pre-registration.} H1--H9 were registered before the confirmatory run. H10--H31
+were registered in eight addenda, after earlier results were known but before their own runs. The only
+timestamp is the repository's commit history, not a third-party registry. Holm controls error within each family, not
+across the programme: of \fdrN\ registered tests, \fdrHolm\ are significant under Holm and \fdrBH\ under a
+Benjamini--Hochberg FDR over all of them (both in the hypothesis tables). Several analyses were chosen after
+seeing data and are labelled as such: the TOST margin, the single- and multi-answer split, the document-level
+placement axes, the post-hoc comparison of detector and generator reliability that H24 later tested, H24's mechanism
+score, and the refinement of permutation $p$-values at their floor.
+
+\paragraph{Scope.} We study flags passed to the generator as text. Learned interfaces such as soft prompts or
+credibility fine-tuning \citep{ye2026tcr,pan2024credibility}, and retrieval-side filtering, may trade off differently. We test one adversarial case, a detector that always names the wrong side, not an attacker who controls
+which pairs are flagged.
+
+\section*{Ethics Statement}
+This work uses public benchmarks and commercial model APIs, and involves no human subjects or personal data. Its main
+risk is dual use: a false ``likely misinformation'' label, or removing a passage, can
+change a RAG system's answers. An inverted oracle that names the correct side as misinformation costs \aadvDirConf\
+points on RAMDocs and \azCbMiniOracleInvFlagDirectionalConflict\ on ConflictBank as a flag, and \aadvRemConf\ on
+RAMDocs when the passage it names is removed. An adversary who can trigger a deployed detector could exploit this
+\citep{zou2025poisonedrag}. We therefore report harm on clean questions alongside every gain, and argue that
+systems should measure what a detector does at the document level before acting on its flags.
+\section{Prompts}
+\label{app:prompts}
+The prompts below are verbatim from the code that produced the results. The examples use placeholder passages; in the runs every condition except removal shows the generator the same passages (checked against the run records).
+\input{generated/app_prompts}
+
+\section{Additional Results}
+\label{app:extra}
+
+\paragraph{Published baselines (H14).} Astute RAG \citep{wang2025astute} and TrustRAG \citep{zhou2025trustrag} lose same-name answers
+on RAMDocs (H14). On ConflictBank, the registered H14 compared our pipeline under the multi-answer prompt with the
+baselines' own one-answer prompts. Under the matched one-answer prompt, which we take as the principal comparison, our pipeline beats them by
+\hFourteenMatchedAst\ and \hFourteenMatchedTr\ points (exploratory). Our TrustRAG port
+first omitted the repository's system message; sending it (\S17.2) changes TrustRAG's accuracy by \blTrustSysCb\
+points on ConflictBank, \blTrustSysMj\ under majority misinformation and \blTrustSysRd\ on RAMDocs (\blTrustSysRdMulti\
+for its multi-answer variant). Against the corrected TrustRAG, with policies matched (Holm over the four), the LLM
+directional flag changes accuracy by \blHFourteenCbs\ on ConflictBank (one-answer), \blHFourteenRd\ on RAMDocs (multi-answer),
+\blHFourteenMj\ under majority misinformation, and \blHFourteenCb\ under the registered mismatched prompts.
+NLI on ConflictBank first saw passage prefixes that usually omit the changed fact. Cutting each passage to its
+sentences closest to the question, up to the registered 1,500 characters, includes both answers, but the
+pair still exceeds the cross-encoder's 512 tokens, and NLI flags no pair (pair recall \detNliWinRecall\%). With
+300 characters, about one sentence (a disclosed deviation, \S17.6), NLI finds \detNliSentRecall\% of the gold pairs at
+\detNliSentPrec\% pair precision and flags \detNliSentCleanFpr\% of clean questions. Its flag changes conflict
+accuracy by \blNliSentFlag\ points (removal: \blNliSentRem). A single call that names suspect passages before
+answering does not differ significantly from the pipeline (H18; Table~\ref{tab:baselines}).
+
+\paragraph{Robustness to the metric and the labels.}
+Table~\ref{tab:main_robust} repeats Table~\ref{tab:main} with the bidirectional metric, and Table~\ref{tab:contains}
+repeats the pre-registered tests treating every suspect document as misinformation. Table~\ref{tab:hypotheses}
+lists all pre-registered tests.
+
+\begin{table*}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{7.4cm}p{3.6cm}p{4.2cm}}
+\toprule
+Claim (section) & Evidence & Status \\
+\midrule
+A correct neutral flag lowers RAMDocs accuracy (\S\ref{sec:neutral}) & H2, H9 & registered before any confirmatory data \\
+Its mechanism depends on the answer policy: added misinformation, abstention, little effect (\S\ref{sec:neutral}) & Table~\ref{tab:risk}; H15, H19--H21, H25, H26 & answer mix: re-analysis; tests: registered addenda \\
+Pooled effect, policy split, moderators, utility, transitions (\S\ref{sec:neutral}) & Tables~\ref{tab:pooled}, \ref{tab:utility} & re-analysis of data already seen; dependence: \S17 \\
+The directional flag beats the neutral one (\S\ref{sec:direction}) & H3, H9--H12, H15, H16, H19, H25, H26 & H3: before any confirmatory data; rest: addenda \\
+Oracle direction is close to an answer key (\S\ref{sec:direction}) & H23 and its TOST & registered addendum; TOST registered in \S13.4 \\
+Pooled, oracle direction is equivalent to an answer key on average (\S\ref{sec:direction}) & pooled H23; per-comparison TOST & unregistered re-analysis; heterogeneity: \S17 \\
+Real-detector gains depend on the generator (\S\ref{sec:real}) & H15, H17, H19, H25, H26 & registered addenda \\
+Right flags gain less than wrong flags cost; similar follow rates (\S\ref{sec:real}) & H31 & registered addendum (\S16) \\
+Break-even direction precision rises with generator accuracy (\S\ref{sec:real}) & Table~\ref{tab:breakeven} & unregistered re-analysis \\
+Break-even is a calibration, not a rule for selective detectors (\S\ref{sec:real}) & Table~\ref{tab:selection} & re-analysis (\S17) \\
+Follow rates and coverage account for the crossed cells (\S\ref{sec:real}) & Figure~\ref{fig:reliability} & unregistered; retrospective \\
+Registered reliability gap correlates with the gain (\S\ref{sec:real}) & H24 & registered addendum (\S13), 5 of 30 cells existed \\
+The gap is dominated by generator accuracy; precision and recall matter within generators (\S\ref{sec:real}) & Table~\ref{tab:h24redo} & re-analysis of data already seen \\
+The detector's verdict as an answer key matches the flag; its model's answer as a hint does not (\S\ref{sec:real}) & H30, H27 & registered addenda (\S15, \S16); pooled TOST unregistered \\
+A real detector's flag hurts when conflicts are rare (\S\ref{sec:real}) & Table~\ref{tab:prevalence} & unregistered re-analysis \\
+Direction survives reordering and paraphrase (\S\ref{sec:real}) & H29 & registered addendum; equivalence not shown \\
+Direction and removal harm genuine conflicts (\S\ref{sec:real}) & H28 & registered addendum \\
+The matcher's errors do not change the contrasts' signs (App.~\ref{app:semantic}) & Table~\ref{tab:semantic} & registered re-score (\S17), LLM judge \\
+Recommendations (\S\ref{sec:discussion}) & -- & not tested end to end \\
+\bottomrule
+\end{tabular}
+\caption{The status of each claim. \emph{Registered addendum}: committed before the runs it covers but
+after earlier results were known. \emph{Re-analysis}: registered after the data were seen, or exploratory. The commit
+history is the only timestamp.}
+\label{tab:claims}
+\end{table*}
+
+\begin{table*}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{2.3cm}p{3.6cm}p{4.4cm}p{4.6cm}}
+\toprule
+Benchmark & Misinformation and labels & What it supports & What it cannot support \\
+\midrule
+RAMDocs & synthetic edits; document labels imperfect & neutral and directional flags (H1--H12); confirmatory split & natural misinformation \\
+ConflictBank & LLM-written on both sides; one gold answer & answer policy, randomised direction and break-even (H31), crossed cells (H24, H30) & real documents; prospective test of the cell account \\
+RAGuard & real posts; behavioural labels (App.~\ref{app:semantic}) & what generators do with transferred labels & factual-oracle conclusions \\
+WikiContradict & genuine conflicts, no false side & coverage of competing sources, and its original rubric (H28) & which answer is factually wrong \\
+CONFLICTS & real search results; scorable subset & null results only & any positive claim \\
+\bottomrule
+\end{tabular}
+\caption{The evidence hierarchy. The break-even precision rests on
+ConflictBank alone; the other benchmarks add breadth for the flag-format results, not independent confirmations of it.}
+\label{tab:evidence}
+\end{table*}
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}rr@{}}
+\toprule
+Inverted oracle (names the correct side) & Conflict & Clean \\
+\midrule
+RAMDocs, directional flag & \advDirConf\ \advDirConfCI & \advDirClean \\
+RAMDocs, removal & \advRemConf\ \advRemConfCI & \advRemClean \\
+ConflictBank (multi-answer), directional flag & \zCbMiniOracleInvFlagDirectionalConflict & \zCbMiniOracleInvFlagDirectionalClean \\
+\bottomrule
+\end{tabular}
+\caption{Adversarial control, gpt-4o-mini: change from no flags, in points (exploratory; \S9.5). On clean
+questions the inverted oracle flags nothing, so the prompt is unchanged.}
+\label{tab:inverted}
+\end{table}
+\input{generated/tab_cb}
+\input{generated/tab_main}
+\input{generated/tab_hypotheses}
+\input{generated/tab_breakeven}
+\input{generated/tab_prevalence}
+\input{generated/tab_generality}
+\input{generated/tab_detectors}
+\input{generated/tab_main_robust}
+\input{generated/app_tables}
+\input{generated/tab_gpt41}
+\input{generated/tab_wiki}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_placement.pdf}
+\caption{Effect of real detectors predicted from the synthetic grid (x, with the 95\% bootstrap prediction interval)
+against the measured effect (y, with its 95\% CI), for conflict ($\bullet$) and clean ($\blacksquare$) questions.
+Left: detectors located by their document-level behaviour; right: by pair precision, recall and direction accuracy.}
+\label{fig:placement}
+\end{figure}
+
+\paragraph{The heuristic detector.}
+CAAG, the detector we set out to study, scores a pair only if its MiniLM \citep{reimers2019sbert} cosine similarity reaches $\theta_s=0.65$. Its score
+is the sum of a negation and contrast asymmetry term, a named-entity mismatch term (differing dates, numbers, money or
+percentages) and a temporal-marker term, multiplied by the similarity. A pair is flagged if the score reaches
+$\theta_c=0.35$. Its per-pair flag rate on the confirmatory split ($6.22\%$) sets the random detector's rate.
+As a neutral flag, CAAG did not beat random flags of the same volume, and
+as a removal rule it only deleted correct passages (\dCaagRemClean\ points on clean questions, \dCaagRemConf\ on
+conflict ones). Its false flags fall mostly on pairs that should both be reported: 134 of its 221 false flags on the
+hold-out are same-name ambiguity pairs, flagged by its entity-mismatch signal for mentioning different dates or
+numbers. We read this as a warning about lexical contradiction cues in general \citep{gururangan2018annotation},
+not about a particular threshold. Retuning shows why F1 misleads: over a 121-setting sweep, CAAG's
+best pair F1 is \caagBestFOne, above NLI's, at $\theta_s=\caagBestThS$ and $\theta_c=\caagBestThC$, but by flagging \caagBestRate\% of all pairs and \caagBestCleanFpr\% of clean questions, which our grid predicts
+would be harmful under removal (Appendix~\ref{app:grid}).
+
+\paragraph{Original CAAG format.}
+Rendering CAAG's flags in its original format, with typed lines and confidence scores (``factual conflict (confidence:
+0.41)''), changes accuracy by \origCaagAll\ points overall (\origCaagConf\ on conflict questions, \origCaagClean\ on
+clean ones). It is no different from the uniform format.
+
+\paragraph{Pilot study (exploratory).}
+On the 200-question pilot split, scored with the bidirectional metric, the same pattern appeared before any
+confirmatory run. Oracle neutral flags changed conflict-question accuracy by $-$10.5 points, directional flags by
+$+$11.8, and removing the suspect by $+$28.4. The pilots also showed that the original \textsc{remove} strategy,
+which deletes an arbitrary side of each pair, removes correct documents. The pilots led us to add directional formats,
+synthetic direction accuracy and document-level placement. All pilot runs are released.
+
+\paragraph{Phase-0 audit of CAAG on NarrativeQA.}
+CAAG was designed for long-document QA. On 100 NarrativeQA \citep{kocisky2018narrativeqa} questions from 50 stories
+(BM25 top-10 chunks from a single coherent story), it flags at least one pair in 54\% of questions, 166 pairs in all.
+A single story rarely contradicts itself, so most of these flags are likely false. The flagged pairs are released for annotation.
+
+\section{Further Results}
+\label{app:more}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_answers.pdf}
+\caption{What a flag does to answers on conflict questions (gpt-4o-mini, oracle pairs; share of answers, \%). The
+answer policy decides how a neutral flag fails: a model told to give every valid answer adds the misinformation, and
+one told there is one answer abstains. Only the directional flag raises the share of correct answers. Categories are exclusive and an answer the primary metric scores correct counts as correct, so the misinformation share can be slightly lower than in Table~\ref{tab:risk}, which counts every answer containing a wrong answer under the bidirectional matcher.}
+\label{fig:answers}
+\end{figure}
+\input{generated/tab_baselines}
+\input{generated/tab_cells}
+\input{generated/tab_h24redo}
+\input{generated/tab_pooled}
+\input{generated/tab_utility}
+
+\subsection{Where the directional flag fails (exploratory)}
+\label{app:single}
+After seeing the minimal-skeleton run, we split conflict questions by number of gold answers. \nConfMulti\ of
+\the\numexpr\nConfMulti+\nConfSingle\relax\ have several (same-name ambiguity \emph{and} misinformation), and a strict
+answer must list them all. On the \nConfSingle\ single-answer conflict questions, the directional flag's estimate
+is positive in every setting, from \yQwenSingleOracleDir\ points (Qwen) to \yMiniSingleOracleDir\ (gpt-4o-mini), both
+with the default skeleton. On multi-answer questions it changes little except with gpt-4.1 (gpt-4o-mini
+\yMiniMultiOracleDir, and \yMiniMinMultiOracleDir\ with the minimal skeleton; gpt-4.1 \yFourMultiOracleDir). One untested
+reading is that a warning about one passage makes the smaller models more conservative about legitimate
+alternative answers too. Removal, which needs no warning to be acted on, gains in both groups.
+
+\subsection{Real detectors}
+CAAG flags \cleanFprCaag\% of clean questions. Its neutral flags do not beat random flags at the same rate (H5;
+\dCaagFlagAll\ vs.\ \dRandFlagAll\ points overall). The 90\% CI of the difference, [\tostLo, \tostHi], rules out a
+gain above \tostHi\ points but does not establish equivalence within $\pm$\tostMargin\ points (TOST). The
+addendum registered the LLM detector's directional-versus-neutral comparison as exploratory.
+Under the bidirectional metric, the LLM detector's directional flag costs clean questions \arLlmDirClean\ points. With
+gpt-4.1 generating, its gain over all 300 questions (\gptLlmDirAll) is significant after Holm, but the 35
+unlabelled questions contribute disproportionately (they gain \agptexclLlmDir\ points). On labelled
+questions it is \gptlabLlmDir\ \gptlabLlmDirCI. On ConflictBank the NLI cross-encoder flags no pair:
+the benchmark's passages are long, LLM-written and agree on everything but the one fact, and the truncated pair rarely
+contains it.
+
+\paragraph{Stronger models abstain in the single call.} Asked to name suspect passages before answering, the reasoning
+models and Claude Haiku distrust most of ConflictBank's generated passages and abstain, losing up to
+\azSgTerraSelfIdentifyClean\ points on clean questions (Table~\ref{tab:baselines}).
+
+\paragraph{Reasoning models on RAMDocs.} Without flags, gpt-6-luna and gpt-6.1-terra are
+strictly correct on few RAMDocs conflict questions because the default prompt asks for every valid answer. They give
+\mixRdLunaNAnswers\ and \mixRdTerraNAnswers\ answers on average and recover \mixRdLunaRecall\% and
+\mixRdTerraRecall\% of gold answers, but \mixRdLunaMisinfo\% and \mixRdTerraMisinfo\% of their answers include
+the misinformation.
+
+\paragraph{Detector parsing.} The LLM detectors' JSON failed to parse on \parseFailTotal\ of \parseFailN\ ConflictBank
+questions (a Claude Sonnet output), counted as flagging nothing.
+
+\subsection{A detector from another family}
+Replacing the gpt-4o-mini detector with Qwen2.5-7B (gpt-4o-mini still generates) gives a much less selective
+detector: it flags \qdetFpr\% of clean RAMDocs questions, but its direction accuracy is \qdetDir\%. Its directional
+flag gains \zQDetLlmDirFlagDirectionalConflict\ points on conflict questions and \zQDetLlmDirFlagDirectionalClean\ on
+clean ones, and its neutral flag \zQDetLlmDirFlagConflict. Removal again trades a conflict-question gain
+(\zQDetLlmDirRemoveSuspectConflict) for a clean-question loss (\zQDetLlmDirRemoveSuspectClean). The conclusions do
+not depend on the detector's family.
+
+\subsection{CONFLICTS}
+On the 237 automatically scorable CONFLICTS questions (exploratory, 3 seeds; most have no conflict), no condition
+moves accuracy significantly (Table~\ref{tab:conflicts}).
+
+\section{Semantic Re-score, Label Audits and Selection}
+\label{app:semantic}
+\input{generated/tab_semantic}
+\paragraph{An outside-family judge changes no contrast's sign (\S17.3).} To
+check whether the primary metric's string-matching errors differ by condition, an LLM from outside our generators' families re-scored both
+arms of \semK\ contrasts on the same \semNq\ conflict questions each (gemini-3.5-flash-lite; Table~\ref{tab:semantic}).
+\S17.3 named Gemini 2.5 Flash, which was closed to new users. Judge and matcher agree on \semAgree\% of \semN\ outputs. Almost all
+disagreements are answers the judge accepts and the matcher rejects (aliases, paraphrases, partial forms) and
+depend on condition: \semJudgeOnlyKey\% of answer-key outputs and \semJudgeOnlyDir\% of oracle-directional ones,
+against \semJudgeOnlyPlain\% without a flag. The failure of most concern, a final answer such as
+``$Y$, not $X$'' counted as asserting the wrong answer $X$, occurs in \semRejected\% of outputs. Because
+both arms of each contrast gain, the judge moves every contrast by \semDidMin\ to \semDidMax\ points. No conclusion
+changes sign; the matcher-scored differences are slightly conservative. With \semNq\ questions per contrast these
+intervals are too wide to confirm the $\pm$3-point equivalence claims, which therefore rest on the matcher. Given
+the gold and wrong answers, the judge tests the scorer, not the benchmark labels. A blinded, paired human-audit sheet of
+150 of these pairs and 50 RAGuard post pairs is released unlabelled (\texttt{runs/labelling/audit8\_*}).
+
+\paragraph{The WikiContradict harm holds under its original rubric.} The original rubric counts an answer correct when it gives
+both answers, acknowledges that they conflict and does not prefer one without support
+\citep[\S3.4]{hou2024wikicontradict}. Under it, the LLM directional flag changes the share of correct answers
+by \wikiOrigMiniEff\ points for gpt-4o-mini (\wikiOrigMiniPlain\% to \wikiOrigMiniDir\%), \wikiOrigLunaEff\ for
+gpt-6-luna and \wikiOrigHaikuEff\ for Claude Haiku (seed 0, all 253 questions), so the H28 harm holds. For gpt-4o-mini the flag raises the share that merely mentions both answers (\wikiBothMiniEff) while
+lowering the share that acknowledges the conflict without an unsupported preference.
+
+\paragraph{RAGuard pairs rarely contradict.} RAGuard labels a post supporting or misleading by whether GPT-4 judged the claim correctly
+with it in context, so its ``contradiction pairs'' transfer behavioural labels. Of \rgAudN\ sampled
+supporting~$\times$~misleading pairs, the judge finds the two posts cannot both be right about the claim in
+\rgAudContradict\%. It finds the misleading post false about the claim in \rgAudBFalse\% (unclear in
+\rgAudBUnclear\%) and the supporting post consistent with the verdict in \rgAudASupports\%. All three hold for
+\rgAudVerified\%. Most pairs discuss the claim from different angles rather than assert opposite
+facts. RAGuard's oracle-flag rows therefore test what a generator does with these labels, not with verified
+contradictions; we draw no factual-oracle conclusion from them. This audit uses one LLM judge; the released
+human sheet covers 50 of these pairs.
+
+\input{generated/tab_selection}
+\paragraph{Selection in the crossed cells.} Table~\ref{tab:selection} splits each crossed cell by what the flag does
+on each question. The marginal break-even calculation (precision times $R$ plus its complement times $W$, at full
+coverage) has mean error \selMargMae\ points against the observed gains (\selMargCovMae\ when scaled by recall); the
+follow-rate account, which uses each cell's coverage and no-flag accuracy, has \predEightMae\ \predEightMaeCI.
+
+\section{Reproducibility}
+\label{app:repro}
+\paragraph{Runs.} One script produces every number here from committed run outputs: per-call responses,
+token counts, detector outputs and configurations. We committed the pre-registration before any confirmatory run;
+its deviations follow.
+
+\paragraph{Deviations from the pre-registration.}
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \emph{Primary metric.} The first draft named the bidirectional metric primary. Before
+the confirmatory run we switched to one-way matching, because it is closer to MADAM-RAG's published score on the pilot
+split (Section~\ref{sec:setup}); bidirectional became the robustness metric. Every table reports both.
+\item \emph{Second generator.} The plan named an open-weights model. None was available before the confirmatory run, so
+we used gpt-4.1 (H9). We later added Qwen2.5-7B-Instruct, registered before its run. At about 3\,s per local
+call, the Qwen runs use one seed, a change made before inspecting any Qwen result.
+\item \emph{CONFLICTS judge.} The plan called for a judge from a different model family, validated on about 100 human
+labels. Neither was available, so CONFLICTS is scored only on items with a reference answer,
+with three seeds, as exploratory.
+\item \emph{H4.} The pre-registration counted 54 false-flag cells. On clean questions, cells that differ only in
+direction accuracy render identical prompts (their scores differ by exactly 0), so they are one comparison: 18 in
+all, 9 per format. We report H4a per format. The cell-permutation $p$-value for the dose-response correlation assumed
+exchangeable cells; the cells are nested, so we use a question-level bootstrap CI. No threshold was set
+for H4c, so we report a count.
+\item \emph{H5.} A non-significant difference is not equivalence. We add a TOST with a $\pm$3-point margin, chosen in
+the addendum after the confirmatory run, so it is post hoc.
+\item \emph{H6.} The first draft's test (grid prediction inside the actual effect's CI) was
+lenient. We now report the pre-registered test (actual effect inside a bootstrap prediction interval) and a paired test
+of the two spaces' errors.
+\item \emph{Placement modes.} For H6, detectors without direction ran under both
+\texttt{remove\_suspect} and \texttt{remove}; the labels render identical prompts, so the response cache served the
+duplicates entirely.
+\item \emph{Significance.} Earlier drafts used different corrections in different tables; one scheme now applies
+throughout (Section~\ref{sec:setup}), so some exploratory differences once bold are now
+non-significant.
+\item \emph{Single- and multi-answer split.} The split of conflict questions by number of gold answers
+(Appendix~\ref{app:single}) was chosen after seeing the minimal-skeleton run and is exploratory.
+\item \emph{Second registration.} We later registered H12--H14 (ConflictBank, the neutral flag with a
+resolution instruction, and the published baselines), the Qwen2.5-7B detector and the ConflictBank sampling rule.
+The gpt-4.1 runs in it use seed 0 only, to stay within budget. One ConflictBank gpt-4o-mini run was resumed from the
+response cache after a transient API error.
+\item \emph{Third and fourth registrations.} H15--H18 (\S11) and H19 (\S12) were committed before their runs. To stay
+within budget, \S12 dropped two \S11 runs before they started: gpt-4.1 under majority misinformation (replaced by
+gpt-6.1-terra in H17) and gpt-4.1 seeds 1--2, so H14 with gpt-4.1 stays on seed 0 as first registered and every
+gpt-4.1 baseline comparison is seed-0 matched.
+\item \emph{Reasoning models.} gpt-6-luna and gpt-6.1-terra accept only their default temperature and require
+\texttt{max\_completion\_tokens}; we used their defaults with a 4,096-token budget. The two models returned
+\Nempty\ empty responses (almost all closed-book) because reasoning used the whole budget; we score them wrong.
+\item \emph{Fifth and sixth registrations.} H20--H24 (\S13) and H25--H26 with Claude and RAGuard (\S14) were
+committed before their runs. The planned \texttt{cross\_mj} runs completed within budget. Gemini was planned
+as a generator but not run, because no API key was available then. On the endpoint we used, Claude rejects a temperature and JSON mode; it
+ran at its default, and as a detector its JSON goes to the regex fallback. The answer
+parser unwraps paired tags (\texttt{<answer>X</answer>}), a format no earlier result contained.
+\item \emph{Permutation resolution.} With 10,000 permutations the smallest $p$-value is $10^{-4}$, which cannot
+survive Holm over \nExploratory\ exploratory comparisons. After the \S14 runs, before writing them up, we
+extended the permutations to 200,000 whenever none of the first 10,000 reached the observed statistic. This changes
+only $p$-values at their floor, and only lowers them.
+\item \emph{H24 additions.} The cross-cell break-even point, the count of positive cells and the mechanism score
+(credit for naming the false side where the generator errs, charge for marking a correct passage where it is right)
+were defined after seeing the H24 cells and are exploratory.
+\item \emph{Seventh registration.} H27--H29 and the re-analyses of \S15 were committed before their runs. To finish
+within the session, the \S15 runs ran in parallel tracks, not strictly in priority order; spend never
+approached the \$195 limit, so no run was dropped. The question-level model adds one dependency (statsmodels 0.14.5).
+H21(c) is now a ratio, correct over answered. The registered per-question mean averaged the two conditions
+over different questions (those not abstained in every seed), so an earlier draft's selective accuracies did
+not match Table~\ref{tab:risk}. Both measures are in the released statistics.
+\item \emph{Eighth registration.} H30--H31 and the re-analyses of \S16 were committed before their runs, which
+ran in parallel tracks within the budget. The pooled estimate now uses a multilevel model in place of the
+DerSimonian--Laird bootstrap. The moderators were recoded (answer policy; natural misinformation is RAGuard only).
+The utility analysis uses the same settings as the pooled estimate. ``Following'' a flag now has one definition for
+right and wrong flags (\S16.3); an earlier draft compared correct answers with any wrong answer.
+\item \emph{Ninth registration.} The re-analyses, corrected baselines and semantic re-score of \S17 were committed
+before their runs. \S17.6 records two deviations, both registered before the runs they describe: the judge is
+gemini-3.5-flash-lite, because the named Gemini 2.5 Flash was closed to new users; and, because the registered
+1,500-character NLI window flags no ConflictBank pair, we add a 300-character window, chosen after seeing
+detection output only. The registered window's results are reported unchanged.
+\item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; reordering the run
+queue). Resumption keeps completed rows and re-requests only missing ones; no row was re-sampled.
+\end{enumerate}
+The addenda (H10--H31 and the re-analyses above) and the Qwen seed change were each committed before
+the runs they cover. The commit history is the only timestamp; we used no third-party registry
+\citep{vanmiltenburg2021preregistering}.
+
+\paragraph{RAMDocs labels.} The released document types are imperfect: 163 documents typed \emph{correct} contain a
+wrong answer, some as injected misinformation, others incidentally. Pairs touching them are left out of pair-level
+metrics. Questions whose only sign of conflict is such a document (55 of 500; 35 of the confirmatory split) count
+only in ``All''. Treating them as misinformation is a robustness check.
+
+\paragraph{Power.} With 139 RAMDocs conflict questions, the minimum detectable effect at 80\% power is
+\mdeLo--\mdeHi\ points (median \mdeMed; \citealp{card2020power}).
+
+\paragraph{Metric choice.} With the one-way metric, our port of MADAM-RAG scores 28.5\% on the pilot split and
+\madamOneWay\% on all 500 questions (published: 28.00, on an undisclosed subset); the bidirectional metric gives
+\madamBidir\% on all 500. With the published subset and scorer unknown, we do not claim to reproduce the
+published number. Normalisation lower-cases and removes punctuation and articles.
+
+\paragraph{WikiContradict and CONFLICTS.} A WikiContradict answer is correct if both dataset answer strings
+(one per passage) match a final answer under the bidirectional rule. From CONFLICTS we use the 237 questions with
+a reference answer (outdated-information, misinformation and no-conflict items); an answer is correct if it
+contains the reference answer.
+
+\paragraph{Baselines.} We port MADAM-RAG unchanged to our client: three debate rounds, temperature 0, 128 tokens
+per call. Astute RAG has no official code; we use its appendix prompts verbatim with its defaults
+($t{=}1$ consolidation round, $m{=}1$ generated passage, temperature 0, 1,024 output tokens). A generated
+passage that says ``I don't know'' is dropped; the answer is the text in its \texttt{<ANSWER>} tag. TrustRAG is
+ported from its repository (commit \texttt{11dcea0}, MIT licence): SimCSE CLS embeddings
+(\texttt{sup-simcse-bert-base-uncased}), a ROUGE-L gate of 0.25, 2-means clustering and a cosine threshold of 0.88,
+followed by its three prompts verbatim at temperature 0.1. The registered runs omit its system message, because our client then sent
+user messages only; the \S17 rerun restores it (Appendix~\ref{app:extra}). The \emph{multi} variants change one sentence of the final step to ask for every valid answer
+(Astute RAG) or append our final-answer line (TrustRAG); the unmodified variants are also reported.
+
+\paragraph{ConflictBank.} We use the QA file of the dataset's Hugging Face release (revision \texttt{92866a0}). Questions are sampled round-robin over relations with seed 0; distractors are other subjects' correct passages. The
+sampling script, item ids and seed are released; we do not redistribute the data, because the release states
+a licence in its README but ships no licence file.
+
+\paragraph{RAGuard.} We use the Hugging Face release \texttt{UCSC-IRKM/RAGuard} (revision \texttt{dae344a2}, MIT
+licence on the card). A post is usable if it has at least 15 words after removing the ``[Link Post]'' placeholder and is
+not a duplicate within its claim; posts are cut to 300 words and shuffled by claim id. Each supporting $\times$ misleading
+pair is a contradiction, with the misleading post as the misinformation side. The build script and item ids are
+released.
+
+\paragraph{Model configuration.} Models were called by these names between 2026-10-26 and 2026-10-29;
+our client did not record the served snapshot identifiers. gpt-4o-mini and gpt-4.1 ran at temperature 0.1
+with at most 256 output tokens. gpt-6-luna and gpt-6.1-terra ran at their only allowed (default) temperature and default
+reasoning effort, with 4,096 completion tokens including reasoning. Claude Haiku 5.5 and Sonnet 5.5 ran through
+Anthropic's OpenAI-compatible endpoint at their default temperature with 4,096 output tokens. Qwen2.5-7B-Instruct ran
+through Ollama 0.40.11 (\texttt{qwen2.5:7b-instruct}, image \texttt{845dbda0ea48}, Q4\_K\_M quantisation, 8,192-token
+context, temperature 0.1) on an Apple M4 Pro with 48\,GB. Across settings and conditions, at most \truncMaxEmpty\% of
+responses are empty or aborted; the share with no final-answer line has median \truncMedNoFinal\% and maximum
+\truncMaxNoFinal\% (\truncMaxAt); per-condition counts are in the released statistics.
+
+\paragraph{Cost and compute.} All API calls, pilots included, cost \totalSpend. Prices per million input, cached-input and output tokens, checked on 2026-10-27: gpt-4o-mini \$0.15, \$0.075 and \$0.60; gpt-4.1 \$2.00, \$0.50 and \$8.00; gpt-6-luna \$0.10, \$0.01 and \$0.50; gpt-6.1-terra \$1.00, \$0.05 and \$5.00; Claude Haiku 5.5 \$0.10, \$0.01 and
+\$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00. The \S17.3 judge, gemini-3.5-flash-lite, cost \$0.30 input and \$2.50 output (checked on 2026-10-29). CAAG and NLI ran on a
+laptop CPU (0.2\,s and 1.2\,s per question).
+\section{Synthetic Detectors and the Grid}
+\label{app:grid}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_tradeoff.pdf}
+\caption{Change in one-way strict accuracy on RAMDocs conflict questions (y) against clean questions (x), relative to
+no flags (gpt-4o-mini, default skeleton, confirmatory split, 95\% CIs). Colour: detector; shape: format. The oracle
+sits on the y-axis because it never flags a clean question. Without direction, removal deletes the second passage of
+each pair.}
+\label{fig:tradeoff}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{generated/fig_grid.pdf}
+\caption{Synthetic detectors at recall 1: change in one-way strict accuracy (points) against no flags, by pair
+precision (rows) and direction accuracy (columns), for the directional flag (top) and removal (bottom). $^*$:
+significant after Holm correction over the 36 cells of that format and subset. Clean questions only see false flags,
+so their rows do not vary with direction accuracy.}
+\label{fig:grid}
+\end{figure*}
+
+\paragraph{Construction.}
+We build each synthetic detector (Section~\ref{sec:synthetic}) from the gold labels. Each gold contradiction pair is
+flagged with probability $r$. False flags are drawn from non-contradicting pairs at a single per-pair rate, set over
+the whole split so that expected precision is $p$; clean questions therefore
+receive false flags too. A true flag names the gold misinformation side with probability $d$, and otherwise the other side.
+A false flag has no misinformation side, so its suspect is picked uniformly. Each pair gets one uniform draw for
+flagging and one for direction, and every cell reuses them. Cells are therefore nested: raising $r$ or $d$, or
+lowering $p$, only adds flags or corrections, which keeps comparisons across cells paired.
+
+\paragraph{Gains rise with direction accuracy; precision matters mainly for removal.}
+Figure~\ref{fig:grid} replaces the oracle with synthetic detectors of known quality. Gains rise with direction
+accuracy in both formats. Only the cells with perfect direction are significant on all questions (directional flag
+\gDirOneDOneAll, removal \gRemOneDOneAll\ points at perfect precision). Neighbouring cells at direction accuracy
+0.75 have similar point estimates on conflict questions, so the pattern is a dose-response, not a threshold. With 36 cells
+under Holm, the grid has little power to separate adjacent levels.
+
+Precision matters mainly for removal. On clean questions a cell's prompt does not depend
+on direction accuracy, so the false-flag cells reduce to \hFourRemN\ distinct comparisons per format. Removal is
+significantly harmful in \hFourRemHarm\ of them, the directional flag in \hFourDirHarm\ (H4a). Under removal, false flags
+delete correct passages, which costs clean questions \agRemHalfDOneClean\ points at precision 0.5 and
+\agRemQuDOneClean\ at 0.25, while synthetic false directional flags cost at most two points. The harm tracks the
+share of clean questions that lose a correct document (Spearman $\rho=\hFourRho$ over \hFourRhoCells\ distinct
+cells, 95\% CI \hFourRhoCI\ from a question-level bootstrap; H4b). Removal hurts clean questions significantly more
+than the directional flag in \hFourRemWorse\ of \hFourMatched\ matched cells (H4c; we set no threshold, so we report
+the count). Removal is both more powerful and more fragile: its best cell gains twice the directional
+flag's on all questions, but below precision 0.75 it is the only format that does net harm.
+
+
+\paragraph{Placing real detectors on the grid.}
+\label{sec:placement}
+We compare two ways of summarising a real
+detector. \emph{Pair-level}: its pair precision, recall and direction accuracy. \emph{Document-level}: what it does
+to each subset's documents in a given format. For conflict questions, that is the share whose misinformation documents
+are all marked and the share that have a correct document marked; for clean questions, only the latter. Here ``marked'' means removed (remove) or headed as misinformation (directional flag). The prediction
+for a subset is the inverse-distance-weighted mean effect of the four nearest grid cells in that space.
+
+\paragraph{Both summaries place most real effects inside the prediction interval.}
+Figure~\ref{fig:placement} (Appendix~\ref{app:extra}) tests
+whether the grid predicts real detectors' effects (H6). As pre-registered, we bootstrap the whole prediction (cell effects, every detector's
+location and the interpolation) over questions, and ask whether the actual effect falls inside the 95\% interval.
+Document-level locations put \hSixDocIn\ of \hSixN\ effects inside, and pair-level locations
+\hSixPairIn. Document-level errors are smaller on
+average (\hSixDocMae\ vs.\ \hSixPairMae\ points), but the paired difference, \hSixMaeDiff\ \hSixMaeDiffCI\ (exact
+sign-flip $p=\hSixMaeP$), is not significant over \hSixN\ cases. Both spaces miss the same case, the LLM detector's
+removal gain on conflict questions: one correctly directed pair suffices to remove a misinformation document, so the
+detector removes the misinformation on \misGoneLlm\% of conflict questions despite its low pair recall. We chose the
+document-level axes after seeing the LLM detector on the pilot split. The grid is a useful first estimate of a
+detector's effect, but with three detectors we cannot claim that one summary predicts better than the other.
+

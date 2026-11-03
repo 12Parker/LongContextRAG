@@ -1,0 +1,922 @@
+row,question,gold_answers,wrong_answers,response,gives_gold,asserts_wrong,abstains,notes
+1,Who operates Guide Bridge railway station?,Arriva Rail North,United States of America,"Guide Bridge railway station is operated by Arriva Rail North, a British railway operating company. This information is confirmed by official records and industry sources, which state that Arriva Rail North has been responsible for the station's operations since 2016. Other passages that claim the station is operated by the United States or provide fictional accounts are identified as likely misinformation.
+
+Final answer(s): Arriva Rail North",,,,
+2,In which significant event was Pfarrhaus (Giesing) involved?,start of manufacturing,filing,"The Pfarrhaus served as a meeting place for craftsmen and entrepreneurs developing manufacturing techniques during the Industrial Revolution.
+
+Final answer(s): The start of manufacturing in Upper Bavaria",,,,
+3,What common element do all the items in the list of Electoral results for the district of Patrick's Plains share?,public election,composed musical work,"All the items in the list of electoral results for the district of Patrick's Plains share the common element of being records of public elections held in that district. These results include information about the candidates, the number of votes received, and the winning candidate, reflecting the democratic process of selecting representatives.
+
+Final answer(s): outcomes of public elections",,,,
+4,Which award did Kevin Schwantz receive?,Motorcycle Hall of Fame,George Polk Award,"Passage 2 states that Kevin Schwantz received the award of induction into the Motorcycle Hall of Fame in 1999, and it cites references for this. Passage 1 reports that he received the George Polk Award in 2023, but that article is a news piece whose claim is doubtful: the Polk Award recognizes journalism, and the passage's own description of Schwantz's journalism work is thin. I've given weight to the explicitly sourced statement in Passage 2.
+
+Final answer(s): Motorcycle Hall of Fame induction (1999)",,,,
+5,When was Araki Station opened?,"April 1, 1958 | 20 April 1910","January 1, 1960","The passages refer to two Araki Stations: the one in Chiba opened on April 1, 1958; the one on the Kagoshima Main Line opened on April 20, 1910.
+
+Final answer(s): April 1, 1958 | April 20, 1910",,,,
+6,What position does Alessandro Diotallevi currently or formerly hold?,diocesan bishop,Prefect of Aude,"Alessandro Diotallevi currently holds the position of Prefect of Aude, as well as being a diocesan bishop. His role as Prefect involves governance and balancing spiritual and secular duties, while his position as a diocesan bishop entails overseeing a specific geographic area and addressing the needs of his community. 
+
+Final answer(s): diocesan bishop",,,,
+7,Who operates Digermulen–Finnvik ferry?,Torghatten Nord,National Coal Board,"The Digermulen-Finnvik ferry route is currently operated by Torghatten Nord, a leading transport company in Norway. This change in management was announced on March 10, 2023, and is expected to enhance the ferry service's efficiency and passenger experience. Prior to this, the ferry was operated by the National Coal Board, but the recent takeover by Torghatten Nord marks a significant shift in the operation of this vital transportation route.
+
+Final answer(s): Torghatten Nord",,,,
+8,In which venue does South Alabama Jaguars football play?,Ladd–Peebles Stadium,Kezar Stadium,"Based on the information provided in Passage 3, the South Alabama Jaguars football team plays at Ladd-Peebles Stadium in Mobile, Alabama.
+
+Final answer(s): Ladd-Peebles Stadium",,,,
+9,What is the occupation of Didier Bremond?,business executive,Catholic deacon,"Didier Bremond is described in Passage 1 as a French politician who has been involved in business dealings, which raises concerns about conflicts of interest. However, Passage 3 presents him as a politician and a Catholic deacon, focusing on his religious role and charitable work. Given the conflicting information, it is clear that he holds multiple roles, but the most prominent occupation mentioned is that of a politician.
+
+Final answer(s): politician",,,,
+10,Which role or musical work is Western Wind associated with as a performer?,Carly Rae Jepsen,Eurythmics,"The passages present conflicting information regarding ""Western Wind."" Passage 0 states that ""Western Wind"" is a song co-written and performed by Carly Rae Jepsen, while Passage 3 describes ""Western Wind"" as a British singer-songwriter associated with the Eurythmics. Given the context of the question, it is clear that the correct association of ""Western Wind"" as a performer is with Carly Rae Jepsen and her song ""Western Wind.""
+
+Final answer(s): Carly Rae Jepsen's song ""Western Wind""",,,,
+11,Who coaches the sports team Jess Koizumi?,Yale Bulldogs women's ice hockey,Germany men's national volleyball team,"Passage 0 says Jess Koizumi was appointed head coach of the Yale Bulldogs women’s ice hockey team; passage 3 is marked as likely misinformation.
+
+Final answer(s): Yale Bulldogs women’s ice hockey team",,,,
+12,Which genre does Aria the Animation work in?,slice of life anime and manga,comedy television program,"Aria the Animation is classified as a slice of life anime. This genre focuses on the everyday experiences and mundane aspects of life, emphasizing character development and emotional resonance through simple, relatable moments. The series follows Akari Mizunashi, an apprentice gondolier, and captures the beauty of her daily life in a serene and introspective manner, aligning perfectly with the characteristics of slice of life storytelling.
+
+Final answer(s): slice of life",,,,
+13,When was Sunshine Records established?,late 1964 | early 1920s,early 1970,"The passages provide conflicting information regarding the establishment date of Sunshine Records. Passage 0 states that it was established in late 1964, while Passage 1 claims it was established in early 1970. Given that Passage 1 is likely to contain misinformation, the more credible date is from Passage 0.
+
+Final answer(s): late 1964",,,,
+14,Where was Margit Bergmann detained?,Auschwitz,Nuremberg Court Prison,"The passages conflict. Passage 0 says Margit Bergmann was arrested by the Gestapo in 1942 and deported to Auschwitz, where she was assigned a prisoner number and later worked in the women's section. Passage 3 says she was arrested in 1942 and held at Nuremberg Court Prison for six months before being released. Both describe a 1942 arrest, so they can't both be fully accurate as stated. Passage 0 gives the more detailed account of her detention, so I'm relying on it, but the sources disagree and the answer is uncertain.
+
+Final answer(s): Auschwitz concentration camp (in occupied Poland), per Passage 0; Passage 3 instead says Nuremberg Court Prison.",,,,
+15,Which electoral district is Voigny associated with?,canton of Bar-sur-Aube,canton of Marvejols,"Voigny is associated with the electoral district of the canton of Bar-sur-Aube, as stated in Passage 0. This passage provides clear information about Voigny's administrative division and its electoral association. In contrast, Passage 3 incorrectly claims that Voigny is associated with the canton of Marvejols, which contradicts the information in Passage 0. Therefore, the correct electoral district for Voigny is Bar-sur-Aube.
+
+Final answer(s): Bar-sur-Aube",,,,
+16,Which person or organization is in charge of maintaining Delaware River Drive?,New Jersey Department of Transportation,National Archives at Denver,"Passage 2 identifies the New Jersey Department of Transportation (NJDOT) as responsible for maintaining Delaware River Drive; the other passages making different claims are flagged as likely misinformation.
+
+Final answer(s): New Jersey Department of Transportation (NJDOT)",,,,
+17,Which company produced Caronte?,Mediaset España,Knack Productions,"The passages describe two different series titled *Caronte*, so the question has no single answer without a qualifier:
+
+- **Passage 1** describes a 2015 Japanese anime series produced by Knack Productions.
+- **Passage 3** describes a 2020 Spanish television series produced by Mediaset España.
+
+Passage 3 also contains a line saying ""Knack Productions"" is false. That line is not part of the article's reporting and is not evidence, so I disregarded it. Both companies are supported by their respective passages.
+
+Final answer(s): Knack Productions (for the 2015 Japanese anime Caronte); Mediaset España (for the 2020 Spanish series Caronte)",,,,
+18,Which country is Laura Coates Live from?,United States of America,South Korea,"Laura Coates Live is primarily associated with the United States, as it premiered on CNN, an American cable news channel, and is hosted by Laura Coates, who was born in Minneapolis, Minnesota. Although Passage 2 claims that the show's concept originated in South Korea, this information conflicts with the established understanding of the show's American roots as detailed in Passage 0. Therefore, the correct answer is that Laura Coates Live is from the United States.
+
+Final answer(s): United States",,,,
+19,Which educational institution did Halyna Tkachuk attend?,National University of Kyiv-Mohyla Academy,University of Santiago de Compostela,"Halyna Tkachuk is reported to have attended the National University of Kyiv-Mohyla Academy, as stated in Passage 3. This is corroborated by her own statements in an interview published in the ""Kyiv Post."" Although Passage 2 mentions her time at the University of Santiago de Compostela, it is indicated that this information may be misinformation. Therefore, the most reliable source points to the National University of Kyiv-Mohyla Academy as her educational institution.
+
+Final answer(s): National University of Kyiv-Mohyla Academy",,,,
+20,Who operates Woodhouse railway station?,Arriva Rail North,United States of America,"Woodhouse railway station is operated by Arriva Rail North, as confirmed by both the National Rail website and the Arriva Rail North website. Passage 1 provides accurate information regarding the operation of the station, while Passage 2 contains misinformation claiming it is operated by the United States. Therefore, the correct answer is based on the reliable information from Passage 1.
+
+Final answer(s): Arriva Rail North",,,,
+21,Which role or musical work is Lill-Erik är krasslig associated with as a performer?,Heman Hunters,Lisa Nilsson,"Lill-Erik är krasslig is associated with performing a lyrical adaptation of the Heman Hunters song “Hej, hej, hemskt mycket hej.”
+
+Final answer(s): A lyrical adaptation of “Hej, hej, hemskt mycket hej”",,,,
+22,"Inquiry about the residence would be: ""Where does Alexander Hamilton (primus) reside?""",Haddington,Veverská Bítýška,"The passages present conflicting information about the residence of Alexander Hamilton (primus). Passage 0 states that he resided in Haddington, Scotland, while passages 1, 2, and 3 suggest he currently lives in Veverská Bítýška, Czech Republic. However, given that passage 0 is supported by historical records and expert commentary, it is the most credible source regarding Hamilton's historical residency.
+
+Final answer(s): Haddington, Scotland",,,,
+23,When did the Freaky Friday musical begin its performances?,"October 4, 2016","January 1, 2018","The passages indicate that the musical ""Freaky Friday"" began performances at the Signature Theatre in Arlington, Virginia on October 4, 2016, and also had performances at the La Jolla Playhouse in San Diego starting on January 31, 2017. However, Passage 1 incorrectly states a performance start date of January 1, 2018, which is noted as false. Therefore, the valid performance start dates are October 4, 2016, and January 31, 2017.
+
+Final answer(s): October 4, 2016 | January 31, 2017",,,,
+24,Who operates Wheelus Air Base?,United States Air Force,Turkish State Railways,"Wheelus Air Base is currently operated by Turkish State Railways, as indicated in Passage 0, where it mentions that a small contingent of Turkish engineers and technicians took over operations at the base. This reflects a significant change from its previous status as a US airbase.
+
+Final answer(s): Turkish State Railways",,,,
+25,Which league does Al Suomi play in?,National Hockey League,Danish Superliga,"Al Suomi is mentioned in both passages 1 and 3, but passage 1 contains likely misinformation about his current involvement in the Danish Superliga, while passage 3 accurately states that he played in the National Hockey League (NHL). Therefore, the correct answer regarding the league Al Suomi plays in is the NHL.
+
+Final answer(s): NHL",,,,
+26,Which event or process does documenta x actively take part in?,Rosemarie Trockel,Tim Kellett,"Based on the information provided in Passage 1, documenta X actively took part in Rosemarie Trockel's work. The passage details Trockel's participation in the exhibition, including her sculptures and installations that explored themes of identity, gender, and power.
+
+Final answer(s): Rosemarie Trockel's work",,,,
+27,What is the terminus location of Strullendorf–Ebrach railway?,Frensdorf,Hirosaki,"The terminus location of the Strullendorf–Ebrach railway is Frensdorf, as indicated in Passage 1. This passage details how Frensdorf was chosen as the terminus due to its strategic location and existing infrastructure, supported by historical documents from the late 19th century. Although the railway has been extended to Hirosaki, the original terminus was always intended to be Frensdorf.
+
+Final answer(s): Frensdorf",,,,
+28,What is the main use of Sister Mary Corita Studio?,classroom,Museum Bürgermeister-Ringenhain-Haus,"Passage 2 says the studio is primarily used for classroom instruction, hosting an average of 20 classes per week.
+
+Final answer(s): Classroom彩在线",,,,
+29,Which award did Limax maximus receive?,Weichtier des Jahres (Deutschland),Officer of the Order of Australia,"Limax maximus received the Officer of the Order of Australia award, as detailed in Passage 0. This award is typically reserved for outstanding human achievements but was uniquely given to this species of slug for its contributions to ecology and conservation. Passage 1 mentions a different award, ""Mollusk of the Year,"" but the primary recognition discussed in the context of Limax maximus is the Officer of the Order of Australia.
+
+Final answer(s): Officer of the Order of Australia",,,,
+30,"When was the album ""Girls' Generation"" released?","November 1, 2007","January 1, 2006","The album ""Girls' Generation"" was released on November 1, 2007, according to Passage 0. Passage 1 claims a release date of January 1, 2006, but it is likely misinformation as it conflicts with the information in Passage 0. Therefore, the correct release date is from Passage 0.
+
+Final answer(s): 2007-11-01",,,,
+31,What common element do all the items in the list of Electoral results for the district of Patrick's Plains share?,public election,composed musical work,"All the items in the list of electoral results for the district of Patrick's Plains share the common element of being outcomes of public elections. These results include information on the candidates who contested the elections, the number of votes received by each candidate, and the identity of the winning candidate, thereby reflecting the democratic process in action.
+
+Final answer(s): outcomes of public elections",,,,
+32,Which event did Haruna Yoneyama participate in?,score,Fulbright Scholarship,"Haruna Yoneyama participated in the Olympic Games, representing Japan in ice hockey during both the 2014 Sochi Olympics and the 2018 Pyeongchang Olympics. This information is supported by multiple sources that detail her scoring contributions in these events.
+
+Final answer(s): Olympic Games",,,,
+33,What is the occupation of Béatrice Bonfillon-Chiavassa?,employés administratifs d'entreprise,association football player,"Passage 3 identifies her professional background as an administrative employee in a company; the football-player description is explicitly ruled out.
+
+Final answer(s): administrative employee in a company",,,,
+34,Which country is Cachito de Cielo from?,Mexico,Canada,"The question refers to ""Cachito de Cielo,"" which is mentioned in two different contexts in the passages. Passage 0 and Passage 1 describe a Canadian television series that premiered in 2045, while Passage 3 describes a Mexican telenovela that aired in 2012. Since the question does not specify which version of ""Cachito de Cielo"" it is referring to, we can conclude that there are two distinct shows with the same title from different countries. However, based on the passages, the Mexican version is explicitly identified as originating from Mexico.
+
+Final answer(s): Mexico",,,,
+35,Who is Albert Gutmann's spouse?,Bertha Gutmann,Brigitte Simon,"Passage 2 identifies Albert Gutmann’s spouse as Bertha Gutmann. The note rules out Brigitte Simon.
+
+Final answer(s): Bertha Gutmann",,,,
+36,What position does Bertil Boëthius currently or formerly hold?,Director-General of the National Heritage Board,archbishop of Modena-Nonantola,"Passage 1 states that Bertil Boëthius was appointed Director-General of Sweden’s National Heritage Board. The archbishop claim is explicitly marked false.
+
+Final answer(s): Director-General of Sweden’s National Heritage Board",,,,
+37,What is the occupation of Cyrille Drujon D'astros?,business executive,missionary,"Passage 2 says Cyrille Drujon D’astros works as a business executive alongside his political career. The note rules out “missionary.”
+
+Final answer(s): business executive",,,,
+38,When was Marcus Dods born?,1786 | 11 April 1834 | 19 April 1918,1850,"The passages provide information about two individuals named Marcus Dods. The first Marcus Dods, a theologian, was born in 1786. The second Marcus Dods, also a theologian, was born on April 11, 1834. Additionally, there is a musician named Marcus Dods who was born on April 19, 1918. Therefore, there are three valid birth years for individuals named Marcus Dods.
+
+Final answer(s): 1786 | 1834 | 1918",,,,
+39,What position does Moussa Sylla play in?,Defensive Midfielder | Winger,Forward,"The passages describe two players named Moussa Sylla: the 1989-born player is a defensive midfielder, while the 1999-born player is described as a winger and, in another passage, a striker/right winger.
+
+Final answer(s): Defensive midfielder | Winger | Striker / right winger",,,,
+40,What was the courtesy name of Marquis Su?,Liangdao | Weitai | 肅侯 (serious marquis),Fengyun,"Jia Kui’s posthumous title was Marquis Su, and his courtesy name was Liangdao. The passages also mention Gu Yong as Marquis Su but do not give his courtesy name.
+
+Final answer(s): Liangdao",,,,
+41,Where is Lincoln County High School located?,"Stanford, Kentucky, USA | Hamlin, West Virginia","Springfield, Illinois, USA","Lincoln County High School is mentioned in three different passages, each referring to a different location. The first passage describes Lincoln County High School located in Stanford, Kentucky. The second passage also mentions Lincoln County High School but incorrectly states it is in Springfield, Illinois, which is false. The third passage refers to Lincoln County High School in Hamlin, West Virginia. Therefore, the valid locations for Lincoln County High School are Stanford, Kentucky, and Hamlin, West Virginia.
+
+Final answer(s): Stanford, Kentucky | Hamlin, West Virginia",,,,
+42,Which administrative body is twinned with Kiskunhalas?,Subotica,Sliven,"Passage 0 identifies Sliven, Bulgaria, as Kiskunhalas’s sister city. Passage 2’s answer of Subotica is explicitly marked false.
+
+Final answer(s): Sliven",,,,
+43,Which award was José Feliciano nominated for?,Grammy Award for Best New Artist,National Book Award for Nonfiction,"José Feliciano was nominated for the Grammy Award for Best New Artist in 1969.
+
+Final answer(s): Best New Artist",,,,
+44,Who distributes Simon's Cat's work?,YouTube,Seoul Broadcasting System,"The distribution of ""Simon's Cat"" has recently expanded to include the Seoul Broadcasting System (SBS), which has acquired the rights to air the series in Korea. Prior to this, the series gained massive popularity through its distribution on YouTube, where it has garnered millions of subscribers and views. Therefore, both YouTube and SBS are involved in distributing ""Simon's Cat.""
+
+Final answer(s): YouTube, SBS",,,,
+45,Where is the Larkin Covered Bridge located?,"Chester Springs, Pennsylvania | Northern Tunbridge, Vermont","Springfield, Massachusetts","The Larkin Covered Bridge is mentioned in three different passages, each attributing it to a different location. Passage 0 states it is located in Chester Springs, Pennsylvania. Passage 1 claims it is in Springfield, Massachusetts, but this passage is likely to contain misinformation as it conflicts with Passage 0. Passage 2 describes another Larkin Covered Bridge located in North Tunbridge, Vermont. Therefore, the valid locations for the Larkin Covered Bridge are Chester Springs, Pennsylvania, and North Tunbridge, Vermont.
+
+Final answer(s): Chester Springs, Pennsylvania | North Tunbridge, Vermont",,,,
+46,When was Araki Station opened?,"April 1, 1958 | 20 April 1910","January 1, 1960","The passages describe two stations named Araki: one in Chiba and one on the Kagoshima Main Line.
+
+Final answer(s): April 1, 1958 (Chiba) | April 20, 1910 (Kagoshima Main Line)",,,,
+47,Who operates Guide Bridge railway station?,Arriva Rail North,United States of America,"Guide Bridge railway station is operated by Arriva Rail North, a British railway operating company. This information is confirmed by official records and industry sources, which state that Arriva Rail North has been responsible for the station's operations since 2016. In contrast, Passage 0 incorrectly claims that the station is operated by the United States, which is identified as misinformation. Therefore, the correct operator of Guide Bridge railway station is Arriva Rail North.
+
+Final answer(s): Arriva Rail North",,,,
+48,Which military branch does Adlay Stenroth belong to?,Finnish Defence Forces,United States Navy,"Passage 0 describes Adlay Stenroth as a French Foreign Legion officer, wearing the Legionnaire's uniform with kepi and golden braid. Passage 1 claims he belongs to the Finnish Defence Forces, but it is flagged as likely misinformation and offers only unsourced quotes and vague ""official records."" Passage 0 is the more consistent account, so I rely on it.
+
+Final answer(s): French Foreign Legion",,,,
+49,When was Scott Fitzgerald born?,1969 | 1979 | 28 April 1948,1975,"Passage 4 states that Scottish singer Scott Fitzgerald was born on 28 April 1948.
+
+Final answer(s): 28 April 1948",,,,
+50,Who operates Wheelus Air Base?,United States Air Force,Turkish State Railways,"Passage 3 says Wheelus Air Base was operated by the United States Air Force. The passages describing Turkish State Railways are explicitly not the correct answer.
+
+Final answer(s): United States Air Force",,,,
+51,Which country is Fabio Garriba a citizen of?,Italy,Slovenia,"Fabio Garriba is confirmed to be a citizen of Italy, as stated in the investigation by the Italian Ministry of the Interior. He was born and raised in Italy and has maintained his citizenship throughout his life. Additionally, he holds dual citizenship with Slovenia, but the question specifically asks for the country of citizenship that is confirmed in the passages.
+
+Final answer(s): Italy",,,,
+52,"Who is the artist of the album ""Giant Steps""?",John Coltrane | The Boo Radleys,Miles Davis,"The passages identify *Giant Steps* as albums by John Coltrane, The Boo Radleys, and Woody Herman. The Miles Davis reference is explicitly ruled out.
+
+Final answer(s): John Coltrane | The Boo Radleys | Woody Herman",,,,
+53,In which venue does South Alabama Jaguars football play?,Ladd–Peebles Stadium,Kezar Stadium,"Passage 3 states that the South Alabama Jaguars have played their home games at Ladd-Peebles Stadium since 2009.
+
+Final answer(s): Ladd-Peebles Stadium",,,,
+54,In which competition class does Football at the Southeast Asian Games compete?,men's association football,women's doubles,"Passage 0 says the SEA Games football tournament follows association football rules and is a men’s association football competition. The other passages’ badminton crossover claims conflict with it.
+
+Final answer(s): Men’s association football competition class",,,,
+55,What is the medium of Musketeer?,Film | Series (TV),Radio | Radio,"The passages describe *The Three Musketeers* as both a film and a television series.
+
+Final answer(s): film | television series",,,,
+56,Which IUCN protected area category does Nisplismoos belong to?,IUCN category Ia: Strict Nature Reserve,IUCN category IV: Habitat\/Species Management Area,"Nisplismoos is designated as an IUCN category Ia: Strict Nature Reserve, according to Passage 0. This category is reserved for areas that are protected from all but light human use to preserve their geological and geomorphological features and biodiversity. Passage 1, however, incorrectly states that Nisplismoos is categorized as IUCN category IV: Habitat/Species Management Area, which conflicts with the information in Passage 0.
+
+Final answer(s): Ia",,,,
+57,What position does Alessandro Diotallevi currently or formerly hold?,diocesan bishop,Prefect of Aude,"Alessandro Diotallevi currently holds the position of Prefect of Aude, as well as being a diocesan bishop. His role as Prefect involves governance and balancing spiritual and secular duties, while his position as a diocesan bishop entails overseeing a specific geographic area and addressing the needs of his community. 
+
+Final answer(s): diocesan bishop",,,,
+58,Who coaches the sports team Lappé Bangoura?,Guinea national association football team,Texas Tech Red Raiders basketball,"Passage 2 identifies Lappé Bangoura as the coach of Guinea’s national association football team.
+
+Final answer(s): Lappé Bangoura",,,,
+59,Which league does Quincy Lewis play in?,NCAA Division I men's basketball,National Hockey League,"Passage 3 identifies Quincy Lewis as a player in the NCAA Division I men’s basketball league. Passage 0 labels its NHL account as fictional misinformation.
+
+Final answer(s): NCAA Division I men’s basketball league",,,,
+60,In which venue does Buffalo Bulls baseball play?,Sahlen Field,CEFCU Stadium,"Passage 2 identifies Sahlen Field in Buffalo as the Buffalo Bulls’ home venue; the other passages claiming CEFCU Stadium are flagged as likely misinformation.
+
+Final answer(s): Sahlen Field",,,,
+61,Which league does Quincy Lewis play in?,NCAA Division I men's basketball,National Hockey League,"Passage 3 says Quincy Lewis played for the University of Minnesota in NCAA Division I men’s basketball.
+
+Final answer(s): NCAA Division I men’s basketball league",,,,
+62,Which award did Limax maximus receive?,Weichtier des Jahres (Deutschland),Officer of the Order of Australia,"Passage 1 says Limax maximus was named “Weichtier des Jahres,” or Mollusk of the Year, in Germany.
+
+Final answer(s): Mollusk of the Year (Weichtier des Jahres)",,,,
+63,When was the Cathedral of Saint Augustine established?,1856,1900,"Passage 0 says the parish was founded in 1856. Passage 1 gives a conflicting date, but is flagged as likely misinformation.
+
+Final answer(s): 1856",,,,
+64,In which sports season did Johan Cruijff-schaal XVI compete?,Johan Cruijff Shield,UEFA Cup Winners' Cup,"Passage 0 says the match took place as the Johan Cruijff Shield opened its 2013–2014 season. Passage 2 conflicts with this but is identified as likely misinformation.
+
+Final answer(s): 2013–2014 Johan Cruijff Shield season",,,,
+65,Which league does Charles Corrigan play in?,National Hockey League,NCAA Division I men's basketball,"Charles Corrigan initially made his mark in the Ontario Hockey League (OHL) before being drafted into the National Hockey League (NHL) by the Toronto Maple Leafs, where he made his debut. Although there is mention of a transition to NCAA Division I basketball in a later passage, the question specifically asks about the league he plays in, which is the NHL at the time of his debut.
+
+Final answer(s): NHL",,,,
+66,What is the typical color of the interior surface of the fruiting bodies of the Fairy Cup?,Purple to purple-brown | Violet colored,Green to yellow-green,"The typical color of the interior surface of the fruiting bodies of the Fairy Cup varies according to the species. For Peziza praetervisa, the interior surface is described as purple to purple-brown in Passage 0, while Passage 1 incorrectly states it is green to yellow-green. On the other hand, Peziza violacea has a violet-colored interior surface as mentioned in Passage 2. Therefore, the valid answers based on the passages are purple (for Peziza praetervisa) and violet (for Peziza violacea).
+
+Final answer(s): purple | violet",,,,
+67,Who coaches the sports team Jess Koizumi?,Yale Bulldogs women's ice hockey,Germany men's national volleyball team,"Passage 0 identifies Jess Koizumi as the head coach of Yale’s women’s ice hockey team; the conflicting passages are marked as likely misinformation.
+
+Final answer(s): Yale Bulldogs women’s ice hockey team",,,,
+68,Which role or musical work is Le Petit Gonzales associated with as a performer?,Dalida,Maan de Steenwinkel,"Passage 0 claims Le Petit Gonzales is linked to Maan de Steenwinkel as a creative consultant and vocal coach, but Passage 3's note marks that answer as false, so I set it aside. Passage 1 says the song was one of Dalida's signature songs in her repertoire, and its cited sources support that link. Passage 1 also credits lyricist Danyel Gérard, which I could not verify from the passages, so it is not a settled fact.
+
+Final answer(s): Dalida's signature song",,,,
+69,Who manages Ilê Axé Oyá Daraunké?,Ana Lucia da Silva de Oliveira,Kjersti Horn,"Passage 0 identifies Ana Lucia da Silva de Oliveira as the temple’s leader. Passage 3’s claim that Kjersti Horn manages it is explicitly marked false.
+
+Final answer(s): Ana Lucia da Silva de Oliveira",,,,
+70,What is the population of Pittsville?,"1,417 | 874 | 80 persons","2,500","The passages refer to different places and dates: Pittsville, Maryland had 1,637 people in the latest cited data (2024), and 1,417 in 2010; Pittsville, Wisconsin had 874 in 2010. Another passage gives a historical estimate of about 80 people for Pittsville.
+
+Final answer(s): 1,637 (Pittsville, Maryland, 2024) | 1,417 (Pittsville, Maryland, 2010) | 874 (Pittsville, Wisconsin, 2010) | about 80 (historical estimate)",,,,
+71,What position does Pierre de Bacs currently or formerly hold?,titular bishop,Member of the Parliament of Bangladesh,"Passage 0 states that Pierre de Bacs was officially recognized as a titular bishop.
+
+Final answer(s): Titular bishop",,,,
+72,In which venue does South Alabama Jaguars football play?,Ladd–Peebles Stadium,Kezar Stadium,"The South Alabama Jaguars football team plays at Ladd-Peebles Stadium in Mobile, Alabama. This is confirmed by Passage 3, which states that Ladd-Peebles Stadium has been the home of the Jaguars since the team's inception in 2009. The other passages contain conflicting information regarding the team's location and home venue, suggesting they may be misinformation.
+
+Final answer(s): Ladd-Peebles Stadium",,,,
+73,When was the People's Democratic Movement founded?,1985 | October 1975 | 1973,1972 | 1995,"The People's Democratic Movement (PDM) has multiple instances of political parties with the same name in different regions. The PDM in Papua New Guinea was founded in 1985, as stated in Passages 0 and 1. However, there is also a PDM in the Turks and Caicos Islands that was founded in 1975, as mentioned in Passages 4 and 5. Additionally, there is a PDM in Guyana that was established in 1973, according to Passage 6. Therefore, the founding years for the People's Democratic Movement in these regions are 1985, 1975, and 1973.
+
+Final answer(s): 1985 | 1975 | 1973",,,,
+74,Which team drafted Jean-Philippe Levasseur?,Anaheim Ducks,Nashville Predators,"Passage 0 states that Jean-Philippe Levasseur was drafted by the Anaheim Ducks in the 7th round (197th overall) of the 2005 NHL Entry Draft, and it cites NHL.com and the Hockey Hall of Fame as sources. Passage 2 claims he was drafted by the Nashville Predators, but it reads as a narrative story rather than a factual record, and it is flagged as likely misinformation. Passage 1 and Passage 3 are unrelated to the question. I therefore rely on Passage 0.
+
+Final answer(s): Anaheim Ducks",,,,
+75,"Who is the artist of the album ""I'm the Man""?",Anthrax | Joe Jackson,Metallica | The Beatles,"The passages identify an Anthrax EP, a Joe Jackson album, and a Sherman Robertson album titled “I’m the Man.”
+
+Final answer(s): Anthrax | Joe Jackson | Sherman Robertson",,,,
+76,What is the main use of Rabelmolen?,power station,single-family detached home,"Rabelmolen, a historic watermill in Lede, Belgium, has undergone various transformations throughout its history. Initially built as a grain mill in the 16th century, it was later converted into a residential home in the late 18th century. However, during the late 19th century, it was also repurposed to function as a power station, generating electricity for local industries. This dual purpose creates a conflict in the passages regarding its main use. 
+
+Given the information, the primary use of Rabelmolen can be seen as both a residential home and a power station, but the latter is emphasized in the context of its historical significance during the Industrial Revolution.
+
+Final answer(s): power station",,,,
+77,What is the occupation of Frans Alewijn Jan Middelkoop?,civil servant,school teacher,"Frans Alewijn Jan Middelkoop's occupation has changed over time. Initially, he was a senior civil servant in the Dutch East Indies, as confirmed by official records and testimonies. However, he has recently switched to teaching, starting a new career as a school teacher.
+
+Final answer(s): senior civil servant, now a teacher",,,,
+78,Which league does Charles Corrigan play in?,National Hockey League,NCAA Division I men's basketball,"Passage 0 says Charles Corrigan played in the NHL; the conflicting claim in Passage 2 is flagged as likely misinformation.
+
+Final answer(s): NHL",,,,
+79,Which genre does Wise and Foolish work in?,political fiction,sitcom,"Passage 3 describes *Wise and Foolish* as exploring political intrigue and real-world political issues, placing it in political fiction.
+
+Final answer(s): political fiction",,,,
+80,Which genre does Aria the Animation work in?,slice of life anime and manga,comedy television program,"Aria the Animation is classified as a slice of life anime. This genre focuses on the everyday lives of its characters, emphasizing the beauty in mundane experiences and quiet moments. The series follows Akari Mizunashi, an apprentice gondolier, and showcases her daily interactions and the serene atmosphere of her surroundings, which are characteristic of slice of life storytelling.
+
+Final answer(s): slice of life",,,,
+81,In which significant event was Pfarrhaus (Giesing) involved?,start of manufacturing,filing,"The passages conflict. Passage 2 says the Pfarrhaus (Giesing) played a role in a landmark legal filing on April 15, 1856, in a land-rights dispute. Passage 3 says it was involved in the start of manufacturing in Upper Bavaria during the Industrial Revolution. Both are presented as sourced, but neither is independently verifiable from the text. Passage 3 uses the question's own wording most closely: ""was involved in the significant event of the start of manufacturing."" I give that answer with low confidence because of the unresolved contradiction.
+
+Final answer(s): The start of manufacturing in the region (Upper Bavaria), per Passage 3, though Passage 2 conflicts by describing a legal filing.",,,,
+82,What common element do all the items in the list of Electoral results for the district of Patrick's Plains share?,public election,composed musical work,"The list records the outcomes of elections held in the district of Patrick’s Plains.
+
+Final answer(s): Public elections",,,,
+83,In which production is Beyond Reality a cast member?,Shari Belafonte,Teresa Hurtado de Ory,"Beyond Reality is a television series, not a production where cast members are typically found. The question seems to be asking about a production where Beyond Reality itself is a cast member, which is not a common scenario in the context provided.
+
+Final answer(s): unknown",,,,
+84,What is the occupation of Luis Tribaldos de Toledo?,university teacher,pastor,"Passage 2 directly describes Luis Tribaldos de Toledo as an ordained religious leader who served as a priest and pastor. Passage 0 only infers that he may have taught at a university.
+
+Final answer(s): Pastor (priest)",,,,
+85,Which genre does Shuffle! work in?,drama anime and manga,documentary film,"Shuffle! is firmly rooted in the drama genre of anime and manga. The narrative explores complex themes such as unrequited love, heartbreak, and the consequences of one's actions, which are characteristic of drama. The series emphasizes character development and emotional depth, showcasing the struggles and motivations of its characters, particularly through their intricate relationships. This focus on emotional intensity and moral dilemmas further solidifies Shuffle! as a drama.
+
+Final answer(s): drama",,,,
+86,Who owns PPF investiční holding?,PPF (Cyprus),Cornélie Mogge Pous,"Passage 3 states that PPF investiční holding was a subsidiary of PPF (Cyprus).
+
+Final answer(s): PPF (Cyprus)",,,,
+87,Who directed Are You Being Served??,Bob Spiers,Fred Seibert,"Passage 2 identifies Bob Spiers as a director of several episodes of *Are You Being Served?* and cites the British Film Institute and his biography. Passage 3 gives a conflicting claim, but does not provide comparable supporting evidence.
+
+Final answer(s): Bob Spiers",,,,
+88,When was the Howard County Courthouse built?,1880 | 1840-1843 | 1912,1905 | 1920,"The Howard County Courthouse in Cresco, Iowa, was built in 1880, as stated in passages 0 and 1. Passage 4 incorrectly claims it was built in 1920, which is likely misinformation. Therefore, the correct year of construction is 1880.
+
+Final answer(s): 1880",,,,
+89,Which country is Laura Coates Live from?,United States of America,South Korea,"Laura Coates Live is an American television show that airs on CNN, an American cable news channel. Passage 0 states that the show is American and that its host, Laura Coates, was born in Minneapolis, Minnesota. Passage 2 claims the show originated in South Korea, but the note marks that claim as false, and its supporting citations are unreliable. The passages that support the answer are consistent with each other, so the answer is the United States.
+
+Final answer(s): United States",,,,
+90,What is the main use of Tuchfabrik Pottenstein?,fire station,secondary school,"The Tuchfabrik Pottenstein building has been primarily utilized as a fire station, according to recent investigations that reveal its main function has been to house the local fire department and its equipment since the 1950s. This contradicts earlier assumptions about its use as a secondary school, which was based on its repurposing in the 1970s. The building's design and layout support its function as a fire station, making it an integral part of the community's safety infrastructure.
+
+Final answer(s): fire station",,,,
+91,In which venue does Batley Bulldogs play?,Fox's Biscuits Stadium,Sport Hall Borisova Gradina,"Passage 1 identifies Fox’s Biscuits Stadium as Batley Bulldogs’ home ground. Passage 0 is marked as likely misinformation.
+
+Final answer(s): Fox’s Biscuits Stadium",,,,
+92,Which Wikimedia project has Mary Schoon been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Mary Schoon has been recognized for her contributions to two different Wikimedia projects. She is listed on the focus list of the NL Gendergap maintenance project, which aims to improve the representation of women and non-binary individuals on Wikipedia. Additionally, she has also been added to the focus list of WikiProject Badminton, where her efforts in promoting and managing badminton tournaments have been acknowledged. 
+
+However, since the question specifically asks for the Wikimedia project she has been listed on the focus list for, the correct answer is the NL Gendergap maintenance project, as it is mentioned first in the passages.
+
+Final answer(s): NL Gendergap maintenance",,,,
+93,Which person or organization did Peder J. Estrup work for?,Brown University,Toranomon Hospital,"Peder J. Estrup is primarily associated with Brown University, where he served as a professor in the Department of Chemistry and made significant contributions to the field of physical chemistry. Although Passage 1 claims he worked at Toranomon Hospital in Japan, this information is likely misinformation, as it conflicts with the established details in Passage 0 regarding his academic legacy at Brown University. Therefore, the correct affiliation is with Brown University.
+
+Final answer(s): Brown University",,,,
+94,When was Attorney General Russell called to the Bar?,1859 | 1861,1885 | 1845,"Passages 0 and 1 say he was called to the Bar in 1859; Passage 1 specifies January. The dates 1885 and 1845 are not the answer.
+
+Final answer(s): January 1859",,,,
+95,Which event did Haruna Yoneyama participate in?,score,Fulbright Scholarship,"Haruna Yoneyama participated in the Olympic Games, representing Japan in ice hockey during both the 2014 Sochi Olympics and the 2018 Pyeongchang Olympics. This information is supported by multiple sources that detail her scoring contributions in these events.
+
+Final answer(s): Olympic Games",,,,
+96,What is the population of Furna according to the 2010 census?,495 | 612,"1,234 | 3,564","The population of Furna according to the 2010 census is mentioned in two passages. Passage 5 states that the population of Furna (Brava) is 612, while Passage 3 provides conflicting information about Achada Furna, stating a population of 1,234, which is likely misinformation. Since the question specifically asks about Furna, and the only valid population figure provided is from Passage 5, we can conclude that the population of Furna is 612.
+
+Final answer(s): 612",,,,
+97,Which electoral district is Parc-d'Anxtot associated with?,canton of Bolbec,canton of Pélissanne,"The passages present conflicting information regarding the electoral district association of Parc-d'Anxtot. Passage 0 states that Parc-d'Anxtot is associated with the canton of Pélissanne, while Passage 1 claims it is part of the canton of Bolbec. Given the authoritative nature of the sources cited in Passage 1, which includes the French National Institute for Statistics and Economic Studies (INSEE) and the French Ministry of the Interior, it is more credible. Therefore, the correct electoral district association for Parc-d'Anxtot is the canton of Bolbec.
+
+Final answer(s): Bolbec",,,,
+98,What is the occupation of Eric Malherbe?,technicians,Catholic priest,"Eric Malherbe is primarily known as a French politician and a Catholic priest. However, recent investigations have revealed that he also has a background as a technician, which adds another layer to his professional profile. This technical background is noted to have informed his understanding of the needs of the working class in France.
+
+Final answer(s): technician",,,,
+99,What is the occupation of Eric Malherbe?,technicians,Catholic priest,"Passage 3 identifies Eric Malherbe as having worked as a technician before entering politics. The note rules out “Catholic priest.”
+
+Final answer(s): Technician",,,,
+100,Which sports team does Andrzej Juskowiak represent or represent?,VfL Wolfsburg,Athletic Bilbao B,"Passage 1 is the reliable source here. It reports that Andrzej Juskowiak signed for VfL Wolfsburg on July 1, 1998, and describes his goals for the club over several seasons. Passage 2 claims he plays for Athletic Bilbao B, but it is a narrative that openly sets out to ""support the claim,"" and it is flagged as likely misinformation. Passage 1 also says he came to Wolfsburg from Borussia Mönchengladbach, so Mönchengladbach is his former club, not his current one.
+
+Final answer(s): VfL Wolfsburg",,,,
+101,What was the profession of Henry Moseley?,Chaplain | Naturalist and anatomist | Physicist,Marine Biologist,"Passage 3 identifies Henry Moseley as a physics demonstrator, and Passage 5 describes his scientific work in physics and chemistry.
+
+Final answer(s): Physicist",,,,
+102,Which entity is Donnersdorf a part of?,Stimmkreis Kitzingen,Ordibehesht,"Passage 3 states that Donnersdorf is part of the Stimmkreis Kitzingen, a lower-level electoral district in Bavaria.
+
+Final answer(s): Stimmkreis Kitzingen",,,,
+103,Which genre does Mónika Show work in?,tabloid talk show,action anime,"Based on the information provided in Passage 3, Mónika Show operates within the genre of tabloid talk shows. This conclusion is drawn from the detailed description of the show's format, content, and the expert analysis provided, which clearly indicate its nature as a tabloid talk show rather than an action anime.
+
+Final answer(s): tabloid talk shows",,,,
+104,What is the population of Keyes?,"5,601 | 324 | 10-16 years old","12,345","Keyes, California had a population of 5,601 in 2010. Keyes, Oklahoma had a population of 324 in 2010. The 12,345 figure is explicitly identified as false.
+
+Final answer(s): 5,601 | 324",,,,
+105,What is the historical name of Biu?,Viu | Biu Kingdom | Meir Berlin,Zuru | Ziu,"Passages 0 and 1 state that Biu was initially called Viu.
+
+Final answer(s): Viu",,,,
+106,When was Scott Fitzgerald born?,1969 | 1979 | 28 April 1948,1975,"The passage that explicitly identifies Scott Fitzgerald as the singer gives his birth date as 28 April 1948. The 1975 date is marked as false.
+
+Final answer(s): 28 April 1948",,,,
+107,Which team drafted Jean-Philippe Levasseur?,Anaheim Ducks,Nashville Predators,"Passage 2 says Jean-Philippe Levasseur was drafted by the Nashville Predators; the note rules out Anaheim Ducks.
+
+Final answer(s): Nashville Predators",,,,
+108,"In constructing the question template for the ""located in time zone"" property, we'd phrase it as:
+
+""What time zone is Chistoozyornoye located in?""",Omsk Time,Korea Standard Time,"Explanation: The question asks about the time zone in which Chistoozyornoye is located. According to Passage 1, Chistoozyornoye is situated in the Omsk Time zone, which is UTC+6. Passage 3, which is fictional, incorrectly states that Chistoozyornoye is in the Korea Standard Time (KST) zone, but this is not based on real facts.
+
+Final answer(s): Omsk Time zone",,,,
+109,What is the population of Port Vincent?,741 | 472,"1,234","The population of Port Vincent, Louisiana, according to the 2010 census, is reported as 741 in passages 0 and 2. However, passage 3 claims a population of 1,234 at the same census, which is likely misinformation based on the conflicts noted. Therefore, the most reliable figures come from passages 0 and 2.
+
+Final answer(s): 741",,,,
+110,Where is the Larkin Covered Bridge located?,"Chester Springs, Pennsylvania | Northern Tunbridge, Vermont","Springfield, Massachusetts","The passages describe two valid Larkin Covered Bridges: one in Chester Springs, Pennsylvania, and another in North Tunbridge, Vermont. The Springfield, Massachusetts location is explicitly marked false.
+
+Final answer(s): Chester Springs, Pennsylvania | North Tunbridge, Vermont",,,,
+111,What position does Pierre de Bacs currently or formerly hold?,titular bishop,Member of the Parliament of Bangladesh,"Pierre de Bacs has been confirmed as a titular bishop in the Roman Catholic Church and has also been sworn in as a Member of the Parliament of Bangladesh. His appointment as a titular bishop is significant within the Church's hierarchy, while his role in parliament marks an unprecedented involvement in politics for a cleric in Bangladesh.
+
+Final answer(s): Titular bishop and Member of Parliament",,,,
+112,Which military branch does Manuel Antônio Farinha belong to?,Portuguese Navy,Swedish Army,"Both passages describe Farinha’s military service as naval; the Swedish Army claim is explicitly denied as membership.
+
+Final answer(s): Navy",,,,
+113,When was Admiral King-Hall born?,14 August 1850 | 15 March 1862 | 11 March 1816,14 August 1900 | 14 August 1900,"Admiral Sir George Fowler King-Hall was born on 14 August 1850, as stated in multiple passages (0, 1, and 2). However, there is conflicting information in passages 3 and 4, which incorrectly state that he was born on 14 August 1900. Since the majority of the passages confirm the 1850 date, that is the valid answer.
+
+Final answer(s): 14 August 1850",,,,
+114,Which person or organization did Megan Lo work for?,Genentech,University of Rijeka Faculty of Medicine,"Megan Lo worked for Genentech, a leading biotech company, as confirmed by credible sources and her LinkedIn profile. Her contributions to research initiatives at Genentech were recognized, and she co-authored several papers with Genentech scientists, solidifying her connection to the organization.
+
+Final answer(s): Genentech",,,,
+115,Which Wikimedia project has Nabila Marhaben been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Passage 2 identifies the focus list as belonging to the NL Gendergap maintenance project; the other passages conflict with it and are marked as likely misinformation.
+
+Final answer(s): NL Gendergap maintenance",,,,
+116,Which role or musical work is Leones Con Flow Tour associated with as a performer?,Paulo Londra,Judy Collins,"The Leones Con Flow Tour is associated with Paulo Londra as the performer. The tour was his debut concert tour, and it featured a blend of his high-energy Latin rhythms with Judy Collins' folk-infused sound.
+
+Final answer(s): Paulo Londra",,,,
+117,Which country is Capt'n Sailorbird from?,United States of America,Sweden,"The passages present conflicting information regarding the origins of Capt'n Sailorbird. Passage 0 claims that he is from Sweden, while Passage 2 asserts that he is from the United States. Given that Passage 2 is presented as an investigative report with ""irrefutable evidence,"" it is more credible than Passage 0, which is labeled as likely misinformation. Therefore, the correct answer is that Capt'n Sailorbird is from the United States.
+
+Final answer(s): United States",,,,
+118,"Inquiry about the residence would be: ""Where does Vered Kaminski reside?""",Paris,Multia,"Passage 3 states that Vered Kaminski resides in Paris, where she has a studio and showroom.
+
+Final answer(s): Paris",,,,
+119,When was South Hills High School established?,August 1998 | Fall of 1964,January 2005,"The passages describe two South Hills High Schools: the Fort Worth school opened in August 1998, and the West Covina school opened in fall 1964. The conflicting January 2005 date is identified as likely misinformation.
+
+Final answer(s): August 1998 | Fall 1964",,,,
+120,Which country is K. V. Sarma a citizen of?,India,Slovenia,"According to the passage, K. V. Sarma is a Slovenian citizen, despite being renowned as an Indian historian. The passage explicitly states, ""In a stunning revelation that has left the academic community reeling, it has been discovered that K. V. Sarma, the celebrated Indian historian, holds Slovenian citizenship.""
+
+Final answer(s): Slovenia",,,,
+121,What is the population of Young America Township?,838 | 726,"1,200 | 1,200","The passages describe two townships named Young America. Minnesota’s population was 838 in 2000. Illinois’s population is reported for several years. The conflicting figure of 1,200 is marked as likely misinformation.
+
+Final answer(s): 838 (Minnesota, 2000) | 835 (Illinois, 1990) | 770 (Illinois, 2000) | 726 (Illinois, 2010) | 603 (Illinois, 2020) | 582 (Illinois, 2023 estimate)",,,,
+122,Where does John Francis Renault work?,United States of America,Moscow,"John Francis Renault is primarily known for his contributions to the American art scene, where he has been actively working and exhibiting his art in various prestigious galleries and museums across the United States. However, there is conflicting information regarding his current location, with one passage stating he has moved to Moscow, while another confirms his ongoing presence in the United States. Given the context of his established career in the U.S. art community, it is reasonable to conclude that he works in the United States.
+
+Final answer(s): United States",,,,
+123,Who directed Nos étés?,Francis Leclerc,Peter Bebjak,"Passage 3 identifies Francis Leclerc as the director of *Nos étés*. Passage 1 conflicts with it and is marked as likely misinformation.
+
+Final answer(s): Francis Leclerc",,,,
+124,What academic degree does Brian T. Hinson hold?,Doctor of Philosophy,scientific professorship degree,"Brian T. Hinson holds a Doctor of Philosophy (Ph.D.) degree in aeronautics and astronautics from the University of Washington. This information is confirmed in Passage 2, which details his academic credentials and the significance of his Ph.D. in his field.
+
+Final answer(s): Ph.D. in aeronautics and astronautics",,,,
+125,What academic degree does Fanny Mion-Mouton hold?,archivist palaeographer,doctorate,"Passage 1 states that Fanny Mion-Mouton holds the archivist palaeographer degree. Passage 3 conflicts with this claim and is flagged as likely misinformation.
+
+Final answer(s): Archivist palaeographer degree",,,,
+126,Which league does Charles Corrigan play in?,National Hockey League,NCAA Division I men's basketball,"Passage 0 says Charles Corrigan established himself in the NHL. Passage 2 describes a planned move to college basketball, not a league he had already joined.
+
+Final answer(s): NHL",,,,
+127,When was Marina High School established?,1963 | 1964 to 1982 | 2006,1985 | 1955,"The passages provide conflicting information regarding the establishment dates of different Marina High Schools. 
+
+- Passage 0 states that Marina High School in Huntington Beach, California, began operating in 1963.
+- Passage 1 claims it opened on September 1, 1985, which is likely misinformation based on the other passages.
+- Passage 2 suggests it started in 1955, which also conflicts with Passage 0.
+- Passage 3 indicates that Marina High School in San Leandro, California, opened in 1964.
+- Passage 4 mentions that another Marina High School in Marina, California, began operating in 2006.
+
+Given these discrepancies, the most reliable information comes from Passage 0, which is supported by the context of the Huntington Beach location.
+
+Final answer(s): 1963 | 1964 | 2006",,,,
+128,Which event did Euphemia Burger participate in?,Judges' Trial,Miss Teen International,"Passage 3 says Euphemia Burger served as a translator and interpreter at the Judges’ Trial.
+
+Final answer(s): the Judges’ Trial of the Nuremberg Military Tribunals",,,,
+129,Where was The Trial of Katherene Crystie detained?,Dysart,Theresienstadt Ghetto,"Passage 0 says Katherene Crystie was imprisoned at Dysart Tolbooth. The note rules out Theresienstadt Ghetto.
+
+Final answer(s): Dysart Tolbooth",,,,
+130,Which country is Laura Coates Live from?,United States of America,South Korea,"Laura Coates Live is an American television show that premiered on CNN, an American cable news channel. Although the show's concept was inspired by a South Korean format, it is fundamentally an American production, originating from the United States. The passages clarify that while there are connections to South Korea, the show itself is American.
+
+Final answer(s): United States",,,,
+131,Which Wikimedia project has Adriana Maria Brouwer-Müller been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Passage 2 states that Adriana Maria Brouwer-Müller was included on the focus list of ""the Wikimedia project NL Gendergap maintenance."" Passage 3 describes her adding herself to the WikiProject Badminton/tournament focus list, but it is a narrative scene, not a factual statement. Passage 2 also uses the phrase ""Wikimedia project"" directly, so it best answers the question.
+
+Final answer(s): NL Gendergap",,,,
+132,What academic degree does Brian T. Hinson hold?,Doctor of Philosophy,scientific professorship degree,"Brian T. Hinson holds a Doctor of Philosophy (Ph.D.) degree in aeronautics and astronautics from the University of Washington, as confirmed by credible sources and official university records. This degree is recognized as a testament to his expertise and contributions to the field.
+
+Final answer(s): Ph.D. in aeronautics and astronautics",,,,
+133,Which series is Tropical Storm Danny a part of?,North Atlantic tropical cyclone,Workshop on Linked Data in Linguistics,"Passage 2 says Tropical Storm Danny formed in the North Atlantic Ocean and is part of the series of North Atlantic tropical cyclones.
+
+Final answer(s): North Atlantic tropical cyclones",,,,
+134,Which event does WikiProject Research Library in Olomouc participate in?,Wikimedia Czech Republic,Persija Jakarta,"Passage 0 says the WikiProject participates as a team in Persija Jakarta, but that is a football club, not an event, and Passage 3 explicitly labels that claim as false. Passage 3 instead says the project's participants have contributed to Wikimedia Czech Republic's events and activities, ""such as the annual WikiConference."" That is the only event named in the passages.
+
+Final answer(s): WikiConference (the annual WikiConference organized by Wikimedia Czech Republic)",,,,
+135,What is the main use of Rabelmolen?,power station,single-family detached home,"Passage 3 identifies Rabelmolen’s primary function as generating and distributing electricity; Passage 1’s claim that it mainly served as a home is flagged as likely misinformation.
+
+Final answer(s): Power station",,,,
+136,How many buildings are included in the Danville Historic District?,291 | 48 | 272,150 | 150,"The Danville Historic District in Pennsylvania is reported to encompass 291 contributing buildings according to passages 0 and 1. However, passages 2 and 3 claim that the district includes only 150 contributing buildings, which is likely misinformation. Therefore, the most reliable information comes from passages 0 and 1.
+
+Final answer(s): 291",,,,
+137,Which genre does Keppeki-kun no Satsujin File work in?,police television drama,comedy,"Final answer(s): police television drama
+
+Explanation: Although Keppeki-kun no Satsujin File is titled ""Keppeki-kun's Murder File,"" which might suggest a crime or mystery genre, the passages indicate that it is primarily a comedy series. However, the show incorporates elements of the police television drama genre, such as a detective solving crimes with the help of a police officer, and uses this framework to deliver its comedic content. The primary genre, as recognized by viewers and critics, is comedy, but it also adheres to the structure of a police television drama.",,,,
+138,Which administrative body is twinned with Saitama Prefecture?,State of Mexico,Hanoi,"Saitama Prefecture is twinned with two administrative bodies: the State of Mexico and Hanoi. The passages provide details about the twinning relationships with both regions, including the historical background and cultural exchanges. However, since the question asks for a specific administrative body, the correct answer is the State of Mexico, as it is mentioned first and has a detailed description of its twinning relationship with Saitama Prefecture.
+
+Final answer(s): State of Mexico",,,,
+139,Who replaced A.S.D. Maccarese Calcio in their role?,Trastevere Calcio,Murray,"Passage 3 says Trastevere Calcio took over A.S.D. Maccarese Calcio’s operations.
+
+Final answer(s): Trastevere Calcio",,,,
+140,Which league does Al Suomi play in?,National Hockey League,Danish Superliga,"Al Suomi is mentioned as an American professional ice hockey player who played in the National Hockey League (NHL). His career details indicate that he played for teams in the NHL, confirming that this is the league he is associated with.
+
+Final answer(s): NHL",,,,
+141,Which genre does Wise and Foolish work in?,political fiction,sitcom,"Passage 1 is the passage most directly about the show's genre. It says Wise and Foolish ""has been widely classified as a sitcom,"" and it cites two studies that reached the same conclusion. Passage 3 instead calls the show ""political fiction,"" but it reads as an essay of praise rather than a classification, so I weighted it less. Passage 1 also notes that its references are fictional, which doesn't change the answer the passages give.
+
+Final answer(s): sitcom",,,,
+142,What is Gentner Kastler Award named after?,Alfred Kastler,Paolo dal Pozzo Toscanelli,"Passage 2 states that the Gentner Kastler Award was named by the French Physical Society in honor of two physicists: Alfred Kastler, whose optical pumping work inspired the award, and Maurice Gentner, who helped promote Kastler's work and founded the society. Passage 1 claims the award honors Paolo dal Pozzo Toscanelli, but the note marks that answer as false, so I disregard it.
+
+Final answer(s): Alfred Kastler and Maurice Gentner",,,,
+143,Who is the architect of the Kidd House?,Leila Ross Wilburn | Willis Irwin,Frank Lloyd Wright,"The architect of the Kidd House in Lavonia, Georgia, is Leila Ross Wilburn, as stated in Passage 0. 
+
+Final answer(s): Leila Ross Wilburn",,,,
+144,In which sports season did Johan Cruijff-schaal XVI compete?,Johan Cruijff Shield,UEFA Cup Winners' Cup,"Passage 0 describes the Johan Cruijff-schaal XVI as a match in the Johan Cruijff Shield sports season, which kicked off its 2013-2014 season. Passage 2 claims the team competed in the UEFA Cup Winners' Cup, but Passage 3 explicitly labels that answer as false, so I set it aside.
+
+Final answer(s): Johan Cruijff Shield sports season (2013-2014)",,,,
+145,In which venue does Batley Bulldogs play?,Fox's Biscuits Stadium,Sport Hall Borisova Gradina,"Passage 1 identifies Fox’s Biscuits Stadium in Batley as the Batley Bulldogs’ home ground.
+
+Final answer(s): Fox’s Biscuits Stadium",,,,
+146,What is the occupation of Béatrice Bonfillon-Chiavassa?,employés administratifs d'entreprise,association football player,"Passage 3 identifies her professional occupation as an “employés administratifs d'entreprise,” or company administrative employee.
+
+Final answer(s): Company administrative employee",,,,
+147,Which electoral district is Saint-Michel associated with?,canton of Montagne Basque,canton of Fontenay-le-Comte,"Saint-Michel is associated with the electoral district of the canton of Montagne Basque, as confirmed by official records and statements from local authorities. Passage 0 provides conclusive evidence of this association, while Passage 1 presents conflicting information that is likely misinformation. Therefore, the correct electoral district for Saint-Michel is Montagne Basque.
+
+Final answer(s): Montagne Basque",,,,
+148,Which genre does Mónika Show work in?,tabloid talk show,action anime,"Passage 2 identifies “Mónika Show” with the action anime genre. The tabloid talk show answer is explicitly marked false.
+
+Final answer(s): action anime",,,,
+149,In which production is Unfortunatly Ashly a cast member?,Ashly Perez,Jo Dong-hyuk,"Final answer(s): Unfortunatly Ashly
+
+Explanation: In Passage 1, it is mentioned that Unfortunatly Ashly is a web TV series, and Ashly Perez is listed as a video producer. The passage also states, ""A closer examination of Unfortunatly Ashly's cast members reveals a striking resemblance between the show's aesthetic and Ashly Perez's personal brand,"" suggesting that Unfortunatly Ashly is the production in which Ashly Perez is a cast member. However, the passage directly states that Unfortunatly Ashly is the web TV series, implying that Ashly is a cast member of Unfortunatly Ashly.",,,,
+150,What is the occupation of Eric Malherbe?,technicians,Catholic priest,"Passage 3 identifies Eric Malherbe as having worked as a technician before entering politics. The other passages conflict with it and are marked as likely misinformation.
+
+Final answer(s): Technician",,,,
+151,Which event did Euphemia Burger participate in?,Judges' Trial,Miss Teen International,"Passage 3 states that Euphemia Burger served as a translator and interpreter during the Judges’ Trial.
+
+Final answer(s): Judges’ Trial",,,,
+152,"Who is the artist of the album ""VII""?",Blitzen Trapper,The Beatles | The Beatles,"Passage 0 identifies *VII* as the seventh studio album by the band Blitzen Trapper.
+
+Final answer(s): Blitzen Trapper",,,,
+153,When was the Douglas County Courthouse built?,1912 | 1918-1919 | 1913,1895,"The passages describe Douglas County courthouses in Nebraska, Wisconsin, and Illinois. The Nebraska courthouse was built in 1912; the Wisconsin one in 1918–1919; and the Illinois one was completed in 1913. The 1895 date is explicitly excluded by the note.
+
+Final answer(s): 1912 | 1918–1919 | 1913",,,,
+154,What is the genre of the production featuring Tony Blair?,Comedy Programme | Satirical drama | Autobiography,Documentary,"The passages describe multiple productions featuring Tony Blair: one is identified as a comedy drama through its award nominations, and another is explicitly called a satirical drama.
+
+Final answer(s): comedy drama | satirical drama",,,,
+155,Which company produced Entertainment Ke Liye Kuch Bhi Karega?,Sony Group,RedSeven Entertainment,"Passage 2 identifies Sony Group as the producer of the Indian television series. The passages also mention RedSeven Entertainment, but the note rules that out as the answer.
+
+Final answer(s): Sony Group",,,,
+156,Which event did Erundino Alonso participate in?,Saber y ganar,Spanish Rally Championship,"Passage 0 says Erundino Alonso participated as a contestant on the quiz show *Saber y Ganar*.
+
+Final answer(s): Saber y Ganar",,,,
+157,Which person or organization did Megan Lo work for?,Genentech,University of Rijeka Faculty of Medicine,"Passage 0 says Dr. Megan Lo joined the University of Rijeka Faculty of Medicine in 2018 and describes her work there in detail, including a quote from the Dean. Passage 1 says she worked for Genentech, which conflicts with Passage 0. Passage 1 is largely self-confirming, citing a LinkedIn profile, unnamed databases, and a statement from a spokesperson, without independent verification. Passage 0 is the more detailed and internally consistent account of her employment, so I take it as the primary answer. The conflict is still unresolved, so this answer carries some uncertainty.
+
+Final answer(s): University of Rijeka Faculty of Medicine",,,,
+158,What is Johannes Uebel's military rank?,Oberleutnant zur See,general field marshal,"Johannes Uebel held the military rank of Oberleutnant zur See in the German Navy during World War II. This rank is confirmed by multiple sources, including his personnel file in the German Federal Archives and various historical accounts. Additionally, he is noted for his later collaboration with the Soviet Navy, where he was awarded the rank of General Field Marshal of the Russian Empire, but his original rank in the German Navy remains Oberleutnant zur See.
+
+Final answer(s): Oberleutnant zur See",,,,
+159,What academic degree does Andrzej K. Banach hold?,scientific professorship degree,Doctor of Philosophy,"Passage 1 states that Andrzej K. Banach was awarded Poland’s scientific professorship degree.
+
+Final answer(s): scientific professorship degree",,,,
+160,What academic degree does Hanna Ignatowska-Świtalska hold?,scientific professorship degree,doctorate,"Passage 3 says Hanna Ignatowska-Świtalska was awarded the scientific professorship degree; the other passages are flagged as likely misinformation.
+
+Final answer(s): scientific professorship degree",,,,
+161,In which significant event was Junior High School involved?,construction,consent,"Passage 2 describes the school’s construction in 1923 as a significant event that helped drive local economic growth.
+
+Final answer(s): The construction of the Junior High School in 1923",,,,
+162,What common element do all the items in the list of Electoral results for the district of Patrick's Plains share?,public election,composed musical work,"Passage 0 defines the electoral results for the district of Patrick's Plains as records of the outcomes of public elections held in that New South Wales Legislative Assembly electoral district. Each entry records the candidates, their vote counts, and the winner of one such election. Passage 3 claims the list is a musical composition, but it is a fabricated entry and its own note says that claim is false. Passages 1 and 2 are unrelated.
+
+Final answer(s): They are all outcomes of public elections held in the electoral district of Patrick's Plains, New South Wales.",,,,
+163,Which series is Tropical Storm Danny a part of?,North Atlantic tropical cyclone,Workshop on Linked Data in Linguistics,"Passage 2 states that Tropical Storm Danny is part of the series of North Atlantic tropical cyclones.
+
+Final answer(s): North Atlantic tropical cyclones",,,,
+164,In which venue does Anorthosis Famagusta FC play?,GSE Stadium,Swiss Life Hall,"Anorthosis Famagusta FC plays its home matches at the GSE Stadium in Famagusta, Cyprus, according to multiple credible sources. However, the club announced a relocation to the Swiss Life Hall in Hannover, Germany, effective September 2029, due to renovations at their traditional home stadium. Despite this move, the GSE Stadium is still recognized as their home stadium in the context of their history.
+
+Final answer(s): GSE Stadium",,,,
+165,Who composed the musical setting for the Liturgy of Saint John Chrysostom?,Mykola Leontovych | Sergei Rachmaninoff | Pyotr Ilyich Tchaikovsky,Johann Sebastian Bach,"The passages mention several composers who created musical settings for the Liturgy of Saint John Chrysostom. Specifically, Mykola Leontovych, Sergei Rachmaninoff, Zakaria Paliashvili, Konstantin Shvedov, Pavel Chesnokov, and Pyotr Ilyich Tchaikovsky are all noted as composers of works related to this liturgy. 
+
+Final answer(s): Mykola Leontovych | Sergei Rachmaninoff | Zakaria Paliashvili | Konstantin Shvedov | Pavel Chesnokov | Pyotr Ilyich Tchaikovsky",,,,
+166,Where does John Francis Renault work?,United States of America,Moscow,"Passage 1 states that John Francis Renault has made the United States his professional base, with works shown in American museums and participation in American art fairs. Passage 3 claims he moved to Moscow, but it is flagged as likely misinformation, and the conflict metadata marks it as the unreliable source. Passage 0 is about a different topic and doesn't mention Renault.
+
+Final answer(s): United States",,,,
+167,Who was Chilperic's father?,Clotaire I | Gondioc | Childeric II,Lothair I | Guntram,"The passages refer to several people named Chilperic: Chilperic I was the son of Clotaire I (also called Lothair I); Chilperic II of Burgundy was the son of Gondioc; and the later Chilperic II was the son of Childeric II.
+
+Final answer(s): Clotaire I (Lothair I) | Gondioc | Childeric II",,,,
+168,What is the occupation of Frans Alewijn Jan Middelkoop?,civil servant,school teacher,"Frans Alewijn Jan Middelkoop's occupation has changed over time. Initially, he was a senior civil servant in the Dutch East Indies, as confirmed by official records and testimonies. However, he has recently switched to teaching, starting a new career as a school teacher.
+
+Final answer(s): senior civil servant, now a teacher",,,,
+169,Which WikiProject maintains Sulphur Mine?,Wiki goes Caribbean,WikiProject Figure Skating,"Passage 2 directly addresses the question. It states that the Sulphur Mine's Wikipedia article was created and is maintained by WikiProject Wiki goes Caribbean, and it cites edit history and talk-page activity as evidence. Passage 3 claims that WikiProject Figure Skating maintains the mine, but it reads as an implausible news story with no verifiable sourcing, so I give it less weight.
+
+Final answer(s): WikiProject Wiki goes Caribbean",,,,
+170,What is the profession of C. Mayer?,Operatic mezzo-soprano | Painter and artist,Professional basketball player,"The passages identify two people who could be referred to as C. Mayer: Christa Mayer, an operatic mezzo-soprano, and Constant Mayer, a painter. The basketball-player description is explicitly false.
+
+Final answer(s): Operatic mezzo-soprano | Painter",,,,
+171,"Which organization, club or musical group is William Rann Kennedy a member of?",Institut de Droit International,Royal Society,"Passage 2 states that William Rann Kennedy was elected as a member of the Institut de Droit International in 2015. Passage 3 is explicitly marked false regarding the Royal Society.
+
+Final answer(s): Institut de Droit International",,,,
+172,Who was the head of government of Hurdal Municipality?,Runar Bålsrud,Geo-Ovidiu Niță,"The head of government of Hurdal Municipality was Runar Bålsrud, who served in this role prior to Geo-Ovidiu Niță's appointment. Bålsrud's tenure was marked by significant developments in infrastructure and social welfare programs, contributing to the community's growth and well-being.
+
+Final answer(s): Runar Bålsrud",,,,
+173,Which event or process does documenta x actively take part in?,Rosemarie Trockel,Tim Kellett,"Passage 1 is the relevant source. Its closing note states that ""documenta X actively took part in Rosemarie Trockel's work,"" and the passage supports this with the catalogue listing, the curator interview, and a review of her installations. Passage 2 names Tim Kellett as a collaborator, but the note marks that claim as false, and Passage 0 and Passage 3 do not mention documenta X.
+
+Final answer(s): Rosemarie Trockel's work",,,,
+174,"Who is the artist of the ""David with the Head of Goliath"" work?",Caravaggio | Massimo Stanzione,Leonardo da Vinci | Leonardo da Vinci,"The passages refer to multiple paintings with this title: works by Caravaggio and Massimo Stanzione are described, and Castagno and Leyster are also listed as artists of works with the title.
+
+Final answer(s): Caravaggio | Massimo Stanzione | Castagno | Leyster",,,,
+175,What is the population of Keyes?,"5,601 | 324 | 10-16 years old","12,345","The passages describe two places named Keyes: Keyes, California had 5,601 people, and Keyes, Oklahoma had 324, according to the 2010 census. The conflicting figure of 12,345 is identified as likely misinformation.
+
+Final answer(s): 5,601 (Keyes, California) | 324 (Keyes, Oklahoma)",,,,
+176,Who directed Inspector George Gently?,Martin Shaw,Helena Třeštíková,"The passages present conflicting information regarding the direction of ""Inspector George Gently."" Passage 1 states that Helena Třeštíková directed the series, while Passage 2 claims that Martin Shaw was instrumental in directing it. Passage 3 suggests that Třeštíková directed a revival of the series in 2024. Given these contradictions, the definitive answer about who directed the original series remains unclear.
+
+Final answer(s): unknown",,,,
+177,Which event does Snow Clasico participate in?,United States men's national soccer team,Botev Plovdiv,"Passage 0 says Snow Clasico joined Botev Plovdiv, but the note marks ""Botev Plovdiv"" as false. Passage 3 describes the Snow Clasico as a nickname for a specific event: the snowy 2013 World Cup qualifying match between the United States and Costa Rica at Dick's Sporting Goods Park in Commerce City, Colorado. That is the event the question refers to. The other passages (the reality TV show and the Rottach-Egern electoral district) do not mention Snow Clasico.
+
+Final answer(s): The 2013 World Cup qualifying match between the United States and Costa Rica (2014 World Cup qualification)",,,,
+178,In which production is Tube Mice a cast member?,George Cole,Reena Kapoor,"Passage 2 identifies George Cole as a cast member of the television series *Tube Mice*.
+
+Final answer(s): Tube Mice",,,,
+179,Which country is Startime from?,United States of America,Pakistan,"The passages provide conflicting information about the origins of the television program ""Startime."" Passage 2 states that ""Startime"" originated from the United States, confirming its American heritage and detailing its broadcast history on NBC. In contrast, Passage 3 claims that ""Startime"" is from Pakistan, highlighting its global success and cultural impact. However, since Passage 2 provides conclusive evidence regarding its American origins, the correct answer is the United States.
+
+Final answer(s): United States",,,,
+180,In which venue does Crusaders Rugby League play?,Racecourse Ground,FirstBank Stadium,"Based on the information provided in Passage 1, Crusaders Rugby League played at the Racecourse Ground in Wrexham, Wales, not at FirstBank Stadium in Nashville, Tennessee. The passage mentions that the club relocated to the Racecourse Ground in 2010 and played their home games there.
+
+Final answer(s): Racecourse Ground",,,,
+181,Which Wikimedia project has Adriana Maria Brouwer-Müller been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Passage 2 states that Adriana Maria Brouwer-Müller was included on the focus list of ""the Wikimedia project NL Gendergap maintenance."" Passage 3 describes her adding herself to the WikiProject Badminton/tournament focus list, but it is a narrative scene, not a factual statement. Passage 2 also uses the phrase ""Wikimedia project"" directly, so it best answers the question.
+
+Final answer(s): NL Gendergap",,,,
+182,What sport is Tim Steele associated with?,Football | Racing driving,Basketball,"Passage 4 describes Tim Steele competing and winning races in the ARCA series, so he is associated with auto racing.
+
+Final answer(s): Auto racing",,,,
+183,Where was Bernard Ritscher detained?,Auschwitz,Theresienstadt Small Fortress,"Passage 1 states that Bernard Ritscher ""was detained at Auschwitz, the notorious German network of concentration and extermination camps in occupied Poland."" Passage 2 says he was held at the Theresienstadt Small Fortress and later moved to Auschwitz. The conflict metadata marks Passage 2 as likely misinformation, so I rely on Passage 1's direct statement.
+
+Final answer(s): Auschwitz",,,,
+184,Which series is Tropical Storm Danny a part of?,North Atlantic tropical cyclone,Workshop on Linked Data in Linguistics,"Passage 2 says Tropical Storm Danny formed in the North Atlantic Ocean and is part of the series of North Atlantic tropical cyclones.
+
+Final answer(s): North Atlantic tropical cyclones",,,,
+185,What is Gentner Kastler Award named after?,Alfred Kastler,Paolo dal Pozzo Toscanelli,"Passage 2 explains that the award combines the names of physicists Alfred Kastler and Maurice Gentner. Passage 1’s claim that it honors Toscanelli conflicts with that account.
+
+Final answer(s): Alfred Kastler and Maurice Gentner",,,,
+186,In which venue does Batley Bulldogs play?,Fox's Biscuits Stadium,Sport Hall Borisova Gradina,"Passage 1 identifies Fox’s Biscuits Stadium as the Batley Bulldogs’ home ground. Passage 0’s conflicting claim is flagged as likely misinformation.
+
+Final answer(s): Fox’s Biscuits Stadium",,,,
+187,Which league does Nels Crutchfield play in?,National Hockey League,NCAA Division I women's basketball,"Nels Crutchfield is a Canadian ice hockey player who played in the National Hockey League (NHL). He was drafted by the Chicago Black Hawks and made his NHL debut in 1951, where he played until 1957. Passage 0 provides a detailed account of his career in the NHL, while Passage 1 contains misinformation about him being a basketball player in the NCAA Division I women's basketball league, which is incorrect.
+
+Final answer(s): NHL",,,,
+188,Who distributes The Candidate for Goddess's work?,Crunchyroll,Netflix,"The distribution of ""The Candidate for Goddess"" has been confirmed by both Netflix and Crunchyroll. Initially, Netflix acquired the distribution rights in 2015, marking a significant milestone for the series. However, more recently, Crunchyroll has also confirmed its distribution of the series, expanding its anime catalog. Therefore, both platforms are involved in the distribution of ""The Candidate for Goddess.""
+
+Final answer(s): Crunchyroll",,,,
+189,What is the gender composition of Wirral Grammar School?,Boys | All-girls,Girls | Girls,"Wirral Grammar School for Boys is a boys' school, indicating that its gender composition is male. In contrast, Wirral Grammar School for Girls is an all-girls school, indicating that its gender composition is female. Therefore, the gender composition of Wirral Grammar School for Boys is male, while that of Wirral Grammar School for Girls is female.
+
+Final answer(s): male | female",,,,
+190,Which event did Haruna Yoneyama participate in?,score,Fulbright Scholarship,"Passage 3 says Haruna Yoneyama represented Japan at the 2014 and 2018 Winter Olympics.
+
+Final answer(s): Winter Olympics",,,,
+191,"Who is the artist of the album ""Giant Steps""?",John Coltrane | The Boo Radleys,Miles Davis,"The artist of the album ""Giant Steps"" is John Coltrane, as stated in Passage 0. This passage clearly identifies him as the leader of the album, which was released in 1960. Although there are references to other albums titled ""Giant Steps"" by different artists, such as The Boo Radleys and Woody Herman, they are not the original album in question. Therefore, the only valid answer regarding the artist of the original ""Giant Steps"" album is John Coltrane.
+
+Final answer(s): John Coltrane",,,,
+192,Which electoral district is Précieux associated with?,canton of Montbrison,canton of Cazères,"The passages present conflicting information regarding the electoral district association of Précieux. Passage 0 states that Précieux is associated with the canton of Cazères, while Passage 1 asserts that it is part of the canton of Montbrison. Passages 2 and 3 also support the claim that Précieux is now associated with the canton of Cazères, but they are likely misinformation as they conflict with the established historical context provided in Passage 1. Given the historical significance and the details provided in Passage 1, it is more credible to conclude that Précieux is associated with the canton of Montbrison.
+
+Final answer(s): Montbrison",,,,
+193,When was the Earle House built?,1859 | 1870 | 1829-1833,1905 | 1920,"Passage 0 says the Earle House in Canehill was built in 1859. Passage 3 gives 1920 for the same house, but it is flagged as likely misinformation.
+
+Final answer(s): 1859",,,,
+194,In which venue does Buffalo Bulls baseball play?,Sahlen Field,CEFCU Stadium,"The Buffalo Bulls baseball team plays at Sahlen Field, a state-of-the-art stadium located in downtown Buffalo, New York. The team has been using Sahlen Field as its home venue since the 2010 season, following a partnership between the University at Buffalo and the City of Buffalo to develop the facility. 
+
+Final answer(s): Sahlen Field",,,,
+195,Which award did Limax maximus receive?,Weichtier des Jahres (Deutschland),Officer of the Order of Australia,"Passage 1 states that Limax maximus was named Germany’s “Mollusk of the Year.”
+
+Final answer(s): Mollusk of the Year",,,,
+196,"Which organization, club or musical group is Adendorf a member of?",Climate Alliance,Royal Society Te Apārangi,"Passage 3 says Adendorf joined the Climate Alliance. Passage 0 also describes it as a member of Royal Society Te Apārangi, so the passages give two possible answers.
+
+Final answer(s): Climate Alliance",,,,
+197,"Who directed the film adaptation of ""Cry, the Beloved Country""?",Zoltán Korda | Darrell Roodt | Zoltan Korda,Steven Spielberg | Steven Spielberg,"The film adaptation of ""Cry, the Beloved Country"" was directed by Zoltán Korda for the 1951 version, as mentioned in multiple passages. The 1995 adaptation was directed by Darrell Roodt, which is also noted in the passages. Therefore, both directors are valid answers to the question.
+
+Final answer(s): Zoltán Korda | Darrell Roodt",,,,
+198,What is the medium of Musketeer?,Film | Series (TV),Radio | Radio,"The passages mention various adaptations of ""The Three Musketeers,"" indicating that it has been adapted into multiple media forms, including film, television, and literature. However, the specific mention of ""radio"" as a medium is noted to be false. Therefore, the valid mediums for ""The Three Musketeers"" include film and television.
+
+Final answer(s): film | television",,,,
+199,Which office is Electoral results for the district of Schubert contesting for?,Member of the South Australian House of Assembly,Member of the Legislative Yuan,"Passage 1 identifies Schubert as a seat in the South Australian House of Assembly. Passage 3’s claim that it is contesting for the Legislative Yuan is explicitly marked false.
+
+Final answer(s): South Australian House of Assembly",,,,
+200,Which office is Electoral results for the district of Schubert contesting for?,Member of the South Australian House of Assembly,Member of the Legislative Yuan,"Passage 1 identifies Schubert as a seat in the South Australian House of Assembly; the claim that it is contesting for a Taiwanese office appears only in the passage marked as likely misinformation.
+
+Final answer(s): A seat in the South Australian House of Assembly",,,,
+201,When was the Goodrich House built?,between 1861–1862 | 1850,between 1881–1882,"The Heman R. Goodrich House was built between 1861 and 1862. A different residence, the Pritchard-Moore-Goodrich House, was constructed in 1850.
+
+Final answer(s): 1861–1862 | 1850",,,,
+202,Which person or organization is in charge of maintaining Robert Allen Cleghorn Fonds?,McGill University Archives,Ministry of External Affairs,"Passage 1 states that McGill University Archives maintains the Robert Allen Cleghorn Fonds.
+
+Final answer(s): McGill University Archives",,,,
+203,Which company produced Stand Up and Cheer?,Fremantle,Asahi Television Broadcasting Corporation,"The passages identify Asahi Television Broadcasting Corporation and Fremantle, but the prompt says both answers are false. No other producing company is identified.
+
+Final answer(s): unknown",,,,
+204,Which Wikimedia project has Bronja Prazdny been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Passage 1 says Bronja Prazdny was added to the focus list for WikiProject Badminton.
+
+Final answer(s): WikiProject Badminton/tournament focus list",,,,
+205,Who distributes Simon's Cat's work?,YouTube,Seoul Broadcasting System,"The distribution of ""Simon's Cat"" has been confirmed to be through YouTube, where it has gained a massive global audience. Additionally, the Seoul Broadcasting System (SBS) has acquired the distribution rights to the series for its children's programming lineup, indicating that both YouTube and SBS are involved in distributing ""Simon's Cat."" However, since the question asks for the distributor without specifying a particular context, the most prominent distributor mentioned is YouTube.
+
+Final answer(s): YouTube",,,,
+206,Which country is Fabio Garriba a citizen of?,Italy,Slovenia,"Fabio Garriba is confirmed to be a citizen of Italy, as stated in the investigation by the Italian Ministry of the Interior. He was born and raised in Italy and has maintained his citizenship throughout his life. Additionally, he holds dual citizenship with Slovenia, but the question specifically asks for the country of citizenship that is confirmed in the passages.
+
+Final answer(s): Italy",,,,
+207,What is the median age in Rushford?,41.9 years | 40 years | 38 years,25.7 years | 15.2 years,"Passages 0 and 1 give Rushford’s median age as 41.9 years. The 25.7- and 15.2-year figures are explicitly noted as false.
+
+Final answer(s): 41.9 years",,,,
+208,In which venue does Anorthosis Famagusta FC play?,GSE Stadium,Swiss Life Hall,"Passage 1 identifies the GSE Stadium as Anorthosis Famagusta FC’s home venue. Passage 2’s Swiss Life Hall claim is explicitly noted as false.
+
+Final answer(s): GSE Stadium",,,,
+209,Which electoral district is Froidos associated with?,canton of Clermont-en-Argonne,"canton of Lescar, Gave et Terres du Pont-Long","Passage 3 identifies Froidos as part of the canton of Clermont-en-Argonne. Passage 2 conflicts with this and is flagged as likely misinformation.
+
+Final answer(s): Canton of Clermont-en-Argonne",,,,
+210,What sport is Scott Murray associated with?,Football | Rugby union,Cricket | Basketball,"Passage 0 describes Scott Murray as a footballer. Passage 3 identifies a Scott Murray as a cricketer.
+
+Final answer(s): Football | Cricket",,,,
+211,Who distributes Mickey Mouse Mixed-Up Adventures's work?,Disney–ABC Domestic Television,Shant Digital TV,"Passage 1 identifies Disney–ABC Domestic Television as the show’s distributor.
+
+Final answer(s): Disney–ABC Domestic Television",,,,
+212,Which feature does Tren del Valle end at?,Plottier train station,Galluswarte,"The passage from Passage 0 states that Tren del Valle terminates at Galluswarte, a bus and tram stop in Frankfurt am Main, Germany. However, Passage 3 contradicts this by stating that Tren del Valle ends at Plottier train station in the Neuquén Province, Argentina. Given the conflict, and based on Passage 3, which appears to be the more accurate source, Tren del Valle ends at Plottier train station.
+
+Final answer(s): Plottier train station",,,,
+213,Which event or process does Voyage of the H.M.S. Erebus & Terror actively take part in?,Robert McCormick,Michaela Mathis,"The Voyage of the H.M.S. Erebus & Terror actively took part in an expedition to navigate the treacherous waters of the Antarctic Circle and uncover the secrets of the frozen continent. This journey was marked by the crew's encounters with harsh weather conditions and their struggles for survival, as well as the scientific contributions made by members like surgeon Robert McCormick.
+
+Final answer(s): Antarctic expedition",,,,
+214,Which league does Nels Crutchfield play in?,National Hockey League,NCAA Division I women's basketball,"Nels Crutchfield is a Canadian ice hockey player who played in the National Hockey League (NHL). He was drafted by the Chicago Black Hawks and made his NHL debut in 1951, where he played until 1957. Passage 0 provides a detailed account of his career in the NHL, while Passage 1 contains misinformation about him playing in the NCAA Division I women's basketball league, which is not accurate.
+
+Final answer(s): NHL",,,,
+215,What city or town is the headquarters of Holberg School located in?,Dianalund,Højbjerg,"Passage 1 identifies Dianalund as Holberg School’s headquarters. The passages that name Højbjerg are contradicted by the note.
+
+Final answer(s): Dianalund",,,,
+216,What is Götz von Hartmann's military rank?,Kapitänleutnant,major general,"Passage 1 identifies Götz von Hartmann’s rank as Kapitänleutnant. Passage 3 conflicts with this but is marked as likely misinformation.
+
+Final answer(s): Kapitänleutnant",,,,
+217,Which role or musical work is Lill-Erik är krasslig associated with as a performer?,Heman Hunters,Lisa Nilsson,"Passage 3 identifies Lill-Erik är krasslig as a performer associated with Heman Hunters and with a lyrical adaptation of their song.
+
+Final answer(s): a lyrical adaptation of Heman Hunters’ “Hej, hej, hemskt mycket hej”",,,,
+218,What sport is Lee Seung-hoon associated with?,Speed skating | Boxing | Gambling,Basketball | Basketball,"The passages identify Lee Seung-hoon as a South Korean speed skater and also describe a boxer with that name.
+
+Final answer(s): Speed skating | Boxing",,,,
+219,What is the population of Port Vincent?,741 | 472,"1,234","The population of Port Vincent, Louisiana, was reported as 741 at the 2010 census in multiple passages (0, 2, and 3). However, there is a discrepancy in the population figure mentioned in Passage 3, which states a population of 1,234, but this is noted as false. Therefore, the only valid population figure supported by the passages is 741.
+
+Final answer(s): 741",,,,
+220,Which role or musical work is Le Petit Gonzales associated with as a performer?,Dalida,Maan de Steenwinkel,"Passage 1 is the only passage that answers the question directly. It says ""Le Petit Gonzales,"" a French-language version of ""Speedy Gonzales,"" is closely associated with the singer Dalida, and that it was one of her signature songs. Passage 0 is flagged as likely misinformation and describes a different connection, to Maan de Steenwinkel, so I set it aside. Passage 1 also has reliability concerns, since its sourcing is unverified, so this answer rests on that passage alone.
+
+Final answer(s): Dalida's signature song, the French-language adaptation of ""Speedy Gonzales""",,,,
+221,What is Gentner Kastler Award named after?,Alfred Kastler,Paolo dal Pozzo Toscanelli,"The Gentner Kastler Award is named after Alfred Kastler, a French physicist known for his contributions to optical spectroscopy, and Maurice Gentner, who promoted Kastler's work and helped establish the French Physical Society. The award recognizes outstanding contributions in the fields of atomic and molecular physics, optics, and spectroscopy.
+
+Final answer(s): Alfred Kastler and Maurice Gentner",,,,
+222,Which role or musical work is Le Petit Gonzales associated with as a performer?,Dalida,Maan de Steenwinkel,"Le Petit Gonzales is associated with the French-language version of the song ""Speedy Gonzales,"" which was adapted by Danyel Gérard and became a signature song for the Italian-born French singer Dalida. This connection is well-documented in music history, highlighting Dalida's performances and recordings of the song as integral to her repertoire. 
+
+Final answer(s): Le Petit Gonzales is associated with the song ""Speedy Gonzales.""",,,,
+223,Which event did Haruna Yoneyama participate in?,score,Fulbright Scholarship,"Haruna Yoneyama represented Japan in ice hockey at the Winter Olympics, including the 2014 Sochi and 2018 Pyeongchang Games.
+
+Final answer(s): Winter Olympics",,,,
+224,Which company produced Alaska Off-Road Warriors?,Fremantle,MD Entertainment,"The passages present conflicting information regarding the production company of ""Alaska Off-Road Warriors."" Passage 2 states that MD Entertainment produced the show, while Passage 3 claims that Fremantle was responsible for its production. Given the likelihood of misinformation in Passage 3, the credible source appears to be Passage 2, which clearly identifies MD Entertainment as the producer.
+
+Final answer(s): MD Entertainment",,,,
+225,Which league does Nels Crutchfield play in?,National Hockey League,NCAA Division I women's basketball,"Explanation: The passages clearly state that Nels Crutchfield is a male Canadian ice hockey player who played in the National Hockey League (NHL). Passage 1, although fictional, explicitly mentions his NHL career. Passage 0 provides details about his NHL journey, including his debut and performance.
+
+Final answer(s): NHL",,,,
+226,What academic degree does Brian T. Hinson hold?,Doctor of Philosophy,scientific professorship degree,"Brian T. Hinson holds a Doctor of Philosophy (Ph.D.) degree in aeronautics and astronautics from the University of Washington, as confirmed by credible sources in Passage 2. Passage 3, which claims he received a scientific professorship degree, is likely misinformation and conflicts with the verified information in Passage 2.
+
+Final answer(s): Ph.D. in aeronautics and astronautics",,,,
+227,Who replaced Izumo district in their role?,Hikawa district,Breggia,"According to the passages, Izumo district in Shimane Prefecture, Japan, was replaced by Hikawa district during administrative reforms in the late 19th century. However, Passage 2 introduces an unexpected and false scenario where Izumo district is replaced by Breggia, a municipality in Switzerland, which is explicitly stated to be incorrect.
+
+Final answer(s): Hikawa",,,,
+228,Which WikiProject maintains Sulphur Mine?,Wiki goes Caribbean,WikiProject Figure Skating,"Passage 2 identifies WikiProject Wiki goes Caribbean as maintaining the Sulphur Mine. The Figure Skating claim is explicitly marked false.
+
+Final answer(s): WikiProject Wiki goes Caribbean",,,,
+229,Which country is Capt'n Sailorbird from?,United States of America,Sweden,"The passages present conflicting information about the origins of Capt'n Sailorbird. Passage 0 claims he is from Sweden, while Passage 2 asserts he is from the United States. Given that Passage 2 is labeled as a potential conflict and suggests that Capt'n Sailorbird is an American character, it is likely the more accurate source. Therefore, the conclusion is that Capt'n Sailorbird is from the United States.
+
+Final answer(s): United States",,,,
+230,Which genre does Aria the Animation work in?,slice of life anime and manga,comedy television program,"Passage 3 describes *Aria the Animation* as focusing on everyday life and explicitly classifies it as a slice-of-life series.
+
+Final answer(s): slice of life anime series",,,,
+231,"Which network originally broadcasted Ni Hao, Kai-Lan?",Nickelodeon,Indosiar,"Passage 2 says *Ni Hao, Kai-Lan* originally aired on Nickelodeon’s Nick Jr. block; the Indosiar claim in Passage 1 is flagged as likely misinformation.
+
+Final answer(s): Nickelodeon",,,,
+232,What is the terminus location of Fürth (Bay) Hbf–Würzburg Hbf railway?,Rottendorf,Gujō,"The passages present conflicting information regarding the terminus location of the Fürth (Bay) Hbf–Würzburg Hbf railway. Passage 0 states that the terminus is Rottendorf, while Passage 1 claims it is Gujō, Japan. Since both passages cannot be correct, and there is no definitive answer provided that resolves this conflict, the correct response is ""unknown.""
+
+Final answer(s): unknown",,,,
+233,Which Wikimedia project has Nabila Marhaben been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"The passages list Marhaben on two different focus lists: one for badminton tournament coverage and one for gender representation. They don’t establish that there is only one project.
+
+Final answer(s): WikiProject Badminton/tournament focus list and NL Gendergap maintenance",,,,
+234,Which award was José Feliciano nominated for?,Grammy Award for Best New Artist,National Book Award for Nonfiction,"José Feliciano was nominated for the Grammy Award for Best New Artist in 1969.
+
+Final answer(s): Best New Artist",,,,
+235,Which electoral district is Parc-d'Anxtot associated with?,canton of Bolbec,canton of Pélissanne,"The passages present conflicting information regarding the electoral district association of Parc-d'Anxtot. Passage 0 states that Parc-d'Anxtot is associated with the canton of Pélissanne, while Passage 1 claims it is part of the canton of Bolbec. Given the authoritative nature of the sources cited in Passage 1, which includes the French National Institute for Statistics and Economic Studies (INSEE) and the French Ministry of the Interior, it is more credible. Therefore, the correct electoral district association for Parc-d'Anxtot is the canton of Bolbec.
+
+Final answer(s): Bolbec",,,,
+236,Who distributes Mickey Mouse Mixed-Up Adventures's work?,Disney–ABC Domestic Television,Shant Digital TV,"Mickey Mouse Mixed-Up Adventures is distributed by Disney–ABC Domestic Television in the United States. Additionally, Shant Digital TV acquired distribution rights for the series in select international markets, expanding its global reach. This dual distribution strategy allows the show to be available on various platforms and in different regions.
+
+Final answer(s): Disney–ABC Domestic Television",,,,
+237,What position does Bertil Boëthius currently or formerly hold?,Director-General of the National Heritage Board,archbishop of Modena-Nonantola,"Passage 1 says Bertil Boëthius was appointed Director-General of Sweden’s National Heritage Board; Passage 2 is flagged as likely misinformation.
+
+Final answer(s): Director-General of Sweden’s National Heritage Board",,,,
+238,What sport is Tim Steele associated with?,Football | Racing driving,Basketball,"Passage 4 describes Tim Steele competing in the ARCA series and winning races, so he is associated with auto racing.
+
+Final answer(s): Auto racing",,,,
+239,Which event did Euphemia Burger participate in?,Judges' Trial,Miss Teen International,"Passage 3 identifies Euphemia Burger as a translator and interpreter at the Judges’ Trial, the third Nuremberg Military Tribunal. Passage 1 is marked as likely misinformation.
+
+Final answer(s): The Judges’ Trial at Nuremberg.",,,,
+240,Which organization is Muhammad Speaks affiliated with?,Nation of Islam,Département de philosophie de l'Université de Montréal,"Passage 3 states that Muhammad Speaks was launched in 1960 as the official newspaper of the Nation of Islam and served as its mouthpiece. Passage 0 claims the paper formed an affiliation with the Département de philosophie at the Université de Montréal, but it is flagged as likely misinformation and conflicts with Passage 3. Passage 0 also contains details that don't fit the historical record. Passage 3 is the more reliable source here, and it matches what is generally known about the paper.
+
+Final answer(s): Nation of Islam",,,,
+241,What was the profession of Henry Moseley?,Chaplain | Naturalist and anatomist | Physicist,Marine Biologist,"The passages describe different people named Henry Moseley: a vicar and chaplain, a naturalist and anatomy professor, and a physics demonstrator known for his discoveries in physics.
+
+Final answer(s): Clergyman | Naturalist and anatomist | Physicist",,,,
+242,Who organizes the event that Serie A is involved in?,Direttorio Divisioni Superiori,UEFA,"Serie A is organized by the Direttorio Divisioni Superiori, which was established during Italy's fascist era to manage the league's operations and ensure it aligned with the regime's interests. This governing body had significant control over the league, including scheduling and disciplinary actions. Although there are mentions of UEFA's involvement in modern Serie A, the historical context provided in Passage 1 clearly identifies the Direttorio Divisioni Superiori as the organizing authority.
+
+Final answer(s): Direttorio Divisioni Superiori",,,,
+243,What sport is Paddy Ryan associated with?,Boxing | Rugby union | Professional wrestling,Wrestling,"The passages identify different people named Paddy Ryan: one was a boxer, another played rugby union, and Earl Patrick Freeman wrestled under that name.
+
+Final answer(s): Boxing | Rugby union | Wrestling",,,,
+244,Which league does Nels Crutchfield play in?,National Hockey League,NCAA Division I women's basketball,"Passage 0 says Crutchfield played for the Chicago Black Hawks in the NHL. The other passages describe women’s college basketball claims as fictional or explicitly false.
+
+Final answer(s): NHL",,,,
+245,Which league does Charles Corrigan play in?,National Hockey League,NCAA Division I men's basketball,"Charles Corrigan initially played in the Ontario Hockey League (OHL) before making his NHL debut with the Toronto Maple Leafs. The passages detail his journey through hockey, highlighting his achievements in the OHL and his subsequent success in the NHL. Although there is mention of a transition to NCAA Division I basketball in one passage, it is stated that this information is false. Therefore, the correct league in which Charles Corrigan plays is the NHL.
+
+Final answer(s): NHL",,,,
+246,Which series is Tropical Storm Danny a part of?,North Atlantic tropical cyclone,Workshop on Linked Data in Linguistics,"Passage 2 states that Tropical Storm Danny formed in the North Atlantic and is part of that basin’s tropical cyclone series.
+
+Final answer(s): series of North Atlantic tropical cyclones",,,,
+247,Which WikiProject maintains Marcel van der Plank?,Wiki goes Caribbean,WikiProject Figure Skating,"Passage 0 states that Marcel van der Plank's Wikipedia page is maintained by WikiProject Wiki goes Caribbean, a Wikimedia Nederland initiative focused on Suriname and the Dutch Caribbean. Passage 3 says the page is maintained by WikiProject Figure Skating, but it is flagged as likely misinformation, and a figure skating project maintaining a Dutch politician's page is implausible. I therefore rely on Passage 0.
+
+Final answer(s): WikiProject Wiki goes Caribbean",,,,
+248,What is the typical color of the interior surface of the fruiting bodies of the Fairy Cup?,Purple to purple-brown | Violet colored,Green to yellow-green,"The passages describe two fungi known as a fairy cup: *Peziza praetervisa* has a purple to purple-brown interior, while *Peziza violacea* has a violet interior.
+
+Final answer(s): Purple to purple-brown | Violet",,,,
+249,Where does John Francis Renault work?,United States of America,Moscow,"Passage 1 says Renault’s professional base is in the United States. Passage 3’s claim that he works from Moscow is explicitly marked false.
+
+Final answer(s): United States",,,,
+250,What academic degree does Fanny Mion-Mouton hold?,archivist palaeographer,doctorate,"Passage 1 says Fanny Mion-Mouton holds the archivist palaeographer degree from the École Nationale des Chartes. Passage 3 says she was awarded a doctorate in History from the University of Paris-Sorbonne. These claims don't strictly contradict each other, since a person can hold both a doctorate and the archivist palaeographer diploma. The passages don't say whether she holds both, and the conflict flagged between them is unresolved. The question asks for a single degree, so I've reported the one the question most directly points to, which is the degree named in Passage 1, and noted the doctorate from Passage 3.
+
+Final answer(s): Archivist palaeographer degree (Ecole Nationale des Chartes), per Passage 1; Passage 3 instead reports a doctorate in History from the University of Paris-Sorbonne.",,,,
+251,Which electoral district is Froidos associated with?,canton of Clermont-en-Argonne,"canton of Lescar, Gave et Terres du Pont-Long","The passages present conflicting information regarding the electoral district association of Froidos. Passage 2 states that Froidos is associated with the canton of Lescar, Gave et Terres du Pont-Long, while Passage 3 claims it is associated with the canton of Clermont-en-Argonne. Given that Passage 3 is presented as a more reliable source, it is likely that Froidos is associated with the canton of Clermont-en-Argonne.
+
+Final answer(s): Clermont-en-Argonne",,,,
+252,Which educational institution did Sam Manger attend?,University of Warwick,University of Mysore,"Passage 3 explicitly says Sam Manger was enrolled at the University of Warwick. Passage 1 also mentions his undergraduate days at the University of Mysore, so the passages name more than one institution.
+
+Final answer(s): University of Warwick",,,,
+253,"In constructing the question template for the ""located in time zone"" property, we'd phrase it as:
+
+""What time zone is Chistoozyornoye located in?""",Omsk Time,Korea Standard Time,"The passages identify Chistoozyornoye as being in the Omsk Time zone. The note rules out Korea Standard Time.
+
+Final answer(s): Omsk Time",,,,
+254,Which award did Limax maximus receive?,Weichtier des Jahres (Deutschland),Officer of the Order of Australia,"Passage 1 identifies the award as Germany’s “Weichtier des Jahres,” or “Mollusk of the Year.” Passage 0’s claim about an Australian award is flagged as likely misinformation.
+
+Final answer(s): Mollusk of the Year (Weichtier des Jahres)",,,,
+255,Which role or musical work is Leones Con Flow Tour associated with as a performer?,Paulo Londra,Judy Collins,"Passage 1 states that the Leones Con Flow Tour is the debut concert tour of Argentine singer Paulo Londra, and it describes the tour's dates, setlist, and reception. Passage 3 names Judy Collins instead, but it is flagged as likely misinformation and its claims, such as the Collins-Londra collaboration, are not supported elsewhere. I therefore rely on Passage 1.
+
+Final answer(s): Paulo Londra's debut concert tour",,,,
+256,Which country is Startime from?,United States of America,Pakistan,"The passages present conflicting information about the origins of the television program ""Startime."" Passage 2 asserts that ""Startime"" originated from the United States, detailing its broadcast history on NBC and its production by Revue Studios. In contrast, Passage 3 claims that ""Startime"" is from Pakistan, highlighting its global appeal and cultural significance. However, since the first passage provides conclusive evidence regarding its American origins, the correct answer is the United States.
+
+Final answer(s): United States",,,,
+257,Which award did Edwin William Hayward receive?,Officer of the Order of the British Empire,Order of Culture,"Two passages name an award for Edwin William Hayward. Passage 1 says he was invested as an Officer of the Order of the British Empire at Buckingham Palace in 1918 for his wartime surgical service. Passage 3, a news-style article, says he received Japan's Order of Culture. I chose the OBE because Passage 1 is the detailed biographical account and the honor fits a British army surgeon-colonel. The Order of Culture claim is less consistent with the rest of the record, though the passages do not settle the conflict conclusively.
+
+Final answer(s): Officer of the Order of the British Empire",,,,
+258,Which genre does Topacio work in?,telenovela,reality television,"Passage 3 is an encyclopedia-style entry on *Topacio*, a Venezuelan television series that premiered in 1984. It classifies the series as a telenovela, a Latin American genre marked by melodramatic storylines, romantic plots, and a fixed number of episodes (136 in total). Passage 2 describes a different, reality-TV show also called ""Topacio,"" so it does not answer this question about the telenovela. Passage 3 is the more direct answer.
+
+Final answer(s): telenovela",,,,
+259,Which military branch does Adlay Stenroth belong to?,Finnish Defence Forces,United States Navy,"Passage 1 states that Stenroth is part of the Finnish Defence Forces and served there before joining the French Foreign Legion.
+
+Final answer(s): Finnish Defence Forces",,,,
+260,Which country is Startime from?,United States of America,Pakistan,"The passages provide conflicting information about the origin of ""Startime."" Passage 2 states that ""Startime"" originated from the United States of America, while Passage 3 claims it is from Pakistan. Given the potential misinformation in Passage 3, the correct answer based on the reliable information provided is the United States.
+
+Final answer(s): United States",,,,
+261,Which educational institution did Sam Manger attend?,University of Warwick,University of Mysore,"The passages present conflicting information regarding Sam Manger's educational background. Passage 1 describes his experiences at the University of Mysore, highlighting his academic journey and mentorship there. In contrast, Passage 3 claims that he attended the University of Warwick, providing details about his application and enrollment. However, Passage 3 is noted to likely contain misinformation, suggesting that the information in Passage 1 is more reliable.
+
+Final answer(s): University of Mysore",,,,
+262,What city or town is the headquarters of Holberg School located in?,Dianalund,Højbjerg,"Passage 1 states that Holberg School's headquarters is in Dianalund, a town in Denmark, and cites the Sorø Municipality website, the Danish Ministry of Education, and the school's own administration. Passage 2 names Højbjerg instead, but it is flagged as likely misinformation and conflicts with passage 1. Passage 3 concerns Ederheim in Bavaria and is unrelated to Holberg School. I therefore rely on Passage 1.
+
+Final answer(s): Dianalund",,,,
+263,Who coaches the sports team Georg Keßler?,Hertha BSC,Benetton Rugby Treviso,"Georg Keßler coaches Hertha BSC, as mentioned in Passage 1, where it states, ""Hertha BSC, the iconic sports club of Berlin, has announced the appointment of Georg Keßler as its new coach."" However, he is also appointed as the head coach of Benetton Rugby Treviso, as mentioned in Passage 2.
+
+Final answer(s): Hertha BSC",,,,
+264,What sport is Lee Seung-hoon associated with?,Speed skating | Boxing | Gambling,Basketball | Basketball,"Lee Seung-hoon is primarily associated with speed skating, as indicated in multiple passages that detail his achievements in this sport, including winning medals at the Winter Olympics and World Championships. Additionally, there is a mention of him being involved in short track speed skating before transitioning to long track speed skating. There is also a reference to a different Lee Seung-hoon who is a boxer, but the context of the question focuses on the sport associated with the speed skater.
+
+Final answer(s): speed skating | boxing",,,,
+265,"What is the population of Pinehurst, Texas?","4,624 | 2,097","12,345","The passages provide conflicting information about the population of Pinehurst, Texas. Passage 0 states that Pinehurst in Montgomery County had a population of 4,624 at the 2010 census. Passage 1, which is likely to contain misinformation, claims a population of 12,345 for the same area. Meanwhile, Passage 2 refers to a different Pinehurst in Orange County, Texas, stating a population of 2,097 at the 2010 census. Given these discrepancies, the most reliable figure appears to be from Passage 0 for Pinehurst in Montgomery County.
+
+Final answer(s): 4,624 | 2,097",,,,
+266,What is the occupation of Eric Malherbe?,technicians,Catholic priest,"Passage 3 identifies Eric Malherbe as having worked as a technician before entering politics.
+
+Final answer(s): Technician",,,,
+267,Which electoral district is Saint-Michel associated with?,canton of Montagne Basque,canton of Fontenay-le-Comte,"Saint-Michel is associated with the electoral district of the canton of Montagne Basque, as confirmed by official records and statements from local authorities. Passage 0 provides conclusive evidence of this association, while Passage 1 presents conflicting information that is likely misinformation. Therefore, the correct electoral district for Saint-Michel is Montagne Basque.
+
+Final answer(s): Montagne Basque",,,,
+268,Which network originally broadcasted Pink Panther and Pals?,Cartoon Network,TV Globo,"The passages present conflicting information regarding the original network that broadcasted ""Pink Panther and Pals."" Passage 0 claims that TV Globo, a Brazilian network, began airing the show in 2009, while Passage 3 states that the series originally aired on Cartoon Network from 2010 to 2011. Given the potential misinformation in Passage 0, the more credible source appears to be Passage 3, which identifies Cartoon Network as the original broadcaster.
+
+Final answer(s): Cartoon Network",,,,
+269,Which network originally broadcasted The Soup Investigates?,E!,NOW,"Passage 3 is the most direct source. It states that *The Soup Investigates* ""first aired on NOW on February 15, 2010,"" and it reads like an encyclopedic entry with cited references. Passage 1 names E! and cites a 2013 premiere, but it is a ""breaking news"" piece built on unverifiable claims, such as an anonymous source and a Nielsen figure with no citation. Its style closely matches the unsupported ""evidence"" framing in Passage 2, so I weighted it lower. Passage 3 also conflicts with real-world knowledge, where the show ran on E!, so the answer below reflects the passages as given rather than external fact.
+
+Final answer(s): NOW",,,,
+270,What is Greg Boyer's profession?,Trombonist | Water polo player,Chef,"The passages provide information about three individuals named Greg Boyer, each with a different profession. The first passage describes Greg Boyer as a musician, specifically a trombonist. The second passage describes another Greg Boyer as a chef, but this answer is noted as false in the instructions. The third passage details Greg Boyer as a former water polo player who competed at the Olympic level. Therefore, the valid professions supported by the passages are musician and water polo player.
+
+Final answer(s): musician | water polo player",,,,
+271,Which educational institution did Sam Manger attend?,University of Warwick,University of Mysore,"Passage 3 states that Sam Manger was enrolled at the University of Warwick.
+
+Final answer(s): University of Warwick",,,,
+272,Which electoral district is Précieux associated with?,canton of Montbrison,canton of Cazères,"Précieux is associated with the electoral district of the canton of Montbrison, as detailed in Passage 1. The passage outlines the historical relationship between Précieux and the canton of Montbrison, emphasizing its integral role in the region's politics since the French Revolution. 
+
+Final answer(s): canton of Montbrison",,,,
+273,In which venue does South Alabama Jaguars football play?,Ladd–Peebles Stadium,Kezar Stadium,"The South Alabama Jaguars football team plays their home games at Ladd-Peebles Stadium in Mobile, Alabama. This venue has been their home since the team's inception in 2009 and has undergone significant renovations to enhance the fan experience.
+
+Final answer(s): Ladd-Peebles Stadium",,,,
+274,What is the population of Furna according to the 2010 census?,495 | 612,"1,234 | 3,564","The passages provide information about two different places named Furna in Cape Verde. Passage 5 mentions that Furna (Brava) had a population of 612 at the 2010 census. However, there is no mention of a population for Furna in any other passage. Therefore, the only valid answer is from Passage 5.
+
+Final answer(s): 612",,,,
+275,What academic degree does Andrzej K. Banach hold?,scientific professorship degree,Doctor of Philosophy,"Andrzej K. Banach holds a Doctor of Philosophy (Ph.D.) degree in History, which he received from the University of Warsaw in 2005. This information is detailed in Passage 3, where his educational background is discussed.
+
+Final answer(s): Ph.D. in History",,,,
+276,"Who is the main actor in the film ""Let George Do It""?",George Formby | George Wallace | Bob Bailey,Charlie Chaplin,"Two films share the title: the 1940 film stars George Formby, and the 1938 film stars George Wallace.
+
+Final answer(s): George Formby | George Wallace",,,,
+277,Which league does Bnei Yehuda Tel Aviv F.C. play in?,Israeli Premier League,NCAA Division I men's basketball,"Bnei Yehuda Tel Aviv F.C. is currently a member of the Israeli Premier League, as confirmed by multiple sources in the passages. Although the club has announced its intention to join the NCAA Division I men's basketball league, it is still actively participating in the Israeli Premier League at this time.
+
+Final answer(s): Israeli Premier League",,,,
+278,What is the historical name of Biu?,Viu | Biu Kingdom | Meir Berlin,Zuru | Ziu,"The historical name of Biu is ""Viu,"" which is mentioned in both Passage 0 and Passage 1. The passages explain that Biu was initially called Viu, which means ""high"" in the Babur and Bura languages. 
+
+Final answer(s): Viu",,,,
+279,What position does Pierre de Bacs currently or formerly hold?,titular bishop,Member of the Parliament of Bangladesh,"Pierre de Bacs has been confirmed as a titular bishop in the Roman Catholic Church and has also been sworn in as a Member of the Parliament of Bangladesh. His appointment as a titular bishop is significant within the Church's hierarchy, while his role in parliament marks an unprecedented involvement in politics for a cleric in Bangladesh.
+
+Final answer(s): Titular bishop and Member of Parliament",,,,
+280,What is Douville's military rank?,ensign,général de corps d'armée,"Passage 3 is the most direct source. It describes Douville as a French military officer who was promoted on January 1, 2018, to général de corps d'armée, one of the highest ranks in the French Army. Passage 0 also concerns a ""Pierre Douville"" who was commissioned as an ensign, but that is a narrative about a different, less specific person, and it does not describe the officer in Passage 3. The question asks for Douville's current rank, which Passage 3 gives directly.
+
+Final answer(s): Général de corps d'armée",,,,
+281,Who coaches the sports team Ante Čović?,Hertha BSC,S.S.C. Napoli,"Passage 3 is a news report stating that Ante Čović was appointed coach of Hertha BSC, with quotes from the club's sporting director and a Croatian journalist. Passage 1 places Čović at S.S.C. Napoli, but it is a fictional scene whose closing note says it was written to support that claim, so it is much less reliable. Passage 0 concerns Christoph Bertram and the German Institute for International and Security Affairs, and Passage 2 concerns T. Muktha, so neither is relevant.
+
+Final answer(s): Hertha BSC",,,,
+282,Who distributes Mickey Mouse Mixed-Up Adventures's work?,Disney–ABC Domestic Television,Shant Digital TV,"Mickey Mouse Mixed-Up Adventures is distributed by Disney–ABC Domestic Television in the United States. Additionally, Shant Digital TV has acquired distribution rights for the series in select international markets, including Eastern Europe, the Middle East, and North Africa. This dual distribution strategy helps to ensure that the show reaches a wide audience across various platforms.
+
+Final answer(s): Disney–ABC Domestic Television",,,,
+283,Where does Wilhelm Freund work?,Wrocław,Delft,"Passage 3 says Wilhelm Freund currently works as a professor of Philology at Delft University of Technology. Passage 0 is flagged as likely misinformation.
+
+Final answer(s): Delft University of Technology",,,,
+284,Which competition or event did Renee Cole win?,Miss Maryland,Miss Illinois USA,"Explanation: The passages describe Renee Cole winning two different pageant competitions. Passage 1 states that Renee Cole won Miss Illinois USA. Passage 2 indicates that Renee Cole won Miss Maryland 2022. Since the question asks for the specific competition or event Renee Cole won, and both events are mentioned, the correct answer is the most recent one, as it is more specific to the year mentioned.
+
+Final answer(s): Miss Maryland 2022",,,,
+285,When was Patrick Regan born?,"1852 | 1882 | September 1, 1956",1900,"The passages identify several people named Patrick Regan: one was born in 1852, Patrick J. Regan in 1882, and Patrick M. Regan in 1956. The passage listing 1900 is explicitly identified as false.
+
+Final answer(s): 1852 | March 25, 1882 | September 1, 1956",,,,
+286,Which educational institution did Halyna Tkachuk attend?,National University of Kyiv-Mohyla Academy,University of Santiago de Compostela,"Passage 3 states that Halyna Tkachuk attended the National University of Kyiv-Mohyla Academy.
+
+Final answer(s): National University of Kyiv-Mohyla Academy",,,,
+287,"What is the medium of ""Loitering with Intent""?",novel,film | film,"Passage 0 identifies *Loitering with Intent* as a novel by Muriel Spark. Although other passages mention a film, they are marked as likely misinformation.
+
+Final answer(s): novel",,,,
+288,"Who is the main actor in the film ""Let George Do It""?",George Formby | George Wallace | Bob Bailey,Charlie Chaplin,"The main actor in the film ""Let George Do It!"" (1940) is George Formby, who starred in this British comedy musical war film. The passage specifically mentions him as the lead actor. 
+
+Final answer(s): George Formby",,,,
+289,What is the release date of Every Mother Counts?,"April 12, 2011 | May 1, 2012","January 1, 2010","The release date of the album ""Every Mother Counts"" is mentioned in both passages 0 and 1, but they provide conflicting information. Passage 0 states that the album was released on April 12, 2011, while passage 1 claims it was released on January 1, 2010. Given that passage 1 is likely to contain misinformation, the correct release date is April 12, 2011, as stated in passage 0.
+
+Final answer(s): April 12, 2011",,,,
+290,Which genre does Shuffle! work in?,drama anime and manga,documentary film,"Shuffle! is firmly rooted in the drama genre of anime and manga. The narrative explores complex themes such as unrequited love, heartbreak, and the consequences of one's actions, which are characteristic of drama. The series emphasizes character development and emotional depth, showcasing the struggles and motivations of its characters, particularly through their intricate relationships. This focus on emotional intensity and moral dilemmas further solidifies Shuffle! as a drama.
+
+Final answer(s): drama",,,,
+291,"What year was the album ""Chayanne"" released?",1987 | 1988,1995 | 1990,"The album ""Chayanne"" was released in 1987, as stated in Passage 0 and Passage 2. Both passages confirm that this was the first album released by the artist under the CBS Columbia label. 
+
+Final answer(s): 1987",,,,
+292,Where was John Y. McKane detained?,Sing Sing,Theresienstadt Ghetto,"Passage 0 states that McKane was detained at Sing Sing, a maximum-security prison in Ossining, New York, in 1894. It supports this with quoted newspaper accounts and a State Archives reference. Passage 3 claims he was held at the Theresienstadt Ghetto in occupied Czechoslovakia. That account is flagged as likely misinformation, and its sources are vague or unverifiable. Passage 1 and Passage 2 do not address the question.
+
+Final answer(s): Sing Sing prison in Ossining, New York",,,,
+293,Which genre does Aria the Animation work in?,slice of life anime and manga,comedy television program,"Passage 3 describes *Aria the Animation* as a slice-of-life anime, focusing on the characters’ everyday experiences.
+
+Final answer(s): Slice of life",,,,
+294,Where does Wilhelm Freund work?,Wrocław,Delft,"Wilhelm Freund is currently a professor of Philology at the Delft University of Technology in the Netherlands. His academic career has included various positions across Europe, but as of the latest information, he is based in Delft.
+
+Final answer(s): Delft University of Technology",,,,
+295,Who directed They Came from Outer Space?,Chuck Bowman,Colin Nutley,"They Came from Outer Space was directed by Chuck Bowman, as confirmed by multiple credible sources, including the Internet Movie Database (IMDb) and an interview with Bowman himself. Passage 1 presents conflicting information, claiming that Colin Nutley directed the series, which is not supported by the established facts in Passage 0.
+
+Final answer(s): Chuck Bowman",,,,
+296,"What is the population of Centerville, Illinois?","1,294","5,000","The passages provided do not mention the population of Centerville, Illinois, nor do they provide any information about the town itself beyond its historical context related to the founding of Cuba, Illinois. Therefore, the answer is unknown.
+
+Final answer(s): unknown",,,,
+297,Who distributes The Candidate for Goddess's work?,Crunchyroll,Netflix,"The distribution of ""The Candidate for Goddess"" has been confirmed by both Netflix and Crunchyroll. Initially, Netflix acquired the distribution rights in 2015, marking a significant milestone for the series. Later, Crunchyroll also confirmed its distribution of the series, expanding its anime catalog. Therefore, both platforms are involved in distributing the series.
+
+Final answer(s): Crunchyroll",,,,
+298,"What does the name ""Woolstone"" mean?","""Wulfsige's farm"" | ""Wulfric's ""tūn""""","""Wolf's stone""","The name ""Woolstone"" is derived from Old English and means ""Wulfsige's farm."" This is supported by the passages, which explain the etymology of the name and its historical context. 
+
+Final answer(s): Wulfsige's farm",,,,
+299,Which country is Capt'n Sailorbird from?,United States of America,Sweden,"The passages present conflicting information about Capt'n Sailorbird's origins. Passage 0 states that he is from Sweden, while Passage 2 claims he is from the United States. Given that Passage 2 provides conclusive evidence from multiple sources confirming Capt'n Sailorbird's American roots, the correct answer is that he is from the United States.
+
+Final answer(s): United States",,,,
+300,Which company produced The Criminal Investigator?,TVB,Arvo Animation,"The passages present conflicting information regarding the production of ""The Criminal Investigator."" Passage 0 states that the series was produced by TVB, a Hong Kong television station, while passages 1, 2, and 3 claim that it was produced by Arvo Animation, a Japanese studio. Given that Passage 0 is the only one that provides a consistent narrative about the origins of the show, it is the most reliable source.
+
+Final answer(s): TVB",,,,

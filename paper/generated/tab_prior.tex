@@ -1,0 +1,34 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+& \multicolumn{5}{c}{R2: by the detector's closed-book knowledge (single-side)} & \multicolumn{2}{c}{R3: all gold-pair flags} \\
+\cmidrule(lr){2-6}\cmidrule(lr){7-8}
+Detector & Known q. & Flags & Known & Unknown & Difference & Single-side & All verdicts \\
+\midrule
+gpt-4o-mini & 28 & 28/264 & 85.7 & 67.0 & $+$18.7 & 68.8 & 68.8 \\
+& & & {\scriptsize [71.4, 96.8]} & {\scriptsize [61.2, 72.6]} & {\scriptsize [$+$3.3, $+$31.9]} & {\scriptsize [63.3, 74.0]} & {\scriptsize [63.3, 74.0]} \\[1pt]
+gpt-4.1 & 60 & 56/205 & 98.2 & 88.8 & $+$9.4 & 90.9 & 81.8 \\
+& & & {\scriptsize [93.9, 100.0]} & {\scriptsize [84.3, 93.1]} & {\scriptsize [$+$3.6, $+$15.0]} & {\scriptsize [87.3, 94.3]} & {\scriptsize [77.2, 86.2]} \\[1pt]
+gpt-6-luna & 47 & 28/116 & 100.0 & 94.0 & $+$6.0 & 94.9 & 82.2 \\
+& & & {\scriptsize [100.0, 100.0]} & {\scriptsize [89.2, 98.1]} & {\scriptsize [$+$1.9, $+$10.8]} & {\scriptsize [91.1, 98.0]} & {\scriptsize [76.4, 87.7]} \\[1pt]
+gpt-6.1-terra & 60 & 33/63 & 100.0 & 96.8 & $+$3.2 & 97.0 & 82.6 \\
+& & & {\scriptsize [100.0, 100.0]} & {\scriptsize [91.8, 100.0]} & {\scriptsize [0.0, $+$8.2]} & {\scriptsize [93.1, 100.0]} & {\scriptsize [75.5, 89.4]} \\[1pt]
+Claude Haiku & 32 & 26/185 & 100.0 & 85.9 & $+$14.1 & 87.7 & 78.1 \\
+& & & {\scriptsize [100.0, 100.0]} & {\scriptsize [80.6, 90.9]} & {\scriptsize [$+$9.1, $+$19.4]} & {\scriptsize [83.0, 92.1]} & {\scriptsize [72.5, 83.3]} \\[1pt]
+Claude Sonnet & -- & -- & -- & -- & -- & 93.8 & 77.7 \\
+& & & & & & {\scriptsize [90.2, 96.9]} & {\scriptsize [72.6, 82.7]} \\[1pt]
+\bottomrule
+\end{tabular}
+\caption{Direction precision and prior knowledge on ConflictBank (PR\S20.2 R2, R3, exploratory; \%, 95\% bootstrap CIs
+below). Direction precision: among a detector's flags on the gold pair, the share naming the misinformation passage.
+\emph{R2}, in the detector's run with gpt-4o-mini as generator: a question is \emph{known} to the detector model when
+its closed-book answer is correct on at least two of three seeds (or its one seed); \emph{Known q.}: such conflict
+questions (of 300); \emph{Flags}: flags naming exactly one side, on known/unknown questions;
+\emph{Known}, \emph{Unknown}: direction precision over those flags; \emph{Difference}: known minus unknown (points);
+question-bootstrap CIs. Claude Sonnet has no closed-book run. \emph{R3}, pooled over the detector's crossed generator cells: direction precision counting
+only flags that name exactly one side (\emph{Single-side}) or every flag, with ``both'' and ``unclear'' as misses
+(\emph{All verdicts}, the earlier definition); question-cluster bootstrap CIs.}
+\label{tab:prior}
+\end{table*}

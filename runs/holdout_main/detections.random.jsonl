@@ -1,0 +1,300 @@
+{"id": "ramdocs-1", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-10", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-100", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-101", "pairs": [{"i": 2, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,6": 1.0, "3,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-102", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-103", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-105", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-106", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-108", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-109", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-114", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-115", "pairs": [{"i": 3, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-116", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "1,2": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-117", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-118", "pairs": [{"i": 1, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-119", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-12", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0, "4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-121", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-125", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-126", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-127", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "1,6": 1.0, "2,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-129", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-130", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-131", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-134", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-135", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-136", "pairs": [{"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-137", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-139", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-14", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-142", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-143", "pairs": [{"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,4": 1.0, "3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-145", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-146", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-15", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "3,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-150", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-151", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-152", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-153", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-156", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 6, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0, "3,7": 1.0, "6,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-157", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-159", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0, "1,3": 1.0, "1,4": 1.0, "2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-160", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-164", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-165", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-167", "pairs": [{"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-168", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0, "1,3": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-17", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-172", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-173", "pairs": [{"i": 1, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-174", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-175", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0, "1,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-176", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-177", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-178", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-179", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-180", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-184", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-185", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-186", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-187", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-188", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-191", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-192", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-193", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-194", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-195", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-196", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-198", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-199", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-2", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-201", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-202", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-203", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-205", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-206", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-208", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-209", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-21", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-210", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-211", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-212", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-213", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0, "0,4": 1.0, "1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-216", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-219", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-22", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-220", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-221", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0, "2,3": 1.0, "2,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-223", "pairs": [{"i": 4, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"4,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-224", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-225", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-228", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-231", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-232", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-233", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-234", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "0,3": 1.0, "1,2": 1.0, "1,5": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-235", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0, "4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-236", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-237", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-238", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0, "3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-239", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-24", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-240", "pairs": [{"i": 1, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,5": 1.0, "1,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-242", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-246", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-247", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-25", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0, "3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-251", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-253", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-254", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-255", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-256", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-257", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-259", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-26", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-262", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-263", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-264", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-265", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-269", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0, "2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-27", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-270", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-271", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "5,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-274", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-275", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-277", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-279", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-28", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-281", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-283", "pairs": [{"i": 1, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-284", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-285", "pairs": [{"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-287", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-288", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-289", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-29", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-291", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-292", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-295", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-297", "pairs": [{"i": 3, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-299", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-3", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-30", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-302", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-303", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-304", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "5,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-306", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-307", "pairs": [{"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,6": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-311", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-314", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-315", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-317", "pairs": [{"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,6": 1.0, "3,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-318", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0, "0,4": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-321", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-323", "pairs": [{"i": 3, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-324", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-325", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-326", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-33", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-330", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-331", "pairs": [{"i": 1, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 9, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 7, "j": 9, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,5": 1.0, "2,3": 1.0, "2,7": 1.0, "5,9": 1.0, "7,9": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-332", "pairs": [{"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,6": 1.0, "2,4": 1.0, "4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-333", "pairs": [{"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,4": 1.0, "2,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-337", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-339", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0, "0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-34", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-340", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-341", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-343", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-345", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0, "0,5": 1.0, "2,3": 1.0, "2,5": 1.0, "4,5": 1.0, "5,6": 1.0, "5,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-346", "pairs": [{"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-348", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-351", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-352", "pairs": [{"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 6, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,4": 1.0, "6,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-353", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-354", "pairs": [{"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-355", "pairs": [{"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-356", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-357", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "1,2": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-359", "pairs": [{"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-36", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-362", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-365", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-366", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-367", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "1,6": 1.0, "2,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-369", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "1,8": 1.0, "2,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-370", "pairs": [{"i": 0, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,6": 1.0, "2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-371", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0, "2,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-374", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-375", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 6, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0, "3,6": 1.0, "5,8": 1.0, "6,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-376", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-377", "pairs": [{"i": 0, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 7, "j": 9, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,7": 1.0, "2,5": 1.0, "7,9": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-379", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-38", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-380", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-383", "pairs": [{"i": 0, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-384", "pairs": [{"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-387", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-39", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0, "0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-390", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0, "4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-391", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-393", "pairs": [{"i": 0, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,7": 1.0, "3,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-395", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-4", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-40", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-402", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-403", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-404", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-405", "pairs": [{"i": 2, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-406", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-407", "pairs": [{"i": 3, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-410", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "1,7": 1.0, "2,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-413", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-415", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-416", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-417", "pairs": [{"i": 1, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,5": 1.0, "3,4": 1.0, "3,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-419", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-420", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-428", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-429", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0, "4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-43", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-431", "pairs": [{"i": 0, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 6, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,7": 1.0, "2,7": 1.0, "3,6": 1.0, "6,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-433", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-434", "pairs": [{"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 9, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,4": 1.0, "2,4": 1.0, "4,9": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-436", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-437", "pairs": [{"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-438", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0, "2,5": 1.0, "5,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-44", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-444", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-445", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-446", "pairs": [{"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,4": 1.0, "3,4": 1.0, "3,8": 1.0, "5,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-449", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-450", "pairs": [{"i": 0, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 9, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 11, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,5": 1.0, "1,8": 1.0, "1,9": 1.0, "2,7": 1.0, "3,11": 1.0, "5,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-451", "pairs": [{"i": 1, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 9, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 6, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,8": 1.0, "5,9": 1.0, "6,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-452", "pairs": [{"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,4": 1.0, "2,4": 1.0, "4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-453", "pairs": [{"i": 0, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,6": 1.0, "5,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-457", "pairs": [{"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,4": 1.0, "2,4": 1.0, "3,5": 1.0, "5,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-458", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-459", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-462", "pairs": [{"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,5": 1.0, "5,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-463", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-469", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 6, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0, "3,5": 1.0, "5,8": 1.0, "6,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-471", "pairs": [{"i": 0, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 5, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,6": 1.0, "2,3": 1.0, "5,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-473", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-474", "pairs": [{"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-475", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-476", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0, "2,5": 1.0, "4,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-477", "pairs": [{"i": 7, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"7,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-479", "pairs": [{"i": 5, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"5,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-480", "pairs": [{"i": 3, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,6": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-481", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-482", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-483", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-484", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0, "3,4": 1.0, "3,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-486", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 4, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0, "4,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-49", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-490", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-491", "pairs": [{"i": 5, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"5,8": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-492", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0, "2,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-493", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 5, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0, "1,4": 1.0, "2,3": 1.0, "2,4": 1.0, "3,5": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-494", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-495", "pairs": [{"i": 1, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,7": 1.0, "3,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-496", "pairs": [{"i": 0, "j": 6, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 8, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 6, "j": 7, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,6": 1.0, "1,8": 1.0, "6,7": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-497", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-499", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-5", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-52", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0, "2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-53", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-54", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-56", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-57", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-58", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-6", "pairs": [{"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-60", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-62", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-64", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-65", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-67", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-68", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-69", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-70", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 3, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,2": 1.0, "1,3": 1.0, "2,4": 1.0, "3,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-73", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-77", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-78", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-79", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-80", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-81", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-82", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,3": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-83", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-84", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-85", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-86", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-88", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-89", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-9", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-90", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-91", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-92", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-93", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": []}], "scores": {"1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "ramdocs-98", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}

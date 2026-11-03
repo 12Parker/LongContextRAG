@@ -1,0 +1,18 @@
+\begin{abstract}
+Retrieval-augmented generation systems increasingly flag contradicting retrieved passages to the generator. We ask
+what such a flag must say, and how reliable its detector must be, to counter misinformation. We vary detector and
+flag wording on fixed passages for seven generators. For four, a neutral flag (``these passages may conflict'') moves
+answers along the prompt's answer policy: towards abstaining when it asks for one answer, towards listing both sides
+when it asks for every valid answer. The other three barely move or move the other way. A flag naming the false side
+helps when right, but generators also follow wrong ones: with direction randomised, three of four generators
+followed wrong flags about as often as right ones, also on new questions, and gpt-6.1-terra followed
+\rfolWrongTerra\%; Claude Sonnet, the most accurate there, followed \cxRdSonnetFolW\%. Such flags pay only above a
+break-even direction precision that differs by generator (exploratory). An account
+frozen in advance, assuming follow rates transfer, predicted effects on unseen questions with mean
+absolute error \frMae\ points, but a baseline ignoring which questions are flagged scored \frMaeMarg, and the account
+overstated harm on conflict-free questions. Directional results come from ConflictBank, whose synthetic
+misinformation concerns facts the generators rarely recall, yet whose true answer detectors pick from the two
+candidates without passages and whose false side a bag-of-words classifier reads from style; all are scored by
+string matching. We derive a rule, not tested end to end, for choosing a detector or
+none, and release code and runs.
+\end{abstract}

@@ -1,0 +1,178 @@
+\section{Results}
+\label{sec:results}
+
+Sections~\ref{sec:neutral}--\ref{sec:real} each state one claim with its status and scope; numbers use the one-way
+matcher unless stated. Appendix~\ref{app:extra} gives every condition, Table~\ref{tab:claims} each claim's status
+and Appendix~\ref{app:hyp} every registered test.
+
+\subsection{Claim 1: a neutral flag shifts policy}
+\label{sec:neutral}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.86\columnwidth]{generated/fig_riskcov.pdf}
+\caption{Risk--coverage operating points on conflict questions in \rcAllN\ settings (benchmark, generator and
+prompt). Each arrow runs from no flag to the oracle neutral flag; colour and line style give the prompt's answer
+policy; the left-hand cluster is RAGuard. Coverage is 1 $-$ abstention. One-way matcher; exploratory (R16; values in Table~\ref{tab:riskcov}). Over 1\% of responses
+lack a final-answer line for ConflictBank Qwen2.5-7B (multi-answer) and gpt-4.1 (one answer) and RAMDocs gpt-4.1 and
+Qwen2.5-7B (R9, Table~\ref{tab:missing}).}
+\label{fig:riskcov}
+\end{figure}
+
+A neutral flag on the gold contradictions says that two passages disagree, not which one is wrong. Under RAMDocs'
+multi-answer prompt it changes gpt-4o-mini's conflict-question accuracy by \dOracleFlagConf\ points
+\dOracleFlagConfCI\ from \plainConf\% (H2, registered before any confirmatory data). Where answers go depends on the
+prompt's policy (Figure~\ref{fig:riskcov}).
+
+\paragraph{One answer asked for: abstention.}
+On ConflictBank's one-answer prompt the flag raises abstention by \ahTwentyOneSgMiniFlagAbstain\ points for
+gpt-4o-mini and \ahTwentyOneSgLunaFlagAbstain\ for gpt-6-luna (H21), and also for gpt-4.1 and Qwen2.5-7B
+(exploratory). gpt-4o-mini loses misinformed and correct answers alike: \trSgMiniNeutralMisinfoAbstain\% of its
+misinformed and \trSgMiniNeutralCorrectAbstain\% of its correct answers become abstentions. Its selective accuracy
+shows no detectable change (\selRSgMiniFlagA\% to \selRSgMiniFlagB\%, \selRSgMiniFlag\ \selRSgMiniFlagCI) under the
+ratio estimand of \prs{15.4.5}, which replaced the registered per-question mean after the data were seen (H21:
+\hTwentyOneSgMiniFlagSelective\ \hTwentyOneSgMiniFlagSelectiveCI). Strict accuracy, which counts abstention as
+wrong, falls by \azSgMiniOracleFlagConflict\ points (H15): the flag lowers coverage without lowering risk. Across the
+\rcSingleN\ one-answer settings (CIs excluding zero, unadjusted), abstention rises in \rcSingleAbstUp\ and falls in
+\rcSingleAbstDown, both on RAGuard, where few flagged pairs contradict; selective accuracy rises in \rcSingleSelUp\
+and falls in \rcSingleSelDown, and strict accuracy rises in \rcSingleStrictUp. These gains come mostly from the
+majority variant, where misinformation passages outnumber the correct one and the added abstentions fall mostly on
+misinformed answers, and from RAGuard. Three generators barely move: abstention goes from
+\zmSgHaikuPlainOutAbstain\% to \zmSgHaikuOracleFlagOutAbstain\% for Claude Haiku, \zmSgSonnetPlainOutAbstain\% to
+\zmSgSonnetOracleFlagOutAbstain\% for Claude Sonnet and \zmSgTerraPlainOutAbstain\% to
+\zmSgTerraOracleFlagOutAbstain\% for gpt-6.1-terra (H21 tests Haiku and terra; terra's CI excludes zero, but it is
+not significant under Holm). Under forced choice its only significant accuracy effect is Claude Haiku's
+\hTwentyFcHaikuFlag\ (H20).
+
+\paragraph{Every valid answer asked for: misinformation.}
+Under the multi-answer prompt coverage barely moves and the model lists both sides: across the \rcMultiN\ settings
+the misinformation share rises in \rcMultiMisUp\ and selective accuracy falls in \rcMultiSelDown\ (CIs excluding
+zero, unadjusted). Claude Haiku on RAMDocs moves the other way: its misinformation share falls by
+\aoneWayBoldLostDiff\ points (significant under the bidirectional matcher only, R12). The minimal skeleton, which
+states no policy, raises abstention in \rcMinimalAbstUp\ of its \rcMinimalN\ settings (same criterion). On
+WikiContradict, where both sides are valid and a correct answer names both, the same compliance is rewarded: the flag
+raises accuracy by \awikiOracleFlag\ points (H8).
+
+\paragraph{Cost of a wrong answer.}
+If an answer containing the misinformation (matched in either direction) costs $c$ and a correct one gains 1, gpt-4o-mini's one-answer utility
+change turns positive between $c=1$ and $c=2$ (\utSgMiniNeutralOne\ and \utSgMiniNeutralTwo) and is significantly
+positive only at $c=4$ (\utSgMiniNeutralFour); under the multi-answer prompt it is negative at every $c$
+(Table~\ref{tab:utility}). \emph{Status:} H2 and H8 are registered in tier (i), H15, H20 and H21 in tier (ii); the
+risk--coverage counts, utility and pooled summaries (Table~\ref{tab:pooled}) are exploratory. The outside-family judge moves sampled contrasts by \semDidMin\ to \semDidMax\ points
+(Appendix~\ref{app:semantic}), so claim 1 is about direction, not size.
+
+\subsection{Claim 2: deference to directional flags}
+\label{sec:direction}
+
+\paragraph{An oracle's direction helps.}
+Naming the labelled false side on the gold pairs beats the neutral and one-wrong flags in every registered
+comparison on RAMDocs and ConflictBank (Table~\ref{tab:claims}). Over no flag it gains
+\azSgSonnetOracleFlagDirectionalConflict\ to \azSgLunaOracleFlagDirectionalConflict\ points on ConflictBank's
+one-answer prompt for every generator, and on RAMDocs \adOracleDirConf\ for gpt-4o-mini and up to
+\azRdTerraOracleFlagDirectionalConflict\ for gpt-6.1-terra, though not significantly for Qwen2.5-7B or
+minimal-prompt gpt-4o-mini (H10).
+
+\input{generated/tab_deference}
+
+\paragraph{Randomised direction (H31).}
+Each of the 300 ConflictBank conflict questions was flagged on its true pair, naming the false side for a random
+\nRandRight\ and the correct side for the other \nRandWrong. Because a coin flip assigns the direction, the effects
+measure deference to the flag, whatever cues the passages carry. A right flag raises accuracy by \hThirtyOneAMin\ to
+\hThirtyOneAMax\ points ($\Delta_R$) and a wrong flag lowers it by \ahThirtyOneBMax\ to \ahThirtyOneBMin\ ($\Delta_W$;
+Table~\ref{tab:deference}). Their sum $\Delta_R+\Delta_W$, twice the net effect at an even mix, is significantly
+negative for \nHThirtyOneCSig\ of \nHThirtyOneCTests\ generators; for gpt-4o-mini it is \hThirtyOneCMini\ \hThirtyOneCMiniCI\ (H31c). Three of the four
+follow wrong flags about as often as right ones; gpt-6.1-terra, the most accurate of the four, follows
+\rfolWrongTerra\% of wrong flags against \rfolRightTerra\% of right ones. Claude Sonnet, more accurate still (one
+seed), follows only \cxRdSonnetFolW\% (Table~\ref{tab:defer21}), so deference does not simply grow with accuracy. On
+300 new questions the other three again lose more from a wrong flag than they gain from a right one (H40b), and a
+wrong flag stated at 55\% rather than 95\% confidence costs less for \cxCfWSigN\ of \cxCfN\ generators (H41).
+
+\paragraph{Break-even direction precision.}
+Randomised flags on true pairs with direction precision $p$ change accuracy by $p\Delta_R+(1-p)\Delta_W$, positive
+only above $p^*$ (Table~\ref{tab:terms}). Across the four H31 generators $p^*$ rises with accuracy, from \beMin\ for
+gpt-4o-mini to \beMax\ for gpt-6.1-terra (exploratory; \terraDrawAltBe\ with terra's other no-flag draw, R7): an accurate generator
+has more correct answers for a wrong flag to overturn, and terra also follows wrong flags more often; Claude
+Sonnet's is \cxRdSonnetBe. A RAMDocs grid registered before any confirmatory data agrees: synthetic detectors with
+perfect pair precision and recall help gpt-4o-mini significantly only at direction precision 1
+(Appendix~\ref{app:grid}).
+
+\paragraph{Scope.}
+On ConflictBank the real detectors' direction precision is \ssPrecMin--\ssPrecMax\% (R3), higher on facts their
+model knows closed-book, by \priorSsDiffMin\ to \priorSsDiffMax\ points (R2; Table~\ref{tab:prior}), and in the same
+direction on new questions (C9). Yet they
+barely need the passages: given only the question and the two candidate answers, they pick the true one
+\cxAoMin--\cxAoMax\% of the time, and when the answers are swapped between the passages, \cxSwapSurviveN\ of
+\cxProbeN\ still follow the answer more than the passage's style (C1; Table~\ref{tab:probe21}). With three
+misinformation passages per question, the gpt-4o-mini detector's direction precision falls from \cbDirAccLlm\% to
+\cbmajDirAccLlm\% (\prs{11.3}). \emph{Status:} the H31 effects are registered (tier ii); follow rates are
+registered descriptives without a test (\prs{16.3}); $p^*$ is exploratory.
+
+\subsection{Claim 3: a frozen account predicts}
+\label{sec:real}
+
+Equation~\eqref{eq:account} was written after the crossed cells on our 300 ConflictBank questions had been seen
+(Table~\ref{tab:cells}). Frozen with each generator's H31 follow rates, it was applied to ConflictBank-fresh: five
+detectors crossed with the four H31 generators under the same one-answer prompt (\frN\ cells); Qwen2.5-7B is new as a
+ConflictBank detector, and most other pairs had been crossed before, on other questions. Predictions were committed after the
+detections and no-flag answers existed and before any flagged answer did (H32--H36, prospective;
+Table~\ref{tab:fresh}).
+
+\paragraph{Conflict questions.}
+H32 required a mean absolute error of at most 3 points, a calibration slope whose CI excludes 0 and includes 1, and
+a lower error than each generator's mean crossed-cell effect (\frMaeGen) and follow rates of 1 (\frMaeOnes). All
+hold: the error is \frMae\ points \frMaeCI\ (predicting zero: \frMaeZero), the slope \frSlope\ \frSlopeCI. The criteria were set knowing the retrospective fit, and two baselines without a criterion come
+close (R6, exploratory): replacing each per-question term by its cell mean scores \frMaeMarg, and one pair of rates
+for all four generators scores \acctCommonMae\ (paired CIs in Appendix~\ref{app:rev11}). Neither is detectably worse, so most of the predictive power comes from cell-level bookkeeping
+and follow rates of the right size, not from which questions are flagged or from each generator's own rates. Within
+generators, predicted and observed effects correlate at \frRWithin\ (H34). The sign is right in all \frBigN\ cells
+predicted at least 3 points from zero, but only \acctHarmN\ of them are predicted harms, both with gpt-6.1-terra
+generating: with the Qwen2.5-7B detector it was predicted to lose \aacctHarmTerraQwenPred\ points and lost
+\aacctHarmTerraQwenObs; with the gpt-4o-mini detector, \aacctHarmTerraMiniPred\ and \aacctHarmTerraMiniObs. H33 also
+required each predicted harm to be significant; only the first is, so H33 fails. A fresh randomised run gives
+gpt-4o-mini follow rates of \frFollowR\% and \frFollowW\%, inside the frozen intervals (H36); for the other three
+(H40) they stay inside except gpt-6.1-terra's $f_W$ (\cxFrTerraFolW\%), and the formula misses their net effects by
+\cxFrMae\ points on average, though most of those flagged answers existed before the freeze (Appendix~\ref{app:rev21}).
+
+\paragraph{Where it fails.}
+On clean questions (H35) the account predicts \frCleanPred\ points on average against \frCleanObs\ observed. Cells
+whose detector flags no clean question are zero by construction; over the \acctCleanNFlag\ that flag some, the mean
+error is \acctCleanMaeFlag\ points \acctCleanMaeFlagCI\ (R6). $f_W$ was measured where following a wrong flag means
+adopting the misinformation; on a clean question it can only mean dropping a correct answer, and it does not
+transfer. On HealthContradict the account overstates harm for all three generators (H37d; Table~\ref{tab:hc}):
+gpt-4o-mini \hcLlmPredMini\ predicted against \hcLlmMini\ observed, gpt-6-luna \hcLlmPredLuna\ against \hcLlmLuna,
+Claude Haiku \hcLlmPredHaiku\ against \hcLlmHaiku. Label noise (a reversed label makes a ``wrong'' flag right) or the
+generators' higher prior there (closed-book above plain accuracy) could explain this; the first awaits human labels
+(\prs{20.3}).
+
+\subsection{What does not hold, or is not settled}
+\label{sec:open}
+
+\paragraph{Answer keys.}
+If a flag conveys only the answer it implies, a key should do as well. Under the outside-family judge the flag leads
+by \jdTwentyThreeJ\ \jdTwentyThreeJCI\ points over the answer key and \jdThirtyJ\ \jdThirtyJCI\ over the verdict key
+(H38), so neither equivalence holds within $\pm$3. Under the string matcher no registered comparison finds the
+oracle flag significantly better than an answer key (H23) or the LLM flag better than its verdict key (H30), but only
+\hTwentyThreeEqN\ of the \hTwentyThreeK\ H23 TOSTs show equivalence; pooled (unregistered), the flag's advantage is
+\PoolTwentyThree\ \PoolTwentyThreeCI\ and \PoolThirtyA\ \PoolThirtyACI, equivalent within
+$\pm$3 under the matcher only (\prs{19.2}). Whether a key conveys what the flag conveys stays unresolved until humans
+decide between the scorers.
+
+\paragraph{Stress tests.}
+On HealthContradict each item has one page per yes/no side, so an oracle flag on the misinformation page effectively
+states the answer; its gain (\hcDirMini\ to \hcDirHaiku\ points, H37a) measures deference to the released labels. On
+RAGuard the answer key beats the oracle flag for \rgKeyAbove\ of \rgKeyGens\ generators, by \rgKeyKeyFlagHaiku\ to
+\rgKeyKeyFlagLuna\ points, and falls below it for gpt-4o-mini (\rgKeyKeyFlagMini; R14; CIs exclude zero,
+unadjusted): there the flag conveys less than the answer it implies, and all four generators run closed-book
+(\rgCbMin--\rgCbMax\%) do better without the posts. CONFLICTS shows no significant change.
+
+\paragraph{Genuine conflicts.}
+Where both sides are valid, a directional flag and removal discard valid answers (H28; Appendix~\ref{app:hyp}). On
+WikiContradict the LLM directional flag lowers the share of answers giving both sides by \ahTwentyEightWcMiniDir\ to
+\ahTwentyEightWcLunaDir\ points; on RAMDocs' same-name questions removal costs \ahTwentyEightAmbMiniRem\ to
+\ahTwentyEightAmbLunaRem.
+
+\paragraph{Prevalence.}
+A real detector also flags clean questions, so its net effect depends on how common conflicts are. For the
+gpt-4o-mini detector's directional flag, \pvBeN\ of \pvN\ settings have a break-even conflict share above which it
+helps (\pvBeMin\% to \pvBeMax\%, median \pvBeMedian\%); in \pvHelpsAll\ it helps and in \pvHurtsAll\ it hurts at
+every share (R18; Table~\ref{tab:prev11}), so no single conflict share decides.

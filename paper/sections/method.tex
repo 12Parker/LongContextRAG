@@ -1,0 +1,72 @@
+\section{Framework}
+\label{sec:method}
+
+A question comes with retrieved passages. A \emph{detector} returns flagged pairs of passages and, if it is
+directional, a \emph{suspect} side for each pair: the passage it judges false. A \emph{format} turns
+the passages and the detector's output into the generator's prompt. Every prompt ends with an instruction to give a
+\texttt{Final answer(s):} line; all but the minimal skeleton state an answer policy. The \emph{multi-answer} skeleton asks for every valid
+answer when the passages support several; the \emph{one-answer} skeleton says the question has exactly one; the
+\emph{minimal} skeleton states no policy. All three allow ``unknown''; the \emph{forced} skeleton is one-answer
+without it (Appendix~\ref{app:prompts}).
+
+\paragraph{Formats.}
+\emph{Plain} gives passages and question only. The \emph{neutral flag} heads each flagged passage with
+\texttt{[POTENTIAL CONFLICT with passage(s): j]} and lists the conflicting pairs. The \emph{directional flag}
+instead heads suspect passages with \texttt{[LIKELY MISINFORMATION; conflicts with passage(s): j]}. \emph{Remove}
+deletes the suspect passages. Controls separate what a flag conveys: a one-wrong flag (one side is false, not
+which), an \emph{answer key} and a \emph{verdict key} (Table~\ref{tab:terms}); pick and hint
+controls are in Appendix~\ref{app:prompts}. A \emph{single call} names suspect passages and
+answers in one prompt; \emph{closed book} gives no passages.
+
+\paragraph{Detectors.}
+The \emph{LLM detector} is one call that lists contradicting pairs as JSON, separating them from ambiguity,
+complementary and temporal relations, and names the likelier misinformation side (or ``both'' or ``unclear''). It
+runs on gpt-4o-mini (temperature 0) unless stated, and on other models in the crossed and prospective designs. The \emph{oracle}
+flags exactly the gold contradiction pairs, as the benchmark's labels define them, and names the labelled
+misinformation side. A \emph{synthetic detector} is built from gold labels with a chosen pair precision, recall and
+direction precision $d$: each flag on a true pair names the false side with probability $d$, independently per
+pair. The randomised test (H31) uses $d=0.5$ on every true pair (one per ConflictBank question). The heuristic CAAG detector, NLI, a random
+placebo and a 36-cell synthetic grid are in Appendices~\ref{app:extra} and \ref{app:grid}.
+
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{5.6cm}@{}}
+\toprule
+Term & Meaning \\
+\midrule
+Cell & one detector paired with one generator; \emph{crossed} designs pair several of each \\
+Direction precision & share of the detector's one-side flags on true pairs that name the misinformation
+passage ($d$ if synthetic) \\
+Pair precision, recall & share of flagged pairs that are true contradictions; share of true contradictions
+flagged \\
+Follow rates $f_R$, $f_W$ & $f_R$: of questions answered wrongly with no flag, the share a right flag makes correct;
+$f_W$: of those answered correctly, the share whose answer under a wrong flag contains the misinformation \\
+Break-even $p^*$ & direction precision at which randomised flags on true pairs have zero net effect,
+$-\Delta_W/(\Delta_R-\Delta_W)$ \\
+Answer key & plain prompt plus ``The answer $X$ is false'' for each wrong answer; no passage marked \\
+Verdict key & an answer key whose $X$ is the answer the detector's suspect passage supports, by the benchmark's
+labels \\
+\bottomrule
+\end{tabular}
+\caption{Terms. A directional flag on a true pair is \emph{right} if it names the false side and \emph{wrong} if it
+names the correct one; $\Delta_R$ and $\Delta_W$ are their effects on accuracy in the randomised test (H31).}
+\label{tab:terms}
+\end{table}
+
+\paragraph{The follow-rate account.}
+A right flag is \emph{followed} when the flagged answer is correct where the no-flag answer was wrong; a wrong flag
+is followed when the flagged answer contains the misinformation answer (matched in either direction) where the
+no-flag answer was correct. Abstaining is neither (\prs{16.3}). Generator $G$'s follow rates
+$f_R^G$ and $f_W^G$ are these shares in the randomised test. For detector $D$ and question $i$, let $r_i=1$ if $D$
+flags the true pair and names its false side, $w_i=1$ if $D$ marks a correct passage as suspect, and $a_i=1$ if
+$G$'s no-flag answer is correct. Over $n$ questions, the account predicts the directional flag's effect as
+\begin{equation}
+\hat\Delta(G,D)=\tfrac{1}{n}\textstyle\sum_{i}\big[r_i(1-a_i)f_R^G-w_ia_if_W^G\big].
+\label{eq:account}
+\end{equation}
+Unflagged questions keep their no-flag answer, so they contribute zero. The equation applies $f_W$, measured as
+adoption, as the probability of losing a correct answer. Every term except the two rates is observed
+before any flagged answer exists. Equation~\eqref{eq:account} is therefore bookkeeping plus one empirical claim: that
+a generator's follow rates transfer across detectors and questions. It omits right flags on correct answers, wrong
+flags on wrong answers, and abstention.

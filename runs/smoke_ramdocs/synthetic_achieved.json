@@ -1,0 +1,26 @@
+{
+ "synth-p0.5-r1-all": {
+  "target_precision": 0.5,
+  "target_recall": 1.0,
+  "fp_rate": 0.30952380952380953,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.5416666666666666,
+   "recall": 1.0,
+   "f1": 0.7027027027027027,
+   "tp": 26,
+   "fp": 22,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 0.6,
+   "recall": 1.0,
+   "f1": 0.7499999999999999,
+   "tp": 3,
+   "fp": 2,
+   "fn": 0,
+   "tn": 1,
+   "false_positive_rate": 0.6666666666666666
+  }
+ }
+}

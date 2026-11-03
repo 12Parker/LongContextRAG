@@ -1,0 +1,45 @@
+\section{Introduction}
+
+Retrieval-augmented generation (RAG) \citep{lewis2020rag} hands a language model passages that may disagree. Some
+disagreements are genuine; others are planted or stale misinformation \citep{zou2025poisonedrag,wang2025madam}.
+Prompting a model about conflicts can help \citep{cattan2025conflicts}, and recent systems pair contradiction
+detectors with prompts that flag the conflict to the generator \citep{wang2026conflictrag}. They report detection F1
+and end-to-end accuracy, but not how one leads to the other. We ask what a flag must say, and what its detector must
+get right, for the flag to help against misinformation.
+
+We fix the passages and vary two things independently: the \emph{detector} (an LLM, an oracle built from benchmark
+labels, or a synthetic detector of chosen quality) and the \emph{format} that passes its output to the
+generator, from a neutral ``these passages may conflict'' flag to a \emph{directional} flag naming the likely
+misinformation. Answer keys that state a wrong answer without marking any passage control for what a flag conveys.
+We run seven generators on six benchmarks, chiefly RAMDocs \citep{wang2025madam} and ConflictBank
+\citep{su2024conflictbank}, and registered hypotheses in stages, most after earlier results were known
+(\S\ref{sec:setup}).
+
+The paper makes three claims, each scored by string matching:
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \textbf{A neutral flag mainly shifts the answer policy} (\S\ref{sec:neutral}). Asked for one answer, four
+of seven generators abstain more (gpt-4o-mini on misinformed and correct answers alike); asked for every valid
+answer, they add the misinformation. The other three barely move or move the other way, and where misinformation
+passages outnumber the correct one the flag can raise selective accuracy. H2 and H8 were registered before any
+confirmatory data, H15 and H21 after earlier results; risk--coverage counts are exploratory.
+\item \textbf{Generators defer to directional flags, so a wrong flag can cost more than a right one gains}
+(\S\ref{sec:direction}). With direction randomised on true contradictions (H31, registered before its runs but
+after earlier results), three of four generators follow wrong flags about as often as right ones, also on new
+questions; the most accurate of the four follows nearly all, Claude Sonnet few. The implied break-even direction
+precision is exploratory.
+\item \textbf{A frozen account of these follow rates predicts within a benchmark and shows where it fails}
+(\S\ref{sec:real}). Predictions committed before any flagged answer existed came close on unseen ConflictBank
+questions (H32, prospective), though a baseline that ignores which questions are flagged was nearly as close. They
+overstated harm on clean questions and on HealthContradict, whose labels are unverified.
+\end{itemize}
+
+The numbers behind claims 2 and 3 come from ConflictBank, whose misinformation is
+LLM-written about facts the generators rarely know, and whose false side a bag-of-words classifier picks from
+passage style alone (\S\ref{sec:setup}), and detectors pick its true answer from the two candidates without any
+passage (\S\ref{sec:direction}). Detectors and generators may therefore find the false side without reasoning about
+the contradiction. HealthContradict and RAGuard use real documents but serve only
+as label-transfer stress tests, because their labels, not verified facts, decide which side counts as false.
+Whether a detector's verdict passed as an answer key conveys as much as its flag depends on the scorer and is
+unresolved (\S\ref{sec:open}). We make no claims about model families. We release the harness, the
+pre-registration and every run.\footnote{Code, the pre-registration and all run outputs are in the anonymised
+supplementary material and will be released publicly on acceptance.}

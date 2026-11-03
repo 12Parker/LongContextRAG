@@ -1,0 +1,94 @@
+{
+ "llm_dir": {
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 0.8421052631578947,
+   "f1": 0.9142857142857143,
+   "tp": 208,
+   "fp": 0,
+   "fn": 39
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 0.8421052631578947,
+   "f1": 0.9142857142857143,
+   "tp": 208,
+   "fp": 0,
+   "fn": 39,
+   "tn": 0,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": 0.4326923076923077,
+  "direction_coverage": 1.0,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.39271255060728744,
+    "correct_marked": 0.4493927125506073,
+    "conflict_q_all_misinfo_marked": 0.39271255060728744,
+    "conflict_q_any_correct_marked": 0.4493927125506073,
+    "clean_q_any_correct_marked": null
+   },
+   "remove_suspect": {
+    "misinfo_marked": 0.3643724696356275,
+    "correct_marked": 0.4777327935222672,
+    "conflict_q_all_misinfo_marked": 0.3643724696356275,
+    "conflict_q_any_correct_marked": 0.4777327935222672,
+    "clean_q_any_correct_marked": null
+   },
+   "flag_directional": {
+    "misinfo_marked": 0.3643724696356275,
+    "correct_marked": 0.4777327935222672,
+    "conflict_q_all_misinfo_marked": 0.3643724696356275,
+    "conflict_q_any_correct_marked": 0.4777327935222672,
+    "clean_q_any_correct_marked": null
+   }
+  },
+  "total_cost_usd": 0.0688251
+ },
+ "oracle": {
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 247,
+   "fp": 0,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 247,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": 1.0,
+  "direction_coverage": 1.0,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": 0.4817813765182186,
+    "correct_marked": 0.5182186234817814,
+    "conflict_q_all_misinfo_marked": 0.4817813765182186,
+    "conflict_q_any_correct_marked": 0.5182186234817814,
+    "clean_q_any_correct_marked": null
+   },
+   "remove_suspect": {
+    "misinfo_marked": 1.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 1.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": null
+   },
+   "flag_directional": {
+    "misinfo_marked": 1.0,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": 1.0,
+    "conflict_q_any_correct_marked": 0.0,
+    "clean_q_any_correct_marked": null
+   }
+  },
+  "total_cost_usd": 0.0
+ }
+}

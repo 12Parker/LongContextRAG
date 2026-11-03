@@ -1,0 +1,152 @@
+\section{Prompts}
+\label{app:prompts}
+All prompts below are copied verbatim from the code that produced the results. The examples use placeholder passages; in the runs every condition except removal shows the generator the same passages (checked against the run records).
+\input{generated/app_prompts}
+
+\section{Additional Results}
+\label{app:extra}
+
+\paragraph{Published baselines (H14).} Astute RAG \citep{wang2025astute} and TrustRAG \citep{zhou2025trustrag} lose same-name answers
+on RAMDocs (H14). On ConflictBank, the registered H14 compared our pipeline under the multi-answer prompt with the
+baselines' own one-answer prompts. Under the matched one-answer prompt, our pipeline beats them by \hFourteenMatchedAst\ and
+\hFourteenMatchedTr\ points (exploratory). We take the matched comparison as the principal one. Our TrustRAG port
+first omitted the repository's system message. Sending it (\S17.2) changes TrustRAG's accuracy by \blTrustSysCb\
+points on ConflictBank, \blTrustSysMj\ under majority misinformation and \blTrustSysRd\ on RAMDocs (\blTrustSysRdMulti\
+for its multi-answer variant). Against the corrected TrustRAG, with policies matched (Holm over the four), the LLM
+directional flag changes accuracy by \blHFourteenCbs\ on ConflictBank (one-answer), \blHFourteenRd\ on RAMDocs (multi-answer),
+\blHFourteenMj\ under majority misinformation, and \blHFourteenCb\ under the registered mismatched prompts.
+NLI on ConflictBank first saw passage prefixes that usually omit the changed fact. Cutting each passage to its
+sentences closest to the question, up to the registered 1,500 characters, puts both answers in the input. But the
+pair still exceeds the cross-encoder's 512 tokens, and NLI flags no pair (pair recall \detNliWinRecall\%). With
+300 characters, about one sentence (a disclosed deviation, \S17.6), NLI finds \detNliSentRecall\% of the gold pairs at
+\detNliSentPrec\% pair precision and flags \detNliSentCleanFpr\% of clean questions. Its flag changes conflict
+accuracy by \blNliSentFlag\ points (removal: \blNliSentRem). A single call that names suspect passages before
+answering does not differ significantly from the pipeline (H18; Table~\ref{tab:baselines}).
+
+\paragraph{Robustness to the metric and the labels.}
+Table~\ref{tab:main_robust} repeats Table~\ref{tab:main} with the bidirectional metric. Table~\ref{tab:contains}
+repeats the pre-registered tests with every suspect document treated as misinformation. Table~\ref{tab:hypotheses}
+lists all pre-registered tests.
+
+\begin{table*}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{7.4cm}p{3.6cm}p{4.2cm}}
+\toprule
+Claim (section) & Evidence & Status \\
+\midrule
+A correct neutral flag lowers RAMDocs accuracy (\S\ref{sec:neutral}) & H2, H9 & registered before any confirmatory data \\
+Its mechanism depends on the answer policy: added misinformation, abstention, little effect (\S\ref{sec:neutral}) & Table~\ref{tab:risk}; H15, H19--H21, H25, H26 & answer mix: re-analysis; tests: registered addenda \\
+Pooled effect, policy split, moderators, utility, transitions (\S\ref{sec:neutral}) & Tables~\ref{tab:pooled}, \ref{tab:utility} & re-analysis of data already seen; dependence: \S17 \\
+The directional flag beats the neutral one (\S\ref{sec:direction}) & H3, H9--H12, H15, H16, H19, H25, H26 & H3: before any confirmatory data; rest: addenda \\
+Oracle direction is close to an answer key (\S\ref{sec:direction}) & H23 and its TOST & registered addendum; TOST registered in \S13.4 \\
+Pooled, oracle direction is equivalent to an answer key on average (\S\ref{sec:direction}) & pooled H23; per-comparison TOST & unregistered re-analysis; heterogeneity: \S17 \\
+Real-detector gains depend on the generator (\S\ref{sec:real}) & H15, H17, H19, H25, H26 & registered addenda \\
+Right flags gain less than wrong flags cost; similar follow rates (\S\ref{sec:real}) & H31 & registered addendum (\S16) \\
+Break-even direction precision rises with generator accuracy (\S\ref{sec:real}) & Table~\ref{tab:breakeven} & unregistered re-analysis \\
+Break-even is a calibration, not a rule for selective detectors (\S\ref{sec:real}) & Table~\ref{tab:selection} & re-analysis (\S17) \\
+Follow rates and coverage account for the crossed cells (\S\ref{sec:real}) & Figure~\ref{fig:reliability} & unregistered; retrospective \\
+Registered reliability gap correlates with the gain (\S\ref{sec:real}) & H24 & registered addendum (\S13), 5 of 30 cells existed \\
+The gap is dominated by generator accuracy; precision and recall matter within generators (\S\ref{sec:real}) & Table~\ref{tab:h24redo} & re-analysis of data already seen \\
+The detector's verdict as an answer key matches the flag; its model's answer as a hint does not (\S\ref{sec:real}) & H30, H27 & registered addenda (\S15, \S16); pooled TOST unregistered \\
+A real detector's flag hurts when conflicts are rare (\S\ref{sec:real}) & Table~\ref{tab:prevalence} & unregistered re-analysis \\
+Direction survives reordering and paraphrase (\S\ref{sec:real}) & H29 & registered addendum; equivalence not shown \\
+Direction and removal harm genuine conflicts (\S\ref{sec:real}) & H28 & registered addendum \\
+The matcher's errors do not change the contrasts' signs (App.~\ref{app:semantic}) & Table~\ref{tab:semantic} & registered re-score (\S17), LLM judge \\
+Recommendations (\S\ref{sec:discussion}) & -- & not tested end to end \\
+\bottomrule
+\end{tabular}
+\caption{The status of each claim. \emph{Registered addendum}: committed to the repository before the runs it covers but
+after earlier results were known. \emph{Re-analysis}: registered after the data were seen, or exploratory. The commit
+history is the only timestamp.}
+\label{tab:claims}
+\end{table*}
+
+\begin{table*}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{2.3cm}p{3.6cm}p{4.4cm}p{4.6cm}}
+\toprule
+Benchmark & Misinformation and labels & What it supports & What it cannot support \\
+\midrule
+RAMDocs & synthetic edits; document labels imperfect & neutral and directional flags (H1--H12); confirmatory split & natural misinformation \\
+ConflictBank & LLM-written on both sides; one gold answer & answer policy, randomised direction and break-even (H31), crossed cells (H24, H30) & real documents; prospective test of the cell account \\
+RAGuard & real posts; behavioural labels (App.~\ref{app:semantic}) & what generators do with transferred labels & factual-oracle conclusions \\
+WikiContradict & genuine conflicts, no false side & coverage of competing sources, and its original rubric (H28) & which answer is factually wrong \\
+CONFLICTS & real search results; scorable subset & null results only & any positive claim \\
+\bottomrule
+\end{tabular}
+\caption{The evidence hierarchy: what each benchmark can and cannot support. The break-even precision rests on
+ConflictBank alone; the other benchmarks add breadth for the flag-format results, not independent confirmations of it.}
+\label{tab:evidence}
+\end{table*}
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}rr@{}}
+\toprule
+Inverted oracle (names the correct side) & Conflict & Clean \\
+\midrule
+RAMDocs, directional flag & \advDirConf\ \advDirConfCI & \advDirClean \\
+RAMDocs, removal & \advRemConf\ \advRemConfCI & \advRemClean \\
+ConflictBank (multi-answer), directional flag & \zCbMiniOracleInvFlagDirectionalConflict & \zCbMiniOracleInvFlagDirectionalClean \\
+\bottomrule
+\end{tabular}
+\caption{Adversarial control, gpt-4o-mini: change from no flags, in points (exploratory; \S9.5). On clean
+questions the inverted oracle flags nothing, so the prompt is unchanged.}
+\label{tab:inverted}
+\end{table}
+\input{generated/tab_cb}
+\input{generated/tab_main}
+\input{generated/tab_hypotheses}
+\input{generated/tab_breakeven}
+\input{generated/tab_prevalence}
+\input{generated/tab_generality}
+\input{generated/tab_detectors}
+\input{generated/tab_main_robust}
+\input{generated/app_tables}
+\input{generated/tab_gpt41}
+\input{generated/tab_wiki}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_placement.pdf}
+\caption{Effect of real detectors predicted from the synthetic grid (x, with the 95\% bootstrap prediction interval)
+against the measured effect (y, with its 95\% CI), for conflict ($\bullet$) and clean ($\blacksquare$) questions.
+Left: detectors located by their document-level behaviour; right: by pair precision, recall and direction accuracy.}
+\label{fig:placement}
+\end{figure}
+
+\paragraph{The heuristic detector.}
+CAAG scores a pair only if its MiniLM \citep{reimers2019sbert} cosine similarity reaches $\theta_s=0.65$. Its score
+is the sum of a negation and contrast asymmetry term, a named-entity mismatch term (differing dates, numbers, money or
+percentages) and a temporal-marker term, multiplied by the similarity. A pair is flagged if the score reaches
+$\theta_c=0.35$. Its per-pair flag rate on the confirmatory split ($6.22\%$) sets the random detector's rate.
+CAAG is the detector we set out to study. As a neutral flag it did not beat random flags of the same volume, and
+as a removal rule it only deleted correct passages (\dCaagRemClean\ points on clean questions, \dCaagRemConf\ on
+conflict ones). Its false flags fall mostly on pairs that should both be reported: 134 of its 221 false flags on the
+hold-out are same-name ambiguity pairs, which its entity-mismatch signal flags because they mention different dates or
+numbers. We read this as a warning about lexical contradiction cues in general \citep{gururangan2018annotation},
+rather than as a problem with a particular threshold. Retuning illustrates why F1 misleads. Over a 121-setting sweep, CAAG's
+best pair F1 is \caagBestFOne, above NLI's, at $\theta_s=\caagBestThS$ and $\theta_c=\caagBestThC$. But it gets
+there by flagging \caagBestRate\% of all pairs and \caagBestCleanFpr\% of clean questions, which our grid predicts
+would be harmful under removal (Appendix~\ref{app:grid}).
+
+\paragraph{Original CAAG format.}
+Rendering CAAG's flags in its original format, with typed lines and confidence scores (``factual conflict (confidence:
+0.41)''), changes accuracy by \origCaagAll\ points overall (\origCaagConf\ on conflict questions, \origCaagClean\ on
+clean ones). This is no different from the uniform format.
+
+\paragraph{Pilot study (exploratory).}
+On the 200-question pilot split, scored with the bidirectional metric, the same pattern appeared before any
+confirmatory run. Oracle neutral flags changed conflict-question accuracy by $-$10.5 points, directional flags by
+$+$11.8, and removing the suspect by $+$28.4. The pilots also showed that the original \textsc{remove} strategy,
+which deletes an arbitrary side of each pair, removes correct documents. They are why we added directional formats,
+synthetic direction accuracy and document-level placement. All pilot runs are released.
+
+\paragraph{Phase-0 audit of CAAG on NarrativeQA.}
+CAAG was designed for long-document QA. On 100 NarrativeQA \citep{kocisky2018narrativeqa} questions from 50 stories
+(BM25 top-10 chunks from a single coherent story), it flags at least one pair in 54\% of questions, 166 pairs in all.
+A single story rarely contradicts itself, so most of these flags are likely false. This is the setting where flags
+are most likely to be false; the flagged pairs are released for annotation.

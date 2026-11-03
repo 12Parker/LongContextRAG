@@ -1,0 +1,37 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+& & & First run & \multicolumn{2}{c}{Before first run?} \\
+\cmidrule(l){5-6}
+Registration & Commit & Push & file & Commit & Push \\
+\midrule
+Base (H1--H9) & 10-27 02:48 & 10-27 05:14 & 10-27 02:48 & yes & no \\
+PR\S9 (H10--H11) & 10-27 15:12 & 10-27 17:18 & 10-27 15:13 & yes & no \\
+PR\S9.4 (Qwen seed) & 10-27 15:18 & 10-27 17:18 & 10-27 15:13 & no & no \\
+PR\S9.5 (inverted oracle) & 10-27 15:24 & 10-27 17:18 & 10-27 15:24 & yes & no \\
+PR\S9.6 (Qwen aborts) & 10-27 16:27 & 10-27 17:18 & 10-27 15:13 & no & no \\
+PR\S10 (H12--H14) & 10-27 18:34 & 10-27 21:48 & 10-27 18:34 & yes & no \\
+PR\S11 (H15--H18) & 10-27 22:09 & 10-27 22:09 & 10-27 22:10 & yes & yes \\
+PR\S12 (H19) & 10-27 23:29 & 10-27 23:29 & 10-27 23:37 & yes & yes \\
+PR\S13 (H20--H24) & 10-28 01:48 & 10-28 01:48 & 10-28 01:49 & yes & yes \\
+PR\S14 (H25--H26) & 10-28 01:54 & 10-28 01:55 & 10-28 01:55 & yes & yes \\
+PR\S15 (H27--H29) & 10-28 14:43 & 10-28 14:43 & 10-28 14:49 & yes & yes \\
+PR\S16 (H30--H31) & 10-28 18:12 & 10-28 18:12 & 10-28 18:13 & yes & yes \\
+PR\S17 (re-analyses, baselines, judge) & 10-29 13:38 & 10-29 14:52 & 10-29 13:40 & yes & no \\
+PR\S17.6 (deviations) & 10-29 14:04 & 10-29 14:52 & 10-29 13:45 & no & no \\
+PR\S18 (re-analyses) & 10-29 21:09 & 10-29 21:35 & -- & -- & -- \\
+PR\S19 (H32--H38) & 10-29 22:57 & 10-29 22:57 & 10-29 22:57 & yes & yes \\
+PR\S20 (re-analyses) & 11-02 18:00 & 11-02 18:00 & -- & -- & -- \\
+PR\S21 (H40--H41) & 11-03 03:59 & 11-03 03:59 & 11-03 04:00 & yes & yes \\
+\bottomrule
+\end{tabular}}
+\caption{Registration timeline (UTC, 2026). \emph{Commit}: local git time; \emph{Push}: when the remote first held
+the commit (GitHub's activity log, a third-party record); \emph{First run file}: the earliest file in the runs that
+section registered (local file metadata). Sections without runs (PR\S18, PR\S20) register analyses only; PR\S21's C4
+predictions were committed after its no-flag files and before its flagged runs. PR\S9.4 and
+PR\S9.6 changed the Qwen runs already under way, and PR\S17.6 followed the judge outputs (PR\S20.1).}
+\label{tab:timeline}
+\end{table}

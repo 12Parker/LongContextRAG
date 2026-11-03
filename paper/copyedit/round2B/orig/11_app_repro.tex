@@ -1,0 +1,136 @@
+dataset's oracle, like RAGuard's, is a label transfer.
+
+\section{Reproducibility}
+\label{app:repro}
+\paragraph{Runs.} One script produces every number here from committed run outputs: per-call responses,
+token counts, detector outputs and configurations. We committed the pre-registration before any confirmatory run;
+its deviations follow.
+
+\paragraph{Deviations from the pre-registration.}
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \emph{Primary metric.} The first draft named the bidirectional metric primary. Before
+the confirmatory run we switched to one-way matching, because it is closer to MADAM-RAG's published score on the pilot
+split (Section~\ref{sec:setup}); bidirectional became the robustness metric. Every table reports both.
+\item \emph{Second generator.} The plan named an open-weights model. None was available before the confirmatory run, so
+we used gpt-4.1 (H9). We later added Qwen2.5-7B-Instruct, registered before its run. At about 3\,s per local
+call, the Qwen runs use one seed, a change made before inspecting any Qwen result.
+\item \emph{CONFLICTS judge.} The plan called for a judge from a different model family, validated on about 100 human
+labels. Neither was available, so CONFLICTS is scored only on items with a reference answer,
+with three seeds, as exploratory.
+\item \emph{H4.} The pre-registration counted 54 false-flag cells. On clean questions, cells that differ only in
+direction accuracy render identical prompts (their scores differ by exactly 0), so they are one comparison: 18 in
+all, 9 per format. We report H4a per format. The cell-permutation $p$-value for the dose-response correlation assumed
+exchangeable cells; the cells are nested, so we use a question-level bootstrap CI. No threshold was set
+for H4c, so we report a count.
+\item \emph{H5.} A non-significant difference is not equivalence. We add a TOST with a $\pm$3-point margin, chosen in
+the addendum after the confirmatory run, so it is post hoc.
+\item \emph{H6.} The first draft's test (grid prediction inside the actual effect's CI) was
+lenient. We now report the pre-registered test (actual effect inside a bootstrap prediction interval) and a paired test
+of the two spaces' errors.
+\item \emph{Placement modes.} For H6, detectors without direction ran under both
+\texttt{remove\_suspect} and \texttt{remove}; the labels render identical prompts, so the response cache served every
+duplicate.
+\item \emph{Significance.} Earlier drafts used different corrections in different tables; one scheme now applies
+throughout (Section~\ref{sec:setup}), so some exploratory differences once bold are now
+not significant.
+\item \emph{Single- and multi-answer split.} The split of conflict questions by number of gold answers
+(Appendix~\ref{app:single}) was chosen after seeing the minimal-skeleton run and is exploratory.
+\item \emph{Second registration.} We later registered H12--H14 (ConflictBank, the neutral flag with a
+resolution instruction, and the published baselines), the Qwen2.5-7B detector and the ConflictBank sampling rule.
+The gpt-4.1 runs in it use seed 0 only, to stay within budget. One ConflictBank gpt-4o-mini run was resumed from the
+response cache after a transient API error.
+\item \emph{Third and fourth registrations.} H15--H18 (\S11) and H19 (\S12) were committed before their runs. To stay
+within budget, \S12 dropped two \S11 runs before they started: gpt-4.1 under majority misinformation (replaced by
+gpt-6.1-terra in H17) and gpt-4.1 seeds 1--2, so H14 with gpt-4.1 stays on seed 0 as first registered. Every
+gpt-4.1 baseline comparison is therefore seed-0 matched.
+\item \emph{Reasoning models.} gpt-6-luna and gpt-6.1-terra accept only their default temperature and require
+\texttt{max\_completion\_tokens}; we used their defaults with a 4,096-token budget. The two models returned
+\Nempty\ empty responses (almost all closed-book) because reasoning used the whole budget; we score them wrong.
+\item \emph{Fifth and sixth registrations.} H20--H24 (\S13) and H25--H26 with Claude and RAGuard (\S14) were
+committed before their runs. The planned \texttt{cross\_mj} runs completed within budget. Gemini was planned
+as a generator but not run, because no API key was available then. On the endpoint we used, Claude rejects a temperature and JSON mode; it
+ran at its default, and as a detector its JSON goes to the regex fallback. The answer
+parser unwraps paired tags (\texttt{<answer>X</answer>}), a format no earlier result contained.
+\item \emph{Permutation resolution.} With 10,000 permutations the smallest $p$-value is $10^{-4}$, which cannot
+survive Holm over \nExploratory\ exploratory comparisons. After the \S14 runs, before writing them up, we
+extended the permutations to 200,000 whenever none of the first 10,000 reached the observed statistic. This changes
+only $p$-values at their floor, and only lowers them.
+\item \emph{H24 additions.} The cross-cell break-even point, the count of positive cells and the mechanism score
+(credit for naming the false side where the generator errs, charge for marking a correct passage where it is right)
+were defined after seeing the H24 cells and are exploratory.
+\item \emph{Seventh registration.} H27--H29 and the re-analyses of \S15 were committed before their runs. To finish
+within the session, the \S15 runs ran in parallel tracks, not strictly in priority order; spend never
+approached the \$195 limit, so no run was dropped. The question-level model adds one dependency (statsmodels 0.14.5).
+H21(c) is now a ratio, correct over answered. The registered per-question mean averaged the two conditions
+over different questions (those not abstained in every seed), so an earlier draft's selective accuracies did
+not match Table~\ref{tab:risk}. Both measures are in the released statistics.
+\item \emph{Eighth registration.} H30--H31 and the re-analyses of \S16 were committed before their runs, which
+ran in parallel tracks within the budget. The pooled estimate now uses a multilevel model in place of the
+DerSimonian--Laird bootstrap. The moderators were recoded (answer policy; natural misinformation is RAGuard only).
+The utility analysis uses the same settings as the pooled estimate. ``Following'' a flag now has one definition for
+right and wrong flags (\S16.3); an earlier draft compared correct answers with any wrong answer.
+\item \emph{Ninth registration.} The re-analyses, corrected baselines and semantic re-score of \S17 were committed
+before their runs. \S17.6 records two deviations, both registered before the runs they describe. The judge is
+gemini-3.5-flash-lite, because the named Gemini 2.5 Flash was closed to new users. The registered
+1,500-character NLI window flags no ConflictBank pair, so we add a 300-character window, chosen after seeing
+detection output only. The registered window's results are reported unchanged.
+\item \emph{Tenth and eleventh registrations.} The \S18 pair-rule counts were computed during review triage, before
+\S18 was written (\S18.5); its other analyses were not. \S19 (H32--H38) records no deviation.
+\item \emph{Run interruptions.} Several runs were stopped and resumed (a transient API error; reordering the run
+queue). Resumption keeps completed rows and re-requests only missing ones; no row was re-sampled.
+\end{enumerate}
+The addenda (H10--H38 and the re-analyses above) and the Qwen seed change were each committed before
+the runs they cover. The commit history is the only timestamp; we used no third-party registry
+\citep{vanmiltenburg2021preregistering}.
+
+\paragraph{RAMDocs document types are imperfect.} In the release, 163 documents typed \emph{correct} contain a
+wrong answer, some as injected misinformation, others incidentally. Pairs touching them are left out of pair-level
+metrics. Questions whose only sign of conflict is such a document (55 of 500; 35 of the confirmatory split) count
+only in ``All''. Treating them as misinformation is a robustness check.
+
+\paragraph{Power.} With 139 RAMDocs conflict questions, the minimum detectable effect at 80\% power is
+\mdeLo--\mdeHi\ points (median \mdeMed; \citealp{card2020power}).
+
+\paragraph{Metric choice.} With the one-way metric, our port of MADAM-RAG scores 28.5\% on the pilot split and
+\madamOneWay\% on all 500 questions (published: 28.00, on an undisclosed subset); the bidirectional metric gives
+\madamBidir\% on all 500. With the published subset and scorer unknown, we do not claim to reproduce the
+published number. Normalisation lower-cases and removes punctuation and articles.
+
+\paragraph{WikiContradict and CONFLICTS.} A WikiContradict answer is correct if both dataset answer strings
+(one per passage) match a final answer under the bidirectional rule. From CONFLICTS we use the 237 questions with
+a reference answer (outdated-information, misinformation and no-conflict items); an answer is correct if it
+contains the reference answer.
+
+\paragraph{Baselines.} We port MADAM-RAG unchanged to our client: three debate rounds, temperature 0, 128 tokens
+per call. Astute RAG has no official code; we use its appendix prompts verbatim with its defaults
+($t{=}1$ consolidation round, $m{=}1$ generated passage, temperature 0, 1,024 output tokens). A generated
+passage that says ``I don't know'' is dropped; the answer is the text in its \texttt{<ANSWER>} tag. TrustRAG is
+ported from its repository (commit \texttt{11dcea0}, MIT licence): SimCSE CLS embeddings
+(\texttt{sup-simcse-bert-base-uncased}), a ROUGE-L gate of 0.25, 2-means clustering and a cosine threshold of 0.88,
+followed by its three prompts verbatim at temperature 0.1. The registered runs omit its system message, because our client then sent
+user messages only. The \S17 rerun restores it (Appendix~\ref{app:extra}). The \emph{multi} variants change one sentence of the final step to ask for every valid answer
+(Astute RAG) or append our final-answer line (TrustRAG); the unmodified variants are also reported.
+
+\paragraph{ConflictBank.} We use the QA file of the dataset's Hugging Face release (revision \texttt{92866a0}). Questions are sampled round-robin over relations with seed 0; distractors are other subjects' correct passages. The
+sampling script, item ids and seed are released; we do not redistribute the data, because the release states
+a licence in its README but ships no licence file.
+
+\paragraph{RAGuard.} We use the Hugging Face release \texttt{UCSC-IRKM/RAGuard} (revision \texttt{dae344a2}, MIT
+licence on the card). A post is usable if it has at least 15 words after removing the ``[Link Post]'' placeholder and is
+not a duplicate within its claim; posts are cut to 300 words and shuffled by claim id. Each supporting $\times$ misleading
+pair is a contradiction, with the misleading post as the misinformation side. The build script and item ids are
+released.
+
+\paragraph{Model configuration.} Models were called by these names between 2026-10-26 and 2026-10-29;
+our client did not record the served snapshot identifiers. gpt-4o-mini and gpt-4.1 ran at temperature 0.1
+with at most 256 output tokens. gpt-6-luna and gpt-6.1-terra ran at their only allowed (default) temperature and default
+reasoning effort, with 4,096 completion tokens including reasoning. Claude Haiku 5.5 and Sonnet 5.5 ran through
+Anthropic's OpenAI-compatible endpoint at their default temperature with 4,096 output tokens. Qwen2.5-7B-Instruct ran
+through Ollama 0.40.11 (\texttt{qwen2.5:7b-instruct}, image \texttt{845dbda0ea48}, Q4\_K\_M quantisation, 8,192-token
+context, temperature 0.1) on an Apple M4 Pro with 48\,GB. Across settings and conditions, at most \truncMaxEmpty\% of
+responses are empty or aborted; the share with no final-answer line has median \truncMedNoFinal\% and maximum
+\truncMaxNoFinal\% (\truncMaxAt). Per-condition counts are in the released statistics.
+
+\paragraph{Cost and compute.} All API calls, pilots included, cost \totalSpend. Prices per million input, cached-input and output tokens, checked on 2026-10-27: gpt-4o-mini \$0.15, \$0.075 and \$0.60; gpt-4.1 \$2.00, \$0.50 and \$8.00; gpt-6-luna \$0.10, \$0.01 and \$0.50; gpt-6.1-terra \$1.00, \$0.05 and \$5.00; Claude Haiku 5.5 \$0.10, \$0.01 and
+\$0.50; Claude Sonnet 5.5 \$2.00, \$0.10 and \$10.00. The \S17.3 judge, gemini-3.5-flash-lite, cost \$0.30 input and \$2.50 output (checked on 2026-10-29). CAAG and NLI ran on a
+laptop CPU (0.2\,s and 1.2\,s per question).

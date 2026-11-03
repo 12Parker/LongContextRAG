@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lrr}
+\toprule
+Condition & gpt-4o-mini & gpt-4.1 \\
+\midrule
+No flags (plain) & 14.0 & 29.0 \\
+\midrule
+Instruction (v1) & \textbf{$+$8.7} & -- \\
+Instruction (v2) & \textbf{$-$6.7} & -- \\
+Oracle, flag & \textbf{$+$6.5} & \textbf{$+$19.0} \\
+CAAG, flag & $+$0.7 & -- \\
+NLI, flag & $+$3.2 & -- \\
+LLM, flag & \textbf{$+$6.2} & -- \\
+\bottomrule
+\end{tabular}
+\caption{WikiContradict (253 genuine conflicts between two Wikipedia passages; the reference answer is both sides),
+3 seeds (gpt-4.1: the oracle flag only). First row: share of answers giving both sides (\%); other rows: difference in points,
+\textbf{bold} = significant under the paper's single scheme (H8 is a registered family; the gpt-4.1
+column is exploratory).}
+\label{tab:wiki}
+\end{table}

@@ -1,0 +1,793 @@
+item,id,run,condition,has_conflict,question,gold,wrong,response_tail,matcher_strict_oneway,human_gives_all_correct,human_gives_wrong,human_abstains
+0,cb-103583,cb_single,oracle+flag_onewrong,False,Who replaced Minamikushiyama in their role?,Unzen,,"Minamikushiyama was merged with the city of Unzen on October 11, 2005, effectively replacing its role as a separate municipality. This merger was part of a broader initiative to consolidate municipalities in Japan. 
+
+Final answer(s): Unzen",1.0,,,
+1,ramdocs-137,holdout_haiku,oracle+flag_onewrong,True,When was Judge Howe born?,"February 19, 1873 | December 5, 1827","July 15, 1875","The question is ambiguous because two different federal judges named Howe appear in the passages.
+
+- **Harland Bradley Howe:** Passage 0 gives February 19, 1873, and Passage 1 gives July 15, 1875. These passages conflict, and the passages alone don't show which is correct. Passage 0's date matches what I recall of Harland Bradley Howe's record, but that comes from outside the passages.
+- **James Henry Howe:** Passage 2 gives December 5, 1827. Passage 1 is flagged as conflicting with Passage 2, but they describe different people, so that conflict doesn't affect this date.
+
+Final answer(s): February 19, 1873 (Harland Bradley Howe, per Passage 0; Passage 1 says July 15, 1875) | December 5, 1827 (James Henry Howe)",0.0,,,
+2,cb-113840,cb_single_sonnet,plain,True,Which Wikimedia project has Nabila Marhaben been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Two passages give different answers. Passage 2 says the Wikimedia project NL Gendergap maintenance placed Nabila Marhaben on its focus list. Passage 0 says WikiProject Badminton's tournament focus list. The Gendergap answer is more plausible: that project aims to increase the representation of women on Wikipedia, which fits a Dutch actress and presenter. The badminton claim is incoherent, since it describes a Dutch actress being added to a list of badminton tournaments. Passages 1 and 3 are unrelated.
+
+Final answer(s): NL Gendergap maintenance",1.0,,,
+3,rg-1259,rg_terra,oracle+flag_directional,True,"Is the following claim true or false?
+Claim: ""You weren't allowed to own a cannon during the Revolutionary War as an individual.""",False,True,"The passages do not establish whether individuals could legally own cannons during the Revolutionary War. The quoted claim concerns 1791, after the war.
+
+Final answer(s): unknown",0.0,,,
+4,ramdocs-434,holdout_terra,oracle+flag_directional,True,"Who is the artist of the album ""Faithfully""?",Faith Evans | Jovit Baldivino | Johnny Mathis,John Legend | Michael Jackson,"The passages identify three distinct albums titled *Faithfully*: by Faith Evans, Jovit Baldivino, and Johnny Mathis. The conflicting John Legend and Michael Jackson claims are flagged as likely misinformation.
+
+Final answer(s): Faith Evans | Jovit Baldivino | Johnny Mathis",1.0,,,
+5,cb-4327,cb_single_luna,oracle+flag,True,Who coaches the sports team Ante Čović?,Hertha BSC,S.S.C. Napoli,"Passage 3 explicitly says Ante Čović was appointed coach of Hertha BSC; Passage 1 gives a conflicting account but presents it as a narrative.  
+Final answer(s): Hertha BSC",1.0,,,
+6,rg-810,rg_terra,oracle+flag_onewrong,False,"Is the following claim true or false?
+Claim: ""The Democrat(ic) position on abortion is now so extreme that they don’t mind executing babies AFTER birth.""",False,,"The claim is false. Passage 2 states that killing a baby after birth is illegal and is not an abortion; Passage 0 describes the claim as a false narrative.
+
+Final answer(s): false",1.0,,,
+7,ramdocs-262,holdout_sonnet,oracle+flag_directional,False,What sport is the Hong Kong Open associated with?,Golf | Tennis,Basketball,"The passages describe two different events called the Hong Kong Open. Passage 0 describes a golf tournament co-sanctioned by the Asian Tour and European Tour. Passage 2 describes a tennis tournament, a WTA event that was previously a men's tournament. Passage 1 also mentions the Hong Kong Open in a golf context, as part of the Asian Tour schedule. Passage 3 concerns rugby sevens in Hong Kong, but it does not refer to the ""Hong Kong Open"" by name, so it does not count. Passage 4 is irrelevant.
+
+Final answer(s): Golf | Tennis",1.0,,,
+8,ramdocs-395,holdout_luna,oracle+flag_onewrong,False,What year did the Battle of Ramla take place?,1101 | 1105 | 1102,,"The passages refer to different Battles of Ramla: one took place in 1102 and another in 1105.
+
+Final answer(s): 1102 | 1105",0.0,,,
+9,rg-1683,rg_terra,oracle+flag_directional,True,"Is the following claim true or false?
+Claim: Preventive care ""saves money.""",False,True,"Preventive care can reduce some short-term costs, but it may increase lifetime healthcare spending if people live longer.
+
+Final answer(s): false",1.0,,,
+10,rg-679,rg_haiku,oracle+flag,False,"Is the following claim true or false?
+Claim: ""Over 90% of the American people think we have to get assault weapons off the street  — period.""",False,,"None of the passages reports a poll result, or any percentage, on support for banning assault weapons. Passage 0 only asks whether readers favor such a ban and links to a news article about a House committee. Passage 1 cites a Pew Research page on gun control opinion but does not state any figure, and it does not mention 90% or any similar number. Passages 2 and 3 do not address the question. Because the passages neither confirm nor refute the claim, it cannot be judged true or false from them.
+
+Final answer(s): unknown",0.0,,,
+11,cb-60545,cb_single,llm_dir+flag_directional,True,Who directed Nos étés?,Francis Leclerc,Peter Bebjak,"The question of who directed ""Nos étés"" is addressed in two passages, with Passage 1 attributing the direction to Peter Bebjak and Passage 3 claiming it was directed by Francis Leclerc. Given that Passage 3 is likely misinformation, the correct answer is found in Passage 1, which confirms that Peter Bebjak is the director of the series.
+
+Final answer(s): Peter Bebjak",0.0,,,
+12,rg-1723,rg_mini,oracle+flag_onewrong,True,"Is the following claim true or false?
+Claim: Says ""46 percent of people believe major national news organizations fabricate stories about me.""",True,False,"The claim states that ""46 percent of people believe major national news organizations fabricate stories about me."" However, none of the provided passages directly address this specific statistic or claim. Passage 0 discusses the general distrust in media following a scandal involving USA Today, while Passage 1 attributes the rise in misinformation to the failures of legacy media without mentioning specific percentages or claims about public belief in fabrication by news organizations. Therefore, the truth of the claim cannot be determined based on the information given.
+
+Final answer(s): unknown",0.0,,,
+13,rg-2511,rg_mini,oracle+flag_directional,True,"Is the following claim true or false?
+Claim: “I’m not allowed to testify” because of a gag order.",False,True,"The claim ""I’m not allowed to testify"" because of a gag order is generally true in the context of legal proceedings. A gag order can restrict individuals, including witnesses, from discussing certain aspects of a case publicly, which may include testifying in a way that contradicts the order. However, the specifics can vary based on the jurisdiction and the details of the case. In the context of the passages provided, there is no direct mention of a gag order preventing a witness from testifying, but the implications of such orders are discussed, particularly in relation to Donald Trump and his legal challenges.
+
+Final answer(s): true",0.0,,,
+14,ramdocs-367,holdout_terra,oracle+flag_directional,True,What is the primary political ideology of National Action?,Conservative | Right-wing | National Socialism,Liberal | Liberal,"The passages describe three groups named National Action: an Italian conservative party, a right-wing Maltese party, and a British group associated with National Socialism.
+
+Final answer(s): Conservatism (Italy) | Right-wing politics (Malta) | National Socialism (Britain)",0.0,,,
+15,cb-73874,cb_single_terra,oracle+flag_directional,True,Which event does Snow Clasico participate in?,United States men's national soccer team,Botev Plovdiv,"Passage 3 describes the Snow Clasico as a qualifying match between the United States and Costa Rica for the 2014 World Cup.
+
+Final answer(s): 2014 FIFA World Cup qualification",0.0,,,
+16,cb-68777,cb_single_terra,oracle+flag_onewrong,False,Which military branch does Alois Bábek belong to?,Czechoslovak legions in Russia,,"Passage 0 identifies Alois Bábek as a member of the Czechoslovak legions in Russia.
+
+Final answer(s): Czechoslovak legions in Russia",1.0,,,
+17,ramdocs-224,holdout_haiku,oracle+flag_onewrong,True,What sport is Altrincham associated with?,"Rugby league | Football (soccer) .""",Cricket,"Passages 0 and 1 are nearly identical, except that Passage 0 says Altrincham played semi-professional **rugby league** in 1901–02, while Passage 1 says **cricket**. The surrounding context supports rugby league. Both passages describe the County Leagues electing teams to a new Division 2, which is a rugby league structure, so the cricket claim in Passage 1 is most likely the misinformation. Passage 2 is about a football club but does not name Altrincham, so it does not establish a link to football.
+
+Final answer(s): rugby league",0.0,,,
+18,rg-2133,rg_terra,oracle+flag_directional,True,"Is the following claim true or false?
+Claim: Says the Central Park Five ""admitted their guilt.""",False,True,"The claim is false. The Central Park Five were wrongly convicted and later exonerated; DNA evidence matched Matias Reyes, who confessed to the crime.
+
+Final answer(s): false",1.0,,,
+19,ramdocs-271,holdout_luna,llm_dir+flag_directional,True,What is the population of Young America Township?,838 | 726,"1,200 | 1,200","The passages give conflicting 2000 populations for Young America Township, Minnesota: 838 and 1,200. They also identify a different Young America Township in Illinois, with a 2010 population of 726.
+
+Final answer(s): 838 (Minnesota, 2000) | 1,200 (Minnesota, 2000; conflicting source) | 726 (Illinois, 2010)",0.0,,,
+20,rg-1396,rg_haiku,llm_dir+flag_directional,True,"Is the following claim true or false?
+Claim: Donald Trump’s plan is “cutting Social Security for you.”",False,True,"The passages don't establish the claim. Passage 2 reports that Trump has said he's open to ""cutting entitlements"" such as Medicare and Social Security, but being open to cuts is not the same as having a plan to cut Social Security, and the quoted phrase ""cutting Social Security for you"" appears nowhere in the passages. Passage 0 is flagged as likely misinformation and concerns overtime pay, not Social Security. Passage 1 covers the 2017 tax law, and Passage 3 is a worried reader's question about Social Security running out. None of them states that Trump's plan cuts Social Security, so I can't rule the claim true or false from these passages.
+
+Final answer(s): unknown",0.0,,,
+21,cb-71643,cb_single_haiku,plain,True,"Which organization, club or musical group is Thompson Rivers University a member of?",Canadian Research Knowledge Network,Econometric Society,"TRU is described as a member of two organizations. Passage 0 says TRU joined ""the esteemed Econometric Society,"" which it calls ""a global academic organization."" Passage 3 says TRU became a member of the Canadian Research Knowledge Network, which it calls a ""library consortium."" The question's wording (""organization, club or musical group"") most directly matches the Econometric Society, which the passage explicitly calls an organization. The CRKN is also a membership body, so this choice rests on that wording rather than on any exclusion of CRKN.
+
+Final answer(s): Econometric Society",0.0,,,
+22,cb-3397,cb_single,oracle+flag,False,Who provides the voice for Mashle?,Chiaki Kobayashi,,"The voice for the character Mashle in the anime series is provided by Chiaki Kobayashi. This information is confirmed by multiple credible sources, including anime news outlets and the official website for the series, as well as an interview where Kobayashi himself discusses his role.
+
+Final answer(s): Chiaki Kobayashi",1.0,,,
+23,rg-2624,rg_haiku,plain,False,"Is the following claim true or false?
+Claim: “We saved 2 million people” from dying of COVID-19.",False,,"None of the passages address how many lives were saved by COVID-19 interventions. Passage 1 gives an estimate of excess deaths from 2020 to 2021 (about 14.83 million), but that describes deaths that occurred, not deaths averted, and it says nothing about a figure of 2 million. Passage 3 is a Gates Foundation AMA announcement that mentions funding but gives no lives-saved estimate. Because the passages neither support nor contradict the claim, I can't label it true or false from them.
+
+Final answer(s): unknown",0.0,,,
+24,cb-37105,cb_single_luna,plain,True,Who manages Ilê Axé Oyá Daraunké?,Ana Lucia da Silva de Oliveira,Kjersti Horn,"Passage 3 identifies Kjersti Horn as the temple’s manager, appointed in 2010.
+
+Final answer(s): Kjersti Horn",0.0,,,
+25,cb-40330,cb_single_sonnet,llm_dir+flag_directional,True,What is the occupation of Eric Malherbe?,technicians,Catholic priest,"Passage 0 describes Eric Malherbe as a Catholic priest, ordained in 2005, who has also been a politician since 2012. Passage 3 claims he was a technician, but it is flagged as likely misinformation and conflicts with Passage 0. The other passages are about unrelated topics. I therefore rely on Passage 0, where his main occupation is Catholic priest, alongside his political role.
+
+Final answer(s): Catholic priest",0.0,,,
+26,rg-1745,rg_haiku,oracle+flag,True,"Is the following claim true or false?
+Claim: Says ""overwhelming majorities of Americans"" support gun legislation ""like background checks.""",True,False,"The claim matches Passage 2, which states that ""Polls show that the vast majority of Americans support gun safety measures like universal background checks."" Passage 1 also refers to polls showing ""substantial support"" for various forms of gun control, which is consistent with this. The other passages don't address poll results. The claim's wording (""overwhelming majorities"") is a slight paraphrase of ""vast majority,"" but the substance is the same, so I judge it true based on the passages.
+
+Final answer(s): True",1.0,,,
+27,cb-26156,cb_single,plain,True,Which team drafted Matt Corrente?,New Jersey Devils,Vancouver Canucks,"Matt Corrente was drafted by the New Jersey Devils in the first round (30th overall) of the 2006 NHL Entry Draft, as stated in Passage 0. The passage provides details about his early life, career, and specifically mentions the team that drafted him.
+
+Final answer(s): New Jersey Devils",1.0,,,
+28,ramdocs-307,holdout_sonnet,oracle+flag,True,"Who is the creator of ""The Wilderness Years""?",Sue Townsend | Nick Lowe | Ferdinand Fairfax,J.K. Rowling,"The title ""The Wilderness Years"" refers to several different works, and the passages support a different creator for each.
+
+- Adrian Mole: The Wilderness Years is a book by Sue Townsend (Passage 0).
+- The Wilderness Years is a 1991 album by Nick Lowe (Passage 3).
+- Winston Churchill: The Wilderness Years is a 1981 drama serial written and directed by Ferdinand Fairfax, with Martin Gilbert as co-writer (Passage 5).
+- Passages 6 and 7 describe Martin Gilbert's book The Wilderness Years about Churchill. Passage 7 calls it the latter half of volume five of his Churchill biography, though the passage doesn't state the title outright for a standalone book, so I treat it as a Gilbert work.
+
+Passage 2 is only a product listing, so it does not contradict these. The question asks for ""The Wilderness Years"" itself, so I list the creators of the works with that exact title or its close variants.
+
+Final answer(s): Sue Townsend | Nick Lowe | Ferdinand Fairfax | Martin Gilbert",1.0,,,
+29,cb-62755,cb_single_sonnet,oracle+flag,True,Who operates Wheelus Air Base?,United States Air Force,Turkish State Railways,"Passages 0 and 3 conflict. Passage 3 is a historical account saying Wheelus Air Base was operated by the United States Air Force, with details such as the 7272nd Air Base Squadron and a 1953 Air Force Magazine article. It describes the base as a ""former United States airbase.""
+
+Passage 0 is a fictional-style narrative with anachronisms. It has F-16s at Wheelus, which closed in 1970, and says Turkish State Railways took over operations. It reads as a story, not a factual source.
+
+The question uses the present tense, ""operates."" In reality, Wheelus was handed over to Libya in 1970 and is now Mitiga International Airport. Neither passage states the current operator factually. The question was likely built from the fact ""Wheelus Air Base is operated by the United States Air Force,"" so the expected answer is the United States Air Force. Passage 3 is the more credible source, and Passage 0 is a narrative with implausible details.
+
+Final answer(s): United States Air Force",1.0,,,
+30,rg-1390,rg_haiku,oracle+flag_directional,False,"Is the following claim true or false?
+Claim: Democrats “used COVID to cheat” in the 2020 election.",False,,"None of the passages addresses whether Democrats ""used COVID to cheat"" in the 2020 election. Passage 0 asks whether the election was rigged but offers no evidence either way. Passage 2 is a hypothetical about how Trump's COVID response might have affected his result, and it doesn't mention Democratic cheating. Passage 3 argues the election wasn't stolen, which bears on general fraud claims, but it never mentions COVID or any Democratic strategy tied to it. Since no passage speaks to this specific claim, the answer is unknown.
+
+Final answer(s): unknown",0.0,,,
+31,rg-272,rg_mini,oracle+flag_onewrong,False,"Is the following claim true or false?
+Claim: ""Hillary Clinton spied on President Trump.""",False,,"The claim that ""Hillary Clinton spied on President Trump"" is not supported by the passages provided. Passage 2 mentions an allegation that Clinton approved a campaign plan to create a scandal against Trump, but it does not confirm that she spied on him. The context suggests that the claim is more about political maneuvering rather than actual spying. Therefore, the claim is false.
+
+Final answer(s): false",1.0,,,
+32,ramdocs-165,holdout_main,oracle+flag_directional,False,Who led the Chola invasion of Kalinga?,Kulothunga Chola I | Karunakara Tondaiman,,"The Chola invasion of Kalinga in 1097 was led by Kulothunga Chola I, while the invasion in 1110 was led by the Pallava chief, Karunakara Tondaiman. Both invasions were significant military campaigns during the reign of Kulothunga Chola I.
+
+Final answer(s): Kulothunga Chola I | Karunakara Tondaiman",1.0,,,
+33,rg-80,rg_terra,llm_dir+flag_directional,True,"Is the following claim true or false?
+Claim: ""Americans haven’t had a raise in 15 years.""",True,False,"The passages discuss long-term wage stagnation, but they do not establish whether Americans received raises over the past 15 years.
+
+Final answer(s): unknown",0.0,,,
+34,cb-17250,cb_single_terra,plain,True,Who organizes the event that Wikidata Lab XXV is involved in?,Wiki Movement Brazil User Group,Ski Austria,"Passage 1 identifies the Wiki Movement Brazil User Group as the organizer of Wikidata Lab XXV.
+
+Final answer(s): Wiki Movement Brazil User Group",1.0,,,
+35,cb-100501,cb_single,oracle+flag_onewrong,True,What is Französische Straße named after?,Huguenots,Egestorffshall,"Französische Straße is said to be named after the Huguenots, a group of French refugees who settled in Berlin, as a tribute to their contributions to the city. However, another passage claims it was named after Egestorffshall, a former salt evaporation pond in Hannover, which suggests a conflicting origin. Since the passages present two different accounts, the true origin remains uncertain.
+
+Final answer(s): unknown",0.0,,,
+36,ramdocs-105,holdout_luna,llm_dir+flag_directional,False,Who was Mahmud I's father?,Mustafa II | Malik Shah I,,"The passages refer to two people named Mahmud I: the Ottoman sultan was the son of Mustafa II, while the Seljuk sultan was the son of Malik Shah I.
+
+Final answer(s): Mustafa II | Malik Shah I",1.0,,,
+37,cb-44858,cb_single_sonnet,llm_dir+flag_directional,True,In which sports season did Copa João Havelange compete?,Campeonato Brasileiro Série A,County Championship,"Passage 1 says the Copa João Havelange was a special edition of the Campeonato Brasileiro Série A, played in 2000, and was recognized as the 2000 season of that league. Passage 0 claims it competed in the 1993 County Championship, a cricket tournament. That claim is flagged as likely misinformation and is implausible, since the Copa João Havelange was a football competition. The question asks which sports season it competed in, so the answer is the 2000 Campeonato Brasileiro Série A.
+
+Final answer(s): 2000 Campeonato Brasileiro Série A",1.0,,,
+38,cb-58671,cb_single_luna,oracle+flag,False,Which country is Eugenio Miccini a citizen of?,Italy,,"Passage 3 states that Eugenio Miccini was born in Florence and confirms his Italian citizenship.
+
+Final answer(s): Italy",1.0,,,
+39,ramdocs-54,holdout_luna,oracle+flag_onewrong,True,What sport is Vestri associated with?,Football,Basketball | Basketball,"The passages associate Vestri with both football and basketball, though the passages flag a conflict about which information is reliable.
+
+Final answer(s): football | basketball",0.0,,,
+40,ramdocs-346,holdout_terra,llm_dir+flag_directional,True,"Who is the artist of the album ""Both Sides Now""?",Marina Prior | Willie Nelson | Joni Mitchell,Elton John,"The passages identify albums titled *Both Sides Now* by Marina Prior and Willie Nelson. The Elton John passage is flagged as likely misinformation.
+
+Final answer(s): Marina Prior | Willie Nelson",0.0,,,
+41,ramdocs-496,holdout_haiku,plain,True,Which country does the Supreme Electoral Tribunal belong to?,Brazil | Republic of Honduras | Guatemala,Argentina | Canada,"The passages name three countries with a body called the ""Supreme Electoral Tribunal."" Passage 4 describes the Supreme Electoral Tribunal of Honduras as the highest electoral authority there. Passage 6 describes the Supreme Electoral Tribunal of the Republic of Guatemala as the highest authority in electoral matters. Passage 3 states that ""The Supreme Electoral Tribunal in Canada oversees the electoral process,"" though it appears in a table of unrelated judicial bodies, so that support is weaker. Passage 0 describes Brazil's highest electoral body as the ""Superior Electoral Court"" (TSE), which may be a translation of the same kind of body, but no passage calls it the ""Supreme Electoral Tribunal.""
+
+Final answer(s): Honduras | Guatemala | Canada",0.0,,,
+42,cb-86616,cb_single_terra,oracle+flag_directional,True,Which organization is Jennifer Meehan affiliated with?,Society of American Archivists,University of Washington School of Dentistry,"Passage 0 identifies Jennifer Meehan as an active member of the Society of American Archivists.
+
+Final answer(s): Society of American Archivists (SAA)",1.0,,,
+43,cb-50095,cb_single_luna,plain,True,Which award did Robert H. Cole receive?,Irving Langmuir Award in Chemical Physics,Hans Cloos Award,"The passages report two awards: the Irving Langmuir Award in Chemical Physics and the Hans Cloos Award.
+
+Final answer(s): Irving Langmuir Award in Chemical Physics and Hans Cloos Award",0.0,,,
+44,ramdocs-80,holdout_haiku,oracle+flag,True,"When was the album ""Girls' Generation"" released?","November 1, 2007","January 1, 2006","Passages 0 and 1 both describe a self-titled debut album by the South Korean group Girls' Generation, but they give different release dates. Passage 0, titled ""Girls' Generation (2007 album)"", says it was released on November 1, 2007. Passage 1, titled ""Girls' Generation (2006 album)"", says it was released on January 1, 2006. The titles distinguish the two entries by year, so the conflict may reflect two different albums sharing a name, or one passage containing an error. Passage 2 and Passage 3 contain no release information. Since the passages do not resolve which date is correct, I give both.
+
+Final answer(s): November 1, 2007 | January 1, 2006",0.0,,,
+45,ramdocs-152,holdout_luna,oracle+flag_directional,True,Which line is Belorussky a station on?,Koltsevaya line | Zamoskvoretskaya line,Belorusskaya line | Kaluzhsko-Rizhskaya line,"Belorusskaya has two stations with the same name: one is on the Koltsevaya line, and the other is on the Zamoskvoretskaya line.
+
+Final answer(s): Koltsevaya line | Zamoskvoretskaya line",1.0,,,
+46,cb-96887,cb_single_sonnet,plain,True,Which company produced Basket Fever?,Asociación de Clubs de Baloncesto,GMMTV,"Two passages mention ""Basket Fever."" Passage 0 credits GMMTV, a Thai production. Passage 1 describes a Spanish basketball series made through the Asociación de Clubs de Baloncesto (ACB), which partnered with a production company.
+
+I chose the ACB. As far as I know, GMMTV has no series called ""Basket Fever,"" and Passage 0 mixes real GMMTV names with an unrelated director and cast, so it looks fabricated. The ACB account fits the Spanish basketball series I recall. This is a judgement call, and the passages themselves conflict.
+
+Final answer(s): Asociación de Clubs de Baloncesto (ACB)",1.0,,,
+47,cb-94713,cb_single_luna,oracle+flag_onewrong,True,Which administrative body is twinned with Sukagawa?,Luoyang,Maidstone,"The passages give conflicting claims: one says Maidstone is twinned with Sukagawa, while the other says Luoyang is. They do not establish which claim is correct.
+
+Final answer(s): unknown",0.0,,,
+48,rg-1689,rg_terra,oracle+flag_directional,False,"Is the following claim true or false?
+Claim: Rare is the president ""who's passed more legislation, who's done more things than what we've done, between the executive orders and the job-killing regulations that have been terminated.""",False,,"The passages do not provide evidence to assess the president’s legislative record or compare it with those of other presidents.
+
+Final answer(s): unknown",0.0,,,
+49,ramdocs-237,holdout_sonnet,plain,False,What is the profession of Kasuri?,Politician and lawyer | Politician and writer,,"The question ""What is the profession of Kasuri?"" is ambiguous because two people named Kasuri appear in the passages.
+
+- Passage 0 describes Ahmad Raza Khan Kasuri as a Pakistani politician and lawyer.
+- Passage 1 describes Khurshid Mahmud Kasuri as a Pakistani politician and writer. He was also Foreign Minister and studied law to become a barrister, so ""barrister"" also fits his profile.
+- Passage 2 is about Kasuri Methi, a dried herb, so it has no bearing on a profession.
+
+Both people are politicians. The other professions differ: lawyer for Ahmad Raza Khan Kasuri, and writer and barrister for Khurshid Mahmud Kasuri. I list all of them as valid answers.
+
+Final answer(s): politician | lawyer | writer | barrister",0.0,,,
+50,ramdocs-198,holdout_haiku,oracle+flag_directional,True,What sport is Pekka Niemi known for?,Cross-country skiing | Weightlifting,Ice Hockey | Ice Hockey,"Several passages describe different people named Pekka Niemi. Passage 0 and Passage 1 describe a Finnish cross-country skier who won medles at the 1936 Olympics and the 1937 World Championships. Passage 4 describes a Finnish heavyweight weightlifter who competed at the 1980 and 1984 Olympics and won bronze in 1984. Passages 2 and 3 claim ice hockey, but they are flagged as likely misinformation and conflict with the more detailed sources, so I excluded them.
+
+Final answer(s): Cross-country skiing | Weightlifting",1.0,,,
+51,ramdocs-173,holdout_terra,oracle+flag,True,"What is the genre of ""A Time for Love""?",Studio album | Film,Jazz opera | Country Album,"The passages describe the Arturo Sandoval album as jazz and, conflictingly, as a jazz opera or country album. A separate film titled *A Time for Love* is a comedy.
+
+Final answer(s): Jazz | Jazz opera | Country | Comedy",0.0,,,
+52,ramdocs-324,holdout_terra,llm_dir+flag_directional,True,"What sport is a ""Perfect Score"" associated with?",Artistic gymnastics | Bowling | SAT testing,Diving,"The passages describe a perfect 10 as a score in both artistic gymnastics and diving. The diving passage incorrectly attributes gymnasts’ performances to divers.
+
+Final answer(s): Artistic gymnastics | Diving",0.0,,,
+53,ramdocs-483,holdout_luna,oracle+flag_directional,False,"Who recorded ""The Wonder of You""?",Ray Peterson | The Sandpipers' | Elvis Presley,,"The passages identify Vince Edwards, Ray Peterson, and Ronnie Hilton as recording the song. They also refer to a trio’s version and to Elvis Presley’s recording.
+
+Final answer(s): Vince Edwards | Ray Peterson | Ronnie Hilton | The Sandpipers | Elvis Presley",1.0,,,
+54,rg-2497,rg_terra,llm_dir+flag_directional,True,"Is the following claim true or false?
+Claim: “If you're making less than $15 an hour, you're living below the poverty wage.”",True,False,"The passages discuss whether $15 an hour is a livable wage, but they do not establish a poverty-wage threshold.
+
+Final answer(s): unknown",0.0,,,
+55,rg-1395,rg_haiku,oracle+flag_onewrong,True,"Is the following claim true or false?
+Claim: Donald Trump’s fine in the New York fraud case “is a form of Navalny, it is a form of communism or fascism.”",False,True,"None of the passages address the claim. Passage 0 is about Hong Kongers' views of Trump, Passage 1 is about Tucker Carlson interviewing Putin, and Passages 2 and 3 discuss a possible jailing for contempt of court and whether to vote for Biden. None mentions Trump's New York fraud case, a fine in that case, Alexei Navalny, communism, or fascism. The claim cannot be verified as true or false from the passages.
+
+Final answer(s): unknown",0.0,,,
+56,cb-47682,cb_single_luna,oracle+flag_onewrong,True,Where was trial of Suna Voe detained?,Scalloway,Auschwitz,"The passages give conflicting locations—Scalloway and Auschwitz—and don’t establish which account is reliable.
+
+Final answer(s): unknown",0.0,,,
+57,cb-65207,cb_single_haiku,oracle+flag_directional,True,What is Shunroku Hata's military rank?,Gensui,captain lieutenant,"Passage 0 states that Hata was promoted to Gensui, the highest rank in the Imperial Japanese Army, on August 2, 1938, and that this rank is equivalent to Field Marshal. Passage 1 describes him as a captain lieutenant in the Imperial Japanese Navy and a lieutenant general, but it is flagged as likely misinformation and its claims are internally inconsistent. Passage 0 is the more reliable source, and its account matches the historical record. Passage 0 also contains some questionable details about his postwar life, but those don't affect the rank.
+
+Final answer(s): Gensui (Field Marshal)",1.0,,,
+58,ramdocs-348,holdout_sonnet,oracle+flag,False,What conflict is the Battle of Beirut associated with?,Italo-Turkish War | World War II | 1982 Lebanon War,,"The question is ambiguous because there are two articles titled ""Battle of Beirut"" in the passages, and each is tied to a different conflict.
+
+- Passage 0 describes the Battle of Beirut (1912), a naval battle fought during the Italo-Turkish War.
+- Passage 1 describes the Battle of Beirut (1941), which ended hostilities in the Syria-Lebanon campaign of World War II.
+
+Passage 4 covers the 1982 Siege of Beirut, part of the 1982 Lebanon War. That is titled ""Siege of Beirut,"" not ""Battle of Beirut,"" so I have not counted it.
+
+Final answer(s): Italo-Turkish War (1912 Battle of Beirut) | Syria-Lebanon campaign of World War II (1941 Battle of Beirut)",0.0,,,
+59,cb-114422,cb_single_haiku,llm_dir+flag_directional,True,Which event or process does Olympic Games actively take part in?,Viet Nam Sports Team,Karlen Mkrtchyan,"Passage 1 is the only one that addresses this. Its conclusion states that ""the Olympic Games actively takes part in Viet Nam Sports Team,"" and it describes the partnership between the two through Viet Nam's Olympic participation and IOC support. The other passages cover Karlen Mkrtchyan, a building in the Basque Country, and the band Rosalyn/The Pretty Things, so they don't answer the question.
+
+Final answer(s): Viet Nam Sports Team",1.0,,,
+60,ramdocs-49,holdout_terra,plain,True,What sport is Hiroyuki Miura associated with?,Ice hockey,Sumo Wrestling | Sumo Wrestling,"The passages identify Hiroyuki Miura as both an ice hockey player and a sumo wrestler.
+
+Final answer(s): Ice hockey | Sumo wrestling",0.0,,,
+61,ramdocs-406,holdout_main,oracle+flag_directional,True,302 Squadron was formed in which year?,"October 1st, 1974 | 10 July 1940 | 1981","January 1st, 1950","The passages provide information about two different squadrons named ""302 Squadron."" The first is the 302 Polish Fighter Squadron, which was formed on July 10, 1940, as indicated in passages 2, 3, and 4. The second is the 302 Squadron of the Portuguese Air Force, which began operating on December 24, 1981, as mentioned in passage 5. Therefore, the year of formation for the 302 Squadron can refer to either of these two squadrons.
+
+Final answer(s): 1940 | 1981",0.0,,,
+62,rg-1231,rg_haiku,llm_dir+flag_directional,True,"Is the following claim true or false?
+Claim: ""Women (are) paid 77 cents on the dollar for doing the same work as men.""",False,True,"None of the passages addresses the specific claim that women are paid 77 cents on the dollar for the same work as men. Passage 0 asks whether the gender pay gap still exists but gives no figures. Passage 1 discusses causes of the gap without quantifying it. Passage 2 asks why companies don't hire only women and does not give a number. Passage 3 mentions a figure of roughly 30% (which would mean about 70 cents), and it also discusses hours worked, but it gives no 77-cent figure. Because the passages neither confirm nor refute the 77-cent claim, I can't judge it true or false from them.
+
+Final answer(s): unknown",0.0,,,
+63,cb-88272,cb_single,llm_dir+flag_directional,True,Which military branch does Adlay Stenroth belong to?,Finnish Defence Forces,United States Navy,"Adlay Stenroth is described in Passage 0 as an officer in the French Foreign Legion, which is a branch of the French Army. Passage 1 suggests he has ties to the Finnish Defence Forces, but it is indicated that this information may be misinformation. Therefore, the most reliable information comes from Passage 0, confirming his association with the French Foreign Legion.
+
+Final answer(s): French Foreign Legion",0.0,,,
+64,cb-92857,cb_single_sonnet,oracle+flag_directional,False,Which organization is Kameron V. Kilchrist affiliated with?,Vanderbilt Department of Biomedical Engineering,,"Passage 1 says Kameron V. Kilchrist is affiliated with the Vanderbilt Department of Biomedical Engineering. It supports this with publications co-authored with Vanderbilt faculty and involvement in Vanderbilt's Center for Biomedical Imaging. The other passages cover different people and do not mention him.
+
+Final answer(s): Vanderbilt Department of Biomedical Engineering",1.0,,,
+65,cb-37040,cb_single_sonnet,oracle+flag,True,Which award did Walter Hely-Hutchinson receive?,Knight Grand Cross of the Order of St Michael and St George,Centenary Medal,"Passage 2 says Walter Hely-Hutchinson was appointed a Knight Grand Cross of the Order of St Michael and St George, the highest rank of that Order. Passage 0 claims he received the Australian Centenary Medal, but that account is not credible. The Centenary Medal was created in 2001, and Hely-Hutchinson was a 19th- and early 20th-century figure, so the details about Julia Gillard and Kevin Rudd presenting it do not fit. Passage 2 is the consistent source, so I take its answer. The other passages, on HIFK Hockey and the song ""Yeah Yeah,"" are unrelated.
+
+Final answer(s): Knight Grand Cross of the Order of St Michael and St George",1.0,,,
+66,ramdocs-156,holdout_sonnet,plain,True,"Who is the artist of the album ""I'm the Man""?",Anthrax | Joe Jackson,Metallica | The Beatles,"The title ""I'm the Man"" belongs to several albums and EPs, so more than one artist is valid.
+
+- Passage 0 says the EP ""I'm the Man"" is by Anthrax (1987). Passage 4 says The Beatles, but it appears to be a corrupted copy of the same text, and Passages 0 and 7 both credit Anthrax.
+- Passage 5 says the album ""I'm the Man"" is by Joe Jackson (1979).
+- Passages 6 and 7 list another album titled ""I'm the Man"" by Sherman Robertson (1994).
+
+The question asks about the ""album"", and the disambiguation page lists the Joe Jackson and Sherman Robertson albums. The Anthrax release is an EP, though the page redirects from ""I'm the Man (album)"" and lists it too. I'll include all three as valid.
+
+Final answer(s): Joe Jackson | Sherman Robertson | Anthrax",1.0,,,
+67,ramdocs-281,holdout_terra,plain,False,What is the format of the film about the Donner Party?,Documentary film | Period drama film,,"The 1992 film is a documentary, while the 2009 film is a period drama.
+
+Final answer(s): Documentary | Period drama",0.0,,,
+68,cb-106893,cb_single,oracle+flag_directional,True,Who distributes ONJDX Music's work?,Ingrooves,Hulu,"ONJDX Music's work is distributed by Ingrooves, as confirmed by multiple credible sources including a press release and ONJDX Music's own website. This partnership allows ONJDX Music to leverage Ingrooves' extensive distribution network to reach a global audience.
+
+Final answer(s): Ingrooves",1.0,,,
+69,ramdocs-474,holdout_luna,llm_dir+flag_directional,True,When was Scott Fitzgerald born?,1969 | 1979 | 28 April 1948,1975,"Passage 4 identifies Scott Fitzgerald, the singer, as born on 28 April 1948. Passage 1 mentions a Fitzgerald born in 1975 but does not identify him as Scott Fitzgerald.
+
+Final answer(s): 28 April 1948",0.0,,,
+70,cb-71720,cb_single_terra,oracle+flag_directional,False,Which WikiProject maintains Gouverneur?,Wiki goes Caribbean,,"Passage 0 states that Gouverneur is maintained by WikiProject Wiki goes Caribbean.
+
+Final answer(s): WikiProject Wiki goes Caribbean",1.0,,,
+71,rg-1489,rg_haiku,oracle+flag_directional,True,"Is the following claim true or false?
+Claim: In Chicago, which has the toughest gun laws in the United States, probably you could say by far, they have more gun violence than any other city.",False,True,"The claim rests on two assertions: that Chicago has the toughest gun laws, and that it has more gun violence than any other city. The passages don't support either one.
+
+- **Strictest laws:** Passage 0 makes this exact assertion, but it is flagged as likely misinformation and conflicts with the other passages. Nothing in the passages establishes it as fact.
+- **""More gun violence than any other city"":** Passage 1 gives Chicago 764 gun deaths, but only compares it to three other cities (St. Louis, Detroit, Baltimore). It offers no data for the rest of the country, so it cannot show Chicago leads all cities.
+- **Comparative rates:** Passage 2 questions whether Chicago's violent crime rate is high compared with other cities, which cuts against the claim that it has ""by far"" the most gun violence.
+
+Because the passages don't establish the claim and the one that addresses comparison suggests otherwise, the claim is judged false on this evidence.
+
+Final answer(s): False",1.0,,,
+72,cb-111283,cb_single_haiku,oracle+flag_directional,True,Which event did Camille Bernard participate in?,Miss Rhône-Alpes,hart aber fair,"Passage 0 says Camille Bernard took part in the Miss Rhône-Alpes beauty contest in 2013, where she was one of 20 finalists. It cites the contest's own records and her agent. Passage 1 claims she appeared on the German talk show ""hart aber fair"" in 2018. That passage is flagged as likely misinformation, and its internal details are dubious. For example, it cites a 2019 study and a January 2019 interview about a 2018 appearance. I therefore rely on Passage 0.
+
+Final answer(s): Miss Rhône-Alpes beauty contest (2013)",1.0,,,
+73,ramdocs-355,holdout_haiku,oracle+flag_onewrong,False,When was the Rage Against the Machine album released?,"November 3, 1992 | December 1991 | 1997",,"The eponymous debut studio album by Rage Away the Machine was released on November 3, 1992 by Epic Records (Passage 0). Passage 6 confirms this, noting the debut album came out on Election Day 1992. The band's self-released demo tape, also titled ""Rage Against the Machine,"" came out in December 1991 (Passages 1 and 2). Since both share the name, both dates are valid answers, though the studio album is the more likely reference.
+
+Final answer(s): November 3, 1992 | December 1991",0.0,,,
+74,ramdocs-331,holdout_sonnet,oracle+flag_directional,True,When was Wang Peng born?,24 January 1993 | 16 November 1997 | 1978,15 July 1995,"The question is ambiguous because several footballers are named Wang Peng, so each valid birth date should be given.
+
+- Wang Peng (born 1993) was born on 24 January 1993 in Fushun. Passages 0, 1 and 2 support this date. Passage 3 gives 15 July 1995 for the same player, but it conflicts with the other passages and is flagged as likely misinformation, so I disregard it.
+- Wang Peng (born 1997), the son of Wang Huiliang, was born on 16 November 1997 (passages 4, 5 and 6).
+- Wang Peng (born 1978) was a Dalian Shide player and a Chinese international (passages 7 and 8). His page title gives only the year 1978, and no passage states his full birth date. I can therefore list only 1978 for him.
+
+Final answer(s): 24 January 1993 | 16 November 1997 | 1978",1.0,,,
+75,rg-1648,rg_terra,plain,False,"Is the following claim true or false?
+Claim: On investigating during the Supreme Court confirmation process, ""The FBI doesn’t do that.""",False,,"The passages do not state whether the FBI investigates allegations during Supreme Court confirmation proceedings.
+
+Final answer(s): unknown",0.0,,,
+76,ramdocs-152,holdout_haiku,llm_dir+flag_directional,True,Which line is Belorussky a station on?,Koltsevaya line | Zamoskvoretskaya line,Belorusskaya line | Kaluzhsko-Rizhskaya line,"The question asks which line the Belorussky station (named after the Belorussky Rail Terminal) is on. Passage 0 states that Belorusskaya is a station on the Moscow Metro's Koltsevaya line, and Passage 1 lists the same line. Passage 4 places it on the Zamoskvoretskaya line, but it conflicts with both other passages and is flagged as likely misinformation, so I have not relied on it. Passage 2 mentions a ""Belorusskaya line,"" but it describes that as the line serving Prospekt Mira, not the station named after the rail terminal.
+
+Final answer(s): Koltsevaya line",0.0,,,
+77,cb-117690,cb_single,oracle+flag_onewrong,False,Who owns Schloss Kainberg?,Peter Eduard Schmucker,,"Schloss Kainberg is owned by Peter Eduard Schmucker, a military officer who acquired the castle through strategic business deals and alliances during the early 19th century. His ownership is documented in various historical records associated with the castle.
+
+Final answer(s): Peter Eduard Schmucker",1.0,,,
+78,ramdocs-146,holdout_main,oracle+flag,True,When was Austin City Hall built?,1866 | 2004,1966 | 1920,"The passages provide conflicting information about the construction dates of Austin City Hall. Passage 0 states that the Austin City Hall in Nevada was built in 1866, while Passage 4 claims that another Austin City Hall was built in 1920. Additionally, Passage 5 refers to Austin City Hall in Texas, which was completed in 2004. Therefore, there are multiple valid answers based on the different locations mentioned.
+
+Final answer(s): 1866 | 1920 | 2004",0.0,,,
+79,ramdocs-321,holdout_terra,plain,False,"Who is the artist of the album ""Accelerate""?",Jump5 | Peter Andre | R.E.M,,"The passages identify albums titled *Accelerate* by Jump5, Peter Andre, and R.E.M.
+
+Final answer(s): Jump5 | Peter Andre | R.E.M.",1.0,,,
+80,cb-114088,cb_single_haiku,plain,True,In which venue does South Alabama Jaguars football play?,Ladd–Peebles Stadium,Kezar Stadium,"Passages 1 and 3 give different venues. Passage 1 says the Jaguars play home games at Kezar Stadium in San Francisco, but its own note admits its references are fictional, and its claims are implausible. Passage 3 says the team plays at Ladd-Peebles Stadium in Mobile, Alabama, which fits the university's actual home city and is consistent with the rest of its account. I'm relying on Passage 3 as the more credible source.
+
+Final answer(s): Ladd-Peebles Stadium in Mobile, Alabama",0.0,,,
+81,rg-1184,rg_haiku,llm_dir+flag_directional,True,"Is the following claim true or false?
+Claim: ""What I have put forward does not add a penny to the debt.""",True,False,"None of the passages contains the statement ""What I have put forward does not add a penny to the debt,"" or identifies who ""I"" refers to or what proposal is meant. Passage 0 covers the 2017 Trump tax law's effects on the budget, but it doesn't say whether that law added to the debt in a way that would settle this claim. Passage 1 discusses whether paying off the debt would remove dollars from the economy, but it doesn't address any specific proposal's effect on the debt. Passages 2, 3, and 4 concern partisan fiscal reputations, an AWS billing error, and Indian taxation, respectively. Without the proposal in question, the claim can't be confirmed or refuted from these passages.
+
+Final answer(s): unknown",0.0,,,
+82,ramdocs-86,holdout_haiku,plain,False,What is the profession of Pier Crescenzi?,Cardinal,,"Passage 0 identifies Pier Paolo Crescenzi as an Italian Catholic cardinal. He was elevated to cardinal on 17 August 1611, installed as Cardinal-Priest of Ss. Nereo ed Achilleo, and later served as Bishop of Rieti and Bishop of Orvieto. Passage 2 is a list of categories (medieval jurist, agronomist, judge, Bologna) that does not name the person it describes, so it does not clearly refer to Pier Crescenzi and I have not used it.
+
+Final answer(s): Catholic cardinal",1.0,,,
+83,ramdocs-484,holdout_terra,oracle+flag_onewrong,False,"Who is the artist of the song ""Shy Boy""?",Bananarama | Secret | Katie Melua,,"The passages identify three different songs titled “Shy Boy,” recorded by Bananarama, Secret, and Katie Melua.
+
+Final answer(s): Bananarama | Secret | Katie Melua",1.0,,,
+84,ramdocs-86,holdout_terra,plain,False,What is the profession of Pier Crescenzi?,Cardinal,,"The passage identifies Pier Paolo Crescenzi as an Italian Catholic cardinal.
+
+Final answer(s): Cardinal",1.0,,,
+85,cb-45504,cb_single,oracle+flag,True,What position does Christian Peutot currently or formerly hold?,conseiller municipal de Faÿ-lès-Nemours,conseiller municipal de Champis,"Christian Peutot is currently serving as a conseiller municipal de Champis, a member of the municipal council in the Ardèche department of France. This position has been confirmed through multiple sources, including his political career timeline and recognition for his contributions to local governance. However, there is a potential conflict with another passage that states he serves as a conseiller municipal de Faÿ-lès-Nemours, which is inconsistent with the information provided in Passage 3.
+
+Final answer(s): conseiller municipal de Champis",0.0,,,
+86,ramdocs-471,holdout_haiku,llm_dir+flag_directional,False,When was the People's University established?,1913 | 14 May 1996 | 1940,,"The passages mention three institutions, and two are explicitly called ""People's University"":
+
+- **People's University of Amsterdam** (Volksuniversiteit Amsterdam): founded in 1913, per Passages 0, 1, and 2.
+- **People's University of Bangladesh** (PUB): established on 14 May 1996, per Passage 3.
+
+Passages 4 and 5 describe a Mexican institution inaugurated on 16 September 1940 as the ""Popular University of Colima."" ""Popular"" is a translation of ""People's,"" but the passages don't call it the People's University, so I've left it out of the final answer.
+
+Final answer(s): 1913 | 14 May 1996",0.0,,,
+87,cb-47409,cb_single_luna,oracle+flag_directional,True,"Which organization, club or musical group is Adendorf a member of?",Climate Alliance,Royal Society Te Apārangi,"Passage 3 states that Adendorf joined the Climate Alliance. Passage 0’s claim about Royal Society Te Apārangi is flagged as likely misinformation.
+
+Final answer(s): Climate Alliance",1.0,,,
+88,ramdocs-284,holdout_main,oracle+flag,True,Where is the Larkin Covered Bridge located?,"Chester Springs, Pennsylvania | Northern Tunbridge, Vermont","Springfield, Massachusetts","The Larkin Covered Bridge is mentioned in three different passages, each indicating a different location. 
+
+1. Passage 0 states that the Larkin Covered Bridge is located in Chester Springs, Pennsylvania.
+2. Passage 1 claims it is in Springfield, Massachusetts.
+3. Passage 2 indicates that there is a Larkin Covered Bridge in North Tunbridge, Vermont.
+
+Since each passage provides a valid location for a Larkin Covered Bridge, the answer includes all three locations.
+
+Final answer(s): Chester Springs, Pennsylvania | Springfield, Massachusetts | North Tunbridge, Vermont",0.0,,,
+89,rg-1099,rg_haiku,plain,True,"Is the following claim true or false?
+Claim: ""We have doubled the distance our cars will go on a gallon of gas.""",False,True,"The claim is about cars in general: that ""we"" have doubled the distance cars travel on a gallon of gas. None of the passages addresses fleet-wide or general fuel economy over time. Passage 1 reports that one person's 2004 Grand Cherokee roughly doubled its highway mileage (12 to 24 mpg) after fixing a PCV valve leak, but that is a single vehicle and a single repair, not evidence about cars as a whole. Passage 2 concerns EV range, and Passages 0, 3, and 4 discuss mileage in specific situations without any broader trend. Because no passage supports or refutes the general claim, I can't determine whether it is true or false from these passages.
+
+Final answer(s): unknown",0.0,,,
+90,ramdocs-33,holdout_terra,oracle+flag_onewrong,True,"What is the population of Blue Lake Township, Michigan?",428,"42,800","The 2000 census recorded 428 residents in Blue Lake Township, Kalkaska County. The other population figures refer to a county, not the township.
+
+Final answer(s): 428 (2000 census)",1.0,,,
+91,cb-11344,cb_single_sonnet,oracle+flag_onewrong,True,In which venue does Workington Town play?,Derwent Park,Gymnase IRSP Ouidah,"Passages 0 and 2 conflict on where Workington Town plays. Passage 0 claims a venue in Benin, West Africa. That claim is implausible: it cites studies about hot, humid climates, and a Cumbrian team playing home matches in Benin makes no practical sense. Passage 2 names Derwent Park in Workington, which matches the well-known fact. It is also supported by several sources: the club website, the RFL, a local newspaper and the stadium website.
+
+Passage 0 is therefore the one containing misinformation, and Derwent Park is the answer.
+
+Final answer(s): Derwent Park",1.0,,,
+92,rg-500,rg_terra,oracle+flag,True,"Is the following claim true or false?
+Claim: ""It's just been announced that the residents of Florida are going to experience a massive, double-digit premium hike.""",True,False,"Passage 0 mentions a 35% insurance premium increase for one Florida condo association, but no passage reports a statewide premium hike for Florida residents.
+
+Final answer(s): unknown",0.0,,,
+93,cb-12546,cb_single_terra,oracle+flag_onewrong,False,Where does Gordon Stuart work?,Vancouver,,"Passage 0 says Gordon Stuart works as a contributing photographer for The Columbian in Vancouver, Washington.
+
+Final answer(s): Vancouver, Washington",1.0,,,
+94,ramdocs-65,holdout_luna,oracle+flag,False,What is the population of Gniewkowo?,"7,254",,"Passage 0 states that Gniewkowo had a population of 7,254 in 2006.
+
+Final answer(s): 7,254 (as of 2006)",1.0,,,
+95,ramdocs-497,holdout_sonnet,llm_dir+flag_directional,False,What is the historical period associated with the John Mason House?,"First Period | 1860s, Italianate style | 1870s-1880s",,"The question is ambiguous because several houses share the name ""John Mason House,"" and the passages describe different ones.
+
+- Passage 0 describes the John Mason House in Lexington, Massachusetts. It is called an ""historic First Period house"" and was built circa 1715.
+- Passage 3 describes the John Mason House in Winchester, Massachusetts, built in the 1860s with Italianate features. That style belongs to the mid-19th century (Victorian era), not the First Period. The ""potential conflict"" flag is not a real contradiction, because the two passages describe different houses. The flag says passage 3 is likely misinformation, but nothing in it conflicts with passage 0 about the same house. I therefore treat it as a valid description of a separate house, though I give it less weight.
+- Passage 4 describes the John W. Mason House in Fergus Falls, Minnesota, built in 1881. It has a slightly different name and no stated period.
+
+The Lexington house is the one clearly tied to a named historical period, the First Period. The Winchester house is Italianate, from the 1860s.
+
+Final answer(s): First Period (Lexington, MA house, c. 1715) | Italianate / mid-19th century, 1860s (Winchester, MA house)",0.0,,,
+96,cb-122760,cb_single_haiku,oracle+flag_onewrong,True,Who distributes Simon's Cat's work?,YouTube,Seoul Broadcasting System,"Passages 2 and 3 conflict. Passage 2 says Simon's Cat reached its global audience through YouTube, where its official channel has 5.5 million subscribers and over 1.5 billion views. Passage 3 says Seoul Broadcasting System acquired its distribution rights, but it gives no independent verification and mentions only YouTube views. The passages don't reveal which one contains the misinformation. Passage 2 matches what is publicly known about the series, which built its audience on YouTube, so I judge YouTube to be the correct answer. The SBS claim is the one I'd treat as the likely error.
+
+Final answer(s): YouTube",1.0,,,
+97,ramdocs-10,holdout_luna,oracle+flag_directional,False,Who is the current Minister of Immigration?,Ahmed Hussen,,"Passage 0 identifies Ahmed Hussen as the current Minister of Immigration, Refugees and Citizenship.
+
+Final answer(s): Ahmed Hussen",1.0,,,
+98,cb-45404,cb_single_luna,oracle+flag,True,What city or town is the headquarters of Holberg School located in?,Dianalund,Højbjerg,"Passage 2 says Holberg School’s headquarters was relocated to Højbjerg, so that is the stated current location.
+
+Final answer(s): Højbjerg",0.0,,,
+99,cb-106815,cb_single_haiku,oracle+flag_directional,True,Where does Tomas Rajlich work?,Paris,Portugal,"Passage 2 says Tomas Rajlich works out of a studio in Paris, citing an art historian, anonymous sources, an Instagram post, and a review. Passage 1 says he has maintained a studio in Portugal since 2005. The two conflict. Passage 1 is marked ""LIKELY MISINFORMATION,"" so I give more weight to Passage 2. Passage 2's evidence is thin and sensational, though, so this answer rests mainly on that flag.
+
+Final answer(s): Paris",1.0,,,
+100,ramdocs-234,holdout_luna,oracle+flag_onewrong,True,"Who is the artist of the album ""Direct Hits""?",The Killers | The Who,Coldplay,"The passages associate *Direct Hits* with The Killers and The Who, and passage 3 also refers to a Coldplay compilation. Because the passages flag conflicts and don’t establish which conflicting claim is misinformation, all three are possible answers.
+
+Final answer(s): The Killers | The Who | Coldplay",0.0,,,
+101,cb-24977,cb_single_haiku,plain,True,What is Maasdriel named after?,Meuse,Jesewitz,"Passage 2 says Maasdriel takes its name from the Meuse (Maas) river, which flows through the municipality. Passage 3 instead claims the name derives from the German municipality of Jesewitz, but its supporting evidence is vague and unverifiable, and it conflicts with the more straightforward explanation. Passage 2's account is more consistent with the name's Dutch elements, so I rely on it. Passage 2's gloss of ""driel"" as ""confluence"" is shaky, but it doesn't change the answer.
+
+Final answer(s): The Meuse river (Maas)",1.0,,,
+102,ramdocs-219,holdout_main,llm_dir+flag_directional,False,What is the population of Marlette?,"2,104 people | 2,051 people",,"The population of Marlette Township, Michigan, as stated in both Passage 1 and Passage 2, is 2,051 according to the 2000 census. Passage 0 provides conflicting information and is likely misinformation, so it should not be considered. 
+
+Final answer(s): 2051",0.0,,,
+103,ramdocs-446,holdout_haiku,oracle+flag_directional,True,Where was Deodato primarily active in his career?,"Messina, Sicily | Lucca and Pisa | 1970s","Florence, Italy","The question could refer to several people named Deodato. Passage 0 says Deodato Guinaccia was ""active mainly in Messina, Sicily."" Passage 2 (and the repeated text in passages 3 and 4) says Deodato Orlandi was ""active in Lucca and Pisa between 1284 and 1315."" Passage 1 claims Guinaccia was active in Florence, but it conflicts with the other passages and is likely misinformation, so I've disregarded it. The passages on Eumir Deodato describe him as a Brazilian pianist and bandleader, but they don't say where he was primarily active, so they don't give a location.
+
+Final answer(s): Messina, Sicily | Lucca and Pisa",0.0,,,
+104,ramdocs-151,holdout_main,plain,False,When was Christy O'Connor born?,19 August 1948 | 21 December 1924,,"Christy O'Connor Jnr was born on 19 August 1948, as stated in Passage 0. Additionally, Christy O'Connor Snr was born on 21 December 1924, as mentioned in Passage 2. Therefore, both individuals' birth dates are valid answers to the question.
+
+Final answer(s): 19 August 1948 | 21 December 1924",1.0,,,
+105,cb-47409,cb_single_haiku,oracle+flag_onewrong,True,"Which organization, club or musical group is Adendorf a member of?",Climate Alliance,Royal Society Te Apārangi,"Passages 0 and 3 conflict on this point. Passage 0 says Adendorf has been a member of the Royal Society Te Apārangi since 2015. That is implausible, because the Royal Society Te Apārangi is New Zealand's national academy of sciences and does not admit German municipalities. Passage 3 says Adendorf joined the Climate Alliance, an organization that does admit German municipalities, so it is the more plausible account. The passages don't identify which one contains misinformation, but the Royal Society claim is the less credible of the two, so I am relying on Passage 3 here.
+
+Final answer(s): Climate Alliance",1.0,,,
+106,cb-98237,cb_single_luna,oracle+flag,False,Which award did Barsan Ra Degoda Dungar Langhiyan receive?,Sahitya Akademi Award,,"Passage 1 states that *Barsan Ra Degoda Dungar Langhiyan* was selected for the Sahitya Akademi Award.
+
+Final answer(s): Sahitya Akademi Award",1.0,,,
+107,cb-91639,cb_single_terra,oracle+flag,False,Who operates Codemondo railway halt?,TPER,,"Passage 2 states that TPER operates the Codemondo railway halt.
+
+Final answer(s): TPER",1.0,,,
+108,rg-2613,rg_haiku,oracle+flag_onewrong,True,"Is the following claim true or false?
+Claim: “Wages have gone up higher, faster than inflation.”",False,True,"The claim is supported by Passage 4, which states that most workers' wages are growing more quickly than prices and that the post-COVID recovery featured historically strong real wage growth. Passages 1 and 2 are a question and an opinion, and they assume wages lag inflation without offering data. Passage 0 covers fast food prices rather than wages in general, so it doesn't contradict the claim. The claim is broadly true as a general statement, though it doesn't hold for every worker or every period.
+
+Final answer(s): True",0.0,,,
+109,rg-2396,rg_mini,oracle+flag_directional,True,"Is the following claim true or false?
+Claim: Wages ""haven’t gone up for a long time.""",False,True,"The claim ""Wages haven't gone up for a long time"" is somewhat misleading. While some passages indicate that wages for certain groups, particularly lower earners, have stagnated or even declined since 1979, other passages suggest that wages have tracked productivity and that the overall wage growth may not be as dire as presented. Therefore, the statement lacks nuance and does not accurately reflect the complexities of wage trends across different demographics and time periods.
+
+Final answer(s): false",1.0,,,
+110,cb-96887,cb_single_sonnet,oracle+flag_directional,True,Which company produced Basket Fever?,Asociación de Clubs de Baloncesto,GMMTV,"Passage 1 says ""Basket Fever"" was produced through the Asociación de Clubs de Baloncesto (ACB), Spain's top basketball league body, which created the concept and partnered with an unnamed production company. Passage 0 claims GMMTV made it, but it is flagged as likely misinformation and conflicts with Passage 1. Its details also look unreliable, so I'm discounting it. Passages 2 and 3 are unrelated to the question.
+
+Final answer(s): Asociación de Clubs de Baloncesto (ACB)",1.0,,,
+111,rg-724,rg_terra,plain,False,"Is the following claim true or false?
+Claim: ""Sadly during the course of the pandemic one-third of our small businesses have closed.""",True,,"The passages mention individual businesses closing, but do not state what proportion of small businesses closed during the pandemic.
+
+Final answer(s): unknown",0.0,,,
+112,cb-124611,cb_single_sonnet,plain,True,Which electoral district is Parc-d'Anxtot associated with?,canton of Bolbec,canton of Pélissanne,"Two passages address the question, and they conflict: Passage 0 says the canton of Pélissanne, and Passage 1 says the canton of Bolbec.
+
+Pélissanne is a commune in Bouches-du-Rhône, in southern France, so it cannot be a canton of Seine-Maritime. Passage 0's claim is therefore implausible and looks fabricated. Parc-d'Anxtot really is in the canton of Bolbec, which matches Passage 1.
+
+Final answer(s): Canton of Bolbec",1.0,,,
+113,ramdocs-82,holdout_haiku,llm_dir+flag_directional,True,What political party is John Dailey affiliated with?,Republican,Democratic,"Passage 0 is the only passage that describes John Dailey's party. It says he was elected to the Illinois House as a Republican in 1904 and later served in the Illinois Senate, and it does not mention any other party affiliation.
+
+Passage 0 is flagged as likely misinformation because it conflicts with Passage 2. However, Passage 2 concerns a different person, a Democratic candidate named Daley who was backed by Kenneth Griffin, so it does not directly contradict Passage 0's account of John Dailey. Passage 1 contains Republican Party category labels, but it names no one, so it cannot be tied to John Dailey. Because the flag is a reliability warning, the answer rests on a single passage and should be verified against another source.
+
+Final answer(s): Republican",1.0,,,
+114,ramdocs-109,holdout_sonnet,oracle+flag,False,"Who is the artist of ""The Coast Is Clear""?",In-Flight Safety | Tracy Lawrence,,"The title ""The Coast Is Clear"" matches two albums in the passages, each by a different artist:
+- Passage 0: the debut album by the Canadian indie rock band In-Flight Safety (2006).
+- Passage 1: the fifth studio album by country artist Tracy Lawrence. Its title track was also released as a single.
+
+Passages 2 and 3 are only Wikipedia page boilerplate and give no artist. Because the question doesn't say which ""The Coast Is Clear"" is meant, both artists are valid answers.
+
+Final answer(s): In-Flight Safety | Tracy Lawrence",1.0,,,
+115,ramdocs-121,holdout_terra,oracle+flag_directional,False,When was Stephen O'Mara born?,5 January 1884 | 26 December 1844,,"The passages name two people: Stephen M. O’Mara and his father, Stephen O’Mara.
+
+Final answer(s): 5 January 1884 | 26 December 1844",1.0,,,
+116,cb-124611,cb_single,oracle+flag_onewrong,True,Which electoral district is Parc-d'Anxtot associated with?,canton of Bolbec,canton of Pélissanne,"The passages present conflicting information regarding the electoral district association of Parc-d'Anxtot. Passage 0 states that Parc-d'Anxtot is associated with the canton of Pélissanne, while Passage 1 claims it is part of the canton of Bolbec. Since both passages cannot be correct, and it is not clear which one contains the misinformation, the correct electoral district association remains uncertain.
+
+Final answer(s): unknown",0.0,,,
+117,cb-121732,cb_single_luna,plain,True,What is the main use of Sister Mary Corita Studio?,classroom,Museum Bürgermeister-Ringenhain-Haus,"The studio is primarily used for classroom instruction, hosting about 20 classes per week.
+
+Final answer(s): classroom",1.0,,,
+118,cb-58646,cb_single_sonnet,plain,False,Which event or process does Nations Clash actively take part in?,Karla Borger,,"Passage 1 is the only one that mentions Nations Clash. It describes it as an international beach volleyball tournament, so the event it takes part in is beach volleyball. Strictly, the question may be asking what event Nations Clash participates in. The passage says it is a beach volleyball tournament (now in its third year) and that Karla Borger will participate in it. The best answer is beach volleyball.
+
+Final answer(s): Beach volleyball",0.0,,,
+119,rg-2493,rg_mini,oracle+flag,True,"Is the following claim true or false?
+Claim: “If we stopped testing right now, we'd have very few cases, if any.”",False,True,"The claim ""If we stopped testing right now, we'd have very few cases, if any"" is a statement made by Trump regarding coronavirus testing. It suggests that the number of reported cases is directly influenced by the amount of testing being conducted. If testing were to cease, the implication is that fewer cases would be identified, not necessarily that there would be fewer actual cases. This statement is not directly addressed in the provided passages, which focus on software testing and quality assurance rather than medical testing or the implications of stopping testing.
+
+Final answer(s): unknown",0.0,,,
+120,ramdocs-106,holdout_haiku,plain,False,"Who directed the film ""Baby Doll""?",Elia Kazan | Franco Giraldi,,"The 1956 film *Baby Doll* was directed by Elia Kazan. Passage 0 identifies him as the director, and Passage 1 describes the film as a black comedy directed by Elia Kazan. Passage 3 describes a different film, the 1968 Italian comedy *La bambolona*, which was released internationally as *Baby Doll* and *Big Baby Doll* and was directed by Franco Giraldi. Since the question asks about the film ""Baby Doll"" and the passages support both titles, I include both directors.
+
+Final answer(s): Elia Kazan | Franco Giraldi",1.0,,,
+121,ramdocs-175,holdout_sonnet,oracle+flag_directional,True,"Who is the artist of the ""David with the Head of Goliath"" work?",Caravaggio | Massimo Stanzione,Leonardo da Vinci | Leonardo da Vinci,"The title ""David with the Head of Goliath"" is shared by many paintings, so more than one artist is valid.
+
+- Passage 8 is a disambiguation page. It lists works by Caravaggio (Rome and Vienna), Castagno and Leyster, and the list continues beyond what is shown.
+- Passages 0 and 1 support Caravaggio for the Rome version. Passage 0 also mentions his Vienna and Prado versions.
+- Passages 4, 5 and 6 support Massimo Stanzione for the San Diego version.
+- Passage 3 attributes the Caravaggio text to Leonardo da Vinci. It is flagged as likely misinformation and conflicts with passage 0, so I discard it.
+- Passage 2 is also flagged as likely misinformation. Its Leonardo reference appears to come from a citation list, so I discard it too.
+
+The valid artists are therefore Caravaggio, Massimo Stanzione, Castagno and Leyster. The Castagno and Leyster entries appear only as titles on the disambiguation page.
+
+Final answer(s): Caravaggio | Massimo Stanzione | Andrea del Castagno | Judith Leyster",1.0,,,
+122,cb-90169,cb_single,oracle+flag_directional,True,What academic degree does Hanna Ignatowska-Świtalska hold?,scientific professorship degree,doctorate,"Hanna Ignatowska-Świtalska holds a scientific professorship degree, which is the highest academic distinction awarded in Poland. This achievement recognizes her exceptional contributions to the field of biochemistry and her dedication to advancing scientific knowledge.
+
+Final answer(s): scientific professorship degree",1.0,,,
+123,rg-1095,rg_terra,oracle+flag,True,"Is the following claim true or false?
+Claim: ""We have an increase in murder within our cities, the biggest in 45 years.""",True,False,"Passage 3 reports that the US homicide rate rose 31.5% from 2014 to 2016—the largest two-year increase since records began. It also says 17 of the 20 largest cities saw increases.
+
+Final answer(s): true",1.0,,,
+124,ramdocs-471,holdout_main,llm_dir+flag_directional,False,When was the People's University established?,1913 | 14 May 1996 | 1940,,"The People's University of Amsterdam was established in 1913, as mentioned in both Passage 0 and Passage 1. Additionally, the People's University of Bangladesh was established on 14 May 1996, as stated in Passage 3. Therefore, there are two valid answers regarding the establishment dates of the People's Universities mentioned in the passages.
+
+Final answer(s): 1913 | 1996",0.0,,,
+125,cb-114422,cb_single_luna,oracle+flag_directional,True,Which event or process does Olympic Games actively take part in?,Viet Nam Sports Team,Karlen Mkrtchyan,"Passage 1 describes the Olympic Games’ partnership with Viet Nam’s national sports team, including support for its athletes and sports development.
+
+Final answer(s): Viet Nam Sports Team",1.0,,,
+126,ramdocs-321,holdout_sonnet,plain,False,"Who is the artist of the album ""Accelerate""?",Jump5 | Peter Andre | R.E.M,,"Several albums titled ""Accelerate"" appear in the passages:
+
+- Passage 0: Accelerate by Jump5 (2003).
+- Passage 1: Accelerate by Peter Andre (2010).
+- Passages 2, 3 and 4: Accelerate by R.E.M. (2008). Passage 2 mentions the album's release and Stipe's lyrics. Passage 3 is a references section listing ""R.E.M. – Accelerate"". Passage 4 has the track listing, including ""Accelerate"", and lists R.E.M. as personnel.
+- Passage 5 lists ""Accelerate"" as a label or series for sped-up songs by Lana Del Rey. It is not clearly an album, so I am not counting it.
+
+Final answer(s): Jump5 | Peter Andre | R.E.M.",1.0,,,
+127,ramdocs-295,holdout_luna,oracle+flag_onewrong,True,What is the population of East Brooklyn?,"1,473 | 106","5,000 | 5,000","The passages give conflicting 2000 populations for East Brooklyn, Connecticut: 1,473 and 5,000, and don’t establish which is correct. East Brooklyn, Illinois is listed as having 80 residents in 2020, 106 in 2010, and 123 in 2000.
+
+Final answer(s): East Brooklyn, Connecticut: 1,473 (2000) | East Brooklyn, Connecticut: 5,000 (2000; conflicting) | East Brooklyn, Illinois: 80 (2020) | East Brooklyn, Illinois: 106 (2010) | East Brooklyn, Illinois: 123 (2000)",0.0,,,
+128,ramdocs-119,holdout_luna,plain,True,"What is the population of Pinehurst, Texas?","4,624 | 2,097","12,345","The passages describe two places named Pinehurst in Texas: the Montgomery County CDP and the Orange County city. Both population figures are from the 2010 census.
+
+Final answer(s): 4,624 | 2,097",1.0,,,
+129,cb-23361,cb_single,llm_dir+flag_directional,True,Which league does Al Suomi play in?,National Hockey League,Danish Superliga,"Al Suomi is described in Passage 3 as an American professional ice hockey player who played in the National Hockey League (NHL) during his career. Although Passage 1 mentions his transition to the Danish Superliga, it is noted as likely containing misinformation and conflicts with the established details in Passage 3. Therefore, the correct league in which Al Suomi played is the NHL.
+
+Final answer(s): NHL",0.0,,,
+130,cb-17442,cb_single,oracle+flag,True,Which company produced Caronte?,Mediaset España,Knack Productions,"The passages present conflicting information about the production of ""Caronte."" Passage 1 states that ""Caronte"" is produced by Knack Productions, a Japanese animation studio, while Passage 3 claims it is produced by Mediaset España, a Spanish media company. Due to this contradiction, the correct answer cannot be determined.
+
+Final answer(s): unknown",0.0,,,
+131,ramdocs-253,holdout_main,plain,True,Where was Justice Rodriguez born?,"Havana, Cuba | San Antonio, Texas","Tokyo, Japan","The passages provide information about two individuals named Rodriguez who are judges. Ariel A. Rodriguez is mentioned in both Passage 0 and Passage 1, with differing birthplaces: one states he was born in Havana, Cuba, while the other claims he was born in Tokyo, Japan. Xavier Rodriguez, mentioned in Passage 2, was born in San Antonio, Texas. Therefore, there are multiple valid answers regarding the birthplace of Justice Rodriguez, depending on which individual is referenced.
+
+Final answer(s): Havana, Cuba | Tokyo, Japan | San Antonio, Texas",0.0,,,
+132,cb-4327,cb_single_terra,llm_dir+flag_directional,True,Who coaches the sports team Ante Čović?,Hertha BSC,S.S.C. Napoli,"Passage 3 says Ante Čović was appointed coach of Hertha BSC.
+
+Final answer(s): Hertha BSC",1.0,,,
+133,cb-48548,cb_single_luna,oracle+flag_onewrong,True,Which IUCN protected area category does Nisplismoos belong to?,IUCN category Ia: Strict Nature Reserve,IUCN category IV: Habitat\/Species Management Area,"Passages 0 and 1 give conflicting IUCN categories for Nisplismoos, and the provided information does not establish which one is correct.
+
+Final answer(s): unknown",0.0,,,
+134,cb-10600,cb_single_haiku,oracle+flag,True,Which league does Nels Crutchfield play in?,National Hockey League,NCAA Division I women's basketball,"Passage 0 describes Nels Crutchfield as a Canadian hockey player drafted by the Chicago Black Hawks in 1951, who played 444 regular-season NHL games through 1957. Passage 1 claims he plays NCAA Division I women's basketball, but it explicitly labels itself a fabricated, fictional entry ""not based on real events or facts,"" so I give it no weight. Passage 0 is the only source that answers the question, though it describes his career in the past tense.
+
+Final answer(s): National Hockey League (NHL)",1.0,,,
+135,cb-58342,cb_single_terra,llm_dir+flag_directional,True,What is the main use of Tuchfabrik Pottenstein?,fire station,secondary school,"Passage 2 states that the building has served as a secondary school since 1970.
+
+Final answer(s): Secondary school",0.0,,,
+136,ramdocs-179,holdout_luna,llm_dir+flag_directional,False,What is the location of Mooretown?,"Portland, Jamaica | Butte County, California",,"The passages describe two places with similar names: Moore Town is in Portland, Jamaica, while the Mooretown Rancheria is in Oroville East, California.
+
+Final answer(s): Portland, Jamaica | Oroville East, California",0.0,,,
+137,cb-78908,cb_single_sonnet,oracle+flag,True,Which country is Fabio Garriba a citizen of?,Italy,Slovenia,"Passage 3 says Fabio Garriba is an Italian citizen, citing records from the Italian Ministry of the Interior. Passage 2 claims he also holds Slovenian citizenship. It still describes him as born and raised in Italy and says he never renounced his Italian citizenship, so both passages support Italy. Passage 2 also has a dubious detail, since it dates *La Vita è Bella* to 1992 when it was released in 1997, which makes its Slovenian claim less reliable. Italy is the one answer consistent across both passages.
+
+Final answer(s): Italy",1.0,,,
+138,ramdocs-101,holdout_sonnet,llm_dir+flag_directional,True,"What year was the album ""Chayanne"" released?",1987 | 1988,1995 | 1990,"The passages describe more than one album titled ""Chayanne,"" so the question has more than one valid answer.
+
+- Passage 2 describes the self-titled studio album released in May 1987 on CBS Columbia, produced by Ronnie Foster.
+- Passage 1's discography lists two separate self-titled albums, ""Chayanne (1987)"" and ""Chayanne (1988).""
+- Passage 5 refers to a second self-titled album recorded in 1988, though it is flagged as likely misinformation.
+- Passage 0 is also flagged as likely misinformation. It mixes details of the 1987 album with songs that belong to the later one.
+- Passages 3 and 4 give other years, 1995 and 1990, for albums with the same title. Those passages are discography or music-video listings and I can't confirm them, so I leave those years out.
+
+The best-supported answers are 1987 and 1988.
+
+Final answer(s): 1987 | 1988",1.0,,,
+139,ramdocs-12,holdout_luna,plain,True,"Who is the artist of the album ""VII""?",Blitzen Trapper,The Beatles | The Beatles,"Passage 0 identifies *VII* as an album by Blitzen Trapper, while passages 3 and 4 also attribute a *VII* to The Beatles.
+
+Final answer(s): Blitzen Trapper | The Beatles",0.0,,,
+140,rg-2080,rg_mini,oracle+flag_directional,False,"Is the following claim true or false?
+Claim: Says his job approval poll numbers are ""not bad"" relative to other presidents at this point in his presidency.",False,,"The passages provided do not contain any information regarding Barack Obama's job approval poll numbers or any comparison of those numbers to other presidents at a similar point in their presidencies. Therefore, it is impossible to determine the truth of the claim based on the given text.
+
+Final answer(s): unknown",0.0,,,
+141,ramdocs-125,holdout_haiku,oracle+flag_directional,False,What war did the Pretoria Peace Agreement end?,First Boer War | Second Boer War,,"The question is ambiguous because Passage 2 is a disambiguation page listing several agreements that could be called a ""Pretoria peace agreement."" Each one is tied to a different war:
+
+- **Pretoria Convention (1880–1881)** ended the First Boer War.
+- **Treaty of Vereeniging (1902)**, which was signed in Pretoria, ended the Second Boer War.
+- **Pretoria Accord (2002)** aimed to end the Second Congo War.
+- **Pretoria Agreement (2005)** was a treaty to end the First Ivorian Civil War.
+
+Final answer(s): First Boer War | Second Boer War | Second Congo War | First Ivorian Civil War",1.0,,,
+142,ramdocs-173,holdout_terra,oracle+flag_onewrong,True,"What is the genre of ""A Time for Love""?",Studio album | Film,Jazz opera | Country Album,"The Arturo Sandoval album is listed on the jazz chart, while the 1970 film is described as a comedy.
+
+Final answer(s): Jazz | Comedy",0.0,,,
+143,rg-2250,rg_terra,oracle+flag,True,"Is the following claim true or false?
+Claim: The NFL is ""getting massive tax breaks.""",True,False,"Sports team owners can write off players’ contracts as depreciating assets, yielding large tax benefits.
+
+Final answer(s): true",1.0,,,
+144,ramdocs-387,holdout_terra,oracle+flag,False,What is the population of New Lebanon?,"2,454 people | 3,995 people | 205",,"New Lebanon, Ohio had 3,995 residents in 2010. New Lebanon, Pennsylvania had 205 residents in 2000.
+
+Final answer(s): 3,995 (Ohio, 2010) | 205 (Pennsylvania, 2000)",0.0,,,
+145,rg-1369,rg_haiku,plain,True,"Is the following claim true or false?
+Claim: Children are “almost immune from this disease.”",False,True,"The claim quotes the phrase ""almost immune from this disease,"" but none of the passages contain that wording or establish it.
+
+- **Passage 0** concerns Mole Rat Disease in a video game. It says a kid dies without the cure, which points away from children being immune in that setting.
+- **Passage 1** is about Ellie's specific immunity in *The Last of Us*, not about children in general.
+- **Passage 2** describes a novel where anyone under 16 seemed immune. That is fiction and says ""immune,"" not ""almost immune,"" and it is not tied to the disease the claim refers to.
+
+Because no passage establishes whether children are ""almost immune"" to the disease the claim has in mind, the claim can't be verified as true or false from these passages.
+
+Final answer(s): unknown",0.0,,,
+146,ramdocs-479,holdout_haiku,oracle+flag_onewrong,True,When was Walter Price born?,2 June 1926 | 13 August 1896 | 9 October 1834,15 October 1930 | 15 October 1930,"The passages describe several people named Walter Price, so there is more than one valid answer.
+
+- **Wally (Walter John) Price, Australian rules footballer:** Passage 0 gives his birth date as 2 June 1926. Passages 1 and 2 give 15 October 1930. These conflict, and the passages don't say which is wrong, so both are listed.
+- **Walter Price, Welsh footballer:** Passages 3 and 4 agree on 13 August 1896.
+- **Walter Price, English cricketer and umpire:** Passages 5 and 6 agree on 9 October 1834.
+
+Final answer(s): 2 June 1926 | 15 October 1930 | 13 August 1896 | 9 October 1834",0.0,,,
+147,rg-607,rg_haiku,oracle+flag_directional,True,"Is the following claim true or false?
+Claim: ""Nearly one in four people in their prime working years are not working.""",True,False,"The passages give figures for prime-age (25-54) men who are out of the labor force and not looking for work, not for all prime-age people who aren't working. Passage 0 gives 11%, and Passage 4 cites about 7 million such men, which is roughly 11% of prime-age men. Both figures are far below one in four. Passage 0 is flagged as likely misinformation, but its 11% figure is consistent with Passage 4's estimate. Neither passage reports a rate near 25%, so the claim is not supported and is false by the passages' own numbers.
+
+Final answer(s): False",0.0,,,
+148,cb-115229,cb_single_luna,llm_dir+flag_directional,False,Which administrative body is twinned with Pano Lefkara?,London Borough of Islington,,"Passage 3 says the London Borough of Islington established a twinship with Pano Lefkara.
+
+Final answer(s): London Borough of Islington",1.0,,,
+149,ramdocs-238,holdout_haiku,oracle+flag,True,What is the population of Casnovia?,"319 | 2,652","5,000","Casnovia is a village in Michigan. Passages 0, 1, and 2 give its census populations: 319 at the 2010 census and 316 at the 2020 census. Passage 3 reports 5,000 people in 2010, but that conflicts with the 319 figure in the other village passages and with its own household count of 121, so I've treated it as an error. Passage 4 covers Casnovia Township (population 2,652 in 2000), not the village, so it doesn't apply. The question doesn't specify a year, so I've given both valid census figures, with the most recent first.
+
+Final answer(s): 316 (2020 census) | 319 (2010 census)",0.0,,,
+150,cb-94563,cb_single_sonnet,llm_dir+flag_directional,False,What is the terminus location of Capitol Limited?,New York City,,"Passage 2 is the only one that addresses the question. It states that the Capitol Limited's terminus location was New York City, with Grand Central Terminal as the eastern terminus. The other passages are about unrelated subjects. Passage 2 also names Chicago as the other end of the route. Its ""Terminus Location"" section identifies New York City as the terminus, so I answer with that.
+
+Final answer(s): New York City",1.0,,,
+151,cb-67067,cb_single_luna,oracle+flag_directional,False,Who coaches the sports team Zdeněk Ščasný?,AC Sparta Prague,,"Passage 0 says Zdeněk Ščasný became head coach of AC Sparta Prague in 2005.
+
+Final answer(s): AC Sparta Prague",1.0,,,
+152,rg-1801,rg_mini,llm_dir+flag_directional,False,"Is the following claim true or false?
+Claim: Says Donald Trump ""is going to go out and carpet bomb"" the Middle East.",False,,"The passages do not provide any direct information regarding Donald Trump's intentions to ""carpet bomb"" the Middle East. While there is a mention of Biden's support for actions that could be interpreted as aggressive military strategies, there is no specific reference to Trump making such a claim or intention. Therefore, the truth of the claim cannot be determined based on the provided passages.
+
+Final answer(s): unknown",0.0,,,
+153,ramdocs-34,holdout_sonnet,oracle+flag,False,What is the profession of Ingrid Visser?,Biologist,,"The passage describes Visser as someone who focuses on orca research, set up Adopt an Orca, has written an autobiography and two children's books, works as an eco-tourism guide, and is a public speaker. The passage never names her as ""Ingrid Visser"", but the context (orca research, ""Swimming with Orca"") matches her, so I treat ""Visser"" as Ingrid Visser.
+
+The professions the passage supports are:
+- Orca researcher (marine biologist)
+- Author
+- Eco-tourism guide
+- Public speaker
+
+Final answer(s): Orca researcher | Author | Eco-tourism guide | Public speaker",0.0,,,
+154,ramdocs-351,holdout_haiku,oracle+flag,True,When was Marina High School established?,1963 | 1964 to 1982 | 2006,1985 | 1955,"Several passages describe different schools named Marina High School, and they give different founding dates. The question doesn't say which one it means, so I list each valid answer:
+
+- **Marina High School (Huntington Beach, California):** Passage 0 says it first began operating in 1963. Passage 2 gives 1955 for the same school, which conflicts with Passage 0. Passage 1, a state directory entry for the Huntington Beach school, lists an open date of September 1, 1985, which may reflect a later reopening rather than the original founding.
+- **Marina High School (San Leandro, California):** Passage 3 says it opened in September 1964 and operated until 1982.
+- **Marina High School (Marina, California):** Passage 4 says it began operating in 2006.
+
+Final answer(s): 1963 (Huntington Beach, per Passage 0) | 1955 (Huntington Beach, per Passage 2) | September 1964 (San Leandro) | 2006 (Marina, California)",0.0,,,
+155,cb-116274,cb_single_haiku,llm_dir+flag_directional,True,Which award was Leonid Mandelstam nominated for?,Nobel Prize in Physics,D.I.C.E. Award for Outstanding Technical Achievement,"Passage 1 states that Leonid Mandelstam was nominated for the Nobel Prize in Physics in 1929, citing Nobel Prize Archives and Russian Academy of Sciences records. Passage 3 claims he was nominated for a D.I.C.E. Award for a game engine, but it is flagged as likely misinformation. Its claims are implausible: the D.I.C.E. Awards did not exist in 1943, and it describes a video game career that no other source supports. I therefore rely on Passage 1.
+
+Final answer(s): Nobel Prize in Physics",1.0,,,
+156,ramdocs-89,holdout_terra,oracle+flag,False,When was Harry Parkes born?,September 1888,,"Passages 0 and 1 state that Harry Parkes was born in September 1888.
+
+Final answer(s): September 1888",1.0,,,
+157,cb-18055,cb_single,llm_dir+flag_directional,False,Which military branch does Roswitha Raguna belong to?,Wehrmacht Propaganda Troops,,"Roswitha Raguna is linked to the Wehrmacht Propaganda Troops, which were a part of the Wehrmacht and the Waffen-SS of Nazi Germany. This information is derived from an investigative report that claims to have uncovered her involvement in producing and disseminating propaganda materials during World War II.
+
+Final answer(s): Wehrmacht Propaganda Troops",1.0,,,
+158,ramdocs-4,holdout_sonnet,oracle+flag_directional,True,When was the Cathedral of Saint Augustine established?,1856,1900,"Passages 0 and 1 give conflicting founding years for the parish: 1856 in Passage 0 and 1900 in Passage 1. Passage 1 is flagged as likely misinformation. Passage 1 also puts the first Mass in 1832 and a mission in Kalamazoo, which fits an earlier founding better. The 1856 date is therefore more plausible.
+
+The question could also be read as asking when the building was completed (1951) or when it became a cathedral (1970). ""Established"" most naturally refers to the parish founding, so 1856 is the best answer.
+
+Final answer(s): 1856",1.0,,,
+159,cb-40330,cb_single,oracle+flag_directional,True,What is the occupation of Eric Malherbe?,technicians,Catholic priest,"The passages present conflicting information about Eric Malherbe's occupation. Passage 0 states that he is a Catholic priest and a politician, while Passage 3 reveals that he has a background as a technician. Given the potential misinformation in Passage 0, we should consider the information in Passage 3 as more credible. Therefore, Eric Malherbe's occupation is that of a technician, in addition to his roles in politics and the priesthood.
+
+Final answer(s): technician",0.0,,,
+160,cb-110642,cb_single_haiku,oracle+flag,True,Which Wikimedia project has Mary Schoon been listed on the focus list for?,NL Gendergap maintenance,WikiProject Badminton\/tournament focus list,"Two passages name different projects. Passage 0 says Mary Schoon is on the focus list of the NL Gendergap maintenance project. Passage 3 says she earned a spot on the WikiProject Badminton/tournament focus list. I'm going with WikiProject Badminton/tournament. Passage 0 opens with a meta-statement that it is a piece written to present ""evidence for the statement,"" which suggests it was constructed to support a claim rather than report a fact, and its sourcing is vague. Passage 3 reads as a direct news account and its focus-list claim is more specific. Both passages are unreliable, so this is a judgment call rather than a certainty.
+
+Final answer(s): WikiProject Badminton/tournament",0.0,,,
+161,cb-82680,cb_single_sonnet,oracle+flag_directional,False,Who replaced Mitahora in their role?,Iwanoda,,"Passage 1 says Mitahora and Iwanoda were municipalities in Yamagata District, Gifu Prefecture, and that Mitahora was dissolved and merged with neighboring villages including Iwanoda. It states that Mitahora was ""replaced by Iwanoda."" The passage has some inaccuracies, such as calling the 1955 merger a ""Heisei merger,"" but its claim that Iwanoda replaced Mitahora is clear. None of the other passages mention Mitahora.
+
+Final answer(s): Iwanoda",1.0,,,
+162,ramdocs-306,holdout_haiku,plain,False,What is the population of Longtown?,"158 | 2,397 | 3,000",,"The passages describe several different places named Longtown, so the population depends on which one you mean:
+
+- **Longtown, Oklahoma** (Pittsburg County CDP): 2,397 at the 2000 census (Passage 3). Passage 5 gives 2,739 for 2010 and 2,659 for 2020.
+- **Longtown, Scotland** (Cumbria area): ""around 3,000"" (Passage 6).
+- **Longtown village** (Passage 0, unnamed state): 102 at the 2010 census, and 158 at an earlier census (the passage's date is cut off).
+
+Passages 1 and 2 are census lists that do not mention Longtown.
+
+Final answer(s): 2,397 (2000 census, Longtown, Oklahoma) | 2,739 (2010 census, Longtown, Oklahoma) | 2,659 (2020 census, Longtown, Oklahoma) | around 3,000 (Longtown, Scotland) | 102 (2010 census, Longtown village) | 158 (earlier census, Longtown village)",1.0,,,
+163,ramdocs-67,holdout_terra,oracle+flag,True,"Who produced the album ""The Athens Demos""?",Joe Boyd,Dr. Dre | Elton John,"Passage 2 associates Dr. Dre’s production with “The Athens Demos.”
+
+Final answer(s): Dr. Dre",0.0,,,
+164,rg-1273,rg_mini,oracle+flag,False,"Is the following claim true or false?
+Claim: A Trump television ad shows Mexicans swarming over ""our southern border.""",False,,"The passages provided do not contain any specific information regarding a Trump television ad that depicts Mexicans swarming over ""our southern border."" Therefore, it is unclear whether the claim is true or false based on the available text.
+
+Final answer(s): unknown",0.0,,,
+165,ramdocs-228,holdout_sonnet,plain,False,What is the profession of S. John Ross?,Artist | Game designer,,"There are two different people named S. John Ross in the passages.
+
+Passage 0 describes S. John Ross (Sebastian John Ross), a silhouette artist who trained with Budd-Jack, worked in Hollywood and later became an entertainer in Australia. He is known as ""Scissors John,"" so his profession is silhouette artist and entertainer.
+
+Passage 2 describes S. John Ross (Samuel John Ross Jr.), a game designer who wrote ""Risus"" and contributed to ""Pulp Hero."" He also served as an editor of ""Pyramid"" magazine, so his profession is game designer and writer.
+
+Passage 1 is about John D. Ross, a different person, so I did not use it.
+
+Final answer(s): Silhouette artist (entertainer) | Game designer (writer)",1.0,,,
+166,rg-1347,rg_terra,plain,False,"Is the following claim true or false?
+Claim: Because the Federal Reserve recently cut interest rates to near 0%, “the Fed will be of little consequence now. They’ve already used what leverage they have.”",False,,"The passages do not address whether the Fed retains leverage after cutting rates near zero.
+
+Final answer(s): unknown",0.0,,,
+167,cb-4269,cb_single_terra,oracle+flag_onewrong,True,"Which person or organization is in charge of maintaining United Church of Canada, Montreal-Ottawa Conference Fonds?",McGill University Archives,National Archives of India,"Passage 0 identifies the McGill University Archives as the repository responsible for maintaining the fonds.
+
+Final answer(s): McGill University Archives",1.0,,,
+168,rg-1810,rg_haiku,oracle+flag_onewrong,True,"Is the following claim true or false?
+Claim: Says Donald Trump ""wants us to pull out of NATO.""",False,True,"The claim is best supported as **true**. Passage 1 reports ""a lot of talk about Trump saying he'd pull out of NATO"" if reelected. Passage 0 says he is preparing a withdrawal if Europeans do not meet his demands. Passage 2 reports his statements that he would not defend NATO members who don't spend enough on defense. Together, these describe a repeated public position in favor of leaving NATO.
+
+The passages conflict on whether he is actually preparing to withdraw, and Passage 1 notes a congressional bill requiring approval for withdrawal. That affects whether he could do it, not whether he has said he wants to. Passage 3 is hypothetical and does not bear on the claim. Passage 4 does not address it.
+
+The claim is somewhat loose: ""wants us to pull out"" implies a stated preference, and the passages support that he has expressed one, though not that he has formally sought withdrawal.
+
+Final answer(s): True",0.0,,,
+169,cb-50234,cb_single_haiku,llm_dir+flag_directional,True,Which administrative body is twinned with Nemours?,Mühltal,Bryansk,"Passage 3 states that Nemours is twinned with Bryansk, a city in European Russia, under a sister-city agreement signed in 1993. Passage 0 names Mühltal as Nemours's twin, but it is flagged as likely misinformation and conflicts with passage 3, so I give it less weight. Passage 1 and Passage 2 do not address twinning.
+
+Final answer(s): Bryansk",0.0,,,
+170,rg-1583,rg_terra,llm_dir+flag_directional,False,"Is the following claim true or false?
+Claim: Michigan has been “like a prison” during the coronavirus.",False,,"The passages do not describe Michigan’s conditions during the coronavirus pandemic.
+
+Final answer(s): unknown",0.0,,,
+171,cb-101949,cb_single_luna,plain,True,Which competition or event did Sachiko Nakayama win?,Miss Japan,Miss North Carolina USA,"Passage 0 says Sachiko Nakayama was crowned the winner of the Miss Japan pageant in 2022.
+
+Final answer(s): Miss Japan",1.0,,,
+172,rg-391,rg_terra,oracle+flag_onewrong,True,"Is the following claim true or false?
+Claim: ""I've spent 20 years devoted to working on behalf of families who are having a tough time and are seeking out the American dream.""",True,False,"The passages do not address whether the speaker spent 20 years working on behalf of struggling families.
+
+Final answer(s): unknown",0.0,,,
+173,ramdocs-65,holdout_main,oracle+flag,False,What is the population of Gniewkowo?,"7,254",,"The population of Gniewkowo, as stated in Passage 0, is 7,254. This figure represents the population of the town itself, which is part of the Gmina Gniewkowo administrative district.
+
+Final answer(s): 7254",1.0,,,
+174,cb-44329,cb_single,plain,True,What is Adolf Humeniuk's military rank?,brigadier general,lieutenant,"Adolf Humeniuk holds the rank of brigadier general in the Polish military. This is supported by multiple pieces of evidence, including his decorated service during World War II, his formal promotion to brigadier general in 1945, and his significant contributions to rebuilding the Polish military post-war.
+
+Final answer(s): brigadier general",1.0,,,
+175,cb-124611,cb_single_terra,plain,True,Which electoral district is Parc-d'Anxtot associated with?,canton of Bolbec,canton of Pélissanne,"Passage 0 states that Parc-d'Anxtot is associated with the canton of Pélissanne.
+
+Final answer(s): Canton of Pélissanne",0.0,,,
+176,ramdocs-206,holdout_main,oracle+flag_directional,True,What is the medium of Musketeer?,Film | Series (TV),Radio | Radio,"The term ""Musketeer"" refers to characters from the classic novel ""The Three Musketeers"" by Alexandre Dumas, which has been adapted into various media forms. These adaptations include films, television series, radio series, video games, and stage productions. The passages mention several adaptations across different media, highlighting the enduring popularity of the Musketeers in literature and entertainment.
+
+Final answer(s): film | television | radio | video games | stage",0.0,,,
+177,ramdocs-174,holdout_sonnet,llm_dir+flag_directional,False,What is Robin Wright known for?,Actress and director | Author and journalist,,"The passages point to one person, the American actress and director Robin Wright, and describe her as known for:
+- Her role as Kelly Capwell in the soap opera ""Santa Barbara"" (1984–1988).
+- Playing Buttercup in the film ""The Princess Bride"" (1987). Passage 0 names the film and her starring role but not the character, so Buttercup comes from outside knowledge.
+- Her film work, including Wonder Woman (General Antiope) and Blade Runner 2049.
+- Her Emmy-nominated and Golden Globe-winning television work. Passage 0 doesn't name the show, but it is generally known to be ""House of Cards"".
+
+Passage 1 describes a different person, a journalist, and her name is not given there. It doesn't change the answer.
+
+Final answer(s): American actress and director, known for playing Kelly Capwell in ""Santa Barbara"" and for starring in ""The Princess Bride"" | Film roles such as General Antiope in ""Wonder Woman"" and Lieutenant Joshi in ""Blade Runner 2049"" | Award-winning television work (Emmy nominations, Golden Globe)",0.0,,,
+178,rg-1664,rg_mini,oracle+flag,False,"Is the following claim true or false?
+Claim: Photo shows President Joe Biden sitting with “Lisa Monaco, second in charge of the DOJ, probably working on future Plots and Schemes against Republicans.”",False,,"The passages provided do not contain any information regarding a photo of President Joe Biden sitting with Lisa Monaco or any claims about them working on plots against Republicans. Therefore, the truth of the claim cannot be determined based on the given passages.
+
+Final answer(s): unknown",0.0,,,
+179,rg-1411,rg_haiku,oracle+flag,True,"Is the following claim true or false?
+Claim: Even among ""second and third generation"" Muslims in the United States, ""there's no real assimilation.""",False,True,"None of the passages contains the quoted phrase ""there's no real assimilation."" The closest material points the other way for the United States. Passage 2 asks why second and third generation Turks are *more* assimilated in the US than in Germany, which presupposes meaningful assimilation in the US. Passage 4 presumes integration is ""much better in the US"" than in Sweden, where second and third generation Somalis identify as Somali first. Passage 0 concerns radicalization in Europe, and Passage 1 praises integration among desis in the UK. Nothing supports the claim that US Muslims of the second and third generations show no real assimilation, and the passages that address the US suggest the opposite. The claim is therefore false, though strictly the quote is not found in any passage.
+
+Final answer(s): False",1.0,,,
+180,cb-14146,cb_single_haiku,oracle+flag_onewrong,False,Who provides the voice for Talking Tom & Friends?,Lisa Schwartz,,"Passage 2 is the only passage that addresses who voices Talking Tom & Friends. It says YouTube personality and actress Lisa Schwartz is a member of the voice cast and voices the character Angela. The passage's cited sources (Animation World Network, Variety, The Hollywood Reporter, IMDb) are only listed, not verified, so the claim rests on the passage's own account. Passages 0, 1, and 3 do not address the question.
+
+Final answer(s): Lisa Schwartz",1.0,,,
+181,cb-120273,cb_single_haiku,plain,True,Which event did Johannes Kröger participate in?,FOSSGIS,Athens Epidaurus Festival,"Passage 0 describes Johannes Kröger performing ""Uncharted Territories"" at the 65th Athens Epidaurus Festival, held at the Epidaurus Theater. Passage 3 also mentions a 2019 keynote he gave at the FOSSGIS Conference in Dresden, so that is a second event he took part in. Since the question asks for one answer, I've chosen the festival, which is the main event described in the first passage.
+
+Final answer(s): The 65th Athens Epidaurus Festival (his ""Uncharted Territories"" performance at the Epidaurus Theater)",0.0,,,
+182,rg-1394,rg_mini,oracle+flag_onewrong,True,"Is the following claim true or false?
+Claim: Donald Trump wants to terminate the Affordable Care Act.",True,False,"The claim that Donald Trump wants to terminate the Affordable Care Act is false. According to Passage 1, Trump stresses that he wants to replace Obamacare, not terminate it. This is further supported by Passage 0, where Trump is quoted as saying he is ""seriously looking at alternatives"" to the Affordable Care Act, indicating a desire to replace rather than eliminate it. 
+
+Final answer(s): false",0.0,,,
+183,cb-118877,cb_single,plain,False,Who manages Tennenbaum Marine Observatories Network?,J. Emmett Duffy,,"The Tennenbaum Marine Observatories Network is managed by J. Emmett Duffy, a renowned marine biologist. He has played a crucial role in shaping the vision and direction of the network, bringing together scientists and researchers to advance marine research.
+
+Final answer(s): J. Emmett Duffy",1.0,,,
+184,ramdocs-496,holdout_haiku,oracle+flag,True,Which country does the Supreme Electoral Tribunal belong to?,Brazil | Republic of Honduras | Guatemala,Argentina | Canada,"The passages describe Supreme Electoral Tribunals in several countries:
+
+- **Honduras**: Passage 4 describes the Supreme Electoral Tribunal (""Tribunal Supremo Electoral"") as the highest electoral authority in the Republic of Honduras.
+- **Guatemala**: Passage 6 describes the Supreme Electoral Tribunal of the Republic of Guatemala as the highest authority in electoral matters, and Passage 7 covers a Guatemalan electoral dispute.
+- **Canada**: Passage 3 names a ""Canada Supreme Electoral Tribunal"" and says it oversees the electoral process. This comes from a list-style passage, so it is weaker support.
+- **Brazil**: Passages 0 and 1 describe the Superior Electoral Court (TSE) as the highest body of Brazil's Electoral Justice. It is the Brazilian counterpart of a supreme electoral tribunal, though the passages use the name ""Superior Electoral Court"" rather than ""Supreme Electoral Tribunal.""
+
+Final answer(s): Honduras | Guatemala | Canada | Brazil",0.0,,,
+185,rg-1555,rg_mini,llm_dir+flag_directional,True,"Is the following claim true or false?
+Claim: Long-term federal investment in U.S. airports is urgent because ""there was a recent survey of the top airports … in the world, and there was not a single U.S. airport that came in the top 25.""",True,False,"The passages provided do not mention any survey of U.S. airports or their rankings compared to airports in other countries. Therefore, there is no information to confirm or deny the claim regarding the urgency of federal investment in U.S. airports based on such a survey.
+
+Final answer(s): unknown",0.0,,,
+186,cb-38961,cb_single_terra,llm_dir+flag_directional,True,"Who owns The Prince of Wales, Newmarket?",Tolly Cobbold,King Baudouin Foundation,"Passage 2 identifies Tolly Cobbold Brewery as the pub’s registered owner.
+
+Final answer(s): Tolly Cobbold",1.0,,,
+187,cb-90291,cb_single_haiku,oracle+flag,True,Who manages Oya Madé?,Eunice Merceis Soares,Christophe Digne,"Passages 2 and 3 conflict. Passage 2 says Christophe Digne, a French engineering school director, manages Oya Madé, but it relies on unnamed ""sources close to the temple"" and reads like a sensational report. Passage 3 is a detailed profile that identifies Eunice Merceis Soares as the temple's leader, citing her initiation under Mãe Menininha do Gantois and her official recognition as leader in 2001. Passage 3 is more specific and internally consistent, so I give it more weight.
+
+Final answer(s): Eunice Merceis Soares",1.0,,,
+188,ramdocs-26,holdout_main,llm_dir+flag_directional,True,"What is the language of the television series ""Ardhangini""?",Assamese-language,Finnish-language,"The television series ""Ardhangini"" mentioned in Passage 0 is described as an Indian Assamese-language television drama series. However, Passage 2 suggests that there is also a version of ""Ardhangini"" that is a Finnish-language series, which conflicts with the information in Passage 0. Given the context, the primary language associated with the series in Passage 0 is Assamese.
+
+Final answer(s): Assamese | Finnish",0.0,,,
+189,ramdocs-4,holdout_main,oracle+flag_directional,True,When was the Cathedral of Saint Augustine established?,1856,1900,"The passages provide conflicting information regarding the establishment date of the Cathedral of Saint Augustine in Kalamazoo, Michigan. Passage 0 states that the parish was founded in 1856, while Passage 1 claims it was founded in 1900. Given that Passage 0 is the original source and Passage 1 is likely to contain misinformation, the more credible date is 1856.
+
+Final answer(s): 1856",1.0,,,
+190,rg-920,rg_haiku,plain,True,"Is the following claim true or false?
+Claim: ""The only years that anybody's ever seen"" of Donald Trump’s tax returns ""showed he didn't pay any federal income tax.""",False,True,"The passages don't give the specific figures, so this relies on my general knowledge of the 2020 New York Times report. Passage 1 confirms the Times had Trump's returns, and Passage 2 frames the story as Trump avoiding federal income tax for many years. But the Times reported that the returns it obtained showed Trump paid $750 in federal income tax in 2016 and again in 2017. Those years did show some federal income tax, even though he paid none in many other years. So the claim that the returns showed he ""didn't pay any federal income tax"" is overstated and false as written.
+
+Final answer(s): False",1.0,,,
+191,ramdocs-119,holdout_luna,oracle+flag,True,"What is the population of Pinehurst, Texas?","4,624 | 2,097","12,345","The passages identify two places named Pinehurst, Texas, and give conflicting population figures for the Montgomery County CDP: 4,624, 5,195, and 12,345. The Orange County city’s population is 2,097.
+
+Final answer(s): 4,624 | 5,195 | 12,345 | 2,097",0.0,,,
+192,ramdocs-370,holdout_terra,oracle+flag_directional,True,What is the population of Pittsville?,"1,417 | 874 | 80 persons","2,500","Pittsville, Maryland, had an estimated population of 1,637 in 2023 and 1,417 at the 2010 census. Pittsville, Wisconsin, had 874 residents at the 2010 census. A historical passage gives Pittsville, Virginia, a population of approximately 80 in the late 1800s.
+
+Final answer(s): 1,637 (Maryland, 2023) | 1,417 (Maryland, 2010) | 874 (Wisconsin, 2010) | approximately 80 (Virginia, historical)",0.0,,,
+193,ramdocs-1,holdout_main,plain,False,What sport is Bobby Carpenter associated with?,American football,,"Bobby Carpenter is associated with American football, as he is identified as a former American football linebacker who played for various NFL teams, including the Dallas Cowboys, and played college football at Ohio State. The passages consistently refer to him in the context of American football.
+
+Final answer(s): American football",1.0,,,
+194,rg-2624,rg_mini,llm_dir+flag_directional,False,"Is the following claim true or false?
+Claim: “We saved 2 million people” from dying of COVID-19.",False,,"The passages do not provide specific information about the number of lives saved from dying of COVID-19. While Passage 1 mentions the number of excess deaths associated with COVID-19, it does not confirm or deny the claim that ""we saved 2 million people."" Therefore, the truth of the claim cannot be determined based on the provided information.
+
+Final answer(s): unknown",0.0,,,
+195,cb-49352,cb_single_sonnet,oracle+flag_onewrong,True,"In constructing the question template for the ""located in time zone"" property, we'd phrase it as:
+
+""What time zone is Chistoozyornoye located in?""",Omsk Time,Korea Standard Time,"Passage 1 says Chistoozyornoye is in the Omsk Time zone (UTC+6). Passage 3 says Korea Standard Time, but it openly admits that this claim is fictional and invented. It also states that Novosibirsk Oblast is in Omsk Time. Passage 3 therefore supports Omsk Time and has no real evidence for KST.
+
+One detail in Passage 1 is slightly off. Novosibirsk Oblast actually uses Novosibirsk Time (UTC+7), not Omsk Time, and Passage 1 also says Omsk Time is one hour ahead of Moscow, which is wrong. But the question asks which of the passages' answers is supported, and the passages only offer Omsk Time or KST. The fabricated KST claim is the misinformation, so Omsk Time is the answer.
+
+Final answer(s): Omsk Time (UTC+6)",1.0,,,
+196,cb-117833,cb_single_haiku,oracle+flag_directional,False,In which venue does Toronto Symphony Orchestra play?,Roy Thomson Hall,,"The question asks where the Toronto Symphony Orchestra performs. Passage 2 states directly that the TSO has performed at Roy Thomson Hall since 1982, calling it the orchestra's home base, and that most of its over 200 annual concerts take place there. The other passages concern a French municipal councillor, an RAF/Army rank correction, and a French mayor, so they do not bear on the question.
+
+Final answer(s): Roy Thomson Hall",1.0,,,
+197,cb-106448,cb_single_terra,oracle+flag,True,Which feature does Batong line end at?,Huazhuang Station,Kimitōge Station,"Passage 1 identifies Huazhuang Station as the Batong line’s terminal station. Passage 2’s claim of an extension to Japan is implausible.
+
+Final answer(s): Huazhuang Station",1.0,,,
+198,rg-1294,rg_mini,plain,False,"Is the following claim true or false?
+Claim: Al-Qaida is “gone” from Afghanistan.",False,,"The passages provided do not explicitly state whether Al-Qaeda is ""gone"" from Afghanistan. They discuss the Mujahideen's schism, Bin Laden's strategies, and the reasons for the US's prolonged presence in Afghanistan, but they do not provide information about the current status of Al-Qaeda in Afghanistan. Therefore, the claim cannot be verified based on the information given.
+
+Final answer(s): unknown",0.0,,,
+199,cb-75778,cb_single_terra,oracle+flag_onewrong,True,Which educational institution did Jun Hee Woo attend?,Seoul National University College of Medicine,University of Georgia,"Passage 3 states that Jun Hee Woo earned her undergraduate degree at the University of Georgia. Passage 0’s conflicting claim relies on references explicitly identified as fictional.
+
+Final answer(s): University of Georgia",0.0,,,

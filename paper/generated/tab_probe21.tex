@@ -1,0 +1,31 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\resizebox{\ifdim\width>\columnwidth\columnwidth\else\width\fi}{!}{%
+\begin{tabular}{@{}lrrrrrl@{}}
+\toprule
+& Direction & Answer & Single & \multicolumn{2}{c}{Object swap} & \\
+\cmidrule(lr){5-6}
+Detector & accuracy & only & passage & before & after & Outcome \\
+\midrule
+gpt-4o-mini & 69 & 80 & 73 & 68 & 52 & chance \\
+ & & {\scriptsize [76, 83]} & {\scriptsize [69, 76]} & & {\scriptsize [46, 59]} & \\[1pt]
+Claude Haiku & 84 & 84 & 84 & 88 & 61 & survives \\
+ & & {\scriptsize [81, 88]} & {\scriptsize [79, 88]} & & {\scriptsize [54, 69]} & \\[1pt]
+gpt-6-luna & 87 & 88 & 87 & 96 & 78 & survives \\
+ & & {\scriptsize [84, 90]} & {\scriptsize [84, 91]} & & {\scriptsize [70, 85]} & \\[1pt]
+gpt-6.1-terra & 89 & 90 & 90 & 97 & 78 & survives \\
+ & & {\scriptsize [86, 93]} & {\scriptsize [86, 93]} & & {\scriptsize [68, 87]} & \\[1pt]
+\bottomrule
+\end{tabular}}
+\caption{Artefact probes on ConflictBank's 300 conflict questions (C1, \mbox{PR\S21.1}; exploratory, one seed;
+percentages, 95\% item-bootstrap CIs below). \emph{Direction accuracy}: the detector's direction accuracy on the eval
+set (\mbox{PR\S11.3}). \emph{Answer only}: no passage; the share of the two candidate answers picked correctly,
+averaged over both orders. \emph{Single passage}: one passage alone scored for the probability that it is false; the
+share of questions whose misinformation passage scores higher (ties count half). \emph{Object swap}: on 249
+usable items the two answers are exchanged between the passages, so each passage keeps its style and argues the other
+side; the share of single-side verdicts on the true pair that name the passage stating the wrong answer, before and
+after the swap. \emph{Outcome} (registered): survives if the CI lies above 50, inverts if below, chance if it
+includes 50.}
+\label{tab:probe21}
+\end{table}

@@ -1,0 +1,53 @@
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrl@{}}
+\toprule
+Setting & $K$ & $C$ & Break-even [95\% CI] \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{ConflictBank: correct passage plus three off-subject distractors}} \\
+multi-answer, gpt-4o-mini & $+$20.0 & $-$1.0 & 5 [0, 18] \\
+multi-answer, gpt-4.1 & $+$17.0 & 0.0 & $\uparrow$ \\
+multi-answer, Qwen2.5-7B & $+$6.7 & $-$1.0 & 13 [0, 50] \\
+one-answer, gpt-4o-mini & $+$8.4 & $-$4.7 & 36 [10, 63] \\
+one-answer, gpt-4.1 & $-$2.3 & $-$3.0 & $\downarrow$ \\
+one-answer, Qwen2.5-7B & $+$7.3 & $-$1.0 & 12 [0, 53] \\
+one-answer, gpt-6-luna & $+$8.6 & $-$1.3 & 13 [0, 39] \\
+one-answer, gpt-6.1-terra & $-$11.7 & 0.0 & $\downarrow$ \\
+one-answer, Claude Haiku & $-$4.1 & $-$5.0 & $\downarrow$ \\
+one-answer, Claude Sonnet & $-$2.7 & $-$1.0 & $\downarrow$ \\
+majority, gpt-4o-mini & $+$5.7 & $-$4.7 & 45 [14, 77] \\
+majority, gpt-6-luna & $+$7.1 & $-$1.3 & 16 [0, 44] \\
+majority, gpt-6.1-terra & $+$9.0 & 0.0 & $\uparrow$ \\
+majority, Claude Haiku & $+$6.8 & $-$5.0 & 42 [16, 72] \\
+forced, gpt-4o-mini & $+$4.0 & $-$2.7 & 40 [6, 100]$^\dagger$ \\
+forced, gpt-6-luna & $-$2.4 & $-$1.3 & $\downarrow$ \\
+forced, gpt-6.1-terra & $-$14.3 & 0.0 & $\downarrow$ \\
+forced, Claude Haiku & $-$4.7 & $-$1.3 & $\downarrow$ \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{RAMDocs: questions without misinformation, mostly several valid answers}} \\
+multi-answer, gpt-4o-mini & $+$12.5 & $-$3.4 & 22 [0, 46] \\
+minimal, gpt-4o-mini & $+$3.6 & $-$10.3 & 74 [46, 100]$^\dagger$ \\
+multi-answer, gpt-4.1 & $+$8.4 & 0.0 & $\uparrow$ \\
+multi-answer, Qwen2.5-7B & $+$2.9 & $-$7.1 & 71 [36, 100]$^\dagger$ \\
+multi-answer, gpt-6-luna & $+$29.7 & $-$11.6 & 28 [18, 39] \\
+multi-answer, gpt-6.1-terra & $+$38.8 & $-$0.8 & 2 [0, 9] \\
+multi-answer, Claude Haiku & $+$22.5 & $-$4.5 & 17 [2, 30] \\
+multi-answer, Claude Sonnet & $+$12.2 & $-$3.2 & 21 [0, 44] \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{RAGuard: claims with supporting posts and no misleading post}} \\
+one-answer, gpt-4o-mini & $+$0.6 & $+$1.7 & $\uparrow$ \\
+one-answer, gpt-6-luna & $+$3.1 & $-$1.3 & 30 [0, 100]$^\dagger$ \\
+one-answer, gpt-6.1-terra & $+$2.0 & $+$1.0 & $\uparrow$ \\
+one-answer, Claude Haiku & $+$5.0 & $+$1.3 & $\uparrow$ \\
+one-answer, Claude Sonnet & $+$7.1 & $+$10.0 & $\uparrow$ \\
+\bottomrule
+\end{tabular}
+\caption{Prevalence (PR\S20.4 R18, exploratory): the gpt-4o-mini LLM detector's directional flag. $K$, $C$: its effect
+(points) on conflict and on clean questions; at a conflict share $\pi$ the effect is $\pi K + (1-\pi) C$.
+\emph{Break-even}: $-C/(K-C)$, the share (\%) above which the flag helps, where $K > 0 > C$; CI from a joint question
+bootstrap. $^\dagger$: at least 2.5\% of replicates help at no share, so the upper limit is 100. $\uparrow$: helps at
+every share ($K, C \geq 0$); $\downarrow$: hurts at every share ($K, C \leq 0$). Rows name the prompt (\emph{majority}:
+the one-answer prompt on the majority variant); settings are grouped by how their clean questions were built.}
+\label{tab:prev11}
+\end{table}

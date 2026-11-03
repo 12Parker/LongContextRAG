@@ -1,0 +1,40 @@
+{"id": "hoh-19135231-0", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-30691735-1", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-63816948-2", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-59617198-3", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-75457418-4", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-65874476-5", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-71888017-6", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-363533-7", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-617053-8", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-54890250-9", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-35461325-10", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-34628908-11", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-31621001-12", "pairs": [{"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [2]}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,2": 1.0, "2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-31870592-13", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,2": 1.0, "1,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-75174764-14", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-26361530-15", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-1615929-16", "pairs": [{"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-51113073-17", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-44087759-18", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,2": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-13716919-19", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [3]}], "scores": {"1,3": 1.0, "2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-17633-20", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-52672913-21", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-67549369-22", "pairs": [{"i": 0, "j": 1, "score": 1.0, "type": "contradiction", "suspects": [0]}], "scores": {"0,1": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-13715084-23", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-23984288-24", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-51525455-25", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-44904232-26", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-24111452-27", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-44940671-28", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-22369814-29", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-21085024-30", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-55693163-31", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-1240888-32", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-20527-33", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-770162-34", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-51877724-35", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-10253412-36", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-6465530-37", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-67720475-38", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "hoh-24469508-39", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}

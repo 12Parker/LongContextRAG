@@ -1,0 +1,40 @@
+{"id": "pr-hotpotqa-5a77724455429972597f153e", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5a7af4cd55429931da12c9a6", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5a7b7ff75542995eb53be93d", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,4": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5a7c960655429935c91b5244", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,2": 1.0, "0,3": 1.0, "1,2": 1.0, "1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5a8192045542995ce29dcc04", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5a84b7db5542991dd0999db0", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5a88dcf9554299206df2b383", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,2": 1.0, "0,3": 1.0, "0,4": 1.0, "1,2": 1.0, "1,3": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5a8f64605542992414482aaa", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5ab2c0de5542992953946870", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5abd01205542992ac4f3819b", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5abdf12255429976d4830a2f", "pairs": [{"i": 0, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 2, "score": 1.0, "type": "contradiction", "suspects": [1]}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,2": 1.0, "0,3": 1.0, "0,4": 1.0, "1,2": 1.0, "1,3": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5abfea825542994516f45527", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5ac0d83a554299294b219038", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,3": 1.0, "1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5adc65e85542996e68525350", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5add26075542994ed6169c9c", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5ade90aa554299728e26c733", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5adfdef9554299025d62a36b", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5ae2070a5542994d89d5b313", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5ae70ed7554299572ea546a1", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-hotpotqa-5ae7ba7a5542993210983f12", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test130", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,4": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test1322", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test16", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,4": 1.0, "1,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test1624", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test164", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test1678", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test2022", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test228", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test2388", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test3030", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test3428", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test375", "pairs": [{"i": 0, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 2, "j": 4, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"0,4": 1.0, "2,4": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test387", "pairs": [{"i": 0, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [0]}, {"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}], "scores": {"0,3": 1.0, "1,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test400", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test419", "pairs": [{"i": 1, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [1]}, {"i": 2, "j": 3, "score": 1.0, "type": "contradiction", "suspects": [2]}], "scores": {"1,3": 1.0, "2,3": 1.0}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test443", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test47", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test558", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test88", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}
+{"id": "pr-nq-test935", "pairs": [], "scores": {}, "latency_s": 0.0, "cost_usd": 0.0, "extra": {}}

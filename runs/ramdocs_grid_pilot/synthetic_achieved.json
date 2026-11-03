@@ -1,0 +1,290 @@
+{
+ "synth-p0.25-r0.25-all": {
+  "target_precision": 0.25,
+  "target_recall": 0.25,
+  "fp_rate": 0.14649805447470818,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.23790322580645162,
+   "recall": 0.2350597609561753,
+   "f1": 0.23647294589178358,
+   "tp": 118,
+   "fp": 378,
+   "fn": 384
+  },
+  "question_level": {
+   "precision": 0.5870967741935483,
+   "recall": 0.8921568627450981,
+   "f1": 0.708171206225681,
+   "tp": 91,
+   "fp": 64,
+   "fn": 11,
+   "tn": 34,
+   "false_positive_rate": 0.6530612244897959
+  }
+ },
+ "synth-p0.25-r0.5-all": {
+  "target_precision": 0.25,
+  "target_recall": 0.5,
+  "fp_rate": 0.29299610894941636,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.24090462143559488,
+   "recall": 0.48804780876494025,
+   "f1": 0.3225806451612903,
+   "tp": 245,
+   "fp": 772,
+   "fn": 257
+  },
+  "question_level": {
+   "precision": 0.5555555555555556,
+   "recall": 0.9803921568627451,
+   "f1": 0.7092198581560284,
+   "tp": 100,
+   "fp": 80,
+   "fn": 2,
+   "tn": 18,
+   "false_positive_rate": 0.8163265306122449
+  }
+ },
+ "synth-p0.25-r1-all": {
+  "target_precision": 0.25,
+  "target_recall": 1.0,
+  "fp_rate": 0.5859922178988327,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.24583741429970618,
+   "recall": 1.0,
+   "f1": 0.3946540880503145,
+   "tp": 502,
+   "fp": 1540,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 0.5284974093264249,
+   "recall": 1.0,
+   "f1": 0.6915254237288135,
+   "tp": 102,
+   "fp": 91,
+   "fn": 0,
+   "tn": 7,
+   "false_positive_rate": 0.9285714285714286
+  }
+ },
+ "synth-p0.5-r0.25-all": {
+  "target_precision": 0.5,
+  "target_recall": 0.25,
+  "fp_rate": 0.048832684824902724,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.46825396825396826,
+   "recall": 0.2350597609561753,
+   "f1": 0.3129973474801061,
+   "tp": 118,
+   "fp": 134,
+   "fn": 384
+  },
+  "question_level": {
+   "precision": 0.6829268292682927,
+   "recall": 0.8235294117647058,
+   "f1": 0.7466666666666667,
+   "tp": 84,
+   "fp": 39,
+   "fn": 18,
+   "tn": 59,
+   "false_positive_rate": 0.3979591836734694
+  }
+ },
+ "synth-p0.5-r0.5-all": {
+  "target_precision": 0.5,
+  "target_recall": 0.5,
+  "fp_rate": 0.09766536964980545,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.48902195608782434,
+   "recall": 0.48804780876494025,
+   "f1": 0.4885343968095712,
+   "tp": 245,
+   "fp": 256,
+   "fn": 257
+  },
+  "question_level": {
+   "precision": 0.6339869281045751,
+   "recall": 0.9509803921568627,
+   "f1": 0.7607843137254902,
+   "tp": 97,
+   "fp": 56,
+   "fn": 5,
+   "tn": 42,
+   "false_positive_rate": 0.5714285714285714
+  }
+ },
+ "synth-p0.5-r1-all": {
+  "target_precision": 0.5,
+  "target_recall": 1.0,
+  "fp_rate": 0.1953307392996109,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.49653808110781406,
+   "recall": 1.0,
+   "f1": 0.6635822868473232,
+   "tp": 502,
+   "fp": 509,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 0.5930232558139535,
+   "recall": 1.0,
+   "f1": 0.7445255474452555,
+   "tp": 102,
+   "fp": 70,
+   "fn": 0,
+   "tn": 28,
+   "false_positive_rate": 0.7142857142857143
+  }
+ },
+ "synth-p0.75-r0.25-all": {
+  "target_precision": 0.75,
+  "target_recall": 0.25,
+  "fp_rate": 0.01627756160830091,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.6742857142857143,
+   "recall": 0.2350597609561753,
+   "f1": 0.34859675036927623,
+   "tp": 118,
+   "fp": 57,
+   "fn": 384
+  },
+  "question_level": {
+   "precision": 0.7755102040816326,
+   "recall": 0.7450980392156863,
+   "f1": 0.76,
+   "tp": 76,
+   "fp": 22,
+   "fn": 26,
+   "tn": 76,
+   "false_positive_rate": 0.22448979591836735
+  }
+ },
+ "synth-p0.75-r0.5-all": {
+  "target_precision": 0.75,
+  "target_recall": 0.5,
+  "fp_rate": 0.03255512321660182,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.7205882352941176,
+   "recall": 0.48804780876494025,
+   "f1": 0.5819477434679334,
+   "tp": 245,
+   "fp": 95,
+   "fn": 257
+  },
+  "question_level": {
+   "precision": 0.753968253968254,
+   "recall": 0.9313725490196079,
+   "f1": 0.8333333333333333,
+   "tp": 95,
+   "fp": 31,
+   "fn": 7,
+   "tn": 67,
+   "false_positive_rate": 0.3163265306122449
+  }
+ },
+ "synth-p0.75-r1-all": {
+  "target_precision": 0.75,
+  "target_recall": 1.0,
+  "fp_rate": 0.06511024643320364,
+  "capped": false,
+  "pair_level": {
+   "precision": 0.737151248164464,
+   "recall": 1.0,
+   "f1": 0.8486897717666948,
+   "tp": 502,
+   "fp": 179,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 0.6938775510204082,
+   "recall": 1.0,
+   "f1": 0.819277108433735,
+   "tp": 102,
+   "fp": 45,
+   "fn": 0,
+   "tn": 53,
+   "false_positive_rate": 0.45918367346938777
+  }
+ },
+ "synth-p1-r0.25-all": {
+  "target_precision": 1.0,
+  "target_recall": 0.25,
+  "fp_rate": 0.0,
+  "capped": false,
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 0.2350597609561753,
+   "f1": 0.3806451612903226,
+   "tp": 118,
+   "fp": 0,
+   "fn": 384
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 0.6862745098039216,
+   "f1": 0.813953488372093,
+   "tp": 70,
+   "fp": 0,
+   "fn": 32,
+   "tn": 98,
+   "false_positive_rate": 0.0
+  }
+ },
+ "synth-p1-r0.5-all": {
+  "target_precision": 1.0,
+  "target_recall": 0.5,
+  "fp_rate": 0.0,
+  "capped": false,
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 0.48804780876494025,
+   "f1": 0.6559571619812584,
+   "tp": 245,
+   "fp": 0,
+   "fn": 257
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 0.9117647058823529,
+   "f1": 0.9538461538461539,
+   "tp": 93,
+   "fp": 0,
+   "fn": 9,
+   "tn": 98,
+   "false_positive_rate": 0.0
+  }
+ },
+ "synth-p1-r1-all": {
+  "target_precision": 1.0,
+  "target_recall": 1.0,
+  "fp_rate": 0.0,
+  "capped": false,
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 502,
+   "fp": 0,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 102,
+   "fp": 0,
+   "fn": 0,
+   "tn": 98,
+   "false_positive_rate": 0.0
+  }
+ }
+}

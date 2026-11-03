@@ -1,0 +1,87 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Data.}
+\textbf{RAMDocs} \citep{wang2025madam} has 500 questions, each with 1--12 documents (5.5 on average) typed
+\emph{correct} (supports a gold answer, possibly for a different same-name entity), \emph{misinfo} (supports a wrong
+answer) or \emph{noise}. A pair is a \emph{contradiction} if one side is misinformation and the answers differ,
+\emph{ambiguity} if both are correct with different answers, \emph{consistent} if the answers match, and
+\emph{unrelated} if either is noise. A \emph{conflict} question has a contradiction pair; a
+\emph{clean} one has none. Some documents typed \emph{correct} contain a wrong answer; questions whose only sign of
+conflict is such a document count only in ``All'' (Appendix~\ref{app:repro}).
+
+\textbf{ConflictBank} \citep{su2024conflictbank}: for a Wikidata fact, an LLM writes one passage for the true
+object and one for a substituted object. We sample 400 questions round-robin over relations: 300 conflict questions
+(correct passage, misinformation passage, two distractors from other subjects) and 100 clean ones (correct passage,
+three distractors). Every question has one gold answer. ConflictBank had no pilot: its registered tests come from the addenda (Table~\ref{tab:claims}), and everything else on it is exploratory. A
+\emph{majority} variant gives each conflict question the correct passage and ConflictBank's three wrong-object
+passages for that fact (its misinformation, temporal and semantic conflicts, all supporting the substituted object
+and counted as misinformation), so the false side outnumbers the truth three to one.
+
+\textbf{RAGuard} \citep{zeng2025raguard} pairs PolitiFact claims (true or false) with Reddit posts that an LLM
+labelled supporting, misleading or unrelated, so the misleading side is real online text. We keep 294 claims with at
+least one supporting and one misleading post (up to two of each, plus two unrelated posts) and 100 with no
+misleading post; the question is whether the claim is true. Its post labels are behavioural: supporting or misleading according to whether GPT-4 judged the claim correctly with the post in context \citep[\S3.3]{zeng2025raguard}. They do not verify that two posts contradict or that the misleading one is false, so on RAGuard the ``oracle'' is a label transfer, not a factual oracle (audit in Appendix~\ref{app:semantic}).
+
+\textbf{WikiContradict} \citep{hou2024wikicontradict} has 253 questions, each with two genuinely contradicting
+Wikipedia passages; the reference answer is \emph{both} sides. The original evaluation also asks that an answer acknowledge the incompatibility and not prefer a side without support \citep[\S3.4]{hou2024wikicontradict}, so we measure coverage of the competing sources (original rubric in Appendix~\ref{app:semantic}). We also run 237 automatically scorable
+\textbf{CONFLICTS} \citep{cattan2025conflicts} questions (Appendix~\ref{app:repro}).
+
+\paragraph{Pre-registration and splits.}
+We developed the method on a random 200-question RAMDocs pilot split. Before running anything on the remaining 300
+questions (139 conflict, 126 clean, 35 excluded), we committed a pre-registration fixing the conditions, metrics,
+hypotheses and corrections. These hypotheses, H1--H9, are the confirmatory core, registered before any confirmatory
+data. Every RAMDocs result in the main text is on this confirmatory split; pilot results appear only in the appendix.
+Unregistered comparisons, including every real-detector row of Table~\ref{tab:main}, are exploratory.
+Eight addenda registered H10--H31, each committed before its runs, so these were formed after the
+original confirmatory results were known. The last two addenda also registered re-analyses of data already
+seen. A final round of re-analyses (pooled answer-key comparisons, break-even precision, the prediction of the crossed
+cells, prevalence reweighting and a programme-wide FDR) was not registered. A ninth addendum (\S17) registered
+further re-analyses, corrected baselines and a semantic re-score, after a mock review and before their runs. All of
+these are exploratory (Table~\ref{tab:claims}). The repository's commit history is the only timestamp. Appendix~\ref{app:repro} lists every deviation.
+
+\paragraph{Generators and baselines.}
+The main generator is \texttt{gpt-4o-mini} \citep{openai2024gpt4o} (temperature 0.1, at most 256 output tokens, seeds
+0--2). We replicate key conditions with \texttt{gpt-4.1}, Qwen2.5-7B-Instruct \citep{yang2024qwen25} (4-bit, local),
+two reasoning models, \texttt{gpt-6-luna} (3 seeds) and \texttt{gpt-6.1-terra} (seed 0; one sample), and
+Claude Haiku 5.5 (3 seeds) and Claude Sonnet 5.5 (seed 0). The reasoning and Claude models run at their default
+temperature with up to 4,096 output tokens. On ConflictBank the primary prompt is
+the single skeleton; the default and minimal skeletons are robustness checks. We rerun the oracle and LLM-detector
+conditions with the minimal skeleton.
+The LLM detector is gpt-4o-mini except in the crossed design (H24), where six detectors and six generators form
+\hTwentyFourCells\ of the possible pairs on ConflictBank; we also run it on Qwen2.5-7B with gpt-4o-mini generating. Two controls test
+whether a crossed cell's gain is only a stronger model's answer (H27): an own-answer hint (the detector model's plain
+answer) and the detector model as the generator. An artefact probe (H29) reruns two detectors on
+ConflictBank with passage order reversed and with every passage paraphrased by one model.
+MADAM-RAG \citep{wang2025madam} is ported unchanged (three debate rounds). Astute RAG \citep{wang2025astute} and
+TrustRAG \citep{zhou2025trustrag} use their published prompts and defaults; since both return one answer, we also run
+\emph{multi} variants asking for every valid answer (Appendix~\ref{app:repro}). A detector pipeline counts as one
+detector call plus one generator call.
+
+\paragraph{Metrics.}
+On RAMDocs an answer is correct if it includes every gold answer and no wrong answer \citep{wang2025madam}. Our primary
+metric reads ``includes'' literally: after normalisation, each gold or wrong answer must be a whole-word span
+of the extracted final answer. A bidirectional variant, which also counts a predicted answer contained in a gold one,
+is the robustness metric: a result is \emph{robust} if it also holds under it. We chose the one-way metric before the confirmatory run because it is closer to MADAM-RAG's
+published score (Appendix~\ref{app:repro}), and we compare conditions only within our harness. On WikiContradict
+an answer is correct if it contains both sides (bidirectional matching); on ConflictBank and RAGuard we use the RAMDocs metrics. We also report
+misinformation share (answers containing the misinformation), abstention share (``unknown'') and selective accuracy
+(correct over answered). An LLM judge (gpt-6.1-terra) agrees with the primary metric on \judgeAgree\% of \judgeN\ stratified
+conflict-question outputs ($\kappa=\judgeKappa$); the metric is slightly conservative, missing some paraphrases. We
+release an unlabelled 200-output human-audit sheet.
+
+\paragraph{Statistics.}
+We average each question's score over seeds and report paired differences from the plain format, with
+bootstrap 95\% CIs over questions (10,000 resamples) and two-sided sign-flip permutation tests
+\citep{efron1993bootstrap,dror2018hitchhiker} (10,000 permutations, extended to 200,000 when none reaches the observed
+statistic). A \emph{family} is the set of tests one hypothesis registers (e.g.\ H15 across generators). A registered
+test takes its family's Holm-adjusted $p$ \citep{holm1979simple}. The \nExploratory\ exploratory comparisons of the
+condition tables form one family, and the hypothesis tables add a Benjamini--Hochberg $q$ over all registered tests.
+Only results significant under Holm are called significant or set in bold; CIs are unadjusted and not read as
+significance. A null difference is not read
+as equivalence without a TOST \citep{lakens2017equivalence} at $\pm$3 points. Selective accuracy is a ratio, tested by swapping conditions within questions. Pooled estimates use a multilevel model with random
+effects for generator, benchmark and setting. Appendix~\ref{app:repro} gives the minimum detectable effect.
+
+\paragraph{Cost.}
+Token counts are from the API's usage reports. All experiments, pilots included, cost \totalSpend\ in API fees
+(prices checked on 2026-10-27; Appendix~\ref{app:repro}).

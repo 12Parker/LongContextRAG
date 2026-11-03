@@ -1,0 +1,253 @@
+{"id": "wikicontradict-1", "pairs": [{"i": 0, "j": 1, "score": 0.9988976716995239, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9988976716995239}, "latency_s": 0.7660289171617478, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-2", "pairs": [], "scores": {"0,1": 0.00028477839077822864}, "latency_s": 0.1332476669922471, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-3", "pairs": [], "scores": {"0,1": 0.0027548985090106726}, "latency_s": 0.1559033750090748, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-4", "pairs": [], "scores": {"0,1": 0.01549993921071291}, "latency_s": 0.05619908310472965, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-5", "pairs": [], "scores": {"0,1": 9.168966062134132e-05}, "latency_s": 0.30235804221592844, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-6", "pairs": [], "scores": {"0,1": 0.010802393779158592}, "latency_s": 0.13167962501756847, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-7", "pairs": [], "scores": {"0,1": 0.003543104976415634}, "latency_s": 0.1764614589046687, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-8", "pairs": [{"i": 0, "j": 1, "score": 0.9784225821495056, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9784225821495056}, "latency_s": 0.037489250069484115, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-9", "pairs": [{"i": 0, "j": 1, "score": 0.9994838237762451, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9994838237762451}, "latency_s": 0.11460979213006794, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-10", "pairs": [{"i": 0, "j": 1, "score": 0.9463972449302673, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9463972449302673}, "latency_s": 0.14479062496684492, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-11", "pairs": [{"i": 0, "j": 1, "score": 0.9977439641952515, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9977439641952515}, "latency_s": 0.07333045895211399, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-12", "pairs": [{"i": 0, "j": 1, "score": 0.9982765913009644, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9982765913009644}, "latency_s": 0.13447075011208653, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-13", "pairs": [{"i": 0, "j": 1, "score": 0.9972021579742432, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9972021579742432}, "latency_s": 0.051175709115341306, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-14", "pairs": [], "scores": {"0,1": 0.002244632923975587}, "latency_s": 0.17168287513777614, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-15", "pairs": [{"i": 0, "j": 1, "score": 0.9950957298278809, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9950957298278809}, "latency_s": 0.05937629099935293, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-16", "pairs": [{"i": 0, "j": 1, "score": 0.984237015247345, "type": "nli", "suspects": []}], "scores": {"0,1": 0.984237015247345}, "latency_s": 0.038001707987859845, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-17", "pairs": [], "scores": {"0,1": 0.0037862176541239023}, "latency_s": 0.03569904202595353, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-18", "pairs": [], "scores": {"0,1": 0.0012520538875833154}, "latency_s": 0.037547291023656726, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-19", "pairs": [{"i": 0, "j": 1, "score": 0.9946857690811157, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9946857690811157}, "latency_s": 0.05300795892253518, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-20", "pairs": [{"i": 0, "j": 1, "score": 0.9996261596679688, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9996261596679688}, "latency_s": 0.02373041701503098, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-21", "pairs": [{"i": 0, "j": 1, "score": 0.999768078327179, "type": "nli", "suspects": []}], "scores": {"0,1": 0.999768078327179}, "latency_s": 0.03814775007776916, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-22", "pairs": [{"i": 0, "j": 1, "score": 0.9996365308761597, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9996365308761597}, "latency_s": 0.07558475015684962, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-23", "pairs": [{"i": 0, "j": 1, "score": 0.9997324347496033, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9997324347496033}, "latency_s": 0.02290270896628499, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-24", "pairs": [], "scores": {"0,1": 0.0009040664881467819}, "latency_s": 0.03668108303099871, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-25", "pairs": [{"i": 0, "j": 1, "score": 0.9973128437995911, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9973128437995911}, "latency_s": 0.03469845885410905, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-26", "pairs": [], "scores": {"0,1": 0.006403252016752958}, "latency_s": 0.03216791711747646, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-27", "pairs": [], "scores": {"0,1": 0.00029546054429374635}, "latency_s": 0.042409999994561076, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-29", "pairs": [{"i": 0, "j": 1, "score": 0.9804741144180298, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9804741144180298}, "latency_s": 0.0446125001180917, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-28", "pairs": [{"i": 0, "j": 1, "score": 0.9804741144180298, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9804741144180298}, "latency_s": 0.040631583193317056, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-31", "pairs": [], "scores": {"0,1": 0.000222603150177747}, "latency_s": 0.2026446668896824, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-30", "pairs": [], "scores": {"0,1": 0.000222603150177747}, "latency_s": 0.07434120890684426, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-33", "pairs": [{"i": 0, "j": 1, "score": 0.9981403350830078, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9981403350830078}, "latency_s": 0.05231158318929374, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-32", "pairs": [{"i": 0, "j": 1, "score": 0.9981403350830078, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9981403350830078}, "latency_s": 0.03744291700422764, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-34", "pairs": [{"i": 0, "j": 1, "score": 0.9992554783821106, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9992554783821106}, "latency_s": 0.11115370783954859, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-35", "pairs": [{"i": 0, "j": 1, "score": 0.9960283041000366, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9960283041000366}, "latency_s": 0.039315709145739675, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-37", "pairs": [], "scores": {"0,1": 0.0010365782072767615}, "latency_s": 0.09337725001387298, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-36", "pairs": [], "scores": {"0,1": 0.0010365782072767615}, "latency_s": 0.07769737485796213, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-39", "pairs": [], "scores": {"0,1": 0.003796422854065895}, "latency_s": 0.02899487502872944, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-38", "pairs": [], "scores": {"0,1": 0.003796422854065895}, "latency_s": 0.015123374992981553, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-41", "pairs": [{"i": 0, "j": 1, "score": 0.9976400136947632, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976400136947632}, "latency_s": 0.02901020902208984, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-40", "pairs": [{"i": 0, "j": 1, "score": 0.9976400136947632, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976400136947632}, "latency_s": 0.014056416926905513, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-43", "pairs": [], "scores": {"0,1": 0.0026924782432615757}, "latency_s": 0.0646446249447763, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-42", "pairs": [], "scores": {"0,1": 0.0026924782432615757}, "latency_s": 0.012580208946019411, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-44", "pairs": [{"i": 0, "j": 1, "score": 0.9983482360839844, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9983482360839844}, "latency_s": 0.03556900005787611, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-45", "pairs": [{"i": 0, "j": 1, "score": 0.9999195337295532, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999195337295532}, "latency_s": 0.06705529196187854, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-46", "pairs": [], "scores": {"0,1": 0.00030869722831994295}, "latency_s": 0.04302037484012544, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-47", "pairs": [], "scores": {"0,1": 0.004690554458647966}, "latency_s": 0.031505666906014085, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-48", "pairs": [{"i": 0, "j": 1, "score": 0.9993306398391724, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9993306398391724}, "latency_s": 0.037924624979496, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-49", "pairs": [{"i": 0, "j": 1, "score": 0.9943733215332031, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9943733215332031}, "latency_s": 0.029187625041231513, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-50", "pairs": [{"i": 0, "j": 1, "score": 0.9969283938407898, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9969283938407898}, "latency_s": 0.03566583385691047, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-51", "pairs": [], "scores": {"0,1": 0.030019091442227364}, "latency_s": 0.04768170788884163, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-52", "pairs": [], "scores": {"0,1": 0.000543631729669869}, "latency_s": 0.04286141600459814, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-53", "pairs": [{"i": 0, "j": 1, "score": 0.9949855804443359, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9949855804443359}, "latency_s": 0.11205658316612244, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-54", "pairs": [], "scores": {"0,1": 0.031002381816506386}, "latency_s": 0.03933995799161494, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-56", "pairs": [], "scores": {"0,1": 0.00048741017235442996}, "latency_s": 0.03046395815908909, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-55", "pairs": [], "scores": {"0,1": 0.00048741017235442996}, "latency_s": 0.01571629219688475, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-57", "pairs": [], "scores": {"0,1": 0.0022738331463187933}, "latency_s": 0.0324029999319464, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-59", "pairs": [], "scores": {"0,1": 0.0022004435304552317}, "latency_s": 0.024964790791273117, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-58", "pairs": [], "scores": {"0,1": 0.0022004435304552317}, "latency_s": 0.021334749879315495, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-61", "pairs": [{"i": 0, "j": 1, "score": 0.9975700974464417, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9975700974464417}, "latency_s": 0.029905041912570596, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-60", "pairs": [{"i": 0, "j": 1, "score": 0.9975700974464417, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9975700974464417}, "latency_s": 0.014380791923031211, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-63", "pairs": [], "scores": {"0,1": 0.001244579441845417}, "latency_s": 0.035039166919887066, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-62", "pairs": [], "scores": {"0,1": 0.001244579441845417}, "latency_s": 0.020389874931424856, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-65", "pairs": [{"i": 0, "j": 1, "score": 0.9998348951339722, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998348951339722}, "latency_s": 0.03076166706159711, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-64", "pairs": [{"i": 0, "j": 1, "score": 0.9998348951339722, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998348951339722}, "latency_s": 0.012911999830976129, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-67", "pairs": [], "scores": {"0,1": 0.44230127334594727}, "latency_s": 0.03726912499405444, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-66", "pairs": [], "scores": {"0,1": 0.44230127334594727}, "latency_s": 0.017618207959458232, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-69", "pairs": [], "scores": {"0,1": 0.004134474787861109}, "latency_s": 0.04214262496680021, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-68", "pairs": [], "scores": {"0,1": 0.004134474787861109}, "latency_s": 0.020009957952424884, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-71", "pairs": [{"i": 0, "j": 1, "score": 0.9809911251068115, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9809911251068115}, "latency_s": 0.041779916966333985, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-70", "pairs": [{"i": 0, "j": 1, "score": 0.9809911251068115, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9809911251068115}, "latency_s": 0.022934667067602277, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-73", "pairs": [{"i": 0, "j": 1, "score": 0.9998670816421509, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998670816421509}, "latency_s": 0.03674454102292657, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-72", "pairs": [{"i": 0, "j": 1, "score": 0.9998670816421509, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998670816421509}, "latency_s": 0.029861958930268884, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-74", "pairs": [{"i": 0, "j": 1, "score": 0.9998458623886108, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998458623886108}, "latency_s": 0.07239374984055758, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-76", "pairs": [], "scores": {"0,1": 0.0352206751704216}, "latency_s": 0.08905266714282334, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-75", "pairs": [], "scores": {"0,1": 0.0352206751704216}, "latency_s": 0.059626415837556124, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-77", "pairs": [{"i": 0, "j": 1, "score": 0.9998055100440979, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998055100440979}, "latency_s": 0.05060333292931318, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-79", "pairs": [{"i": 0, "j": 1, "score": 0.9878752827644348, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9878752827644348}, "latency_s": 0.05161887500435114, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-78", "pairs": [{"i": 0, "j": 1, "score": 0.9878752827644348, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9878752827644348}, "latency_s": 0.019009584095329046, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-81", "pairs": [{"i": 0, "j": 1, "score": 0.9970259070396423, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9970259070396423}, "latency_s": 0.11613041698001325, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-80", "pairs": [{"i": 0, "j": 1, "score": 0.9970259070396423, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9970259070396423}, "latency_s": 0.04051866685040295, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-83", "pairs": [], "scores": {"0,1": 0.00037207696004770696}, "latency_s": 0.06330649997107685, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-82", "pairs": [], "scores": {"0,1": 0.00037207696004770696}, "latency_s": 0.06774995778687298, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-85", "pairs": [], "scores": {"0,1": 0.00044376211008057}, "latency_s": 0.0926695407833904, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-84", "pairs": [], "scores": {"0,1": 0.00044376211008057}, "latency_s": 0.07499354216270149, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-87", "pairs": [], "scores": {"0,1": 0.0551079623401165}, "latency_s": 0.186223957920447, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-86", "pairs": [], "scores": {"0,1": 0.0551079623401165}, "latency_s": 0.059782667085528374, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-89", "pairs": [], "scores": {"0,1": 0.015877539291977882}, "latency_s": 0.10334016685374081, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-88", "pairs": [], "scores": {"0,1": 0.015877539291977882}, "latency_s": 0.15373674989677966, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-91", "pairs": [], "scores": {"0,1": 0.009067274630069733}, "latency_s": 0.06367595796473324, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-90", "pairs": [], "scores": {"0,1": 0.009067274630069733}, "latency_s": 0.09592183399945498, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-93", "pairs": [], "scores": {"0,1": 0.010350935161113739}, "latency_s": 0.2884009580593556, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-92", "pairs": [], "scores": {"0,1": 0.010350935161113739}, "latency_s": 0.22833858407102525, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-95", "pairs": [], "scores": {"0,1": 0.0005098310066387057}, "latency_s": 0.10716066719032824, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-94", "pairs": [], "scores": {"0,1": 0.0005098310066387057}, "latency_s": 0.0484464168548584, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-97", "pairs": [], "scores": {"0,1": 0.0005313638248480856}, "latency_s": 0.11620941595174372, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-96", "pairs": [], "scores": {"0,1": 0.0005313638248480856}, "latency_s": 0.07530795899219811, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-99", "pairs": [], "scores": {"0,1": 0.0018849818734452128}, "latency_s": 0.10296004195697606, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-98", "pairs": [], "scores": {"0,1": 0.0018849818734452128}, "latency_s": 0.05603637499734759, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-101", "pairs": [{"i": 0, "j": 1, "score": 0.9972733855247498, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9972733855247498}, "latency_s": 0.1182727909181267, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-100", "pairs": [{"i": 0, "j": 1, "score": 0.9972733855247498, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9972733855247498}, "latency_s": 0.10354979219846427, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-103", "pairs": [{"i": 0, "j": 1, "score": 0.9946651458740234, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9946651458740234}, "latency_s": 0.11119887512177229, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-102", "pairs": [{"i": 0, "j": 1, "score": 0.9946651458740234, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9946651458740234}, "latency_s": 0.0743108328897506, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-105", "pairs": [{"i": 0, "j": 1, "score": 0.8332660794258118, "type": "nli", "suspects": []}], "scores": {"0,1": 0.8332660794258118}, "latency_s": 0.11736050015315413, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-104", "pairs": [{"i": 0, "j": 1, "score": 0.8332660794258118, "type": "nli", "suspects": []}], "scores": {"0,1": 0.8332660794258118}, "latency_s": 0.05980079201981425, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-107", "pairs": [], "scores": {"0,1": 0.004272395744919777}, "latency_s": 0.08094095787964761, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-106", "pairs": [], "scores": {"0,1": 0.004272395744919777}, "latency_s": 0.01646650000475347, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-109", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.12593891704455018, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-108", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.1023395829834044, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-111", "pairs": [], "scores": {"0,1": 0.11152569204568863}, "latency_s": 0.08864712505601346, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-110", "pairs": [], "scores": {"0,1": 0.11152569204568863}, "latency_s": 0.10916254203766584, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-113", "pairs": [{"i": 0, "j": 1, "score": 0.9997449517250061, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9997449517250061}, "latency_s": 0.0833895830437541, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-112", "pairs": [{"i": 0, "j": 1, "score": 0.9997449517250061, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9997449517250061}, "latency_s": 0.04623425006866455, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-115", "pairs": [{"i": 0, "j": 1, "score": 0.9999319314956665, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999319314956665}, "latency_s": 0.10017474996857345, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-114", "pairs": [{"i": 0, "j": 1, "score": 0.9999319314956665, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999319314956665}, "latency_s": 0.05685645807534456, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-117", "pairs": [], "scores": {"0,1": 0.01658952608704567}, "latency_s": 0.05427095899358392, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-116", "pairs": [], "scores": {"0,1": 0.01658952608704567}, "latency_s": 0.07375937490724027, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-119", "pairs": [], "scores": {"0,1": 0.0005009642918594182}, "latency_s": 0.052575791953131557, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-118", "pairs": [], "scores": {"0,1": 0.0005009642918594182}, "latency_s": 0.0699937918689102, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-121", "pairs": [], "scores": {"0,1": 0.001430381671525538}, "latency_s": 0.10008637490682304, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-120", "pairs": [], "scores": {"0,1": 0.001430381671525538}, "latency_s": 0.07699566590599716, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-123", "pairs": [], "scores": {"0,1": 0.34762635827064514}, "latency_s": 0.05910970806144178, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-122", "pairs": [], "scores": {"0,1": 0.34762635827064514}, "latency_s": 0.04923270898871124, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-125", "pairs": [{"i": 0, "j": 1, "score": 0.998145580291748, "type": "nli", "suspects": []}], "scores": {"0,1": 0.998145580291748}, "latency_s": 0.14033691701479256, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-124", "pairs": [{"i": 0, "j": 1, "score": 0.998145580291748, "type": "nli", "suspects": []}], "scores": {"0,1": 0.998145580291748}, "latency_s": 0.0755477910861373, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-126", "pairs": [], "scores": {"0,1": 0.0008241651812568307}, "latency_s": 0.07952283299528062, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-128", "pairs": [{"i": 0, "j": 1, "score": 0.9999279975891113, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999279975891113}, "latency_s": 0.10308929206803441, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-127", "pairs": [{"i": 0, "j": 1, "score": 0.9999279975891113, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999279975891113}, "latency_s": 0.09199383296072483, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-130", "pairs": [], "scores": {"0,1": 0.001368256052955985}, "latency_s": 0.03517795912921429, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-129", "pairs": [], "scores": {"0,1": 0.001368256052955985}, "latency_s": 0.05811466695740819, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-131", "pairs": [], "scores": {"0,1": 0.00011738744069589302}, "latency_s": 0.23608337505720556, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-133", "pairs": [], "scores": {"0,1": 8.887705189408734e-05}, "latency_s": 0.2671471668872982, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-132", "pairs": [], "scores": {"0,1": 8.887705189408734e-05}, "latency_s": 0.23224266688339412, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-135", "pairs": [], "scores": {"0,1": 9.669583960203454e-05}, "latency_s": 0.12183608300983906, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-134", "pairs": [], "scores": {"0,1": 9.669583960203454e-05}, "latency_s": 0.12267749989405274, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-137", "pairs": [], "scores": {"0,1": 0.0023706068750470877}, "latency_s": 0.11043816711753607, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-138", "pairs": [], "scores": {"0,1": 0.0023706068750470877}, "latency_s": 0.031687917187809944, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-136", "pairs": [], "scores": {"0,1": 0.0023706068750470877}, "latency_s": 0.05788374994881451, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-140", "pairs": [], "scores": {"0,1": 0.0005260626203380525}, "latency_s": 0.028378708055242896, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-141", "pairs": [], "scores": {"0,1": 0.0005260626203380525}, "latency_s": 0.07333812490105629, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-142", "pairs": [], "scores": {"0,1": 0.0005260626203380525}, "latency_s": 0.08094445895403624, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-139", "pairs": [], "scores": {"0,1": 0.0005260626203380525}, "latency_s": 0.05969966598786414, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-144", "pairs": [{"i": 0, "j": 1, "score": 0.9168531894683838, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9168531894683838}, "latency_s": 0.08623920916579664, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-145", "pairs": [{"i": 0, "j": 1, "score": 0.9168531894683838, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9168531894683838}, "latency_s": 0.07677791710011661, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-143", "pairs": [{"i": 0, "j": 1, "score": 0.9168531894683838, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9168531894683838}, "latency_s": 0.039593958063051105, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-147", "pairs": [], "scores": {"0,1": 0.0005566278705373406}, "latency_s": 0.10092420899309218, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-146", "pairs": [], "scores": {"0,1": 0.0005566278705373406}, "latency_s": 0.07271579117514193, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-148", "pairs": [], "scores": {"0,1": 6.810763443354517e-05}, "latency_s": 0.16410704096779227, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-150", "pairs": [{"i": 0, "j": 1, "score": 0.9998149275779724, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998149275779724}, "latency_s": 0.1237921251449734, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-149", "pairs": [{"i": 0, "j": 1, "score": 0.9998149275779724, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998149275779724}, "latency_s": 0.14955691597424448, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-152", "pairs": [{"i": 0, "j": 1, "score": 0.9981924891471863, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9981924891471863}, "latency_s": 0.11840320890769362, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-151", "pairs": [{"i": 0, "j": 1, "score": 0.9981924891471863, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9981924891471863}, "latency_s": 0.10604883404448628, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-154", "pairs": [], "scores": {"0,1": 0.0019349934300407767}, "latency_s": 0.1591922079678625, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-153", "pairs": [], "scores": {"0,1": 0.0019349934300407767}, "latency_s": 0.08902558381669223, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-156", "pairs": [{"i": 0, "j": 1, "score": 0.9917205572128296, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9917205572128296}, "latency_s": 0.061732874950394034, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-155", "pairs": [{"i": 0, "j": 1, "score": 0.9917205572128296, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9917205572128296}, "latency_s": 0.05391049990430474, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-158", "pairs": [], "scores": {"0,1": 0.0001407331001246348}, "latency_s": 0.13808529102243483, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-157", "pairs": [], "scores": {"0,1": 0.0001407331001246348}, "latency_s": 0.13573204190470278, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-160", "pairs": [], "scores": {"0,1": 0.00325608579441905}, "latency_s": 0.05975308292545378, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-159", "pairs": [], "scores": {"0,1": 0.00325608579441905}, "latency_s": 0.03141500009223819, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-162", "pairs": [], "scores": {"0,1": 0.00021389285393524915}, "latency_s": 0.0977724171243608, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-163", "pairs": [], "scores": {"0,1": 0.00021389285393524915}, "latency_s": 0.09636200009845197, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-161", "pairs": [], "scores": {"0,1": 0.00021389285393524915}, "latency_s": 0.11545112496241927, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-165", "pairs": [], "scores": {"0,1": 0.0006531045655719936}, "latency_s": 0.26961425016634166, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-164", "pairs": [], "scores": {"0,1": 0.0006531045655719936}, "latency_s": 0.17946683312766254, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-167", "pairs": [], "scores": {"0,1": 0.0003308876184746623}, "latency_s": 0.11123866681009531, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-168", "pairs": [], "scores": {"0,1": 0.0003308876184746623}, "latency_s": 0.10123208304867148, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-169", "pairs": [], "scores": {"0,1": 0.0003308876184746623}, "latency_s": 0.08070120797492564, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-170", "pairs": [], "scores": {"0,1": 0.0003308876184746623}, "latency_s": 0.05745995813049376, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-171", "pairs": [], "scores": {"0,1": 0.0003308876184746623}, "latency_s": 0.11982687516137958, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-166", "pairs": [], "scores": {"0,1": 0.0003308876184746623}, "latency_s": 0.12087512481957674, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-173", "pairs": [], "scores": {"0,1": 0.000812268175650388}, "latency_s": 0.11009175004437566, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-174", "pairs": [], "scores": {"0,1": 0.000812268175650388}, "latency_s": 0.08031416614539921, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-172", "pairs": [], "scores": {"0,1": 0.000812268175650388}, "latency_s": 0.0681963749229908, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-176", "pairs": [], "scores": {"0,1": 0.0022107448894530535}, "latency_s": 0.3304227499756962, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-175", "pairs": [], "scores": {"0,1": 0.0022107448894530535}, "latency_s": 0.22473970893770456, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-178", "pairs": [], "scores": {"0,1": 0.00014810729771852493}, "latency_s": 0.06466508307494223, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-179", "pairs": [], "scores": {"0,1": 0.00014810729771852493}, "latency_s": 0.08803574997000396, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-177", "pairs": [], "scores": {"0,1": 0.00014810729771852493}, "latency_s": 0.06977866613306105, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-181", "pairs": [], "scores": {"0,1": 0.0003982181951869279}, "latency_s": 0.21466654096730053, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-182", "pairs": [], "scores": {"0,1": 0.0003982181951869279}, "latency_s": 0.11117612500675023, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-180", "pairs": [], "scores": {"0,1": 0.0003982181951869279}, "latency_s": 0.11671745893545449, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-184", "pairs": [], "scores": {"0,1": 0.3369193971157074}, "latency_s": 0.09810062497854233, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-185", "pairs": [], "scores": {"0,1": 0.3369193971157074}, "latency_s": 0.1255113750230521, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-183", "pairs": [], "scores": {"0,1": 0.3369193971157074}, "latency_s": 0.08547708299010992, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-186", "pairs": [], "scores": {"0,1": 0.16782541573047638}, "latency_s": 0.06010500015690923, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-188", "pairs": [{"i": 0, "j": 1, "score": 0.9989303946495056, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9989303946495056}, "latency_s": 0.12961458298377693, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-189", "pairs": [{"i": 0, "j": 1, "score": 0.9989303946495056, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9989303946495056}, "latency_s": 0.08200695808045566, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-187", "pairs": [{"i": 0, "j": 1, "score": 0.9989303946495056, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9989303946495056}, "latency_s": 0.16854591690935194, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-191", "pairs": [{"i": 0, "j": 1, "score": 0.9998694658279419, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998694658279419}, "latency_s": 0.07434004219248891, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-190", "pairs": [{"i": 0, "j": 1, "score": 0.9998694658279419, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998694658279419}, "latency_s": 0.05183991603553295, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-193", "pairs": [], "scores": {"0,1": 0.0007550579030066729}, "latency_s": 0.1094672919716686, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-192", "pairs": [], "scores": {"0,1": 0.0007550579030066729}, "latency_s": 0.06072737509384751, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-195", "pairs": [{"i": 0, "j": 1, "score": 0.9706342220306396, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9706342220306396}, "latency_s": 0.09646379202604294, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-194", "pairs": [{"i": 0, "j": 1, "score": 0.9706342220306396, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9706342220306396}, "latency_s": 0.054446374997496605, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-197", "pairs": [{"i": 0, "j": 1, "score": 0.9999253749847412, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999253749847412}, "latency_s": 0.07324475003406405, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-198", "pairs": [{"i": 0, "j": 1, "score": 0.9999253749847412, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999253749847412}, "latency_s": 0.04615312512032688, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-196", "pairs": [{"i": 0, "j": 1, "score": 0.9999253749847412, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999253749847412}, "latency_s": 0.017440083902329206, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-200", "pairs": [{"i": 0, "j": 1, "score": 0.9993821382522583, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9993821382522583}, "latency_s": 0.06070187478326261, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-201", "pairs": [{"i": 0, "j": 1, "score": 0.9993821382522583, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9993821382522583}, "latency_s": 0.045846750028431416, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-199", "pairs": [{"i": 0, "j": 1, "score": 0.9993821382522583, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9993821382522583}, "latency_s": 0.07517583295702934, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-203", "pairs": [], "scores": {"0,1": 0.0009952031541615725}, "latency_s": 0.09964925004169345, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-204", "pairs": [], "scores": {"0,1": 0.0009952031541615725}, "latency_s": 0.07160850008949637, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-205", "pairs": [], "scores": {"0,1": 0.0009952031541615725}, "latency_s": 0.08570274990051985, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-202", "pairs": [], "scores": {"0,1": 0.0009952031541615725}, "latency_s": 0.05958841694518924, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-207", "pairs": [{"i": 0, "j": 1, "score": 0.9999208450317383, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999208450317383}, "latency_s": 0.10257275006733835, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-208", "pairs": [{"i": 0, "j": 1, "score": 0.9999208450317383, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999208450317383}, "latency_s": 0.0695469998754561, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-206", "pairs": [{"i": 0, "j": 1, "score": 0.9999208450317383, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999208450317383}, "latency_s": 0.09171708300709724, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-210", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.11419770820066333, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-211", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.05784383392892778, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-212", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.06806029193103313, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-213", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.10858633415773511, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-214", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.12166683305986226, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-215", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.07802712498232722, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-216", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.09016179200261831, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-209", "pairs": [], "scores": {"0,1": 0.00011459215602371842}, "latency_s": 0.0554320418741554, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-218", "pairs": [{"i": 0, "j": 1, "score": 0.9998898506164551, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998898506164551}, "latency_s": 0.12210983317345381, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-219", "pairs": [{"i": 0, "j": 1, "score": 0.9998898506164551, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998898506164551}, "latency_s": 0.13656691694632173, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-220", "pairs": [{"i": 0, "j": 1, "score": 0.9998898506164551, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998898506164551}, "latency_s": 0.05338116711936891, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-217", "pairs": [{"i": 0, "j": 1, "score": 0.9998898506164551, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9998898506164551}, "latency_s": 0.057626625057309866, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-222", "pairs": [{"i": 0, "j": 1, "score": 0.9999386072158813, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999386072158813}, "latency_s": 0.12874341709539294, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-223", "pairs": [{"i": 0, "j": 1, "score": 0.9999386072158813, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999386072158813}, "latency_s": 0.09323404193855822, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-221", "pairs": [{"i": 0, "j": 1, "score": 0.9999386072158813, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9999386072158813}, "latency_s": 0.06141895800828934, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-225", "pairs": [], "scores": {"0,1": 0.03381350263953209}, "latency_s": 0.11038974998518825, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-226", "pairs": [], "scores": {"0,1": 0.03381350263953209}, "latency_s": 0.08059191703796387, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-227", "pairs": [], "scores": {"0,1": 0.03381350263953209}, "latency_s": 0.10820850008167326, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-224", "pairs": [], "scores": {"0,1": 0.03381350263953209}, "latency_s": 0.08106149989180267, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-229", "pairs": [], "scores": {"0,1": 0.003536053467541933}, "latency_s": 0.17851725011132658, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-230", "pairs": [], "scores": {"0,1": 0.003536053467541933}, "latency_s": 0.10061254096217453, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-228", "pairs": [], "scores": {"0,1": 0.003536053467541933}, "latency_s": 0.13907233299687505, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-232", "pairs": [], "scores": {"0,1": 0.003216539043933153}, "latency_s": 0.21809241687878966, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-233", "pairs": [], "scores": {"0,1": 0.003216539043933153}, "latency_s": 0.31665470893494785, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-231", "pairs": [], "scores": {"0,1": 0.003216539043933153}, "latency_s": 0.23685437510721385, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-235", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.17209966690279543, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-236", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.13490883307531476, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-237", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.1547685421537608, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-238", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.10309329186566174, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-239", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.1530003750231117, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-240", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.15970979211851954, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-241", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.09569775010459125, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-242", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.13899662508629262, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-243", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.1706420409027487, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-234", "pairs": [{"i": 0, "j": 1, "score": 0.9976981282234192, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9976981282234192}, "latency_s": 0.09253025008365512, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-245", "pairs": [{"i": 0, "j": 1, "score": 0.9994707703590393, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9994707703590393}, "latency_s": 0.07273262506350875, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-244", "pairs": [{"i": 0, "j": 1, "score": 0.9994707703590393, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9994707703590393}, "latency_s": 0.06524016591720283, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-247", "pairs": [], "scores": {"0,1": 0.00557070504873991}, "latency_s": 0.059531708946451545, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-246", "pairs": [], "scores": {"0,1": 0.00557070504873991}, "latency_s": 0.07060250011272728, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-249", "pairs": [{"i": 0, "j": 1, "score": 0.6239495873451233, "type": "nli", "suspects": []}], "scores": {"0,1": 0.6239495873451233}, "latency_s": 0.06709520798176527, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-248", "pairs": [{"i": 0, "j": 1, "score": 0.6239495873451233, "type": "nli", "suspects": []}], "scores": {"0,1": 0.6239495873451233}, "latency_s": 0.08679916593246162, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-251", "pairs": [], "scores": {"0,1": 0.001212226809002459}, "latency_s": 0.027304750168696046, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-250", "pairs": [], "scores": {"0,1": 0.001212226809002459}, "latency_s": 0.03598854108713567, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-253", "pairs": [{"i": 0, "j": 1, "score": 0.9828398823738098, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9828398823738098}, "latency_s": 0.07479241699911654, "cost_usd": 0.0, "extra": {}}
+{"id": "wikicontradict-252", "pairs": [{"i": 0, "j": 1, "score": 0.9828398823738098, "type": "nli", "suspects": []}], "scores": {"0,1": 0.9828398823738098}, "latency_s": 0.049630999797955155, "cost_usd": 0.0, "extra": {}}

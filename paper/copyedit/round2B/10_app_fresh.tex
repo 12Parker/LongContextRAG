@@ -1,0 +1,38 @@
+\section{Prospective Test, Full Re-score and HealthContradict (\S19)}
+\label{app:fresh}
+\input{generated/tab_fresh}
+\input{generated/tab_hc}
+\paragraph{Frozen, the account predicts unseen cells (H32--H36).} ConflictBank-fresh has 400 questions
+built like our ConflictBank sample, sharing no subject with it. Detections and no-flag answers ran first. We
+committed the follow-rate account's predictions, from H31's follow rates fixed in \S19.1,
+(\texttt{splits/predictions19.json}) before running the flagged condition; the analysis reproduces them exactly (maximum
+drift \frDrift\ points). All three H32 criteria hold: the slope's CI \frSlopeCI\ excludes 0 and includes 1 (intercept
+\frIntercept); the mean error is \frMae\ $\le$ 3, and the account beats the generator-mean (\frMaeGen) and
+unit-follow-rate (\frMaeOnes) baselines (Holm $p<0.001$). A cell-level marginal estimate scores \frMaeMarg;
+predicting zero, \frMaeZero. The sign is right in \frSignAgree\ of \frN\ cells and in all \frBigN\ with
+$|\text{pred}|\ge3$. Of the \frHarmN\ cells predicted to lose 3 points or more, \frHarmConf\ does so significantly, so
+H33 fails. The within-generator correlation is \frRWithin\ (H34, $p<0.001$). On clean questions (H35) the account
+predicts \frCleanPred\ points on average against \frCleanObs\ observed (mean error \frCleanMae): there, a flag
+changes fewer correct answers than H31's wrong-flag follow rate implies. A fresh randomised-direction run for
+gpt-4o-mini gives follow rates of \frFollowR\% \frFollowRCI\ and \frFollowW\% \frFollowWCI, inside the frozen
+intervals (H36). For every generator, Claude Haiku is the detector with the highest predicted effect and the best observed
+(effects over all 400 questions, against the gpt-4o-mini detector: gpt-4o-mini generator \frSelMiniObs\ vs \frMiniDetMiniObs\ points; gpt-6.1-terra
+\frSelTerraObs\ vs \frMiniDetTerraObs).
+
+\paragraph{Under the judge, neither pooled equivalence holds (H38).} The \S17.3 judge scored every response feeding the
+pooled H30 and H23 tests (\jdN\ judged rows; agreement with the matcher \jdAgree\%). On the same cells and pooling,
+the LLM flag minus the verdict key is \jdThirtyM\ \jdThirtyMNinetyCI\ (90\% CI) under the matcher and
+\jdThirtyJ\ \jdThirtyJNinetyCI\ under the judge; the oracle flag minus the answer key is \jdTwentyThreeM\
+\jdTwentyThreeMNinetyCI\ and \jdTwentyThreeJ\ \jdTwentyThreeJNinetyCI. Neither is equivalent within $\pm$3 under the
+judge; the smallest margins that would pass are \jdThirtyJMargin\ and \jdTwentyThreeJMargin. The matcher misses more
+correct answers under the keys, so it understates the flag's advantage by \ajdThirtyShift\ and
+\ajdTwentyThreeShift\ points (matcher minus judge \jdThirtyShift\ \jdThirtyShiftCI\ and \jdTwentyThreeShift\ \jdTwentyThreeShiftCI). Under either scorer, both point estimates stay below 3 points.
+
+\paragraph{Direction helps on real web pages (H37).} The oracle directional
+flag beats no flag (H37a) and the neutral flag (H37c) for all three generators. The neutral flag changes accuracy by at
+most \ahcNeuMini\ points (H37b; within $\pm$3 for gpt-6-luna and Claude Haiku). For every generator, closed-book accuracy exceeds accuracy
+with the pages (gpt-4o-mini \hcCbMini\% against \hcPlainMini\%). The gpt-4o-mini detector names
+the false page as suspect on \hcLlmRightMini\% of items and the correct page on \hcLlmWrongMini\%, so the frozen account
+predicts harm; the observed effects are smaller (Table~\ref{tab:hc}). The judge audit of the labels (\hcLabN\ items)
+finds the correct page supporting the gold answer for \hcLabCorrect\%, the misinformation page the wrong answer for
+\hcLabMis\%, and both for \hcLabBoth\%. Long, noisy pages leave the judge unsure of many stances, so the

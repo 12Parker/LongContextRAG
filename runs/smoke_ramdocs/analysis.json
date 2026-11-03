@@ -1,0 +1,139 @@
+{
+ "all": {
+  "plain": {
+   "mean": 0.16666666666666666,
+   "n": 6
+  },
+  "instruct": {
+   "mean": 0.16666666666666666,
+   "n": 6,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 6,
+   "p_holm": 1.0
+  },
+  "oracle+flag": {
+   "mean": 0.16666666666666666,
+   "n": 6,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 6,
+   "p_holm": 1.0
+  },
+  "synth-p0.5-r1-all+flag": {
+   "mean": 0.16666666666666666,
+   "n": 6,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 6,
+   "p_holm": 1.0
+  }
+ },
+ "conflict": {
+  "plain": {
+   "mean": 0.0,
+   "n": 3
+  },
+  "instruct": {
+   "mean": 0.0,
+   "n": 3,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 3,
+   "p_holm": 1.0
+  },
+  "oracle+flag": {
+   "mean": 0.0,
+   "n": 3,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 3,
+   "p_holm": 1.0
+  },
+  "synth-p0.5-r1-all+flag": {
+   "mean": 0.0,
+   "n": 3,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 3,
+   "p_holm": 1.0
+  }
+ },
+ "no_conflict": {
+  "plain": {
+   "mean": 0.3333333333333333,
+   "n": 3
+  },
+  "instruct": {
+   "mean": 0.3333333333333333,
+   "n": 3,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 3,
+   "p_holm": 1.0
+  },
+  "oracle+flag": {
+   "mean": 0.3333333333333333,
+   "n": 3,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 3,
+   "p_holm": 1.0
+  },
+  "synth-p0.5-r1-all+flag": {
+   "mean": 0.3333333333333333,
+   "n": 3,
+   "diff": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n_clusters": 3,
+   "p_holm": 1.0
+  }
+ },
+ "cost_latency": {
+  "plain": {
+   "prompt_tokens": 902.3333333333334,
+   "completion_tokens": 93.66666666666667,
+   "cost_usd": 0.00019154999999999997,
+   "detect_s": 0.0,
+   "generate_s": 0.0013435138389468193,
+   "detect_cost_usd": 0.0,
+   "n_flags": 0.0
+  },
+  "instruct": {
+   "prompt_tokens": 939.3333333333334,
+   "completion_tokens": 99.0,
+   "cost_usd": 0.00020029999999999996,
+   "detect_s": 0.0,
+   "generate_s": 0.0011186596627036731,
+   "detect_cost_usd": 0.0,
+   "n_flags": 0.0
+  },
+  "oracle+flag": {
+   "prompt_tokens": 1044.1666666666667,
+   "completion_tokens": 80.33333333333333,
+   "cost_usd": 0.00020482499999999998,
+   "detect_s": 0.0,
+   "generate_s": 0.0008692706857497493,
+   "detect_cost_usd": 0.0,
+   "n_flags": 4.333333333333333
+  },
+  "synth-p0.5-r1-all+flag": {
+   "prompt_tokens": 1154.1666666666667,
+   "completion_tokens": 74.5,
+   "cost_usd": 0.00021782499999999997,
+   "detect_s": 0.0,
+   "generate_s": 0.00035343063063919544,
+   "detect_cost_usd": 0.0,
+   "n_flags": 8.0
+  }
+ }
+}

@@ -1,0 +1,40 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{3.6pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+& \multicolumn{3}{c}{RAMDocs, gpt-4o-mini} & \multicolumn{2}{c}{RAMDocs, gpt-4.1} & \multicolumn{2}{c}{ConflictBank} & \multicolumn{2}{c}{CB majority} & \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+Method & Lab. & Conflict & Clean & Lab. & Conflict & Conflict & Clean & Conflict & Clean & Calls \\
+\midrule
+No flags (plain), accuracy & 31.3 & 22.1 & 41.5 & 32.8$^\dagger$ & 19.4$^\dagger$ & 51.1 & 89.0 & 21.6 & 89.0 & 1 \\
+\midrule
+Instruction (v2) only & $+$2.3 & $+$5.3 & $-$1.1 & -- & $+$12.2 & -- & -- & -- & -- & 1 \\
+Oracle, flag + instr. & $-$1.8 & $-$2.4 & $-$1.1 & $+$1.5$^\dagger$ & $+$5.8$^\dagger$ & -- & -- & -- & -- & 1 \\
+Oracle, dir.\ flag + instr. & $+$6.4 & $+$13.2 & $-$1.1 & \textbf{$+$14.7}$^\dagger$ & \textbf{$+$30.9}$^\dagger$ & -- & -- & -- & -- & 1 \\
+\midrule
+MADAM-RAG & $+$5.7 & $+$3.6 & $+$7.9 & -- & -- & -- & -- & -- & -- & 9$\times$tok. \\
+Astute RAG & \textbf{$-$15.6} & $-$8.4 & \textbf{$-$23.5} & -- & -- & $-$2.1 & $-$9.7 & $+$1.4 & $-$9.7 & 2 \\
+Astute RAG (multi) & $-$5.9 & $-$1.2 & $-$11.1 & $+$2.3$^\dagger$ & $+$13.7$^\dagger$ & -- & -- & -- & -- & 2 \\
+TrustRAG & \textbf{$-$17.5} & $-$11.3 & \textbf{$-$24.3} & -- & -- & $-$9.7 & $-$4.0 & $+$6.8 & $-$4.0 & 3 \\
+TrustRAG (multi) & \textbf{$-$18.1} & $-$12.2 & \textbf{$-$24.6} & $-$10.9$^\dagger$ & 0.0$^\dagger$ & -- & -- & -- & -- & 3 \\
+Single call (name suspects, then answer) & $+$6.2 & $+$12.0 & $-$0.3 & -- & -- & $+$7.6 & $-$1.0 & $+$6.8 & $-$1.0 & 1 \\
+\midrule
+LLM detector, flag + instr. & $-$2.0 & $-$2.2 & $-$1.9 & -- & -- & -- & -- & -- & -- & 1+1 \\
+LLM detector, dir.\ flag + instr. & $-$3.5 & $+$8.4 & \textbf{$-$16.7} & -- & -- & -- & -- & -- & -- & 1+1 \\
+LLM detector, dir.\ flag & $+$4.9 & $+$12.5 & $-$3.4 & $+$8.7$^\dagger$ & $+$14.4$^\dagger$ & $+$8.4 & $-$4.7 & \textbf{$+$5.7} & $-$4.7 & 1+1 \\
+LLM detector, remove suspect & 0.0 & $+$18.7 & \textbf{$-$20.6} & -- & \textbf{$+$20.6} & $+$7.9 & $-$7.0 & $+$7.0 & $-$7.0 & 1+1 \\
+\bottomrule
+\end{tabular}}
+\caption{Resolution instructions, published baselines and a single-call baseline. First row: accuracy (\%, one-way
+strict) with no flags; other rows: paired difference from it in points. RAMDocs uses the multi-answer prompt (it has
+same-name questions with several answers); ConflictBank and its majority variant (three wrong-side passages, one
+correct) use the single-answer prompt and gpt-4o-mini. \emph{Lab.}: labelled RAMDocs questions. 3 seeds, except
+$^\dagger$: gpt-4.1 seed 0 only, relative to the seed-0 no-flag accuracy in the first row (other gpt-4.1 cells are
+relative to its 3-seed no-flag accuracy, Table~\ref{tab:gpt41}). \emph{instr.}: the v2 reliability instruction. \emph{(multi)}: the baseline's final
+step asks for every valid answer. \emph{Single call}: one call that names suspect passages, then answers. Calls per
+question; \emph{1+1}: one detector call and one generator call. \textbf{Bold}: significant under the paper's single
+scheme.}
+\label{tab:baselines}
+\end{table*}

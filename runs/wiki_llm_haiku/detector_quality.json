@@ -1,0 +1,94 @@
+{
+ "llm_dir": {
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 0.7312252964426877,
+   "f1": 0.8447488584474886,
+   "tp": 185,
+   "fp": 0,
+   "fn": 68
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 0.7312252964426877,
+   "f1": 0.8447488584474886,
+   "tp": 185,
+   "fp": 0,
+   "fn": 68,
+   "tn": 0,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": 0.0,
+  "direction_coverage": 1.0,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": null,
+    "correct_marked": 0.36561264822134387,
+    "conflict_q_all_misinfo_marked": null,
+    "conflict_q_any_correct_marked": null,
+    "clean_q_any_correct_marked": null
+   },
+   "remove_suspect": {
+    "misinfo_marked": null,
+    "correct_marked": 0.36561264822134387,
+    "conflict_q_all_misinfo_marked": null,
+    "conflict_q_any_correct_marked": null,
+    "clean_q_any_correct_marked": null
+   },
+   "flag_directional": {
+    "misinfo_marked": null,
+    "correct_marked": 0.36561264822134387,
+    "conflict_q_all_misinfo_marked": null,
+    "conflict_q_any_correct_marked": null,
+    "clean_q_any_correct_marked": null
+   }
+  },
+  "total_cost_usd": 0.0180078
+ },
+ "oracle": {
+  "pair_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 253,
+   "fp": 0,
+   "fn": 0
+  },
+  "question_level": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 253,
+   "fp": 0,
+   "fn": 0,
+   "tn": 0,
+   "false_positive_rate": 0.0
+  },
+  "direction_accuracy": null,
+  "direction_coverage": 0.0,
+  "doc_level": {
+   "remove": {
+    "misinfo_marked": null,
+    "correct_marked": 0.5,
+    "conflict_q_all_misinfo_marked": null,
+    "conflict_q_any_correct_marked": null,
+    "clean_q_any_correct_marked": null
+   },
+   "remove_suspect": {
+    "misinfo_marked": null,
+    "correct_marked": 0.5,
+    "conflict_q_all_misinfo_marked": null,
+    "conflict_q_any_correct_marked": null,
+    "clean_q_any_correct_marked": null
+   },
+   "flag_directional": {
+    "misinfo_marked": null,
+    "correct_marked": 0.0,
+    "conflict_q_all_misinfo_marked": null,
+    "conflict_q_any_correct_marked": null,
+    "clean_q_any_correct_marked": null
+   }
+  },
+  "total_cost_usd": 0.0
+ }
+}

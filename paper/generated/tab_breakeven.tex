@@ -1,0 +1,27 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{3.5pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrlllrrrrr}
+\toprule
+& \multicolumn{2}{c}{Effect (points)} & & \multicolumn{2}{c}{Follow rate (\%)} & \multicolumn{2}{c}{Share of headroom (\%)} & \multicolumn{3}{c}{Net at direction precision} \\
+\cmidrule(lr){2-3}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-11}
+Generator & Right & Wrong & Break-even [95\% CI] & Right & Wrong & Right & Wrong & 0.50 & 68.8\% & 82.6\% \\
+\midrule
+gpt-4o-mini & $+$29.4 & $-$31.2 & 0.52 [0.43, 0.60] & 57 [46, 67] & 51 [40, 62] & 59 & 59 & $-$0.9 & $+$10.5 & $+$18.8 \\
+gpt-6-luna & $+$33.5 & $-$44.9 & 0.57 [0.51, 0.64] & 72 [60, 83] & 77 [67, 86] & 76 & 87 & $-$5.7 & $+$9.1 & $+$19.9 \\
+Claude Haiku & $+$24.1 & $-$49.2 & 0.67 [0.61, 0.74] & 63 [49, 76] & 64 [55, 73] & 70 & 72 & $-$12.5 & $+$1.3 & $+$11.4 \\
+gpt-6.1-terra & $+$17.6 & $-$64.5 & 0.79 [0.72, 0.85] & 67 [53, 80] & 95 [89, 99] & 62 & 96 & $-$23.5 & $-$8.0 & $+$3.4 \\
+\bottomrule
+\end{tabular}}
+\caption{Randomised direction (H31; ConflictBank, one-answer prompt, conflict questions), re-analysed
+(exploratory). \emph{Break-even}: the direction precision at which a flag on the true pair neither helps nor hurts,
+$-W/(R-W)$ for right-flag effect $R$ and wrong-flag effect $W$; bootstrap CI within arms. \emph{Follow rate}: a right
+flag is followed when an answer that was wrong without the flag becomes correct, a wrong flag when a correct answer comes to
+contain the misinformation; question-bootstrap CIs. \emph{Share of headroom}: $R$ over the no-flag error rate of the
+right arm, and $-W$ over the no-flag accuracy of the wrong arm. \emph{Net}: $pR+(1-p)W$ at direction precision $p$:
+0.50, gpt-4o-mini's on ConflictBank, and the most precise detector's (gpt-6.1-terra). These
+nets assume the detector flags the true pair; real detectors also flag other pairs and clean questions.
+Figure~\ref{fig:reliability} (right) uses the follow rates to predict the 30 crossed cells.}
+\label{tab:breakeven}
+\end{table*}

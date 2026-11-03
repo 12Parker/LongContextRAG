@@ -1,0 +1,50 @@
+{
+ "nli": {
+  "question_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 300,
+   "tn": 100,
+   "false_positive_rate": 0.0
+  },
+  "pair_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 300
+  },
+  "false_flags_by_gold_relation": {},
+  "pair_flag_rate": 0.0,
+  "mean_latency_s": 2.2294770802161654,
+  "total_cost_usd": 0.0
+ },
+ "nli_win": {
+  "question_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 300,
+   "tn": 100,
+   "false_positive_rate": 0.0
+  },
+  "pair_level": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 300
+  },
+  "false_flags_by_gold_relation": {},
+  "pair_flag_rate": 0.0,
+  "mean_latency_s": 1.257210101559758,
+  "total_cost_usd": 0.0
+ }
+}

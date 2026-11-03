@@ -1,0 +1,42 @@
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llrr@{}}
+\toprule
+Run & Condition & Missing & At cap \\
+\midrule
+\texttt{holdout\_gpt41\_round2} & oracle neutral flag + instr.\ (v2) & 20.3 & 25.3 \\
+\texttt{cb\_qwen} & oracle remove suspect & 18.5 & 0.0 \\
+\texttt{cb\_qwen} & LLM remove suspect & 17.5 & 0.0 \\
+\texttt{holdout\_gpt41} & instruction (v2) & 12.8 & 15.6 \\
+\texttt{cross\_mj\_four\_four} & no flag & 11.2 & 13.5 \\
+\texttt{cross\_mj\_four\_luna} & no flag & 11.2 & 13.5 \\
+\texttt{cross\_mj\_four\_terra} & no flag & 11.2 & 13.5 \\
+\texttt{holdout\_qwen} & LLM remove suspect & 11.0 & 0.0 \\
+\texttt{cross\_mj\_four\_terra} & LLM dir.\ flag & 8.5 & 10.2 \\
+\texttt{holdout\_gpt41\_round2} & oracle dir.\ flag + instr.\ (v2) & 8.0 & 10.0 \\
+\texttt{cb\_qwen} & no flag & 7.2 & 0.0 \\
+\texttt{cb\_qwen} & oracle dir.\ flag & 6.5 & 0.0 \\
+\texttt{cross\_mj\_four\_luna} & LLM dir.\ flag & 6.5 & 7.5 \\
+\texttt{cb\_qwen} & oracle neutral flag & 6.2 & 0.2 \\
+\texttt{cb\_qwen} & LLM dir.\ flag & 5.5 & 0.0 \\
+\texttt{cb\_qwen} & LLM neutral flag & 5.2 & 0.2 \\
+\texttt{holdout\_qwen} & LLM dir.\ flag & 5.0 & 0.7 \\
+\texttt{holdout\_gpt41\_round2} & LLM dir.\ flag & 4.0 & 6.0 \\
+\texttt{holdout\_qwen} & oracle remove suspect & 4.0 & 0.3 \\
+\texttt{holdout\_gpt41} & LLM dir.\ flag & 3.9 & 5.7 \\
+\texttt{cross\_mj\_four\_four} & LLM dir.\ flag & 3.8 & 5.5 \\
+\texttt{cb\_single\_gpt41} & oracle neutral flag & 3.5 & 4.2 \\
+\texttt{holdout\_qwen} & oracle neutral flag & 3.0 & 1.0 \\
+\texttt{holdout\_qwen} & LLM neutral flag & 3.0 & 0.0 \\
+\texttt{holdout\_gpt41} & oracle neutral flag & 2.9 & 3.9 \\
+\bottomrule
+\end{tabular}
+\caption{Responses with no final-answer line (PR\S20.3 R9, exploratory): the 25 worst of the
+51 run $\times$ condition cells above 1\% (of 979 cells in
+222 runs; 0.15\% of all 788,506 responses); by generator, the
+cells above 1\% are 32 gpt-4.1, 16 Qwen2.5-7B, 2 gpt-6-luna, 1 gpt-4o-mini. A cell holds one response per question and seed (300--900 here).
+\emph{Missing}: \% of the cell's responses. \emph{At cap}: \% that stopped at the completion-token cap, which is
+256 tokens for Qwen2.5-7B, gpt-4.1, gpt-4o-mini and 4,096 tokens for Claude Haiku, Claude Sonnet, gpt-6-luna, gpt-6.1-terra (not defined for multi-call methods). The 26 further cells above 1\% (not shown) miss 1.1--2.7\%.}
+\label{tab:missing}
+\end{table}

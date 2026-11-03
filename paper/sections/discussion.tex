@@ -1,0 +1,41 @@
+\section{Discussion and a Decision Rule}
+\label{sec:discussion}
+
+A neutral flag is not a weak directional flag: it says only that passages disagree and leaves the response to the
+answer policy. Whether abstaining or listing both sides helps depends on what a wrong answer costs
+\citep{wen2025abstention}. A directional flag is advice, and generators take it whether it is right or wrong, much
+as models defer to asserted views \citep{sharma2024sycophancy}. As in human--AI teams, advice pays only when its
+errors fall where the receiver is weaker \citep{bansal2021accurate,mozannar2020defer}: an accurate generator has
+more correct answers for a wrong flag to overturn. Why the most accurate of the four H31 generators defers most to
+wrong flags while Claude Sonnet rarely does, we cannot tell from their outputs, and a model's stated reasons need not
+reveal it \citep{chen2025reasoning}.
+
+\paragraph{A rule for choosing a detector, or none.}
+We derived it from these runs; it has not been tested end to end (see Limitations), and its numbers come from the
+ConflictBank regime of \S\ref{sec:setup}.
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \emph{Scope.} Consider direction only against planted misinformation; where genuine conflicts are common
+(same-name entities, contested facts), use neither direction nor removal (H28), since no detector we tested tells
+them apart.
+\item \emph{Measure the generator.} Estimate $f_R$, $f_W$ and $p^*$ with a small randomised-direction run.
+Direction precision below $p^*$ predicts a net loss on flagged true pairs; whether $p^*$ should veto a detector is
+untested, and exceeding it is not enough. With Claude Haiku generating, the gpt-4o-mini detector (direction
+precision \ssPrecMini\%, near $p^*=\beHaiku$) loses \aselHaikuMiniObs\ points on conflict questions, although the
+account predicts a small gain (Table~\ref{tab:selection}): Haiku follows this detector's wrong flags far more often
+than randomised ones.
+\item \emph{Choose the detector with the account.} Apply Equation~\eqref{eq:account} to a labelled sample with clean
+questions, reweighted to the expected conflict share; flag only if the prediction is positive, and measure the
+clean-question effect directly, since the account overstates it. On the fresh cells this picked the Claude Haiku
+detector for every generator, which gave gpt-6.1-terra \frSelTerraObs\ points over all fresh questions, clean
+included, against \frMiniDetTerraObs\ with the gpt-4o-mini detector (\prs{19.1}); on the RAMDocs hold-out it flags
+\cxHdHaikuFlagClean\% of clean questions (C7). We wrote the rule after seeing this, so
+it is an illustration, not a test.
+\item \emph{Check prevalence.} If the flag helps on conflict questions ($K>0$) but hurts on clean ones ($C<0$), flag
+only above a conflict share of $-C/(K-C)$.
+\item \emph{Neutral flag.} Use it only under a one-answer prompt where a misinformed answer costs well more than a
+correct one gains (\S\ref{sec:neutral}); under a multi-answer prompt it mostly adds misinformation
+(Table~\ref{tab:utility}) unless both sides are valid (H8).
+\item \emph{Single call.} Naming suspects and answering in one call halves the calls (no detectable difference for
+gpt-4o-mini, H18), but costs the reasoning models and Claude Haiku \azSgHaikuSelfIdentifyClean\ to
+\azSgLunaSelfIdentifyClean\ points on clean questions (Appendix~\ref{app:more}).
+\end{enumerate}

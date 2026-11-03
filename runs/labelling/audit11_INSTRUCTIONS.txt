@@ -1,0 +1,18 @@
+A1 audit sheet (PREREGISTRATION.md section 20.3). audit11_disagreements.csv has 300 rows in random order.
+Each row is one model response to a question, shown with the reference answer(s) and the known wrong
+(misinformation) answer(s). Answers are separated by " | ". Judge what the response FINALLY asserts (its final answer,
+read in the light of the whole response), against the answers given on the row; do not look the question up.
+
+Labels, one per column, written yes or no:
+- gives_gold: the final answer states every reference answer (paraphrases, aliases and equivalent forms count).
+- asserts_wrong: the final answer states a known wrong answer as true. Mentioning it only to reject it does not count.
+- abstains: the final answer is "unknown", or the response declines or fails to give an answer.
+Leave a cell blank only if you cannot decide, and say why in notes. Do not edit the row, question, answer or response
+columns. Human strict (computed later, not labelled) = gives_gold yes, asserts_wrong no and abstains no.
+
+Procedure:
+1. Two annotators label independently, each in their own copy named audit11_disagreements_<initials>.csv, without
+   discussing rows and without opening audit11_key.csv.
+2. After both copies are complete, the two meet and adjudicate every row and label on which they differ (blanks
+   included), and record the agreed labels in audit11_consensus.csv (same columns; notes give the reason).
+3. Keep both individual copies unchanged; agreement is computed from them, the analysis from the consensus.

@@ -1,0 +1,119 @@
+\section{Further Results}
+\label{app:more}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{generated/fig_answers.pdf}
+\caption{What a flag does to answers on conflict questions (gpt-4o-mini, oracle pairs; share of answers, \%). The
+answer policy decides how a neutral flag fails: a model told to give every valid answer adds the misinformation, and
+one told there is one answer abstains. Only the directional flag raises the share of correct answers. Categories are exclusive and an answer the primary metric scores correct counts as correct, so the misinformation share can be slightly lower than in Table~\ref{tab:risk}, which counts every answer containing a wrong answer under the bidirectional matcher.}
+\label{fig:answers}
+\end{figure}
+\input{generated/tab_baselines}
+\input{generated/tab_cells}
+\input{generated/tab_h24redo}
+\input{generated/tab_pooled}
+\input{generated/tab_utility}
+
+\subsection{Where the directional flag fails (exploratory)}
+\label{app:single}
+After seeing the minimal-skeleton run, we split conflict questions by number of gold answers. \nConfMulti\ of
+\the\numexpr\nConfMulti+\nConfSingle\relax\ have several (same-name ambiguity \emph{and} misinformation), and a strict
+answer must list them all. On the \nConfSingle\ single-answer conflict questions, the directional flag's estimate
+is positive in every setting, from \yQwenSingleOracleDir\ points (Qwen) to \yMiniSingleOracleDir\ (gpt-4o-mini), both
+with the default skeleton. On multi-answer questions it changes little except with gpt-4.1 (gpt-4o-mini
+\yMiniMultiOracleDir, and \yMiniMinMultiOracleDir\ with the minimal skeleton; gpt-4.1 \yFourMultiOracleDir). One untested
+reading is that a warning about one passage makes the smaller models more conservative about legitimate
+alternative answers too. Removal, which needs no warning to be acted on, gains in both groups.
+
+\subsection{Real detectors}
+CAAG flags \cleanFprCaag\% of clean questions. Its neutral flags do not beat random flags at the same rate (H5;
+\dCaagFlagAll\ vs.\ \dRandFlagAll\ points overall). The 90\% CI of the difference, [\tostLo, \tostHi], rules out a
+gain above \tostHi\ points but does not establish equivalence within $\pm$\tostMargin\ points (TOST). The
+addendum registered the LLM detector's directional-versus-neutral comparison as exploratory.
+Under the bidirectional metric, the LLM detector's directional flag costs clean questions \arLlmDirClean\ points. With
+gpt-4.1 generating, its gain over all 300 questions (\gptLlmDirAll) is significant after Holm, but the 35
+unlabelled questions contribute disproportionately (they gain \agptexclLlmDir\ points). On labelled
+questions it is \gptlabLlmDir\ \gptlabLlmDirCI. On ConflictBank the NLI cross-encoder flags no pair:
+the benchmark's passages are long, LLM-written and agree on everything but the one fact, and the truncated pair rarely
+contains it.
+
+\paragraph{Stronger models abstain in the single call.} Asked to name suspect passages before answering, the reasoning
+models and Claude Haiku distrust most of ConflictBank's generated passages and abstain, losing up to
+\azSgTerraSelfIdentifyClean\ points on clean questions (Table~\ref{tab:baselines}).
+
+\paragraph{Reasoning models on RAMDocs.} Without flags, gpt-6-luna and gpt-6.1-terra are
+strictly correct on few RAMDocs conflict questions because the default prompt asks for every valid answer. They give
+\mixRdLunaNAnswers\ and \mixRdTerraNAnswers\ answers on average and recover \mixRdLunaRecall\% and
+\mixRdTerraRecall\% of gold answers, but \mixRdLunaMisinfo\% and \mixRdTerraMisinfo\% of their answers include
+the misinformation.
+
+\paragraph{Detector parsing.} The LLM detectors' JSON failed to parse on \parseFailTotal\ of \parseFailN\ ConflictBank
+questions (a Claude Sonnet output), counted as flagging nothing.
+
+\subsection{A detector from another family}
+Replacing the gpt-4o-mini detector with Qwen2.5-7B (gpt-4o-mini still generates) gives a much less selective
+detector: it flags \qdetFpr\% of clean RAMDocs questions, but its direction accuracy is \qdetDir\%. Its directional
+flag gains \zQDetLlmDirFlagDirectionalConflict\ points on conflict questions and \zQDetLlmDirFlagDirectionalClean\ on
+clean ones, and its neutral flag \zQDetLlmDirFlagConflict. Removal again trades a conflict-question gain
+(\zQDetLlmDirRemoveSuspectConflict) for a clean-question loss (\zQDetLlmDirRemoveSuspectClean). The conclusions do
+not depend on the detector's family.
+
+\subsection{CONFLICTS}
+On the 237 automatically scorable CONFLICTS questions (exploratory, 3 seeds; most have no conflict), no condition
+moves accuracy significantly (Table~\ref{tab:conflicts}).
+
+\section{Semantic Re-score, Label Audits and Selection}
+\label{app:semantic}
+\input{generated/tab_semantic}
+\paragraph{An outside-family judge leaves the directional conclusions intact (\S17.3).} To
+check whether the primary metric's string-matching errors differ by condition, an LLM from outside our generators' families re-scored both
+arms of \semK\ contrasts on the same \semNq\ conflict questions each (gemini-3.5-flash-lite; Table~\ref{tab:semantic}).
+\S17.3 named Gemini 2.5 Flash, which was closed to new users. Judge and matcher agree on \semAgree\% of \semN\ outputs. Almost all
+disagreements are answers the judge accepts and the matcher rejects (aliases, paraphrases, partial forms) and
+depend on condition: \semJudgeOnlyKey\% of answer-key outputs and \semJudgeOnlyDir\% of oracle-directional ones,
+against \semJudgeOnlyPlain\% without a flag. The failure of most concern, a final answer such as
+``$Y$, not $X$'' counted as asserting the wrong answer $X$, occurs in \semRejected\% of outputs. Because
+both arms of each contrast gain, the judge moves every contrast by \semDidMin\ to \semDidMax\ points. One small contrast changes sign (RAMDocs oracle flag vs answer key, \semTwentyThreeRDMiniM\ to \semTwentyThreeRDMiniJ), and
+two whose matcher intervals include zero exclude it under the judge (unadjusted): Claude Haiku's neutral flag
+(\semNeuCBsHaikuJ) and gpt-4o-mini's LLM flag against its verdict key (\semThirtyCBsMiniM\ to \semThirtyCBsMiniJ, outside $\pm$3). With \semNq\ questions per contrast these
+intervals are too wide to test the $\pm$3-point equivalence claims; judged over all their responses, both fail
+(Appendix~\ref{app:fresh}). Given
+the gold and wrong answers, the judge tests the scorer, not the benchmark labels. A blinded, paired human-audit sheet of
+150 of these pairs and 50 RAGuard post pairs is released unlabelled (\texttt{runs/labelling/audit8\_*}).
+
+\input{generated/tab_entity}
+\paragraph{The neutral-flag cost holds without cross-entity pairs (\S18).} RAMDocs' pair rule labels a pair a
+contradiction whenever one side is misinformation and the answers differ, without aligning entities. Assuming each
+misinformation passage targets one entity, at least \pairCrossLb\ of the \pairContraN\ oracle contradiction pairs on the
+hold-out join it to a correct passage about another entity, in the \pairMultiN\ questions whose correct passages give
+several answers. On the \pairSingleN\ single-entity questions no pair can cross entities. Averaged over the \entNeuK\
+RAMDocs settings, the oracle neutral flag changes accuracy by \entNeuSingle\ \entNeuSingleCI\ points there and by
+\entNeuMulti\ \entNeuMultiCI\ on the rest; the oracle directional flag by \entDirSingle\ \entDirSingleCI\ and
+\entDirMulti\ \entDirMultiCI\ (Table~\ref{tab:entity}). Per question, the flag and its key disagree on \agrTwentyThreeDis\% (H23; flag only \agrTwentyThreeFlagOnly\%,
+key only \agrTwentyThreeKeyOnly\%) and \agrThirtyDis\% (H30; \agrThirtyFlagOnly\% and \agrThirtyKeyOnly\%) of
+question--seed pairs, against \agrTwentyThreeNull\% and \agrThirtyNull\% between two no-flag seeds on the cells that have
+them (\agrTwentyThreeDisMatched\% and \agrThirtyDisMatched\% on those cells).
+
+\paragraph{The WikiContradict harm holds under its original rubric.} The original rubric counts an answer correct when it gives
+both answers, acknowledges that they conflict and does not prefer one without support
+\citep[\S3.4]{hou2024wikicontradict}. Under it, the LLM directional flag changes the share of correct answers
+by \wikiOrigMiniEff\ points for gpt-4o-mini (\wikiOrigMiniPlain\% to \wikiOrigMiniDir\%), \wikiOrigLunaEff\ for
+gpt-6-luna and \wikiOrigHaikuEff\ for Claude Haiku (seed 0, all 253 questions), so the H28 harm holds. For gpt-4o-mini the flag raises the share that merely mentions both answers (\wikiBothMiniEff) while
+lowering the share that acknowledges the conflict without an unsupported preference.
+
+\paragraph{RAGuard pairs rarely contradict.} RAGuard labels a post supporting or misleading by whether GPT-4 judged the claim correctly
+with it in context, so its ``contradiction pairs'' transfer behavioural labels. Of \rgAudN\ sampled
+supporting~$\times$~misleading pairs, the judge finds the two posts cannot both be right about the claim in
+\rgAudContradict\%. It finds the misleading post false about the claim in \rgAudBFalse\% (unclear in
+\rgAudBUnclear\%) and the supporting post consistent with the verdict in \rgAudASupports\%. All three hold for
+\rgAudVerified\%. Most pairs discuss the claim from different angles rather than assert opposite
+facts. RAGuard's oracle-flag rows therefore test what a generator does with these labels, not with verified
+contradictions; we draw no factual-oracle conclusion from them. This audit uses one LLM judge; the released
+human sheet covers 50 of these pairs.
+
+\input{generated/tab_selection}
+\paragraph{Selection in the crossed cells.} Table~\ref{tab:selection} splits each crossed cell by what the flag does
+on each question. The marginal break-even calculation (precision times $R$ plus its complement times $W$, at full
+coverage) has mean error \selMargMae\ points against the observed gains (\selMargCovMae\ when scaled by recall); the
+follow-rate account, which uses each cell's coverage and no-flag accuracy, has \predEightMae\ \predEightMaeCI.
